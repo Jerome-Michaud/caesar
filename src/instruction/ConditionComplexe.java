@@ -1,5 +1,7 @@
 package instruction;
 
-public interface ConditionComplexe extends Condition {
+import java.util.List;
 
+public abstract class ConditionComplexe implements Condition {
+	
 }

@@ -1,5 +1,6 @@
 package instruction;
 
-public interface ConditionSimple extends Condition{
 
+public abstract class ConditionSimple implements Condition{
+		
 }

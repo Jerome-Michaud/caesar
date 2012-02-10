@@ -1,5 +1,7 @@
 package instruction;
 
-public interface Condition {
+import java.util.List;
 
+public interface Condition {
+	List<Condition> getEnfants();
 }
