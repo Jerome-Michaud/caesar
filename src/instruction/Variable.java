@@ -34,5 +34,5 @@ public abstract class Variable {
 	}
 	
 	public abstract boolean isConstante();
-	
+
 }
