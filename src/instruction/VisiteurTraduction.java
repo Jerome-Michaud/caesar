@@ -4,13 +4,13 @@ public abstract class VisiteurTraduction {
 
 	private String traduction;
 	private int nivIndent;
-	
-	public void nextIndent(){
-		nivIndent++;
+		
+	public String getTraduction() {
+		return traduction;
 	}
-	
-	public void prevIndent(){
-		nivIndent--;		
+
+	public void reset(){
+		traduction = "";
 	}
 
 	public abstract void visiter(InstructionIf inst);
@@ -26,5 +26,4 @@ public abstract class VisiteurTraduction {
 	public abstract void visiter(InstrcutionHeureActuelle inst);
 
 	public abstract void visiter(InstructionAttente inst);
-
 }
