@@ -1,6 +1,6 @@
 package instruction;
 
-public class InstructionAttente extends InstructionInconditionelle {
+public class InstructionAttente extends InstructionTerminale {
 
 	@Override
 	public Categorie getCategorie() {

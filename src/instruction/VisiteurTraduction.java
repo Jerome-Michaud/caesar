@@ -6,39 +6,25 @@ public abstract class VisiteurTraduction {
 	private int nivIndent;
 	
 	public void nextIndent(){
-		// TODO nextIndent
+		nivIndent++;
 	}
 	
 	public void prevIndent(){
-		// TODO prevIndent		
+		nivIndent--;		
 	}
 
-	public void visiter(InstructionIf inst) {
-		// TODO Auto-generated method stub
-	}
+	public abstract void visiter(InstructionIf inst);
 
-	public void visiter(InstructionIfElse inst) {
-		// TODO Auto-generated method stub
-	}
+	public abstract void visiter(InstructionIfElse inst);
 
-	public void visiter(InstructionWhile inst) {
-		// TODO Auto-generated method stub
-	}
+	public abstract void visiter(InstructionWhile inst);
 
-	public void visiter(InstructionDoWhile inst) {
-		// TODO Auto-generated method stub
-	}
+	public abstract void visiter(InstructionDoWhile inst);
 
-	public void visiter(InstructionTache inst) {
-		// TODO Auto-generated method stub
-	}
+	public abstract void visiter(InstructionTache inst);
 
-	public void visiter(InstrcutionHeureActuelle inst) {
-		// TODO Auto-generated method stub
-	}
+	public abstract void visiter(InstrcutionHeureActuelle inst);
 
-	public void visiter(InstructionAttente inst) {
-		// TODO Auto-generated method stub
-	}
+	public abstract void visiter(InstructionAttente inst);
 
 }

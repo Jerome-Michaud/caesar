@@ -1,5 +1,10 @@
 package instruction;
 
-public class VariableModifiable {
+public abstract class VariableModifiable extends Variable{
+
+	@Override
+	public boolean isConstante() {
+		return false;
+	}
 	
 }

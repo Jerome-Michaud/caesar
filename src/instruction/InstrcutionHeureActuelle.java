@@ -1,7 +1,7 @@
 package instruction;
 
 //TODO nom InstrcutionHeureActuelle ?
-public class InstrcutionHeureActuelle extends InstructionInconditionelle {
+public class InstrcutionHeureActuelle extends InstructionTerminale {
 
 	@Override
 	public Categorie getCategorie() {
