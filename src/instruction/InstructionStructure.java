@@ -4,6 +4,8 @@ import java.util.List;
 
 public abstract class InstructionStructure implements Instruction {
 
+	protected List enfants;
+
 	@Override
 	public abstract Categorie getCategorie();
 
@@ -13,8 +15,7 @@ public abstract class InstructionStructure implements Instruction {
 	}
 
 	@Override
-	public abstract void accept(Visiteur visiteur);
+	public abstract void accept(VisiteurTraduction visiteur);
 
-	private List enfants;
 	
 }

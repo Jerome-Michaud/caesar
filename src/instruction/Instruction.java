@@ -20,7 +20,7 @@ public interface Instruction {
 	 * 
 	 * @param visiteur
 	 */
-	void accept(Visiteur visiteur);
+	void accept(VisiteurTraduction visiteur);
 	
 	
 	

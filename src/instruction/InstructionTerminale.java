@@ -5,10 +5,7 @@ import java.util.List;
 public abstract class InstructionTerminale implements Instruction {
 
 	@Override
-	public Categorie getCategorie() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract Categorie getCategorie();
 
 	@Override
 	public List<Instruction> getEnfants() {
@@ -16,7 +13,6 @@ public abstract class InstructionTerminale implements Instruction {
 	}
 
 	@Override
-	public abstract void accept(Visiteur visiteur);
-	
+	public abstract void accept(VisiteurTraduction visiteur);
 
 }

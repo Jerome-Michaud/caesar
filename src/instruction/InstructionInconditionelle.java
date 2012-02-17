@@ -1,5 +1,11 @@
 package instruction;
 
-public class InstructionInconditionelle implements Instruction{
+public abstract class InstructionInconditionelle extends InstructionStructure {
+
+	@Override
+	public abstract Categorie getCategorie();
+
+	@Override
+	public abstract void accept(VisiteurTraduction visiteur);
 	
 }

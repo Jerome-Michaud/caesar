@@ -1,7 +1,17 @@
 package instruction;
 
-public class InstructionConditionelle implements Instruction, Condition{
+public abstract class InstructionConditionelle extends InstructionStructure {
+	
 	private Condition cond;
+
+	@Override
+	public Categorie getCategorie(){
+		return Categorie.CONTROL;
+	}
+
+	@Override
+	public abstract void accept(VisiteurTraduction visiteur);
+	
 	
 	
 }
