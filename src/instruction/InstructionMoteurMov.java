@@ -1,6 +1,6 @@
 package instruction;
 
-public class InstructionMoteurMov extends InstructionTerminale{
+public class InstructionMoteurMov extends InstructionMoteurCmd{
 
 	@Override
 	public Categorie getCategorie() {
