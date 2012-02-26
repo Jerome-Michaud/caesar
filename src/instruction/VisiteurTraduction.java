@@ -26,4 +26,8 @@ public abstract class VisiteurTraduction {
 	public abstract void visiter(InstrcutionHeureActuelle inst);
 
 	public abstract void visiter(InstructionAttente inst);
+	
+	public abstract void visiter(InstructionMoteurMov inst);
+	
+	public abstract void visiter(InstructionMoteurOff inst);
 }

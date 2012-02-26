@@ -43,4 +43,16 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	}
 
+	@Override
+	public void visiter(InstructionMoteurMov inst) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visiter(InstructionMoteurOff inst) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
