@@ -30,4 +30,9 @@ public abstract class VisiteurTraduction {
 	public abstract void visiter(InstructionMoteurMov inst);
 	
 	public abstract void visiter(InstructionMoteurOff inst);
+
+	public void visiter(InstructionFor instructionFor) {
+		// TODO Auto-generated method stub
+		
+	}
 }

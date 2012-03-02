@@ -13,6 +13,6 @@ public abstract class InstructionTerminale implements Instruction {
 	}
 
 	@Override
-	public abstract void accept(VisiteurTraduction visiteur);
+	public abstract void accepte(VisiteurTraduction visiteur);
 
 }
