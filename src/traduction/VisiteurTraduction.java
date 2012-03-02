@@ -1,4 +1,15 @@
-package instruction;
+package traduction;
+
+import instruction.InstrcutionHeureActuelle;
+import instruction.InstructionAttente;
+import instruction.InstructionDoWhile;
+import instruction.InstructionFor;
+import instruction.InstructionIf;
+import instruction.InstructionIfElse;
+import instruction.InstructionMoteurMov;
+import instruction.InstructionMoteurOff;
+import instruction.InstructionTache;
+import instruction.InstructionWhile;
 
 public abstract class VisiteurTraduction {
 

@@ -1,5 +1,7 @@
 package instruction;
 
+import traduction.VisiteurTraduction;
+
 public abstract class InstructionInconditionelle extends InstructionStructure {
 
 	@Override

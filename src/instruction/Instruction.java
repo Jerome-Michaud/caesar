@@ -2,6 +2,8 @@ package instruction;
 
 import java.util.List;
 
+import traduction.VisiteurTraduction;
+
 public interface Instruction {
 
 	/**

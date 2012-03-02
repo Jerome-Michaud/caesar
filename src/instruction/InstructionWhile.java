@@ -1,5 +1,7 @@
 package instruction;
 
+import traduction.VisiteurTraduction;
+
 public class InstructionWhile extends InstructionConditionelle {
 
 	@Override

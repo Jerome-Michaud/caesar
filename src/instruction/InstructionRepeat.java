@@ -1,5 +1,7 @@
 package instruction;
 
+import traduction.VisiteurTraduction;
+
 public class InstructionRepeat extends InstructionInconditionelle{
 	@Override
 	public Categorie getCategorie() {

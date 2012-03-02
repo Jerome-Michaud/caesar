@@ -1,5 +1,7 @@
 package instruction;
 
+import traduction.VisiteurTraduction;
+
 //TODO nom InstrcutionHeureActuelle ?
 public class InstrcutionHeureActuelle extends InstructionTerminale {
 

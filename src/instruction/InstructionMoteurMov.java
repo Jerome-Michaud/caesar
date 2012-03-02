@@ -1,5 +1,7 @@
 package instruction;
 
+import traduction.VisiteurTraduction;
+
 public class InstructionMoteurMov extends InstructionMoteurCmd{
 
 	@Override
