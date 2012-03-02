@@ -1,6 +1,7 @@
 package traduction;
 
-import instruction.InstrcutionHeureActuelle;
+
+
 import instruction.InstructionAttente;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
@@ -8,7 +9,9 @@ import instruction.InstructionIf;
 import instruction.InstructionIfElse;
 import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
+import instruction.InstructionRepeat;
 import instruction.InstructionTache;
+import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 
 public abstract class VisiteurTraduction {
@@ -24,7 +27,7 @@ public abstract class VisiteurTraduction {
 		traduction = "";
 	}
 
-	public abstract void visiter(InstructionIf inst);
+	public abstract void visiter(InstructionIf instructionIf);
 
 	public abstract void visiter(InstructionIfElse inst);
 
@@ -34,7 +37,7 @@ public abstract class VisiteurTraduction {
 
 	public abstract void visiter(InstructionTache inst);
 
-	public abstract void visiter(InstrcutionHeureActuelle inst);
+	public abstract void visiter(InstructionTempsCourant inst);
 
 	public abstract void visiter(InstructionAttente inst);
 	
@@ -43,4 +46,10 @@ public abstract class VisiteurTraduction {
 	public abstract void visiter(InstructionMoteurOff inst);
 
 	public abstract void visiter(InstructionFor instructionFor);
+
+	public abstract void visiter(InstructionRepeat instructionRepeat) ;
+
+	
+	
+
 }

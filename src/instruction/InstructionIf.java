@@ -8,4 +8,6 @@ public class InstructionIf extends InstructionConditionelle {
 	public void accepte(VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
+
+
 }
