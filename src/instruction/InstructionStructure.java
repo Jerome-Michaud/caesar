@@ -19,7 +19,7 @@ public abstract class InstructionStructure implements Instruction {
 	}
 
 	@Override
-	public abstract void accept(VisiteurTraduction visiteur);
+	public abstract void accepte(VisiteurTraduction visiteur);
 
 	
 }

@@ -6,6 +6,6 @@ public abstract class InstructionInconditionelle extends InstructionStructure {
 	public abstract Categorie getCategorie();
 
 	@Override
-	public abstract void accept(VisiteurTraduction visiteur);
+	public abstract void accepte(VisiteurTraduction visiteur);
 	
 }

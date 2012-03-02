@@ -7,7 +7,7 @@ public abstract class InstructionMoteurCmd extends InstructionTerminale{
 	public abstract Categorie getCategorie() ;
 	
 	
-	public abstract void accept(VisiteurTraduction visiteur) ;
+	public abstract void accepte(VisiteurTraduction visiteur) ;
 	
 	public void setMoteur(Moteur moteur){
 

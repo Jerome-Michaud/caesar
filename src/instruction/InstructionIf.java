@@ -3,7 +3,7 @@ package instruction;
 public class InstructionIf extends InstructionConditionelle {
 
 	@Override
-	public void accept(VisiteurTraduction visiteur) {
+	public void accepte(VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
 }

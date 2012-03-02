@@ -8,7 +8,7 @@ public class InstructionAttente extends InstructionTerminale {
 	}
 
 	@Override
-	public void accept(VisiteurTraduction visiteur) {
+	public void accepte(VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
 
