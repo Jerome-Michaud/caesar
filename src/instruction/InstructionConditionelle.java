@@ -10,10 +10,5 @@ public abstract class InstructionConditionelle extends InstructionStructure {
 	public Categorie getCategorie(){
 		return Categorie.CONTROL;
 	}
-
-	@Override
-	public abstract void accepte(VisiteurTraduction visiteur);
-	
-	
 	
 }

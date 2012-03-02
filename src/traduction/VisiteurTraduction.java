@@ -2,6 +2,7 @@ package traduction;
 
 
 
+import instruction.Affectation;
 import instruction.InstructionAttente;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
@@ -48,6 +49,8 @@ public abstract class VisiteurTraduction {
 	public abstract void visiter(InstructionFor instructionFor);
 
 	public abstract void visiter(InstructionRepeat instructionRepeat) ;
+
+	public abstract void visiter(Affectation affectation);
 
 	
 	

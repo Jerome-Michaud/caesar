@@ -1,6 +1,6 @@
 package instruction;
 
-public abstract class Variable {
+public abstract class Variable implements Expression{
 	
 	private TypeVariable type;
 	private String nom;
@@ -17,7 +17,7 @@ public abstract class Variable {
 	}
 
 	public void setType(TypeVariable type) {
-		this.type = type;
+		this.type = type;	
 	}
 
 	public String getValeur() {

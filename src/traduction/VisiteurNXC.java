@@ -1,6 +1,7 @@
 package traduction;
 
 
+import instruction.Affectation;
 import instruction.InstructionAttente;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
@@ -76,6 +77,12 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionRepeat instructionRepeat) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visiter(Affectation affectation) {
 		// TODO Auto-generated method stub
 		
 	}
