@@ -55,4 +55,10 @@ public class VisiteurNXC extends VisiteurTraduction {
 		
 	}
 
+	@Override
+	public void visiter(Affectation affectation) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

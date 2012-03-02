@@ -30,4 +30,7 @@ public abstract class VisiteurTraduction {
 	public abstract void visiter(InstructionMoteurMov inst);
 	
 	public abstract void visiter(InstructionMoteurOff inst);
+
+	public abstract void visiter(Affectation affectation);
+	
 }
