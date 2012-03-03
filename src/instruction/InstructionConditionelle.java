@@ -1,13 +1,15 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 public abstract class InstructionConditionelle extends InstructionStructure {
 	
 	private Condition cond;
 
+	public InstructionConditionelle(Condition cond){
+		this.cond = cond;
+	}
+	
 	@Override
-	public Categorie getCategorie(){
+	public final Categorie getCategorie(){
 		return Categorie.CONTROL;
 	}
 	

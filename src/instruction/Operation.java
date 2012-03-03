@@ -15,7 +15,7 @@ public class Operation extends ExpressionComplexe {
 
 	@Override
 	public void accepte(VisiteurTraduction v) {
-
+		v.visiter(this);
 	}
 
 }

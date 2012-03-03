@@ -4,13 +4,12 @@ import traduction.VisiteurTraduction;
 
 public class Affectation extends ExpressionComplexe {
 
-	public Affectation(Expression membreGauche, Expression membreDroit)
+	public Affectation(VariableModifiable membreGauche, Expression membreDroit)
 			throws Exception {
 		super(TypeOperation.AFF, membreGauche, membreDroit);
 
 		// TODO fix
-		if (!(membreGauche instanceof VariableModifiable)
-				|| membreDroit instanceof Affectation)
+		if (membreDroit instanceof Affectation)
 			throw new Exception();
 	}
 

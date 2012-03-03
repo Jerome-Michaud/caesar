@@ -10,6 +10,14 @@ public class DicoVars {
 	private HashMap<String, Variable> dict = new HashMap<String, Variable>();
 
 	private DicoVars(){}
+
+	public static DicoVars getInstace(){
+		if (instance == null){
+			instance = new DicoVars();
+		}
+		return instance;
+	}
+	
 	
 	public void ajouter(Variable v){
 		dict.put(v.toString(),v);
@@ -27,13 +35,6 @@ public class DicoVars {
 			}
 		}
 		return res;
-	}
-	
-	public static DicoVars getInstace(){
-		if (instance == null){
-			instance = new DicoVars();
-		}
-		return instance;
 	}
 	
 }
