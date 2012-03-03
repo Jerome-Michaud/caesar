@@ -30,7 +30,9 @@ public abstract class Variable implements Expression{
 
 	@Override
 	public String toString() {
-		return new String(type+" "+nom+"="+valeur);
+		if (isConstante())
+			return valeur;
+		return nom;
 	}
 	
 	public abstract boolean isConstante();

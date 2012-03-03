@@ -3,7 +3,7 @@ package instruction;
 public enum Categorie {
 	MOTEUR,CONTROL,OPERATEURS,VARIABLES,CAPTEURS,TEMPS,AFFICHAGE;
 
-    @Override
+	@Override
     public String toString()
     {
             switch(this)

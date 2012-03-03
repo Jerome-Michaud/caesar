@@ -1,7 +1,5 @@
 package traduction;
 
-
-
 import instruction.Affectation;
 import instruction.InstructionAttente;
 import instruction.InstructionDoWhile;
@@ -17,8 +15,8 @@ import instruction.InstructionWhile;
 
 public abstract class VisiteurTraduction {
 
-	private String traduction;
-	private int nivIndent;
+	protected String traduction;
+	protected int nivIndent;
 		
 	public String getTraduction() {
 		return traduction;
@@ -51,8 +49,5 @@ public abstract class VisiteurTraduction {
 	public abstract void visiter(InstructionRepeat instructionRepeat) ;
 
 	public abstract void visiter(Affectation affectation);
-
-	
-	
 
 }

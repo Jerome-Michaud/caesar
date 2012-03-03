@@ -7,6 +7,8 @@ package test.instruction;
 
 import static instruction.TypeVariable.*;
 import static instruction.TypeOperation.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import instruction.Affectation;
 import instruction.Expression;
 import instruction.Operation;
@@ -53,12 +55,13 @@ public class ExpressionTest {
 	public void tearDown() throws Exception {
 	}
 	
+	//TODO automatiser
 	@Test
 	public void testComposeExpression() throws Exception{
 		/* Expression
-		 * e = ((a+b)>1)||(c*d<8.2)
+		 * e=(((a+b)>1)||((c*d)<8.2))
 		 */
-		VariableModifiable e = new VariableModifiable(BOOL,"c","");
+		VariableModifiable e = new VariableModifiable(BOOL,"e","");
 		VariableModifiable a = new VariableModifiable(INT,"a","");
 		VariableModifiable b = new VariableModifiable(INT,"b","");
 		VariableModifiable c = new VariableModifiable(FLOAT,"c","");
@@ -69,7 +72,7 @@ public class ExpressionTest {
 		Expression expr = new Affectation(// =
 				e,
 				new Operation(// ||
-						ADD,
+						OU,
 						new Operation(// >
 								SUPERIERE,
 								new Operation(// +
@@ -90,7 +93,8 @@ public class ExpressionTest {
 								)
 						)
 				);
-		System.out.println(expr);
+		
+		assertTrue(expr.toString().equals("e=(((a+b)>1)||((c*d)<8.2))"));
 
 	};
 
