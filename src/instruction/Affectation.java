@@ -18,4 +18,7 @@ public class Affectation extends ExpressionComplexe {
 		v.visiter(this);
 	}
 
+	public String toString(){
+		return membreGauche.toString() + typeOperation + membreDroit;
+	}
 }

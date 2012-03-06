@@ -25,8 +25,6 @@ public abstract class ExpressionComplexe implements Expression {
 
 	@Override
 	public String toString() {
-		if (this instanceof Affectation)
-			return (membreGauche.toString() + typeOperation + membreDroit);
 		return "(" + membreGauche + typeOperation + membreDroit + ")";
 	}
 
