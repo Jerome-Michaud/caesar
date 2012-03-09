@@ -13,12 +13,18 @@ public abstract class ExpressionComplexe implements Expression {
 		this.membreDroit = membreDroit;
 	}
 
-	@Override
+	/**
+	 * Modifit le membre droit.
+	 * @param expression l'expression à mettre en membre droit
+	 */
 	public void setMembreDroit(Expression expression) {
 		membreDroit = expression;
 	}
 
-	@Override
+	/**
+	 * Modifit le membre gauche.
+	 * @param expression l'expression à mettre en membre gauche
+	 */
 	public void setMembreGauche(Expression expression) {
 		membreGauche = expression;
 	}

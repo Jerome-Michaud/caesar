@@ -12,14 +12,6 @@ public class VariableConstante extends Variable{
 		return true;
 	}
 	@Override
-	public void setMembreDroit(Expression expression) {
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void setMembreGauche(Expression expression) {
-		// TODO Auto-generated method stub
-	}
-	@Override
 	public void accepte(VisiteurTraduction v) {
 		// TODO Auto-generated method stub
 	}
