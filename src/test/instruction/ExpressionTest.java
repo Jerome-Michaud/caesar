@@ -74,7 +74,7 @@ public class ExpressionTest {
 				new Operation(// ||
 						OU,
 						new Operation(// >
-								SUPERIERE,
+								SUPERIEUR,
 								new Operation(// +
 										ADD,
 										a,
@@ -83,7 +83,7 @@ public class ExpressionTest {
 								const1
 								),
 						new Operation(// <
-								INFERIERE,
+								INFERIEUR,
 								new Operation(// *
 										MUL,
 										c, 

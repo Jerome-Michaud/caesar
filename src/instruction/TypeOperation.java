@@ -3,7 +3,7 @@ package instruction;
 public enum TypeOperation {
 
 	//ADDITION,SUBSTRACTION,MULTIPLICATION,DIVISION,CONJONCTION,DISJONCTION,NEGATION
-	AFF,ADD,SUB,MUL,DIV,ET,OU,NON,XOR,SUPERIERE,INFERIERE,EGALE;
+	AFF,ADD,SUB,MUL,DIV,ET,OU,NON,XOR,SUPERIEUR,INFERIEUR,EGALE;
 	
 	public String toString(){
 		switch (this) {
@@ -25,9 +25,9 @@ public enum TypeOperation {
 			return "~";
 		case XOR:
 			return "^";
-		case SUPERIERE:
+		case SUPERIEUR:
 			return ">";
-		case INFERIERE:
+		case INFERIEUR:
 			return "<";
 		case EGALE:
 			return "==";	
