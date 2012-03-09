@@ -2,7 +2,7 @@ package instruction;
 
 import traduction.VisiteurTraduction;
 
-public class Affectation extends ExpressionComplexe {
+public class Affectation extends ExpressionComplexe implements Instruction{
 
 	public Affectation(VariableModifiable membreGauche, Expression membreDroit)
 			throws Exception {
@@ -20,5 +20,10 @@ public class Affectation extends ExpressionComplexe {
 
 	public String toString(){
 		return membreGauche.toString() + typeOperation + membreDroit;
+	}
+
+	@Override
+	public Categorie getCategorie() {
+		return Categorie.OPERATEURS;
 	}
 }
