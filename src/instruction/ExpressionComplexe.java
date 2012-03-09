@@ -4,18 +4,20 @@ public abstract class ExpressionComplexe implements Expression {
 
 	protected Expression membreDroit;
 	protected Expression membreGauche;
-	protected TypeOperation typeOperation;
+	protected Operateur operateur;
 
-	public ExpressionComplexe(TypeOperation typeOperation,
-			Expression membreGauche, Expression membreDroit) {
-		this.typeOperation = typeOperation;
+	public ExpressionComplexe(Operateur operation, Expression membreGauche,
+			Expression membreDroit) {
+		this.operateur = operation;
 		this.membreGauche = membreGauche;
 		this.membreDroit = membreDroit;
 	}
 
 	/**
 	 * Modifit le membre droit.
-	 * @param expression l'expression à mettre en membre droit
+	 * 
+	 * @param expression
+	 *            l'expression à mettre en membre droit
 	 */
 	public void setMembreDroit(Expression expression) {
 		membreDroit = expression;
@@ -23,7 +25,9 @@ public abstract class ExpressionComplexe implements Expression {
 
 	/**
 	 * Modifit le membre gauche.
-	 * @param expression l'expression à mettre en membre gauche
+	 * 
+	 * @param expression
+	 *            l'expression à mettre en membre gauche
 	 */
 	public void setMembreGauche(Expression expression) {
 		membreGauche = expression;
@@ -31,7 +35,7 @@ public abstract class ExpressionComplexe implements Expression {
 
 	@Override
 	public String toString() {
-		return "(" + membreGauche + typeOperation + membreDroit + ")";
+		return "(" + membreGauche + operateur + membreDroit + ")";
 	}
 
 }

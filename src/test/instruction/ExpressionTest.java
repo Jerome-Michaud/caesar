@@ -6,10 +6,11 @@
 package test.instruction;
 
 import static instruction.TypeVariable.*;
-import static instruction.TypeOperation.*;
+import static instruction.Operateur.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import instruction.Affectation;
+import instruction.Condition;
 import instruction.Expression;
 import instruction.Operation;
 import instruction.VariableConstante;
@@ -71,21 +72,21 @@ public class ExpressionTest {
 		
 		Expression expr = new Affectation(// =
 				e,
-				new Operation(// ||
+				new Condition(// ||
 						OU,
-						new Operation(// >
+						new Condition(// >
 								SUPERIEUR,
 								new Operation(// +
-										ADD,
+										ADDITION,
 										a,
 										b
 										),
 								const1
 								),
-						new Operation(// <
+						new Condition(// <
 								INFERIEUR,
 								new Operation(// *
-										MUL,
+										MULIPLICATION,
 										c, 
 										d
 										),
