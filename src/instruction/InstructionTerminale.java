@@ -10,11 +10,6 @@ public abstract class InstructionTerminale implements Instruction {
 	public abstract Categorie getCategorie();
 
 	@Override
-	public List<Instruction> getEnfants() {
-		return null;
-	}
-
-	@Override
 	public abstract void accepte(VisiteurTraduction visiteur);
 
 }
