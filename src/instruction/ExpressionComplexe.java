@@ -40,6 +40,10 @@ public abstract class ExpressionComplexe implements Expression {
 	public Expression getMembreDroit() {
 		return this.membreDroit;
 	}
+	
+	public Operateur getOperateur() {
+		return this.operateur;
+	}
 
 	@Override
 	public String toString() {
