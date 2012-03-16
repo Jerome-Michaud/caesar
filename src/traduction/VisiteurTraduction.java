@@ -1,6 +1,7 @@
 package traduction;
 
 import instruction.Affectation;
+import instruction.ExpressionComplexe;
 import instruction.InstructionAttente;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
@@ -13,6 +14,7 @@ import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Operation;
+import instruction.Variable;
 
 public abstract class VisiteurTraduction {
 
@@ -47,10 +49,12 @@ public abstract class VisiteurTraduction {
 
 	public abstract void visiter(InstructionFor instructionFor);
 
-	public abstract void visiter(InstructionRepeat instructionRepeat) ;
+	public abstract void visiter(InstructionRepeat instructionRepeat);
+	
+	public abstract void visiter(Variable variable);
 
 	public abstract void visiter(Affectation affectation);
 
-	public abstract void visiter(Operation operation);
+	public abstract void visiter(ExpressionComplexe expr);
 
 }

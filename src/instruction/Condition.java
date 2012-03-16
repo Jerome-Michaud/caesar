@@ -13,6 +13,6 @@ public class Condition extends ExpressionComplexe {
 
 	@Override
 	public void accepte(VisiteurTraduction v) {
-		// TODO Auto-generated method stub
+		v.visiter(this);
 	}
 }

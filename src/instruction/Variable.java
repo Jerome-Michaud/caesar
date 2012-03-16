@@ -1,5 +1,7 @@
 package instruction;
 
+import traduction.VisiteurTraduction;
+
 public abstract class Variable implements Expression{
 	
 	private TypeVariable type;
@@ -11,6 +13,13 @@ public abstract class Variable implements Expression{
 		this.nom = nom;
 		this.valeur = valeur;
 	}
+	
+	@Override
+	public void accepte(VisiteurTraduction v) {
+		v.visiter(this);
+	}
+	
+	public abstract boolean isConstante();
 	
 	public TypeVariable getType() {
 		return type;
@@ -32,9 +41,16 @@ public abstract class Variable implements Expression{
 	public String toString() {
 		if (isConstante())
 			return valeur;
+		return getNom();
+	}
+	/**
+	 * Donne le nom de la variable ou sa valeur si la variable n'a pas de nom.
+	 * @return le nom de la variable.
+	 */
+	public String getNom() {
+		if(nom == null || nom.equals(""))
+			return valeur;
 		return nom;
 	}
-	
-	public abstract boolean isConstante();
 
 }

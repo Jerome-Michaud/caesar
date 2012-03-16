@@ -2,6 +2,9 @@ package traduction;
 
 
 import instruction.Affectation;
+import instruction.Condition;
+import instruction.ExpressionComplexe;
+import instruction.Instruction;
 import instruction.InstructionAttente;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
@@ -10,10 +13,12 @@ import instruction.InstructionIfElse;
 import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
 import instruction.InstructionRepeat;
+import instruction.InstructionStructure;
 import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Operation;
+import instruction.Variable;
 
 public class VisiteurNXC extends VisiteurTraduction {
 
@@ -42,8 +47,14 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionTache inst) {
-		// TODO Auto-generated method stub
-
+		traduction+="main(){\n";
+		for (Instruction is:inst.getEnfants()){
+			traduction+="\t";
+			is.accepte(this);
+			traduction+=";\n";
+		}
+		traduction+="}";
+		
 	}
 
 	@Override
@@ -84,13 +95,23 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(Affectation affectation) {
-		// TODO Auto-generated method stub
-		
+		affectation.getMembreGauche().accepte(this);
+		super.traduction += " = ";
+		affectation.getMembreDroit().accepte(this);
 	}
 
 	@Override
-	public void visiter(Operation operation) {
-		// TODO Auto-generated method stub
+	public void visiter(ExpressionComplexe expr) {
+		super.traduction += "(";
+		expr.getMembreGauche().accepte(this);
+		super.traduction += " "+expr.getOperateur()+" ";
+		expr.getMembreDroit().accepte(this);
+		super.traduction += ")";
+	}
+
+	@Override
+	public void visiter(Variable variable) {
+		traduction += variable.toString();
 	}
 
 }
