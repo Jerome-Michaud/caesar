@@ -101,6 +101,7 @@ public class ExpressionTest {
 		trad.reset();
 		trad.visiter((Affectation)expr);
 		assertTrue(expr.toString().equals("e=(((a+b)>1)||((c*d)<8.2))"));
+		System.out.println(trad.getTraduction());
 		assertTrue(trad.getTraduction().equals("e = (((a + b) > 1) || ((c * d) < 8.2))"));
 
 	};
