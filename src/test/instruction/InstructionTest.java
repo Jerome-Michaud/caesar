@@ -69,7 +69,7 @@ public class InstructionTest {
 		//Creer une tache , avec la creation d'une variable et son affectation 
 		
 		VariableModifiable var = new VariableModifiable(TypeVariable.INT,"VariableModifiable","");
-		DicoVars dico = DicoVars.getInstace();
+		DicoVars dico = DicoVars.getInstance();
 		dico.ajouter(var );
 		InstructionStructure i1 = new InstructionTache();
 		InstructionDeclaration i2 = new InstructionDeclaration () ;
@@ -77,7 +77,7 @@ public class InstructionTest {
 		i1.inserer(0,i2);
 		i1.inserer(1,i3);
 		i2.setMembre(var);
-		//i3.setMembre((VariableModifiable) dico.getVariable(var.toString()) , new VariableConstante(TypeVariable.INT , "variableConstante",  "10"));
+		i3.setMembre(var , new VariableConstante(TypeVariable.INT , "variableConstante",  "10"));
 		System.out.println(i1);
 
 	};

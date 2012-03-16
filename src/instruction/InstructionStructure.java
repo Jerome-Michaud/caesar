@@ -56,13 +56,5 @@ public abstract class InstructionStructure implements Instruction {
 	@Override
 	public abstract void accepte(VisiteurTraduction visiteur);
 
-	public String toString()
-	{
-		String temp= "\n";
-		for ( Instruction enfant:enfants )
-		{
-			temp += "->"+enfant.toString()+ "\n";
-		}
-		return temp;
-	}
+
 }
