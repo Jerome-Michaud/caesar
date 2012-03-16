@@ -55,7 +55,7 @@ public class InstructionTest {
 	//TODO automatiser
 	@Test
 	public void testComposeInstruction() throws Exception{
-		//System.out.printf("chat");
+		//Creer une tache et la remplir de quelques instructions
 		
 		InstructionStructure n1 = new InstructionTache();
 		Instruction n2 = new InstructionMoteurRotate();
@@ -65,6 +65,20 @@ public class InstructionTest {
 		n1.inserer(1,n3);
 		n1.inserer(2,n4);
 		System.out.println(n1);
+		
+		//Creer une tache , avec la creation d'une variable et son affectation 
+		
+		VariableModifiable var = new VariableModifiable(TypeVariable.INT,"VariableModifiable","");
+		DicoVars dico = DicoVars.getInstace();
+		dico.ajouter(var );
+		InstructionStructure i1 = new InstructionTache();
+		InstructionDeclaration i2 = new InstructionDeclaration () ;
+		InstructionDeclarationAffectation i3 = new InstructionDeclarationAffectation ();
+		i1.inserer(0,i2);
+		i1.inserer(1,i3);
+		i2.setMembre(var);
+		//i3.setMembre((VariableModifiable) dico.getVariable(var.toString()) , new VariableConstante(TypeVariable.INT , "variableConstante",  "10"));
+		System.out.println(i1);
 
 	};
 
