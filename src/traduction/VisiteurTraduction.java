@@ -13,6 +13,7 @@ import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Operation;
+import instruction.Variable;
 
 public abstract class VisiteurTraduction {
 
@@ -47,7 +48,9 @@ public abstract class VisiteurTraduction {
 
 	public abstract void visiter(InstructionFor instructionFor);
 
-	public abstract void visiter(InstructionRepeat instructionRepeat) ;
+	public abstract void visiter(InstructionRepeat instructionRepeat);
+	
+	public abstract void visiter(Variable variable);
 
 	public abstract void visiter(Affectation affectation);
 

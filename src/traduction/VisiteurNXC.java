@@ -14,6 +14,7 @@ import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Operation;
+import instruction.Variable;
 
 public class VisiteurNXC extends VisiteurTraduction {
 
@@ -84,13 +85,17 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(Affectation affectation) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void visiter(Operation operation) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void visiter(Variable variable) {
+		traduction += variable.toString();
 	}
 
 }

@@ -32,6 +32,15 @@ public abstract class Variable implements Expression{
 	public String toString() {
 		if (isConstante())
 			return valeur;
+		return getNom();
+	}
+	/**
+	 * Donne le nom de la variable ou sa valeur si la variable n'a pas de nom.
+	 * @return le nom de la variable.
+	 */
+	public String getNom() {
+		if(nom == null || nom.equals(""))
+			return valeur;
 		return nom;
 	}
 	
