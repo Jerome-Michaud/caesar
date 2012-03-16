@@ -14,7 +14,7 @@ public abstract class ExpressionComplexe implements Expression {
 	}
 
 	/**
-	 * Modifit le membre droit.
+	 * Modifie le membre droit.
 	 * 
 	 * @param expression
 	 *            l'expression à mettre en membre droit
@@ -24,13 +24,21 @@ public abstract class ExpressionComplexe implements Expression {
 	}
 
 	/**
-	 * Modifit le membre gauche.
+	 * Modifie le membre gauche.
 	 * 
 	 * @param expression
 	 *            l'expression à mettre en membre gauche
 	 */
 	public void setMembreGauche(Expression expression) {
 		membreGauche = expression;
+	}
+	
+	public Expression getMembreGauche() {
+		return this.membreGauche;
+	}
+	
+	public Expression getMembreDroit() {
+		return this.membreDroit;
 	}
 
 	@Override
