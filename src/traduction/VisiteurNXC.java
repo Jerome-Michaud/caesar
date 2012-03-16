@@ -4,6 +4,7 @@ package traduction;
 import instruction.Affectation;
 import instruction.Condition;
 import instruction.ExpressionComplexe;
+import instruction.Instruction;
 import instruction.InstructionAttente;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
@@ -12,6 +13,7 @@ import instruction.InstructionIfElse;
 import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
 import instruction.InstructionRepeat;
+import instruction.InstructionStructure;
 import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
@@ -45,8 +47,14 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionTache inst) {
-		// TODO Auto-generated method stub
-
+		traduction+="main(){\n";
+		for (Instruction is:inst.getEnfants()){
+			traduction+="\t";
+			is.accepte(this);
+			traduction+=";\n";
+		}
+		traduction+="}";
+		
 	}
 
 	@Override

@@ -14,5 +14,14 @@ public class InstructionIf extends InstructionConditionelle {
 		visiteur.visiter(this);
 	}
 
-
+	public String toString(){
+		String res = "";
+		res+="if("+condition+"){\n";
+		for (Instruction is : enfants){
+			res += "\t" + is + ";\n";
+		}
+		res+="\t}\n";
+		return res;
+	}
+	
 }
