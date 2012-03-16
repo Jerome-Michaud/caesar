@@ -2,7 +2,7 @@ package instruction;
 
 import traduction.VisiteurTraduction;
 
-public abstract class InstructionMoteurCmd extends InstructionTerminale{
+public abstract class InstructionMoteurCmd implements Instruction {
 
 	protected Moteur moteur;
 

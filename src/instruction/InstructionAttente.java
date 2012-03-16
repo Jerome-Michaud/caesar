@@ -2,7 +2,7 @@ package instruction;
 
 import traduction.VisiteurTraduction;
 
-public class InstructionAttente extends InstructionTerminale {
+public class InstructionAttente implements Instruction {
 
 	@Override
 	public Categorie getCategorie() {
