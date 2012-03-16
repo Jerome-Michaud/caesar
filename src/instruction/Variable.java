@@ -1,5 +1,7 @@
 package instruction;
 
+import traduction.VisiteurTraduction;
+
 public abstract class Variable implements Expression{
 	
 	private TypeVariable type;
@@ -11,6 +13,13 @@ public abstract class Variable implements Expression{
 		this.nom = nom;
 		this.valeur = valeur;
 	}
+	
+	@Override
+	public void accepte(VisiteurTraduction v) {
+		v.visiter(this);
+	}
+	
+	public abstract boolean isConstante();
 	
 	public TypeVariable getType() {
 		return type;
@@ -43,7 +52,5 @@ public abstract class Variable implements Expression{
 			return valeur;
 		return nom;
 	}
-	
-	public abstract boolean isConstante();
 
 }

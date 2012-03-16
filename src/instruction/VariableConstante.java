@@ -11,9 +11,5 @@ public class VariableConstante extends Variable{
 	public boolean isConstante() {
 		return true;
 	}
-	@Override
-	public void accepte(VisiteurTraduction v) {
-		// TODO Auto-generated method stub
-	}
 
 }
