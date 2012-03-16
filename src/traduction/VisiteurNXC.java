@@ -2,6 +2,8 @@ package traduction;
 
 
 import instruction.Affectation;
+import instruction.Condition;
+import instruction.ExpressionComplexe;
 import instruction.InstructionAttente;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
@@ -91,11 +93,11 @@ public class VisiteurNXC extends VisiteurTraduction {
 	}
 
 	@Override
-	public void visiter(Operation operation) {
+	public void visiter(ExpressionComplexe expr) {
 		super.traduction += "(";
-		operation.getMembreGauche().accepte(this);
-		super.traduction += " "+operation.getOperateur()+" ";
-		operation.getMembreDroit().accepte(this);
+		expr.getMembreGauche().accepte(this);
+		super.traduction += " "+expr.getOperateur()+" ";
+		expr.getMembreDroit().accepte(this);
 		super.traduction += ")";
 	}
 

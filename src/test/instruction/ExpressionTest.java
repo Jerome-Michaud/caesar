@@ -22,6 +22,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import traduction.VisiteurNXC;
+import traduction.VisiteurTraduction;
+
 /**
  * @author m1022
  *
@@ -94,8 +97,11 @@ public class ExpressionTest {
 								)
 						)
 				);
-		
+		VisiteurTraduction trad = new VisiteurNXC();
+		trad.reset();
+		trad.visiter((Affectation)expr);
 		assertTrue(expr.toString().equals("e=(((a+b)>1)||((c*d)<8.2))"));
+		assertTrue(trad.getTraduction().equals("e = (((a + b) > 1) || ((c * d) < 8.2))"));
 
 	};
 

@@ -1,6 +1,7 @@
 package traduction;
 
 import instruction.Affectation;
+import instruction.ExpressionComplexe;
 import instruction.InstructionAttente;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
@@ -54,6 +55,6 @@ public abstract class VisiteurTraduction {
 
 	public abstract void visiter(Affectation affectation);
 
-	public abstract void visiter(Operation operation);
+	public abstract void visiter(ExpressionComplexe expr);
 
 }
