@@ -11,7 +11,7 @@ public class DicoVars {
 
 	private DicoVars(){}
 
-	public static DicoVars getInstace(){
+	public synchronized static DicoVars getInstance() {
 		if (instance == null){
 			instance = new DicoVars();
 		}
