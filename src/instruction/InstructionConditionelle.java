@@ -2,10 +2,10 @@ package instruction;
 
 public abstract class InstructionConditionelle extends InstructionStructure {
 	
-	private Condition cond;
+	private Condition condition;
 
 	public InstructionConditionelle(Condition cond){
-		this.cond = cond;
+		this.condition = cond;
 	}
 	
 	@Override
@@ -13,4 +13,7 @@ public abstract class InstructionConditionelle extends InstructionStructure {
 		return Categorie.CONTROL;
 	}
 	
+	public Condition getCondition() {
+		return condition;
+	}
 }
