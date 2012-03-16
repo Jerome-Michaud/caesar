@@ -1,5 +1,6 @@
 package instruction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import traduction.VisiteurTraduction;
@@ -8,7 +9,9 @@ public abstract class InstructionStructure implements Instruction {
 
 	protected List<Instruction> enfants;
 		
-	public InstructionStructure() {}
+	public InstructionStructure() {
+		enfants = new ArrayList<Instruction>();
+	}
 	
 	public InstructionStructure(List<Instruction> enfants) {
 		this.enfants = enfants;
@@ -24,5 +27,13 @@ public abstract class InstructionStructure implements Instruction {
 	@Override
 	public abstract void accepte(VisiteurTraduction visiteur);
 
-	
+	public String toString()
+	{
+		String temp= "\n";
+		for ( Instruction enfant:enfants )
+		{
+			temp += "->"+enfant.toString()+ "\n";
+		}
+		return temp;
+	}
 }

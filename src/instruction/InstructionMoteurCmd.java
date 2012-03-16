@@ -15,6 +15,9 @@ public abstract class InstructionMoteurCmd extends InstructionTerminale{
 
 			this.moteur = moteur;
 	}
+	public Moteur getMoteur(){
+		return moteur;
+	}
 	
 	
 

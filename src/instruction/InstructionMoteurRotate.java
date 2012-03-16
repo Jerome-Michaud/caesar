@@ -15,5 +15,8 @@ public class InstructionMoteurRotate extends InstructionMoteurCmd{
 		// TODO Auto-generated method stub
 		
 	}
-
+	public String toString()
+	{
+		return "Moteur mov" ;
+	}
 }
