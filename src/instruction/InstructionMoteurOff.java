@@ -16,6 +16,10 @@ public class InstructionMoteurOff extends InstructionMoteurCmd{
 	
 		
 	}
+	public String toString()
+	{
+		return "Moteur Off" ;
+	}
 	
 
 

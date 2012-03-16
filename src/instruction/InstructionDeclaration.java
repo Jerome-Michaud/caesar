@@ -2,10 +2,9 @@ package instruction;
 
 import traduction.VisiteurTraduction;
 
-public class InstructionMoteurRotate extends InstructionMoteurCmd{
-	
-	protected Expression exp;
-	
+public class InstructionDeclaration implements Instruction{
+
+	protected VariableModifiable membreGauche;
 	@Override
 	public Categorie getCategorie() {
 		// TODO Auto-generated method stub
@@ -17,11 +16,14 @@ public class InstructionMoteurRotate extends InstructionMoteurCmd{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void setMembre ( VariableModifiable variable ){
+		this.membreGauche = variable;
+	}
+	
 	public String toString()
 	{
-		return "Moteur mov" ;
+		return "declaration "+ membreGauche.toString() ;
 	}
-	public void setExpression ( Expression exp){
-		this.exp = exp;
-	}
+
 }

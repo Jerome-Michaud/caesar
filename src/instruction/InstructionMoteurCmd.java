@@ -15,6 +15,9 @@ public abstract class InstructionMoteurCmd implements Instruction {
 
 			this.moteur = moteur;
 	}
+	public Moteur getMoteur(){
+		return moteur;
+	}
 	
 	
 
