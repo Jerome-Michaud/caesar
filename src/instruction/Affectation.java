@@ -4,13 +4,8 @@ import traduction.VisiteurTraduction;
 
 public class Affectation extends ExpressionComplexe implements Instruction{
 
-	public Affectation(VariableModifiable membreGauche, Expression membreDroit)
-			throws Exception {
-		super(TypeOperation.AFF, membreGauche, membreDroit);
-
-		// TODO fix
-		if (membreDroit instanceof Affectation)
-			throw new Exception();
+	public Affectation(VariableModifiable membreGauche, Expression membreDroit) {
+		super(Operateur.AFFECTATION, membreGauche, membreDroit);
 	}
 
 	@Override
@@ -19,7 +14,7 @@ public class Affectation extends ExpressionComplexe implements Instruction{
 	}
 
 	public String toString(){
-		return membreGauche.toString() + typeOperation + membreDroit;
+		return membreGauche.toString() + operateur + membreDroit;
 	}
 
 	@Override
