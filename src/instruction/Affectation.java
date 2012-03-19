@@ -4,8 +4,11 @@ import traduction.VisiteurTraduction;
 
 public class Affectation extends ExpressionComplexe implements Instruction{
 
+	private boolean isInstruction;
+	
 	public Affectation(VariableModifiable membreGauche, Expression membreDroit) {
 		super(Operateur.AFFECTATION, membreGauche, membreDroit);
+		isInstruction = false;
 	}
 
 	@Override
@@ -20,5 +23,21 @@ public class Affectation extends ExpressionComplexe implements Instruction{
 	@Override
 	public Categorie getCategorie() {
 		return Categorie.OPERATEURS;
+	}
+	
+	/**
+	 * Permet de savoir si l'affectation est utilisée comme instruction.
+	 * @return true si l'affectation est utilisée comme instruction, false sinon.
+	 */
+	public boolean isInstruction() {
+		return isInstruction;
+	}
+	
+	/**
+	 * Modifie l'utilisation de l'affection en tant que instruction ou expression
+	 * @param b
+	 */
+	public void setIsInstruction(boolean b) {
+		isInstruction = b;
 	}
 }
