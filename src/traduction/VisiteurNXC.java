@@ -6,6 +6,8 @@ import instruction.Condition;
 import instruction.ExpressionComplexe;
 import instruction.Instruction;
 import instruction.InstructionAttente;
+import instruction.InstructionDeclaration;
+import instruction.InstructionDeclarationAffectation;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
 import instruction.InstructionIf;
@@ -33,7 +35,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
-			traduction+=";\n";
+			
 		}
 		
 		nivIndent--;
@@ -54,7 +56,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
-			traduction+=";\n";
+			
 		}
 		
 		nivIndent--;
@@ -79,7 +81,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
-			traduction+=";\n";
+			
 		}
 		
 		nivIndent--;
@@ -97,7 +99,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
-			traduction+=";\n";
+			
 		}
 		
 		nivIndent--;
@@ -114,7 +116,6 @@ public class VisiteurNXC extends VisiteurTraduction {
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
-			traduction+=";\n";
 		}
 		nivIndent--;
 		traduction+=indent()+"}";
@@ -178,6 +179,30 @@ public class VisiteurNXC extends VisiteurTraduction {
 	@Override
 	public void visiter(Variable variable) {
 		traduction += variable.toString();
+	}
+
+	@Override
+	public void visiter(InstructionDeclaration instructionDeclaration) {
+		super.traduction += indent();
+		super.traduction += instructionDeclaration.getMembreGauche().getType()+" ";
+		instructionDeclaration.getMembreGauche().accepte(this);
+		
+		
+		super.traduction += ";\n";
+		
+	}
+
+	@Override
+	public void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation) {
+		super.traduction += indent();
+		super.traduction += instructionDeclarationAffectation.getMembreGauche().getType()+" ";
+		instructionDeclarationAffectation.getMembreGauche().accepte(this);
+		super.traduction += " = ";
+		instructionDeclarationAffectation.getMembreDroit().accepte(this);
+		super.traduction += ";\n";
+		
+	
+		
 	}
 
 }

@@ -214,10 +214,10 @@ public class InstructionTest {
 		a1.insererFin(a2);
 		
 		a2.insererFin(i2);
-		a2.insererFin(i2);
+		a2.insererFin(i3);
 		
 		a2.insererFinElse(i2);
-		a2.insererFinElse(i2);
+		a2.insererFinElse(i3);
 		
 		a1.insererFin(a3);
 		a1.insererFin(a4);
