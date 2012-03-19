@@ -20,7 +20,7 @@ public class InstructionDoWhile extends InstructionConditionelle {
 	
 	public String toString(){
 		String res = "";
-		res+="Dowhile("+condition+"){\n";
+		res+="Dowhile("+getCondition()+"){\n";
 		for (Instruction is : getEnfants()){
 			res += "\t" + is + ";\n";
 		}

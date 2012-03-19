@@ -38,24 +38,73 @@ public class VisiteurNXC extends VisiteurTraduction {
 		
 		nivIndent--;
 		
-		traduction+=indent()+"}";
+		traduction+=indent()+"}\n";
 	}
 
 	@Override
 	public void visiter(InstructionIfElse inst) {
-		// TODO Auto-generated method stub
+		inst.getMembreIf().accepte(this);
+		
+		
+		// Else
+		
+		traduction+=indent();
+		traduction+="else{\n";
+		
+		nivIndent++;
+		for (Instruction is:inst.getEnfants()){
+			is.accepte(this);
+			traduction+=";\n";
+		}
+		
+		nivIndent--;
+		
+		traduction+=indent()+"}\n";
+		
+		
+		
+
+	
 
 	}
 
 	@Override
 	public void visiter(InstructionWhile inst) {
-		// TODO Auto-generated method stub
+		traduction+=indent();
+		
+		traduction+="while(";
+		inst.getCondition().accepte(this);
+		traduction+="){\n";
+		
+		nivIndent++;
+		for (Instruction is:inst.getEnfants()){
+			is.accepte(this);
+			traduction+=";\n";
+		}
+		
+		nivIndent--;
+		
+		traduction+=indent()+"}\n";
 
 	}
 
 	@Override
 	public void visiter(InstructionDoWhile inst) {
-		// TODO Auto-generated method stub
+		traduction+=indent();
+		
+		traduction+="do{\n";
+		
+		nivIndent++;
+		for (Instruction is:inst.getEnfants()){
+			is.accepte(this);
+			traduction+=";\n";
+		}
+		
+		nivIndent--;
+		
+		traduction+=indent()+"} while(";
+		inst.getCondition().accepte(this);
+		traduction+=");\n";
 
 	}
 

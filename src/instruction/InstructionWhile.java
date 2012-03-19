@@ -17,7 +17,7 @@ public class InstructionWhile extends InstructionConditionelle {
 	}
 	public String toString(){
 		String res = "";
-		res+="While("+condition+"){\n";
+		res+="While("+getCondition()+"){\n";
 		for (Instruction is : getEnfants()){
 			res += "\t" + is + ";\n";
 		}
