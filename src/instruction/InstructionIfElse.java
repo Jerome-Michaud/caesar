@@ -20,6 +20,14 @@ public class InstructionIfElse extends InstructionConditionelle {
 		getMembreIf().setCondition(cond);
 	}
 	
+	public Condition getCondition(){
+		return getMembreIf().getCondition();
+	}
+	
+	public void setCondition(Condition cond){
+		getMembreIf().setCondition(cond);
+	}
+	
 	
 	public InstructionIf getMembreIf()
 	{

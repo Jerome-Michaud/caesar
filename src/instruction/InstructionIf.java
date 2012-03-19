@@ -22,7 +22,7 @@ public class InstructionIf extends InstructionConditionelle {
 
 	public String toString(){
 		String res = "";
-		res+="if("+condition+"){\n";
+		res+="if("+getCondition()+"){\n";
 		for (Instruction is : getEnfants()){
 			res += "\t" + is + ";\n";
 		}

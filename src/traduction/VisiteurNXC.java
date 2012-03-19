@@ -6,6 +6,8 @@ import instruction.Condition;
 import instruction.ExpressionComplexe;
 import instruction.Instruction;
 import instruction.InstructionAttente;
+import instruction.InstructionDeclaration;
+import instruction.InstructionDeclarationAffectation;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
 import instruction.InstructionIf;
@@ -44,28 +46,80 @@ public class VisiteurNXC extends VisiteurTraduction {
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
-			ajouterPointVirgule(is);
-			traduction+="\n";
 		}
 		nivIndent--;
 		
-		traduction+=indent()+"}";
+		traduction+=indent()+"}\n";
 	}
 
 	@Override
 	public void visiter(InstructionIfElse inst) {
+
+		inst.getMembreIf().accepte(this);
+		
+		
+		// Else
+		
+		traduction+=indent();
+		traduction+="else{\n";
+		
+		nivIndent++;
+		for (Instruction is:inst.getEnfants()){
+			is.accepte(this);
+			
+		}
+		
+		nivIndent--;
+		
+		traduction+=indent()+"}\n";
+		
 	}
 
 	@Override
 	public void visiter(InstructionWhile inst) {
+
+		traduction+=indent();
+		
+		traduction+="while(";
+		inst.getCondition().accepte(this);
+		traduction+="){\n";
+		
+		nivIndent++;
+		for (Instruction is:inst.getEnfants()){
+			is.accepte(this);
+			
+		}
+		
+		nivIndent--;
+		
+		traduction+=indent()+"}\n";
 	}
 
 	@Override
 	public void visiter(InstructionDoWhile inst) {
+
+		traduction+=indent();
+		
+		traduction+="do{\n";
+		
+		nivIndent++;
+		for (Instruction is:inst.getEnfants()){
+			is.accepte(this);
+			
+		}
+		
+		nivIndent--;
+		
+		traduction+=indent()+"} while(";
+		inst.getCondition().accepte(this);
+		traduction+=");\n";
+
 	}
 	
 	@Override
 	public void visiter(InstructionFor instructionFor) {
+		// TODO vister InstructionFor
+		
 	}
 
 	@Override
@@ -76,8 +130,6 @@ public class VisiteurNXC extends VisiteurTraduction {
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
-			ajouterPointVirgule(is);
-			traduction+="\n";
 		}
 		nivIndent--;
 		
@@ -85,16 +137,6 @@ public class VisiteurNXC extends VisiteurTraduction {
 		
 	}
 
-	
-	/*
-	 * 	
-	 * 	OnFwd(OUT_A, 75);
-		OnFwd(OUT_C, 75);
-		Wait(4000);
-		OnRev(OUT_AC, 75);
-		Wait(4000);
-		Off(OUT_AC);
-	 */
 	@Override
 	public void visiter(InstructionAttente inst) {
 		traduction += indent();
@@ -155,6 +197,28 @@ public class VisiteurNXC extends VisiteurTraduction {
 	@Override
 	public void visiter(Variable variable) {
 		traduction += variable.toString();
+	}
+
+	@Override
+	public void visiter(InstructionDeclaration instructionDeclaration) {
+		super.traduction += indent();
+		super.traduction += instructionDeclaration.getMembreGauche().getType()+" ";
+		instructionDeclaration.getMembreGauche().accepte(this);
+		
+		
+		super.traduction += ";\n";
+		
+	}
+
+	@Override
+	public void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation) {
+		super.traduction += indent();
+		super.traduction += instructionDeclarationAffectation.getMembreGauche().getType()+" ";
+		instructionDeclarationAffectation.getMembreGauche().accepte(this);
+		super.traduction += " = ";
+		instructionDeclarationAffectation.getMembreDroit().accepte(this);
+		super.traduction += ";\n";
+	
 	}
 
 }

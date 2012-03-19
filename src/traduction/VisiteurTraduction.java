@@ -3,6 +3,8 @@ package traduction;
 import instruction.Affectation;
 import instruction.ExpressionComplexe;
 import instruction.InstructionAttente;
+import instruction.InstructionDeclaration;
+import instruction.InstructionDeclarationAffectation;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
 import instruction.InstructionIf;
@@ -50,6 +52,18 @@ public abstract class VisiteurTraduction {
 		}
 		return indent;
 	}
+	
+	/**
+	 * Traduit une instruction Declaration.
+	 * @param instructionDeclaration l'instruction à traduire
+	 */
+	public abstract void visiter(InstructionDeclaration instructionDeclaration);
+	/**
+	 * Traduit une instruction Declaration Affectation.
+	 * @param instructionDeclarationAffectation l'instruction à traduire
+	 */
+	public abstract void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation);
+	
 	
 	/**
 	 * Traduit une instruction if.
@@ -134,5 +148,7 @@ public abstract class VisiteurTraduction {
 	 * @param expr l'expression à traduire
 	 */
 	public abstract void visiter(ExpressionComplexe expr);
+	
+	
 
 }

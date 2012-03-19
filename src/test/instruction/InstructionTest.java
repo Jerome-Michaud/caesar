@@ -189,10 +189,10 @@ public class InstructionTest {
 	@Test
 	public void testVisiteurNXC() throws Exception{
 	
-		trad.reset();
-		trad.visiter((InstructionTache)n1);
+		//trad.reset();
+		//trad.visiter((InstructionTache)n1);
 		
-		System.out.println(trad.getTraduction());
+		//System.out.println(trad.getTraduction());
 		
 
 		VariableModifiable var = new VariableModifiable(TypeVariable.INT,"VariableModifiable","");
@@ -201,11 +201,11 @@ public class InstructionTest {
 		InstructionStructure i1 = new InstructionTache();
 		InstructionDeclaration i2 = new InstructionDeclaration () ;
 		InstructionDeclarationAffectation i3 = new InstructionDeclarationAffectation ();
-		i1.inserer(0,i2);
-		i1.inserer(1,i3);
+		i1.insererFin(i2);
+		i1.insererFin(i3);
 		i2.setMembre(var);
 		i3.setMembre(var , new VariableConstante(TypeVariable.INT , "variableConstante",  "10"));
-		System.out.println(i1);
+		//System.out.println(i1);
 		
 		
 		// Creer un ifelse , un while , un dowhile dans une tache
@@ -217,18 +217,18 @@ public class InstructionTest {
 		a1.insererFin(a2);
 		
 		a2.insererFin(i2);
-		a2.insererFin(i2);
+		a2.insererFin(i3);
 		
 		a2.insererFinElse(i2);
-		a2.insererFinElse(i2);
+		a2.insererFinElse(i3);
 		
 		a1.insererFin(a3);
 		a1.insererFin(a4);
-		System.out.println(a1);
+		//System.out.println(a1);
+	
 		
-
 		trad.reset();
-		trad.visiter((InstructionTache)i1);
+		trad.visiter((InstructionTache)a1);
 		
 		System.out.println(trad.getTraduction());
 

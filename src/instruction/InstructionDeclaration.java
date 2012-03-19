@@ -11,11 +11,7 @@ public class InstructionDeclaration implements Instruction{
 		return null;
 	}
 
-	@Override
-	public void accepte(VisiteurTraduction visiteur) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	public void setMembre ( VariableModifiable variable ){
 		this.membreGauche = variable;
@@ -29,6 +25,13 @@ public class InstructionDeclaration implements Instruction{
 	public VariableModifiable getMembreGauche()
 	{
 		return membreGauche;
+	}
+
+
+
+	@Override
+	public void accepte(VisiteurTraduction visiteur) {
+		visiteur.visiter(this);
 	}
 
 }

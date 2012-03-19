@@ -2,7 +2,7 @@ package instruction;
 
 public abstract class InstructionConditionelle extends InstructionStructure {
 	
-	protected Condition condition;
+	private Condition condition;
 
 	public InstructionConditionelle(Condition cond){
 		this.condition = cond;

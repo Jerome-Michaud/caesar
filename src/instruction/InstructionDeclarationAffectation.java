@@ -1,5 +1,7 @@
 package instruction;
 
+import traduction.VisiteurTraduction;
+
 public class InstructionDeclarationAffectation extends InstructionDeclaration {
 	
 
@@ -19,5 +21,9 @@ public class InstructionDeclarationAffectation extends InstructionDeclaration {
 	{
 		return membreDroit;
 
+	}
+	@Override
+	public void accepte(VisiteurTraduction visiteur) {
+		visiteur.visiter(this);
 	}
 }
