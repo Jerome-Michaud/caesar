@@ -16,4 +16,7 @@ public abstract class InstructionConditionelle extends InstructionStructure {
 	public Condition getCondition() {
 		return condition;
 	}
+	public void setCondition(Condition cond) {
+		condition = cond;
+	}
 }

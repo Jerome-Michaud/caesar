@@ -4,6 +4,9 @@ import traduction.VisiteurTraduction;
 
 public class InstructionWhile extends InstructionConditionelle {
 
+	public InstructionWhile() {
+		super(null);
+	}
 	public InstructionWhile(Condition cond) {
 		super(cond);
 	}
@@ -12,5 +15,13 @@ public class InstructionWhile extends InstructionConditionelle {
 	public void accepte(VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
-
+	public String toString(){
+		String res = "";
+		res+="While("+condition+"){\n";
+		for (Instruction is : getEnfants()){
+			res += "\t" + is + ";\n";
+		}
+		res+="\t}\n";
+		return res;
+	}
 }

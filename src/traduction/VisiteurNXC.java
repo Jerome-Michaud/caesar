@@ -139,6 +139,8 @@ public class VisiteurNXC extends VisiteurTraduction {
 		affectation.getMembreGauche().accepte(this);
 		traduction += " = ";
 		affectation.getMembreDroit().accepte(this);
+		if(affectation.isInstruction())
+			super.traduction += ";";
 	}
 
 	@Override

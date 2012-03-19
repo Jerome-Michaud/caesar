@@ -4,7 +4,7 @@ import traduction.VisiteurTraduction;
 
 public class InstructionDeclaration implements Instruction{
 
-	protected VariableModifiable membreGauche;
+	private VariableModifiable membreGauche;
 	@Override
 	public Categorie getCategorie() {
 		// TODO Auto-generated method stub
@@ -24,6 +24,11 @@ public class InstructionDeclaration implements Instruction{
 	public String toString()
 	{
 		return membreGauche.getType() + " " +membreGauche.getNom();
+	}
+	
+	public VariableModifiable getMembreGauche()
+	{
+		return membreGauche;
 	}
 
 }

@@ -37,7 +37,7 @@ public class InstructionTache extends InstructionInconditionelle {
 	public String toString(){
 		String res = "";
 		res+=nom+"(){\n";
-		for (Instruction is : enfants){
+		for (Instruction is : getEnfants()){
 			res += "\t" + is + ";\n";
 		}
 		res+="}";
