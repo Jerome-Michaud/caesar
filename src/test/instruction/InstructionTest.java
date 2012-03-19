@@ -3,6 +3,14 @@ package test.instruction;
 import instruction.*;
 
 
+import static instruction.Operateur.ADDITION;
+import static instruction.Operateur.INFERIEUR;
+import static instruction.Operateur.MULIPLICATION;
+import static instruction.Operateur.OU;
+import static instruction.Operateur.SUPERIEUR;
+import static instruction.TypeVariable.BOOL;
+import static instruction.TypeVariable.FLOAT;
+import static instruction.TypeVariable.INT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -23,6 +31,11 @@ import org.junit.Test;
  *
  */
 public class InstructionTest {
+	
+	Expression expression;
+	Condition cond;
+	
+
 
 	/**
 	 * @throws java.lang.Exception
@@ -43,6 +56,40 @@ public class InstructionTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		VariableModifiable e = new VariableModifiable(BOOL,"e","");
+		VariableModifiable a = new VariableModifiable(INT,"a","");
+		VariableModifiable b = new VariableModifiable(INT,"b","");
+		VariableModifiable c = new VariableModifiable(FLOAT,"c","");
+		VariableModifiable d = new VariableModifiable(FLOAT,"d","");
+		VariableConstante const1 = new VariableConstante(INT,"","1");
+		VariableConstante const2 = new VariableConstante(FLOAT,"","8.2");
+		
+		cond = new Condition(// ||
+				OU,
+				new Condition(// >
+						SUPERIEUR,
+						new Operation(// +
+								ADDITION,
+								a,
+								b
+								),
+						const1
+						),
+				new Condition(// <
+						INFERIEUR,
+						new Operation(// *
+								MULIPLICATION,
+								c, 
+								d
+								),
+						const2
+						)
+				);
+		
+		expression = new Affectation(// =
+				e,
+				cond
+				);
 	}
 
 	/**
@@ -79,6 +126,26 @@ public class InstructionTest {
 		i2.setMembre(var);
 		i3.setMembre(var , new VariableConstante(TypeVariable.INT , "variableConstante",  "10"));
 		System.out.println(i1);
+		
+		
+		// Creer un ifelse , un while , un dowhile dans une tache
+		
+		InstructionStructure a1 = new InstructionTache();
+		InstructionIfElse a2 = new InstructionIfElse(cond);
+		InstructionDoWhile a3 = new InstructionDoWhile(cond);
+		InstructionWhile a4 = new InstructionWhile(cond);
+		a1.ajouterFin(a2);
+		
+		a2.ajouterFin(i2);
+		a2.ajouterFin(i2);
+		
+		a2.ajouterFinElse(i2);
+		a2.ajouterFinElse(i2);
+		
+		a1.ajouterFin(a3);
+		a1.ajouterFin(a4);
+		System.out.println(a1);
+		
 
 	};
 

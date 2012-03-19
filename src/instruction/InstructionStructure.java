@@ -10,7 +10,7 @@ public abstract class InstructionStructure implements Instruction {
 	public static final int POSITION_DEBUT_CODE = 0;
 	public static final int POSITION_FIN_CODE = Integer.MAX_VALUE;
 	
-	protected List<Instruction> enfants = new ArrayList<Instruction>();
+	private List<Instruction> enfants ;
 		
 	public InstructionStructure() {
 		enfants = new ArrayList<Instruction>();

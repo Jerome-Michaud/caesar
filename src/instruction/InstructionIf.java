@@ -4,6 +4,10 @@ import traduction.VisiteurTraduction;
 
 public class InstructionIf extends InstructionConditionelle {
 
+	public InstructionIf(){
+		super(null);
+	}
+	
 	public InstructionIf(Condition cond) {
 		super(cond);
 		// TODO Auto-generated constructor stub
@@ -13,11 +17,13 @@ public class InstructionIf extends InstructionConditionelle {
 	public void accepte(VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
+	
+	
 
 	public String toString(){
 		String res = "";
 		res+="if("+condition+"){\n";
-		for (Instruction is : enfants){
+		for (Instruction is : getEnfants()){
 			res += "\t" + is + ";\n";
 		}
 		res+="\t}\n";
