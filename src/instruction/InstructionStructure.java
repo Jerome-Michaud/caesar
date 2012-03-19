@@ -35,10 +35,22 @@ public abstract class InstructionStructure implements Instruction {
 		enfants.add(inst);	
 	}
 	
+	/**
+	 * Donne la liste des instructions du corps de l'instruction
+	 * @return la liste des instructions
+	 */
 	public List<Instruction> getEnfants() {
 		return enfants;
 	}
 	
+	/**
+	 * Donne la liste des instrauctions du corps de l'instruction à partir d'une position.
+	 * @param pos la position de départ.
+	 * @return la liste des instructions concernées.
+	 */
+	public List<Instruction> getEnfants(int pos) {
+		return enfants.subList(pos, enfants.size()-1);
+	}
 	
 	@Override
 	public abstract Categorie getCategorie();
