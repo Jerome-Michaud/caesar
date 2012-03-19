@@ -99,10 +99,10 @@ public class ExpressionTest {
 		InstructionIf instrIf2 = new InstructionIf(cond);
 		
 		tache = new InstructionTache();
-		tache.ajouterFin((Instruction)expression);
-		instrIf1.ajouterFin(instrIf2);
-		tache.ajouterFin(instrIf1);
-		tache.ajouterFin((Instruction)expression);
+		tache.insererFin((Instruction)expression);
+		instrIf1.insererFin(instrIf2);
+		tache.insererFin(instrIf1);
+		tache.insererFin((Instruction)expression);
 		
 	}
 
