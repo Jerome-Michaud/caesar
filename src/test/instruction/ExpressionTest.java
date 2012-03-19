@@ -33,28 +33,14 @@ import traduction.VisiteurTraduction;
  */
 public class ExpressionTest {
 
-	Expression expression;
-	InstructionTache tache;
+	static Expression expression;
+	static InstructionTache tache;
 	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
 		
 		//Setup d'expression
 		
@@ -103,6 +89,21 @@ public class ExpressionTest {
 		instrIf1.insererFin(instrIf2);
 		tache.insererFin(instrIf1);
 		tache.insererFin((Instruction)expression);
+		
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
 		
 	}
 
