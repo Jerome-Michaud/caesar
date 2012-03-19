@@ -79,17 +79,6 @@ public class ExpressionTest {
 				cond
 				);
 		
-		//Setup d'une tache
-		
-		InstructionIf instrIf1 = new InstructionIf(cond);
-		InstructionIf instrIf2 = new InstructionIf(cond);
-		
-		tache = new InstructionTache();
-		tache.insererFin((Instruction)expression);
-		instrIf1.insererFin(instrIf2);
-		tache.insererFin(instrIf1);
-		tache.insererFin((Instruction)expression);
-		
 	}
 
 	/**
@@ -130,9 +119,5 @@ public class ExpressionTest {
 
 	};
 	
-	@Test
-	public void testComposeTache(){
-		System.out.println(tache.toString());
-	}
-
+	
 }

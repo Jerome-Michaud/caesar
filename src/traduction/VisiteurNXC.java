@@ -24,7 +24,21 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionIf inst) {
-		// TODO Auto-generated method stub
+		traduction+=indent();
+		
+		traduction+="if(";
+		inst.getCondition().accepte(this);
+		traduction+="){\n";
+		
+		nivIndent++;
+		for (Instruction is:inst.getEnfants()){
+			is.accepte(this);
+			traduction+=";\n";
+		}
+		
+		nivIndent--;
+		
+		traduction+=indent()+"}";
 	}
 
 	@Override
@@ -47,13 +61,14 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionTache inst) {
-		traduction+="main(){\n";
+		traduction+=indent()+"task "+inst.getNom()+"(){\n";
+		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
-			traduction+="\t";
 			is.accepte(this);
 			traduction+=";\n";
 		}
-		traduction+="}";
+		nivIndent--;
+		traduction+=indent()+"}";
 		
 	}
 
@@ -90,11 +105,11 @@ public class VisiteurNXC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionRepeat instructionRepeat) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void visiter(Affectation affectation) {
+		super.traduction += indent();
 		affectation.getMembreGauche().accepte(this);
 		super.traduction += " = ";
 		affectation.getMembreDroit().accepte(this);
