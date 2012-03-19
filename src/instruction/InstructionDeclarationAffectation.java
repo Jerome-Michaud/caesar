@@ -3,7 +3,7 @@ package instruction;
 public class InstructionDeclarationAffectation extends InstructionDeclaration {
 	
 
-	protected Expression membreDroit ;
+	private Expression membreDroit ;
 	
 	public void setMembre( VariableModifiable variable, Expression expression ){
 		super.setMembre(variable);
@@ -12,7 +12,12 @@ public class InstructionDeclarationAffectation extends InstructionDeclaration {
 	
 	public String toString()
 	{
-		return membreGauche.getType() +" "+ membreGauche.getNom() +" = "+ membreDroit.toString() ;
-	}
 
+		return getMembreGauche().getType() +" "+ getMembreGauche().getNom() +" = "+ membreDroit.toString() ;
+	}
+	public Expression getMembreDroit()
+	{
+		return membreDroit;
+
+	}
 }

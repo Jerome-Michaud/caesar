@@ -29,6 +29,11 @@ import traduction.VisiteurTraduction;
  *
  */
 public class InstructionTest {
+	
+	Expression expression;
+	Condition cond;
+	
+
 
 	static InstructionStructure n1;
 	static InstructionStructure i1;
@@ -126,6 +131,40 @@ public class InstructionTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		VariableModifiable e = new VariableModifiable(BOOL,"e","");
+		VariableModifiable a = new VariableModifiable(INT,"a","");
+		VariableModifiable b = new VariableModifiable(INT,"b","");
+		VariableModifiable c = new VariableModifiable(FLOAT,"c","");
+		VariableModifiable d = new VariableModifiable(FLOAT,"d","");
+		VariableConstante const1 = new VariableConstante(INT,"","1");
+		VariableConstante const2 = new VariableConstante(FLOAT,"","8.2");
+		
+		cond = new Condition(// ||
+				OU,
+				new Condition(// >
+						SUPERIEUR,
+						new Operation(// +
+								ADDITION,
+								a,
+								b
+								),
+						const1
+						),
+				new Condition(// <
+						INFERIEUR,
+						new Operation(// *
+								MULIPLICATION,
+								c, 
+								d
+								),
+						const2
+						)
+				);
+		
+		expression = new Affectation(// =
+				e,
+				cond
+				);
 	}
 
 	/**
@@ -152,10 +191,44 @@ public class InstructionTest {
 		
 		System.out.println(trad.getTraduction());
 		
+
+		VariableModifiable var = new VariableModifiable(TypeVariable.INT,"VariableModifiable","");
+		DicoVars dico = DicoVars.getInstance();
+		dico.ajouter(var );
+		InstructionStructure i1 = new InstructionTache();
+		InstructionDeclaration i2 = new InstructionDeclaration () ;
+		InstructionDeclarationAffectation i3 = new InstructionDeclarationAffectation ();
+		i1.inserer(0,i2);
+		i1.inserer(1,i3);
+		i2.setMembre(var);
+		i3.setMembre(var , new VariableConstante(TypeVariable.INT , "variableConstante",  "10"));
+		System.out.println(i1);
+		
+		
+		// Creer un ifelse , un while , un dowhile dans une tache
+		
+		InstructionStructure a1 = new InstructionTache();
+		InstructionIfElse a2 = new InstructionIfElse(cond);
+		InstructionDoWhile a3 = new InstructionDoWhile(cond);
+		InstructionWhile a4 = new InstructionWhile(cond);
+		a1.insererFin(a2);
+		
+		a2.insererFin(i2);
+		a2.insererFin(i2);
+		
+		a2.insererFinElse(i2);
+		a2.insererFinElse(i2);
+		
+		a1.insererFin(a3);
+		a1.insererFin(a4);
+		System.out.println(a1);
+		
+
 		trad.reset();
 		trad.visiter((InstructionTache)i1);
 		
 		System.out.println(trad.getTraduction());
+
 
 	};
 	
