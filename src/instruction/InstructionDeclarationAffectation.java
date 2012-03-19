@@ -12,10 +12,12 @@ public class InstructionDeclarationAffectation extends InstructionDeclaration {
 	
 	public String toString()
 	{
-		return "declarationAffectation  "+ getMembreGauche().toString() +"  "+ membreDroit.toString() ;
+
+		return getMembreGauche().getType() +" "+ getMembreGauche().getNom() +" = "+ membreDroit.toString() ;
 	}
 	public Expression getMembreDroit()
 	{
 		return membreDroit;
+
 	}
 }

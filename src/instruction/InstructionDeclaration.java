@@ -23,7 +23,7 @@ public class InstructionDeclaration implements Instruction{
 	
 	public String toString()
 	{
-		return "declaration "+ membreGauche.toString() ;
+		return membreGauche.getType() + " " +membreGauche.getNom();
 	}
 	
 	public VariableModifiable getMembreGauche()

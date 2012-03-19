@@ -5,7 +5,15 @@ import traduction.VisiteurTraduction;
 public class InstructionTache extends InstructionInconditionelle {
 
 	private String nom;
-	
+		
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
 	public InstructionTache()
 	{
 		this.nom = "main";
@@ -25,12 +33,15 @@ public class InstructionTache extends InstructionInconditionelle {
 		visiteur.visiter(this);
 	}
 	
-	public String toString()
-	{
-		String temp = super.toString();
-		return "Tache " + nom + " " + temp;
-		
-		
+	@Override
+	public String toString(){
+		String res = "";
+		res+=nom+"(){\n";
+		for (Instruction is : getEnfants()){
+			res += "\t" + is + ";\n";
+		}
+		res+="}";
+		return res;
 	}
 
 }

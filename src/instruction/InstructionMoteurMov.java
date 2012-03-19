@@ -31,7 +31,7 @@ public class InstructionMoteurMov extends InstructionMoteurCmd{
 	
 	public String toString()
 	{
-		return "Moteur mov " ;
+		return "moteurMov()";
 	}
 	public void setExpression ( Expression exp){
 		this.exp = exp;

@@ -27,8 +27,17 @@ public abstract class VisiteurTraduction {
 
 	public void reset(){
 		traduction = "";
+		nivIndent = 0;
 	}
 
+	protected String indent(){
+		String indent = "";
+		for (int i=0;i<nivIndent;i++){
+			indent+="\t";
+		}
+		return indent;
+	}
+	
 	public abstract void visiter(InstructionIf instructionIf);
 
 	public abstract void visiter(InstructionIfElse inst);

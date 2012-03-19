@@ -19,7 +19,7 @@ public class InstructionMoteurRotate extends InstructionMoteurCmd{
 	}
 	public String toString()
 	{
-		return "Moteur mov" ;
+		return "moteurOn()";
 	}
 	public void setExpression ( Expression exp){
 		this.exp = exp;

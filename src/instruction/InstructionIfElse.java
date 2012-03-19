@@ -44,14 +44,14 @@ public class InstructionIfElse extends InstructionConditionelle {
 	/**
 	 * inserer sur if
 	 */
-	public void ajouterDebut(Instruction inst){
-		membreIf.ajouterDebut(inst);
+	public void insererDebut(Instruction inst){
+		membreIf.insererDebut(inst);
 	}
 	/**
 	 * inserer sur if
 	 */
-	public void ajouterFin(Instruction inst){
-		membreIf.ajouterFin(inst);
+	public void insererFin(Instruction inst){
+		membreIf.insererFin(inst);
 	}
 	/**
 	 * get If enfants
@@ -68,12 +68,12 @@ public class InstructionIfElse extends InstructionConditionelle {
 		super.inserer(position,inst);
 	}
 	
-	public void ajouterDebutElse(Instruction inst){
-		super.ajouterDebut(inst);
+	public void insererDebutElse(Instruction inst){
+		super.insererDebut(inst);
 	}
 	
-	public void ajouterFinElse(Instruction inst){
-		super.ajouterFin(inst);
+	public void insererFinElse(Instruction inst){
+		super.insererFin(inst);
 	}
 	
 	public List<Instruction> getEnfantsElse() {

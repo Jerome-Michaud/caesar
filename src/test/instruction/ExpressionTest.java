@@ -33,28 +33,14 @@ import traduction.VisiteurTraduction;
  */
 public class ExpressionTest {
 
-	Expression expression;
-	InstructionTache tache;
+	static Expression expression;
+	static InstructionTache tache;
 	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
 		
 		//Setup d'expression
 		
@@ -93,16 +79,20 @@ public class ExpressionTest {
 				cond
 				);
 		
-		//Setup d'une tache
-		
-		InstructionIf instrIf1 = new InstructionIf(cond);
-		InstructionIf instrIf2 = new InstructionIf(cond);
-		
-		tache = new InstructionTache();
-		tache.ajouterFin((Instruction)expression);
-		instrIf1.ajouterFin(instrIf2);
-		tache.ajouterFin(instrIf1);
-		tache.ajouterFin((Instruction)expression);
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
 		
 	}
 
@@ -129,9 +119,5 @@ public class ExpressionTest {
 
 	};
 	
-	@Test
-	public void testComposeTache(){
-		System.out.println(tache.toString());
-	}
-
+	
 }
