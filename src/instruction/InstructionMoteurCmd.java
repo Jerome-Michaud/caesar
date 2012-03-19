@@ -6,6 +6,10 @@ public abstract class InstructionMoteurCmd implements Instruction {
 
 	protected Moteur moteur;
 
+	public InstructionMoteurCmd(Moteur moteur){
+		this.moteur = moteur;
+	}
+	
 	public abstract Categorie getCategorie() ;
 	
 	

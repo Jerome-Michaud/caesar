@@ -20,12 +20,23 @@ import instruction.InstructionWhile;
 import instruction.Operation;
 import instruction.Variable;
 
+/**
+ * @author m1022
+ *
+ */
+
+
 public class VisiteurNXC extends VisiteurTraduction {
 
+	
+	private void ajouterPointVirgule(Instruction is){
+		if (!(is instanceof InstructionStructure))
+			traduction+=";";
+	}
+	
 	@Override
 	public void visiter(InstructionIf inst) {
 		traduction+=indent();
-		
 		traduction+="if(";
 		inst.getCondition().accepte(this);
 		traduction+="){\n";
@@ -33,9 +44,9 @@ public class VisiteurNXC extends VisiteurTraduction {
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
-			traduction+=";\n";
+			ajouterPointVirgule(is);
+			traduction+="\n";
 		}
-		
 		nivIndent--;
 		
 		traduction+=indent()+"}";
@@ -43,85 +54,100 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionIfElse inst) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void visiter(InstructionWhile inst) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void visiter(InstructionDoWhile inst) {
-		// TODO Auto-generated method stub
-
+	}
+	
+	@Override
+	public void visiter(InstructionFor instructionFor) {
 	}
 
 	@Override
 	public void visiter(InstructionTache inst) {
+		
 		traduction+=indent()+"task "+inst.getNom()+"(){\n";
+		
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
-			traduction+=";\n";
+			ajouterPointVirgule(is);
+			traduction+="\n";
 		}
 		nivIndent--;
+		
 		traduction+=indent()+"}";
 		
 	}
 
+	
+	/*
+	 * 	
+	 * 	OnFwd(OUT_A, 75);
+		OnFwd(OUT_C, 75);
+		Wait(4000);
+		OnRev(OUT_AC, 75);
+		Wait(4000);
+		Off(OUT_AC);
+	 */
 	@Override
 	public void visiter(InstructionAttente inst) {
-		// TODO Auto-generated method stub
-
+		traduction += indent();
+		//TODO visiter InstructionAttente
 	}
 
 	@Override
 	public void visiter(InstructionMoteurMov inst) {
-		// TODO Auto-generated method stub
+		traduction += indent();
 		
+		if (inst.isReverse())
+			traduction += "OnRev("+inst.getMoteur();
+		else
+			traduction += "OnFwd("+inst.getMoteur();
+		
+		traduction += ", ";
+		inst.getExpression().accepte(this);
+		traduction += ");";
 	}
 
 	@Override
 	public void visiter(InstructionMoteurOff inst) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visiter(InstructionFor instructionFor) {
-		// TODO Auto-generated method stub
-		
+		traduction += indent();
+		traduction += "Off("+inst.getMoteur()+");";
 	}
 
 	@Override
 	public void visiter(InstructionTempsCourant inst) {
-		// TODO Auto-generated method stub
-		
+		traduction += indent();
+		//TODO visiter InstructionTempsCourant
 	}
 
 	@Override
 	public void visiter(InstructionRepeat instructionRepeat) {
-		// TODO Auto-generated method stub
+		traduction += indent();
+		//TODO visiter InstructionRepeat
 	}
 
 	@Override
 	public void visiter(Affectation affectation) {
-		super.traduction += indent();
+		traduction += indent();
 		affectation.getMembreGauche().accepte(this);
-		super.traduction += " = ";
+		traduction += " = ";
 		affectation.getMembreDroit().accepte(this);
 	}
 
 	@Override
 	public void visiter(ExpressionComplexe expr) {
-		super.traduction += "(";
+		traduction += "(";
 		expr.getMembreGauche().accepte(this);
-		super.traduction += " "+expr.getOperateur()+" ";
+		traduction += " "+expr.getOperateur()+" ";
 		expr.getMembreDroit().accepte(this);
-		super.traduction += ")";
+		traduction += ")";
 	}
 
 	@Override

@@ -20,6 +20,7 @@ public abstract class VisiteurTraduction {
 
 	protected String traduction;
 	protected int nivIndent;
+	protected String indent;
 		
 	public String getTraduction() {
 		return traduction;

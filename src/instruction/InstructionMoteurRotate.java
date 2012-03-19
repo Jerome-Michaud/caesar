@@ -5,6 +5,11 @@ import traduction.VisiteurTraduction;
 public class InstructionMoteurRotate extends InstructionMoteurCmd{
 	
 	protected Expression exp;
+
+	public InstructionMoteurRotate(Moteur moteur, Expression exp) {
+		super(moteur);
+		this.exp = exp;
+	}
 	
 	@Override
 	public Categorie getCategorie() {

@@ -4,6 +4,11 @@ import traduction.VisiteurTraduction;
 
 public class InstructionMoteurOff extends InstructionMoteurCmd{
 
+	public InstructionMoteurOff(Moteur moteur) {
+		super(moteur);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public Categorie getCategorie() {
 		// TODO Auto-generated method stub
@@ -18,7 +23,7 @@ public class InstructionMoteurOff extends InstructionMoteurCmd{
 	}
 	public String toString()
 	{
-		return "moteurOn()" ;
+		return "moteurOn("+moteur+")" ;
 	}
 	
 

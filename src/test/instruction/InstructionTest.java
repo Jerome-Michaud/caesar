@@ -40,15 +40,6 @@ public class InstructionTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 			
-		//Creer une tache et la remplir de quelques instructions
-		
-		n1 = new InstructionTache();
-		Instruction n2 = new InstructionMoteurRotate();
-		Instruction n3 = new InstructionMoteurOff();
-		Instruction n4 = new InstructionMoteurMov();
-		n1.inserer(0,n2);
-		n1.inserer(1,n3);
-		n1.inserer(2,n4);
 		
 		//Creer une tache , avec la creation d'une variable et son affectation 
 		
@@ -107,6 +98,18 @@ public class InstructionTest {
 		i1.insererFin(instrIf1);
 		i1.insererFin((Instruction) expression);
 		
+		//Creer une tache et la remplir de quelques instructions
+		
+				n1 = new InstructionTache();
+				Instruction n2 = new InstructionMoteurRotate(Moteur.A, expression);
+				Instruction n3 = new InstructionMoteurOff(Moteur.B);
+				Instruction n4 = new InstructionMoteurMov(Moteur.C, expression);
+				Instruction n5 = new InstructionMoteurMov(Moteur.D, expression, true);
+				n1.inserer(0,n2);
+				n1.inserer(1,n3);
+				n1.inserer(2,n4);
+				n1.inserer(2,n5);
+				
 		
 		//Creation d'un visiteur NXC 
 		trad = new VisiteurNXC();
