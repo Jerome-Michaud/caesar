@@ -70,14 +70,14 @@ public class TestProgramme {
 		
 		
 		
-		// while(i > 3)
+		// while(i < 3)
 		
 		
 		
 		InstructionWhile i9 = new InstructionWhile();
 		i1.insererFin(i9);
 		Condition condsup ;
-		i9.setCondition(condsup = new Condition(Operateur.SUPERIEUR));
+		i9.setCondition(condsup = new Condition(Operateur.INFERIEUR));
 		condsup.setMembreGauche(i);
 		condsup.setMembreDroit(new VariableConstante(TypeVariable.INT,"","3"));
 		
