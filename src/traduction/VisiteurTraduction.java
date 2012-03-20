@@ -23,7 +23,7 @@ public abstract class VisiteurTraduction {
 	protected String traduction;
 	protected int nivIndent;
 	protected String indent;
-	
+	protected boolean identationTabulation = false;
 
 	/**
 	 * Donne la traduction.
@@ -48,11 +48,22 @@ public abstract class VisiteurTraduction {
 	protected String indent(){
 		String indent = "";
 		for (int i=0;i<nivIndent;i++){
-			indent+="\t";
+			if (identationTabulation)
+				indent+="\t";
+			else
+				indent+="    ";
 		}
 		return indent;
 	}
 	
+	public boolean isIdentationTabulation() {
+		return identationTabulation;
+	}
+
+	public void setIdentationTabulation(boolean identationTabulation) {
+		this.identationTabulation = identationTabulation;
+	}
+
 	/**
 	 * Traduit une instruction Declaration.
 	 * @param instructionDeclaration l'instruction à traduire

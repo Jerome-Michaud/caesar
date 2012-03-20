@@ -4,14 +4,42 @@ import traduction.VisiteurTraduction;
 
 public class InstructionFor extends InstructionConditionelle{
 
-	
-	public InstructionFor() {
-		super(null);
-		// TODO Auto-generated constructor stub
-	}
-	public InstructionFor(Condition cond) {
+	private Affectation	intialization;
+	private Condition condition;
+	private Affectation	iteration;
+		
+	public InstructionFor(Condition cond, Affectation initialization,
+			Condition condition, Affectation iteration) {
 		super(cond);
-		// TODO Auto-generated constructor stub
+		this.intialization = initialization;
+		this.condition = condition;
+		this.iteration = iteration;
+		initialization.setIsInstruction(false);
+		iteration.setIsInstruction(false);
+	}
+	
+	public Affectation getIntialization() {
+		return intialization;
+	}
+
+	public void setIntialization(Affectation intialization) {
+		this.intialization = intialization;
+	}
+
+	public Condition getCondition() {
+		return condition;
+	}
+
+	public void setCondition(Condition condition) {
+		this.condition = condition;
+	}
+
+	public Affectation getIteration() {
+		return iteration;
+	}
+
+	public void setIteration(Affectation iteration) {
+		this.iteration = iteration;
 	}
 
 	@Override

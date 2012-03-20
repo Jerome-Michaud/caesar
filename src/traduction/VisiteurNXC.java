@@ -29,7 +29,17 @@ import instruction.Variable;
 
 
 public class VisiteurNXC extends VisiteurTraduction {
-
+	
+	private static VisiteurNXC instance;
+	
+	private VisiteurNXC(){};
+	
+	public static VisiteurNXC getInstance(){
+		if (instance==null){
+			instance = new VisiteurNXC();
+		}
+		return instance;
+	}
 	
 	private void ajouterPointVirgule(Instruction is){
 		if (!(is instanceof InstructionStructure))
@@ -117,8 +127,23 @@ public class VisiteurNXC extends VisiteurTraduction {
 	}
 	
 	@Override
-	public void visiter(InstructionFor instructionFor) {
-		// TODO vister InstructionFor
+	public void visiter(InstructionFor inst) {
+		
+		traduction+=indent()+"for (";
+		inst.getIntialization().accepte(this);
+		traduction+="; ";
+		inst.getCondition().accepte(this);
+		traduction+="; ";
+		inst.getIteration().accepte(this);
+		traduction+=" ){\n";
+			
+		nivIndent++;
+		for (Instruction is:inst.getEnfants()){
+			is.accepte(this);
+		}
+		nivIndent--;
+		
+		traduction+=indent()+"}\n";
 		
 	}
 
@@ -140,7 +165,9 @@ public class VisiteurNXC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionAttente inst) {
 		traduction += indent();
-		//TODO visiter InstructionAttente
+		traduction += "Wait(";
+		inst.getExpression().accepte(this);
+		traduction += ");\n";
 	}
 
 	@Override
@@ -160,29 +187,42 @@ public class VisiteurNXC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionMoteurOff inst) {
 		traduction += indent();
-		traduction += "Off("+inst.getMoteur()+");";
+		traduction += "Off("+inst.getMoteur()+");\n";
 	}
 
 	@Override
 	public void visiter(InstructionTempsCourant inst) {
 		traduction += indent();
-		//TODO visiter InstructionTempsCourant
+		traduction += "CurrentTick();\n";
+		//TODO CurrentTick(s)?
 	}
 
 	@Override
-	public void visiter(InstructionRepeat instructionRepeat) {
+	public void visiter(InstructionRepeat inst) {
 		traduction += indent();
-		//TODO visiter InstructionRepeat
+		
+		traduction += "repeat(";
+		inst.getExpression().accepte(this);
+		traduction += "){\n";
+		
+		nivIndent++;
+		for (Instruction is:inst.getEnfants()){
+			is.accepte(this);
+		}
+		nivIndent--;
+		
+		traduction+=indent()+"}\n";
 	}
 
 	@Override
 	public void visiter(Affectation affectation) {
-		traduction += indent();
+		if(affectation.isInstruction())	
+			traduction += indent();
 		affectation.getMembreGauche().accepte(this);
 		traduction += " = ";
 		affectation.getMembreDroit().accepte(this);
 		if(affectation.isInstruction())
-			super.traduction += ";";
+			super.traduction += ";\n";
 	}
 
 	@Override
@@ -201,23 +241,22 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionDeclaration instructionDeclaration) {
-		super.traduction += indent();
-		super.traduction += instructionDeclaration.getMembreGauche().getType()+" ";
+		traduction += indent();
+		traduction += instructionDeclaration.getMembreGauche().getType()+" ";
 		instructionDeclaration.getMembreGauche().accepte(this);
 		
-		
-		super.traduction += ";\n";
+		traduction += ";\n";
 		
 	}
 
 	@Override
 	public void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation) {
-		super.traduction += indent();
-		super.traduction += instructionDeclarationAffectation.getMembreGauche().getType()+" ";
+		traduction += indent();
+		traduction += instructionDeclarationAffectation.getMembreGauche().getType()+" ";
 		instructionDeclarationAffectation.getMembreGauche().accepte(this);
-		super.traduction += " = ";
+		traduction += " = ";
 		instructionDeclarationAffectation.getMembreDroit().accepte(this);
-		super.traduction += ";\n";
+		traduction += ";\n";
 	
 	}
 
