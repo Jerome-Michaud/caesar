@@ -5,6 +5,10 @@ import traduction.VisiteurTraduction;
 public class InstructionMoteurRotate extends InstructionMoteurCmd{
 	
 	protected Expression expression;
+	
+	public InstructionMoteurRotate() {
+		super();
+	}
 
 	public InstructionMoteurRotate(Moteur moteur, Expression exp) {
 		super(moteur);

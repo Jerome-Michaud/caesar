@@ -7,6 +7,10 @@ public class InstructionDeclarationAffectation extends InstructionDeclaration {
 
 	private Expression membreDroit ;
 	
+	public InstructionDeclarationAffectation() {
+		super();
+	}
+
 	public void setMembre( VariableModifiable variable, Expression expression ){
 		super.setMembre(variable);
 		this.membreDroit = expression;

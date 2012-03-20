@@ -4,9 +4,15 @@ import traduction.VisiteurTraduction;
 
 public class InstructionFor extends InstructionConditionelle{
 
+
 	private Affectation	intialization;
 	private Affectation	iteration;
-		
+	
+	public InstructionFor() {
+		super();
+	}
+	
+	
 	public InstructionFor(Condition cond, Affectation initialization,
 			Condition condition, Affectation iteration) {
 		super(cond);

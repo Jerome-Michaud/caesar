@@ -4,11 +4,16 @@ import traduction.VisiteurTraduction;
 
 public class InstructionAttente implements Instruction {
 
+
+	public InstructionAttente() {
+		super();
+	}
+
 	private Expression expression;
 
-	public InstructionAttente(Expression expr) {
+	public InstructionAttente(Expression expression) {
 		super();
-		this.expression = expr;
+		this.expression = expression;
 	}
 
 	public Expression getExpression() {

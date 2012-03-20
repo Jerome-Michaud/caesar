@@ -2,6 +2,10 @@ package instruction;
 
 public abstract class ExpressionComplexe implements Expression {
 
+	public ExpressionComplexe() {
+		super();
+	}
+
 	protected Expression membreDroit;
 	protected Expression membreGauche;
 	protected Operateur operateur;

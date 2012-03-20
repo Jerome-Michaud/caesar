@@ -16,6 +16,7 @@ public class InstructionTache extends InstructionInconditionelle {
 
 	public InstructionTache()
 	{
+		//TODO nom de tache par defaut
 		this.nom = "main";
 	}
 	
