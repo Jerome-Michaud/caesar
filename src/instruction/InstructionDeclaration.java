@@ -37,5 +37,9 @@ public class InstructionDeclaration implements Instruction{
 	public void accepte(VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
+	
+	public void setMembreGauche(VariableModifiable variable){
+		membreGauche = variable;
+	}
 
 }

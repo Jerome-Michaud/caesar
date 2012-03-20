@@ -74,7 +74,7 @@ public class InstructionTest {
 								MULIPLICATION, c, d), const2));
 
 		Expression expression = new Affectation(// =
-				e, cond);
+				e, cond,false);
 
 		InstructionIf instrIf1 = new InstructionIf(cond);
 		InstructionIf instrIf2 = new InstructionIf(cond);
@@ -128,7 +128,7 @@ public class InstructionTest {
 								MULIPLICATION, c, d), const2));
 
 		expression = new Affectation(// =
-				e, cond);
+				e, cond,false);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class InstructionTest {
 								MULIPLICATION, c, d), const2));
 
 		expression = new Affectation(// =
-				e, cond);
+				e, cond,false);
 		
 		// trad.reset();
 		// trad.visiter((InstructionTache)n1);
@@ -206,11 +206,11 @@ public class InstructionTest {
 						"a", "5.4"), new VariableModifiable(TypeVariable.FLOAT,
 						"a", "5.4")), new Affectation(new VariableModifiable(
 				TypeVariable.FLOAT, "i", "1"), new VariableConstante(
-				TypeVariable.FLOAT, "i", "1")), cond, new Affectation(
+				TypeVariable.FLOAT, "i", "1"),false), cond, new Affectation(
 				new VariableModifiable(TypeVariable.FLOAT, "i", "1"),
 				new Operation(Operateur.ADDITION, new VariableModifiable(
 						TypeVariable.FLOAT, "i", "1"), new VariableConstante(
-								TypeVariable.FLOAT, "i", "1"))));
+								TypeVariable.FLOAT, "i", "1")),false));
 		InstructionTempsCourant iTemps = new InstructionTempsCourant();
 		InstructionMoteurOff iOff = new InstructionMoteurOff(Moteur.B);
 		

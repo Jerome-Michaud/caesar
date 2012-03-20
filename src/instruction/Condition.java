@@ -11,6 +11,12 @@ public class Condition extends ExpressionComplexe {
 			throw new Exception("Opérateur non logique dans Condition.");
 	}
 
+	public Condition(Operateur operateur) throws Exception {
+		super(operateur);
+		if(!Operateur.isLogique(operateur))
+			throw new Exception("Opérateur non logique dans Condition.");
+	}
+
 	@Override
 	public void accepte(VisiteurTraduction v) {
 		v.visiter(this);

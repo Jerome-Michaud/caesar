@@ -6,9 +6,13 @@ public class Affectation extends ExpressionComplexe implements Instruction{
 
 	private boolean isInstruction;
 	
-	public Affectation(VariableModifiable membreGauche, Expression membreDroit) {
+	public Affectation(VariableModifiable membreGauche, Expression membreDroit,boolean isInstruction) {
 		super(Operateur.AFFECTATION, membreGauche, membreDroit);
-		isInstruction = false;
+		isInstruction = isInstruction;
+	}
+	public Affectation(boolean isInstruction) {
+		super(Operateur.AFFECTATION);
+		isInstruction = isInstruction;
 	}
 
 	@Override

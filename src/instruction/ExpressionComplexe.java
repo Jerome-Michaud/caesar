@@ -17,6 +17,10 @@ public abstract class ExpressionComplexe implements Expression {
 		this.membreDroit = membreDroit;
 	}
 
+	public ExpressionComplexe(Operateur operation) {
+		this.operateur =  operation;
+	}
+
 	/**
 	 * Modifie le membre droit.
 	 * 

@@ -30,4 +30,10 @@ public class InstructionDeclarationAffectation extends InstructionDeclaration {
 	public void accepte(VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
+
+	public void setMembreDroit(Expression expression) {
+		membreDroit = expression;
+		
+	}
+
 }

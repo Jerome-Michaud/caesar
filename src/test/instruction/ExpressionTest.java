@@ -77,7 +77,7 @@ public class ExpressionTest {
 		expression = new Affectation(// =
 				e,
 				cond
-				);
+				,false);
 		
 	}
 
@@ -110,7 +110,7 @@ public class ExpressionTest {
 		 * e=(((a+b)>1)||((c*d)<8.2))
 		 */
 		
-		VisiteurTraduction trad = new VisiteurNXC();
+		VisiteurTraduction trad = VisiteurNXC.getInstance();
 		trad.reset();
 		trad.visiter((Affectation)expression);
 		assertTrue(expression.toString().equals("e=(((a+b)>1)||((c*d)<8.2))"));
