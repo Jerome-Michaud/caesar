@@ -19,6 +19,7 @@ import instruction.InstructionStructure;
 import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
+import instruction.Moteur;
 import instruction.Operation;
 import instruction.Variable;
 
@@ -44,6 +45,23 @@ public class VisiteurNXC extends VisiteurTraduction {
 	private void ajouterPointVirgule(Instruction is){
 		if (!(is instanceof InstructionStructure))
 			traduction+=";";
+	}
+	
+	private void ajouterNomMoteur(Moteur m){
+		switch (m){
+		case A:
+			traduction += "OUTA";
+			break;
+		case B:
+			traduction += "OUTB";
+			break;
+		case C:
+			traduction += "OUTC";
+			break;
+		case D:
+			traduction += "OUTD";
+			break;
+		}
 	}
 	
 	@Override
@@ -175,19 +193,25 @@ public class VisiteurNXC extends VisiteurTraduction {
 		traduction += indent();
 		
 		if (inst.isReverse())
-			traduction += "OnRev("+inst.getMoteur();
+			traduction += "OnRev(";
 		else
-			traduction += "OnFwd("+inst.getMoteur();
+			traduction += "OnFwd(";
+		
+		ajouterNomMoteur(inst.getMoteur());
 		
 		traduction += ", ";
 		inst.getExpression().accepte(this);
-		traduction += ");";
+		traduction += ");\n";
 	}
 
 	@Override
 	public void visiter(InstructionMoteurOff inst) {
 		traduction += indent();
-		traduction += "Off("+inst.getMoteur()+");\n";
+		traduction += "Off(";
+		
+		ajouterNomMoteur(inst.getMoteur());
+		
+		traduction += ");\n";
 	}
 
 	@Override

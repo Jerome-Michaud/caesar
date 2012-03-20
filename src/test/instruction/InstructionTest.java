@@ -150,6 +150,24 @@ public class InstructionTest {
 	@Test
 	public void testVisiteurNXC() throws Exception {
 
+		VariableModifiable e = new VariableModifiable(BOOL, "e", "");
+		VariableModifiable a = new VariableModifiable(INT, "a", "");
+		VariableModifiable b = new VariableModifiable(INT, "b", "");
+		VariableModifiable c = new VariableModifiable(FLOAT, "c", "");
+		VariableModifiable d = new VariableModifiable(FLOAT, "d", "");
+		VariableConstante const1 = new VariableConstante(INT, "", "10");
+		VariableConstante const2 = new VariableConstante(FLOAT, "", "8.2");
+
+		cond = new Condition(// ||
+				OU, new Condition(// >
+						SUPERIEUR, new Operation(// +
+								ADDITION, a, b), const1), new Condition(// <
+						INFERIEUR, new Operation(// *
+								MULIPLICATION, c, d), const2));
+
+		expression = new Affectation(// =
+				e, cond);
+		
 		// trad.reset();
 		// trad.visiter((InstructionTache)n1);
 
@@ -176,7 +194,9 @@ public class InstructionTest {
 		InstructionDoWhile a3 = new InstructionDoWhile(cond);
 		InstructionWhile a4 = new InstructionWhile(cond);
 
-		// repeat(), wait(), off, temps courant, for, 
+		// OnRev, OnFwd ,repeat(), wait(), off, temps courant, for, 
+		InstructionMoteurMov iMotAvancer = new InstructionMoteurMov(Moteur.B, const1);
+		InstructionMoteurMov iMotReculer = new InstructionMoteurMov(Moteur.C, const1, true);
 		InstructionRepeat iRepeat = new InstructionRepeat(
 				new VariableModifiable(TypeVariable.INT, "r", "10"));
 		InstructionAttente iWait = new InstructionAttente(
@@ -203,6 +223,9 @@ public class InstructionTest {
 		a2.insererFinElse(i2);
 		a2.insererFinElse(i3);
 
+		a3.insererDebut(iMotReculer);
+		a3.insererDebut(iMotAvancer);
+		
 		a1.insererFin(a3);
 		a1.insererFin(a4);
 		a1.insererFin(iRepeat);

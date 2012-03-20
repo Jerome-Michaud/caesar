@@ -24,7 +24,7 @@ public abstract class VisiteurTraduction {
 	protected int nivIndent;
 	protected String indent;
 	protected boolean identationTabulation = false;
-
+	
 	/**
 	 * Donne la traduction.
 	 * @return la traduction
