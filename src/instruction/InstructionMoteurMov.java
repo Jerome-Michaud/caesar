@@ -33,6 +33,10 @@ public class InstructionMoteurMov extends InstructionMoteurCmd{
 		
 	}
 	
+	public void setReverse(boolean reverse){
+		this.reverse = reverse;
+	}
+	
 	public boolean isReverse()
 	{
 		return reverse;

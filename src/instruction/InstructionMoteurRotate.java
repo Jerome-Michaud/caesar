@@ -4,11 +4,11 @@ import traduction.VisiteurTraduction;
 
 public class InstructionMoteurRotate extends InstructionMoteurCmd{
 	
-	protected Expression exp;
+	protected Expression expression;
 
 	public InstructionMoteurRotate(Moteur moteur, Expression exp) {
 		super(moteur);
-		this.exp = exp;
+		this.expression = exp;
 	}
 	
 	@Override
@@ -27,6 +27,9 @@ public class InstructionMoteurRotate extends InstructionMoteurCmd{
 		return "moteurOn()";
 	}
 	public void setExpression ( Expression exp){
-		this.exp = exp;
+		this.expression = exp;
+	}
+	public Expression getExpression(){
+		return expression;
 	}
 }

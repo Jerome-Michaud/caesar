@@ -6,7 +6,7 @@ public class InstructionTempsCourant implements Instruction{
 
 	@Override
 	public Categorie getCategorie() {
-		// TODO Auto-generated method stub
+		// TODO getCategorie() pour InstructionTempsCourant
 		return null;
 	}
 

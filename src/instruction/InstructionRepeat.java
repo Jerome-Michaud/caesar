@@ -4,19 +4,19 @@ import traduction.VisiteurTraduction;
 
 public class InstructionRepeat extends InstructionInconditionelle{
 	
-	private Expression expr;
+	private Expression expression;
 	
 	public InstructionRepeat(Expression expr) {
 		super();
-		this.expr = expr;
+		this.expression = expr;
 	}
 
 	public Expression getExpression() {
-		return expr;
+		return expression;
 	}
 
 	public void setExpression(Expression expr) {
-		this.expr = expr;
+		this.expression = expr;
 	}
 
 	@Override

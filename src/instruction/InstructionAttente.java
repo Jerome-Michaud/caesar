@@ -4,21 +4,21 @@ import traduction.VisiteurTraduction;
 
 public class InstructionAttente implements Instruction {
 
-	private Expression expr;
+	private Expression expression;
 
 	public InstructionAttente(Expression expr) {
 		super();
-		this.expr = expr;
+		this.expression = expr;
 	}
 
 	public Expression getExpression() {
-		return expr;
+		return expression;
 	}
 
 	public void setExpression(Expression expr) {
-		this.expr = expr;
+		this.expression = expr;
 	}
-
+	
 	@Override
 	public Categorie getCategorie() {
 		return Categorie.TEMPS;
