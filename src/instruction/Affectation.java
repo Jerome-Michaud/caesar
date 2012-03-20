@@ -8,11 +8,11 @@ public class Affectation extends ExpressionComplexe implements Instruction{
 	
 	public Affectation(VariableModifiable membreGauche, Expression membreDroit,boolean isInstruction) {
 		super(Operateur.AFFECTATION, membreGauche, membreDroit);
-		isInstruction = isInstruction;
+		this.isInstruction = isInstruction;
 	}
 	public Affectation(boolean isInstruction) {
 		super(Operateur.AFFECTATION);
-		isInstruction = isInstruction;
+		this.isInstruction = isInstruction;
 	}
 
 	@Override
