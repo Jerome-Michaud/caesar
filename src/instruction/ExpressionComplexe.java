@@ -2,6 +2,10 @@ package instruction;
 
 public abstract class ExpressionComplexe implements Expression {
 
+	public ExpressionComplexe() {
+		super();
+	}
+
 	protected Expression membreDroit;
 	protected Expression membreGauche;
 	protected Operateur operateur;
@@ -11,6 +15,10 @@ public abstract class ExpressionComplexe implements Expression {
 		this.operateur = operation;
 		this.membreGauche = membreGauche;
 		this.membreDroit = membreDroit;
+	}
+
+	public ExpressionComplexe(Operateur operation) {
+		this.operateur =  operation;
 	}
 
 	/**

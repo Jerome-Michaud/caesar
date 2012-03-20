@@ -50,16 +50,16 @@ public class VisiteurNXC extends VisiteurTraduction {
 	private void ajouterNomMoteur(Moteur m){
 		switch (m){
 		case A:
-			traduction += "OUTA";
+			traduction += "OUT_A";
 			break;
 		case B:
-			traduction += "OUTB";
+			traduction += "OUT_B";
 			break;
 		case C:
-			traduction += "OUTC";
+			traduction += "OUT_C";
 			break;
 		case D:
-			traduction += "OUTD";
+			traduction += "OUT_D";
 			break;
 		}
 	}

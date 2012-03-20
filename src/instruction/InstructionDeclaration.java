@@ -5,14 +5,18 @@ import traduction.VisiteurTraduction;
 public class InstructionDeclaration implements Instruction{
 
 	private VariableModifiable membreGauche;
+
+	public InstructionDeclaration() {
+		super();
+	}
+	
 	@Override
 	public Categorie getCategorie() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 	
+
 	public void setMembre ( VariableModifiable variable ){
 		this.membreGauche = variable;
 	}
@@ -32,6 +36,10 @@ public class InstructionDeclaration implements Instruction{
 	@Override
 	public void accepte(VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
+	}
+	
+	public void setMembreGauche(VariableModifiable variable){
+		membreGauche = variable;
 	}
 
 }

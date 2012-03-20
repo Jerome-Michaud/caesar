@@ -6,6 +6,10 @@ public class InstructionRepeat extends InstructionInconditionelle{
 	
 	private Expression expression;
 	
+	public InstructionRepeat() {
+		super();
+	}
+
 	public InstructionRepeat(Expression expr) {
 		super();
 		this.expression = expr;

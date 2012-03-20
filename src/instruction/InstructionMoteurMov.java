@@ -7,6 +7,10 @@ public class InstructionMoteurMov extends InstructionMoteurCmd{
 	protected boolean reverse;
 	protected Expression exp;
 	
+	public InstructionMoteurMov() {
+		super();
+	}
+
 	public InstructionMoteurMov(Moteur moteur, Expression exp, boolean reverse)
 	{
 		super(moteur);

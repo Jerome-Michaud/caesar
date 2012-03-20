@@ -8,6 +8,10 @@ public abstract class Variable implements Expression{
 	private String nom;
 	private String valeur;
 	
+	public Variable() {
+		super();
+	}
+
 	/**
 	 * Construit une variable.
 	 * @param type Le type de la variable
