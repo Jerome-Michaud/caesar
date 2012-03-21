@@ -3,8 +3,6 @@ package instruction;
 import java.util.ArrayList;
 import java.util.List;
 
-import traduction.VisiteurTraduction;
-
 public abstract class InstructionStructure implements Instruction {
 	
 	public static final int POSITION_DEBUT_CODE = 0;
