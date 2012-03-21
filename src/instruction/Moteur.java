@@ -1,6 +1,11 @@
 package instruction;
 
-public enum Moteur {A,B,C,D;
+/**
+ * Cette énumération correspond aux différents moteurs
+ * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ */
+public enum Moteur {
+	A,B,C,D;
 
 	public String toString(){
 		switch (this){

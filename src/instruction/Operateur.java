@@ -1,5 +1,8 @@
 package instruction;
-
+/**
+ * Cette énumération regroupe les différents opérateurs disponibles pour les expressions
+ * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ */
 public enum Operateur {
 
 	ADDITION, SOUSTRACTION, MULIPLICATION, DIVISION,/* Arithmétique */
