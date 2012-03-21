@@ -6,9 +6,9 @@ public abstract class ExpressionComplexe implements Expression {
 		super();
 	}
 
-	protected Expression membreDroit;
-	protected Expression membreGauche;
-	protected Operateur operateur;
+	private Expression membreDroit;
+	private Expression membreGauche;
+	private Operateur operateur;
 
 	public ExpressionComplexe(Operateur operation, Expression membreGauche,
 			Expression membreDroit) {

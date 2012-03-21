@@ -21,7 +21,7 @@ public class Affectation extends ExpressionComplexe implements Instruction{
 	}
 
 	public String toString(){
-		return membreGauche.toString() + operateur + membreDroit;
+		return getMembreGauche().toString() + getOperateur() + getMembreDroit();
 	}
 
 	@Override

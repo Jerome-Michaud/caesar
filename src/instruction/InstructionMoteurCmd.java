@@ -4,7 +4,7 @@ import traduction.VisiteurTraduction;
 
 public abstract class InstructionMoteurCmd implements Instruction {
 
-	protected Moteur moteur;
+	private Moteur moteur;
 
 	public InstructionMoteurCmd() {
 		super();
