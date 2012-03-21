@@ -1,15 +1,27 @@
 package instruction;
 
 import traduction.VisiteurTraduction;
-
+/**
+ * Modèle d'une affectation.
+ * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ */
 public class Affectation extends ExpressionComplexe implements Instruction{
 
 	private boolean isInstruction;
-	
+	/**
+	 * Crée une affectation.
+	 * @param membreGauche variable cible de l'affectation
+	 * @param membreDroit expression dont la valeur sera affecter à la variable
+	 * @param isInstruction booléen indiquant si l'affectation doit être considérée comme une instruction
+	 */
 	public Affectation(VariableModifiable membreGauche, Expression membreDroit,boolean isInstruction) {
 		super(Operateur.AFFECTATION, membreGauche, membreDroit);
 		this.isInstruction = isInstruction;
 	}
+	/**
+	 * Crée une affectation sans membres. Ces derniers seront renseignés plus tard.
+	 * @param isInstruction booléen indiquant si l'affectation doit être considérée comme une instruction
+	 */
 	public Affectation(boolean isInstruction) {
 		super(Operateur.AFFECTATION);
 		this.isInstruction = isInstruction;
@@ -39,7 +51,7 @@ public class Affectation extends ExpressionComplexe implements Instruction{
 	
 	/**
 	 * Modifie l'utilisation de l'affection en tant que instruction ou expression
-	 * @param b
+	 * @param b si true l'affectation sera considéré comme une instruction
 	 */
 	public void setIsInstruction(boolean b) {
 		isInstruction = b;
