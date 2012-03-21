@@ -50,16 +50,16 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	private void ajouterNomMoteur(Moteur m){
 		switch (m){
 		case A:
-			traduction += "OUT_A";
+			traduction += "motorA";
 			break;
 		case B:
-			traduction += "OUT_B";
+			traduction += "motorB";
 			break;
 		case C:
-			traduction += "OUT_C";
+			traduction += "motorC";
 			break;
 		case D:
-			traduction += "OUT_D";
+			traduction += "motorD";
 			break;
 		}
 	}
@@ -183,7 +183,7 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionAttente inst) {
 		traduction += indent();
-		traduction += "Wait(";
+		traduction += "wait1Msec";
 		inst.getExpression().accepte(this);
 		traduction += ");\n";
 	}
@@ -192,26 +192,25 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	public void visiter(InstructionMoteurMov inst) {
 		traduction += indent();
 		
-		if (inst.isReverse())
-			traduction += "OnRev(";
-		else
-			traduction += "OnFwd(";
-		
+		traduction += "motor[";
 		ajouterNomMoteur(inst.getMoteur());
+		traduction += "]=";
 		
-		traduction += ", ";
+		if (inst.isReverse())
+			traduction += "-";
+
 		inst.getExpression().accepte(this);
-		traduction += ");\n";
+		traduction += ";\n";
 	}
 
 	@Override
 	public void visiter(InstructionMoteurOff inst) {
 		traduction += indent();
-		traduction += "Off(";
 		
+		traduction += "motor[";
 		ajouterNomMoteur(inst.getMoteur());
-		
-		traduction += ");\n";
+		traduction += "]=0";
+		traduction += ";\n";
 	}
 
 	@Override
@@ -223,12 +222,13 @@ public class VisiteurRobotC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionRepeat inst) {
-		traduction += indent();
-		
-		traduction += "repeat(";
-		inst.getExpression().accepte(this);
-		traduction += "){\n";
-		
+		traduction+=indent()+"int variablePourFor";
+		traduction+=indent()+"for (";
+		traduction+="variablePourFor = 0 ; ";
+		traduction+="variablePourFor <"+ inst.getExpression()+ ";" ;
+		traduction+="variablePourFor++" ;
+		traduction+=" ){\n";
+			
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
