@@ -1,20 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vue.Tools;
 
 import Vue.Widget.WidgetCompose;
-import Vue.Widget.IWidget;
 import Vue.Widget.Widget;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
-/**
- *
- * @author Bastien
- */
 public class ArborescenceTools {
 
     private List<List<Widget>> arborescence;
@@ -47,9 +37,7 @@ public class ArborescenceTools {
                 return parent.getComposition();
             } else {
                 for (List<Widget> lst : arborescence) {
-                    System.out.println("un petit tour");
                     if (lst.contains(comp)) {
-                        System.out.println("dans if");
                         return lst;
                     }
                 }// Ne devrait jamais arriver

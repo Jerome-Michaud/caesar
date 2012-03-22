@@ -11,8 +11,6 @@ import static org.junit.Assert.assertTrue;
 import instruction.Affectation;
 import instruction.Condition;
 import instruction.Expression;
-import instruction.Instruction;
-import instruction.InstructionIf;
 import instruction.InstructionTache;
 import instruction.Operation;
 import instruction.VariableConstante;

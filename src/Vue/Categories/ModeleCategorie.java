@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Polygon;
 
 public class ModeleCategorie {
+
 	private int tabXIcone[] = {0, 5, 10, 10, 5, 0};
 	private int tabYIcone[] = {5, 0, 0, Variables.TAILLE_CATEGORIE_Y, Variables.TAILLE_CATEGORIE_Y, Variables.TAILLE_CATEGORIE_Y - 5};
 	

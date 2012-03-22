@@ -1,9 +1,7 @@
 package Vue.Interface;
 
-import Vue.Categories.BoutonCategorie;
-import Vue.Categories.ModeleCategorie;
+import Vue.Categories.*;
 import Vue.Tools.Variables;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,12 +17,12 @@ public class PanelTypeWidget extends JPanel {
 		this.setBorder(BorderFactory.createTitledBorder("Catégories"));
 
 		this.lesCategories = new LinkedList<BoutonCategorie>();
-		this.lesCategories.add(new BoutonCategorie(new ModeleCategorie("Instructions", Color.BLUE)));
-		this.lesCategories.add(new BoutonCategorie(new ModeleCategorie("Contrôle", Color.YELLOW)));
-		this.lesCategories.add(new BoutonCategorie(new ModeleCategorie("Moteur", Color.GREEN)));
-		this.lesCategories.add(new BoutonCategorie(new ModeleCategorie("Affichage", Color.RED)));
-		this.lesCategories.add(new BoutonCategorie(new ModeleCategorie("I/O", Color.ORANGE)));
-		this.lesCategories.add(new BoutonCategorie(new ModeleCategorie("Temps", Color.CYAN)));
+		this.lesCategories.add(new BoutonCategorieInstruction());
+		this.lesCategories.add(new BoutonCategorieControle());
+		this.lesCategories.add(new BoutonCategorieMoteur());
+		this.lesCategories.add(new BoutonCategorieAffichage());
+		this.lesCategories.add(new BoutonCategorieIO());
+		this.lesCategories.add(new BoutonCategorieTemps());
 
 		this.setLayout(null);
 		int i = 0, x = 10, y = 26;
@@ -49,5 +47,9 @@ public class PanelTypeWidget extends JPanel {
 
 	public static PanelTypeWidget getInstance() {
 		return instance;
+	}
+	
+	public List<BoutonCategorie> getLesCategories() {
+		return this.lesCategories;
 	}
 }

@@ -4,7 +4,7 @@ public class Variables {
 	/**
 	 * Taille en X des boutons des catégories.
 	 */
-	public static final int TAILLE_CATEGORIE_X = 100;
+	public static final int TAILLE_CATEGORIE_X = 110;
 	
 	/**
 	 * Taille en Y des boutons des catégories.

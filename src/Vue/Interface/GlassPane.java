@@ -17,38 +17,41 @@ import javax.swing.SwingUtilities;
  */
 public class GlassPane extends JPanel {
 
-    private static final GlassPane instance = new GlassPane();
-    private Point linePoint;
-    public static final int LINE_WIDTH = 5;
-    private int lineWidth;
+	private static final GlassPane instance = new GlassPane();
+	private Point linePoint;
+	public static final int LINE_WIDTH = 5;
+	private int lineWidth;
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        if (linePoint != null) {
-            g2d.setStroke(new BasicStroke(LINE_WIDTH));
-            g2d.drawLine(linePoint.x, linePoint.y, linePoint.x + lineWidth, linePoint.y);
-        }
-    }
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g;
+		if (linePoint != null) {
+			g2d.setStroke(new BasicStroke(LINE_WIDTH));
+			g2d.drawLine(linePoint.x, linePoint.y, linePoint.x + lineWidth, linePoint.y);
+		}
+	}
 
-    private GlassPane() {
-        this.linePoint = null;
-        this.lineWidth = 0;
-    }
+	private GlassPane() {
+		this.linePoint = null;
+		this.lineWidth = 0;
+		this.setLayout(null);
+		this.setOpaque(false);
+		this.setVisible(true);
+	}
 
-    public static GlassPane getInstance() {
-        return instance;
-    }
+	public static GlassPane getInstance() {
+		return instance;
+	}
 
-    public void setLinePointOnScreen(Point linePoint) {
-        if (linePoint != null) {
-            SwingUtilities.convertPointFromScreen(linePoint, this);
-        }
-        this.linePoint = linePoint;
-    }
+	public void setLinePointOnScreen(Point linePoint) {
+		if (linePoint != null) {
+			SwingUtilities.convertPointFromScreen(linePoint, this);
+		}
+		this.linePoint = linePoint;
+	}
 
-    public void setLineWidth(int lineWidth) {
-        this.lineWidth = lineWidth;
-    }
+	public void setLineWidth(int lineWidth) {
+		this.lineWidth = lineWidth;
+	}
 }

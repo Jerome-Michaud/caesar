@@ -18,101 +18,99 @@ import javax.swing.Timer;
 
 public class FenetreAPropos extends JFrame implements MouseListener {
 
-    private JScrollPane textPane = null;
-    private JTextPane text = null;
-    private int tW = 300, tH = 350;
-    private Timer t;
+	private JScrollPane textPane = null;
+	private JTextPane text = null;
+	private int tW = 300, tH = 350;
+	private Timer t;
 
-    public FenetreAPropos() {
-	this.setTitle("A propos");
-	this.setSize(400, 370);
-	this.setResizable(false);
-	this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	this.setLayout(new FlowLayout(FlowLayout.CENTER));
-	this.setLocationRelativeTo(null);
+	public FenetreAPropos() {
+		this.setTitle("A propos");
+		this.setSize(400, 370);
+		this.setResizable(false);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+		this.setLocationRelativeTo(null);
 
-	
-	this.text = new JTextPane();
-	this.text.getCaret().setVisible(false);
-	this.text.setSize(tW, tH);
-	this.text.setContentType("text/html");
 
-	try {
-	    this.text.setPage(this.getClass().getClassLoader().getResource("APropos.html"));
-	} catch (Exception e) {
-	    Erreur.afficher(e);
+		this.text = new JTextPane();
+		this.text.getCaret().setVisible(false);
+		this.text.setSize(tW, tH);
+		this.text.setContentType("text/html");
+
+		try {
+			this.text.setPage(this.getClass().getClassLoader().getResource("APropos.html"));
+		} catch (Exception e) {
+			Erreur.afficher(e);
+		}
+
+		this.textPane = new JScrollPane(this.text);
+		this.textPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		this.textPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		this.textPane.setBounds(55, 0, tW, tH);
+
+		final JViewport vp = textPane.getViewport();
+		vp.setViewPosition(new Point(0, 0));
+
+		SwingUtilities.invokeLater(new Runnable() {
+
+			public void run() {
+				t = new Timer(40, new ActionListenerTextTimer(vp, tH, 1800));//24 images par secondes
+				t.start();
+			}
+		});
+
+		this.text.addMouseListener(this);
+		this.textPane.addMouseListener(this);
+
+		this.setLayout(new BorderLayout());
+		this.add(this.textPane, BorderLayout.CENTER);
+		this.textPane.setBorder(null);
+
+
+		this.setVisible(true);
 	}
 
-	this.textPane = new JScrollPane(this.text);
-	this.textPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-	this.textPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	this.textPane.setBounds(55, 0, tW, tH);
-	//this.textPane.setBackground(Color.WHITE);
-	//this.textPane.setBorder(null);
+	public class ActionListenerTextTimer implements ActionListener {
 
-	final JViewport vp = textPane.getViewport();
-	vp.setViewPosition(new Point(0, 0));
+		int height, i, posMax;
+		JViewport vp;
 
-	SwingUtilities.invokeLater(new Runnable() {
+		ActionListenerTextTimer(JViewport vp, int height, int posMax) {
+			super();
+			this.height = height;
+			this.vp = vp;
+			i = 1;
+			this.posMax = posMax;
+		}
 
-	    public void run() {
-		t = new Timer(40, new ActionListenerTextTimer(vp, tH, 1800));//24 images par secondes
-		t.start();
-	    }
-	});
-
-	this.text.addMouseListener(this);
-	this.textPane.addMouseListener(this);
-
-	this.setLayout(new BorderLayout());
-	this.add(this.textPane, BorderLayout.CENTER);
-	this.textPane.setBorder(null);
-
-	
-	this.setVisible(true);
-    }
-
-    public class ActionListenerTextTimer implements ActionListener {
-
-	int height, i, posMax;
-	JViewport vp;
-
-	ActionListenerTextTimer(JViewport vp, int height, int posMax) {
-	    super();
-	    this.height = height;
-	    this.vp = vp;
-	    i = 1;
-	    this.posMax = posMax;
+		public void actionPerformed(ActionEvent e) {
+			if (i <= posMax) {
+				vp.setViewPosition(new Point(0, i));
+				i++;
+			} else {
+				i = 1;
+			}
+		}
 	}
 
-	public void actionPerformed(ActionEvent e) {
-	    if (i <= posMax) {
-		vp.setViewPosition(new Point(0, i));
-		i++;
-	    } else {
-		i = 1;
-	    }
+	public void dispose() {
+		super.dispose();
+		t.stop();
 	}
-    }
 
-    public void dispose() {
-	super.dispose();
-	t.stop();
-    }
+	public void mouseClicked(MouseEvent e) {
+		this.dispose();
+	}
 
-    public void mouseClicked(MouseEvent e) {
-	this.dispose();
-    }
+	public void mouseEntered(MouseEvent e) {
+	}
 
-    public void mouseEntered(MouseEvent e) {
-    }
+	public void mouseExited(MouseEvent e) {
+	}
 
-    public void mouseExited(MouseEvent e) {
-    }
+	public void mousePressed(MouseEvent e) {
+	}
 
-    public void mousePressed(MouseEvent e) {
-    }
-
-    public void mouseReleased(MouseEvent e) {
-    }
+	public void mouseReleased(MouseEvent e) {
+	}
 }
