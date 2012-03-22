@@ -1,5 +1,6 @@
 package Vue.Widget;
 
+import Vue.Widget.modele.ModeleWidget;
 import Vue.Tools.IntegerTextField;
 
 public class WidgetTexte extends Widget implements WidgetComposant {

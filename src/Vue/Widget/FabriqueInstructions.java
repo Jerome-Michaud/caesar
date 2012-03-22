@@ -1,13 +1,16 @@
 package Vue.Widget;
 
+import Vue.Widget.modele.IfWidget;
+import Vue.Widget.modele.WhileWidget;
+
 public class FabriqueInstructions {
 
-    public Widget creerWidgetInstruction(){
-        return new WidgetInstruction(new ModeleWidget());
+    public Widget creerWidgetWhile(){
+        return new Widget(new WhileWidget());
     }
     
     public Widget creerWidgetIf(){
-        return new WidgetTexte(new ModeleWidget(), 10, 10);
+        return new WidgetTexte(new IfWidget(), 10, 10);
     }
 
 }

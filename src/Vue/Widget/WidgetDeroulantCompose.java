@@ -3,6 +3,8 @@ package Vue.Widget;
 import java.util.LinkedList;
 import java.util.List;
 
+import Vue.Widget.modele.ModeleWidget;
+
 public class WidgetDeroulantCompose extends WidgetTexte {
 
 	private List<Widget> lesFils;

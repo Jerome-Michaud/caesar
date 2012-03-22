@@ -4,6 +4,8 @@ import Vue.Interface.GlassPane;
 import Vue.Interface.PanelCodeGraphique;
 import Vue.Interface.PanelWidget;
 import Vue.Tools.DragAndDropTools;
+import Vue.Widget.modele.ModeleWidget;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

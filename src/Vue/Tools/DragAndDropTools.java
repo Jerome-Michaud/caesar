@@ -7,8 +7,9 @@ package Vue.Tools;
 import Modeles.Erreur;
 import Vue.Interface.*;
 import Vue.Widget.IWidget;
-import Vue.Widget.ModeleWidget;
 import Vue.Widget.Widget;
+import Vue.Widget.modele.ModeleWidget;
+
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
