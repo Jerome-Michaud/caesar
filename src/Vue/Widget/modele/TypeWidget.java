@@ -10,7 +10,7 @@ package Vue.Widget.modele;
  */
 public enum TypeWidget {
 
-    INSTRUCTION, IF, WHILE, NEGATION;
+    INSTRUCTION, IF, WHILE, NEGATION, DOWHILE, IFELSE, TACHE;
 
     public String toString() {
 	switch (this) {
@@ -22,6 +22,12 @@ public enum TypeWidget {
 		return "If";
 	    case WHILE:
 		return "While";
+	    case DOWHILE:
+	    return "DoWhile";
+	    case IFELSE:
+		return "IfElse";
+	    case TACHE:
+		return "Tache";
 	    default:
 		return null;
 	}
