@@ -28,7 +28,7 @@ public class PanelWidget extends JPanel {
 
 		placerWidgets();
 
-		this.setMinimumSize(new Dimension(Variables.xMax, 600));
+		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 600));
 	}
 
 	public static PanelWidget getInstance() {
@@ -44,7 +44,7 @@ public class PanelWidget extends JPanel {
 		for (Widget w : this.lesWidgets) {
 			w.setDraggable(false);
 
-			int x = Variables.xMax / 2 - w.getWidth() / 2;
+			int x = Variables.X_MAX_INSTRUCTION / 2 - w.getWidth() / 2;
 			int y = i * (w.getHeight() + 10);
 
 			w.setLocation(x, y);

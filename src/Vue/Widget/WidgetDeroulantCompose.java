@@ -1,6 +1,5 @@
 package Vue.Widget;
 
-import Vue.Widget.Texte.WidgetTexte;
 import java.util.LinkedList;
 import java.util.List;
 

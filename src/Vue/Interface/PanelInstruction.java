@@ -11,8 +11,8 @@ public class PanelInstruction extends JPanel {
 	private PanelInstruction() {
 		this.setLayout(new BorderLayout());
 
-		this.setMinimumSize(new Dimension(Variables.xMax, 800));
-		this.setPreferredSize(new Dimension(Variables.xMax, 800));
+		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 800));
+		this.setPreferredSize(new Dimension(Variables.X_MAX_INSTRUCTION, 800));
 
 		this.add(PanelTypeWidget.getInstance(), BorderLayout.NORTH);
 		this.add(PanelWidget.getInstance(), BorderLayout.CENTER);
