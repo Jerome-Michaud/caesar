@@ -11,6 +11,7 @@ import javax.swing.JComponent;
 
 public class Widget extends JComponent implements IWidget{
 
+    public static final float TAUX_TRANSFERT_PANEL = (float) 0.6;
     private Point ptClick;
     private boolean draggable = false;
     private ModeleWidget composant;
@@ -28,6 +29,9 @@ public class Widget extends JComponent implements IWidget{
         g2d.setColor(Color.WHITE);
         g2d.drawString(this.composant.getMessage(), 55, 17);
         super.paintComponent(g);
+        /*
+         * for(Widget w : this.widgetsAttaches){ w.repaint(); }
+         */
     }
 
     public Widget(ModeleWidget modele) {
@@ -150,8 +154,4 @@ public class Widget extends JComponent implements IWidget{
     public boolean isRacine() {
         return false;
     }
-
-	public TypeWidget getType() {
-		return this.composant.getType();
-	}
 }

@@ -11,7 +11,7 @@ import javax.swing.JSplitPane;
 public class Fenetre extends JFrame {
     private Menu menu;
     private JSplitPane split;
-    private JPanel glassPane;
+    private GlassPane glassPane;
     private static Fenetre instance = new Fenetre();
     private Dimension ecran;
     
@@ -39,7 +39,7 @@ public class Fenetre extends JFrame {
 	
 	
 	//Gestion du GlassPane
-	this.glassPane = new JPanel();
+	this.glassPane = GlassPane.getInstance();
         this.setGlassPane(this.glassPane);
         this.glassPane.setLayout(null);
         this.glassPane.setOpaque(false);
@@ -47,10 +47,6 @@ public class Fenetre extends JFrame {
 	
 	this.setVisible(true);
 	this.split.setDividerLocation(0.75);
-    }
-    
-    public JPanel getGlassPane() {
-	return this.glassPane;
     }
     
     public Menu getMenu() {

@@ -4,10 +4,12 @@
  */
 package Vue.Tools;
 
-import Vue.Widget.Widget;
 import Vue.Widget.WidgetCompose;
+import Vue.Widget.IWidget;
+import Vue.Widget.Widget;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
@@ -42,7 +44,7 @@ public class ArborescenceTools {
         } else {
             if (!comp.parent().isRacine()) {
                 WidgetCompose parent = (WidgetCompose) (comp.parent());
-                return parent.getLesFils();
+                return parent.getComposition();
             } else {
                 for (List<Widget> lst : arborescence) {
                     System.out.println("un petit tour");

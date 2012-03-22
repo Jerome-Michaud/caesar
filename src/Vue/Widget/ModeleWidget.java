@@ -1,7 +1,7 @@
 package Vue.Widget;
 
-import java.awt.*;
 import java.awt.Color;
+import java.awt.Polygon;
 
 public class ModeleWidget {
 
@@ -11,11 +11,11 @@ public class ModeleWidget {
     private Color couleur;
     private Polygon forme;
     private String message;
-    private TypeWidget type;
+    private boolean comp;
+    private int type;
 
-    public ModeleWidget(TypeWidget type) {
+    public ModeleWidget() {
 	this.couleur = Color.BLUE;
-	this.type = type;
 	this.message = "répéter";
 	this.forme = new Polygon(this.tabX, this.tabY, this.tabX.length);
     }
@@ -30,9 +30,5 @@ public class ModeleWidget {
     
     public String getMessage() {
 	return this.message;
-    }
-    
-    public TypeWidget getType() {
-	return this.type;
     }
 }

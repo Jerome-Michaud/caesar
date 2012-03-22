@@ -22,4 +22,8 @@ public class WidgetCompose extends Widget {
 	public List<Widget> getLesFils() {
 		return this.lesFils;
 	}
+
+	public List<Widget> getComposition() {
+		return this.lesFils;
+	}
 }
