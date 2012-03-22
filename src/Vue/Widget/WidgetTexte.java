@@ -1,8 +1,8 @@
 package Vue.Widget;
 
 import Vue.Tools.IntegerTextField;
-import Vue.Widget.ModeleWidget;
 import Vue.Widget.Widget;
+import Vue.Widget.modele.ModeleWidget;
 
 public class WidgetTexte extends Widget {
     private IntegerTextField zone;

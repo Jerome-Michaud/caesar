@@ -1,7 +1,8 @@
 package Vue.Widget;
 
-import Vue.Widget.ModeleWidget;
 import Vue.Widget.Widget;
+import Vue.Widget.modele.ModeleWidget;
+
 import java.util.LinkedList;
 import java.util.List;
 

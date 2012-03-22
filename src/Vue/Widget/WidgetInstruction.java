@@ -5,6 +5,8 @@
 
 package Vue.Widget;
 
+import Vue.Widget.modele.ModeleWidget;
+
 /**
  *
  * @author Bastien

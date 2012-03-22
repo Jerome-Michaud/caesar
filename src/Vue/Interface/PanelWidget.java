@@ -21,7 +21,7 @@ public class PanelWidget extends JPanel {
 	this.fabrique = new FabriqueInstructions();
 	this.setLayout(null);
 	
-	lesWidgets.add(fabrique.creerWidgetInstruction());
+	lesWidgets.add(fabrique.creerWidgetWhile());
 	lesWidgets.add(fabrique.creerWidgetIf());
 	//lesWidgets.add(fabrique.creerWidgetInstruction());
 	//lesWidgets.add(fabrique.creerWidgetInstruction());

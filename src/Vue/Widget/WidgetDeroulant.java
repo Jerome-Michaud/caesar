@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JComboBox;
 
+import Vue.Widget.modele.ModeleWidget;
+
 public class WidgetDeroulant<T> extends Widget {
     private JComboBox zone;
     private List<T> lesValeurs;
