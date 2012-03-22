@@ -15,7 +15,6 @@ import instruction.InstructionRepeat;
 import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
-import instruction.Operation;
 import instruction.Variable;
 
 public abstract class VisiteurTraduction {
@@ -56,10 +55,19 @@ public abstract class VisiteurTraduction {
 		return indent;
 	}
 	
+	/**
+	 * Permet de savoir si le caractère tabulation est utilisé pour l'indention.
+	 * pour faire l'indention.
+	 * @return true si la tabulation est utilisée pour l'indention, false sinon.
+	 */
 	public boolean isIdentationTabulation() {
 		return identationTabulation;
 	}
 
+	/**
+	 * Modifie la façon d'effectuer l'indention dans la traduction.
+	 * @param identationTabulation si false l'indention sera effectuée avec des espaces, sinon c'est le caractère '\t' qui est utilisé.
+	 */
 	public void setIdentationTabulation(boolean identationTabulation) {
 		this.identationTabulation = identationTabulation;
 	}
@@ -74,7 +82,6 @@ public abstract class VisiteurTraduction {
 	 * @param instructionDeclarationAffectation l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation);
-	
 	
 	/**
 	 * Traduit une instruction if.
@@ -159,7 +166,4 @@ public abstract class VisiteurTraduction {
 	 * @param expr l'expression à traduire
 	 */
 	public abstract void visiter(ExpressionComplexe expr);
-	
-	
-
 }

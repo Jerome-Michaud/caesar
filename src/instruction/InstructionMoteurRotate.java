@@ -4,7 +4,7 @@ import traduction.VisiteurTraduction;
 
 public class InstructionMoteurRotate extends InstructionMoteurCmd{
 	
-	protected Expression expression;
+	private Expression expression;
 	
 	public InstructionMoteurRotate() {
 		super();

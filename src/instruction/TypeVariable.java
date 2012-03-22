@@ -1,8 +1,9 @@
 package instruction;
 
 /**
- * @author Ivan
- *
+ * Cette énumération donne la liste des différents types
+ * possibles pour les variables.
+ * @author Ivan MELNYCHENKO
  */
 public enum TypeVariable {
 	INT, SHORT, LONG, FLOAT, BOOL, STRING, LIST;

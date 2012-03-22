@@ -27,7 +27,7 @@ public class InstructionMoteurOff extends InstructionMoteurCmd{
 	}
 	public String toString()
 	{
-		return "moteurOn("+moteur+")" ;
+		return "moteurOn("+getMoteur()+")" ;
 	}
 	
 

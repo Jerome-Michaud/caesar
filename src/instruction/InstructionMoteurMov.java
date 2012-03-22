@@ -4,8 +4,8 @@ import traduction.VisiteurTraduction;
 
 public class InstructionMoteurMov extends InstructionMoteurCmd{
 
-	protected boolean reverse;
-	protected Expression exp;
+	private boolean reverse;
+	private Expression exp;
 	
 	public InstructionMoteurMov() {
 		super();
@@ -48,7 +48,7 @@ public class InstructionMoteurMov extends InstructionMoteurCmd{
 	
 	public String toString()
 	{
-		return "moteurMov("+moteur+")";
+		return "moteurMov("+getMoteur()+")";
 	}
 	
 	public void setExpression (Expression exp){

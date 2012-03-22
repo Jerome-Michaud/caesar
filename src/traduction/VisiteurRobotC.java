@@ -1,6 +1,8 @@
 package traduction;
 
+
 import instruction.Affectation;
+import instruction.Condition;
 import instruction.ExpressionComplexe;
 import instruction.Instruction;
 import instruction.InstructionAttente;
@@ -13,47 +15,51 @@ import instruction.InstructionIfElse;
 import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
 import instruction.InstructionRepeat;
+import instruction.InstructionStructure;
 import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Moteur;
+import instruction.Operation;
 import instruction.Variable;
 
 /**
- * Traducteur d'instructions dans le langage NXC.
- * Cette classe implémente le design pattern Singleton.
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ * @author m1022
+ *
  */
-public class VisiteurNXC extends VisiteurTraduction {
+
+
+public class VisiteurRobotC extends VisiteurTraduction {
 	
-	private static VisiteurNXC instance;
+	private static VisiteurRobotC instance;
 	
-	private VisiteurNXC(){};
+	private VisiteurRobotC(){};
 	
-	/**
-	 * Donne l'instance unique de VisiteurNXC.
-	 * @return l'instance de VisiteurNXC
-	 */
-	public static VisiteurNXC getInstance(){
+	public static VisiteurRobotC getInstance(){
 		if (instance==null){
-			instance = new VisiteurNXC();
+			instance = new VisiteurRobotC();
 		}
 		return instance;
+	}
+	
+	private void ajouterPointVirgule(Instruction is){
+		if (!(is instanceof InstructionStructure))
+			traduction+=";";
 	}
 	
 	private void ajouterNomMoteur(Moteur m){
 		switch (m){
 		case A:
-			traduction += "OUT_A";
+			traduction += "motorA";
 			break;
 		case B:
-			traduction += "OUT_B";
+			traduction += "motorB";
 			break;
 		case C:
-			traduction += "OUT_C";
+			traduction += "motorC";
 			break;
 		case D:
-			traduction += "OUT_D";
+			traduction += "motorD";
 			break;
 		}
 	}
@@ -76,23 +82,30 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionIfElse inst) {
+
 		inst.getMembreIf().accepte(this);
+		
+		
 		// Else
+		
 		traduction+=indent();
 		traduction+="else{\n";
 		
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
+			
 		}
 		
 		nivIndent--;
 		
-		traduction+=indent()+"}\n";	
+		traduction+=indent()+"}\n";
+		
 	}
 
 	@Override
 	public void visiter(InstructionWhile inst) {
+
 		traduction+=indent();
 		
 		traduction+="while(";
@@ -101,7 +114,8 @@ public class VisiteurNXC extends VisiteurTraduction {
 		
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
-			is.accepte(this);		
+			is.accepte(this);
+			
 		}
 		
 		nivIndent--;
@@ -111,13 +125,15 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionDoWhile inst) {
+
 		traduction+=indent();
 		
 		traduction+="do{\n";
 		
 		nivIndent++;
-		for (Instruction is:inst.getEnfants()) {
-			is.accepte(this);		
+		for (Instruction is:inst.getEnfants()){
+			is.accepte(this);
+			
 		}
 		
 		nivIndent--;
@@ -125,10 +141,12 @@ public class VisiteurNXC extends VisiteurTraduction {
 		traduction+=indent()+"} while(";
 		inst.getCondition().accepte(this);
 		traduction+=");\n";
+
 	}
 	
 	@Override
-	public void visiter(InstructionFor inst) {		
+	public void visiter(InstructionFor inst) {
+		
 		traduction+=indent()+"for (";
 		inst.getIntialization().accepte(this);
 		traduction+="; ";
@@ -143,11 +161,13 @@ public class VisiteurNXC extends VisiteurTraduction {
 		}
 		nivIndent--;
 		
-		traduction+=indent()+"}\n";	
+		traduction+=indent()+"}\n";
+		
 	}
 
 	@Override
-	public void visiter(InstructionTache inst) {		
+	public void visiter(InstructionTache inst) {
+		
 		traduction+=indent()+"task "+inst.getNom()+"(){\n";
 		
 		nivIndent++;
@@ -156,13 +176,14 @@ public class VisiteurNXC extends VisiteurTraduction {
 		}
 		nivIndent--;
 		
-		traduction+=indent()+"}";	
+		traduction+=indent()+"}";
+		
 	}
 
 	@Override
 	public void visiter(InstructionAttente inst) {
 		traduction += indent();
-		traduction += "Wait(";
+		traduction += "wait1Msec";
 		inst.getExpression().accepte(this);
 		traduction += ");\n";
 	}
@@ -171,42 +192,43 @@ public class VisiteurNXC extends VisiteurTraduction {
 	public void visiter(InstructionMoteurMov inst) {
 		traduction += indent();
 		
-		if (inst.isReverse())
-			traduction += "OnRev(";
-		else
-			traduction += "OnFwd(";
-		
+		traduction += "motor[";
 		ajouterNomMoteur(inst.getMoteur());
+		traduction += "]=";
 		
-		traduction += ", ";
+		if (inst.isReverse())
+			traduction += "-";
+
 		inst.getExpression().accepte(this);
-		traduction += ");\n";
+		traduction += ";\n";
 	}
 
 	@Override
 	public void visiter(InstructionMoteurOff inst) {
 		traduction += indent();
-		traduction += "Off(";
 		
+		traduction += "motor[";
 		ajouterNomMoteur(inst.getMoteur());
-		
-		traduction += ");\n";
+		traduction += "]=0";
+		traduction += ";\n";
 	}
 
 	@Override
 	public void visiter(InstructionTempsCourant inst) {
 		traduction += indent();
 		traduction += "CurrentTick();\n";
+		//TODO CurrentTick(s)?
 	}
 
 	@Override
 	public void visiter(InstructionRepeat inst) {
-		traduction += indent();
-		
-		traduction += "repeat(";
-		inst.getExpression().accepte(this);
-		traduction += "){\n";
-		
+		traduction+=indent()+"int variablePourFor";
+		traduction+=indent()+"for (";
+		traduction+="variablePourFor = 0 ; ";
+		traduction+="variablePourFor <"+ inst.getExpression()+ ";" ;
+		traduction+="variablePourFor++" ;
+		traduction+=" ){\n";
+			
 		nivIndent++;
 		for (Instruction is:inst.getEnfants()){
 			is.accepte(this);
@@ -245,8 +267,10 @@ public class VisiteurNXC extends VisiteurTraduction {
 	public void visiter(InstructionDeclaration instructionDeclaration) {
 		traduction += indent();
 		traduction += instructionDeclaration.getMembreGauche().getType()+" ";
-		instructionDeclaration.getMembreGauche().accepte(this);		
-		traduction += ";\n";		
+		instructionDeclaration.getMembreGauche().accepte(this);
+		
+		traduction += ";\n";
+		
 	}
 
 	@Override
@@ -256,6 +280,8 @@ public class VisiteurNXC extends VisiteurTraduction {
 		instructionDeclarationAffectation.getMembreGauche().accepte(this);
 		traduction += " = ";
 		instructionDeclarationAffectation.getMembreDroit().accepte(this);
-		traduction += ";\n";	
+		traduction += ";\n";
+	
 	}
+
 }
