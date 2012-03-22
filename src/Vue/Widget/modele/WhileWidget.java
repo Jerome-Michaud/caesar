@@ -12,7 +12,7 @@ public class WhileWidget extends ModeleWidget{
 			super();
 			this.type=TypeWidget.WHILE;
 			this.couleur = Color.YELLOW;
-			this.message = "while";
+			this.message = "While";
 			this.forme = new Polygon(this.tabX, this.tabY, this.tabX.length);
 		}
 
