@@ -1,26 +1,36 @@
 package Vue.Widget;
 
+
+import Vue.Tools.NonClonableException;
+
 import Vue.Widget.modele.*;
 
 public class FabriqueInstructions {
 
+	public Widget creerWidgetInstruction(){
+        return new Widget(new InstructionWidget());
+    }
+	
     public Widget creerWidgetWhile(){
     	return new WidgetTexte(new WhileWidget(), 10, 10);
     }
     
-    public Widget creerWidgetIf(){
-        return new WidgetTexte(new IfWidget(), 10, 10);
+    public Widget creerWidgetDoWhile(){
+        return new Widget(new DoWhileWidget());
     }
+	
+	public Widget creerWidgetIf(){
+        return new Widget(new IfWidget());
+    }
+	
+	public Widget creerWidgetIfElse(){
+        return new Widget(new IfElseWidget());
+    }
+
     public Widget creerWidgetFor(){
     	return new WidgetTexte(new ForWidget(), 10, 10);
     }
-    
-    public Widget creerWidgetIfElse(){
-    	return new WidgetTexte(new ForWidget(), 10, 10);
-    }
-    public Widget creerWidgetDoWhile(){
-    	return new WidgetTexte(new DoWhileWidget(), 10, 10);
-    }
+
     public Widget creerWidgetRepeat(){
     	return new WidgetTexte(new RepeatWidget(), 10, 10);
     }
@@ -34,13 +44,47 @@ public class FabriqueInstructions {
     public Widget creerWidgetMoteurOff(){
         return new Widget(new MoteurOffWidget());
     }
-    public Widget creerWidgetTache(){
-        return new Widget(new TacheWidget());
-    }
     
     public Widget creerWidgetWait(){
         return new Widget(new WaitWidget());
     }
+
+
+	
+	public Widget creerWidgetTache(){
+        return new Widget(new TacheWidget());
+    }
+
+	public Widget cloner(Widget comp) throws NonClonableException {
+		Widget w = null;
+		if (comp.getModele() instanceof InstructionWidget) {
+			w = creerWidgetInstruction();
+		}
+		else if (comp.getModele() instanceof IfWidget) {
+			w = creerWidgetIf();
+		}
+		else if (comp.getModele() instanceof IfElseWidget) {
+			w = creerWidgetIfElse();
+		}
+		else if (comp.getModele() instanceof TacheWidget) {
+			w = creerWidgetTache();
+		}
+		else if (comp.getModele() instanceof WhileWidget) {
+			w = creerWidgetWhile();
+		}
+		else if (comp.getModele() instanceof DoWhileWidget) {
+			w = creerWidgetDoWhile();
+		}
+		if (w == null) {
+			throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
+		}
+		w.getModele().setCouleur(comp.getModele().getCouleur());
+		return w;
+	}
+
+	private void NonClonableException(String string) {
+		throw new UnsupportedOperationException("Not yet implemented");
+	}
 
 
 }

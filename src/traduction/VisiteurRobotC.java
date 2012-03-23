@@ -2,7 +2,6 @@ package traduction;
 
 
 import instruction.Affectation;
-import instruction.Condition;
 import instruction.ExpressionComplexe;
 import instruction.Instruction;
 import instruction.InstructionAttente;
@@ -15,36 +14,28 @@ import instruction.InstructionIfElse;
 import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
 import instruction.InstructionRepeat;
-import instruction.InstructionStructure;
 import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Moteur;
-import instruction.Operation;
 import instruction.Variable;
 
 /**
- * @author m1022
- *
+ * Traducteur d'instructions dans le langage RobotC.
+ * Cette classe implémente le design pattern Singleton.
+ * @author Ivan MELNYCHENKO, Adrien DUROY
  */
-
-
 public class VisiteurRobotC extends VisiteurTraduction {
 	
 	private static VisiteurRobotC instance;
 	
 	private VisiteurRobotC(){};
 	
-	public static VisiteurRobotC getInstance(){
+	public synchronized static VisiteurRobotC getInstance(){
 		if (instance==null){
 			instance = new VisiteurRobotC();
 		}
 		return instance;
-	}
-	
-	private void ajouterPointVirgule(Instruction is){
-		if (!(is instanceof InstructionStructure))
-			traduction+=";";
 	}
 	
 	private void ajouterNomMoteur(Moteur m){

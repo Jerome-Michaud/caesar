@@ -1,6 +1,7 @@
 package traduction;
 
 import instruction.Affectation;
+import instruction.Expression;
 import instruction.ExpressionComplexe;
 import instruction.Instruction;
 import instruction.InstructionAttente;
@@ -18,6 +19,7 @@ import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Moteur;
 import instruction.Variable;
+import instruction.VariableModifiable;
 
 /**
  * Traducteur d'instructions dans le langage NXC.
@@ -34,7 +36,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 	 * Donne l'instance unique de VisiteurNXC.
 	 * @return l'instance de VisiteurNXC
 	 */
-	public static VisiteurNXC getInstance(){
+	public synchronized static VisiteurNXC getInstance(){
 		if (instance==null){
 			instance = new VisiteurNXC();
 		}
@@ -62,7 +64,9 @@ public class VisiteurNXC extends VisiteurTraduction {
 	public void visiter(InstructionIf inst) {
 		traduction+=indent();
 		traduction+="if(";
-		inst.getCondition().accepte(this);
+		ExpressionComplexe cond = inst.getCondition();
+		if(cond != null)
+			cond.accepte(this);
 		traduction+="){\n";
 		
 		nivIndent++;
@@ -76,7 +80,9 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionIfElse inst) {
-		inst.getMembreIf().accepte(this);
+		InstructionIf membre = inst.getMembreIf();
+		if(membre != null)
+			membre.accepte(this);
 		// Else
 		traduction+=indent();
 		traduction+="else{\n";
@@ -96,7 +102,9 @@ public class VisiteurNXC extends VisiteurTraduction {
 		traduction+=indent();
 		
 		traduction+="while(";
-		inst.getCondition().accepte(this);
+		ExpressionComplexe cond = inst.getCondition();
+		if(cond != null)
+			cond.accepte(this);
 		traduction+="){\n";
 		
 		nivIndent++;
@@ -123,18 +131,25 @@ public class VisiteurNXC extends VisiteurTraduction {
 		nivIndent--;
 		
 		traduction+=indent()+"} while(";
-		inst.getCondition().accepte(this);
+		ExpressionComplexe cond = inst.getCondition();
+		if(cond != null)
+			cond.accepte(this);
 		traduction+=");\n";
 	}
 	
 	@Override
 	public void visiter(InstructionFor inst) {		
 		traduction+=indent()+"for (";
-		inst.getIntialization().accepte(this);
+		Affectation affec = inst.getIntialization();
+		affec.accepte(this);
 		traduction+="; ";
-		inst.getCondition().accepte(this);
+		ExpressionComplexe cond = inst.getCondition();
+		if(cond != null)
+			cond.accepte(this);
 		traduction+="; ";
-		inst.getIteration().accepte(this);
+		affec = inst.getIteration();
+		if(affec != null)
+			affec.accepte(this);
 		traduction+=" ){\n";
 			
 		nivIndent++;
@@ -163,7 +178,9 @@ public class VisiteurNXC extends VisiteurTraduction {
 	public void visiter(InstructionAttente inst) {
 		traduction += indent();
 		traduction += "Wait(";
-		inst.getExpression().accepte(this);
+		Expression ex = inst.getExpression();
+		if(ex != null)
+			ex.accepte(this);
 		traduction += ");\n";
 	}
 
@@ -179,7 +196,9 @@ public class VisiteurNXC extends VisiteurTraduction {
 		ajouterNomMoteur(inst.getMoteur());
 		
 		traduction += ", ";
-		inst.getExpression().accepte(this);
+		Expression ex = inst.getExpression();
+		if(ex != null)
+			ex.accepte(this);
 		traduction += ");\n";
 	}
 
@@ -204,7 +223,9 @@ public class VisiteurNXC extends VisiteurTraduction {
 		traduction += indent();
 		
 		traduction += "repeat(";
-		inst.getExpression().accepte(this);
+		Expression ex = inst.getExpression();
+		if(ex != null)
+			ex.accepte(this);
 		traduction += "){\n";
 		
 		nivIndent++;
@@ -220,9 +241,13 @@ public class VisiteurNXC extends VisiteurTraduction {
 	public void visiter(Affectation affectation) {
 		if(affectation.isInstruction())	
 			traduction += indent();
-		affectation.getMembreGauche().accepte(this);
+		Expression membre = affectation.getMembreGauche();
+		if(membre != null)
+			membre.accepte(this);
 		traduction += " = ";
-		affectation.getMembreDroit().accepte(this);
+		membre = affectation.getMembreDroit();
+		if(membre != null)
+			membre.accepte(this);
 		if(affectation.isInstruction())
 			super.traduction += ";\n";
 	}
@@ -230,9 +255,13 @@ public class VisiteurNXC extends VisiteurTraduction {
 	@Override
 	public void visiter(ExpressionComplexe expr) {
 		traduction += "(";
-		expr.getMembreGauche().accepte(this);
+		Expression membre = expr.getMembreGauche();
+		if(membre != null)
+			membre.accepte(this);
 		traduction += " "+expr.getOperateur()+" ";
-		expr.getMembreDroit().accepte(this);
+		membre = expr.getMembreDroit();
+		if(membre != null)
+			membre.accepte(this);
 		traduction += ")";
 	}
 
@@ -244,18 +273,28 @@ public class VisiteurNXC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionDeclaration instructionDeclaration) {
 		traduction += indent();
-		traduction += instructionDeclaration.getMembreGauche().getType()+" ";
-		instructionDeclaration.getMembreGauche().accepte(this);		
+		VariableModifiable var = instructionDeclaration.getMembreGauche();
+		if(var != null)
+		{
+			traduction += var.getType()+" ";
+			var.accepte(this);
+		}
 		traduction += ";\n";		
 	}
 
 	@Override
 	public void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation) {
 		traduction += indent();
-		traduction += instructionDeclarationAffectation.getMembreGauche().getType()+" ";
-		instructionDeclarationAffectation.getMembreGauche().accepte(this);
+		VariableModifiable var = instructionDeclarationAffectation.getMembreGauche();
+		if(var != null)
+		{
+			traduction += var.getType()+" ";
+			var.accepte(this);
+		}
 		traduction += " = ";
-		instructionDeclarationAffectation.getMembreDroit().accepte(this);
+		Expression ex = instructionDeclarationAffectation.getMembreDroit();
+		if(ex != null)
+			ex.accepte(this);
 		traduction += ";\n";	
 	}
 }

@@ -1,5 +1,6 @@
 package Vue.Widget;
 
+import Modeles.TypeWidget;
 import Vue.Interface.GlassPane;
 import Vue.Interface.PanelCodeGraphique;
 import Vue.Interface.PanelWidget;
@@ -16,7 +17,7 @@ public class Widget extends JComponent implements IWidget {
 	public static final float TAUX_TRANSFERT_PANEL = (float) 0.6;
 	private Point ptClick;
 	private boolean draggable = false;
-	private ModeleWidget composant;
+	private ModeleWidget modele;
 	private Font font;
 	private IWidget parent;
 
@@ -24,18 +25,26 @@ public class Widget extends JComponent implements IWidget {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(new BasicStroke(1));
-		g2d.setColor(this.composant.getCouleur());
-		g2d.fillPolygon(this.composant.getForme());
+		g2d.setColor(this.modele.getCouleur());
+		g2d.fillPolygon(this.modele.getForme());
 		g2d.setColor(Color.BLACK);
-		g2d.drawPolygon(this.composant.getForme());
+		g2d.drawPolygon(this.modele.getForme());
 		g2d.setColor(Color.WHITE);
-		g2d.drawString(this.composant.getMessage(), 55, 17);
+		if (this.modele.isConditionHaute()) {
+			g2d.drawString(this.modele.getMessage(), 60, 17);
+		}
+		else {
+			g2d.drawString(this.modele.getMessage(), 60, this.getHeight() - 14);
+		}
 		super.paintComponent(g);
 	}
+	
+
+	
 
 	public Widget(ModeleWidget modele) {
 		this.font = new Font("TimesRoman ", Font.PLAIN, 12);
-		this.composant = modele;
+		this.modele = modele;
 		this.setFont(this.font);
 		this.setFocusable(true);
 		this.setOpaque(true);
@@ -73,12 +82,12 @@ public class Widget extends JComponent implements IWidget {
 
 	public void setForme() {
 		int maxX = 0;
-		for (Integer i : this.composant.getForme().xpoints) {
+		for (Integer i : this.modele.getForme().xpoints) {
 			maxX = Math.max(maxX, i);
 		}
 
 		int maxY = 0;
-		for (Integer i : this.composant.getForme().ypoints) {
+		for (Integer i : this.modele.getForme().ypoints) {
 			maxY = Math.max(maxY, i);
 		}
 
@@ -89,7 +98,7 @@ public class Widget extends JComponent implements IWidget {
 	public void decalageXout(int a) {
 		int i;
 		for (i = 6; i < 10; i++) {
-			this.composant.getForme().xpoints[i] = this.composant.getForme().xpoints[i] + a;
+			this.modele.getForme().xpoints[i] = this.modele.getForme().xpoints[i] + a;
 		}
 		this.setForme();
 	}
@@ -97,7 +106,7 @@ public class Widget extends JComponent implements IWidget {
 	public void decalageXin(int a) {
 		int i;
 		for (i = 6; i < 10; i++) {
-			this.composant.getForme().xpoints[i] = this.composant.getForme().xpoints[i] - a;
+			this.modele.getForme().xpoints[i] = this.modele.getForme().xpoints[i] - a;
 		}
 		this.setForme();
 	}
@@ -105,7 +114,7 @@ public class Widget extends JComponent implements IWidget {
 	public void decalageYout(int b) {
 		int i;
 		for (i = 8; i < 16; i++) {
-			this.composant.getForme().ypoints[i] = this.composant.getForme().ypoints[i] + b;
+			this.modele.getForme().ypoints[i] = this.modele.getForme().ypoints[i] + b;
 		}
 		this.setForme();
 	}
@@ -113,13 +122,13 @@ public class Widget extends JComponent implements IWidget {
 	public void decalageYin(int b) {
 		int i;
 		for (i = 8; i < 16; i++) {
-			this.composant.getForme().ypoints[i] = this.composant.getForme().ypoints[i] - b;
+			this.modele.getForme().ypoints[i] = this.modele.getForme().ypoints[i] - b;
 		}
 		this.setForme();
 	}
 
-	public ModeleWidget getGComposant() {
-		return this.composant;
+	public ModeleWidget getModele() {
+		return this.modele;
 	}
 
 	public boolean isDraggable() {
@@ -152,5 +161,9 @@ public class Widget extends JComponent implements IWidget {
 
 	public boolean isRacine() {
 		return false;
+	}
+	
+	public TypeWidget getType() {
+		return this.modele.getType();
 	}
 }
