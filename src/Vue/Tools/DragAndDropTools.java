@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vue.Tools;
 
 import Modeles.Erreur;
@@ -18,10 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author Bastien
- */
 public class DragAndDropTools {
     
     private List<Widget> composantsDrague;
@@ -40,7 +32,7 @@ public class DragAndDropTools {
         
         if (!comp.isDraggable()) {
             comp.setDraggable(true);
-            Widget compNouv = PanelWidget.getInstance().getFabrique().creerWidgetIf();
+            Widget compNouv = PanelWidget.getInstance().getFabrique().cloner(comp);
             compNouv.setBounds(comp.getBounds());
             PanelWidget.getInstance().add(compNouv);
             composantsDrague = new LinkedList<Widget>();

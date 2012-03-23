@@ -34,9 +34,7 @@ public class PanelWidget extends JPanel {
 	}
 	
 	public void setLesWidgets(List<Widget> l) {
-		for (Widget w : this.lesWidgets) {
-			this.remove(w);
-		}
+		this.removeAll();
 		this.lesWidgets = l;
 		placerWidgets();
 		this.repaint();
@@ -44,13 +42,16 @@ public class PanelWidget extends JPanel {
 
 	private void placerWidgets() {
 		int i = 1;
+		int y = 30;
+		
 		for (Widget w : this.lesWidgets) {
 			w.setDraggable(false);
 
 			int x = Variables.X_MAX_INSTRUCTION / 2 - w.getWidth() / 2;
-			int y = i * (w.getHeight() + 10);
-
+			
 			w.setLocation(x, y);
+			y += w.getHeight() + 20;
+
 			this.add(w);
 			i++;
 		}
