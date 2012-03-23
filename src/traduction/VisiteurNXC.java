@@ -34,7 +34,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 	 * Donne l'instance unique de VisiteurNXC.
 	 * @return l'instance de VisiteurNXC
 	 */
-	public static VisiteurNXC getInstance(){
+	public synchronized static VisiteurNXC getInstance(){
 		if (instance==null){
 			instance = new VisiteurNXC();
 		}
