@@ -4,6 +4,10 @@ import Vue.Widget.modele.*;
 
 public class FabriqueInstructions {
 
+	public Widget creerWidgetInstruction(){
+        return new Widget(new InstructionWidget());
+    }
+	
     public Widget creerWidgetWhile(){
         return new Widget(new WhileWidget());
     }
@@ -25,15 +29,22 @@ public class FabriqueInstructions {
     }
 
 	public Widget cloner(Widget comp) {
-		if (comp.getModele() instanceof IfWidget) {
+		if (comp.getModele() instanceof InstructionWidget) {
+			return creerWidgetInstruction();
+		}
+		else if (comp.getModele() instanceof IfWidget) {
 			return creerWidgetIf();
-		} else if (comp.getModele() instanceof IfElseWidget) {
+		}
+		else if (comp.getModele() instanceof IfElseWidget) {
 			return creerWidgetIfElse();
-		} else if (comp.getModele() instanceof TacheWidget) {
+		}
+		else if (comp.getModele() instanceof TacheWidget) {
 			return creerWidgetTache();
-		} else if (comp.getModele() instanceof WhileWidget) {
+		}
+		else if (comp.getModele() instanceof WhileWidget) {
 			return creerWidgetWhile();
-		} else if (comp.getModele() instanceof DoWhileWidget) {
+		}
+		else if (comp.getModele() instanceof DoWhileWidget) {
 			return creerWidgetDoWhile();
 		}
 		return null;

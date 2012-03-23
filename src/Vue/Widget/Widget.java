@@ -29,9 +29,17 @@ public class Widget extends JComponent implements IWidget {
 		g2d.setColor(Color.BLACK);
 		g2d.drawPolygon(this.modele.getForme());
 		g2d.setColor(Color.WHITE);
-		g2d.drawString(this.modele.getMessage(), 55, 17);
+		if (this.modele.isConditionHaute()) {
+			g2d.drawString(this.modele.getMessage(), 60, 17);
+		}
+		else {
+			g2d.drawString(this.modele.getMessage(), 60, this.getHeight() - 14);
+		}
 		super.paintComponent(g);
 	}
+	
+
+	
 
 	public Widget(ModeleWidget modele) {
 		this.font = new Font("TimesRoman ", Font.PLAIN, 12);

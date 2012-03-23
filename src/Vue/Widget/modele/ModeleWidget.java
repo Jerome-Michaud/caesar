@@ -12,8 +12,18 @@ public abstract class ModeleWidget {
 	private Polygon forme;
 	private String message;
 	private TypeWidget type;
+	private boolean conditionHaute;
 
 	public ModeleWidget() {
+		this.conditionHaute = true;
+	}
+
+	public boolean isConditionHaute() {
+		return conditionHaute;
+	}
+
+	public void setConditionHaute(boolean conditionHaute) {
+		this.conditionHaute = conditionHaute;
 	}
 	
 	public int[] getTabX() {

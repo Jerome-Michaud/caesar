@@ -1,7 +1,6 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
-import java.awt.Color;
 import java.awt.Polygon;
 
 public class WhileWidget extends ModeleWidget {
@@ -15,7 +14,6 @@ public class WhileWidget extends ModeleWidget {
 			this.setTabX(tX);
 			this.setTabY(tY);
 			this.setType(TypeWidget.WHILE);
-			this.setCouleur(Color.YELLOW);
 			this.setMessage("While");
 			this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		}
