@@ -7,28 +7,60 @@ import java.awt.Polygon;
 public abstract class ModeleWidget {
 
 	public static final int OFFSET = 5;
-	protected int[] tabX, tabY;
-	protected Color couleur;
-	protected Polygon forme;
-	protected String message;
-	protected TypeWidget type;
+	private int[] tabX, tabY;
+	private Color couleur;
+	private Polygon forme;
+	private String message;
+	private TypeWidget type;
 
 	public ModeleWidget() {
 	}
+	
+	public int[] getTabX() {
+		return tabX;
+	}
 
-	public Polygon getForme() {
-		return this.forme;
+	public void setTabX(int[] tabX) {
+		this.tabX = tabX;
+	}
+
+	public int[] getTabY() {
+		return tabY;
+	}
+
+	public void setTabY(int[] tabY) {
+		this.tabY = tabY;
 	}
 
 	public Color getCouleur() {
-		return this.couleur;
+		return couleur;
+	}
+
+	public void setCouleur(Color couleur) {
+		this.couleur = couleur;
+	}
+
+	public Polygon getForme() {
+		return forme;
+	}
+
+	public void setForme(Polygon forme) {
+		this.forme = forme;
 	}
 
 	public String getMessage() {
-		return this.message;
+		return message;
 	}
-	
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public TypeWidget getType() {
-		return this.type;
+		return type;
+	}
+
+	public void setType(TypeWidget type) {
+		this.type = type;
 	}
 }
