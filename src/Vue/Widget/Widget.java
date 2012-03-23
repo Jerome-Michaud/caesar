@@ -1,5 +1,6 @@
 package Vue.Widget;
 
+import Modeles.TypeWidget;
 import Vue.Interface.GlassPane;
 import Vue.Interface.PanelCodeGraphique;
 import Vue.Interface.PanelWidget;
@@ -160,5 +161,9 @@ public class Widget extends JComponent implements IWidget {
 
 	public boolean isRacine() {
 		return false;
+	}
+	
+	public TypeWidget getType() {
+		return this.modele.getType();
 	}
 }

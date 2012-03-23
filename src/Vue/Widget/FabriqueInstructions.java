@@ -1,5 +1,6 @@
 package Vue.Widget;
 
+import Vue.Tools.NonClonableException;
 import Vue.Widget.modele.*;
 
 public class FabriqueInstructions {
@@ -28,26 +29,35 @@ public class FabriqueInstructions {
         return new Widget(new TacheWidget());
     }
 
-	public Widget cloner(Widget comp) {
+	public Widget cloner(Widget comp) throws NonClonableException {
+		Widget w = null;
 		if (comp.getModele() instanceof InstructionWidget) {
-			return creerWidgetInstruction();
+			w = creerWidgetInstruction();
 		}
 		else if (comp.getModele() instanceof IfWidget) {
-			return creerWidgetIf();
+			w = creerWidgetIf();
 		}
 		else if (comp.getModele() instanceof IfElseWidget) {
-			return creerWidgetIfElse();
+			w = creerWidgetIfElse();
 		}
 		else if (comp.getModele() instanceof TacheWidget) {
-			return creerWidgetTache();
+			w = creerWidgetTache();
 		}
 		else if (comp.getModele() instanceof WhileWidget) {
-			return creerWidgetWhile();
+			w = creerWidgetWhile();
 		}
 		else if (comp.getModele() instanceof DoWhileWidget) {
-			return creerWidgetDoWhile();
+			w = creerWidgetDoWhile();
 		}
-		return null;
+		if (w == null) {
+			throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
+		}
+		w.getModele().setCouleur(comp.getModele().getCouleur());
+		return w;
+	}
+
+	private void NonClonableException(String string) {
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
 }
