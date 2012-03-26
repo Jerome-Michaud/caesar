@@ -11,7 +11,7 @@ import java.util.List;
 import Vue.Tools.ComposantIntrouvableException;
 import Vue.Widget.modele.ModeleWidget;
 
-public class WidgetCompose extends Widget {
+public class WidgetCompose extends Widget implements IWidget {
 
 	private HashMap<Rectangle,List<Widget>> mapZone;
 	
@@ -77,4 +77,8 @@ public class WidgetCompose extends Widget {
 		return true;
 	}
 	
+	@Override
+    public boolean isRacine() {
+        return false;
+    }
 }

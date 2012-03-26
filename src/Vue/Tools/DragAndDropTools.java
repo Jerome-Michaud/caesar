@@ -184,7 +184,6 @@ public class DragAndDropTools {
                     p.add(w);
                     if (compSurvole == null) {
                         w.defParent((IWidget) p);//gestion du parent suivant element survole
-
                     } else {
                         w.defParent(compSurvole.parent());
                     }

@@ -12,7 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 
-public class Widget extends JComponent implements IWidget {
+public class Widget extends JComponent {
 
     public static final float TAUX_TRANSFERT_PANEL = (float) 0.6;
     private Point ptClick;
@@ -134,10 +134,6 @@ public class Widget extends JComponent implements IWidget {
 
     public void defParent(IWidget parent) {
         this.parent = parent;
-    }
-
-    public boolean isRacine() {
-        return false;
     }
 
     public TypeWidget getType() {
