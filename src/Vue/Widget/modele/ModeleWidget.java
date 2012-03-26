@@ -3,8 +3,9 @@ package Vue.Widget.modele;
 import Modeles.TypeWidget;
 import java.awt.Color;
 import java.awt.Polygon;
+import java.io.Serializable;
 
-public abstract class ModeleWidget {
+public abstract class ModeleWidget implements Serializable{
 
 	public static final int OFFSET = 5;
 	private int[] tabX, tabY;
@@ -18,9 +19,7 @@ public abstract class ModeleWidget {
 
 	public ModeleWidget() {
 		this.conditionHaute = true;
-		this.tailleX=this.getXMax(tabX)-this.getXMin(tabX);
-		this.tailleY=this.getYMax(tabY)-this.getYMin(tabY);
-		
+
 	}
 	
 	public int getXMin(int[] tabX){
@@ -127,15 +126,23 @@ public abstract class ModeleWidget {
 		return this.tailleX;
 	}
 	
-	public void setTailleX(int x){
-		this.tailleX=x;
+	public void setTailleX(){
+		this.tailleX=this.getXMax(tabX)-this.getXMin(tabX);
 	}
 	
 	public int getTailleY(){
 		return this.tailleY;
 	}
 	
-	public void setTailleY(int y){
-		this.tailleY=y;
+	public void setTailleY(){
+		this.tailleY=this.getYMax(tabY)-this.getYMin(tabY);
 	}
+	
+	public abstract void decalageXout(int x);
+    
+    public abstract void decalageXin(int x);
+    
+    public abstract void decalageYout(int x);
+    
+    public abstract void decalageYin(int x);
 }
