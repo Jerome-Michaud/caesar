@@ -7,6 +7,6 @@ import traduction.VisiteurTraduction;
  * Elle peut être traduite dans plusieurs langages différents.
  * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
  */
-public interface Expression {
+public interface Expression extends IElementProgramme {
 	void accepte(VisiteurTraduction v);
 }

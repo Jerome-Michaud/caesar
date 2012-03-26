@@ -1,11 +1,10 @@
 package Modeles;
 
-import javax.swing.JOptionPane;
-
 public class Erreur {
 
 	public static void afficher(Exception e) {
-		JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+		//JOptionPane.showMessageDialog(Fenetre.getInstance(), e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+		e.printStackTrace();
 		System.exit(1);
 	}
 }
