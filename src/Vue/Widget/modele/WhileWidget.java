@@ -20,7 +20,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setTabY(tY);
         this.setType(TypeWidget.WHILE);
         this.setMessage("While");
-		this.setInstruction(new InstructionWhile());
+		this.setElementProgramme(new InstructionWhile());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }

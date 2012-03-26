@@ -18,7 +18,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
 		this.setTabY(tY);
 		this.setType(TypeWidget.IFELSE);
 		this.setMessage("If");
-		this.setInstruction(new InstructionIfElse());
+		this.setElementProgramme(new InstructionIfElse());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_ELSE);

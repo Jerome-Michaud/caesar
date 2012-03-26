@@ -24,7 +24,7 @@ public class IfWidget extends ModeleWidget{
 			this.setTailleY();
 			this.setType(TypeWidget.IF);
 			this.setMessage("If");
-			this.setInstruction(new InstructionIf());
+			this.setElementProgramme(new InstructionIf());
 			this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 			this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 

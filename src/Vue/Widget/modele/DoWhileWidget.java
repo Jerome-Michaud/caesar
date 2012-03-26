@@ -18,7 +18,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
 		this.setTabY(tY);
 		this.setType(TypeWidget.DOWHILE);
 		this.setMessage("Do");
-		this.setInstruction(new InstructionDoWhile());
+		this.setElementProgramme(new InstructionDoWhile());
 		this.setConditionHaute(false);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_DOWHILE);

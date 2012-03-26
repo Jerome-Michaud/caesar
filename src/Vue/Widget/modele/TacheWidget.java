@@ -18,7 +18,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setTabY(tY);
         this.setType(TypeWidget.TACHE);
         this.setMessage("Tâche");
-		this.setInstruction(new InstructionTache());
+		this.setElementProgramme(new InstructionTache());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.attachableBas = false;
         this.attachableHaut = false;

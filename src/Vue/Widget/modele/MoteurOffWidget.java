@@ -21,7 +21,7 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEUROFF);
 		this.setMessage("Moteur off");
-		this.setInstruction(new InstructionMoteurOff());
+		this.setElementProgramme(new InstructionMoteurOff());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 	}

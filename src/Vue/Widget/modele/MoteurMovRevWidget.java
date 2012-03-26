@@ -21,7 +21,7 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEURMOVREV);
 		this.setMessage("MoteurMovRev");
-		this.setInstruction(new InstructionMoteurMov());
+		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 	}

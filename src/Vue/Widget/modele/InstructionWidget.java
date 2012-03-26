@@ -17,7 +17,7 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
 		this.setTabY(tY);
 		this.setType(TypeWidget.INSTRUCTION);
 		this.setMessage(msg);
-		this.setInstruction(i);
+		this.setElementProgramme(i);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 	}
 

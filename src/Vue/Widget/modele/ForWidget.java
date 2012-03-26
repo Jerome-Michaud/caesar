@@ -20,7 +20,7 @@ public class ForWidget extends ModeleWidget {
 			this.setTailleY();
 			this.setType(TypeWidget.FOR);
 			this.setMessage("For");
-			this.setInstruction(new InstructionFor());
+			this.setElementProgramme(new InstructionFor());
 			this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		}

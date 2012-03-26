@@ -21,7 +21,7 @@ public class WaitWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeWidget.WAIT);
 		this.setMessage("Wait");
-		this.setInstruction(new InstructionAttente());
+		this.setElementProgramme(new InstructionAttente());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 	}
