@@ -39,6 +39,22 @@ public class PanelWidget extends JPanel {
 		placerWidgets();
 		this.repaint();
 	}
+        
+        public void ajouterWidget(Widget widget) {
+            this.ajouterWidget(widget,this.lesWidgets.size());
+        }
+        
+        public void ajouterWidget(Widget widget,int index) {
+		this.lesWidgets.add(index,widget);
+	}
+        
+        public int getIndex(Widget w){
+            return this.lesWidgets.indexOf(w);
+        }
+
+	public boolean supprimerWidget(Widget widget) {
+		return this.lesWidgets.remove(widget);
+	}
 
 	private void placerWidgets() {
 		int i = 1;

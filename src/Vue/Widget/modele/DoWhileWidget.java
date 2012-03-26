@@ -1,9 +1,12 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
-import java.awt.Polygon;
+import Vue.Tools.Variables;
 
-public class DoWhileWidget extends ModeleWidget {
+import java.awt.Polygon;
+import java.io.Serializable;
+
+public class DoWhileWidget extends ModeleWidget implements Serializable{
 
 	public DoWhileWidget() {
 		super();
@@ -17,5 +20,26 @@ public class DoWhileWidget extends ModeleWidget {
 		this.setMessage("Do");
 		this.setConditionHaute(false);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_DOWHILE);
 	}
+
+    @Override
+    public void decalageXout(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void decalageXin(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void decalageYout(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void decalageYin(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
