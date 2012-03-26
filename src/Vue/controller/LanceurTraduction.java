@@ -10,6 +10,7 @@ import java.util.List;
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
 import Modeles.TypeWidget;
+import Vue.Interface.PanelCodeConsole;
 import Vue.Tools.ArborescenceTools;
 import Vue.Widget.Widget;
 import Vue.Widget.modele.ModeleWidget;
@@ -36,6 +37,8 @@ public class LanceurTraduction extends MouseAdapter {
 		List<Instruction> list = trouveTaches();
 		for(Instruction inst : list)
 			inst.accepte(traducteur);
+		System.out.println(traducteur.getTraduction());
+		PanelCodeConsole.getInstance().setText(traducteur.getTraduction());
 	}
 	
 	private List<Instruction> trouveTaches() {
@@ -48,6 +51,7 @@ public class LanceurTraduction extends MouseAdapter {
     			ModeleWidget m = tache.getModele();
     			if( m.getType() == TypeWidget.TACHE){
     				System.out.println("Tâche trouvée : Faire traduction");
+    				list.add((Instruction) m.getElementProgramme());
     			}
     		}
     	}
