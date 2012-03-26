@@ -208,7 +208,6 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	public void visiter(InstructionTempsCourant inst) {
 		traduction += indent();
 		traduction += "CurrentTick();\n";
-		//TODO CurrentTick(s)?
 	}
 
 	@Override

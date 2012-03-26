@@ -216,6 +216,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 	public void visiter(InstructionTempsCourant inst) {
 		traduction += indent();
 		traduction += "CurrentTick();\n";
+		//TODO CurrentTick(s)?
 	}
 
 	@Override
