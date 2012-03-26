@@ -49,7 +49,7 @@ public class FabriqueInstructions {
     }
 
 	public Widget creerWidgetTache(){
-        return new Widget(new TacheWidget());
+        return new WidgetComposeTextField(new TacheWidget(),10,10);
     }
 
 	public Widget cloner(Widget comp) throws NonClonableException {
