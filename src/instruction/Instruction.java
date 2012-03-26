@@ -8,7 +8,7 @@ import traduction.VisiteurTraduction;
  * peuvent être traduites dans différents langages.
  * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
  */
-public interface Instruction {
+public interface Instruction extends IElementProgramme {
 
 	/**
 	 * Donne la catégorie de l'instruction
