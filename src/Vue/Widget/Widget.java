@@ -72,37 +72,7 @@ public class Widget extends JComponent implements IWidget {
         this.setPreferredSize(new Dimension(maxX, maxY));
     }
 
-    public void decalageXout(int a) {
-        int i;
-        for (i = 6; i < 10; i++) {
-            this.modele.getForme().xpoints[i] = this.modele.getForme().xpoints[i] + a;
-        }
-        this.setForme();
-    }
-
-    public void decalageXin(int a) {
-        int i;
-        for (i = 6; i < 10; i++) {
-            this.modele.getForme().xpoints[i] = this.modele.getForme().xpoints[i] - a;
-        }
-        this.setForme();
-    }
-
-    public void decalageYout(int b) {
-        int i;
-        for (i = 8; i < 16; i++) {
-            this.modele.getForme().ypoints[i] = this.modele.getForme().ypoints[i] + b;
-        }
-        this.setForme();
-    }
-
-    public void decalageYin(int b) {
-        int i;
-        for (i = 8; i < 16; i++) {
-            this.modele.getForme().ypoints[i] = this.modele.getForme().ypoints[i] - b;
-        }
-        this.setForme();
-    }
+  
 
     public ModeleWidget getModele() {
         return this.modele;
