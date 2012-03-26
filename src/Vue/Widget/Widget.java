@@ -39,9 +39,6 @@ public class Widget extends JComponent implements IWidget {
 		super.paintComponent(g);
 	}
 	
-
-	
-
 	public Widget(ModeleWidget modele) {
 		this.font = new Font("TimesRoman ", Font.PLAIN, 12);
 		this.modele = modele;

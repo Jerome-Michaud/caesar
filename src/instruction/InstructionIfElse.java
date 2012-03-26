@@ -90,4 +90,64 @@ public class InstructionIfElse extends InstructionConditionelle {
 		res+="\t}\n";
 		return res;
 	}
+	
+	/**
+	 * TODO changer
+	 * Donne la liste des instrauctions du corps du membre IF à partir d'une certaine position.
+	 * @param pos la position de départ.
+	 * @return la liste des instructions concernées.
+	 */
+	@Override
+	public List<Instruction> getEnfants(int pos) {
+		return membreIf.getEnfants(pos);
+	}
+	
+	/**
+	 * TODO changer
+	 * Supprime toutes les instructions du corps  du membre IF.
+	 */
+	@Override
+	public void removeEnfants() {
+		membreIf.removeEnfants();
+	}
+	
+	/**
+	 * TODO changer
+	 * Supprime toutes les instructions du corps
+	 *  du membre IF à partir d'un certain rang.
+	 * @param pos le rang de départ
+	 */
+	@Override
+	public void removeEnfants(int pos) {
+		membreIf.removeEnfants(pos);
+	}
+	
+	/**
+	 * TODO changer
+	 * Donne la liste des instrauctions du corps du membre ELSE à partir d'une certaine position.
+	 * @param pos la position de départ.
+	 * @return la liste des instructions concernées.
+	 */
+	public List<Instruction> getEnfantsElse(int pos) {
+		return super.getEnfants(pos);
+	}
+	
+	/**
+	 * TODO changer
+	 * Supprime toutes les instructions du corps du membre ELSE.
+	 */
+
+	public void removeEnfantsElse() {
+		super.removeEnfants();
+	}
+	
+	/**
+	 * TODO changer
+	 * Supprime toutes les instructions du corps
+	 * du membre ELSE à partir d'un certain rang.
+	 * @param pos le rang de départ
+	 */
+	public void removeEnfantsElse(int pos) {
+		super.removeEnfants(pos);
+	}
 }
