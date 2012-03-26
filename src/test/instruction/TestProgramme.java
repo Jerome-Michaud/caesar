@@ -135,10 +135,6 @@ public class TestProgramme {
 				i15.setMembreDroit(new VariableConstante(TypeVariable.INT,"","1"));
 			//}	
 
-
-
-
-
 		//}
 
 		trad.setIdentationTabulation(false);
@@ -149,18 +145,6 @@ public class TestProgramme {
 		
 	}	
 }
-
-		
-		
-		
-		
-		
-		
-
-	
-	
-		
-
 
 
 /*

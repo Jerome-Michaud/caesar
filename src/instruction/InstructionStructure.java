@@ -47,7 +47,7 @@ public abstract class InstructionStructure implements Instruction {
 	 * @return la liste des instructions concernées.
 	 */
 	public List<Instruction> getEnfants(int pos) {
-		return enfants.subList(pos, enfants.size());
+		return new ArrayList<Instruction>(enfants.subList(pos, enfants.size()));
 	}
 	
 	/**
