@@ -181,7 +181,7 @@ public class TestEditionModele {
 		
 		System.out.println("Ajout/suppression debut/milieu:");
 		init();
-		i1.removeEnfants(6);
+		i1.removeEnfants();
 		genererCode();
 		System.out.println();
 		
