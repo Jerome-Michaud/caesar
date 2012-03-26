@@ -2,8 +2,9 @@ package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
 import java.awt.Polygon;
+import java.io.Serializable;
 
-public class DoWhileWidget extends ModeleWidget {
+public class DoWhileWidget extends ModeleWidget implements Serializable{
 
 	public DoWhileWidget() {
 		super();

@@ -2,8 +2,9 @@ package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
 import java.awt.Polygon;
+import java.io.Serializable;
 
-public class IfElseWidget extends ModeleWidget {
+public class IfElseWidget extends ModeleWidget implements Serializable{
 
 	public IfElseWidget() {
 		super();

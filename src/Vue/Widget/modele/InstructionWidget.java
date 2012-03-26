@@ -2,8 +2,9 @@ package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
 import java.awt.Polygon;
+import java.io.Serializable;
 
-public class InstructionWidget extends ModeleWidget {
+public class InstructionWidget extends ModeleWidget implements Serializable{
 
 	public InstructionWidget() {
 		super();

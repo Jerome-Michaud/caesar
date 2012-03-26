@@ -6,7 +6,6 @@ import Vue.Interface.PanelCodeGraphique;
 import Vue.Interface.PanelWidget;
 import Vue.Tools.DragAndDropTools;
 import Vue.Widget.modele.ModeleWidget;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,156 +13,156 @@ import javax.swing.JComponent;
 
 public class Widget extends JComponent implements IWidget {
 
-	public static final float TAUX_TRANSFERT_PANEL = (float) 0.6;
-	private Point ptClick;
-	private boolean draggable = false;
-	private ModeleWidget modele;
-	private Font font;
-	private IWidget parent;
+    public static final float TAUX_TRANSFERT_PANEL = (float) 0.6;
+    private Point ptClick;
+    private boolean draggable = false;
+    private ModeleWidget modele;
+    private Font font;
+    private IWidget parent;
 
-	@Override
-	public void paintComponent(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setStroke(new BasicStroke(1));
-		g2d.setColor(this.modele.getCouleur());
-		g2d.fillPolygon(this.modele.getForme());
-		g2d.setColor(Color.BLACK);
-		g2d.drawPolygon(this.modele.getForme());
-		g2d.setColor(Color.WHITE);
-		if (this.modele.isConditionHaute()) {
-			g2d.drawString(this.modele.getMessage(), 60, 17);
-		}
-		else {
-			g2d.drawString(this.modele.getMessage(), 60, this.getHeight() - 14);
-		}
-		super.paintComponent(g);
-	}
-	
+    @Override
+    public void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(1));
+        g2d.setColor(this.modele.getCouleur());
+        g2d.fillPolygon(this.modele.getForme());
+        g2d.setColor(Color.BLACK);
+        g2d.drawPolygon(this.modele.getForme());
+        g2d.setColor(Color.WHITE);
+        if (this.modele.isConditionHaute()) {
+            g2d.drawString(this.modele.getMessage(), 60, 17);
+        } else {
+            g2d.drawString(this.modele.getMessage(), 60, this.getHeight() - 14);
+        }
+        super.paintComponent(g);
+    }
 
-	
+    public Widget(ModeleWidget modele) {
+        this.font = new Font("TimesRoman ", Font.PLAIN, 12);
+        this.modele = modele;
+        this.setFont(this.font);
+        this.setFocusable(true);
+        this.setOpaque(true);
+        this.setForme();
+        
+        initListeners();
+        
+        this.parent = null;
+    }
 
-	public Widget(ModeleWidget modele) {
-		this.font = new Font("TimesRoman ", Font.PLAIN, 12);
-		this.modele = modele;
-		this.setFont(this.font);
-		this.setFocusable(true);
-		this.setOpaque(true);
-		this.setForme();
+    private void repaintAll(MouseEvent e) {
+        PanelWidget.getInstance().repaint();
+        PanelCodeGraphique.getInstance().repaint();
+        GlassPane.getInstance().repaint();
+    }
 
-		this.addMouseMotionListener(new MouseAdapter() {
+    public void setForme() {
+        int maxX = 0;
+        for (Integer i : this.modele.getForme().xpoints) {
+            maxX = Math.max(maxX, i);
+        }
 
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				DragAndDropTools.getInstance().dragWidget((Widget) e.getComponent());
-			}
-		});
+        int maxY = 0;
+        for (Integer i : this.modele.getForme().ypoints) {
+            maxY = Math.max(maxY, i);
+        }
 
-		this.addMouseListener(new MouseAdapter() {
+        this.setBounds(0, 0, maxX + 1, maxY + 1);
+        this.setPreferredSize(new Dimension(maxX, maxY));
+    }
 
-			@Override
-			public void mousePressed(MouseEvent e) {
-				DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
-				repaintAll(e);
-			}
+    public void decalageXout(int a) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.modele.getForme().xpoints[i] = this.modele.getForme().xpoints[i] + a;
+        }
+        this.setForme();
+    }
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				DragAndDropTools.getInstance().dropWidget();
-			}
-		});
-		this.parent = null;
-	}
+    public void decalageXin(int a) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.modele.getForme().xpoints[i] = this.modele.getForme().xpoints[i] - a;
+        }
+        this.setForme();
+    }
 
-	private void repaintAll(MouseEvent e) {
-		PanelWidget.getInstance().repaint();
-		PanelCodeGraphique.getInstance().repaint();
-		GlassPane.getInstance().repaint();
-	}
+    public void decalageYout(int b) {
+        int i;
+        for (i = 8; i < 16; i++) {
+            this.modele.getForme().ypoints[i] = this.modele.getForme().ypoints[i] + b;
+        }
+        this.setForme();
+    }
 
-	public void setForme() {
-		int maxX = 0;
-		for (Integer i : this.modele.getForme().xpoints) {
-			maxX = Math.max(maxX, i);
-		}
+    public void decalageYin(int b) {
+        int i;
+        for (i = 8; i < 16; i++) {
+            this.modele.getForme().ypoints[i] = this.modele.getForme().ypoints[i] - b;
+        }
+        this.setForme();
+    }
 
-		int maxY = 0;
-		for (Integer i : this.modele.getForme().ypoints) {
-			maxY = Math.max(maxY, i);
-		}
+    public ModeleWidget getModele() {
+        return this.modele;
+    }
 
-		this.setBounds(0, 0, maxX + 1, maxY + 1);
-		this.setPreferredSize(new Dimension(maxX, maxY));
-	}
+    public boolean isDraggable() {
+        return this.draggable;
+    }
 
-	public void decalageXout(int a) {
-		int i;
-		for (i = 6; i < 10; i++) {
-			this.modele.getForme().xpoints[i] = this.modele.getForme().xpoints[i] + a;
-		}
-		this.setForme();
-	}
+    public void setDraggable(boolean draggable) {
+        this.draggable = draggable;
+    }
 
-	public void decalageXin(int a) {
-		int i;
-		for (i = 6; i < 10; i++) {
-			this.modele.getForme().xpoints[i] = this.modele.getForme().xpoints[i] - a;
-		}
-		this.setForme();
-	}
+    public void setPtClick(Point ptClick) {
+        this.ptClick = ptClick;
+    }
 
-	public void decalageYout(int b) {
-		int i;
-		for (i = 8; i < 16; i++) {
-			this.modele.getForme().ypoints[i] = this.modele.getForme().ypoints[i] + b;
-		}
-		this.setForme();
-	}
+    public Point getPtClick() {
+        return this.ptClick;
+    }
 
-	public void decalageYin(int b) {
-		int i;
-		for (i = 8; i < 16; i++) {
-			this.modele.getForme().ypoints[i] = this.modele.getForme().ypoints[i] - b;
-		}
-		this.setForme();
-	}
+    public boolean isComplexe() {
+        return false;
+    }
 
-	public ModeleWidget getModele() {
-		return this.modele;
-	}
+    public IWidget parent() {
+        return parent;
+    }
 
-	public boolean isDraggable() {
-		return this.draggable;
-	}
+    public void defParent(IWidget parent) {
+        this.parent = parent;
+    }
 
-	public void setDraggable(boolean draggable) {
-		this.draggable = draggable;
-	}
+    public boolean isRacine() {
+        return false;
+    }
 
-	public void setPtClick(Point ptClick) {
-		this.ptClick = ptClick;
-	}
+    public TypeWidget getType() {
+        return this.modele.getType();
+    }
 
-	public Point getPtClick() {
-		return this.ptClick;
-	}
+    public void initListeners() {
+        this.addMouseListener(new MouseAdapter() {
 
-	public boolean isComplexe() {
-		return false;
-	}
+            public void mousePressed(MouseEvent e) {
+                DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
+                System.out.println("clic");
+                repaintAll(e);
+            }
 
-	public IWidget parent() {
-		return parent;
-	}
+            public void mouseReleased(MouseEvent e) {
+                DragAndDropTools.getInstance().dropWidget();
+            }
+        });
+		
+        this.addMouseMotionListener(new MouseAdapter() {
 
-	public void defParent(IWidget parent) {
-		this.parent = parent;
-	}
-
-	public boolean isRacine() {
-		return false;
-	}
-	
-	public TypeWidget getType() {
-		return this.modele.getType();
-	}
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                DragAndDropTools.getInstance().dragWidget((Widget) e.getComponent());
+            }
+        });
+    }
 }
