@@ -5,6 +5,9 @@ import java.awt.Polygon;
 
 public class IfElseWidget extends ModeleWidget {
 
+
+	
+	
 	public IfElseWidget() {
 		super();
 		
@@ -17,4 +20,6 @@ public class IfElseWidget extends ModeleWidget {
 		this.setMessage("If");
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 	}
+	
+
 }

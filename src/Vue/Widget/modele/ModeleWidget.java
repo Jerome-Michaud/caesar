@@ -13,9 +13,58 @@ public abstract class ModeleWidget {
 	private String message;
 	private TypeWidget type;
 	private boolean conditionHaute;
+	private int tailleX;
+	private int tailleY;
 
 	public ModeleWidget() {
 		this.conditionHaute = true;
+		this.tailleX=this.getXMax(tabX)-this.getXMin(tabX);
+		this.tailleY=this.getYMax(tabY)-this.getYMin(tabY);
+		
+	}
+	
+	public int getXMin(int[] tabX){
+		int min=tabX[0];
+		int i;
+		
+		for(i=0;i<tabX.length;i++){
+			min=Math.min(min, tabX[i]);
+		}
+		
+		return min;
+	}
+	
+	public int getYMin(int[] tabY){
+		int min=tabY[0];
+		int i;
+		
+		for(i=0;i<tabY.length;i++){
+			min=Math.min(min, tabY[i]);
+		}
+		
+		return min;
+	}
+	
+	public int getXMax(int[] tabX){
+		int max=tabX[0];
+		int i;
+		
+		for(i=0;i<tabX.length;i++){
+			max=Math.max(max, tabX[i]);
+		}
+		
+		return max;
+	}
+	
+	public int getYMax(int[] tabY){
+		int max=tabY[0];
+		int i;
+		
+		for(i=0;i<tabY.length;i++){
+			max=Math.max(max, tabY[i]);
+		}
+		
+		return max;
 	}
 
 	public boolean isConditionHaute() {
@@ -72,5 +121,21 @@ public abstract class ModeleWidget {
 
 	public void setType(TypeWidget type) {
 		this.type = type;
+	}
+	
+	public int getTailleX(){
+		return this.tailleX;
+	}
+	
+	public void setTailleX(int x){
+		this.tailleX=x;
+	}
+	
+	public int getTailleY(){
+		return this.tailleY;
+	}
+	
+	public void setTailleY(int y){
+		this.tailleY=y;
 	}
 }
