@@ -1,6 +1,7 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import instruction.Instruction;
 import java.awt.Color;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -20,6 +21,7 @@ public abstract class ModeleWidget implements Serializable {
     private boolean conditionHaute;
     protected boolean attachableHaut, attachableBas;
     protected List<Rectangle> zonesAccroches;
+	private Instruction instruction;
 
     public ModeleWidget() {
         this.conditionHaute = true;
@@ -27,6 +29,14 @@ public abstract class ModeleWidget implements Serializable {
         this.attachableHaut = true;
         this.zonesAccroches = new LinkedList<Rectangle>();
     }
+
+	public Instruction getInstruction() {
+		return instruction;
+	}
+
+	public void setInstruction(Instruction instruction) {
+		this.instruction = instruction;
+	}
 
     public boolean isConditionHaute() {
         return conditionHaute;

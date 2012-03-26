@@ -6,6 +6,7 @@ import Vue.Interface.PanelCodeGraphique;
 import Vue.Interface.PanelWidget;
 import Vue.Tools.DragAndDropTools;
 import Vue.Widget.modele.ModeleWidget;
+import instruction.Instruction;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -142,6 +143,10 @@ public class Widget extends JComponent implements IWidget {
     public TypeWidget getType() {
         return this.modele.getType();
     }
+	
+	public Instruction getInstruction() {
+		return this.modele.getInstruction();
+	}
 
     public void initListeners() {
         this.addMouseListener(new MouseAdapter() {
