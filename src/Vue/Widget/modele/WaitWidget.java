@@ -1,6 +1,8 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import instruction.InstructionAttente;
+import instruction.InstructionDoWhile;
 import java.awt.Polygon;
 
 public class WaitWidget extends ModeleWidget {
@@ -19,6 +21,7 @@ public class WaitWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeWidget.WAIT);
 		this.setMessage("Wait");
+		this.setElementProgramme(new InstructionAttente());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 	}

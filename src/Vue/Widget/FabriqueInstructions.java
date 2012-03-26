@@ -7,35 +7,8 @@ import Vue.Widget.modele.*;
 
 public class FabriqueInstructions {
 
-	public Widget creerWidgetInstruction(){
-        return new Widget(new InstructionWidget());
-    }
-	
-    public Widget creerWidgetWhile(){
-    	return new WidgetCompose(new WhileWidget());
-    }
-    
-    public Widget creerWidgetDoWhile(){
-        return new WidgetCompose(new DoWhileWidget());
-    }
-	
-	public Widget creerWidgetIf(){
-        return new WidgetCompose(new IfWidget());
-    }
-	
-	public Widget creerWidgetIfElse(){
-        return new WidgetCompose(new IfElseWidget());
-    }
-
-    public Widget creerWidgetFor(){
-    	return new WidgetTexte(new ForWidget(), 10, 10);
-    }
-
-    public Widget creerWidgetRepeat(){
-    	return new WidgetTexte(new RepeatWidget(), 10, 10);
-    }
-    
-    public Widget creerWidgetMoteurMovFwd(){
+	//MOTEURS
+	public Widget creerWidgetMoteurMovFwd(){
         return new WidgetTexte(new MoteurMovFwdWidget(), 10, 10);
     }
     public Widget creerWidgetMoteurMovRev(){
@@ -44,13 +17,37 @@ public class FabriqueInstructions {
     public Widget creerWidgetMoteurOff(){
         return new Widget(new MoteurOffWidget());
     }
+	
+	//BOUCLES
+	public Widget creerWidgetFor(){
+    	return new WidgetTexte(new ForWidget(), 10, 10);
+    }
+
+    public Widget creerWidgetWhile(){
+    	return new WidgetCompose(new WhileWidget());
+    }
+    
+    public Widget creerWidgetDoWhile(){
+        return new WidgetCompose(new DoWhileWidget());
+    }
+	
+	public Widget creerWidgetRepeat(){
+    	return new WidgetTexte(new RepeatWidget(), 10, 10);
+    }
+    
+    //CONDITION
+	public Widget creerWidgetIf(){
+        return new WidgetCompose(new IfWidget());
+    }
+	
+	public Widget creerWidgetIfElse(){
+        return new WidgetCompose(new IfElseWidget());
+    }
     
     public Widget creerWidgetWait(){
         return new Widget(new WaitWidget());
     }
 
-
-	
 	public Widget creerWidgetTache(){
         return new WidgetComposeTextField(new TacheWidget(),10,10);
     }
@@ -58,7 +55,7 @@ public class FabriqueInstructions {
 	public Widget cloner(Widget comp) throws NonClonableException {
 		Widget w = null;
 		if (comp.getModele() instanceof InstructionWidget) {
-			w = creerWidgetInstruction();
+			//w = creerWidgetMoteurFwd();
 		}
 		else if (comp.getModele() instanceof IfWidget) {
 			w = creerWidgetIf();
@@ -75,16 +72,28 @@ public class FabriqueInstructions {
 		else if (comp.getModele() instanceof DoWhileWidget) {
 			w = creerWidgetDoWhile();
 		}
+		else if (comp.getModele() instanceof MoteurMovFwdWidget) {
+			w = creerWidgetMoteurMovFwd();
+		}
+		else if (comp.getModele() instanceof MoteurMovRevWidget) {
+			w = creerWidgetMoteurMovRev();
+		}
+		else if (comp.getModele() instanceof MoteurOffWidget) {
+			w = creerWidgetMoteurOff();
+		}
+		else if (comp.getModele() instanceof WaitWidget) {
+			w = creerWidgetWait();
+		}
+		else if (comp.getModele() instanceof RepeatWidget) {
+			w = creerWidgetRepeat();
+		}
+		else if (comp.getModele() instanceof ForWidget) {
+			w = creerWidgetFor();
+		}
 		if (w == null) {
 			throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
 		}
 		w.getModele().setCouleur(comp.getModele().getCouleur());
 		return w;
 	}
-
-	private void NonClonableException(String string) {
-		throw new UnsupportedOperationException("Not yet implemented");
-	}
-
-
 }

@@ -11,6 +11,9 @@ public class BoutonCategorieControle extends BoutonCategorie {
 		
 		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetWhile());
 		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetDoWhile());
+		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetFor());
+		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetRepeat());
+		//
 		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetIf());
 		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetIfElse());
 		

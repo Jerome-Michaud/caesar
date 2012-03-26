@@ -1,26 +1,46 @@
 package test.instruction;
 
+import instruction.Affectation;
+import instruction.Condition;
+import instruction.InstructionAttente;
+import instruction.InstructionDeclaration;
+import instruction.InstructionIfElse;
+import instruction.InstructionMoteurMov;
+import instruction.InstructionMoteurOff;
+import instruction.InstructionStructure;
+import instruction.InstructionTache;
+import instruction.InstructionWhile;
+import instruction.Moteur;
+import instruction.Operateur;
+import instruction.TypeVariable;
+import instruction.VariableConstante;
+import instruction.VariableModifiable;
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
-import instruction.*;
 
-public class TestProgramme {
+public class TestEditionModele {
 	
+	
+	static InstructionStructure i1;
+	static InstructionDeclaration i2;
+	static Affectation i3;
+	static InstructionMoteurMov i4;
+	static InstructionAttente i5;
+	static InstructionMoteurMov i6;
+	static InstructionAttente i7;
+	static InstructionMoteurOff i8;
+	static InstructionWhile i9;
+	static InstructionAttente i10;
+	static InstructionIfElse i11;
+	static InstructionMoteurMov i12;
+	static Affectation i13;
+	static InstructionMoteurMov i14;
+	static Affectation i15;
+	
+	private static void init() throws Exception{
 
-
-	public static void main (String[] args) throws Exception{
-		
-		
-		
-		VisiteurTraduction trad;
-		 	
-		trad = VisiteurNXC.getInstance();
-
-
-		
-		
 		//task main()
-		InstructionStructure i1 = new InstructionTache();
+		i1 = new InstructionTache();
 		
 		// int i ;
 		InstructionDeclaration i2 = new InstructionDeclaration () ;
@@ -136,31 +156,45 @@ public class TestProgramme {
 			//}	
 
 
-
-
-
 		//}
-
+	}
+	
+	public static void genererCode(){
+		VisiteurTraduction trad;
+		trad = VisiteurNXC.getInstance();
 		trad.setIdentationTabulation(false);
 		trad.reset();
 		trad.visiter((InstructionTache) i1);
 		System.out.println(trad.getTraduction());
+	}
+	
+	public static void main (String[] args) throws Exception{
+
+		////////////////////////////////////////		
+		//Application des changements differentes a la programme//
+		////////////////////////////////////////		
+			
+		System.out.println("Programme complete:");
+		init();
+		genererCode();
+		System.out.println();
 		
+		System.out.println("Ajout/suppression debut/milieu:");
+		init();
+		i1.removeEnfants(6);
+		genererCode();
+		System.out.println();
+		
+		System.out.println("Suppression des enfants d'une tache:");
+		init();
+		while (!i1.getEnfants().isEmpty()){
+			i1.removeEnfants();
+		}
+		genererCode();
+		System.out.println();
 		
 	}	
 }
-
-		
-		
-		
-		
-		
-		
-
-	
-	
-		
-
 
 
 /*

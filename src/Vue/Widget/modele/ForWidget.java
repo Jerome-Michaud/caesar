@@ -1,6 +1,7 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import instruction.InstructionFor;
 import java.awt.Polygon;
 
 public class ForWidget extends ModeleWidget {
@@ -19,6 +20,7 @@ public class ForWidget extends ModeleWidget {
 			this.setTailleY();
 			this.setType(TypeWidget.FOR);
 			this.setMessage("For");
+			this.setElementProgramme(new InstructionFor());
 			this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		}
