@@ -1,6 +1,8 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import instruction.InstructionDoWhile;
+import instruction.InstructionMoteurMov;
 import java.awt.Polygon;
 
 public class MoteurMovFwdWidget extends ModeleWidget {
@@ -19,6 +21,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEURMOVFWD);
 		this.setMessage("Moteurmovfwd");
+		this.setInstruction(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 	}

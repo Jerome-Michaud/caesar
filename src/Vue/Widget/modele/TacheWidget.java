@@ -1,6 +1,7 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import instruction.InstructionTache;
 import java.awt.Polygon;
 import java.io.Serializable;
 
@@ -17,6 +18,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setTabY(tY);
         this.setType(TypeWidget.TACHE);
         this.setMessage("Tâche");
+		this.setInstruction(new InstructionTache());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.attachableBas = false;
         this.attachableHaut = false;
