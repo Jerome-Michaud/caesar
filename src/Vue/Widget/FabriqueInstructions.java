@@ -9,10 +9,10 @@ public class FabriqueInstructions {
 
 	//MOTEURS
 	public Widget creerWidgetMoteurMovFwd(){
-        return new WidgetTexte(new MoteurMovFwdWidget(), 10, 10);
+        return new Widget(new MoteurMovFwdWidget());
     }
     public Widget creerWidgetMoteurMovRev(){
-        return new WidgetTexte(new MoteurMovRevWidget(), 10, 10);
+        return new Widget(new MoteurMovRevWidget());
     }
     public Widget creerWidgetMoteurOff(){
         return new Widget(new MoteurOffWidget());
@@ -20,7 +20,7 @@ public class FabriqueInstructions {
 	
 	//BOUCLES
 	public Widget creerWidgetFor(){
-    	return new WidgetTexte(new ForWidget(), 10, 10);
+    	return new Widget(new ForWidget());
     }
 
     public Widget creerWidgetWhile(){
@@ -32,7 +32,7 @@ public class FabriqueInstructions {
     }
 	
 	public Widget creerWidgetRepeat(){
-    	return new WidgetTexte(new RepeatWidget(), 10, 10);
+    	return new Widget(new RepeatWidget());
     }
     
     //CONDITION
@@ -49,8 +49,9 @@ public class FabriqueInstructions {
     }
 
 	public Widget creerWidgetTache(){
-        return new WidgetComposeTextField(new TacheWidget(),10,10);
+        return new WidgetCompose(new TacheWidget());
     }
+	
 
 	public Widget cloner(Widget comp) throws NonClonableException {
 		Widget w = null;

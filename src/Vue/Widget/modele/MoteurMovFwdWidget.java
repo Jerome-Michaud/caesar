@@ -1,7 +1,7 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
-import instruction.InstructionDoWhile;
+import Vue.Widget.modele.zones.ChampTexte;
 import instruction.InstructionMoteurMov;
 import java.awt.Polygon;
 
@@ -23,7 +23,11 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.setMessage("Moteurmovfwd");
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
-
+		
+		
+		ChampTexte f = new ChampTexte();
+		f.setBounds(110, 3, 20, 20);
+		this.getLesZonesSaisies().add(f);
 	}
 
 	@Override

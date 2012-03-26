@@ -6,6 +6,7 @@ import Vue.Interface.PanelCodeGraphique;
 import Vue.Interface.PanelWidget;
 import Vue.Tools.DragAndDropTools;
 import Vue.Widget.modele.ModeleWidget;
+import Vue.Widget.modele.zones.Zone;
 import instruction.IElementProgramme;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -31,9 +32,9 @@ public class Widget extends JComponent {
         g2d.drawPolygon(this.modele.getForme());
         g2d.setColor(Color.WHITE);
         if (this.modele.isConditionHaute()) {
-            g2d.drawString(this.modele.getMessage(), 60, 17);
+            g2d.drawString(this.modele.getMessage(), 5, 17);
         } else {
-            g2d.drawString(this.modele.getMessage(), 60, this.getHeight() - 14);
+            g2d.drawString(this.modele.getMessage(), 5, this.getHeight() - 14);
         }
         super.paintComponent(g);
     }
@@ -47,6 +48,10 @@ public class Widget extends JComponent {
         this.setForme();
         
         initListeners();
+		
+		for (Zone z : this.modele.getLesZonesSaisies()) {
+			this.add((JComponent)z);
+		}
         
         this.parent = null;
     }

@@ -1,6 +1,8 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import Vue.Widget.modele.zones.ChampTexte;
+import Vue.Widget.modele.zones.Zone;
 import instruction.IElementProgramme;
 import java.awt.Color;
 import java.awt.Polygon;
@@ -8,6 +10,7 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JComponent;
 
 public abstract class ModeleWidget implements Serializable {
 
@@ -22,12 +25,14 @@ public abstract class ModeleWidget implements Serializable {
     protected boolean attachableHaut, attachableBas;
     protected List<Rectangle> zonesAccroches;
 	private IElementProgramme elementProgramme;
+	private List<Zone> lesZonesSaisies;
 
-    public ModeleWidget() {
+	public ModeleWidget() {
         this.conditionHaute = true;
         this.attachableBas = true;
         this.attachableHaut = true;
         this.zonesAccroches = new LinkedList<Rectangle>();
+		this.lesZonesSaisies = new LinkedList<Zone>();
     }
 
 	public IElementProgramme getElementProgramme() {
@@ -36,6 +41,14 @@ public abstract class ModeleWidget implements Serializable {
 
 	public void setElementProgramme(IElementProgramme element) {
 		this.elementProgramme = element;
+	}
+
+    public List<Zone> getLesZonesSaisies() {
+		return lesZonesSaisies;
+	}
+
+	public void setLesZonesSaisies(List<Zone> lesZonesSaisies) {
+		this.lesZonesSaisies = lesZonesSaisies;
 	}
 
     public boolean isConditionHaute() {

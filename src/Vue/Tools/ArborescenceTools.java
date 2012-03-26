@@ -104,8 +104,9 @@ public class ArborescenceTools {
 				w.initListeners();
 			}
 			if (w.isComplexe()) {
-				for (List<Widget> lst : ((WidgetCompose)w).getLesFils().values())
-				setArborescence(lst, initListener);
+				for (List<Widget> lst : ((WidgetCompose)w).getLesFils().values()) {
+					setArborescence(lst, initListener);
+				}
 			}
 		}
 		PanelCodeGraphique.getInstance().repaint();
