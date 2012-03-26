@@ -23,13 +23,4 @@ public class PanelCodeGraphique extends JPanel implements IWidget {
     public boolean isRacine() {
         return true;
     }
-	
-	public void removeAll() {
-		//suppression des anciens composants
-		for (int i = 0;i < this.getComponents().length;i++) {
-			if (this.getComponent(i) instanceof Widget) {
-				this.remove(this.getComponent(i));
-			}
-		}
-	}
 }

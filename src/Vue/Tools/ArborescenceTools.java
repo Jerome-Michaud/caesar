@@ -35,7 +35,7 @@ public class ArborescenceTools {
 		} else {
 			if (!comp.parent().isRacine()) {
 				WidgetCompose parent = (WidgetCompose) (comp.parent());
-				return parent.getComposition();
+				return parent.getWidgetsAssocies(comp);
 			} else {
 				for (List<Widget> lst : arborescence) {
 					if (lst.contains(comp)) {
@@ -94,7 +94,6 @@ public class ArborescenceTools {
 
 	public void setArborescence(List<Widget> liste, boolean initListener) {
 
-		// A AMELIORER : PENSER A SUPPRIMER LA COMPOSITION DE CHAQUE COMPOSITION ET AINSI DE SUITE
 		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
 		p.removeAll();
 
@@ -105,7 +104,8 @@ public class ArborescenceTools {
 				w.initListeners();
 			}
 			if (w.isComplexe()) {
-				setArborescence(((WidgetCompose) w).getLesFils(), initListener);
+				for (List<Widget> lst : ((WidgetCompose)w).getLesFils().values())
+				setArborescence(lst, initListener);
 			}
 		}
 		PanelCodeGraphique.getInstance().repaint();

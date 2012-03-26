@@ -1,6 +1,8 @@
 package Vue.Widget;
 
+
 import Vue.Tools.NonClonableException;
+
 import Vue.Widget.modele.*;
 
 public class FabriqueInstructions {
@@ -10,20 +12,44 @@ public class FabriqueInstructions {
     }
 	
     public Widget creerWidgetWhile(){
-        return new Widget(new WhileWidget());
+    	return new WidgetCompose(new WhileWidget());
     }
     
     public Widget creerWidgetDoWhile(){
-        return new Widget(new DoWhileWidget());
+        return new WidgetCompose(new DoWhileWidget());
     }
 	
 	public Widget creerWidgetIf(){
-        return new Widget(new IfWidget());
+        return new WidgetCompose(new IfWidget());
     }
 	
 	public Widget creerWidgetIfElse(){
-        return new Widget(new IfElseWidget());
+        return new WidgetCompose(new IfElseWidget());
     }
+
+    public Widget creerWidgetFor(){
+    	return new WidgetTexte(new ForWidget(), 10, 10);
+    }
+
+    public Widget creerWidgetRepeat(){
+    	return new WidgetTexte(new RepeatWidget(), 10, 10);
+    }
+    
+    public Widget creerWidgetMoteurMovFwd(){
+        return new WidgetTexte(new MoteurMovFwdWidget(), 10, 10);
+    }
+    public Widget creerWidgetMoteurMovRev(){
+        return new WidgetTexte(new MoteurMovRevWidget(), 10, 10);
+    }
+    public Widget creerWidgetMoteurOff(){
+        return new Widget(new MoteurOffWidget());
+    }
+    
+    public Widget creerWidgetWait(){
+        return new Widget(new WaitWidget());
+    }
+
+
 	
 	public Widget creerWidgetTache(){
         return new Widget(new TacheWidget());
@@ -59,5 +85,6 @@ public class FabriqueInstructions {
 	private void NonClonableException(String string) {
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
+
 
 }

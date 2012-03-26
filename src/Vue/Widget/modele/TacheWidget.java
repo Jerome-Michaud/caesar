@@ -21,4 +21,24 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.attachableBas = false;
         this.attachableHaut = false;
     }
+
+    @Override
+    public void decalageXout(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void decalageXin(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void decalageYout(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void decalageYin(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

@@ -1,5 +1,7 @@
 package Vue.Tools;
 
+import java.awt.Rectangle;
+
 public class Variables {
 	/**
 	 * Taille en X des boutons des catégories.
@@ -32,4 +34,11 @@ public class Variables {
 	 * Indice (en %) pour la conservation du widget dans le PanelCodeGraphique.
 	 */
 	public static final float TAUX_TRANSFERT_PANEL = (float) 0.6;
+	
+	public static final Rectangle ZONE_ACCROCHE_PAR_DEFAULT = new Rectangle(5,25,130,15);
+	
+	public static final Rectangle ZONE_ACCROCHE_ELSE = new Rectangle(5,55,130,15);
+	
+	public static final Rectangle ZONE_ACCROCHE_DOWHILE = new Rectangle(5,15,130,15);
+
 }

@@ -18,4 +18,24 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
 		this.setMessage("Instruction");
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 	}
+
+    @Override
+    public void decalageXout(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void decalageXin(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void decalageYout(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void decalageYin(int x) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

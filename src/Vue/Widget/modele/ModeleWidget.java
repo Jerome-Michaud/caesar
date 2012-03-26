@@ -3,23 +3,29 @@ package Vue.Widget.modele;
 import Modeles.TypeWidget;
 import java.awt.Color;
 import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 public abstract class ModeleWidget implements Serializable {
 
     public static final int OFFSET = 5;
-    private int[] tabX, tabY;
+    protected int[] tabX, tabY;
     private Color couleur;
     private Polygon forme;
     private String message;
     private TypeWidget type;
+    private int tailleX, tailleY;
     private boolean conditionHaute;
     protected boolean attachableHaut, attachableBas;
+    protected List<Rectangle> zonesAccroches;
 
     public ModeleWidget() {
         this.conditionHaute = true;
         this.attachableBas = true;
         this.attachableHaut = true;
+        this.zonesAccroches = new LinkedList<Rectangle>();
     }
 
     public boolean isConditionHaute() {
@@ -28,6 +34,10 @@ public abstract class ModeleWidget implements Serializable {
 
     public void setConditionHaute(boolean conditionHaute) {
         this.conditionHaute = conditionHaute;
+    }
+
+    public List<Rectangle> getZonesAccroches() {
+        return zonesAccroches;
     }
 
     public int[] getTabX() {
@@ -52,6 +62,54 @@ public abstract class ModeleWidget implements Serializable {
 
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
+    }
+
+    public int getTailleX() {
+        return tailleX;
+    }
+
+    public void setTailleX() {
+        this.tailleX = this.getXMax() - this.getXMin();
+    }
+
+    public int getTailleY() {
+        return tailleY;
+    }
+
+    public void setTailleY() {
+        this.tailleY = this.getYMax() - this.getYMin();
+    }
+
+    public int getXMin() {
+        int max = this.tabX[0];
+        for (Integer i : tabX) {
+            max = Math.min(max, i);
+        }
+        return max;
+    }
+
+    public int getXMax() {
+        int max = this.tabX[0];
+        for (Integer i : tabX) {
+            max = Math.max(max, i);
+        }
+        return max;
+    }
+
+    public int getYMin() {
+        int max = this.tabY[0];
+        for (Integer i : tabY) {
+            max = Math.min(max, i);
+        }
+        return max;
+    }
+
+    public int getYMax() {
+        int max = this.tabY[0];
+        for (Integer i : tabY) {
+            max = Math.max(max, i);
+        }
+        return max;
     }
 
     public Polygon getForme() {
@@ -85,4 +143,12 @@ public abstract class ModeleWidget implements Serializable {
     public boolean isAttachableHaut() {
         return attachableHaut;
     }
+
+    public abstract void decalageXout(int x);
+
+    public abstract void decalageXin(int x);
+
+    public abstract void decalageYout(int x);
+
+    public abstract void decalageYin(int x);
 }
