@@ -1,6 +1,8 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import instruction.InstructionDoWhile;
+import instruction.InstructionMoteurOff;
 import java.awt.Polygon;
 
 public class MoteurOffWidget extends ModeleWidget {
@@ -19,6 +21,7 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEUROFF);
 		this.setMessage("Moteur off");
+		this.setInstruction(new InstructionMoteurOff());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 	}

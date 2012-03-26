@@ -1,6 +1,7 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import instruction.InstructionDoWhile;
 import java.awt.Polygon;
 import java.io.Serializable;
 
@@ -16,6 +17,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
 		this.setTabY(tY);
 		this.setType(TypeWidget.DOWHILE);
 		this.setMessage("Do");
+		this.setInstruction(new InstructionDoWhile());
 		this.setConditionHaute(false);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 	}

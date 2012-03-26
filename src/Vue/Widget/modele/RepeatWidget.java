@@ -1,6 +1,8 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import instruction.InstructionDoWhile;
+import instruction.InstructionRepeat;
 import java.awt.Polygon;
 
 public class RepeatWidget extends ModeleWidget {
@@ -19,6 +21,7 @@ public class RepeatWidget extends ModeleWidget {
 			this.setTailleY();
 			this.setType(TypeWidget.REPEAT);
 			this.setMessage("Repeat");
+			this.setInstruction(new InstructionRepeat());
 			this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		}

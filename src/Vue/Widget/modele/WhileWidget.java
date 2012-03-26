@@ -1,6 +1,8 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import instruction.InstructionDoWhile;
+import instruction.InstructionWhile;
 import java.awt.Polygon;
 import java.io.Serializable;
 
@@ -16,6 +18,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setTabY(tY);
         this.setType(TypeWidget.WHILE);
         this.setMessage("While");
+		this.setInstruction(new InstructionWhile());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
     }
 

@@ -1,12 +1,13 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import instruction.Instruction;
 import java.awt.Polygon;
 import java.io.Serializable;
 
 public class InstructionWidget extends ModeleWidget implements Serializable{
 
-	public InstructionWidget() {
+	public InstructionWidget(String msg, Instruction i) {
 		super();
 				
 		int[] tX = {0, 5, 30, 35, 45, 50, 130, 135, 135, 130, 50, 45, 35, 30, 5, 0};
@@ -15,7 +16,8 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setType(TypeWidget.INSTRUCTION);
-		this.setMessage("Instruction");
+		this.setMessage(msg);
+		this.setInstruction(i);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 	}
 
