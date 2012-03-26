@@ -95,7 +95,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * TODO changer
 	 * Donne la liste des instrauctions du corps du membre IF à partir d'une certaine position.
 	 * @param pos la position de départ.
-	 * @return la liste des instructions concernées.
+	 * @return la liste des enfants du membre IF a partir de rang precise
 	 */
 	@Override
 	public List<Instruction> getEnfants(int pos) {
@@ -105,10 +105,11 @@ public class InstructionIfElse extends InstructionConditionelle {
 	/**
 	 * TODO changer
 	 * Supprime toutes les instructions du corps  du membre IF.
+	 * @return la liste des enfants du membre IF
 	 */
 	@Override
-	public void removeEnfants() {
-		membreIf.removeEnfants();
+	public List<Instruction> removeEnfants() {
+		return membreIf.removeEnfants();
 	}
 	
 	/**
@@ -116,29 +117,30 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * Supprime toutes les instructions du corps
 	 *  du membre IF à partir d'un certain rang.
 	 * @param pos le rang de départ
+	 * @return la liste des enfants du membre IF a partir de rang precise
 	 */
 	@Override
-	public void removeEnfants(int pos) {
-		membreIf.removeEnfants(pos);
+	public List<Instruction> removeEnfants(int pos) {
+		return membreIf.removeEnfants(pos);
 	}
 	
 	/**
 	 * TODO changer
 	 * Donne la liste des instrauctions du corps du membre ELSE à partir d'une certaine position.
 	 * @param pos la position de départ.
-	 * @return la liste des instructions concernées.
+	 * @return la liste des enfants du membre ELSE a partir de rang precise
 	 */
 	public List<Instruction> getEnfantsElse(int pos) {
 		return super.getEnfants(pos);
 	}
 	
 	/**
-	 * TODO changer
 	 * Supprime toutes les instructions du corps du membre ELSE.
+	 * @return la liste des enfants du membre ELSE
 	 */
 
-	public void removeEnfantsElse() {
-		super.removeEnfants();
+	public List<Instruction> removeEnfantsElse() {
+		return super.removeEnfants();
 	}
 	
 	/**
@@ -146,8 +148,9 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * Supprime toutes les instructions du corps
 	 * du membre ELSE à partir d'un certain rang.
 	 * @param pos le rang de départ
+	 * @return la liste des enfants du membre ELSE a partir de rang precise
 	 */
-	public void removeEnfantsElse(int pos) {
-		super.removeEnfants(pos);
+	public List<Instruction> removeEnfantsElse(int pos) {
+		return super.removeEnfants(pos);
 	}
 }
