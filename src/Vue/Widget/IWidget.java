@@ -1,6 +1,8 @@
 package Vue.Widget;
 
-public interface IWidget {
+import java.io.Serializable;
+
+public interface IWidget extends Serializable {
 
 	public boolean isRacine();
 }
