@@ -6,7 +6,7 @@ import traduction.VisiteurTraduction;
  * regroupant instruction et expression.
  * @author Adrien DUROY
  */
-public interface IElementProgramme {
+public interface IElementProgramme extends java.io.Serializable {
 	/**
 	 * Accept un objet sachant traduire un élément de programme.
 	 * @param visiteur l'objet traducteur
