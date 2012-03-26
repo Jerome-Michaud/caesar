@@ -2,11 +2,13 @@ package traduction;
 
 
 import instruction.Affectation;
+import instruction.CapteurSlot;
 import instruction.ExpressionComplexe;
 import instruction.Instruction;
 import instruction.InstructionAttente;
 import instruction.InstructionDeclaration;
 import instruction.InstructionDeclarationAffectation;
+import instruction.InstructionDeclarationCapteur;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
 import instruction.InstructionIf;
@@ -19,6 +21,7 @@ import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Moteur;
 import instruction.Variable;
+import instruction.VariableCapteur;
 
 /**
  * Traducteur d'instructions dans le langage RobotC.
@@ -53,6 +56,20 @@ public class VisiteurRobotC extends VisiteurTraduction {
 			traduction += "motorD";
 			break;
 		}
+	}
+	
+	private String getNomCapteur(CapteurSlot c){
+		switch (c){
+		case A:
+			return "S1";
+		case B:
+			return "S2";
+		case C:
+			return "S3";
+		case D:
+			return "S4";
+		}
+		return null;
 	}
 	
 	@Override
@@ -272,6 +289,34 @@ public class VisiteurRobotC extends VisiteurTraduction {
 		instructionDeclarationAffectation.getMembreDroit().accepte(this);
 		traduction += ";\n";
 	
+	}
+
+	@Override
+	public void visiter(InstructionDeclarationCapteur instructionDeclarationCapteur) {
+		String temp = "";
+		temp += "const tSensors";
+		switch (instructionDeclarationCapteur.getCapteur()){
+		case TOUCH : temp+="touchSensor";
+		}
+		temp += "= (tSensors)";
+		temp += getNomCapteur(instructionDeclarationCapteur.getCapteurSlot());
+		temp += ";\n";	
+		
+		traduction = temp + "\n\n\n" + traduction;
+		
+	
+	}
+
+
+
+	@Override
+	public void visiter(VariableCapteur variableCapteur) {
+		traduction+="SensorValue((tSensors)";
+		traduction+=getNomCapteur(variableCapteur.getCapteurSlot());
+		traduction += ")";
+		
+		
+		
 	}
 
 }

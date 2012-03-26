@@ -5,6 +5,7 @@ import instruction.ExpressionComplexe;
 import instruction.InstructionAttente;
 import instruction.InstructionDeclaration;
 import instruction.InstructionDeclarationAffectation;
+import instruction.InstructionDeclarationCapteur;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
 import instruction.InstructionIf;
@@ -16,6 +17,7 @@ import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Variable;
+import instruction.VariableCapteur;
 
 public abstract class VisiteurTraduction {
 
@@ -166,4 +168,14 @@ public abstract class VisiteurTraduction {
 	 * @param expr l'expression à traduire
 	 */
 	public abstract void visiter(ExpressionComplexe expr);
+	/**
+	 * Traduit une declaration de capteur.
+	 * @param expr l'expression à traduire
+	 */
+	public abstract void visiter( InstructionDeclarationCapteur instructionDeclarationCapteur) ;
+	/**
+	 * Traduit une valeur de capteur.
+	 * @param variableCapteur
+	 */
+	public abstract void visiter ( VariableCapteur variableCapteur);
 }

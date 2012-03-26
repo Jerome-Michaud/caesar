@@ -1,12 +1,14 @@
 package traduction;
 
 import instruction.Affectation;
+import instruction.CapteurSlot;
 import instruction.Expression;
 import instruction.ExpressionComplexe;
 import instruction.Instruction;
 import instruction.InstructionAttente;
 import instruction.InstructionDeclaration;
 import instruction.InstructionDeclarationAffectation;
+import instruction.InstructionDeclarationCapteur;
 import instruction.InstructionDoWhile;
 import instruction.InstructionFor;
 import instruction.InstructionIf;
@@ -20,6 +22,7 @@ import instruction.InstructionWhile;
 import instruction.Moteur;
 import instruction.Variable;
 import instruction.VariableModifiable;
+import instruction.VariableCapteur;
 
 /**
  * Traducteur d'instructions dans le langage NXC.
@@ -59,6 +62,24 @@ public class VisiteurNXC extends VisiteurTraduction {
 			break;
 		}
 	}
+	
+	private void ajouterNomCapteur(CapteurSlot c){
+		switch (c){
+		case A:
+			traduction += "IN_1";
+			break;
+		case B:
+			traduction += "IN_2";
+			break;
+		case C:
+			traduction += "IN_3";
+			break;
+		case D:
+			traduction += "IN_4";
+			break;
+		}
+	}
+	
 	
 	@Override
 	public void visiter(InstructionIf inst) {
@@ -298,4 +319,27 @@ public class VisiteurNXC extends VisiteurTraduction {
 			ex.accepte(this);
 		traduction += ";\n";	
 	}
+
+	@Override
+	public void visiter(InstructionDeclarationCapteur instructionDeclarationCapteur) {
+		traduction += indent();
+		switch (instructionDeclarationCapteur.getCapteur()){
+		case TOUCH : traduction+="SetSensorTouch(";
+		}
+		ajouterNomCapteur(instructionDeclarationCapteur.getCapteurSlot());
+		traduction += ");\n";	
+		
+	
+	}
+
+	@Override
+	public void visiter(VariableCapteur variableCapteur) {
+		traduction+="Sensor(";
+		ajouterNomCapteur(variableCapteur.getCapteurSlot());
+		traduction+=")";
+		
+		
+	}
+
+
 }
