@@ -1,6 +1,9 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import Vue.Tools.Variables;
+import instruction.Variable;
+
 import java.awt.Polygon;
 
 public class IfWidget extends ModeleWidget{
@@ -20,6 +23,7 @@ public class IfWidget extends ModeleWidget{
 			this.setType(TypeWidget.IF);
 			this.setMessage("If");
 			this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+			this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 
 		}
 

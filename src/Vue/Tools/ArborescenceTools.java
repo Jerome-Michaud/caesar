@@ -34,7 +34,7 @@ public class ArborescenceTools {
         } else {
             if (!comp.parent().isRacine()) {
                 WidgetCompose parent = (WidgetCompose) (comp.parent());
-                return parent.getComposition();
+                return parent.getWidgetsAssocies(comp);
             } else {
                 for (List<Widget> lst : arborescence) {
                     if (lst.contains(comp)) {

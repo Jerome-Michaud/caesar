@@ -4,11 +4,14 @@ import Modeles.TypeWidget;
 import java.awt.Color;
 import java.awt.Polygon;
 import java.io.Serializable;
+import java.awt.Rectangle;
+import java.util.List;
+import java.util.LinkedList;
 
 public abstract class ModeleWidget implements Serializable{
 
 	public static final int OFFSET = 5;
-	private int[] tabX, tabY;
+	protected int[] tabX, tabY;
 	private Color couleur;
 	private Polygon forme;
 	private String message;
@@ -16,13 +19,23 @@ public abstract class ModeleWidget implements Serializable{
 	private boolean conditionHaute;
 	private int tailleX;
 	private int tailleY;
+	protected List<Rectangle> zonesAccroches;
 
 	public ModeleWidget() {
 		this.conditionHaute = true;
+		this.zonesAccroches = new LinkedList<Rectangle>();
 
 	}
 	
-	public int getXMin(int[] tabX){
+	public List<Rectangle> getZonesAccroches() {
+		return zonesAccroches;
+	}
+
+	public void setZonesAccroches(List<Rectangle> zonesAccroches) {
+		this.zonesAccroches = zonesAccroches;
+	}
+
+	public int getXMin(){
 		int min=tabX[0];
 		int i;
 		
@@ -33,7 +46,7 @@ public abstract class ModeleWidget implements Serializable{
 		return min;
 	}
 	
-	public int getYMin(int[] tabY){
+	public int getYMin(){
 		int min=tabY[0];
 		int i;
 		
@@ -44,7 +57,7 @@ public abstract class ModeleWidget implements Serializable{
 		return min;
 	}
 	
-	public int getXMax(int[] tabX){
+	public int getXMax(){
 		int max=tabX[0];
 		int i;
 		
@@ -55,7 +68,7 @@ public abstract class ModeleWidget implements Serializable{
 		return max;
 	}
 	
-	public int getYMax(int[] tabY){
+	public int getYMax(){
 		int max=tabY[0];
 		int i;
 		
@@ -127,7 +140,7 @@ public abstract class ModeleWidget implements Serializable{
 	}
 	
 	public void setTailleX(){
-		this.tailleX=this.getXMax(tabX)-this.getXMin(tabX);
+		this.tailleX=this.getXMax()-this.getXMin();
 	}
 	
 	public int getTailleY(){
@@ -135,7 +148,7 @@ public abstract class ModeleWidget implements Serializable{
 	}
 	
 	public void setTailleY(){
-		this.tailleY=this.getYMax(tabY)-this.getYMin(tabY);
+		this.tailleY=this.getYMax()-this.getYMin();
 	}
 	
 	public abstract void decalageXout(int x);
