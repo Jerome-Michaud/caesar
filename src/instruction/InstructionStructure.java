@@ -52,18 +52,21 @@ public abstract class InstructionStructure implements Instruction {
 	
 	/**
 	 * Supprime toutes les instructions du corps de l'instruction.
+	 * @return la liste des enfants supprimes
 	 */
-	public void removeEnfants() {
-		enfants.clear();
+	public List<Instruction> removeEnfants() {
+		return removeEnfants(0);
 	}
 	
 	/**
 	 * Supprime toutes les instructions du corps
 	 * de l'instruction à partir d'un certain rang.
 	 * @param pos le rang de départ
+	 * @return la liste des enfants supprimes
 	 */
-	public void removeEnfants(int pos) {
-		for(int i = enfants.size() ; i > pos ; i--)
-			enfants.remove(i);
+	public List<Instruction> removeEnfants(int pos) {
+		List<Instruction> res = getEnfants(pos);
+		enfants.removeAll(res);
+		return res;
 	}
 }

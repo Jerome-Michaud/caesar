@@ -1,8 +1,10 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
-import instruction.InstructionDoWhile;
+import Vue.Tools.Variables;
+
 import instruction.InstructionWhile;
+
 import java.awt.Polygon;
 import java.io.Serializable;
 
@@ -20,6 +22,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setMessage("While");
 		this.setInstruction(new InstructionWhile());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+        this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }
 
     @Override
