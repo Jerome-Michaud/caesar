@@ -1,6 +1,8 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import Vue.Tools.Variables;
+
 import java.awt.Polygon;
 import java.io.Serializable;
 
@@ -17,6 +19,9 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
 		this.setType(TypeWidget.IFELSE);
 		this.setMessage("If");
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
+		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_ELSE);
+		
 	}
 
     @Override
