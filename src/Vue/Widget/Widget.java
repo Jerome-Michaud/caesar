@@ -78,51 +78,13 @@ public class Widget extends JComponent implements IWidget {
 	}
 
 	public void setForme() {
-		int maxX = 0;
-		for (Integer i : this.modele.getForme().xpoints) {
-			maxX = Math.max(maxX, i);
-		}
-
-		int maxY = 0;
-		for (Integer i : this.modele.getForme().ypoints) {
-			maxY = Math.max(maxY, i);
-		}
+		int maxX = this.modele.getXMax();
+		int maxY = this.modele.getYMax();
 
 		this.setBounds(0, 0, maxX + 1, maxY + 1);
 		this.setPreferredSize(new Dimension(maxX, maxY));
 	}
 
-	public void decalageXout(int a) {
-		int i;
-		for (i = 6; i < 10; i++) {
-			this.modele.getForme().xpoints[i] = this.modele.getForme().xpoints[i] + a;
-		}
-		this.setForme();
-	}
-
-	public void decalageXin(int a) {
-		int i;
-		for (i = 6; i < 10; i++) {
-			this.modele.getForme().xpoints[i] = this.modele.getForme().xpoints[i] - a;
-		}
-		this.setForme();
-	}
-
-	public void decalageYout(int b) {
-		int i;
-		for (i = 8; i < 16; i++) {
-			this.modele.getForme().ypoints[i] = this.modele.getForme().ypoints[i] + b;
-		}
-		this.setForme();
-	}
-
-	public void decalageYin(int b) {
-		int i;
-		for (i = 8; i < 16; i++) {
-			this.modele.getForme().ypoints[i] = this.modele.getForme().ypoints[i] - b;
-		}
-		this.setForme();
-	}
 
 	public ModeleWidget getModele() {
 		return this.modele;
