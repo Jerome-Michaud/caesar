@@ -169,9 +169,9 @@ public abstract class ModeleWidget implements Serializable {
         return attachableHaut;
     }
 
-    public abstract void decalageXout(int x,Rectangle r);
+    public abstract void decalageXout(int x);
 
-    public abstract void decalageXin(int x,Rectangle r);
+    public abstract void decalageXin(int x);
 
     public abstract void decalageYout(int x,Rectangle r);
 

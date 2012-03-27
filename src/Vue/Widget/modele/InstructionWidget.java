@@ -22,7 +22,7 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 	}
 
-	  public void decalageXout(int a,Rectangle r) {
+	  public void decalageXout(int a) {
 	        int i;
 	        for (i = 6; i < 10; i++) {
 	            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -31,7 +31,7 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
 	        this.setTailleX();
 	    }
 
-	    public void decalageXin(int a,Rectangle r) {
+	    public void decalageXin(int a) {
 	        int i;
 	        for (i = 6; i < 10; i++) {
 	            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
