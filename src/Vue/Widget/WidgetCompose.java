@@ -7,6 +7,7 @@ import instruction.IElementProgramme;
 import instruction.Instruction;
 import instruction.InstructionStructure;
 import instruction.InstructionTache;
+import instruction.InstructionIfElse;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -137,15 +138,29 @@ public class WidgetCompose extends Widget implements IWidget {
     	/* Testé le type du modele widget courant */
     	if(this.getModele().getType() == TypeWidget.IFELSE) {
 			/* Cas du if...else */
+    		InstructionIfElse structInst = (InstructionIfElse) this.getModele().getElementProgramme();
 			/* Récupéré clé mapZone du if et du else */
-				/* clé du if <=> rectangle supérieur */
-				/* clé du else <=> rectangle inféreur */
-			/* Suppression des instructions du if et du else
-			 * dans l'arbre des instruction */
-			/* Récupérer les instructions des widgets du if */
-				/* les ajouté à l'arbre des instructions */
-	    	/* Récupérer les instructions des widgets du else */
+			/* clé du if <=> rectangle supérieur */
+			/* clé du else <=> rectangle inféreur */
+    		/* Suppression des instructions du if et du else
+    		 * dans l'arbre des instruction */
+    		/* Récupérer les instructions des widgets du if */
 			/* les ajouté à l'arbre des instructions */
+    		List<Widget> widgets = recupeAllWidgetCorps(0);
+    		structInst.removeEnfantsIf();
+    		for(Widget widget : widgets) {
+    			Instruction inst = (Instruction) widget.getElementProgramme();
+    			structInst.insererFin(inst);
+    		}
+    		/* Récupérer les instructions des widgets du else */
+    		/* les ajouté à l'arbre des instructions */
+    		widgets = recupeAllWidgetCorps(1);
+    		structInst.removeEnfantsElse();
+    		for(Widget widget : widgets) {
+    			Instruction inst = (Instruction) widget.getElementProgramme();
+    			structInst.insererFinElse(inst);
+    		}
+
     	}
     	else {
     		/* Cas des instructions structures autre que IfElse */
@@ -153,14 +168,14 @@ public class WidgetCompose extends Widget implements IWidget {
     	}
     }
     
-    private List<Widget> recupeAllWidgetCorps() {
+    private List<Widget> recupeAllWidgetCorps(int i) {
     	/* Récupérer la clé du corps */
 		Set<Rectangle> keys = this.mapZone.keySet();
 		/*
 		 * Récupérer les widgets du contenue
 		 */
 		Object[] rects = keys.toArray();
-		List<Widget> widgets = this.mapZone.get(rects[0]);
+		List<Widget> widgets = this.mapZone.get(rects[i]);
 		return widgets;
 	}
     
@@ -168,7 +183,7 @@ public class WidgetCompose extends Widget implements IWidget {
     	/* Cas de la tâche */
 		InstructionStructure structInst = (InstructionStructure) this.getModele().getElementProgramme();
 		/* Récupération des widgets fils */
-		List<Widget> widgets = recupeAllWidgetCorps();
+		List<Widget> widgets = recupeAllWidgetCorps(0);
 		/* Suppression des enfants de la tâche */
 		structInst.removeEnfants();
 		/* Ajout de tous les enfants nouveaux et anciens */
