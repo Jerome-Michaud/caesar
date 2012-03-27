@@ -6,10 +6,10 @@ import java.awt.Color;
 public class BoutonCategorieTemps extends BoutonCategorie {
 
 	public BoutonCategorieTemps() {
-		super(new ModeleCategorie("Temps", Color.CYAN));
+		super(new ModeleCategorie("Temps", new Color(0,179,214)));
 		
 		for (Widget w : this.getLesWidgets()) {
-			w.getModele().setCouleur(Color.CYAN);
+			w.getModele().setCouleur(new Color(0,179,214));
 		}
 	}
 }
