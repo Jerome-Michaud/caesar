@@ -17,7 +17,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 
 	public MoteurMovFwdWidget() {
 		super();
-		int tX[] = {0, 5, 30, 35, 45, 50, 130, 135, 135, 130, 50, 45, 35, 30, 5, 0};
+		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
 
 
@@ -26,21 +26,23 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEURMOVFWD);
-		this.setMessage("Moteurmovfwd");
+		this.setMessage("Moteur avance");
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
-		l.setBounds(50, 3, 35, 20);
+		l.setBounds(105, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
-		f.setBounds(110, 3, 20, 20);
+		f.setBounds(145, 3, 20, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 
 		setInstructionMoteur(l.getValeur());
 		setInstructionValeur(f.getValeur());
+		
+		//decalage
 		
 		initListeners();
 	}
