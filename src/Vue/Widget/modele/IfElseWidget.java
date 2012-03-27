@@ -27,7 +27,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
 	}
 
     @Override
-    public void decalageXout(int x,Rectangle r) {
+    public void decalageXout(int x) {
     	int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + x;
@@ -43,7 +43,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
     }
 
     @Override
-    public void decalageXin(int x,Rectangle r) {
+    public void decalageXin(int x) {
     	int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;

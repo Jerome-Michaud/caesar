@@ -39,7 +39,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }
 
-    public void decalageXout(int a,Rectangle r) {
+    public void decalageXout(int a) {
         int i;
         for (i = 2; i < 6; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -51,7 +51,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setTailleX();
     }
 
-    public void decalageXin(int a,Rectangle r) {
+    public void decalageXin(int a) {
         int i;
         for (i = 2; i < 6; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;

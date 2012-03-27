@@ -10,14 +10,14 @@ import static instruction.Operateur.SUPERIEUR;
 import static instruction.TypeVariable.BOOL;
 import static instruction.TypeVariable.FLOAT;
 import static instruction.TypeVariable.INT;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import Modeles.DicoVars;
 
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;

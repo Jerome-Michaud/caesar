@@ -13,8 +13,6 @@ import javax.swing.JComponent;
 
 public class MoteurMovFwdWidget extends ModeleWidget {
 
-	private Zone temp;
-
 	public MoteurMovFwdWidget() {
 		super();
 		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
@@ -48,7 +46,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 	}
 
 
-	public void decalageXout(int a, Rectangle r) {
+	public void decalageXout(int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -57,7 +55,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
         this.setTailleX();
     }
 
-    public void decalageXin(int a, Rectangle r) {
+    public void decalageXin(int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
