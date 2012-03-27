@@ -129,7 +129,6 @@ public class Widget extends JComponent {
 
             public void mousePressed(MouseEvent e) {
                 DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
-                System.out.println("clic");
                 repaintAll(e);
             }
 
