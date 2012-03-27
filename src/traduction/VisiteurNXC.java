@@ -196,7 +196,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 		}
 		nivIndent--;
 		
-		traduction+=indent()+"}";	
+		traduction+=indent()+"}\n";	
 	}
 
 	@Override
