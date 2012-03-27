@@ -12,58 +12,13 @@ import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-import traduction.VisiteurTraduction;
 
 public class ForWidget extends ModeleWidget {
 
 	public ForWidget() {
 		super();
-		int[] tX = {0, 5,/*
-			 * 
-			 */ 30, 35, 45, 50,/*
-			 * 
-			 */ 130, 135,/*
-			 * 
-			 */ 135, 130,/*
-			 * 
-			 */ 55, 50, 40, 35, /*
-			 * 
-			 */ 10, 5,/*
-			 * 
-			 */ 5, 10,/*
-			 * 
-			 */ 35, 40, 50, 55,/*
-			 * 
-			 */ 130, 135, /*
-			 * 
-			 */ 135, 130,/*
-			 * 
-			 */ 50, 45, 35, 30,/*
-			 * 
-			 */ 5, 0};
-		int[] tY = {5, 0,/*
-			 * 
-			 */ 0, 5, 5, 0,/*
-			 * 
-			 */ 0, 5,/*
-			 * 
-			 */ 20, 25,/*
-			 * 
-			 */ 25, 30, 30, 25, /*
-			 * 
-			 */ 25, 30,/*
-			 * 
-			 */ 35, 40,/*
-			 * 
-			 */ 40, 45, 45, 40,/*
-			 * 
-			 */ 40, 45, /*
-			 * 
-			 */ 50, 55,/*
-			 * 
-			 */ 55, 60, 60, 55,/*
-			 * 
-			 */ 55, 50};
+		int[] tX = {0, 5,/**/ 30, 35, 45, 50,/**/ 130, 135,/**/ 135, 130,/**/ 55, 50, 40, 35, /**/ 10, 5,/**/ 5, 10,/**/ 35, 40, 50, 55,/**/ 130, 135, /**/ 135, 130,/**/ 50, 45, 35, 30,/**/ 5, 0};
+		int[] tY = {5, 0,/**/ 0, 5, 5, 0,/**/ 0, 5,/**/ 20, 25,/**/ 25, 30, 30, 25, /**/ 25, 30,/**/ 35, 40,/**/ 40, 45, 45, 40,/**/ 40, 45, /**/ 50, 55,/**/ 55, 60, 60, 55,/**/ 55, 50};
 
 		this.setTabX(tX);
 		this.setTabY(tY);
@@ -79,9 +34,7 @@ public class ForWidget extends ModeleWidget {
 		ChampTexte f;
 
 		//variable
-		l = new ListeDeroulante<Variable>(/*
-				 * DicoVars.getInstance()
-				 */);
+		l = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
 		l.setBounds(50, 3, 35, 20);
 		l.setToolTipText("variable");
 		this.getLesZonesSaisies().add(l);
