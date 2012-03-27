@@ -50,7 +50,7 @@ public class WidgetCompose extends Widget implements IWidget {
         return this.mapZone.get(cle).remove(widget);
     }
 
-    public HashMap<Rectangle, List<Widget>> getLesFils() {
+    public HashMap<Rectangle, List<Widget>> getMapZone() {
         return this.mapZone;
     }
 
@@ -85,10 +85,6 @@ public class WidgetCompose extends Widget implements IWidget {
     @Override
     public boolean isRacine() {
         return false;
-    }
-
-    public HashMap<Rectangle, List<Widget>> getMapZone() {
-        return mapZone;
     }
 
     public void notifyChange() {

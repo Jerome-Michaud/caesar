@@ -33,6 +33,21 @@ public abstract class InstructionStructure implements Instruction {
 		enfants.add(inst);	
 	}
 	
+	public void inserer(int position, List<Instruction> instListe){
+		if (position==POSITION_FIN_CODE)
+			enfants.addAll(instListe);
+		else 
+			enfants.addAll(position,instListe);
+	}
+	
+	public void insererDebut(List<Instruction> instListe){
+		enfants.addAll(POSITION_DEBUT_CODE, instListe);	
+	}
+	
+	public void insererFin(List<Instruction> instListe){
+		enfants.addAll(instListe);	
+	}
+	
 	/**
 	 * Donne la liste des instructions du corps de l'instruction
 	 * @return la liste des instructions
