@@ -26,22 +26,24 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEURMOVREV);
-		this.setMessage("MoteurMovRev");
+		this.setMessage("Moteur           recul de");
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
-		l.setBounds(105, 3, 35, 20);
+		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 		
 		ChampTexte f = new ChampTexte();
-		f.setBounds(145, 3, 20, 20);
+		f.setBounds(150, 3, 20, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 		
 		setInstructionMoteur(l.getValeur());
 		setInstructionValeur(f.getValeur());
-		
+			
+		this.decalageXout(-2);
+
 		initListeners();
 	}
 

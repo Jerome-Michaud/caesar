@@ -31,7 +31,7 @@ public class RepeatWidget extends ModeleWidget {
 
 
 		ChampTexte f = new ChampTexte();
-		f.setBounds(110, 3, 20, 20);
+		f.setBounds(80, 3, 20, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 

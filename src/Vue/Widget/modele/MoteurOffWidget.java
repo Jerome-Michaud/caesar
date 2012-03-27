@@ -26,15 +26,17 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEUROFF);
-		this.setMessage("Moteur off");
+		this.setMessage("Moteur           off");
 		this.setElementProgramme(new InstructionMoteurOff());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
-		l.setBounds(95, 3, 35, 20);
+		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 		
 		setInstructionMoteur(l.getValeur());
+		
+		this.decalageXout(-20);
 		
 		initListeners();
 	}

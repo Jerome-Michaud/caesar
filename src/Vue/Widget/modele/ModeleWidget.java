@@ -1,7 +1,6 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
-import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.Zone;
 import instruction.IElementProgramme;
 import java.awt.Color;
@@ -10,7 +9,6 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import javax.swing.JComponent;
 
 public abstract class ModeleWidget implements Serializable {
 
