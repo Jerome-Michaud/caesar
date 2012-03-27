@@ -34,40 +34,40 @@ public class ForWidget extends ModeleWidget {
 		ChampTexte f;
 
 		//variable
-		l = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
-		l.setBounds(50, 3, 35, 20);
+		l = new ListeDeroulante<Variable>(/*DicoVars.getInstance().getLesvariables()*/);
+		l.setBounds(55, 3, 35, 20);
 		l.setToolTipText("variable");
 		this.getLesZonesSaisies().add(l);
 
 		//valeur depart
 		f = new ChampTexte();
-		f.setBounds(90, 3, 20, 20);
+		f.setBounds(95, 3, 20, 20);
 		f.setText("0");
 		f.setToolTipText("valeur de départ");
 		this.getLesZonesSaisies().add(f);
 
 		//condition
 		l = new ListeDeroulante<Operateur>(Operateur.values());
-		l.setBounds(115, 3, 35, 20);
+		l.setBounds(120, 3, 35, 20);
 		l.setToolTipText("opérateur");
 		this.getLesZonesSaisies().add(l);
 
 		//valeur fin
 		f = new ChampTexte();
-		f.setBounds(155, 3, 20, 20);
+		f.setBounds(160, 3, 20, 20);
 		//f.setText("0");
 		f.setToolTipText("valeur de fin");
 		this.getLesZonesSaisies().add(f);
 
 		//pas
 		f = new ChampTexte();
-		f.setBounds(180, 3, 20, 20);
+		f.setBounds(185, 3, 20, 20);
 		f.setText("1");
 		f.setToolTipText("opération d'incrémentation");
 		this.getLesZonesSaisies().add(f);
 
-		this.decalageXout(70);
-
+		this.decalageXout(73);
+		
 		initListeners();
 
 	}

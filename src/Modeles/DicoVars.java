@@ -49,6 +49,7 @@ public class DicoVars {
 
 	public Variable[] getLesvariables() {
 		//DEDANS
-		throw new UnsupportedOperationException("Not yet implemented");
+		//throw new UnsupportedOperationException("Not yet implemented");
+		return null;
 	}
 }
