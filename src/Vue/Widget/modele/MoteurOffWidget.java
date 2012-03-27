@@ -3,14 +3,13 @@ package Vue.Widget.modele;
 import Modeles.TypeWidget;
 import Vue.Widget.modele.zones.ListeDeroulante;
 import Vue.Widget.modele.zones.Zone;
-import instruction.InstructionDoWhile;
-import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
 import instruction.Moteur;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
+import java.awt.Rectangle;
 
 public class MoteurOffWidget extends ModeleWidget {
 
@@ -40,29 +39,44 @@ public class MoteurOffWidget extends ModeleWidget {
 		initListeners();
 	}
 
-	@Override
-	public void decalageXout(int x) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void decalageXout(int a,Rectangle r) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
+    }
 
-	@Override
-	public void decalageXin(int x) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void decalageXin(int a,Rectangle r) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
+    }
 
-	@Override
-	public void decalageYout(int x) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void decalageYout(int b,Rectangle r) {
+        int i;
+        for (i = 8; i < 16; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
+    }
 
-	@Override
-	public void decalageYin(int x) {
-		// TODO Auto-generated method stub
-		
-	}
+
+    public void decalageYin(int b,Rectangle r) {
+        int i;
+        for (i = 8; i < 16; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
+    }
+
+
 	
 	
 	
@@ -79,4 +93,5 @@ public class MoteurOffWidget extends ModeleWidget {
 	private void setInstructionMoteur(String nom) {
 		((InstructionMoteurOff) getElementProgramme()).setMoteur(Moteur.values()[Integer.parseInt(nom)]);
 	}
+
 }

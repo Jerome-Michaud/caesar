@@ -1,7 +1,6 @@
 package Vue.Widget;
 
 import Vue.Tools.ComposantIntrouvableException;
-import Vue.Tools.Variables;
 import Vue.Widget.modele.ModeleWidget;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -109,9 +108,9 @@ public class WidgetCompose extends Widget implements IWidget {
             if (maxBounds != null) {
                 int diff = maxBounds.height - r.height - ModeleWidget.OFFSET;
                 if (diff < 0-ModeleWidget.OFFSET) {
-                    this.getModele().decalageYin(Math.abs(diff));
+                    this.getModele().decalageYin(Math.abs(diff), r);
                 } else if (diff > 0-ModeleWidget.OFFSET) {
-                    this.getModele().decalageYout(diff);
+                    this.getModele().decalageYout(diff, r);
                 }
             }
             if(maxBounds == null){

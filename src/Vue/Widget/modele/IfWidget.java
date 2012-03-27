@@ -7,6 +7,7 @@ import instruction.InstructionIf;
 import instruction.Variable;
 
 import java.awt.Polygon;
+import java.awt.Rectangle;
 
 public class IfWidget extends ModeleWidget{
 
@@ -30,7 +31,7 @@ public class IfWidget extends ModeleWidget{
 
 		}
 
-		public void decalageXout(int a) {
+		public void decalageXout(int a,Rectangle r) {
 	        int i;
 	        for (i = 6; i < 10; i++) {
 	            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -42,7 +43,7 @@ public class IfWidget extends ModeleWidget{
 	        this.setTailleX();
 	    }
 
-	    public void decalageXin(int a) {
+	    public void decalageXin(int a,Rectangle r) {
 	        int i;
 	        for (i = 6; i < 10; i++) {
 	            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
@@ -54,7 +55,7 @@ public class IfWidget extends ModeleWidget{
 	        this.setTailleX();
 	    }
 
-	    public void decalageYout(int b) {
+	    public void decalageYout(int b,Rectangle r) {
 	        int i;
 	        for (i = 16; i < tabY.length; i++) {
 	            this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
@@ -63,7 +64,7 @@ public class IfWidget extends ModeleWidget{
 	        this.setTailleY();
 	    }
 
-	    public void decalageYin(int b) {
+	    public void decalageYin(int b,Rectangle r) {
 	        int i;
 	        for (i = 16; i < tabY.length; i++) {
 	            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;

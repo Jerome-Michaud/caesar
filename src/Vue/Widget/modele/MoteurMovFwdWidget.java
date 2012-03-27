@@ -6,6 +6,7 @@ import Vue.Widget.modele.zones.ListeDeroulante;
 import Vue.Widget.modele.zones.Zone;
 import instruction.*;
 import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
@@ -44,25 +45,44 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		initListeners();
 	}
 
-	@Override
-	public void decalageXout(int x) {
-		// TODO Auto-generated method stub
-	}
 
-	@Override
-	public void decalageXin(int x) {
-		// TODO Auto-generated method stub
-	}
+	public void decalageXout(int a, Rectangle r) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
+    }
 
-	@Override
-	public void decalageYout(int x) {
-		// TODO Auto-generated method stub
-	}
+    public void decalageXin(int a, Rectangle r) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
+    }
 
-	@Override
-	public void decalageYin(int x) {
-		// TODO Auto-generated method stub
-	}
+    public void decalageYout(int b, Rectangle r) {
+        int i;
+        for (i = 8; i < 16; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
+    }
+
+    public void decalageYin(int b, Rectangle r) {
+        int i;
+        for (i = 8; i < 16; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
+    }
+
+
 
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
@@ -90,4 +110,5 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		((InstructionMoteurMov) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
 		System.out.println(((InstructionMoteurMov) getElementProgramme()));
 	}
+
 }

@@ -58,9 +58,6 @@ public class VisiteurNXC extends VisiteurTraduction {
 			case C:
 				traduction += "OUT_C";
 				break;
-			case D:
-				traduction += "OUT_D";
-				break;
 			default:
 				break;
 			}
@@ -196,7 +193,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 		}
 		nivIndent--;
 		
-		traduction+=indent()+"}";	
+		traduction+=indent()+"}\n";	
 	}
 
 	@Override

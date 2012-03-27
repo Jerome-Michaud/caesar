@@ -89,11 +89,9 @@ public class InstructionTest {
 		Instruction n2 = new InstructionMoteurRotate(Moteur.A, expression);
 		Instruction n3 = new InstructionMoteurOff(Moteur.B);
 		Instruction n4 = new InstructionMoteurMov(Moteur.C, expression);
-		Instruction n5 = new InstructionMoteurMov(Moteur.D, expression, true);
 		n1.inserer(0, n2);
 		n1.inserer(1, n3);
 		n1.inserer(2, n4);
-		n1.inserer(2, n5);
 
 		// Creation d'un visiteur NXC
 		trad = VisiteurNXC.getInstance();
