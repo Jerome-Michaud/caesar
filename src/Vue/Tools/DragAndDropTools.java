@@ -4,6 +4,7 @@ import Modeles.Erreur;
 import Vue.Interface.*;
 import Vue.Widget.IWidget;
 import Vue.Widget.Widget;
+import Vue.Widget.WidgetCompose;
 import Vue.Widget.modele.ModeleWidget;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
@@ -11,6 +12,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class DragAndDropTools {
@@ -39,7 +41,7 @@ public class DragAndDropTools {
                 pw.add(compNouv);
                 int ind = pw.getIndex(comp);
                 pw.supprimerWidget(comp);
-                pw.ajouterWidget(compNouv,ind);
+                pw.ajouterWidget(compNouv, ind);
             } catch (NonClonableException ex) {
                 Erreur.afficher(ex);
             }
@@ -50,6 +52,7 @@ public class DragAndDropTools {
             try {
                 //recuperation et detachement des widgets dragués
                 composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));
+
                 System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\arbo size:" + composantsDrague.size());
                 //supression des widgets dans l'arborescence
                 arbo.supprimerWidgets(composantsDrague);
@@ -65,22 +68,40 @@ public class DragAndDropTools {
         }
         System.out.println("//////////////////////////");
         for (Widget w : composantsDrague) {
-            comp.getParent().remove(w);
-            GlassPane.getInstance().add(w);
+            passerSurAutrePanel(w,GlassPane.getInstance());
         }
 
-        Point p = GlassPane.getInstance().getMousePosition();
-        p.x -= ptClick.x;
-        p.y -= ptClick.y;
+//        Point p = GlassPane.getInstance().getMousePosition();
+//        p.x -= ptClick.x;
+//        p.y -= ptClick.y;
 
-        dragGroupeWidget(composantsDrague, p);
+        //dragGroupeWidget(composantsDrague, p);
     }
 
+    public void passerSurAutrePanel(Widget wi,JPanel destination) {
+        if (wi.isComplexe()) {
+            for (List<Widget> lw : ((WidgetCompose)wi).getLesFils().values()) {
+                for (Widget w : lw) {
+                    passerSurAutrePanel(w,destination);
+                }   
+            }
+        }
+        Point p = wi.getLocationOnScreen();
+        System.out.println(p);
+        SwingUtilities.convertPointFromScreen(p, destination);
+        wi.setLocation(p);
+        wi.getParent().remove(wi);
+        destination.add(wi);
+    }
+    
     public void dragGroupeWidget(List<Widget> lst, Point p) {
         System.out.println("-----------");
         for (Widget w : lst) {
             System.out.println("parent comp drag :" + w.getParent());
             w.setLocation(p.x, p.y);
+            if(w.isComplexe()){
+                ((WidgetCompose)w).notifyChange();
+            }
             p.y += w.getHeight() - ModeleWidget.OFFSET;
         }
         System.out.println("-----------");
@@ -149,6 +170,7 @@ public class DragAndDropTools {
         int decal = (int) (Widget.TAUX_TRANSFERT_PANEL * comp.getWidth());
         int inter = (int) (r.getMaxX() - p.getBounds().getMinX());
         ArborescenceTools arbo = ArborescenceTools.getInstance();
+        boolean complexe = false;
 
         try {
             if (inter >= decal) {
@@ -178,14 +200,25 @@ public class DragAndDropTools {
                         arbo.ajouterWidgets(composantsDrague, compSurvole, true);
                         break;
 
+                    case 2:
+                        WidgetCompose wComp = (WidgetCompose) (a.getComp());
+                        List<Widget> lst = wComp.getMapZone().get(a.getRect());
+                        lst.addAll(composantsDrague);
+                        break;
+
                 }
                 for (Widget w : composantsDrague) {
-                    g.remove(w);
-                    p.add(w);
+                    passerSurAutrePanel(w, p);
                     if (compSurvole == null) {
                         w.defParent((IWidget) p);//gestion du parent suivant element survole
+
                     } else {
-                        w.defParent(compSurvole.parent());
+                        if (compSurvole.isComplexe() && a.getVal() == 2) {
+                            complexe = true;
+                            w.defParent((WidgetCompose) compSurvole);
+                        } else {
+                            w.defParent(compSurvole.parent());
+                        }
                     }
                 }
                 p.repaint();
@@ -209,7 +242,11 @@ public class DragAndDropTools {
                     break;
 
             }
-            dragGroupeWidget(arbo.getListe(comp), pt);//penser a la conversion
+            if (complexe) {                
+                dragGroupeWidget(arbo.getSuivants((Widget)(comp.parent()),true), ((Widget)comp.parent()).getLocation());
+            } else {
+                dragGroupeWidget(arbo.getListe(comp), pt);//penser a la conversion
+            }
             composantsDrague.clear();
 
         } catch (ComposantIntrouvableException ex) {
