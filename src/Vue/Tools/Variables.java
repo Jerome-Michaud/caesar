@@ -51,5 +51,7 @@ public class Variables {
 	
 	public static final int ECART_PAR_DEFAULT = 15;
 	
+	public static final String CHEMIN_ACCES_NBC = "C:\\Users\\Bastien\\Desktop\\\"Projet Robot\"\\Compilateur";
+	
 
 }
