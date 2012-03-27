@@ -6,6 +6,7 @@ import Vue.Widget.modele.zones.Zone;
 import Vue.Tools.Variables;
 import instruction.InstructionTache;
 import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.Serializable;
@@ -39,7 +40,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }
 
-    public void decalageXout(int a) {
+    public void decalageXout(int a,Rectangle r) {
         int i;
         for (i = 2; i < 6; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -51,7 +52,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setTailleX();
     }
 
-    public void decalageXin(int a) {
+    public void decalageXin(int a,Rectangle r) {
         int i;
         for (i = 2; i < 6; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
@@ -63,7 +64,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setTailleX();
     }
 
-    public void decalageYout(int b) {
+    public void decalageYout(int b,Rectangle r) {
         int i;
         for (i = 12; i < tabY.length; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
@@ -72,7 +73,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setTailleY();
     }
 
-    public void decalageYin(int b) {
+    public void decalageYin(int b,Rectangle r) {
         int i;
         for (i = 12; i < tabY.length; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;

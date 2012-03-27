@@ -10,6 +10,7 @@ import instruction.Moteur;
 import instruction.TypeVariable;
 import instruction.VariableModifiable;
 import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
@@ -46,7 +47,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 	}
 
 
-	public void decalageXout(int a) {
+	public void decalageXout(int a, Rectangle r) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -55,7 +56,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
         this.setTailleX();
     }
 
-    public void decalageXin(int a) {
+    public void decalageXin(int a, Rectangle r) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
@@ -64,7 +65,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
         this.setTailleX();
     }
 
-    public void decalageYout(int b) {
+    public void decalageYout(int b, Rectangle r) {
         int i;
         for (i = 8; i < 16; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
@@ -73,7 +74,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
         this.setTailleY();
     }
 
-    public void decalageYin(int b) {
+    public void decalageYin(int b, Rectangle r) {
         int i;
         for (i = 8; i < 16; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
