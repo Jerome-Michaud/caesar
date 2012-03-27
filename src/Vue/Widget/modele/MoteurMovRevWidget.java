@@ -17,7 +17,7 @@ public class MoteurMovRevWidget extends ModeleWidget {
 	
 	public MoteurMovRevWidget() {
 		super();
-		int tX[] = {0, 5, 30, 35, 45, 50, 130, 135, 135, 130, 50, 45, 35, 30, 5, 0};
+		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
 
 		
@@ -31,11 +31,11 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
-		l.setBounds(50, 3, 35, 20);
+		l.setBounds(105, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 		
 		ChampTexte f = new ChampTexte();
-		f.setBounds(110, 3, 20, 20);
+		f.setBounds(145, 3, 20, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 		
@@ -45,7 +45,7 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		initListeners();
 	}
 
-	public void decalageXout(int a,Rectangle r) {
+	public void decalageXout(int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -54,7 +54,7 @@ public class MoteurMovRevWidget extends ModeleWidget {
         this.setTailleX();
     }
 
-    public void decalageXin(int a,Rectangle r) {
+    public void decalageXin(int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;

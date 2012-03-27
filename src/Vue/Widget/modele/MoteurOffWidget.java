@@ -31,7 +31,7 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
-		l.setBounds(50, 3, 35, 20);
+		l.setBounds(95, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 		
 		setInstructionMoteur(l.getValeur());
@@ -39,7 +39,7 @@ public class MoteurOffWidget extends ModeleWidget {
 		initListeners();
 	}
 
-	public void decalageXout(int a,Rectangle r) {
+	public void decalageXout(int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -48,7 +48,7 @@ public class MoteurOffWidget extends ModeleWidget {
         this.setTailleX();
     }
 
-    public void decalageXin(int a,Rectangle r) {
+    public void decalageXin(int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;

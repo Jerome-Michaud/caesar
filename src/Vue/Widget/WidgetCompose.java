@@ -5,6 +5,7 @@ import Vue.Tools.ComposantIntrouvableException;
 import Vue.Widget.modele.ModeleWidget;
 import instruction.IElementProgramme;
 import instruction.Instruction;
+import instruction.InstructionStructure;
 import instruction.InstructionTache;
 
 import java.awt.Color;
@@ -128,59 +129,32 @@ public class WidgetCompose extends Widget implements IWidget {
 			this.mapZone.put(mapRect.get(r), this.mapZone.remove(r));
 		}
 	}
-
-	/**
-	 * Met à jour l'arborescence des instructions
-	 */
-	public void applyChangeModele() {
-		/*
-		 * Testé le type du modele widget courant
-		 */
-		/*
-		 * Cas du if...else
-		 */
-		/*
-		 * Récupéré clé mapZone du if et du else
-		 */
-		/*
-		 * clé du if <=> rectangle supérieur
-		 */
-		/*
-		 * clé du else <=> rectangle inféreur
-		 */
-		/*
-		 * Suppression des instructions du if et du else dans l'arbre des
-		 * instruction
-		 */
-		/*
-		 * Récupérer les instructions des widgets du if
-		 */
-		/*
-		 * les ajouté à l'arbre des instructions
-		 */
-		/*
-		 * Récupérer les instructions des widgets du else
-		 */
-		/*
-		 * les ajouté à l'arbre des instructions
-		 */
-		/*
-		 * Cas du repeat
-		 */
-		if (this.getModele().getType() == TypeWidget.TACHE) {
-			/*
-			 * Cas de la tâche
-			 */
-			InstructionTache tache = (InstructionTache) this.getModele().getElementProgramme();
-			List<Widget> widgets = recupeAllWidgetCorps();
-			System.out.println("applyChangeModele : Tâche (" + widgets.size() + ")");
-		}
-	}
-
-	private List<Widget> recupeAllWidgetCorps() {
-		/*
-		 * Récupérer la clé du corps
-		 */
+	
+    /**
+     * Met à jour l'arborescence des instructions
+     */
+    public void applyChangeModele() {
+    	/* Testé le type du modele widget courant */
+    	if(this.getModele().getType() == TypeWidget.IFELSE) {
+			/* Cas du if...else */
+			/* Récupéré clé mapZone du if et du else */
+				/* clé du if <=> rectangle supérieur */
+				/* clé du else <=> rectangle inféreur */
+			/* Suppression des instructions du if et du else
+			 * dans l'arbre des instruction */
+			/* Récupérer les instructions des widgets du if */
+				/* les ajouté à l'arbre des instructions */
+	    	/* Récupérer les instructions des widgets du else */
+			/* les ajouté à l'arbre des instructions */
+    	}
+    	else {
+    		/* Cas des instructions structures autre que IfElse */
+    		this.applyChangeStructInst();
+    	}
+    }
+    
+    private List<Widget> recupeAllWidgetCorps() {
+    	/* Récupérer la clé du corps */
 		Set<Rectangle> keys = this.mapZone.keySet();
 		/*
 		 * Récupérer les widgets du contenue
@@ -189,4 +163,18 @@ public class WidgetCompose extends Widget implements IWidget {
 		List<Widget> widgets = this.mapZone.get(rects[0]);
 		return widgets;
 	}
+    
+    private void applyChangeStructInst() {
+    	/* Cas de la tâche */
+		InstructionStructure structInst = (InstructionStructure) this.getModele().getElementProgramme();
+		/* Récupération des widgets fils */
+		List<Widget> widgets = recupeAllWidgetCorps();
+		/* Suppression des enfants de la tâche */
+		structInst.removeEnfants();
+		/* Ajout de tous les enfants nouveaux et anciens */
+		for(Widget widget : widgets) {
+			Instruction inst = (Instruction) widget.getElementProgramme();
+			structInst.insererFin(inst);
+		}
+    }
 }

@@ -41,7 +41,7 @@ public class RepeatWidget extends ModeleWidget {
 	}
 
 	@Override
-	public void decalageXout(int a,Rectangle r) {
+	public void decalageXout(int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -54,7 +54,7 @@ public class RepeatWidget extends ModeleWidget {
     }
 
 	@Override
-    public void decalageXin(int a,Rectangle r) {
+    public void decalageXin(int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;

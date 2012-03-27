@@ -1,4 +1,7 @@
-package instruction;
+package Modeles;
+
+import instruction.TypeVariable;
+import instruction.Variable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,9 +10,11 @@ import java.util.List;
 public class DicoVars {
 
 	private static DicoVars instance;
-	private HashMap<String, Variable> dict = new HashMap<String, Variable>();
+	private HashMap<String, Variable> dictionnaire;
 
-	private DicoVars(){}
+	private DicoVars(){
+		dictionnaire = new HashMap<String, Variable>();
+	}
 
 	public synchronized static DicoVars getInstance() {
 		if (instance == null){
@@ -20,16 +25,17 @@ public class DicoVars {
 	
 	
 	public void ajouter(Variable v){
-		dict.put(v.toString(),v);
+		if(!v.getNom().isEmpty())
+			dictionnaire.put(v.getNom(),v);
 	}
 	
 	public void supprimer(String nom){
-		dict.remove(nom);
+		dictionnaire.remove(nom);
 	}
 	
 	public List<Variable> getVariablesDeType(TypeVariable type){
 		ArrayList<Variable> res = new ArrayList<Variable>();
-		for (Variable v: dict.values()){
+		for (Variable v: dictionnaire.values()){
 			if (v.getType()==type){
 				res.add(v);
 			}
@@ -37,4 +43,12 @@ public class DicoVars {
 		return res;
 	}
 	
+	public HashMap<String, Variable> getDictionnaire() {
+		return this.dictionnaire;
+	}
+
+	public Variable[] getLesvariables() {
+		//DEDANS
+		throw new UnsupportedOperationException("Not yet implemented");
+	}
 }

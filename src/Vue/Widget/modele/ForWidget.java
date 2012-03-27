@@ -1,5 +1,6 @@
 package Vue.Widget.modele;
 
+import Modeles.DicoVars;
 import Modeles.TypeWidget;
 import Vue.Tools.Variables;
 import Vue.Widget.modele.zones.ChampTexte;
@@ -17,9 +18,53 @@ public class ForWidget extends ModeleWidget {
 
 	public ForWidget() {
 		super();
-			int[] tX = {0, 5,/**/ 30, 35, 45, 50,/**/ 130, 135,/**/ 135, 130,/**/ 55,50,40,35, /**/10, 5,/**/ 5, 10,/**/35,40,50,55,/**/130,135,                                 /**/135,130,/**/50,45,35,30,/**/5,0};
-			int[] tY = {5, 0,/**/ 0, 5, 5, 0,/**/ 0, 5,/**/ 20, 25,/**/25,30,30,25, /**/25, 30,/**/ 35, 40,/**/40,45,45,40,/**/40, 45,                         /**/50,55,/**/55,60,60,55,/**/55,50};
-	
+		int[] tX = {0, 5,/*
+			 * 
+			 */ 30, 35, 45, 50,/*
+			 * 
+			 */ 130, 135,/*
+			 * 
+			 */ 135, 130,/*
+			 * 
+			 */ 55, 50, 40, 35, /*
+			 * 
+			 */ 10, 5,/*
+			 * 
+			 */ 5, 10,/*
+			 * 
+			 */ 35, 40, 50, 55,/*
+			 * 
+			 */ 130, 135, /*
+			 * 
+			 */ 135, 130,/*
+			 * 
+			 */ 50, 45, 35, 30,/*
+			 * 
+			 */ 5, 0};
+		int[] tY = {5, 0,/*
+			 * 
+			 */ 0, 5, 5, 0,/*
+			 * 
+			 */ 0, 5,/*
+			 * 
+			 */ 20, 25,/*
+			 * 
+			 */ 25, 30, 30, 25, /*
+			 * 
+			 */ 25, 30,/*
+			 * 
+			 */ 35, 40,/*
+			 * 
+			 */ 40, 45, 45, 40,/*
+			 * 
+			 */ 40, 45, /*
+			 * 
+			 */ 50, 55,/*
+			 * 
+			 */ 55, 60, 60, 55,/*
+			 * 
+			 */ 55, 50};
+
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setTailleX();
@@ -29,17 +74,18 @@ public class ForWidget extends ModeleWidget {
 		this.setElementProgramme(new InstructionFor());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
-		
+
 		ListeDeroulante l;
 		ChampTexte f;
-		
+
 		//variable
-		l = new ListeDeroulante<Variable>(/*DicoVars.getInstance()*/);
+		l = new ListeDeroulante<Variable>(/*
+				 * DicoVars.getInstance()
+				 */);
 		l.setBounds(50, 3, 35, 20);
 		l.setToolTipText("variable");
 		this.getLesZonesSaisies().add(l);
 
-		
 		//valeur depart
 		f = new ChampTexte();
 		f.setBounds(90, 3, 20, 20);
@@ -52,28 +98,28 @@ public class ForWidget extends ModeleWidget {
 		l.setBounds(115, 3, 35, 20);
 		l.setToolTipText("opérateur");
 		this.getLesZonesSaisies().add(l);
-		
+
 		//valeur fin
 		f = new ChampTexte();
 		f.setBounds(155, 3, 20, 20);
 		//f.setText("0");
 		f.setToolTipText("valeur de fin");
 		this.getLesZonesSaisies().add(f);
-		
+
 		//pas
 		f = new ChampTexte();
 		f.setBounds(180, 3, 20, 20);
 		f.setText("1");
 		f.setToolTipText("opération d'incrémentation");
 		this.getLesZonesSaisies().add(f);
-		
-		this.decalageXout(70, null);
-		
+
+		this.decalageXout(70);
+
 		initListeners();
-		
+
 	}
 
-	public void decalageXout(int a, Rectangle r) {
+	public void decalageXout(int a) {
 		int i;
 		for (i = 6; i < 10; i++) {
 			this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -85,7 +131,7 @@ public class ForWidget extends ModeleWidget {
 		this.setTailleX();
 	}
 
-	public void decalageXin(int a, Rectangle r) {
+	public void decalageXin(int a) {
 		int i;
 		for (i = 6; i < 10; i++) {
 			this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
@@ -120,30 +166,28 @@ public class ForWidget extends ModeleWidget {
 
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				Variable v = DicoVars.getInstance().getVariablesDeType()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
+				Variable v = DicoVars.getInstance().getLesvariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
 				String deb = ((Zone) getLesZonesSaisies().get(1)).getValeur();
 				Operateur o = Operateur.values()[Integer.parseInt(((Zone) getLesZonesSaisies().get(2)).getValeur())];
 				String fin = ((Zone) getLesZonesSaisies().get(3)).getValeur();
 				String pas = ((Zone) getLesZonesSaisies().get(4)).getValeur();
-				
+
 				setCondition();
 				setIteration();
 				setInitialization();
 			}
 		});
 	}
-	
-	
-	
+
 	public void setCondition() {
-		((InstructionFor)getElementProgramme()).setCondition(null);
+		((InstructionFor) getElementProgramme()).setCondition(null);
 	}
-	
+
 	public void setInitialization() {
-		((InstructionFor)getElementProgramme()).setIntialization(null);
+		((InstructionFor) getElementProgramme()).setIntialization(null);
 	}
-	
+
 	public void setIteration() {
-		((InstructionFor)getElementProgramme()).setIteration(null);
+		((InstructionFor) getElementProgramme()).setIteration(null);
 	}
 }
