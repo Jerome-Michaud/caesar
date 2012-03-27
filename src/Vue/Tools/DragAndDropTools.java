@@ -212,6 +212,8 @@ public class DragAndDropTools {
                     }
                 }
                 p.repaint();
+                if(compSurvole != null)
+                	compSurvole.applyChangeModele();
             } else {
                 arbo.supprimerWidgets(composantsDrague);
                 for (Widget w : composantsDrague) {
