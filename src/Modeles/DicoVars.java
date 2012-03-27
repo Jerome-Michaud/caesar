@@ -1,4 +1,7 @@
-package instruction;
+package Modeles;
+
+import instruction.TypeVariable;
+import instruction.Variable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
