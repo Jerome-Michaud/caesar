@@ -47,19 +47,23 @@ public class VisiteurNXC extends VisiteurTraduction {
 	}
 	
 	private void ajouterNomMoteur(Moteur m){
-		switch (m){
-		case A:
-			traduction += "OUT_A";
-			break;
-		case B:
-			traduction += "OUT_B";
-			break;
-		case C:
-			traduction += "OUT_C";
-			break;
-		case D:
-			traduction += "OUT_D";
-			break;
+		if(m != null) {
+			switch (m){
+			case A:
+				traduction += "OUT_A";
+				break;
+			case B:
+				traduction += "OUT_B";
+				break;
+			case C:
+				traduction += "OUT_C";
+				break;
+			case D:
+				traduction += "OUT_D";
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	
@@ -109,7 +113,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 		traduction+="else{\n";
 		
 		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
+		for (Instruction is:inst.getEnfantsElse()){
 			is.accepte(this);
 		}
 		

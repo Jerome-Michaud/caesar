@@ -104,7 +104,7 @@ public class TestProgramme {
 				//OnFwd(OUT_A, 75);
 				InstructionMoteurMov i12 = new InstructionMoteurMov();
 				i11.insererFin(i12);
-				i12.setMoteur(Moteur.A);
+				i12.setMoteur(Moteur.B);
 				i12.setExpression(new VariableConstante(TypeVariable.INT,"","75"));
 			
 				
