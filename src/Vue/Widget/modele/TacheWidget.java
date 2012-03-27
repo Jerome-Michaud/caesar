@@ -1,13 +1,18 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import Vue.Widget.modele.zones.ChampTexte;
+import Vue.Widget.modele.zones.Zone;
 import Vue.Tools.Variables;
 import instruction.InstructionTache;
 import java.awt.Polygon;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.Serializable;
+import javax.swing.JComponent;
 
 public class TacheWidget extends ModeleWidget implements Serializable{
-
+	private Zone temp;
 	
     public TacheWidget(){
         super();
@@ -23,26 +28,77 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.attachableBas = false;
         this.attachableHaut = false;
-        this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
+		
+		ChampTexte f = new ChampTexte();
+		f.setBounds(50, 3, 80, 20);
+		f.setText("main");
+		this.getLesZonesSaisies().add(f);
+		
+		initListeners();
+
+		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }
 
-    @Override
-    public void decalageXout(int x) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void decalageXout(int a) {
+        int i;
+        for (i = 2; i < 6; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        for (i = 18; i < 22; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
     }
 
-    @Override
-    public void decalageXin(int x) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void decalageXin(int a) {
+        int i;
+        for (i = 2; i < 6; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+        }
+        for (i = 18; i < 22; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
     }
 
-    @Override
-    public void decalageYout(int x) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void decalageYout(int b) {
+        int i;
+        for (i = 12; i < tabY.length; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
     }
 
-    @Override
-    public void decalageYin(int x) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void decalageYin(int b) {
+        int i;
+        for (i = 12; i < tabY.length; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
     }
+
+
+	@Override
+	public void initListeners() {
+		for (Zone z : this.getLesZonesSaisies()) {
+			this.temp = z;
+			((JComponent)z).addFocusListener(new FocusAdapter() {
+
+				@Override
+				public void focusLost(FocusEvent arg0) {
+					setInstruction(temp.getValeur());
+				}
+				
+			});
+		}
+	}
+	
+	private void setInstruction(String nom) {
+		((InstructionTache)getElementProgramme()).setNom(nom);
+	}
+
 }

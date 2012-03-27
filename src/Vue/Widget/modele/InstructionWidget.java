@@ -56,4 +56,8 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
 	        this.setForme(this.getForme());
 	        this.setTailleY();
 	    }
+		
+		public void initListeners() {
+		
+	}
 }

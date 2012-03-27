@@ -68,6 +68,8 @@ public class ForWidget extends ModeleWidget {
 	        this.setTailleY();
 	    }
 		
+		public void initListeners() {
 		
+	}
 
 }

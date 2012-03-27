@@ -29,31 +29,54 @@ public class RepeatWidget extends ModeleWidget {
 		}
 
 
-	@Override
-	public void decalageXout(int x) {
-		// TODO Auto-generated method stub
+	public void decalageXout(int a) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        for (i = 22; i < 26; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
+    }
+
+    public void decalageXin(int a) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+        }
+        for (i = 22; i < 26; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
+    }
+
+    public void decalageYout(int b) {
+        int i;
+        for (i = 16; i < tabY.length; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
+    }
+
+    public void decalageYin(int b) {
+        int i;
+        for (i = 16; i < tabY.length; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
+    }
+
+
+
+	
+	public void initListeners() {
 		
 	}
 
-
-	@Override
-	public void decalageXin(int x) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void decalageYout(int x) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void decalageYin(int x) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
