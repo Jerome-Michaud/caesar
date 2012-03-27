@@ -1,7 +1,12 @@
 package Vue.Widget;
 
+import Modeles.TypeWidget;
 import Vue.Tools.ComposantIntrouvableException;
 import Vue.Widget.modele.ModeleWidget;
+import instruction.IElementProgramme;
+import instruction.Instruction;
+import instruction.InstructionTache;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,6 +14,7 @@ import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class WidgetCompose extends Widget implements IWidget {
 
@@ -36,9 +42,9 @@ public class WidgetCompose extends Widget implements IWidget {
         }
     }
 
-    public boolean ajouterWidget(Rectangle cle, Widget widget) {
+    /*public boolean ajouterWidget(Rectangle cle, Widget widget) {
         return this.mapZone.get(cle).add(widget);
-    }
+    }*/
 
     public boolean supprimerWidget(Rectangle cle, Widget widget) {
         return this.mapZone.get(cle).remove(widget);
@@ -120,5 +126,37 @@ public class WidgetCompose extends Widget implements IWidget {
         for(Rectangle r : mapRect.keySet()){
             this.mapZone.put(mapRect.get(r), this.mapZone.remove(r));
         }
+    }
+    /**
+     * Met à jour l'arborescence des instructions
+     */
+    public void applyChangeModele() {
+    	/* Testé le type du modele widget courant */
+			/* Cas du if...else */
+			/* Récupéré clé mapZone du if et du else */
+				/* clé du if <=> rectangle supérieur */
+				/* clé du else <=> rectangle inféreur */
+			/* Suppression des instructions du if et du else
+			 * dans l'arbre des instruction */
+			/* Récupérer les instructions des widgets du if */
+				/* les ajouté à l'arbre des instructions */
+	    	/* Récupérer les instructions des widgets du else */
+			/* les ajouté à l'arbre des instructions */
+			/* Cas du repeat */
+    	if(this.getModele().getType() == TypeWidget.TACHE) {
+    		/* Cas de la tâche */
+    		InstructionTache tache = (InstructionTache) this.getModele().getElementProgramme();
+    		List<Widget> widgets = recupeAllWidgetCorps();
+    		System.out.println("applyChangeModele : Tâche ("+widgets.size()+")");
+    	}
+    }
+    
+    private List<Widget> recupeAllWidgetCorps() {
+    	/* Récupérer la clé du corps */
+		Set<Rectangle> keys = this.mapZone.keySet();
+		/* Récupérer les widgets du contenue*/
+		Object[] rects = keys.toArray();
+		List<Widget> widgets = this.mapZone.get(rects[0]);
+		return widgets;
     }
 }
