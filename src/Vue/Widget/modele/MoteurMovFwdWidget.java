@@ -4,11 +4,7 @@ import Modeles.TypeWidget;
 import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.ListeDeroulante;
 import Vue.Widget.modele.zones.Zone;
-import instruction.InstructionMoteurMov;
-import instruction.InstructionTache;
-import instruction.Moteur;
-import instruction.TypeVariable;
-import instruction.VariableModifiable;
+import instruction.*;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -34,7 +30,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
-		l.setBounds(50, 3, 30, 20);
+		l.setBounds(50, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
@@ -42,7 +38,10 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 
-
+		setInstructionMoteur(l.getValeur());
+		setInstructionValeur(f.getValeur());
+		
+		initListeners();
 	}
 
 	@Override
@@ -88,6 +87,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 
 	private void setInstructionValeur(String nom) {
 		((InstructionMoteurMov) getElementProgramme()).setReverse(false);
-		((InstructionMoteurMov) getElementProgramme()).setExpression(new VariableModifiable(TypeVariable.INT, "", nom));
+		((InstructionMoteurMov) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
+		System.out.println(((InstructionMoteurMov) getElementProgramme()));
 	}
 }

@@ -1,9 +1,16 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import Vue.Widget.modele.zones.ListeDeroulante;
+import Vue.Widget.modele.zones.Zone;
 import instruction.InstructionDoWhile;
+import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
+import instruction.Moteur;
 import java.awt.Polygon;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.JComponent;
 
 public class MoteurOffWidget extends ModeleWidget {
 
@@ -24,6 +31,13 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.setElementProgramme(new InstructionMoteurOff());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
+		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
+		l.setBounds(50, 3, 35, 20);
+		this.getLesZonesSaisies().add(l);
+		
+		setInstructionMoteur(l.getValeur());
+		
+		initListeners();
 	}
 
 	@Override
@@ -50,7 +64,19 @@ public class MoteurOffWidget extends ModeleWidget {
 		
 	}
 	
+	
+	
 	public void initListeners() {
-		
+		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				setInstructionMoteur(((Zone) getLesZonesSaisies().get(0)).getValeur());
+			}
+		});
+	}
+	
+	private void setInstructionMoteur(String nom) {
+		((InstructionMoteurOff) getElementProgramme()).setMoteur(Moteur.values()[Integer.parseInt(nom)]);
 	}
 }

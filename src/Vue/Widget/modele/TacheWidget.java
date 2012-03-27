@@ -12,7 +12,6 @@ import java.io.Serializable;
 import javax.swing.JComponent;
 
 public class TacheWidget extends ModeleWidget implements Serializable{
-	private Zone temp;
 	
     public TacheWidget(){
         super();
@@ -61,17 +60,13 @@ public class TacheWidget extends ModeleWidget implements Serializable{
 
 	@Override
 	public void initListeners() {
-		for (Zone z : this.getLesZonesSaisies()) {
-			this.temp = z;
-			((JComponent)z).addFocusListener(new FocusAdapter() {
+		((JComponent) ((Zone) getLesZonesSaisies().get(0))).addFocusListener(new FocusAdapter() {
 
-				@Override
-				public void focusLost(FocusEvent arg0) {
-					setInstruction(temp.getValeur());
-				}
-				
-			});
-		}
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				setInstruction(((Zone) getLesZonesSaisies().get(0)).getValeur());
+			}
+		});
 	}
 	
 	private void setInstruction(String nom) {
