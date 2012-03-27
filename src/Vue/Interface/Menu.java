@@ -2,6 +2,7 @@ package Vue.Interface;
 
 import Ressources.ResourceTools;
 import Vue.Tools.ArborescenceTools;
+import Vue.Tools.CreationCodeTools;
 import Vue.Tools.SavingTools;
 import Vue.Widget.Widget;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.*;
+
+import traduction.VisiteurNXC;
+import traduction.VisiteurRobotC;
 
 public class Menu extends JMenuBar implements ActionListener {
 
@@ -75,10 +79,9 @@ public class Menu extends JMenuBar implements ActionListener {
             System.exit(0);
         }
 		else if (e.getSource() == exportationNXC) {
-			
+			CreationCodeTools.getInstance().ecrire(VisiteurNXC.getInstance().getTraduction());
         }
 		else if (e.getSource() == exportationRobotC) {
-			
         }
 		else if (e.getSource() == aideAPropos) {
             new FenetreAPropos();
