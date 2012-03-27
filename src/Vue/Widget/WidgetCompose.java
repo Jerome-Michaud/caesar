@@ -148,6 +148,10 @@ public class WidgetCompose extends Widget implements IWidget {
     		InstructionTache tache = (InstructionTache) this.getModele().getElementProgramme();
     		List<Widget> widgets = recupeAllWidgetCorps();
     		System.out.println("applyChangeModele : Tâche ("+widgets.size()+")");
+    		for(Widget widget : widgets) {
+    			Instruction inst = (Instruction) widget.getElementProgramme();
+    			System.out.println(inst.toString());
+    		}
     	}
     }
     
