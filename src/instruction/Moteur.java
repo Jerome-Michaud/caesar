@@ -9,7 +9,7 @@ import java.util.Collections;
  */
 public enum Moteur {
 
-	A, B, C, D;
+	A, B, C;
 
 	public String toString() {
 		switch (this) {
@@ -19,8 +19,8 @@ public enum Moteur {
 				return "B";
 			case C:
 				return "C";
-			case D:
-				return "D";
+			default:
+				break;
 		}
 		return null;
 	}
