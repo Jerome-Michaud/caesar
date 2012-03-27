@@ -48,8 +48,6 @@ public class DicoVars {
 	}
 
 	public Variable[] getLesvariables() {
-		//DEDANS
-		//throw new UnsupportedOperationException("Not yet implemented");
-		return null;
+		return (Variable[]) dictionnaire.values().toArray(new Variable[0]);
 	}
 }
