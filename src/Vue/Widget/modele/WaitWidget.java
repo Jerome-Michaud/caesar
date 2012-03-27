@@ -1,9 +1,13 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
-import instruction.InstructionAttente;
-import instruction.InstructionDoWhile;
+import Vue.Widget.modele.zones.ChampTexte;
+import Vue.Widget.modele.zones.Zone;
+import instruction.*;
 import java.awt.Polygon;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.JComponent;
 
 public class WaitWidget extends ModeleWidget {
 
@@ -24,6 +28,14 @@ public class WaitWidget extends ModeleWidget {
 		this.setElementProgramme(new InstructionAttente());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
+		ChampTexte f = new ChampTexte();
+		f.setBounds(110, 3, 20, 20);
+		f.setText("0");
+		this.getLesZonesSaisies().add(f);
+		
+		this.setInstructionValeur(f.getText());
+		
+		initListeners();
 	}
 
 	@Override
@@ -51,6 +63,16 @@ public class WaitWidget extends ModeleWidget {
 	}
 	
 	public void initListeners() {
-		
+		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				setInstructionValeur(((Zone) getLesZonesSaisies().get(0)).getValeur());
+			}
+		});
+	}
+
+	private void setInstructionValeur(String nom) {
+		((InstructionAttente) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
 	}
 }
