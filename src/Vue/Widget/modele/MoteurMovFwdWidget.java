@@ -13,8 +13,6 @@ import javax.swing.JComponent;
 
 public class MoteurMovFwdWidget extends ModeleWidget {
 
-	private Zone temp;
-
 	public MoteurMovFwdWidget() {
 		super();
 		int tX[] = {0, 5, 30, 35, 45, 50, 130, 135, 135, 130, 50, 45, 35, 30, 5, 0};
