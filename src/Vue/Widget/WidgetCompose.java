@@ -146,15 +146,15 @@ public class WidgetCompose extends Widget implements IWidget {
     		 * dans l'arbre des instruction */
     		/* Récupérer les instructions des widgets du if */
 			/* les ajouté à l'arbre des instructions */
-    		List<Widget> widgets = recupeAllWidgetCorps(0);
+    		List<Widget> widgets = recupeAllWidgetCorps(1);
     		structInst.removeEnfantsIf();
     		for(Widget widget : widgets) {
     			Instruction inst = (Instruction) widget.getElementProgramme();
-    			structInst.insererFin(inst);
+    			structInst.insererFinIf(inst);
     		}
     		/* Récupérer les instructions des widgets du else */
     		/* les ajouté à l'arbre des instructions */
-    		widgets = recupeAllWidgetCorps(1);
+    		widgets = recupeAllWidgetCorps(0);
     		structInst.removeEnfantsElse();
     		for(Widget widget : widgets) {
     			Instruction inst = (Instruction) widget.getElementProgramme();
