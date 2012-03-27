@@ -145,4 +145,6 @@ public class Widget extends JComponent {
             }
         });
     }
+	
+	public void applyChangeModele() {}
 }
