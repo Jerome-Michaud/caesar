@@ -2,6 +2,7 @@ package Modeles;
 
 import instruction.TypeVariable;
 import instruction.Variable;
+import instruction.VariableModifiable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ public class DicoVars {
 
 	private DicoVars(){
 		dictionnaire = new HashMap<String, Variable>();
+		this.dictionnaire.put("i", new VariableModifiable(TypeVariable.INT, "i", "0"));
 	}
 
 	public synchronized static DicoVars getInstance() {

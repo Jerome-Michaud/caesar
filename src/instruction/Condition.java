@@ -15,9 +15,9 @@ public class Condition extends ExpressionComplexe {
 	 * @param membreGauche le membre droit de la condition
 	 * @throws Exception Si l'opérateur fourni n'est pas un opérateur logique.
 	 */
-	public Condition(Operateur operation, Expression membreDroit, Expression membreGauche) throws Exception
+	public Condition(Operateur operation, Expression membreGauche, Expression membreDroit) throws Exception
 	{
-		super(operation, membreDroit, membreGauche);
+		super(operation, membreGauche, membreDroit);
 		if(!Operateur.isLogique(operation))
 			throw new Exception("Opérateur non logique dans Condition.");
 	}

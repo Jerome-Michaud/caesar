@@ -6,7 +6,6 @@ import Vue.Widget.IWidget;
 import Vue.Widget.Widget;
 import Vue.Widget.WidgetCompose;
 import Vue.Widget.modele.ModeleWidget;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -56,6 +55,9 @@ public class DragAndDropTools {
 
                 //supression des widgets dans l'arborescence
                 arbo.supprimerWidgets(composantsDrague);
+                if(comp != null && !comp.parent().isRacine()){
+                    ((Widget)comp.parent()).applyChangeModele();
+                }
                 comp.defParent(null);
 
                 //repaint
@@ -70,11 +72,11 @@ public class DragAndDropTools {
             passerSurAutrePanel(w,GlassPane.getInstance());
         }
 
-//        Point p = GlassPane.getInstance().getMousePosition();
-//        p.x -= ptClick.x;
-//        p.y -= ptClick.y;
+        Point p = GlassPane.getInstance().getMousePosition();
+        p.x -= ptClick.x;
+        p.y -= ptClick.y;
 
-        //dragGroupeWidget(composantsDrague, p);
+        dragGroupeWidget(composantsDrague, p);
     }
 
     public void passerSurAutrePanel(Widget wi,JPanel destination) {
@@ -95,6 +97,8 @@ public class DragAndDropTools {
     public void dragGroupeWidget(List<Widget> lst, Point p) {
         for (Widget w : lst) {
             w.setLocation(p.x, p.y);
+            /*w.getLocation().getLocation(). = p.x;
+            w.getLocation().y = p.y;*/
             if(w.isComplexe()){
                 ((WidgetCompose)w).notifyChange();
             }
@@ -115,25 +119,25 @@ public class DragAndDropTools {
             if (!recZoneUtil.contains(recWid)) {
                 boolean noX = false;
                 if (recWid.getMinX() <= recZoneUtil.getMinX()) {
-                    //a gauche
+                    //System.out.println("a gauche");
                     p.x = (int) recZoneUtil.getMinX() + 4;
                     p.y -= ptClick.y;
                     noX = true;
                 } else if (recWid.getMaxX() > recZoneUtil.getMaxX()) {
-                    //a droite
+                    //System.out.println("a droite");
                     p.x = (int) recZoneUtil.getMaxX() - recWid.width - 4;
                     p.y -= ptClick.y;
                     noX = true;
                 }
 
                 if (recWid.getMinY() <= recZoneUtil.getMinY()) {
-                    //en haut
+                    //System.out.println("en haut");
                     p.y = (int) recZoneUtil.getMinY() + 4;
                     if (!noX) {
                         p.x -= ptClick.x;
                     }
                 } else if (recWid.getMaxY() >= recZoneUtil.getMaxY()) {
-                    //en bas
+                    //System.out.println("en bas");
                     p.y = (int) recZoneUtil.getMaxY() - recWid.height - 4;
                     if (!noX) {
                         p.x -= ptClick.x;
@@ -147,6 +151,7 @@ public class DragAndDropTools {
             p.x -= Fenetre.getInstance().getLocation().getX();
             p.y -= Fenetre.getInstance().getLocation().getY();
             dragGroupeWidget(composantsDrague, p);
+            GlassPane.getInstance().repaint();
             FusionTools.dessinerLigne(comp);
         }
     }
@@ -175,8 +180,8 @@ public class DragAndDropTools {
                     pt.x += (comp.getWidth() - inter) + 3;
                 }
 
-                Widget compSurvole = a.getComp();
-
+				Widget compSurvole = a.getComp();
+                
                 switch (a.getVal()) {
                     case 1:         //Au dessus du compSurvole
                         arbo.ajouterWidgets(composantsDrague, compSurvole, false);
@@ -212,13 +217,13 @@ public class DragAndDropTools {
                     }
                 }
                 p.repaint();
-				if (compSurvole != null) {
-					compSurvole.applyChangeModele();
-				}
+                if(compSurvole != null && compSurvole.isComplexe()){
+                    compSurvole.applyChangeModele();
+                }
             } else {
                 arbo.supprimerWidgets(composantsDrague);
                 for (Widget w : composantsDrague) {
-                    g.remove(w);
+                    deleteWidgetsFromGlassPane(w);
                 }
             }
             switch (a.getVal()) {
@@ -239,6 +244,7 @@ public class DragAndDropTools {
             } else {
                 dragGroupeWidget(arbo.getListe(comp), pt);//penser a la conversion
             }
+            p.repaint();
             composantsDrague.clear();
 
         } catch (ComposantIntrouvableException ex) {
@@ -246,6 +252,17 @@ public class DragAndDropTools {
         }
         g.repaint();
         g.setLinePointOnScreen(null);
+    }
+    
+    private void deleteWidgetsFromGlassPane(Widget comp){
+        if (comp.isComplexe()) {
+            for (List<Widget> lw : ((WidgetCompose)comp).getMapZone().values()) {
+                for (Widget w : lw) {
+                    deleteWidgetsFromGlassPane(w);
+                }   
+            }
+        }
+        GlassPane.getInstance().remove(comp);
     }
 
     private static Rectangle groupeWidgetBounds(List<Widget> lst, int index) {

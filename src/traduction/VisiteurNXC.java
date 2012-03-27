@@ -291,7 +291,12 @@ public class VisiteurNXC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(Variable variable) {
-		traduction += variable.toString();
+		if (variable.isConstante()) {
+			traduction += variable.getValeur();
+		}
+		else {
+			traduction += variable.getNom();
+		}
 	}
 
 	@Override

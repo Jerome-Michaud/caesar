@@ -63,9 +63,7 @@ public class PanelWidget extends JPanel {
 		for (Widget w : this.lesWidgets) {
 			w.setDraggable(false);
 
-			int x = Variables.X_MAX_INSTRUCTION / 2 - w.getWidth() / 2;
-			
-			w.setLocation(x, y);
+			w.setLocation(15, y);
 			y += w.getHeight() + 20;
 
 			this.add(w);

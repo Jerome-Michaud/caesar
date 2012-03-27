@@ -1,6 +1,7 @@
 package Vue.Widget.modele;
 
 import Modeles.DicoVars;
+import Modeles.Erreur;
 import Modeles.TypeWidget;
 import Vue.Tools.Variables;
 import Vue.Widget.modele.zones.ChampTexte;
@@ -30,43 +31,46 @@ public class ForWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 
-		ListeDeroulante l;
-		ChampTexte f;
+		
 
 		//variable
-		l = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
-		l.setBounds(55, 3, 35, 20);
-		l.setToolTipText("variable");
-		this.getLesZonesSaisies().add(l);
+		ListeDeroulante lv = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
+		lv.setBounds(55, 3, 35, 20);
+		lv.setToolTipText("variable");
+		this.getLesZonesSaisies().add(lv);
 
 		//valeur depart
-		f = new ChampTexte();
-		f.setBounds(95, 3, 20, 20);
-		f.setText("0");
-		f.setToolTipText("valeur de départ");
-		this.getLesZonesSaisies().add(f);
+		ChampTexte fd = new ChampTexte();
+		fd.setBounds(95, 3, 20, 20);
+		fd.setText("0");
+		fd.setToolTipText("valeur de départ");
+		this.getLesZonesSaisies().add(fd);
 
 		//condition
-		l = new ListeDeroulante<Operateur>(Operateur.values());
-		l.setBounds(120, 3, 35, 20);
-		l.setToolTipText("opérateur");
-		this.getLesZonesSaisies().add(l);
+		ListeDeroulante lo = new ListeDeroulante<Operateur>(Operateur.comparaisonA());
+		lo.setBounds(120, 3, 40, 20);
+		lo.setToolTipText("opérateur");
+		this.getLesZonesSaisies().add(lo);
 
 		//valeur fin
-		f = new ChampTexte();
-		f.setBounds(160, 3, 20, 20);
-		//f.setText("0");
-		f.setToolTipText("valeur de fin");
-		this.getLesZonesSaisies().add(f);
+		ChampTexte ff = new ChampTexte();
+		ff.setBounds(165, 3, 20, 20);
+		ff.setText("5");
+		ff.setToolTipText("valeur de fin");
+		this.getLesZonesSaisies().add(ff);
 
 		//pas
-		f = new ChampTexte();
-		f.setBounds(185, 3, 20, 20);
-		f.setText("1");
-		f.setToolTipText("opération d'incrémentation");
-		this.getLesZonesSaisies().add(f);
+		ChampTexte fp = new ChampTexte();
+		fp.setBounds(190, 3, 20, 20);
+		fp.setText("1");
+		fp.setToolTipText("opération d'incrémentation");
+		this.getLesZonesSaisies().add(fp);
 
-		this.decalageXout(73);
+		this.decalageXout(78);
+		
+		setCondition(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
+		setIteration(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
+		setInitialization(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
 		
 		initListeners();
 
@@ -115,29 +119,33 @@ public class ForWidget extends ModeleWidget {
 	}
 
 	public void initListeners() {
-		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
+		for (Zone z : this.getLesZonesSaisies()) {
+			((JComponent) z).addFocusListener(new FocusAdapter() {
 
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				Variable v = DicoVars.getInstance().getLesvariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
-				String deb = ((Zone) getLesZonesSaisies().get(1)).getValeur();
-				Operateur o = Operateur.values()[Integer.parseInt(((Zone) getLesZonesSaisies().get(2)).getValeur())];
-				String fin = ((Zone) getLesZonesSaisies().get(3)).getValeur();
-				String pas = ((Zone) getLesZonesSaisies().get(4)).getValeur();
+				@Override
+				public void focusLost(FocusEvent arg0) {
+					Variable v = DicoVars.getInstance().getLesvariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
+					String deb = ((Zone) getLesZonesSaisies().get(1)).getValeur();
+					Operateur o = Operateur.comparaisonA()[Integer.parseInt(((Zone) getLesZonesSaisies().get(2)).getValeur())];
+					String fin = ((Zone) getLesZonesSaisies().get(3)).getValeur();
+					String pas = ((Zone) getLesZonesSaisies().get(4)).getValeur();
 
-				setCondition(v, o, fin);
-				setIteration(v, pas);
-				setInitialization(v, deb);
-			}
-		});
+					setCondition(v, o, fin);
+					setIteration(v, pas);
+					setInitialization(v, deb);
+				}
+			});
+		}
+		
 	}
 
-	public void setCondition(Variable v,Operateur o, String fin) {
+	public void setCondition(Variable v, Operateur o, String fin) {
 		Condition cond = null;
 		try {
-			cond = new Condition(o, new VariableConstante(TypeVariable.INT, "", fin), v);
+			cond = new Condition(o, v, new VariableConstante(TypeVariable.INT, "", fin));
+		} catch (Exception e) {
+			Erreur.afficher(e);
 		}
-		catch(Exception e) {} 
 		((InstructionFor) getElementProgramme()).setCondition(cond);
 	}
 
@@ -154,8 +162,9 @@ public class ForWidget extends ModeleWidget {
 		Operation op = null;
 		try {
 			op = new Operation(Operateur.ADDITION, v, new VariableConstante(TypeVariable.INT, "", pas));
+		} catch (Exception e) {
+			Erreur.afficher(e);
 		}
-		catch(Exception e) {}
 		aff.setMembreDroit(op);
 		((InstructionFor) getElementProgramme()).setIteration(aff);
 	}

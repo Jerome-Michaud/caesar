@@ -69,9 +69,7 @@ public abstract class Variable implements Expression{
 
 	@Override
 	public String toString() {
-		if (isConstante())
-			return valeur;
-		return getNom();
+		return this.getNom();
 	}
 	/**
 	 * Donne le nom de la variable ou sa valeur si la variable n'a pas de nom.
