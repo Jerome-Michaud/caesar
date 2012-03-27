@@ -53,5 +53,9 @@ public class RepeatWidget extends ModeleWidget {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void initListeners() {
+		
+	}
 
 }

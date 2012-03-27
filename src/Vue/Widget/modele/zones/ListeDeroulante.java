@@ -12,6 +12,10 @@ public class ListeDeroulante<T> extends JComboBox implements Zone {
 		this.lesItems = new LinkedList<T>();
 	}
 	
+	public ListeDeroulante(T[] a) {
+		super(a);
+	}
+	
 	public void setLesItems(List<T> l) {
 		this.lesItems = l;
 	}

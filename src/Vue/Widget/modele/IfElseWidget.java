@@ -44,4 +44,8 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
     public void decalageYin(int x) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+	
+	public void initListeners() {
+		
+	}
 }

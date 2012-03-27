@@ -71,4 +71,8 @@ public class IfWidget extends ModeleWidget{
 	        this.setForme(this.getForme());
 	        this.setTailleY();
 	    }
+		
+		public void initListeners() {
+		
+	}
 }

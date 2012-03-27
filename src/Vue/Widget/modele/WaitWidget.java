@@ -49,4 +49,8 @@ public class WaitWidget extends ModeleWidget {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void initListeners() {
+		
+	}
 }

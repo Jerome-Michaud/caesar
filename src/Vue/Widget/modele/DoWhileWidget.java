@@ -22,6 +22,8 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
 		this.setConditionHaute(false);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_DOWHILE);
+		
+		initListeners();
 	}
 
     @Override
@@ -43,4 +45,8 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
     public void decalageYin(int x) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+	
+	public void initListeners() {
+		
+	}
 }

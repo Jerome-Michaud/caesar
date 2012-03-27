@@ -1,12 +1,17 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import Vue.Widget.modele.zones.ChampTexte;
+import Vue.Widget.modele.zones.Zone;
 import instruction.InstructionTache;
 import java.awt.Polygon;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.Serializable;
+import javax.swing.JComponent;
 
 public class TacheWidget extends ModeleWidget implements Serializable{
-
+	private Zone temp;
 	
     public TacheWidget(){
         super();
@@ -22,6 +27,13 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.attachableBas = false;
         this.attachableHaut = false;
+		
+		ChampTexte f = new ChampTexte();
+		f.setBounds(50, 3, 80, 20);
+		f.setText("main");
+		this.getLesZonesSaisies().add(f);
+		
+		initListeners();
     }
 
     @Override
@@ -43,4 +55,23 @@ public class TacheWidget extends ModeleWidget implements Serializable{
     public void decalageYin(int x) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+	@Override
+	public void initListeners() {
+		for (Zone z : this.getLesZonesSaisies()) {
+			this.temp = z;
+			((JComponent)z).addFocusListener(new FocusAdapter() {
+
+				@Override
+				public void focusLost(FocusEvent arg0) {
+					setInstruction(temp.getValeur());
+				}
+				
+			});
+		}
+	}
+	
+	private void setInstruction(String nom) {
+		((InstructionTache)getElementProgramme()).setNom(nom);
+	}
 }
