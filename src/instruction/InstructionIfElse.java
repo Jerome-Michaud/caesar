@@ -57,6 +57,27 @@ public class InstructionIfElse extends InstructionConditionelle {
 	}
 	
 	/**
+	 * Insère une liste des instructions dans le corps de if.
+	 */
+	public void inserer(int position, List<Instruction> instListe){
+		membreIf.inserer(position, instListe);
+	}
+	
+	/**
+	 * Insère une liste des instructions dans le corps de if.
+	 */
+	public void insererDebut(List<Instruction> instListe){
+		membreIf.insererDebut(instListe);
+	}
+	
+	/**
+	 * Insère une liste des instructions dans le corps de if.
+	 */
+	public void insererFin(List<Instruction> instListe){
+		membreIf.insererFin(instListe);
+	}
+	
+	/**
 	 * Donne les instructions du corps de if.
 	 * @return la list des instructions du corps de if.
 	 */
@@ -74,6 +95,18 @@ public class InstructionIfElse extends InstructionConditionelle {
 	
 	public void insererFinElse(Instruction inst){
 		super.insererFin(inst);
+	}
+	
+	public void insererElse(int position, List<Instruction> instListe){
+		super.inserer(position,instListe);
+	}
+	
+	public void insererDebutElse(List<Instruction> instListe){
+		super.insererDebut(instListe);
+	}
+	
+	public void insererFinElse(List<Instruction> instListe){
+		super.insererFin(instListe);
 	}
 	
 	public List<Instruction> getEnfantsElse() {

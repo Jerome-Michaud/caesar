@@ -1,7 +1,10 @@
 package test.instruction;
 
+import java.util.List;
+
 import instruction.Affectation;
 import instruction.Condition;
+import instruction.Instruction;
 import instruction.InstructionAttente;
 import instruction.InstructionDeclaration;
 import instruction.InstructionIfElse;
@@ -181,7 +184,12 @@ public class TestEditionModele {
 		
 		System.out.println("Ajout/suppression debut/milieu:");
 		init();
-		i1.removeEnfants();
+		List<Instruction> l = i1.removeEnfants(7);
+		i1.inserer(2, l);
+//		i1.inserer(1, i5);//Bogue
+		l = i1.removeEnfants();
+		i1.inserer(InstructionStructure.POSITION_DEBUT_CODE, l);
+		i1.inserer(InstructionStructure.POSITION_FIN_CODE, l);
 		genererCode();
 		System.out.println();
 		
