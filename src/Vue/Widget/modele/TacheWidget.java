@@ -26,23 +26,46 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }
 
-    @Override
-    public void decalageXout(int x) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void decalageXout(int a) {
+        int i;
+        for (i = 2; i < 6; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        for (i = 18; i < 22; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
     }
 
-    @Override
-    public void decalageXin(int x) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void decalageXin(int a) {
+        int i;
+        for (i = 2; i < 6; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+        }
+        for (i = 18; i < 22; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
     }
 
-    @Override
-    public void decalageYout(int x) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void decalageYout(int b) {
+        int i;
+        for (i = 12; i < tabY.length; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
     }
 
-    @Override
-    public void decalageYin(int x) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void decalageYin(int b) {
+        int i;
+        for (i = 12; i < tabY.length; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
     }
+
 }

@@ -26,27 +26,39 @@ public class MoteurOffWidget extends ModeleWidget {
 
 	}
 
-	@Override
-	public void decalageXout(int x) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void decalageXout(int a) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
+    }
 
-	@Override
-	public void decalageXin(int x) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void decalageXin(int a) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
+    }
 
-	@Override
-	public void decalageYout(int x) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void decalageYout(int b) {
+        int i;
+        for (i = 8; i < 16; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
+    }
 
-	@Override
-	public void decalageYin(int x) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void decalageYin(int b) {
+        int i;
+        for (i = 8; i < 16; i++) {
+            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+        }
+        this.setForme(this.getForme());
+        this.setTailleY();
+    }
 }
