@@ -53,8 +53,9 @@ public class FusionTools {
                             act.setTranslate(pt);
                         }                        
                         trouve = true;
+                        break;
                     }
-                    break;
+                    
                 }
             }
             if (!trouve) {
