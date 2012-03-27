@@ -3,6 +3,7 @@ package Vue.Widget.modele;
 import Modeles.TypeWidget;
 import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.Zone;
+import Vue.Tools.Variables;
 import instruction.InstructionTache;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
@@ -34,6 +35,8 @@ public class TacheWidget extends ModeleWidget implements Serializable{
 		this.getLesZonesSaisies().add(f);
 		
 		initListeners();
+
+		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }
 
     @Override

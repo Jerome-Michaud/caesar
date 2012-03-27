@@ -1,6 +1,7 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import Vue.Tools.Variables;
 import instruction.InstructionDoWhile;
 import instruction.InstructionRepeat;
 import java.awt.Polygon;
@@ -23,6 +24,7 @@ public class RepeatWidget extends ModeleWidget {
 			this.setMessage("Repeat");
 			this.setElementProgramme(new InstructionRepeat());
 			this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+			this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 
 		}
 
