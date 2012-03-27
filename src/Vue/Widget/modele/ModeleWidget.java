@@ -34,9 +34,11 @@ public abstract class ModeleWidget implements Serializable {
         this.zonesAccroches = new LinkedList<Rectangle>();
 		this.lesZonesSaisies = new LinkedList<Zone>();
     }
+	
+	public abstract void initListeners();
 
 	public IElementProgramme getElementProgramme() {
-		return elementProgramme;
+		return this.elementProgramme;
 	}
 
 	public void setElementProgramme(IElementProgramme element) {
@@ -167,11 +169,11 @@ public abstract class ModeleWidget implements Serializable {
         return attachableHaut;
     }
 
-    public abstract void decalageXout(int x);
+    public abstract void decalageXout(int x,Rectangle r);
 
-    public abstract void decalageXin(int x);
+    public abstract void decalageXin(int x,Rectangle r);
 
-    public abstract void decalageYout(int x);
+    public abstract void decalageYout(int x,Rectangle r);
 
-    public abstract void decalageYin(int x);
+    public abstract void decalageYin(int x,Rectangle r);
 }

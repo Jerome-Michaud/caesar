@@ -6,6 +6,7 @@ import Vue.Tools.Variables;
 import instruction.InstructionWhile;
 
 import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.io.Serializable;
 
 public class WhileWidget extends ModeleWidget implements Serializable{
@@ -25,7 +26,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }
 
-    public void decalageXout(int a) {
+    public void decalageXout(int a,Rectangle r) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -37,7 +38,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setTailleX();
     }
 
-    public void decalageXin(int a) {
+    public void decalageXin(int a,Rectangle r) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
@@ -49,7 +50,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setTailleX();
     }
 
-    public void decalageYout(int b) {
+    public void decalageYout(int b,Rectangle r) {
         int i;
         for (i = 16; i < tabY.length; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
@@ -58,7 +59,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setTailleY();
     }
 
-    public void decalageYin(int b) {
+    public void decalageYin(int b,Rectangle r) {
         int i;
         for (i = 16; i < tabY.length; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
@@ -66,5 +67,9 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleY();
     }
+	
+	public void initListeners() {
+		
+	}
 
 }

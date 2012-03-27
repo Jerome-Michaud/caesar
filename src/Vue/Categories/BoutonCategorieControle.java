@@ -7,7 +7,7 @@ import java.awt.Color;
 public class BoutonCategorieControle extends BoutonCategorie {
 
 	public BoutonCategorieControle() {
-		super(new ModeleCategorie("Contrôle", Color.YELLOW));
+		super(new ModeleCategorie("Contrôle", new Color(255,153,0)));
 		
 		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetWhile());
 		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetDoWhile());
@@ -18,7 +18,7 @@ public class BoutonCategorieControle extends BoutonCategorie {
 		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetIfElse());
 		
 		for (Widget w : this.getLesWidgets()) {
-			w.getModele().setCouleur(Color.YELLOW);
+			w.getModele().setCouleur(new Color(255,153,0));
 		}
 	}
 }

@@ -1,6 +1,5 @@
 package traduction;
 
-
 import instruction.Affectation;
 import instruction.CapteurSlot;
 import instruction.ExpressionComplexe;
@@ -24,168 +23,169 @@ import instruction.Variable;
 import instruction.VariableCapteur;
 
 /**
- * Traducteur d'instructions dans le langage RobotC.
- * Cette classe implémente le design pattern Singleton.
+ * Traducteur d'instructions dans le langage RobotC. Cette classe implémente le
+ * design pattern Singleton.
+ *
  * @author Ivan MELNYCHENKO, Adrien DUROY
  */
 public class VisiteurRobotC extends VisiteurTraduction {
-	
+
 	private static VisiteurRobotC instance;
+
+	private VisiteurRobotC() {
+	}
+
+	;
 	
-	private VisiteurRobotC(){};
-	
-	public synchronized static VisiteurRobotC getInstance(){
-		if (instance==null){
+	public synchronized static VisiteurRobotC getInstance() {
+		if (instance == null) {
 			instance = new VisiteurRobotC();
 		}
 		return instance;
 	}
-	
-	private void ajouterNomMoteur(Moteur m){
-		switch (m){
-		case A:
-			traduction += "motorA";
-			break;
-		case B:
-			traduction += "motorB";
-			break;
-		case C:
-			traduction += "motorC";
-			break;
-		case D:
-			traduction += "motorD";
-			break;
+
+	private void ajouterNomMoteur(Moteur m) {
+		switch (m) {
+			case A:
+				traduction += "motorA";
+				break;
+			case B:
+				traduction += "motorB";
+				break;
+			case C:
+				traduction += "motorC";
+				break;
 		}
 	}
 	
-	private String getNomCapteur(CapteurSlot c){
-		switch (c){
-		case A:
-			return "S1";
-		case B:
-			return "S2";
-		case C:
-			return "S3";
-		case D:
-			return "S4";
+
+	private String getNomCapteur(CapteurSlot c) {
+		switch (c) {
+			case A:
+				return "S1";
+			case B:
+				return "S2";
+			case C:
+				return "S3";
+			default:
+				return null;
 		}
-		return null;
 	}
-	
+
 	@Override
 	public void visiter(InstructionIf inst) {
-		traduction+=indent();
-		traduction+="if(";
+		traduction += indent();
+		traduction += "if(";
 		inst.getCondition().accepte(this);
-		traduction+="){\n";
-		
+		traduction += "){\n";
+
 		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
+		for (Instruction is : inst.getEnfants()) {
 			is.accepte(this);
 		}
 		nivIndent--;
-		
-		traduction+=indent()+"}\n";
+
+		traduction += indent() + "}\n";
 	}
 
 	@Override
 	public void visiter(InstructionIfElse inst) {
 
 		inst.getMembreIf().accepte(this);
-		
-		
+
+
 		// Else
-		
-		traduction+=indent();
-		traduction+="else{\n";
-		
+
+		traduction += indent();
+		traduction += "else{\n";
+
 		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
+		for (Instruction is : inst.getEnfants()) {
 			is.accepte(this);
-			
+
 		}
-		
+
 		nivIndent--;
-		
-		traduction+=indent()+"}\n";
-		
+
+		traduction += indent() + "}\n";
+
 	}
 
 	@Override
 	public void visiter(InstructionWhile inst) {
 
-		traduction+=indent();
-		
-		traduction+="while(";
+		traduction += indent();
+
+		traduction += "while(";
 		inst.getCondition().accepte(this);
-		traduction+="){\n";
-		
+		traduction += "){\n";
+
 		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
+		for (Instruction is : inst.getEnfants()) {
 			is.accepte(this);
-			
+
 		}
-		
+
 		nivIndent--;
-		
-		traduction+=indent()+"}\n";
+
+		traduction += indent() + "}\n";
 	}
 
 	@Override
 	public void visiter(InstructionDoWhile inst) {
 
-		traduction+=indent();
-		
-		traduction+="do{\n";
-		
+		traduction += indent();
+
+		traduction += "do{\n";
+
 		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
+		for (Instruction is : inst.getEnfants()) {
 			is.accepte(this);
-			
+
 		}
-		
+
 		nivIndent--;
-		
-		traduction+=indent()+"} while(";
+
+		traduction += indent() + "} while(";
 		inst.getCondition().accepte(this);
-		traduction+=");\n";
+		traduction += ");\n";
 
 	}
-	
+
 	@Override
 	public void visiter(InstructionFor inst) {
-		
-		traduction+=indent()+"for (";
+
+		traduction += indent() + "for (";
 		inst.getIntialization().accepte(this);
-		traduction+="; ";
+		traduction += "; ";
 		inst.getCondition().accepte(this);
-		traduction+="; ";
+		traduction += "; ";
 		inst.getIteration().accepte(this);
-		traduction+=" ){\n";
-			
+		traduction += " ){\n";
+
 		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
+		for (Instruction is : inst.getEnfants()) {
 			is.accepte(this);
 		}
 		nivIndent--;
-		
-		traduction+=indent()+"}\n";
-		
+
+		traduction += indent() + "}\n";
+
 	}
 
 	@Override
 	public void visiter(InstructionTache inst) {
-		
-		traduction+=indent()+"task "+inst.getNom()+"(){\n";
-		
+
+		traduction += indent() + "task " + inst.getNom() + "(){\n";
+
 		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
+		for (Instruction is : inst.getEnfants()) {
 			is.accepte(this);
 		}
 		nivIndent--;
-		
-		traduction+=indent()+"}";
-		
+
+		traduction += indent() + "}";
+
 	}
 
 	@Override
@@ -199,13 +199,14 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionMoteurMov inst) {
 		traduction += indent();
-		
+
 		traduction += "motor[";
 		ajouterNomMoteur(inst.getMoteur());
 		traduction += "]=";
-		
-		if (inst.isReverse())
+
+		if (inst.isReverse()) {
 			traduction += "-";
+		}
 
 		inst.getExpression().accepte(this);
 		traduction += ";\n";
@@ -214,7 +215,7 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionMoteurOff inst) {
 		traduction += indent();
-		
+
 		traduction += "motor[";
 		ajouterNomMoteur(inst.getMoteur());
 		traduction += "]=0";
@@ -229,38 +230,40 @@ public class VisiteurRobotC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionRepeat inst) {
-		traduction+=indent()+"int variablePourFor";
-		traduction+=indent()+"for (";
-		traduction+="variablePourFor = 0 ; ";
-		traduction+="variablePourFor <"+ inst.getExpression()+ ";" ;
-		traduction+="variablePourFor++" ;
-		traduction+=" ){\n";
-			
+		traduction += indent() + "int variablePourFor";
+		traduction += indent() + "for (";
+		traduction += "variablePourFor = 0 ; ";
+		traduction += "variablePourFor <" + inst.getExpression() + ";";
+		traduction += "variablePourFor++";
+		traduction += " ){\n";
+
 		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
+		for (Instruction is : inst.getEnfants()) {
 			is.accepte(this);
 		}
 		nivIndent--;
-		
-		traduction+=indent()+"}\n";
+
+		traduction += indent() + "}\n";
 	}
 
 	@Override
 	public void visiter(Affectation affectation) {
-		if(affectation.isInstruction())	
+		if (affectation.isInstruction()) {
 			traduction += indent();
+		}
 		affectation.getMembreGauche().accepte(this);
 		traduction += " = ";
 		affectation.getMembreDroit().accepte(this);
-		if(affectation.isInstruction())
+		if (affectation.isInstruction()) {
 			super.traduction += ";\n";
+		}
 	}
 
 	@Override
 	public void visiter(ExpressionComplexe expr) {
 		traduction += "(";
 		expr.getMembreGauche().accepte(this);
-		traduction += " "+expr.getOperateur()+" ";
+		traduction += " " + expr.getOperateur() + " ";
 		expr.getMembreDroit().accepte(this);
 		traduction += ")";
 	}
@@ -273,50 +276,48 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionDeclaration instructionDeclaration) {
 		traduction += indent();
-		traduction += instructionDeclaration.getMembreGauche().getType()+" ";
+		traduction += instructionDeclaration.getMembreGauche().getType() + " ";
 		instructionDeclaration.getMembreGauche().accepte(this);
-		
+
 		traduction += ";\n";
-		
+
 	}
 
 	@Override
 	public void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation) {
 		traduction += indent();
-		traduction += instructionDeclarationAffectation.getMembreGauche().getType()+" ";
+		traduction += instructionDeclarationAffectation.getMembreGauche().getType() + " ";
 		instructionDeclarationAffectation.getMembreGauche().accepte(this);
 		traduction += " = ";
 		instructionDeclarationAffectation.getMembreDroit().accepte(this);
 		traduction += ";\n";
-	
+
 	}
 
 	@Override
 	public void visiter(InstructionDeclarationCapteur instructionDeclarationCapteur) {
 		String temp = "";
 		temp += "const tSensors";
-		switch (instructionDeclarationCapteur.getCapteur()){
-		case TOUCH : temp+="touchSensor";
+		switch (instructionDeclarationCapteur.getCapteur()) {
+			case TOUCH:
+				temp += "touchSensor";
 		}
 		temp += "= (tSensors)";
 		temp += getNomCapteur(instructionDeclarationCapteur.getCapteurSlot());
-		temp += ";\n";	
-		
+		temp += ";\n";
+
 		traduction = temp + "\n\n\n" + traduction;
-		
-	
+
+
 	}
-
-
 
 	@Override
 	public void visiter(VariableCapteur variableCapteur) {
-		traduction+="SensorValue((tSensors)";
-		traduction+=getNomCapteur(variableCapteur.getCapteurSlot());
+		traduction += "SensorValue((tSensors)";
+		traduction += getNomCapteur(variableCapteur.getCapteurSlot());
 		traduction += ")";
-		
-		
-		
-	}
 
+
+
+	}
 }

@@ -45,7 +45,7 @@ public class Widget extends JComponent {
         this.setFont(this.font);
         this.setFocusable(true);
         this.setOpaque(true);
-        this.setForme();
+        this.setForme(true);
         
         initListeners();
 		
@@ -62,7 +62,7 @@ public class Widget extends JComponent {
         GlassPane.getInstance().repaint();
     }
 
-    public void setForme() {
+    public void setForme(boolean setLocation) {
         int maxX = 0;
         for (Integer i : this.modele.getForme().xpoints) {
             maxX = Math.max(maxX, i);
@@ -73,7 +73,12 @@ public class Widget extends JComponent {
             maxY = Math.max(maxY, i);
         }
 
-        this.setBounds(0, 0, maxX + 1, maxY + 1);
+		if (setLocation) {
+			this.setBounds(0, 0, maxX + 1, maxY + 1);
+		}
+		else {
+			this.setSize(maxX + 1, maxY + 1);
+		}
         this.setPreferredSize(new Dimension(maxX, maxY));
     }
 

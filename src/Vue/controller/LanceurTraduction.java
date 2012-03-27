@@ -49,10 +49,10 @@ public class LanceurTraduction extends MouseAdapter {
     		{
     			Widget tache = racine.get(0);
     			ModeleWidget m = tache.getModele();
-    			if( m.getType() == TypeWidget.TACHE){
+    			//if( m.getType() == TypeWidget.TACHE){
     				System.out.println("Tâche trouvée : Faire traduction");
     				list.add((Instruction) m.getElementProgramme());
-    			}
+    			//}
     		}
     	}
     	return list;

@@ -104,7 +104,7 @@ public class ArborescenceTools {
 				w.initListeners();
 			}
 			if (w.isComplexe()) {
-				for (List<Widget> lst : ((WidgetCompose)w).getLesFils().values()) {
+				for (List<Widget> lst : ((WidgetCompose)w).getMapZone().values()) {
 					setArborescence(lst, initListener);
 				}
 			}
