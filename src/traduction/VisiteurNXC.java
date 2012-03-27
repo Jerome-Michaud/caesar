@@ -163,7 +163,8 @@ public class VisiteurNXC extends VisiteurTraduction {
 	public void visiter(InstructionFor inst) {		
 		traduction+=indent()+"for (";
 		Affectation affec = inst.getIntialization();
-		affec.accepte(this);
+		if(affec != null)
+			affec.accepte(this);
 		traduction+="; ";
 		ExpressionComplexe cond = inst.getCondition();
 		if(cond != null)
