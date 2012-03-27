@@ -8,6 +8,7 @@ public abstract class InstructionMoteurCmd implements Instruction {
 
 	public InstructionMoteurCmd() {
 		super();
+		moteur = null;
 	}
 
 	public InstructionMoteurCmd(Moteur moteur){
