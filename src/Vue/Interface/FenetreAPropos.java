@@ -36,6 +36,7 @@ public class FenetreAPropos extends JFrame implements MouseListener {
 		this.text.getCaret().setVisible(false);
 		this.text.setSize(tW, tH);
 		this.text.setContentType("text/html");
+		this.text.setEditable(false);
 
 		try {
 			this.text.setPage(this.getClass().getClassLoader().getResource("APropos.html"));
