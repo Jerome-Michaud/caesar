@@ -80,7 +80,7 @@ public class DragAndDropTools {
 
     public void passerSurAutrePanel(Widget wi,JPanel destination) {
         if (wi.isComplexe()) {
-            for (List<Widget> lw : ((WidgetCompose)wi).getLesFils().values()) {
+            for (List<Widget> lw : ((WidgetCompose)wi).getMapZone().values()) {
                 for (Widget w : lw) {
                     passerSurAutrePanel(w,destination);
                 }   
