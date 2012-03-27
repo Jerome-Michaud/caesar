@@ -6,6 +6,7 @@ import Vue.Widget.IWidget;
 import Vue.Widget.Widget;
 import Vue.Widget.WidgetCompose;
 import Vue.Widget.modele.ModeleWidget;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -242,6 +243,7 @@ public class DragAndDropTools {
         }
         g.repaint();
         g.setLinePointOnScreen(null);
+		comp.applyChangeModele();
     }
 
     private static Rectangle groupeWidgetBounds(List<Widget> lst, int index) {
