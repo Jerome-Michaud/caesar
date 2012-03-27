@@ -125,22 +125,38 @@ public class ForWidget extends ModeleWidget {
 				String fin = ((Zone) getLesZonesSaisies().get(3)).getValeur();
 				String pas = ((Zone) getLesZonesSaisies().get(4)).getValeur();
 
-				setCondition();
-				setIteration();
-				setInitialization();
+				setCondition(v, o, fin);
+				setIteration(v, pas);
+				setInitialization(v, deb);
 			}
 		});
 	}
 
-	public void setCondition() {
-		((InstructionFor) getElementProgramme()).setCondition(null);
+	public void setCondition(Variable v,Operateur o, String fin) {
+		Condition cond = null;
+		try {
+			cond = new Condition(o, new VariableConstante(TypeVariable.INT, "", fin), v);
+		}
+		catch(Exception e) {} 
+		((InstructionFor) getElementProgramme()).setCondition(cond);
 	}
 
-	public void setInitialization() {
-		((InstructionFor) getElementProgramme()).setIntialization(null);
+	public void setInitialization(Variable v, String deb) {
+		Affectation aff = new Affectation(false);
+		aff.setMembreGauche(v);
+		aff.setMembreDroit(new VariableConstante(TypeVariable.INT, "", deb));
+		((InstructionFor) getElementProgramme()).setIntialization(aff);
 	}
 
-	public void setIteration() {
-		((InstructionFor) getElementProgramme()).setIteration(null);
+	public void setIteration(Variable v, String pas) {
+		Affectation aff = new Affectation(false);
+		aff.setMembreGauche(v);
+		Operation op = null;
+		try {
+			op = new Operation(Operateur.ADDITION, v, new VariableConstante(TypeVariable.INT, "", pas));
+		}
+		catch(Exception e) {}
+		aff.setMembreDroit(op);
+		((InstructionFor) getElementProgramme()).setIteration(aff);
 	}
 }
