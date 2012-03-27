@@ -22,6 +22,8 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
 		this.setConditionHaute(false);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_DOWHILE);
+		
+		initListeners();
 	}
 
 	public void decalageXout(int a) {
@@ -65,5 +67,8 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleY();
     }
-
+	
+	public void initListeners() {
+		
+	}
 }

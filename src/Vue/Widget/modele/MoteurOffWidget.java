@@ -53,6 +53,7 @@ public class MoteurOffWidget extends ModeleWidget {
         this.setTailleY();
     }
 
+
     public void decalageYin(int b) {
         int i;
         for (i = 8; i < 16; i++) {
@@ -61,4 +62,11 @@ public class MoteurOffWidget extends ModeleWidget {
         this.setForme(this.getForme());
         this.setTailleY();
     }
+
+
+	
+	public void initListeners() {
+		
+	}
+
 }

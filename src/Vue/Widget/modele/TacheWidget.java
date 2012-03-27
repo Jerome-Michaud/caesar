@@ -1,13 +1,18 @@
 package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
+import Vue.Widget.modele.zones.ChampTexte;
+import Vue.Widget.modele.zones.Zone;
 import Vue.Tools.Variables;
 import instruction.InstructionTache;
 import java.awt.Polygon;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.Serializable;
+import javax.swing.JComponent;
 
 public class TacheWidget extends ModeleWidget implements Serializable{
-
+	private Zone temp;
 	
     public TacheWidget(){
         super();
@@ -23,7 +28,15 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.attachableBas = false;
         this.attachableHaut = false;
-        this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
+		
+		ChampTexte f = new ChampTexte();
+		f.setBounds(50, 3, 80, 20);
+		f.setText("main");
+		this.getLesZonesSaisies().add(f);
+		
+		initListeners();
+
+		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }
 
     public void decalageXout(int a) {
@@ -67,5 +80,25 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleY();
     }
+
+
+	@Override
+	public void initListeners() {
+		for (Zone z : this.getLesZonesSaisies()) {
+			this.temp = z;
+			((JComponent)z).addFocusListener(new FocusAdapter() {
+
+				@Override
+				public void focusLost(FocusEvent arg0) {
+					setInstruction(temp.getValeur());
+				}
+				
+			});
+		}
+	}
+	
+	private void setInstruction(String nom) {
+		((InstructionTache)getElementProgramme()).setNom(nom);
+	}
 
 }

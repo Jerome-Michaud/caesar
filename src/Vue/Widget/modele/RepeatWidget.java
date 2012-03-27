@@ -72,4 +72,11 @@ public class RepeatWidget extends ModeleWidget {
     }
 
 
+
+	
+	public void initListeners() {
+		
+	}
+
+
 }

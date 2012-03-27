@@ -34,9 +34,11 @@ public abstract class ModeleWidget implements Serializable {
         this.zonesAccroches = new LinkedList<Rectangle>();
 		this.lesZonesSaisies = new LinkedList<Zone>();
     }
+	
+	public abstract void initListeners();
 
 	public IElementProgramme getElementProgramme() {
-		return elementProgramme;
+		return this.elementProgramme;
 	}
 
 	public void setElementProgramme(IElementProgramme element) {
