@@ -38,42 +38,42 @@ public class InstructionIfElse extends InstructionConditionelle {
 	/**
 	 * Insère une instruction dans le corps de if.
 	 */
-	public void inserer(int position, Instruction inst){
+	public void insererIf(int position, Instruction inst){
 		membreIf.inserer(position,inst);
 	}
 	
 	/**
 	 * Insère une instruction dans le corps de if.
 	 */
-	public void insererDebut(Instruction inst){
+	public void insererDebutIf(Instruction inst){
 		membreIf.insererDebut(inst);
 	}
 	
 	/**
 	 * Insère une instruction dans le corps de if.
 	 */
-	public void insererFin(Instruction inst){
+	public void insererFinIf(Instruction inst){
 		membreIf.insererFin(inst);
 	}
 	
 	/**
 	 * Insère une liste des instructions dans le corps de if.
 	 */
-	public void inserer(int position, List<Instruction> instListe){
+	public void insererIf(int position, List<Instruction> instListe){
 		membreIf.inserer(position, instListe);
 	}
 	
 	/**
 	 * Insère une liste des instructions dans le corps de if.
 	 */
-	public void insererDebut(List<Instruction> instListe){
+	public void insererDebutIf(List<Instruction> instListe){
 		membreIf.insererDebut(instListe);
 	}
 	
 	/**
 	 * Insère une liste des instructions dans le corps de if.
 	 */
-	public void insererFin(List<Instruction> instListe){
+	public void insererFinIf(List<Instruction> instListe){
 		membreIf.insererFin(instListe);
 	}
 	
@@ -81,7 +81,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * Donne les instructions du corps de if.
 	 * @return la list des instructions du corps de if.
 	 */
-	public List<Instruction> getEnfants() {
+	public List<Instruction> getEnfantsIf() {
 		return membreIf.getEnfants();
 	}
 	
@@ -110,7 +110,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 	}
 	
 	public List<Instruction> getEnfantsElse() {
-		return super.getEnfants();
+		return getEnfants();
 	}	
 	
 	public String toString(){
@@ -130,8 +130,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * @param pos la position de départ.
 	 * @return la liste des enfants du membre IF a partir de rang precise
 	 */
-	@Override
-	public List<Instruction> getEnfants(int pos) {
+	public List<Instruction> getEnfantsIf(int pos) {
 		return membreIf.getEnfants(pos);
 	}
 	
@@ -140,8 +139,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * Supprime toutes les instructions du corps  du membre IF.
 	 * @return la liste des enfants du membre IF
 	 */
-	@Override
-	public List<Instruction> removeEnfants() {
+	public List<Instruction> removeEnfantsIf() {
 		return membreIf.removeEnfants();
 	}
 	
@@ -152,8 +150,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * @param pos le rang de départ
 	 * @return la liste des enfants du membre IF a partir de rang precise
 	 */
-	@Override
-	public List<Instruction> removeEnfants(int pos) {
+	public List<Instruction> removeEnfantsIf(int pos) {
 		return membreIf.removeEnfants(pos);
 	}
 	

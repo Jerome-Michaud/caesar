@@ -46,34 +46,34 @@ public class TestEditionModele {
 		i1 = new InstructionTache();
 		
 		// int i ;
-		InstructionDeclaration i2 = new InstructionDeclaration () ;
+		i2 = new InstructionDeclaration () ;
 		i1.insererFin(i2);
 		
 		VariableModifiable i = new VariableModifiable(TypeVariable.INT,"i","");
 		i2.setMembre(i);
 		
 		// i = 1 ;
-		Affectation i3 = new Affectation(true);
+		i3 = new Affectation(true);
 		i1.insererFin(i3);
 		i3.setMembreGauche(i);
 		i3.setMembreDroit(new VariableConstante(TypeVariable.INT,"","1"));
 		
 		// OnFwd(OUT_A, 75);
 		
-		InstructionMoteurMov i4 = new InstructionMoteurMov();
+		i4 = new InstructionMoteurMov();
 		i1.insererFin(i4);
 		i4.setMoteur(Moteur.A);
 		i4.setExpression(new VariableConstante(TypeVariable.INT,"","75"));
 		
 		
 		// Wait(800);
-		InstructionAttente i5 = new InstructionAttente();
+		i5 = new InstructionAttente();
 		i1.insererFin(i5);
 		i5.setExpression(new VariableConstante(TypeVariable.INT,"","800"));
 		
 		// OnRev(OUT_A, 75);
 		
-		InstructionMoteurMov i6 = new InstructionMoteurMov();
+		i6 = new InstructionMoteurMov();
 		i1.insererFin(i6);
 		i6.setMoteur(Moteur.A);
 		i6.setExpression(new VariableConstante(TypeVariable.INT,"","75"));
@@ -81,13 +81,13 @@ public class TestEditionModele {
 		
 		// Wait(360);
 		
-		InstructionAttente i7 = new InstructionAttente();
+		i7 = new InstructionAttente();
 		i1.insererFin(i7);
 		i7.setExpression(new VariableConstante(TypeVariable.INT,"","360"));
 		
 		// Off(OUT_A);
 		
-		InstructionMoteurOff i8 = new InstructionMoteurOff();
+		i8 = new InstructionMoteurOff();
 		i1.insererFin(i8);
 		i8.setMoteur(Moteur.A);
 		
@@ -97,7 +97,7 @@ public class TestEditionModele {
 		
 		
 		
-		InstructionWhile i9 = new InstructionWhile();
+		i9 = new InstructionWhile();
 		i1.insererFin(i9);
 		Condition condsup ;
 		i9.setCondition(condsup = new Condition(Operateur.INFERIEUR));
@@ -110,12 +110,12 @@ public class TestEditionModele {
 		//{
 			
 			//Wait(100);
-			InstructionAttente i10 = new InstructionAttente();
+			i10 = new InstructionAttente();
 			i9.insererFin(i10);
 			i10.setExpression(new VariableConstante(TypeVariable.INT,"","100"));
 			
 			//if ( i == 1 )
-			InstructionIfElse i11 = new InstructionIfElse();
+			i11 = new InstructionIfElse();
 			i9.insererFin(i11);
 			Condition condegal ;
 			i11.setCondition(condegal = new Condition(Operateur.EGALITE));
@@ -125,16 +125,16 @@ public class TestEditionModele {
 			
 			//{
 				//OnFwd(OUT_A, 75);
-				InstructionMoteurMov i12 = new InstructionMoteurMov();
-				i11.insererFin(i12);
+				i12 = new InstructionMoteurMov();
+				i11.insererFinIf(i12);
 				i12.setMoteur(Moteur.A);
 				i12.setExpression(new VariableConstante(TypeVariable.INT,"","75"));
 			
 				
 				//i = 2 ;
-				Affectation i13 = new Affectation(true);
+				i13 = new Affectation(true);
 				
-				i11.insererFin(i13);
+				i11.insererFinIf(i13);
 				i13.setMembreGauche(i);
 				i13.setMembreDroit(new VariableConstante(TypeVariable.INT,"","2"));
 				
@@ -143,7 +143,7 @@ public class TestEditionModele {
 			//{
 				
 				//OnRev(OUT_A, 75);
-				InstructionMoteurMov i14 = new InstructionMoteurMov();
+				i14 = new InstructionMoteurMov();
 				i11.insererFinElse(i14);
 				i14.setMoteur(Moteur.A);
 				i14.setExpression(new VariableConstante(TypeVariable.INT,"","75"));
@@ -152,7 +152,7 @@ public class TestEditionModele {
 				
 				
 				//i = 1 ;
-				Affectation i15 = new Affectation(true);
+				i15 = new Affectation(true);
 				i11.insererFinElse(i15);
 				i15.setMembreGauche(i);
 				i15.setMembreDroit(new VariableConstante(TypeVariable.INT,"","1"));
@@ -173,34 +173,79 @@ public class TestEditionModele {
 	
 	public static void main (String[] args) throws Exception{
 
-		////////////////////////////////////////		
+		//////////////////////////////////////////////////////////		
 		//Application des changements differentes a la programme//
-		////////////////////////////////////////		
+		//////////////////////////////////////////////////////////		
 			
 		System.out.println("Programme complete:");
 		init();
 		genererCode();
 		System.out.println();
 		
+		//////////////////////////////////////////////////////////
 		System.out.println("Ajout/suppression debut/milieu:");
 		init();
+		i9.removeEnfants();
+		i9.removeEnfants();
 		List<Instruction> l = i1.removeEnfants(7);
-		i1.inserer(2, l);
-//		i1.inserer(1, i5);//Bogue
-		l = i1.removeEnfants();
-		i1.inserer(InstructionStructure.POSITION_DEBUT_CODE, l);
-		i1.inserer(InstructionStructure.POSITION_FIN_CODE, l);
+
+		i1.insererFin(l);
+		i1.insererDebut(l);
+		
+		l = i1.removeEnfants(7);
+		i1.inserer(InstructionStructure.POSITION_DEBUT_CODE,l);
+		l = i1.removeEnfants(7);
+		i1.inserer(InstructionStructure.POSITION_FIN_CODE,l);
+		
+		l = i1.removeEnfants(7);
+		i1.inserer(1,l);
+
 		genererCode();
 		System.out.println();
 		
-		System.out.println("Suppression des enfants d'une tache:");
+		
+		//////////////////////////////////////////////////////////
+		System.out.println("Ajout/suppression dans if:");
 		init();
-		while (!i1.getEnfants().isEmpty()){
-			i1.removeEnfants();
-		}
+		
+		l = i11.removeEnfantsIf(1);
+		i11.insererDebutIf(l);
+		
+		l = i11.removeEnfantsIf(1);
+		i11.insererIf(InstructionStructure.POSITION_DEBUT_CODE,l);
+		l = i11.removeEnfantsIf(1);
+		i11.insererIf(InstructionStructure.POSITION_FIN_CODE,l);
+		
+		l = i11.removeEnfantsIf(1);
+		i11.insererIf(1,l);
+
+		i11.insererIf(InstructionStructure.POSITION_DEBUT_CODE, i2);
+		i11.insererIf(InstructionStructure.POSITION_FIN_CODE, i2);
 		genererCode();
 		System.out.println();
 		
+		
+		//////////////////////////////////////////////////////////
+		
+		System.out.println("Ajout/suppression dans else:");
+		init();
+		l = i11.removeEnfantsElse();
+		i11.insererFinElse(l);
+		l = i11.removeEnfantsElse();
+		i11.insererDebutElse(l);
+		
+		l = i11.removeEnfantsElse(0);
+		i11.insererElse(InstructionStructure.POSITION_DEBUT_CODE,l);
+		l = i11.removeEnfantsElse(1);
+		i11.insererElse(InstructionStructure.POSITION_FIN_CODE,l);
+		
+		l = i11.removeEnfantsElse();
+		
+		genererCode();
+		System.out.println();
+		
+		
+		//////////////////////////////////////////////////////////
 	}	
 }
 

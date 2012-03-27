@@ -109,7 +109,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 		traduction+="else{\n";
 		
 		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
+		for (Instruction is:inst.getEnfantsElse()){
 			is.accepte(this);
 		}
 		
