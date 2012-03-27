@@ -6,6 +6,7 @@ import Vue.Widget.IWidget;
 import Vue.Widget.Widget;
 import Vue.Widget.WidgetCompose;
 import Vue.Widget.modele.ModeleWidget;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -53,7 +54,6 @@ public class DragAndDropTools {
                 //recuperation et detachement des widgets dragués
                 composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));
 
-                System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\arbo size:" + composantsDrague.size());
                 //supression des widgets dans l'arborescence
                 arbo.supprimerWidgets(composantsDrague);
                 comp.defParent(null);
@@ -66,7 +66,6 @@ public class DragAndDropTools {
             }
 
         }
-        System.out.println("//////////////////////////");
         for (Widget w : composantsDrague) {
             passerSurAutrePanel(w,GlassPane.getInstance());
         }
@@ -87,7 +86,6 @@ public class DragAndDropTools {
             }
         }
         Point p = wi.getLocationOnScreen();
-        System.out.println(p);
         SwingUtilities.convertPointFromScreen(p, destination);
         wi.setLocation(p);
         wi.getParent().remove(wi);
@@ -95,16 +93,13 @@ public class DragAndDropTools {
     }
     
     public void dragGroupeWidget(List<Widget> lst, Point p) {
-        System.out.println("-----------");
         for (Widget w : lst) {
-            System.out.println("parent comp drag :" + w.getParent());
             w.setLocation(p.x, p.y);
             if(w.isComplexe()){
                 ((WidgetCompose)w).notifyChange();
             }
             p.y += w.getHeight() - ModeleWidget.OFFSET;
         }
-        System.out.println("-----------");
     }
 
     public void dragWidget(Widget comp) {
@@ -115,31 +110,30 @@ public class DragAndDropTools {
             Rectangle boundsGroup = groupeWidgetBounds(composantsDrague, 0);
 
             Rectangle recWid = new Rectangle(new Point((int) (MouseInfo.getPointerInfo().getLocation().x - ptClick.getX()), (int) (MouseInfo.getPointerInfo().getLocation().y - ptClick.getY())), new Dimension((int) boundsGroup.getWidth(), (int) boundsGroup.getHeight()));
-            System.out.println("hauteur : " + recWid.getHeight());
             recZoneUtil.setBounds(recZoneUtil.getBounds().x + 4, recZoneUtil.getBounds().y + 20, recZoneUtil.getBounds().width - 12, recZoneUtil.getBounds().height - 20 - 9);
 
             if (!recZoneUtil.contains(recWid)) {
                 boolean noX = false;
                 if (recWid.getMinX() <= recZoneUtil.getMinX()) {
-                    System.out.println("a gauche");
+                    //a gauche
                     p.x = (int) recZoneUtil.getMinX() + 4;
                     p.y -= ptClick.y;
                     noX = true;
                 } else if (recWid.getMaxX() > recZoneUtil.getMaxX()) {
-                    System.out.println("a droite");
+                    //a droite
                     p.x = (int) recZoneUtil.getMaxX() - recWid.width - 4;
                     p.y -= ptClick.y;
                     noX = true;
                 }
 
                 if (recWid.getMinY() <= recZoneUtil.getMinY()) {
-                    System.out.println("en haut");
+                    //en haut
                     p.y = (int) recZoneUtil.getMinY() + 4;
                     if (!noX) {
                         p.x -= ptClick.x;
                     }
                 } else if (recWid.getMaxY() >= recZoneUtil.getMaxY()) {
-                    System.out.println("en bas");
+                    //en bas
                     p.y = (int) recZoneUtil.getMaxY() - recWid.height - 4;
                     if (!noX) {
                         p.x -= ptClick.x;
@@ -174,7 +168,6 @@ public class DragAndDropTools {
 
         try {
             if (inter >= decal) {
-                System.out.println("Widget déposé dans le panelCodeGraphique " + inter + "-" + comp.getWidth());
                 p.add(comp);
 
                 SwingUtilities.convertPointFromScreen(pt, p);
@@ -182,10 +175,7 @@ public class DragAndDropTools {
                     pt.x += (comp.getWidth() - inter) + 3;
                 }
 
-
-
                 Widget compSurvole = a.getComp();
-                System.out.println("comp survol : " + compSurvole);
 
                 switch (a.getVal()) {
                     case 1:         //Au dessus du compSurvole
@@ -223,7 +213,6 @@ public class DragAndDropTools {
                 }
                 p.repaint();
             } else {
-                System.out.println("en dehors");
                 arbo.supprimerWidgets(composantsDrague);
                 for (Widget w : composantsDrague) {
                     g.remove(w);
@@ -254,6 +243,7 @@ public class DragAndDropTools {
         }
         g.repaint();
         g.setLinePointOnScreen(null);
+		comp.applyChangeModele();
     }
 
     private static Rectangle groupeWidgetBounds(List<Widget> lst, int index) {

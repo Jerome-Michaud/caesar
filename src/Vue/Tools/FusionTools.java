@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vue.Tools;
 
 import Vue.Interface.GlassPane;
@@ -15,10 +11,6 @@ import java.awt.Rectangle;
 import java.util.List;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author Bastien
- */
 public class FusionTools {
 
     public static final int MARGE_AIMENT = 10;
