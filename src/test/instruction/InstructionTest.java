@@ -47,6 +47,9 @@ public class InstructionTest {
 				"VariableModifiable", "");
 		DicoVars dico = DicoVars.getInstance();
 		dico.ajouter(var);
+		
+		System.out.println(dico.getLesvariables()[0].toString());
+		
 		i1 = new InstructionTache();
 		InstructionDeclaration i2 = new InstructionDeclaration();
 		InstructionDeclarationAffectation i3 = new InstructionDeclarationAffectation();
