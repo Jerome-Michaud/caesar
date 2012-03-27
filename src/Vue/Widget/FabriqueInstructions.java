@@ -20,7 +20,7 @@ public class FabriqueInstructions {
 	
 	//BOUCLES
 	public Widget creerWidgetFor(){
-    	return new Widget(new ForWidget());
+    	return new WidgetCompose(new ForWidget());
     }
 
     public Widget creerWidgetWhile(){
@@ -32,7 +32,7 @@ public class FabriqueInstructions {
     }
 	
 	public Widget creerWidgetRepeat(){
-    	return new Widget(new RepeatWidget());
+    	return new WidgetCompose(new RepeatWidget());
     }
     
     //CONDITION
