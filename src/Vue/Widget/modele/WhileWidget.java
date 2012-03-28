@@ -4,6 +4,7 @@ import Modeles.TypeWidget;
 import Vue.Tools.Variables;
 
 import instruction.InstructionWhile;
+import java.awt.Point;
 
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -20,7 +21,11 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setTabX(tX);
         this.setTabY(tY);
         this.setType(TypeWidget.WHILE);
-        this.setMessage("While");
+        
+		//this.setMessage("While");
+		message.put(new Point(5, 17), "Tant que");
+		message.put(new Point(85, 17), "faire");
+		
 		this.setElementProgramme(new InstructionWhile());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);

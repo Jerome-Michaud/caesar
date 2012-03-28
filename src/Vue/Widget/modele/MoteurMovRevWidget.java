@@ -5,6 +5,7 @@ import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.ListeDeroulante;
 import Vue.Widget.modele.zones.Zone;
 import instruction.*;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
@@ -13,8 +14,6 @@ import javax.swing.JComponent;
 
 public class MoteurMovRevWidget extends ModeleWidget {
 
-		
-	
 	public MoteurMovRevWidget() {
 		super();
 		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
@@ -26,7 +25,11 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEURMOVREV);
-		this.setMessage("Moteur           recul de");
+		
+		//this.setMessage("Moteur           recul de");
+		message.put(new Point(5, 17), "Moteur");
+		message.put(new Point(94, 17), "recul à");
+		
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
@@ -35,14 +38,14 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		this.getLesZonesSaisies().add(l);
 		
 		ChampTexte f = new ChampTexte();
-		f.setBounds(150, 3, 20, 20);
+		f.setBounds(142, 3, 40, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 		
 		setInstructionMoteur(l.getValeur());
 		setInstructionValeur(f.getValeur());
 			
-		this.decalageXout(-2);
+		this.decalageXout(11);
 
 		initListeners();
 	}

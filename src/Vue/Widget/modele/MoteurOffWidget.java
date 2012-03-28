@@ -5,6 +5,7 @@ import Vue.Widget.modele.zones.ListeDeroulante;
 import Vue.Widget.modele.zones.Zone;
 import instruction.InstructionMoteurOff;
 import instruction.Moteur;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -26,7 +27,11 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEUROFF);
-		this.setMessage("Moteur           off");
+		
+		//this.setMessage("Moteur           off");
+		message.put(new Point(5, 17), "Moteur");
+		message.put(new Point(95, 17), "off");
+		
 		this.setElementProgramme(new InstructionMoteurOff());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 

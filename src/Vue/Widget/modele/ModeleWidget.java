@@ -4,9 +4,11 @@ import Modeles.TypeWidget;
 import Vue.Widget.modele.zones.Zone;
 import instruction.IElementProgramme;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,10 +18,10 @@ public abstract class ModeleWidget implements Serializable {
     protected int[] tabX, tabY;
     private Color couleur;
     private Polygon forme;
-    private String message;
+    protected HashMap<Point, String> message;
     private TypeWidget type;
     private int tailleX, tailleY;
-    private boolean conditionHaute;
+    private boolean conditionHaute = true;
     protected boolean attachableHaut, attachableBas;
     protected List<Rectangle> zonesAccroches;
 	private IElementProgramme elementProgramme;
@@ -31,6 +33,7 @@ public abstract class ModeleWidget implements Serializable {
         this.attachableHaut = true;
         this.zonesAccroches = new LinkedList<Rectangle>();
 		this.lesZonesSaisies = new LinkedList<Zone>();
+		this.message = new HashMap<Point, String>();
     }
 	
 	public abstract void initListeners();
@@ -143,14 +146,6 @@ public abstract class ModeleWidget implements Serializable {
         this.forme = forme;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public TypeWidget getType() {
         return type;
     }
@@ -174,4 +169,8 @@ public abstract class ModeleWidget implements Serializable {
     public abstract void decalageYout(int x,Rectangle r);
 
     public abstract void decalageYin(int x,Rectangle r);
+
+	public HashMap<Point, String> getMessage() {
+		return this.message;
+	}
 }

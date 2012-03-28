@@ -31,11 +31,14 @@ public class Widget extends JComponent {
         g2d.setColor(Color.BLACK);
         g2d.drawPolygon(this.modele.getForme());
         g2d.setColor(Color.WHITE);
-        if (this.modele.isConditionHaute()) {
-            g2d.drawString(this.modele.getMessage(), 5, 17);
-        } else {
-            g2d.drawString(this.modele.getMessage(), 5, this.getHeight() - 14);
-        }
+        for (Point p : this.modele.getMessage().keySet()) {
+			if (this.modele.isConditionHaute()) {
+				g2d.drawString(this.modele.getMessage().get(p), p.x, p.y);
+			}
+			else {
+				g2d.drawString(this.modele.getMessage().get(p), p.x, this.getHeight() - p.y);
+			}
+		}
         super.paintComponent(g);
     }
 

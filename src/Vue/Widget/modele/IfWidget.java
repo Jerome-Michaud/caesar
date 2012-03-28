@@ -2,9 +2,8 @@ package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
 import Vue.Tools.Variables;
-import instruction.InstructionDoWhile;
 import instruction.InstructionIf;
-import instruction.Variable;
+import java.awt.Point;
 
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -24,7 +23,10 @@ public class IfWidget extends ModeleWidget{
 			this.setTailleX();
 			this.setTailleY();
 			this.setType(TypeWidget.IF);
-			this.setMessage("If");
+			
+			//this.setMessage("If");
+			message.put(new Point(5, 17), "Si");
+			
 			this.setElementProgramme(new InstructionIf());
 			this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 			this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);

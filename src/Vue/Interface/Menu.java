@@ -89,7 +89,8 @@ public class Menu extends JMenuBar implements ActionListener {
 			if ( name != "Linux" && name != "mac" ){
 				
 					try {
-						Process p = Runtime.getRuntime().exec(Variables.CHEMIN_ACCES_NBC+"\\nbc.exe -r -usb code.nxc");
+						String line = "cmd.exe /C start " + Variables.CHEMIN_ACCES_NBC + "\\lancer.bat";
+						Process p = Runtime.getRuntime().exec(line);
 						InputStream in = (InputStream) p.getInputStream(); 
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block

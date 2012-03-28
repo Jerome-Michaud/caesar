@@ -8,6 +8,7 @@ import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.ListeDeroulante;
 import Vue.Widget.modele.zones.Zone;
 import instruction.*;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
@@ -26,7 +27,13 @@ public class ForWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.FOR);
-		this.setMessage("For");
+		
+		//this.setMessage("For");
+		message.put(new Point(5, 17), "Pour");
+		message.put(new Point(94, 17), "de");
+		message.put(new Point(140, 17), "tant qu'");
+		message.put(new Point(265, 17), "pas :");
+		
 		this.setElementProgramme(new InstructionFor());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
@@ -36,37 +43,32 @@ public class ForWidget extends ModeleWidget {
 		//variable
 		ListeDeroulante lv = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
 		lv.setBounds(55, 3, 35, 20);
-		lv.setToolTipText("variable");
 		this.getLesZonesSaisies().add(lv);
 
 		//valeur depart
 		ChampTexte fd = new ChampTexte();
-		fd.setBounds(95, 3, 20, 20);
+		fd.setBounds(115, 3, 20, 20);
 		fd.setText("0");
-		fd.setToolTipText("valeur de départ");
 		this.getLesZonesSaisies().add(fd);
 
 		//condition
 		ListeDeroulante lo = new ListeDeroulante<Operateur>(Operateur.comparaisonA());
-		lo.setBounds(120, 3, 40, 20);
-		lo.setToolTipText("opérateur");
+		lo.setBounds(190, 3, 40, 20);
 		this.getLesZonesSaisies().add(lo);
 
 		//valeur fin
 		ChampTexte ff = new ChampTexte();
-		ff.setBounds(165, 3, 20, 20);
+		ff.setBounds(235, 3, 20, 20);
 		ff.setText("5");
-		ff.setToolTipText("valeur de fin");
 		this.getLesZonesSaisies().add(ff);
 
 		//pas
 		ChampTexte fp = new ChampTexte();
-		fp.setBounds(190, 3, 20, 20);
+		fp.setBounds(300, 3, 20, 20);
 		fp.setText("1");
-		fp.setToolTipText("opération d'incrémentation");
 		this.getLesZonesSaisies().add(fp);
 
-		this.decalageXout(78);
+		this.decalageXout(188);
 		
 		setCondition(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
 		setIteration(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
