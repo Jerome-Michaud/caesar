@@ -5,6 +5,7 @@ import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.ListeDeroulante;
 import Vue.Widget.modele.zones.Zone;
 import instruction.*;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
@@ -24,7 +25,11 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEURMOVFWD);
-		this.setMessage("Moteur           avance de");
+		
+		//this.setMessage("Moteur           avance de");
+		message.put(new Point(5, 17), "Moteur");
+		message.put(new Point(94, 17), "avance à");
+		
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 

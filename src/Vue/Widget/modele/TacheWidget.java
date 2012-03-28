@@ -5,6 +5,7 @@ import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.Zone;
 import Vue.Tools.Variables;
 import instruction.InstructionTache;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
@@ -23,7 +24,10 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setTabX(tX);
         this.setTabY(tY);
         this.setType(TypeWidget.TACHE);
-        this.setMessage("Tâche");
+		
+        //this.setMessage("Tâche");
+		message.put(new Point(5, 17), "Tâche");
+		
 		this.setElementProgramme(new InstructionTache());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.attachableBas = false;

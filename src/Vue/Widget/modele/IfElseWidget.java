@@ -3,6 +3,7 @@ package Vue.Widget.modele;
 import Modeles.TypeWidget;
 import Vue.Tools.Variables;
 import instruction.InstructionIfElse;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
@@ -18,7 +19,11 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setType(TypeWidget.IFELSE);
-		this.setMessage("If");
+		
+		//this.setMessage("If");
+		message.put(new Point(5, 17), "Si");
+		message.put(new Point(5, 52), "sinon");
+		
 		this.setElementProgramme(new InstructionIfElse());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
@@ -68,7 +73,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
 	        this.setForme(this.getForme());
 	        this.setTailleY();
          }
-         else if(r.getY()==Variables.ZONE_ACCROCHE_ELSE.getY()){
+		 else {// if(r.getY()==Variables.ZONE_ACCROCHE_ELSE.getY()){
         	 int i;
  	        for (i = 32; i < tabY.length; i++) {
  	            this.getForme().ypoints[i] = this.getForme().ypoints[i] + x;
@@ -89,7 +94,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
 	        this.setForme(this.getForme());
 	        this.setTailleY();
          }
-         else if(r.getY()==Variables.ZONE_ACCROCHE_ELSE.getY()){
+		else {// if(r.getY()==Variables.ZONE_ACCROCHE_ELSE.getY()){
         	 int i;
  	        for (i = 32; i < tabY.length; i++) {
  	            this.getForme().ypoints[i] = this.getForme().ypoints[i] - x;

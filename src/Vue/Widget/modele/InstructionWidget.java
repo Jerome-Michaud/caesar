@@ -2,6 +2,7 @@ package Vue.Widget.modele;
 
 import Modeles.TypeWidget;
 import instruction.Instruction;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
@@ -17,7 +18,10 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setType(TypeWidget.INSTRUCTION);
-		this.setMessage(msg);
+		
+		//this.setMessage(msg);
+		message.put(new Point(5, 17), msg);
+		
 		this.setElementProgramme(i);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 	}

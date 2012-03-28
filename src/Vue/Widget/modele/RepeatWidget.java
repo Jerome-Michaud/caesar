@@ -5,6 +5,7 @@ import Vue.Tools.Variables;
 import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.Zone;
 import instruction.*;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -24,18 +25,23 @@ public class RepeatWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.REPEAT);
-		this.setMessage("Repeat");
+		
+		//this.setMessage("Repeat");
+		message.put(new Point(5, 17), "Répéter");
+		message.put(new Point(85, 17), "fois");
+		
 		this.setElementProgramme(new InstructionRepeat());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 
 
 		ChampTexte f = new ChampTexte();
-		f.setBounds(80, 3, 20, 20);
+		f.setBounds(60, 3, 20, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 
 		this.setInstructionValeur(f.getText());
+		
 		
 		initListeners();
 	}
