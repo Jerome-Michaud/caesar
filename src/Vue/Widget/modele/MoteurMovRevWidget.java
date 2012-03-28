@@ -38,14 +38,14 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		this.getLesZonesSaisies().add(l);
 		
 		ChampTexte f = new ChampTexte();
-		f.setBounds(150, 3, 20, 20);
+		f.setBounds(142, 3, 40, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 		
 		setInstructionMoteur(l.getValeur());
 		setInstructionValeur(f.getValeur());
 			
-		this.decalageXout(-2);
+		this.decalageXout(11);
 
 		initListeners();
 	}

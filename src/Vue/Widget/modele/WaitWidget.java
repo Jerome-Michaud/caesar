@@ -27,20 +27,20 @@ public class WaitWidget extends ModeleWidget {
 		
 		//this.setMessage("Wait");
 		message.put(new Point(5, 17), "Attendre");
-		message.put(new Point(88, 17), "millisecondes");
+		message.put(new Point(108, 17), "ms");
 		
 		this.setElementProgramme(new InstructionAttente());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ChampTexte f = new ChampTexte();
-		f.setBounds(65, 3, 20, 20);
+		f.setBounds(65, 3, 40, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 
 		this.setInstructionValeur(f.getText());
 		
-		this.decalageXout(40);
-
+		this.decalageXout(-5);
+		
 		initListeners();
 	}
 
