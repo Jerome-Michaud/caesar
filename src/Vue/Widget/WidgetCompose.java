@@ -23,12 +23,12 @@ public class WidgetCompose extends Widget implements IWidget {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
+        /*Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.GREEN);
         for (Rectangle r : this.mapZone.keySet()) {
             g2d.drawRect(r.x, r.y, r.width, r.height);
 
-        }
+        }*/
 
     }
 
