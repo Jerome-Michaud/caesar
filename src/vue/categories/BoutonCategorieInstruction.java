@@ -1,7 +1,8 @@
 package vue.categories;
 
 import vue.Interface.PanelWidget;
-import vue.Widget.Widget;
+import vue.widget.Widget;
+
 import java.awt.Color;
 
 public class BoutonCategorieInstruction extends BoutonCategorie {

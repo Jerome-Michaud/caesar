@@ -1,6 +1,7 @@
 package vue.categories;
 
-import vue.Widget.Widget;
+import vue.widget.Widget;
+
 import java.awt.Color;
 
 public class BoutonCategorieTemps extends BoutonCategorie {

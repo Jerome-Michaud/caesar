@@ -1,11 +1,11 @@
-package vue.Widget;
+package vue.widget;
 
 import vue.Interface.GlassPane;
 import vue.Interface.PanelCodeGraphique;
 import vue.Interface.PanelWidget;
-import vue.Widget.modele.ModeleWidget;
-import vue.Widget.modele.zones.Zone;
 import vue.tools.DragAndDropTools;
+import vue.widget.modele.ModeleWidget;
+import vue.widget.modele.zones.Zone;
 import instruction.IElementProgramme;
 import java.awt.*;
 import java.awt.event.MouseAdapter;

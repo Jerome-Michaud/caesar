@@ -1,4 +1,4 @@
-package vue.Widget.modele;
+package vue.widget.modele;
 
 import vue.tools.Variables;
 import instruction.InstructionIfElse;

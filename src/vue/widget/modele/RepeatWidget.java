@@ -1,8 +1,8 @@
-package vue.Widget.modele;
+package vue.widget.modele;
 
-import vue.Widget.modele.zones.ChampTexte;
-import vue.Widget.modele.zones.Zone;
 import vue.tools.Variables;
+import vue.widget.modele.zones.ChampTexte;
+import vue.widget.modele.zones.Zone;
 import instruction.*;
 import java.awt.Point;
 import java.awt.Polygon;

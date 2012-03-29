@@ -4,7 +4,8 @@
  */
 package vue.tools;
 
-import vue.Widget.Widget;
+import vue.widget.Widget;
+
 import java.awt.Point;
 import java.awt.Rectangle;
 

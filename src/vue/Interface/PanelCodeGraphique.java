@@ -1,6 +1,7 @@
 package vue.Interface;
 
-import vue.Widget.IWidget;
+import vue.widget.IWidget;
+
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;

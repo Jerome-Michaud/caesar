@@ -2,7 +2,8 @@ package vue.tools;
 
 import vue.Interface.Fenetre;
 import vue.Interface.PanelCodeGraphique;
-import vue.Widget.Widget;
+import vue.widget.Widget;
+
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;

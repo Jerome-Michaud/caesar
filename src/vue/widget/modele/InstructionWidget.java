@@ -1,4 +1,4 @@
-package vue.Widget.modele;
+package vue.widget.modele;
 
 import instruction.Instruction;
 import java.awt.Point;

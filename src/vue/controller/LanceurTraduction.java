@@ -12,10 +12,10 @@ import modeles.TypeWidget;
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
 import vue.Interface.PanelCodeConsole;
-import vue.Widget.Widget;
-import vue.Widget.modele.ModeleWidget;
-import vue.Widget.modele.TacheWidget;
 import vue.tools.ArborescenceTools;
+import vue.widget.Widget;
+import vue.widget.modele.ModeleWidget;
+import vue.widget.modele.TacheWidget;
 
 public class LanceurTraduction extends MouseAdapter {
 

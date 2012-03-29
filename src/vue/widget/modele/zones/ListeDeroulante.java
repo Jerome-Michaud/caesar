@@ -1,4 +1,4 @@
-package vue.Widget.modele.zones;
+package vue.widget.modele.zones;
 
 import java.util.LinkedList;
 import java.util.List;

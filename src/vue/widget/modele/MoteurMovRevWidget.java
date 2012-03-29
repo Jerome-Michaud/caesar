@@ -1,50 +1,53 @@
-package vue.Widget.modele;
+package vue.widget.modele;
 
-import vue.Widget.modele.zones.ListeDeroulante;
-import vue.Widget.modele.zones.Zone;
-import instruction.InstructionMoteurOff;
-import instruction.Moteur;
+import vue.widget.modele.zones.ChampTexte;
+import vue.widget.modele.zones.ListeDeroulante;
+import vue.widget.modele.zones.Zone;
+import instruction.*;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 
 import modeles.TypeWidget;
 
-import java.awt.Rectangle;
+public class MoteurMovRevWidget extends ModeleWidget {
 
-public class MoteurOffWidget extends ModeleWidget {
-
-	
-	
-	public MoteurOffWidget() {
+	public MoteurMovRevWidget() {
 		super();
-		int tX[] = {0, 5, 30, 35, 45, 50, 130, 135, 135, 130, 50, 45, 35, 30, 5, 0};
+		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
-		
+
 		
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.MOTEUROFF);
+		this.setType(TypeWidget.MOTEURMOVREV);
 		
-		//this.setMessage("Moteur           off");
+		//this.setMessage("Moteur           recul de");
 		message.put(new Point(5, 17), "Moteur");
-		message.put(new Point(95, 17), "off");
+		message.put(new Point(94, 17), "recul à");
 		
-		this.setElementProgramme(new InstructionMoteurOff());
+		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
 		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 		
+		ChampTexte f = new ChampTexte();
+		f.setBounds(142, 3, 40, 20);
+		f.setText("0");
+		this.getLesZonesSaisies().add(f);
+		
 		setInstructionMoteur(l.getValeur());
-		
-		this.decalageXout(-20);
-		
+		setInstructionValeur(f.getValeur());
+			
+		this.decalageXout(11);
+
 		initListeners();
 	}
 
@@ -76,7 +79,7 @@ public class MoteurOffWidget extends ModeleWidget {
     }
 
 
-    public void decalageYin(int b,Rectangle r) {
+    public void decalageYin(int b, Rectangle r) {
         int i;
         for (i = 8; i < 16; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
@@ -85,9 +88,6 @@ public class MoteurOffWidget extends ModeleWidget {
         this.setTailleY();
     }
 
-
-	
-	
 	
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
@@ -97,10 +97,23 @@ public class MoteurOffWidget extends ModeleWidget {
 				setInstructionMoteur(((Zone) getLesZonesSaisies().get(0)).getValeur());
 			}
 		});
+		((JComponent) this.getLesZonesSaisies().get(1)).addFocusListener(new FocusAdapter() {
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				setInstructionValeur(((Zone) getLesZonesSaisies().get(1)).getValeur());
+			}
+		});
 	}
 	
 	private void setInstructionMoteur(String nom) {
-		((InstructionMoteurOff) getElementProgramme()).setMoteur(Moteur.values()[Integer.parseInt(nom)]);
+		((InstructionMoteurMov) getElementProgramme()).setMoteur(Moteur.values()[Integer.parseInt(nom)]);
+	}
+
+	private void setInstructionValeur(String nom) {
+		((InstructionMoteurMov) getElementProgramme()).setReverse(true);
+		((InstructionMoteurMov) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
+		System.out.println(((InstructionMoteurMov) getElementProgramme()));
 	}
 
 }

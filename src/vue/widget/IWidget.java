@@ -1,4 +1,4 @@
-package vue.Widget;
+package vue.widget;
 
 import java.io.Serializable;
 

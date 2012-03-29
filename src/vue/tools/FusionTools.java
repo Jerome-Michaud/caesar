@@ -2,8 +2,9 @@ package vue.tools;
 
 import vue.Interface.GlassPane;
 import vue.Interface.PanelCodeGraphique;
-import vue.Widget.Widget;
-import vue.Widget.WidgetCompose;
+import vue.widget.Widget;
+import vue.widget.WidgetCompose;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;

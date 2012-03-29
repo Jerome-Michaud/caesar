@@ -1,8 +1,8 @@
-package vue.Widget.modele;
+package vue.widget.modele;
 
-import vue.Widget.modele.zones.ChampTexte;
-import vue.Widget.modele.zones.ListeDeroulante;
-import vue.Widget.modele.zones.Zone;
+import vue.widget.modele.zones.ChampTexte;
+import vue.widget.modele.zones.ListeDeroulante;
+import vue.widget.modele.zones.Zone;
 import instruction.*;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -13,23 +13,23 @@ import javax.swing.JComponent;
 
 import modeles.TypeWidget;
 
-public class MoteurMovRevWidget extends ModeleWidget {
+public class MoteurMovFwdWidget extends ModeleWidget {
 
-	public MoteurMovRevWidget() {
+	public MoteurMovFwdWidget() {
 		super();
 		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
 
-		
+
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.MOTEURMOVREV);
+		this.setType(TypeWidget.MOTEURMOVFWD);
 		
-		//this.setMessage("Moteur           recul de");
+		//this.setMessage("Moteur           avance de");
 		message.put(new Point(5, 17), "Moteur");
-		message.put(new Point(94, 17), "recul à");
+		message.put(new Point(94, 17), "avance à");
 		
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
@@ -47,9 +47,10 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		setInstructionValeur(f.getValeur());
 			
 		this.decalageXout(11);
-
+		
 		initListeners();
 	}
+
 
 	public void decalageXout(int a) {
         int i;
@@ -69,7 +70,7 @@ public class MoteurMovRevWidget extends ModeleWidget {
         this.setTailleX();
     }
 
-    public void decalageYout(int b,Rectangle r) {
+    public void decalageYout(int b, Rectangle r) {
         int i;
         for (i = 8; i < 16; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
@@ -77,7 +78,6 @@ public class MoteurMovRevWidget extends ModeleWidget {
         this.setForme(this.getForme());
         this.setTailleY();
     }
-
 
     public void decalageYin(int b, Rectangle r) {
         int i;
@@ -88,7 +88,8 @@ public class MoteurMovRevWidget extends ModeleWidget {
         this.setTailleY();
     }
 
-	
+
+
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
 
@@ -111,7 +112,7 @@ public class MoteurMovRevWidget extends ModeleWidget {
 	}
 
 	private void setInstructionValeur(String nom) {
-		((InstructionMoteurMov) getElementProgramme()).setReverse(true);
+		((InstructionMoteurMov) getElementProgramme()).setReverse(false);
 		((InstructionMoteurMov) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
 		System.out.println(((InstructionMoteurMov) getElementProgramme()));
 	}

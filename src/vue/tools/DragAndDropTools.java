@@ -1,10 +1,11 @@
 package vue.tools;
 
 import vue.Interface.*;
-import vue.Widget.IWidget;
-import vue.Widget.Widget;
-import vue.Widget.WidgetCompose;
-import vue.Widget.modele.ModeleWidget;
+import vue.widget.IWidget;
+import vue.widget.Widget;
+import vue.widget.WidgetCompose;
+import vue.widget.modele.ModeleWidget;
+
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;

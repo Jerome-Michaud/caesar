@@ -1,6 +1,6 @@
-package vue.Widget.modele;
+package vue.widget.modele;
 
-import vue.Widget.modele.zones.Zone;
+import vue.widget.modele.zones.Zone;
 import instruction.IElementProgramme;
 import java.awt.Color;
 import java.awt.Point;

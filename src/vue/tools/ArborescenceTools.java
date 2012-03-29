@@ -1,8 +1,9 @@
 package vue.tools;
 
 import vue.Interface.PanelCodeGraphique;
-import vue.Widget.WidgetCompose;
-import vue.Widget.Widget;
+import vue.widget.Widget;
+import vue.widget.WidgetCompose;
+
 import java.util.LinkedList;
 import java.util.List;
 
