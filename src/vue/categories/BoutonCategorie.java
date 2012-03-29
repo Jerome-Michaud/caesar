@@ -1,4 +1,4 @@
-package vue.Categories;
+package vue.categories;
 
 import vue.Interface.PanelTypeWidget;
 import vue.Interface.PanelWidget;

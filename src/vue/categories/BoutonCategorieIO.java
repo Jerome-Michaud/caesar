@@ -1,4 +1,4 @@
-package vue.Categories;
+package vue.categories;
 
 import vue.Widget.Widget;
 import java.awt.Color;
