@@ -1,6 +1,5 @@
 package Vue.Widget.modele;
 
-import Modeles.TypeWidget;
 import Vue.Widget.modele.zones.Zone;
 import instruction.IElementProgramme;
 import java.awt.Color;
@@ -11,6 +10,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+
+import modeles.TypeWidget;
 
 public abstract class ModeleWidget implements Serializable {
 

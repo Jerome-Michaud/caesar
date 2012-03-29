@@ -1,4 +1,4 @@
-package Modeles;
+package modeles;
 
 public enum TypeWidget {
 

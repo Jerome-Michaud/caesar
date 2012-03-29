@@ -1,4 +1,4 @@
-package Modeles;
+package modeles;
 
 import instruction.TypeVariable;
 import instruction.Variable;

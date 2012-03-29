@@ -1,12 +1,13 @@
 package Vue.Widget.modele;
 
-import Modeles.TypeWidget;
 import Vue.Tools.Variables;
 import instruction.InstructionIf;
 import java.awt.Point;
 
 import java.awt.Polygon;
 import java.awt.Rectangle;
+
+import modeles.TypeWidget;
 
 public class IfWidget extends ModeleWidget{
 

@@ -1,6 +1,5 @@
 package Vue.Widget.modele;
 
-import Modeles.TypeWidget;
 import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.Zone;
 import Vue.Tools.Variables;
@@ -12,6 +11,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.Serializable;
 import javax.swing.JComponent;
+
+import modeles.TypeWidget;
 
 public class TacheWidget extends ModeleWidget implements Serializable{
 	

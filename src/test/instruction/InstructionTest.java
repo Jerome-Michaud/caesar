@@ -11,13 +11,14 @@ import static instruction.TypeVariable.BOOL;
 import static instruction.TypeVariable.FLOAT;
 import static instruction.TypeVariable.INT;
 
+import modeles.DicoVars;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Modeles.DicoVars;
 
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;

@@ -7,9 +7,10 @@ import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 
+import modeles.TypeWidget;
+
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
-import Modeles.TypeWidget;
 import Vue.Interface.PanelCodeConsole;
 import Vue.Tools.ArborescenceTools;
 import Vue.Widget.Widget;

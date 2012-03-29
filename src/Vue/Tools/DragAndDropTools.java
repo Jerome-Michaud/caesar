@@ -1,6 +1,5 @@
 package Vue.Tools;
 
-import Modeles.Erreur;
 import Vue.Interface.*;
 import Vue.Widget.IWidget;
 import Vue.Widget.Widget;
@@ -14,6 +13,8 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import modeles.Erreur;
 
 public class DragAndDropTools {
 

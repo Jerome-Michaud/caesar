@@ -1,8 +1,5 @@
 package Vue.Widget.modele;
 
-import Modeles.DicoVars;
-import Modeles.Erreur;
-import Modeles.TypeWidget;
 import Vue.Tools.Variables;
 import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.ListeDeroulante;
@@ -14,6 +11,10 @@ import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
+
+import modeles.DicoVars;
+import modeles.Erreur;
+import modeles.TypeWidget;
 
 public class ForWidget extends ModeleWidget {
 

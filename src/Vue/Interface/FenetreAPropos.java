@@ -1,6 +1,5 @@
 package Vue.Interface;
 
-import Modeles.Erreur;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Point;
@@ -15,6 +14,8 @@ import javax.swing.JTextPane;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+
+import modeles.Erreur;
 
 public class FenetreAPropos extends JFrame implements MouseListener {
 

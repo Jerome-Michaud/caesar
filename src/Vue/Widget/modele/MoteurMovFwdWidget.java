@@ -1,6 +1,5 @@
 package Vue.Widget.modele;
 
-import Modeles.TypeWidget;
 import Vue.Widget.modele.zones.ChampTexte;
 import Vue.Widget.modele.zones.ListeDeroulante;
 import Vue.Widget.modele.zones.Zone;
@@ -11,6 +10,8 @@ import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
+
+import modeles.TypeWidget;
 
 public class MoteurMovFwdWidget extends ModeleWidget {
 

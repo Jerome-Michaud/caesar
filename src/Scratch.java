@@ -1,8 +1,9 @@
 
-import Modeles.Erreur;
 import Vue.Interface.Fenetre;
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import javax.swing.UIManager;
+
+import modeles.Erreur;
 
 public class Scratch {
 

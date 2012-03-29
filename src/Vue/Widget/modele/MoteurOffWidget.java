@@ -1,6 +1,5 @@
 package Vue.Widget.modele;
 
-import Modeles.TypeWidget;
 import Vue.Widget.modele.zones.ListeDeroulante;
 import Vue.Widget.modele.zones.Zone;
 import instruction.InstructionMoteurOff;
@@ -10,6 +9,9 @@ import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
+
+import modeles.TypeWidget;
+
 import java.awt.Rectangle;
 
 public class MoteurOffWidget extends ModeleWidget {

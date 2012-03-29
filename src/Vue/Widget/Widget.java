@@ -1,6 +1,5 @@
 package Vue.Widget;
 
-import Modeles.TypeWidget;
 import Vue.Interface.GlassPane;
 import Vue.Interface.PanelCodeGraphique;
 import Vue.Interface.PanelWidget;
@@ -12,6 +11,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
+
+import modeles.TypeWidget;
 
 public class Widget extends JComponent {
 

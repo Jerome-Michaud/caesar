@@ -1,11 +1,12 @@
 package Vue.Widget.modele;
 
-import Modeles.TypeWidget;
 import instruction.Instruction;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
+
+import modeles.TypeWidget;
 
 public class InstructionWidget extends ModeleWidget implements Serializable{
 

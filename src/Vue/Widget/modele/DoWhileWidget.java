@@ -1,12 +1,13 @@
 package Vue.Widget.modele;
 
-import Modeles.TypeWidget;
 import Vue.Tools.Variables;
 import instruction.InstructionDoWhile;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
+
+import modeles.TypeWidget;
 
 public class DoWhileWidget extends ModeleWidget implements Serializable{
 

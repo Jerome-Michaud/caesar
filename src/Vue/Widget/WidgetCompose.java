@@ -1,6 +1,5 @@
 package Vue.Widget;
 
-import Modeles.TypeWidget;
 import Vue.Tools.ComposantIntrouvableException;
 import Vue.Tools.Variables;
 import Vue.Widget.modele.ModeleWidget;
@@ -15,6 +14,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import modeles.TypeWidget;
 
 public class WidgetCompose extends Widget implements IWidget {
 

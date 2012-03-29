@@ -1,6 +1,5 @@
 package Vue.Tools;
 
-import Modeles.Erreur;
 import Vue.Interface.Fenetre;
 import Vue.Interface.PanelCodeGraphique;
 import Vue.Widget.Widget;
@@ -10,6 +9,8 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import modeles.Erreur;
 
 public class SavingTools {
 
