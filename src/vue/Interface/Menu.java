@@ -1,6 +1,5 @@
 package vue.Interface;
 
-import Ressources.ResourceTools;
 import vue.tools.ArborescenceTools;
 import vue.tools.CreationCodeTools;
 import vue.tools.SavingTools;
@@ -16,6 +15,7 @@ import javax.swing.*;
 
 import org.omg.CORBA.portable.InputStream;
 
+import ressources.ResourceTools;
 import traduction.VisiteurNXC;
 import traduction.VisiteurRobotC;
 

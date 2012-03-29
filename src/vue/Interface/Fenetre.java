@@ -1,12 +1,13 @@
 package vue.Interface;
 
-import Ressources.ResourceTools;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
+
+import ressources.ResourceTools;
 
 public class Fenetre extends JFrame {
     

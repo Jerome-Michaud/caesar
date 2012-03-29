@@ -1,4 +1,4 @@
-package Ressources;
+package ressources;
 
 import java.awt.Image;
 import java.io.IOException;
