@@ -1,6 +1,6 @@
 package vue.Widget.modele;
 
-import vue.Tools.Variables;
+import vue.tools.Variables;
 import instruction.InstructionIfElse;
 import java.awt.Point;
 import java.awt.Polygon;

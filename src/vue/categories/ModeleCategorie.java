@@ -1,6 +1,7 @@
 package vue.categories;
 
-import vue.Tools.Variables;
+import vue.tools.Variables;
+
 import java.awt.Color;
 import java.awt.Polygon;
 

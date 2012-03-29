@@ -1,7 +1,7 @@
 package vue.Interface;
 
-import vue.Tools.Variables;
 import vue.categories.*;
+import vue.tools.Variables;
 
 import java.awt.Dimension;
 import java.util.LinkedList;

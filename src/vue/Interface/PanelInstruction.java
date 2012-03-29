@@ -1,6 +1,7 @@
 package vue.Interface;
 
-import vue.Tools.Variables;
+import vue.tools.Variables;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;

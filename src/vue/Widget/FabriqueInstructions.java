@@ -1,9 +1,9 @@
 package vue.Widget;
 
 
-import vue.Tools.NonClonableException;
 
 import vue.Widget.modele.*;
+import vue.tools.NonClonableException;
 
 public class FabriqueInstructions {
 

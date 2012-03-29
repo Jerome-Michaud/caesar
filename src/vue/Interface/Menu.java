@@ -1,11 +1,12 @@
 package vue.Interface;
 
 import Ressources.ResourceTools;
-import vue.Tools.ArborescenceTools;
-import vue.Tools.CreationCodeTools;
-import vue.Tools.SavingTools;
-import vue.Tools.Variables;
 import vue.Widget.Widget;
+import vue.tools.ArborescenceTools;
+import vue.tools.CreationCodeTools;
+import vue.tools.SavingTools;
+import vue.tools.Variables;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;

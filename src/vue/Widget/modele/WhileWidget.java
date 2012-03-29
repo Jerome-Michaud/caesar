@@ -1,6 +1,6 @@
 package vue.Widget.modele;
 
-import vue.Tools.Variables;
+import vue.tools.Variables;
 
 import instruction.InstructionWhile;
 import java.awt.Point;

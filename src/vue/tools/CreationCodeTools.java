@@ -1,4 +1,4 @@
-package vue.Tools;
+package vue.tools;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

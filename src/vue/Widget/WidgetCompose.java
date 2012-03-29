@@ -1,8 +1,8 @@
 package vue.Widget;
 
-import vue.Tools.ComposantIntrouvableException;
-import vue.Tools.Variables;
 import vue.Widget.modele.ModeleWidget;
+import vue.tools.ComposantIntrouvableException;
+import vue.tools.Variables;
 import instruction.Instruction;
 import instruction.InstructionIfElse;
 import instruction.InstructionStructure;

@@ -1,4 +1,4 @@
-package vue.Tools;
+package vue.tools;
 
 import vue.Interface.Fenetre;
 import vue.Interface.PanelCodeGraphique;

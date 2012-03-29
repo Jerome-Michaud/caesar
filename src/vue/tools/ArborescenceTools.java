@@ -1,4 +1,4 @@
-package vue.Tools;
+package vue.tools;
 
 import vue.Interface.PanelCodeGraphique;
 import vue.Widget.WidgetCompose;
