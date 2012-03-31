@@ -302,7 +302,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionDeclaration instructionDeclaration) {
 		traduction += indent();
-		VariableModifiable var = instructionDeclaration.getMembreGauche();
+		Variable var = instructionDeclaration.getMembre();
 		if(var != null)
 		{
 			traduction += var.getType()+" ";
@@ -314,7 +314,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation) {
 		traduction += indent();
-		VariableModifiable var = instructionDeclarationAffectation.getMembreGauche();
+		Variable var = instructionDeclarationAffectation.getMembre();
 		if(var != null)
 		{
 			traduction += var.getType()+" ";
@@ -334,9 +334,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 		case TOUCH : traduction+="SetSensorTouch(";
 		}
 		ajouterNomCapteur(instructionDeclarationCapteur.getCapteurSlot());
-		traduction += ");\n";	
-		
-	
+		traduction += ");\n";
 	}
 
 	@Override
