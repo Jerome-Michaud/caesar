@@ -1,8 +1,8 @@
 package instruction;
 
 /**
- * Cette énumération correspond aux différents capteurs
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ * Cette énumération correspond aux différents capteurs.
+ * @author Bastien AUBRY, Ivan MELNYCHENKO
  */
 public enum Capteur {
 	TOUCH;

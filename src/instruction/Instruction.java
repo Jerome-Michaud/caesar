@@ -4,7 +4,7 @@ import traduction.VisiteurTraduction;
 
 /**
  * Une instruction est une commande exécutable d'un programme.
- * Les instructions peuvent être divisées en plusieurs catégorie et
+ * Les instructions peuvent être divisées en plusieurs catégories et
  * peuvent être traduites dans différents langages.
  * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
  */

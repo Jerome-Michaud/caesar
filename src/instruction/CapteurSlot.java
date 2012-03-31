@@ -1,8 +1,8 @@
 package instruction;
 
 /**
- * Cette énumération correspond aux différents slot capteurs
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ * Cette énumération correspond aux différents slot capteurs.
+ * @author Bastien AUBRY
  */
 public enum CapteurSlot {
 	A,B,C,D;

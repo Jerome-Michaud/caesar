@@ -1,8 +1,8 @@
 package instruction;
 
 /**
- * Cette énumération regroupe les différentes catégories d'instructions possibles
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ * Cette énumération regroupe les différentes catégories d'instructions possibles.
+ * @author Bastien AUBRY, Ivan MELNYCHENKO
  */
 public enum Categorie {
 	MOTEUR,CONTROL,OPERATEURS,VARIABLES,CAPTEURS,TEMPS,AFFICHAGE;
