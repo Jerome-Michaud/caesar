@@ -2,7 +2,11 @@ package instruction;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Concept abstrait regroupant toutes les instructions composées d'un corps contenant d'autres instruction.
+ * Design pattern Composite.
+ * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ */
 public abstract class InstructionStructure implements Instruction {
 	
 	public static final int POSITION_DEBUT_CODE = 0;
