@@ -203,10 +203,7 @@ public class InstructionTest {
 				new VariableModifiable(TypeVariable.INT, "r", "10"));
 		InstructionAttente iWait = new InstructionAttente(
 				new VariableModifiable(TypeVariable.INT, "g", "10"));
-		InstructionFor iFor = new InstructionFor(new Condition(
-				Operateur.SUPERIEUR, new VariableConstante(TypeVariable.FLOAT,
-						"a", "5.4"), new VariableModifiable(TypeVariable.FLOAT,
-						"a", "5.4")), new Affectation(new VariableModifiable(
+		InstructionFor iFor = new InstructionFor(new Affectation(new VariableModifiable(
 				TypeVariable.FLOAT, "i", "1"), new VariableConstante(
 				TypeVariable.FLOAT, "i", "1"),false), cond, new Affectation(
 				new VariableModifiable(TypeVariable.FLOAT, "i", "1"),
