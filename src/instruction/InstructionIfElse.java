@@ -3,30 +3,52 @@ package instruction;
 import java.util.List;
 
 import traduction.VisiteurTraduction;
-
+/**
+ * Instruction conditionnelle if-else.
+ * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ */
 public class InstructionIfElse extends InstructionConditionelle {
 
-	private InstructionIf membreIf = new InstructionIf();
+	private InstructionIf membreIf;
 	
+	/**
+	 * Crée une instruction if-else non initialisée.
+	 * Ses membres ont pour valeur null.
+	 */
 	public InstructionIfElse() {
-		super(null);
+		this(null);
 	}
 	
+	/**
+	 * Crée une instruction if-else.
+	 * @param cond la condition du if
+	 */
 	public InstructionIfElse(Condition cond) {
 		super(null);
-		getMembreIf().setCondition(cond);
+		membreIf = new InstructionIf(cond);
 	}
 	
-	public Condition getCondition(){
+	/**
+	 * Accède à la condition du if.
+	 * @return la condition.
+	 */
+	public Condition getCondition() {
 		return getMembreIf().getCondition();
 	}
-	
-	public void setCondition(Condition cond){
+
+	/**
+	 * Modifie la condition du if.
+	 * @param cond la condition
+	 */
+	public void setCondition(Condition cond) {
 		getMembreIf().setCondition(cond);
 	}
-		
-	public InstructionIf getMembreIf()
-	{
+
+	/**
+	 * Accède à la partie if du if-else.
+	 * @return l'instruction if utilisée.
+	 */
+	public InstructionIf getMembreIf() {
 		return membreIf;
 	}
 	
@@ -85,34 +107,65 @@ public class InstructionIfElse extends InstructionConditionelle {
 		return membreIf.getEnfants();
 	}
 	
+	/**
+	 * Insère une instruction dans le else à une position donnée.
+	 * @param position la position où insérer
+	 * @param inst l'instruction à insérer
+	 */
 	public void insererElse(int position, Instruction inst){
 		super.inserer(position,inst);
 	}
 	
+	/**
+	 * Insère une instruction au début du else.
+	 * @param inst l'instruction à insérer
+	 */
 	public void insererDebutElse(Instruction inst){
 		super.insererDebut(inst);
 	}
 	
+	/**
+	 * Insère une instruction à la fin du else.
+	 * @param inst l'instruction à insérer
+	 */
 	public void insererFinElse(Instruction inst){
 		super.insererFin(inst);
 	}
 	
+	/**
+	 * Insère des instructions dans le else à une position donnée.
+	 * @param position la position où inserer
+	 * @param instListe la liste des instruction à insérer
+	 */
 	public void insererElse(int position, List<Instruction> instListe){
 		super.inserer(position,instListe);
 	}
 	
+	/**
+	 * Insère des instructions au début du else.
+	 * @param instListe la liste des instruction à insérer
+	 */
 	public void insererDebutElse(List<Instruction> instListe){
 		super.insererDebut(instListe);
 	}
 	
+	/**
+	 * Insère des instructions à la fin du else.
+	 * @param instListe la liste des instruction à insérer
+	 */
 	public void insererFinElse(List<Instruction> instListe){
 		super.insererFin(instListe);
 	}
 	
+	/**
+	 * Accède à la liste des instructions contenue dans le else.
+	 * @return la liste des instructions.
+	 */
 	public List<Instruction> getEnfantsElse() {
 		return getEnfants();
 	}	
 	
+	@Override
 	public String toString(){
 		String res = "";
 		res+= getMembreIf().toString();
@@ -126,9 +179,9 @@ public class InstructionIfElse extends InstructionConditionelle {
 	
 	/**
 	 * TODO changer
-	 * Donne la liste des instrauctions du corps du membre IF à partir d'une certaine position.
-	 * @param pos la position de départ.
-	 * @return la liste des enfants du membre IF a partir de rang precise
+	 * Donne la liste des instructions du corps du if à partir d'une certaine position.
+	 * @param pos la position de départ
+	 * @return la liste des enfants du if à partir d'un rang précis.
 	 */
 	public List<Instruction> getEnfantsIf(int pos) {
 		return membreIf.getEnfants(pos);
@@ -148,7 +201,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * Supprime toutes les instructions du corps
 	 *  du membre IF à partir d'un certain rang.
 	 * @param pos le rang de départ
-	 * @return la liste des enfants du membre IF a partir de rang precise
+	 * @return la liste des enfants du membre IF à partir d'un rang precis
 	 */
 	public List<Instruction> removeEnfantsIf(int pos) {
 		return membreIf.removeEnfants(pos);
@@ -156,7 +209,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 	
 	/**
 	 * TODO changer
-	 * Donne la liste des instrauctions du corps du membre ELSE à partir d'une certaine position.
+	 * Donne la liste des instructions du corps du membre ELSE à partir d'une certaine position.
 	 * @param pos la position de départ.
 	 * @return la liste des enfants du membre ELSE a partir de rang precise
 	 */
@@ -178,7 +231,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * Supprime toutes les instructions du corps
 	 * du membre ELSE à partir d'un certain rang.
 	 * @param pos le rang de départ
-	 * @return la liste des enfants du membre ELSE a partir de rang precise
+	 * @return la liste des enfants du membre ELSE à partir d'un rang précis.
 	 */
 	public List<Instruction> removeEnfantsElse(int pos) {
 		return super.removeEnfants(pos);
