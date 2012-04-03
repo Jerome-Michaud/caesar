@@ -1,16 +1,24 @@
 package instruction;
 
 import traduction.VisiteurTraduction;
-
+/**
+ * Structure conditionnelle if.
+ * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ */
 public class InstructionIf extends InstructionConditionelle {
-
+	/**
+	 * Crée une instruction if sans condition. La condition a pour valeur null.
+	 */
 	public InstructionIf(){
 		super(null);
 	}
 	
+	/**
+	 * Créé une instruction if.
+	 * @param cond la condition
+	 */
 	public InstructionIf(Condition cond) {
 		super(cond);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -18,8 +26,7 @@ public class InstructionIf extends InstructionConditionelle {
 		visiteur.visiter(this);
 	}
 	
-	
-
+	@Override
 	public String toString(){
 		String res = "";
 		res+="if("+getCondition()+"){\n";
@@ -29,5 +36,4 @@ public class InstructionIf extends InstructionConditionelle {
 		res+="\t}\n";
 		return res;
 	}
-	
 }
