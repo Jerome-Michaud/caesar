@@ -15,6 +15,7 @@ import instruction.InstructionIf;
 import instruction.InstructionIfElse;
 import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
+import instruction.InstructionMoteurRotate;
 import instruction.InstructionRepeat;
 import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
@@ -343,6 +344,12 @@ public class VisiteurNXC extends VisiteurTraduction {
 		ajouterNomCapteur(variableCapteur.getCapteurSlot());
 		traduction+=")";
 		
+		
+	}
+
+	@Override
+	public void visiter(InstructionMoteurRotate instructionMoteurRotate) {
+		// TODO Auto-generated method stub
 		
 	}
 

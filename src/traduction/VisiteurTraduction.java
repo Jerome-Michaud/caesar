@@ -12,6 +12,7 @@ import instruction.InstructionIf;
 import instruction.InstructionIfElse;
 import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
+import instruction.InstructionMoteurRotate;
 import instruction.InstructionRepeat;
 import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
@@ -178,4 +179,10 @@ public abstract class VisiteurTraduction {
 	 * @param variableCapteur
 	 */
 	public abstract void visiter ( VariableCapteur variableCapteur);
+
+	/**
+	 * Traduit une instruction de rotation d'un moteur.
+	 * @param instructionMoteurRotate l'instruction à traduire
+	 */
+	public abstract void visiter(InstructionMoteurRotate instructionMoteurRotate);
 }
