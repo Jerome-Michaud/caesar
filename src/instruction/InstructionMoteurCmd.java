@@ -23,6 +23,11 @@ public abstract class InstructionMoteurCmd implements Instruction {
 		this.moteur = moteur;
 	}
 	
+	@Override
+	public Categorie getCategorie() {
+		return Categorie.MOTEUR;
+	}
+	
 	/**
 	 * Modifie le moteur concerné par l'instruction.
 	 * @param moteur le nouveau moteur
