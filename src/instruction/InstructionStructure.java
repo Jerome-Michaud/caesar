@@ -13,15 +13,27 @@ public abstract class InstructionStructure implements Instruction {
 	public static final int POSITION_FIN_CODE = Integer.MAX_VALUE;
 	
 	private List<Instruction> enfants ;
-		
+
+	/**
+	 * Crée une instruction "structure" vide.
+	 */
 	public InstructionStructure() {
 		enfants = new ArrayList<Instruction>();
 	}
 	
+	/**
+	 * Crée une instruction "structure" avec des instruction dans le corps.
+	 * @param enfants la liste des instruction du corps
+	 */
 	public InstructionStructure(List<Instruction> enfants) {
 		this.enfants = enfants;
 	}
 
+	/**
+	 * Ajoute une instruction dans le corps.
+	 * @param position la position où insérer l'instruction
+	 * @param inst l'instruction
+	 */
 	public void inserer(int position, Instruction inst){
 		if (position==POSITION_FIN_CODE)
 			insererFin(inst);
@@ -29,14 +41,27 @@ public abstract class InstructionStructure implements Instruction {
 			enfants.add(position,inst);
 	}
 	
+	/**
+	 * Ajoute une instruction au début du corps.
+	 * @param inst l'instruction
+	 */
 	public void insererDebut(Instruction inst){
 		enfants.add(POSITION_DEBUT_CODE, inst);	
 	}
 	
+	/**
+	 * Ajoute une instruction à la fin du corps.
+	 * @param inst l'instruction
+	 */
 	public void insererFin(Instruction inst){
 		enfants.add(inst);	
 	}
 	
+	/**
+	 * Ajoute plusieurs instructions dans le corps.
+	 * @param position la position où insérer les instructions
+	 * @param instListe la liste des instructions
+	 */
 	public void inserer(int position, List<Instruction> instListe){
 		if (position==POSITION_FIN_CODE)
 			enfants.addAll(instListe);
@@ -44,10 +69,18 @@ public abstract class InstructionStructure implements Instruction {
 			enfants.addAll(position,instListe);
 	}
 	
+	/**
+	 * Ajoute plusieurs instructions au début du corps.
+	 * @param instListe les instructions
+	 */
 	public void insererDebut(List<Instruction> instListe){
 		enfants.addAll(POSITION_DEBUT_CODE, instListe);	
 	}
 	
+	/**
+	 * Ajoute plusieurs instructions à la fin du corps.
+	 * @param instListe les instructions
+	 */
 	public void insererFin(List<Instruction> instListe){
 		enfants.addAll(instListe);	
 	}
