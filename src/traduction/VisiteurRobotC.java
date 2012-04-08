@@ -34,9 +34,8 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	private static VisiteurRobotC instance;
 
 	private VisiteurRobotC() {
+		super();
 	}
-
-	;
 	
 	public synchronized static VisiteurRobotC getInstance() {
 		if (instance == null) {

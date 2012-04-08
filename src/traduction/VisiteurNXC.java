@@ -22,7 +22,6 @@ import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Moteur;
 import instruction.Variable;
-import instruction.VariableModifiable;
 import instruction.VariableCapteur;
 
 /**
@@ -34,7 +33,9 @@ public class VisiteurNXC extends VisiteurTraduction {
 	
 	private static VisiteurNXC instance;
 	
-	private VisiteurNXC(){};
+	private VisiteurNXC() {
+		super();
+	}
 	
 	/**
 	 * Donne l'instance unique de VisiteurNXC.
