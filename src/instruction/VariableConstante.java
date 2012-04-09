@@ -1,5 +1,8 @@
 package instruction;
-
+/**
+ * Variable constante.
+ * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ */
 public class VariableConstante extends Variable{
 
 	/**

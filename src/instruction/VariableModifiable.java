@@ -2,7 +2,7 @@ package instruction;
 
 /**
  * Variable modifiable.
- * @author Adrien, Ivan, Bastien
+ * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
  */
 public class VariableModifiable extends Variable{
 
