@@ -1,15 +1,23 @@
 package instruction;
 
 import traduction.VisiteurTraduction;
-
+/**
+ * Concept abstrait regroupant les variables.
+ * @author Adrien DUROY, Bastien AUBRY
+ */
 public abstract class Variable implements Expression{
 	
 	private TypeVariable type;
 	private String nom;
 	private String valeur;
 	
-	public Variable() {
-		super();
+	/**
+	 * Crée une variable sans valeur.
+	 * @param type Le type de la variable
+	 * @param nom Le nom de la variable
+	 */
+	public Variable(TypeVariable type, String nom) {
+		this(type, nom, "");
 	}
 
 	/**
