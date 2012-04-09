@@ -15,8 +15,11 @@ import vue.Interface.PanelCodeConsole;
 import vue.tools.ArborescenceTools;
 import vue.widget.Widget;
 import vue.widget.modele.ModeleWidget;
-import vue.widget.modele.TacheWidget;
-
+/**
+ * Cette classe s'occupe de lancer la traduction du programme construit avec les widgets.
+ * Utilise le design pattern Singleton.
+ * @author Adrien DUROY
+ */
 public class LanceurTraduction extends MouseAdapter {
 
 	private VisiteurTraduction traducteur;
@@ -26,6 +29,10 @@ public class LanceurTraduction extends MouseAdapter {
 		traducteur = VisiteurNXC.getInstance();
 	}
 	
+	/**
+	 * Donne l'instance unique de la classe.
+	 * @return l'instance.
+	 */
 	public synchronized static LanceurTraduction getInstance() {
 		if(instance == null)
 			instance = new LanceurTraduction();
@@ -42,6 +49,11 @@ public class LanceurTraduction extends MouseAdapter {
 		PanelCodeConsole.getInstance().setText(traducteur.getTraduction());
 	}
 	
+	/**
+	 * Trouve les tâches parmis les widgets.
+	 * La traduction est effectuée à partir de celles-ci.
+	 * @return les instructions à traduire.
+	 */
 	private List<Instruction> trouveTaches() {
 		List<Instruction> list = new LinkedList<Instruction>();
     	for(List<Widget> racine : ArborescenceTools.getInstance().getArborescence())
@@ -59,6 +71,11 @@ public class LanceurTraduction extends MouseAdapter {
     	return list;
     }
 	
+	/**
+	 * Modifie le traducteur utilisé.
+	 * Si n'a jamais été appelé c'est le traducteur vers NXC qui est utilisé.
+	 * @param v le nouveau traducteur
+	 */
 	public void setTraducteur(VisiteurTraduction v) {
 		traducteur = v;
 	}
