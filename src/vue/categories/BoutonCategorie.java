@@ -3,18 +3,24 @@ package vue.categories;
 import vue.Interface.PanelTypeWidget;
 import vue.Interface.PanelWidget;
 import vue.widget.Widget;
-
 import java.awt.*;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JComponent;
-
+/**
+ * Classe permattant de définir les différents comportements des boutons catégories.
+ * 
+ * @since 1.0
+ * @version 1.0
+ */
 public abstract class BoutonCategorie extends JComponent {
 
 	private List<Widget> lesWidgets;
+	/**
+	 * @see Vue.Categories.ModeleCategorie
+	 */
 	private ModeleCategorie modele;
 	private Font font;
 	private Color fond;
@@ -74,8 +80,12 @@ public abstract class BoutonCategorie extends JComponent {
 			}
 		});
 	}
-
-	public void setForme() {
+	/**
+	 * Calcul les bounds du composant en fonction du polygone gris.
+	 * 
+	 * @since 1.0
+	 */
+	private void setForme() {
 		int maxX = 0;
 		for (Integer i : this.modele.getFormeTexte().xpoints) {
 			maxX = Math.max(maxX, i);
@@ -89,14 +99,22 @@ public abstract class BoutonCategorie extends JComponent {
 		this.setBounds(0, 0, maxX + 1, maxY + 1);
 		this.setPreferredSize(new Dimension(maxX, maxY));
 	}
-
+	/**
+	 * Comportement lorsque la souris est sur le bouton.
+	 * 
+	 * @since 1.0
+	 */
 	private void sourisEntree() {
 		if (!active) {
 			this.fond = new Color(141, 141, 141);
 			this.repaint();
 		}
 	}
-
+	/**
+	 * Comportement lorsque la souris sortdu bouton.
+	 * 
+	 * @since 1.0
+	 */
 	private void sourisSortie() {
 		if (!active) {
 			this.fond = Color.LIGHT_GRAY;
@@ -104,6 +122,11 @@ public abstract class BoutonCategorie extends JComponent {
 		}
 	}
 
+	/**
+	 * Comportement lors du relachement du clic.
+	 * 
+	 * @since 1.0
+	 */
 	private void sourisRelachee() {
 		this.setLocation(this.defaultPos);
 		
@@ -121,7 +144,11 @@ public abstract class BoutonCategorie extends JComponent {
 			PanelWidget.getInstance().setLesWidgets(this.lesWidgets);
 		}
 	}
-
+	/**
+	 * Comportement lors du clic avec la souris.
+	 * 
+	 * @since 1.0
+	 */
 	private void sourisAppuyee() {
 		this.defaultPos = new Point(this.getLocation());
 		Point p = this.getLocation();
@@ -129,16 +156,28 @@ public abstract class BoutonCategorie extends JComponent {
 		p.y++;
 		this.setLocation(p);
 	}
-
+	/**
+	 * @since 1.0
+	 * 
+	 * @param b true si la catégorie est active.
+	 */
 	public void setActive(boolean b) {
 		this.active = b;
 	}
-
+	/**
+	 * @since 1.0
+	 * 
+	 * @return La liste des widgets de cette catégorie.
+	 */
 	public List<Widget> getLesWidgets() {
 		return this.lesWidgets;
 	}
-
-	protected void ajouterUnWidget(Widget w) {
-		this.lesWidgets.add(w);
+	/**
+	 * @since 1.0
+	 * 
+	 * @param widget Le widget à ajouter dans la catégorie.
+	 */
+	protected void ajouterUnWidget(Widget widget) {
+		this.lesWidgets.add(widget);
 	}
 }
