@@ -1,7 +1,7 @@
 package vue.tools;
 
-import vue.Interface.Fenetre;
-import vue.Interface.PanelCodeGraphique;
+import vue.ginterface.Fenetre;
+import vue.ginterface.PanelCodeGraphique;
 import vue.widget.Widget;
 
 import java.io.*;

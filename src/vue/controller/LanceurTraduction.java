@@ -11,7 +11,7 @@ import modeles.TypeWidget;
 
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
-import vue.Interface.PanelCodeConsole;
+import vue.ginterface.PanelCodeConsole;
 import vue.tools.ArborescenceTools;
 import vue.widget.Widget;
 import vue.widget.modele.ModeleWidget;

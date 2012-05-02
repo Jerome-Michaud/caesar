@@ -1,6 +1,6 @@
 package vue.tools;
 
-import vue.Interface.*;
+import vue.ginterface.*;
 import vue.widget.IWidget;
 import vue.widget.Widget;
 import vue.widget.WidgetCompose;

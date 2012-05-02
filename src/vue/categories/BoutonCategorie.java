@@ -1,7 +1,7 @@
 package vue.categories;
 
-import vue.Interface.PanelTypeWidget;
-import vue.Interface.PanelWidget;
+import vue.ginterface.PanelTypeWidget;
+import vue.ginterface.PanelWidget;
 import vue.widget.Widget;
 import java.awt.*;
 import java.awt.event.MouseAdapter;

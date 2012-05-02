@@ -1,6 +1,6 @@
 package vue.tools;
 
-import vue.Interface.PanelCodeGraphique;
+import vue.ginterface.PanelCodeGraphique;
 import vue.widget.Widget;
 import vue.widget.WidgetCompose;
 

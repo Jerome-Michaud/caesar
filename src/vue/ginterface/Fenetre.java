@@ -1,4 +1,4 @@
-package vue.Interface;
+package vue.ginterface;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

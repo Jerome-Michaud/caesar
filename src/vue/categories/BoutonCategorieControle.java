@@ -1,6 +1,6 @@
 package vue.categories;
 
-import vue.Interface.PanelWidget;
+import vue.ginterface.PanelWidget;
 import vue.widget.Widget;
 
 import java.awt.Color;

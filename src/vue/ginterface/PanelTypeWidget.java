@@ -1,4 +1,4 @@
-package vue.Interface;
+package vue.ginterface;
 
 import vue.categories.*;
 import vue.tools.Variables;

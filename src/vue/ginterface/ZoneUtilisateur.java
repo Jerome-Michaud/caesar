@@ -1,4 +1,4 @@
-package vue.Interface;
+package vue.ginterface;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;

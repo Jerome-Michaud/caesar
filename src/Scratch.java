@@ -1,5 +1,5 @@
 
-import vue.Interface.Fenetre;
+import vue.ginterface.Fenetre;
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import javax.swing.UIManager;
 
