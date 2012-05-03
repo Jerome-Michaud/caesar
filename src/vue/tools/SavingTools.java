@@ -12,33 +12,43 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import modeles.Erreur;
-
+/**
+ * Classe regroupant différents outils destinés à la sauvegarde et au chargement
+ * de projets JScratch
+ *
+ * @author Andru Bastien
+ */
 public class SavingTools {
-
+	/**
+	 * Permet à l'utilisateur de sauvegarder son projet au format JScratch où il veut.
+	 */
     public static void save() {
         JFileChooser choix = new JFileChooser();
         choix.addChoosableFileFilter(new JScratchFileFilter());
         choix.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int retour = choix.showSaveDialog(Fenetre.getInstance());
-        if (retour == JFileChooser.APPROVE_OPTION) {
+        if(retour == JFileChooser.APPROVE_OPTION) {
             String path = choix.getSelectedFile().getAbsolutePath();
-            if (!path.endsWith(JScratchFileFilter.ext)) {
-                path += "." + JScratchFileFilter.ext;
+            if(!path.endsWith(JScratchFileFilter.EXT)) {
+                path += "." + JScratchFileFilter.EXT;
             }
             boolean ok = true;
-            if (new File(path).exists()) {
+            if(new File(path).exists()) {
                 int opt = JOptionPane.showConfirmDialog(choix, new JLabel("<html>Un fichier portant ce nom existe déjà.<br><br>"
                         + "Souhaitez vous l'écraser?"), "Fichier existant", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (opt != JOptionPane.YES_OPTION) {
                     ok = false;
                 }
             }
-            if (ok){
+            if(ok) {
                 serializeArborescence(path);
             }
         }
     }
-
+    /**
+     * Permet la sérialisation de l'arborescence des widgets.
+     * @param path Le chemin où sauvegarder le l'arborescence
+     */
     private static void serializeArborescence(String path) {
         try {
             FileOutputStream fichier = new FileOutputStream(path);
@@ -50,7 +60,9 @@ public class SavingTools {
             Erreur.afficher(e);
         }
     }
-
+    /**
+     * Permet à l'utilisateur de charger un projet JScratch précédemment sauvegardé.
+     */
     public static void load() {
         JFileChooser choix = new JFileChooser();
         choix.addChoosableFileFilter(new JScratchFileFilter());
@@ -61,7 +73,11 @@ public class SavingTools {
         }
         PanelCodeGraphique.getInstance().repaint();
     }
-
+    /**
+     * Desérialise une arborescence précédemment sauvegardée.
+     *
+     * @param path Le chemin d'accès à l'arborscence sauvegardée
+     */
     private static void deserializeArborescence(String path) {
         try {
             FileInputStream fichier = new FileInputStream(path);

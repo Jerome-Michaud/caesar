@@ -16,20 +16,41 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import modeles.Erreur;
-
+/**
+ * Classe implémentant le design pattern Singleton permettant de gérer le système de drag & drop.
+ *
+ * @author Bastien Andru - Quentin Gosselin
+ */
 public class DragAndDropTools {
-
+	/**
+	 * List de widgets contenant les widgets en cours de draggage.
+	 */
 	private List<Widget> composantsDrague;
+	/**
+	 * Instance statique unique de la Classe.
+	 */
 	private static DragAndDropTools instance = new DragAndDropTools();
-
+	/**
+	 * Constructeur privé de la classe initialisant la liste de widgets à vide.
+	 */
 	private DragAndDropTools() {
 		this.composantsDrague = new LinkedList<Widget>();
 	}
-
+	/**
+	 * Méthode statique permettant de récupérer l'instance unique de la classe.
+	 * @return L'instance unique de la classe.
+	 */
 	public static DragAndDropTools getInstance() {
 		return instance;
 	}
-
+	/**
+	 * Méthode appelée lors du clic sur un widget. Cette méthode va déplacer le
+	 * widget cliqué ainsi que tous les widgets attachés sous lui sur
+	 * le GlassPane et enlever ces derniers du PanelCodeGraphique.
+	 *
+	 * @param comp Le composant cliqué
+	 * @param ptClick Le point où a eu lieu le clique au sein du widget
+	 */
 	public void clickWidget(Widget comp, Point ptClick) {
 		comp.setPtClick(ptClick);
 
@@ -87,7 +108,14 @@ public class DragAndDropTools {
 
 		dragGroupeWidget(composantsDrague, p);
 	}
-
+	/**
+	 * Méthode récursive permettant de passer un widget d'un conteneur à l'autre.
+	 * Si le widget passé en paramètre est de type complexe, cette
+	 * méthode est de nouveau appelée pour chacun de ses fils.
+	 *
+	 * @param wi Le widget à passer sur un autre Panel
+	 * @param destination Le panel de destination du widget
+	 */
 	public void passerSurAutrePanel(Widget wi, JPanel destination) {
 		if (wi.isComplexe()) {
 			for (List<Widget> lw : ((WidgetCompose) wi).getMapZone().values()) {
@@ -102,7 +130,12 @@ public class DragAndDropTools {
 		wi.getParent().remove(wi);
 		destination.add(wi);
 	}
-
+	/**
+	 * Méthode permettant de déplacer un groupe de widgets selon un point particulier.
+	 *
+	 * @param lst La liste de widgets à déplacer
+	 * @param p Le Point à partir duquel il faut placer le widget
+	 */
 	public void dragGroupeWidget(List<Widget> lst, Point p) {
 		for (Widget w : lst) {
 			w.setLocation(p.x, p.y);
@@ -115,7 +148,12 @@ public class DragAndDropTools {
 			p.y += w.getHeight() - ModeleWidget.OFFSET;
 		}
 	}
-
+	/**
+	 * Méthode appelée lors du drag de la souris. Cette méthode va déplacer sur
+	 * le GlassPane les widgets en cours de drag.
+	 *
+	 * @param comp Le widget où a eu lieu l'événement souris d'origine
+	 */
 	public void dragWidget(Widget comp) {
 		if (comp.isDraggable()) {
 			Point ptClick = comp.getPtClick();
@@ -165,7 +203,9 @@ public class DragAndDropTools {
 			FusionTools.dessinerLigne(comp);
 		}
 	}
-
+	/**
+	 * Méthode appelée lors du relâchement de la souris après avoir dragué des composants.
+	 */
 	public void dropWidget() {
 		Widget comp = composantsDrague.get(0);
 
@@ -279,7 +319,13 @@ public class DragAndDropTools {
 		g.repaint();
 		g.setPointLigneSurEcran(null);
 	}
-
+	/**
+	 * Méthode récursive permettant de supprimer un widget du GlassPane.
+	 * Si le widget passé en paramètre est de type complexe, cette méthode est de
+	 * nouveau appelée pour chacun de ses fils.
+	 *
+	 * @param comp le widget à supprimer
+	 */
 	private void deleteWidgetsFromGlassPane(Widget comp) {
 		if (comp.isComplexe()) {
 			for (List<Widget> lw : ((WidgetCompose) comp).getMapZone().values()) {
@@ -290,7 +336,13 @@ public class DragAndDropTools {
 		}
 		GlassPane.getInstance().remove(comp);
 	}
-
+	/**
+	 * Méthode permettant de calculer les Dimensions e position d'un groupe de widgets.
+	 *
+	 * @param lst Le groupe de widgets pour lesquels on veut recupérer les dimensions et positions
+	 * @param index L'index à partir duquel on veut commencer à calculer les dimensions et positions du groupe
+	 * @return Le Rectangle regroupant les positions et dimensions du goupe de widgets passé en paramètre
+	 */
 	private static Rectangle groupeWidgetBounds(List<Widget> lst, int index) {
 		if (lst.isEmpty()) {
 			return new Rectangle();
