@@ -16,7 +16,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import modeles.Erreur;
-
+/**
+ * Fenêtre pour afficher les infirmations de l'application.
+ * 
+ * @since 1.0
+ * @version 1.0
+ */
 public class FenetreAPropos extends JFrame implements MouseListener {
 
 	private JScrollPane textPane = null;
@@ -31,7 +36,6 @@ public class FenetreAPropos extends JFrame implements MouseListener {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.setLocationRelativeTo(null);
-
 
 		this.text = new JTextPane();
 		this.text.getCaret().setVisible(false);
@@ -68,23 +72,25 @@ public class FenetreAPropos extends JFrame implements MouseListener {
 		this.add(this.textPane, BorderLayout.CENTER);
 		this.textPane.setBorder(null);
 
-
 		this.setVisible(true);
 	}
+	/**
+	 * Permet de gérer le défilement vertical du texte.
+	 * 
+	 * @since 1.0
+	 */
+	private class ActionListenerTextTimer implements ActionListener {
 
-	public class ActionListenerTextTimer implements ActionListener {
-
-		int height, i, posMax;
+		private int i, posMax;
 		JViewport vp;
 
 		ActionListenerTextTimer(JViewport vp, int height, int posMax) {
 			super();
-			this.height = height;
 			this.vp = vp;
 			i = 1;
 			this.posMax = posMax;
 		}
-
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (i <= posMax) {
 				vp.setViewPosition(new Point(0, i));
@@ -94,25 +100,21 @@ public class FenetreAPropos extends JFrame implements MouseListener {
 			}
 		}
 	}
-
+	@Override
 	public void dispose() {
 		super.dispose();
 		t.stop();
 	}
-
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		this.dispose();
 	}
-
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	public void mouseExited(MouseEvent e) {
-	}
-
-	public void mousePressed(MouseEvent e) {
-	}
-
-	public void mouseReleased(MouseEvent e) {
-	}
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+	@Override
+	public void mouseExited(MouseEvent e) {}
+	@Override
+	public void mousePressed(MouseEvent e) {}
+	@Override
+	public void mouseReleased(MouseEvent e) {}
 }

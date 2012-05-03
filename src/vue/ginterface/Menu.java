@@ -12,13 +12,16 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.*;
-
 import org.omg.CORBA.portable.InputStream;
-
 import ressources.ResourceTools;
 import traduction.VisiteurNXC;
 import traduction.VisiteurRobotC;
-
+/**
+ * Le menu de l'application.
+ * 
+ * @since 1.0
+ * @version 1.0
+ */
 public class Menu extends JMenuBar implements ActionListener {
 
     private JMenu fichier, exportation, aide;
@@ -106,17 +109,17 @@ public class Menu extends JMenuBar implements ActionListener {
             new FenetreAPropos();
         }
     }
-
+    /**
+     * Permet de créer un nouveau projet.
+     * 
+     * @since 1.0
+     */
     private void nouveau() {
-        int choix = JOptionPane.showConfirmDialog(Fenetre.getInstance(), new JLabel("<html>Souhaitez vous créer un nouveau fichier ?"
-                + "<br><br>Toute Progression non sauvegardée sera perdue.</html>"), "Création d'un nouveau fichier", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int choix = JOptionPane.showConfirmDialog(Fenetre.getInstance(), new JLabel("<html>Souhaitez vous créer un nouveau fichier ?<br><br>Toute Progression non sauvegardée sera perdue.</html>"), "Création d'un nouveau fichier", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (choix == JOptionPane.YES_OPTION) {
-            System.out.println("oui");
             ArborescenceTools.getInstance().initArborescence(new LinkedList<List<Widget>>(), false);
             PanelCodeGraphique.getInstance().repaint();
-        } else {
-            System.out.println("non");
         }
     }
 }

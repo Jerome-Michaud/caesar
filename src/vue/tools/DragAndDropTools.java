@@ -277,7 +277,7 @@ public class DragAndDropTools {
 			Erreur.afficher(ex);
 		}
 		g.repaint();
-		g.setLinePointOnScreen(null);
+		g.setPointLigneSurEcran(null);
 	}
 
 	private void deleteWidgetsFromGlassPane(Widget comp) {

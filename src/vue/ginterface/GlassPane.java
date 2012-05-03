@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package vue.ginterface;
 
 import java.awt.BasicStroke;
@@ -12,46 +8,66 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
- *
+ * Permet de créer l'objet de type GlassPane.
  * @author Bastien
+ * @since 1.0
+ * @version 1.0
  */
 public class GlassPane extends JPanel {
-
+	/**
+	 * SINGLETON.
+	 *
+	 * @since 1.0
+	 */
 	private static final GlassPane instance = new GlassPane();
-	private Point linePoint;
-	public static final int LINE_WIDTH = 5;
-	private int lineWidth;
+	private Point pointLigne;
+	public static final int EPAISSEUR_LIGNE = 5;
+	private int longueurLigne;
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		if (linePoint != null) {
-			g2d.setStroke(new BasicStroke(LINE_WIDTH));
-			g2d.drawLine(linePoint.x, linePoint.y, linePoint.x + lineWidth, linePoint.y);
+		if (pointLigne != null) {
+			g2d.setStroke(new BasicStroke(EPAISSEUR_LIGNE));
+			g2d.drawLine(pointLigne.x, pointLigne.y, pointLigne.x + longueurLigne, pointLigne.y);
 		}
 	}
 
 	private GlassPane() {
-		this.linePoint = null;
-		this.lineWidth = 0;
+		this.pointLigne = null;
+		this.longueurLigne = 0;
 		this.setLayout(null);
 		this.setOpaque(false);
 		this.setVisible(true);
 	}
-
+	/**
+	 * SINGLETON.
+	 *
+	 * @since 1.0
+	 *
+	 * @return L'instance unique de GlassPane.
+	 */
 	public static GlassPane getInstance() {
 		return instance;
 	}
-
-	public void setLinePointOnScreen(Point linePoint) {
-		if (linePoint != null) {
-			SwingUtilities.convertPointFromScreen(linePoint, this);
+	/**
+	 * @since 1.0
+	 * 
+	 * @param pointLigne Le nouveau point pour l'affichage de la ligne de fusion.
+	 */
+	public void setPointLigneSurEcran(Point pointLigne) {
+		if (pointLigne != null) {
+			SwingUtilities.convertPointFromScreen(pointLigne, this);
 		}
-		this.linePoint = linePoint;
+		this.pointLigne = pointLigne;
 	}
-
-	public void setLineWidth(int lineWidth) {
-		this.lineWidth = lineWidth;
+	/**
+	 * @since 1.0
+	 * 
+	 * @param epaisseur L'épaisseur voulue pour le trait de fusion.
+	 */
+	public void setLongueurLigne(int epaisseur) {
+		this.longueurLigne = epaisseur;
 	}
 }

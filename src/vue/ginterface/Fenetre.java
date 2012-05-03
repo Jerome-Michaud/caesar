@@ -8,16 +8,28 @@ import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 
 import ressources.ResourceTools;
-
+/**
+ * Fenêtre principale de l'application.
+ *
+ * @since 1.0
+ * @version 1.0
+ */
 public class Fenetre extends JFrame {
-    
+	/**
+	 * SINGLETON.
+	 *
+	 * @since 1.0
+	 */
+	private static final Fenetre instance = new Fenetre();
+    /**
+     * @see Vue.Interface.GlassPane
+     */
+    private GlassPane glassPane;
+    private Dimension ecran;
     private Menu menu;
     private JSplitPane split;
-    private GlassPane glassPane;
-    private static Fenetre instance = new Fenetre();
-    private Dimension ecran;
     
-    public Fenetre() {
+    private Fenetre() {
         this.setTitle("JScratch");
         this.setIconImage(ResourceTools.getImage("icone.png"));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -53,7 +65,13 @@ public class Fenetre extends JFrame {
     public Menu getMenu() {
         return this.menu;
     }
-    
+    /**
+     * SINGLETON.
+     *
+     * @since 1.0
+     *
+     * @return L'instance unique de Fenetre.
+     */
     public static Fenetre getInstance() {
         return instance;
     }

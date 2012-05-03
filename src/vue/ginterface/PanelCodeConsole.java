@@ -9,12 +9,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import vue.controller.LanceurTraduction;
-
+/**
+ * Panneau d'affichage du code traduit.
+ * 
+ * @since 1.0
+ * @version 1.0
+ */
 public class PanelCodeConsole extends JPanel {
-
+	/**
+	 * SINGLETON.
+	 *
+	 * @since 1.0
+	 */
 	private static PanelCodeConsole instance = new PanelCodeConsole();
 	private JTextArea textarea;
-
+	/**
+	 * @since 1.0
+	 */
 	private PanelCodeConsole() {
 		this.textarea = new JTextArea();
 		this.textarea.setEditable(false);
@@ -27,12 +38,22 @@ public class PanelCodeConsole extends JPanel {
 		
 		this.textarea.addMouseListener(LanceurTraduction.getInstance());
 	}
-
+	/**
+	 * SINGLETON.
+	 *
+	 * @since 1.0
+	 *
+	 * @return L'instance unique de PanelWidget.
+	 */
 	public static PanelCodeConsole getInstance() {
 		return instance;
 	}
-	
-	public void setText(String text) {
-		this.textarea.setText(text);
+	/**
+	 * @since 1.0
+	 * 
+	 * @param texte Le texte à afficher dans la zone.
+	 */
+	public void setText(String texte) {
+		this.textarea.setText(texte);
 	}
 }

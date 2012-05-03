@@ -8,9 +8,18 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-
+/**
+ * Panel où sont entreposés les boutons des différentes catégories disponibles.
+ *
+ * @since 1.0
+ * @version 1.0
+ */
 public class PanelTypeWidget extends JPanel {
-
+	/**
+	 * SINGLETON.
+	 *
+	 * @since 1.0
+	 */
 	private static final PanelTypeWidget instance = new PanelTypeWidget();
 	private List<BoutonCategorie> lesCategories;
 
@@ -45,11 +54,21 @@ public class PanelTypeWidget extends JPanel {
 
 		this.setPreferredSize(new Dimension(Variables.X_MAX_INSTRUCTION, nb));
 	}
-
+	/**
+	 * SINGLETON.
+	 *
+	 * @since 1.0
+	 *
+	 * @return L'instance unique de PanelWidget.
+	 */
 	public static PanelTypeWidget getInstance() {
 		return instance;
 	}
-	
+	/**
+	 * @since 1.0
+	 *
+	 * @return Les boutons des différentes catégories.
+	 */
 	public List<BoutonCategorie> getLesCategories() {
 		return this.lesCategories;
 	}

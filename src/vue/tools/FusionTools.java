@@ -86,23 +86,23 @@ public class FusionTools {
         Widget compRecup = act.getComp();
         switch (act.getVal()) {
             case 1:                //Appliquer l'action au dessus du comp
-                g.setLinePointOnScreen(new Point((int) compRecup.getLocationOnScreen().getX(), (int) compRecup.getLocationOnScreen().getY() - GlassPane.LINE_WIDTH + 1));
-                g.setLineWidth(compRecup.getWidth());
+                g.setPointLigneSurEcran(new Point((int) compRecup.getLocationOnScreen().getX(), (int) compRecup.getLocationOnScreen().getY() - GlassPane.EPAISSEUR_LIGNE + 1));
+                g.setLongueurLigne(compRecup.getWidth());
                 break;
             case 0:                //Appliquer l'action au dessous du comp
-                g.setLinePointOnScreen(new Point((int) compRecup.getLocationOnScreen().getX(), (int) compRecup.getLocationOnScreen().getY() + compRecup.getHeight() + 3));
-                g.setLineWidth(compRecup.getWidth());
+                g.setPointLigneSurEcran(new Point((int) compRecup.getLocationOnScreen().getX(), (int) compRecup.getLocationOnScreen().getY() + compRecup.getHeight() + 3));
+                g.setLongueurLigne(compRecup.getWidth());
                 break;
                 
             case 2 : 
                 Rectangle r  = act.getRect();
                 Rectangle cpy = new Rectangle(r.x,r.y, r.width, r.height);
                     cpy.translate(act.getTranslate().x,act.getTranslate().y);
-                g.setLinePointOnScreen(new Point((int)cpy.x,(int)cpy.getY()+Variables.LINE_STROKE_VALUE));
-                g.setLineWidth(r.width);
+                g.setPointLigneSurEcran(new Point((int)cpy.x,(int)cpy.getY()+Variables.LINE_STROKE_VALUE));
+                g.setLongueurLigne(r.width);
                 break;
             case -1:               //Pas d'action à appliquer
-                g.setLinePointOnScreen(null);
+                g.setPointLigneSurEcran(null);
                 break;
         }
         g.repaint();
