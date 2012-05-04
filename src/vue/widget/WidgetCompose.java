@@ -16,11 +16,23 @@ import java.util.List;
 import java.util.Set;
 
 import modeles.TypeWidget;
-
+/**
+ * Classe héritant de Widget et implémentant IWidget permettant de
+ * représenter un Widget de type Complexe.
+ *
+ * @author Bastien Andru - Vincent Besnard - Adrien Duroy - Quentin Gosselin
+ */
 public class WidgetCompose extends Widget implements IWidget {
-
+	/**
+	 * HashMap stockant les zones d'accroches du composant complexe et les widgets qui y sont insérés.
+	 */
     private HashMap<Rectangle, List<Widget>> mapZone;
-
+    /**
+     * Méthode redéfinie en phase de test afin laisser apparaître les zones
+     * d'accroches
+     *
+     * @param g L'objet Graphics de l'appel
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -32,7 +44,11 @@ public class WidgetCompose extends Widget implements IWidget {
         }*/
 
     }
-
+    /**
+     * Constructeur du Widget Compose faisant appel au constructeur de sa classe mère (Widget)
+     *
+     * @param comp Le modèle du widget à créer
+     */
     public WidgetCompose(ModeleWidget comp) {
         super(comp);
         this.mapZone = new HashMap<Rectangle, List<Widget>>();
@@ -45,10 +61,22 @@ public class WidgetCompose extends Widget implements IWidget {
      * public boolean ajouterWidget(Rectangle cle, Widget widget) { return
      * this.mapZone.get(cle).add(widget); }
      */
+    
+    /**
+     * Méthode permettant de supprimer un widget au sein d'une zone d'accroche.
+     * @param cle La clé de la HashMap où supprimer le widget
+     * @param widget Le widget à supprimer de la zone
+     * @return Un booléen attestant de la suppression ou non du widget au sein de la HashMap.
+     */
     public boolean supprimerWidget(Rectangle cle, Widget widget) {
         return this.mapZone.get(cle).remove(widget);
     }
-
+    
+    /**
+     * Méthode retournant la HashMap représentant les zones d'accroche du composant.
+     *
+     * @return La HashMap représentant les zones d'accroches du composant
+     */
     public HashMap<Rectangle, List<Widget>> getMapZone() {
         return this.mapZone;
     }
@@ -56,6 +84,18 @@ public class WidgetCompose extends Widget implements IWidget {
     /*
      * public HashMap<Rectangle,List<Widget>> getComposition() { return
      * this.mapZone.; }
+     */
+    
+    /**
+     * Méthode permettant de rechercher, au sein de toutes les zones d'accroches
+     * du composant, un composant en particulier et ainsi retourner la liste de
+     * Widgets de la zone d'accroche à laquelle ce composant appartient.
+     *
+     * @param comp Le composant à rechercher au sein des zones d'accroche du
+     * composant complexe
+     * @return La liste de widgets de la zone d'accroche qui contient comp
+     * @throws ComposantIntrouvableException Si le Widget n'est pas trouve dans
+     * aucune des zones d'accroches du composant complexe, on lève une exception
      */
     public List<Widget> getWidgetsAssocies(Widget comp) throws ComposantIntrouvableException {
         List<Widget> l = null;
@@ -85,14 +125,16 @@ public class WidgetCompose extends Widget implements IWidget {
     public boolean isRacine() {
         return false;
     }
-
+    /**
+     * Méthode permettant de recalculer les positions et dimensions de chaque
+     * zones d'accroches du composant complexe.
+     */
     public void notifyChange() {
         HashMap<Rectangle, Rectangle> mapRect = new HashMap<Rectangle, Rectangle>();
         HashMap<Rectangle, Integer> mapDecal = new HashMap<Rectangle, Integer>();
         for (Rectangle r : mapZone.keySet()) {
             int decalY = 0;
             Rectangle maxBounds = null;
-            System.err.println("La taille " + mapZone.get(r).size());
             for (Widget w : mapZone.get(r)) {
                 if (w.isComplexe()) {
                     ((WidgetCompose) w).notifyChange();
@@ -114,7 +156,6 @@ public class WidgetCompose extends Widget implements IWidget {
             int diff = maxBounds.height - r.height;
 
             //On stocke le décalage qu'on voudra appliquer sur les zones d'accroche du composant
-            System.err.println("diff : " + diff);
             if (diff < 0 - ModeleWidget.OFFSET) {
                 this.getModele().decalageYin(Math.abs(diff), r);
                 decaleZonesEnDessousDe(r.y, diff, mapDecal);
@@ -145,7 +186,12 @@ public class WidgetCompose extends Widget implements IWidget {
             this.mapZone.put(mapRect.get(r), this.mapZone.remove(r));
         }
     }
-
+    /**
+     * Méthode permettant de décaler toutes les zones d'accroches situées en dessous d'un certaine zone d'accroche.
+     * @param y La position en Y de la zone d'accroche qui a été agrandie
+     * @param diff La valeur de laquelle il faut décaler chaque zone d'accroche en dessous de y
+     * @param map La Hashmap dans laquelle il faut rechercher les zones à décaler
+     */
     private void decaleZonesEnDessousDe(int y, int diff, HashMap<Rectangle, Integer> map) {
         for (Rectangle r : this.mapZone.keySet()) {
             if (r.y > y) {
@@ -211,7 +257,11 @@ public class WidgetCompose extends Widget implements IWidget {
             this.applyChangeStructInst();
         }
     }
-
+    /**
+     * Méthode permettant de récupérer tous les widgets d'une zone d'accroche
+     * @param i L'index de la zone à recupérer
+     * @return a liste des widgets situés à l'index i
+     */
     private List<Widget> recupeAllWidgetCorps(int i) {
         /*
          * Récupérer la clé du corps
@@ -224,7 +274,9 @@ public class WidgetCompose extends Widget implements IWidget {
         List<Widget> widgets = this.mapZone.get(rects[i]);
         return widgets;
     }
-
+    /**
+     * Méthode permettant d'appliquer les changements à la structure du composant.
+     */
     private void applyChangeStructInst() {
         /*
          * Cas de la tâche

@@ -1,58 +1,113 @@
 package vue.widget;
 
-
-
 import vue.tools.NonClonableException;
 import vue.widget.modele.*;
-
+/**
+ * Classe implémentant le design pattern Factory permettant la création de tous
+ * les types de widgets.
+ *
+ * @author Quentin Gosselin
+ */
 public class FabriqueInstructions {
 
-	//MOTEURS
-	public Widget creerWidgetMoteurMovFwd(){
+	/**
+	 * Méthode permettant de créer un widget de type "Avance Moteur Marche Avant".
+	 *
+	 * @return Un widget de type "Avance Moteur Marche Avant"
+	 */
+	public Widget creerWidgetMoteurMovFwd() {
         return new Widget(new MoteurMovFwdWidget());
     }
-    public Widget creerWidgetMoteurMovRev(){
+	/**
+	 * Méthode permettant de créer un widget de type "Avance Moteur Marche Arrière"
+	 *
+	 * @return Un widget de type "Avance Moteur Marche Arrière"
+	 */
+    public Widget creerWidgetMoteurMovRev() {
         return new Widget(new MoteurMovRevWidget());
     }
-    public Widget creerWidgetMoteurOff(){
+    /**
+	 * Méthode permettant de créer un widget de type "Arrêt Moteur"
+	 *
+	 * @return Un widget de type "Arrêt Moteur"
+	 */
+    public Widget creerWidgetMoteurOff() {
         return new Widget(new MoteurOffWidget());
     }
 	
-	//BOUCLES
-	public Widget creerWidgetFor(){
+    /**
+     * Méthode permettant de créer un widget complexe de type "Boucle Pour"
+     *
+     * @return Un widget complexe de type "Boucle Pour"
+     */
+	public Widget creerWidgetFor() {
     	return new WidgetCompose(new ForWidget());
     }
-
-    public Widget creerWidgetWhile(){
+	/**
+	 * Méthode permettant de créer un widget complexe de type "Boucle Tant Que"
+	 *
+	 * @return Un widget complexe de type "Boucle Tant que"
+	 */
+    public Widget creerWidgetWhile() {
     	return new WidgetCompose(new WhileWidget());
     }
-    
-    public Widget creerWidgetDoWhile(){
+    /**
+     * Méthode permettant de créer un widget complexe de type "Boucle Faire Tant Que"
+     *
+     * @return Un widget complexe de type "Boucle Faire Tant que"
+     */
+    public Widget creerWidgetDoWhile() {
         return new WidgetCompose(new DoWhileWidget());
     }
-	
-	public Widget creerWidgetRepeat(){
+    /**
+     * Méthode permettant de créer un widget complexe de type "Répéter"
+     *
+     * @return Un widget complexe de type "Répéter"
+     */
+	public Widget creerWidgetRepeat() {
     	return new WidgetCompose(new RepeatWidget());
     }
     
-    //CONDITION
-	public Widget creerWidgetIf(){
+	/**
+	 * Méthode permettant de créer un widget complexe de type "Structure Si"
+	 *
+	 * @return Un widget complexe de type "Structure Si"
+	 */
+	public Widget creerWidgetIf() {
         return new WidgetCompose(new IfWidget());
     }
-	
-	public Widget creerWidgetIfElse(){
+	/**
+	 * Méthode permettant de créer un widget complexe de type "Structure Si Sinon"
+	 *
+	 * @return Un widget complexe de type "Structure Si Sinon"
+	 */
+	public Widget creerWidgetIfElse() {
         return new WidgetCompose(new IfElseWidget());
     }
-    
-    public Widget creerWidgetWait(){
+	/**
+	 * Méthode permettant de créer un widget de type "Attente"
+	 *
+	 * @return Un widget de type "Attente"
+	 */
+    public Widget creerWidgetWait() {
         return new Widget(new WaitWidget());
     }
-
-	public Widget creerWidgetTache(){
+    /**
+     * Méthode permettant de créer un widget complexe de type "Tâche"
+     *
+     * @return Un widget complexe de type "Tâche"
+     */
+	public Widget creerWidgetTache() {
         return new WidgetCompose(new TacheWidget());
     }
-	
-
+	/**
+	 * Méthode permettant de créér une copie d'un widget.
+	 *
+	 * @param comp Le widget à cloner
+	 * @return La copie du widget passé en paramètre
+	 * @throws NonClonableException Si on essaye de cloner un widget qui n'est
+	 * pas clonable, une exception est levée
+	 */
 	public Widget cloner(Widget comp) throws NonClonableException {
 		Widget w = null;
 		if (comp.getModele() instanceof InstructionWidget) {
