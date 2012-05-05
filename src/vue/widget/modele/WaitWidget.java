@@ -2,19 +2,24 @@ package vue.widget.modele;
 
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.Zone;
-import instruction.*;
+import instruction.InstructionAttente;
+import instruction.VariableConstante;
+import instruction.TypeVariable;
+import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-
 import modeles.TypeWidget;
-
-import java.awt.Rectangle;
-
+/**
+ * Cette classe modèlise la forme d'un widget de type Wait.
+ * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ */
 public class WaitWidget extends ModeleWidget {
-
+	/**
+	 * Constructeur du modèle définissant les différents paramètres du Wait.
+	 */
 	public WaitWidget() {
 		super();
 		int tX[] = {0, 5, 30, 35, 45, 50, 130, 135, 135, 130, 50, 45, 35, 30, 5, 0};
@@ -96,7 +101,11 @@ public class WaitWidget extends ModeleWidget {
 			}
 		});
 	}
-
+	/**
+	 * Définie le temps d'attente de l'instruction Wait.
+	 * 
+	 * @param nom La valeur du temps d'attente
+	 */
 	private void setInstructionValeur(String nom) {
 		((InstructionAttente) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
 	}

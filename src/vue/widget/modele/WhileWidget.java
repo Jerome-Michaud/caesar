@@ -10,9 +10,16 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 import modeles.TypeWidget;
-
+/**
+ * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
+ * forme d'un widget de type While.
+ * 
+ * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ */
 public class WhileWidget extends ModeleWidget implements Serializable{
-		
+	/**
+	 * Constructeur du modèle définissant les différents paramètres du While.
+	 */
     public WhileWidget(){
         super();
 
@@ -31,7 +38,12 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }
-
+    /**
+     * Méthode permettant d'augmenter la largeur du composant.
+     *
+     * @param a La valeur de l'augmentation à appliquer
+     */
+    @Override
     public void decalageXout(int a) {
         int i;
         for (i = 6; i < 10; i++) {
@@ -43,7 +55,12 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleX();
     }
-
+    /**
+     * Méthode permettant de diminuer la largeur du composant.
+     *
+     * @param a La valeur de la diminution à appliquer
+     */
+    @Override
     public void decalageXin(int a) {
         int i;
         for (i = 6; i < 10; i++) {
@@ -55,7 +72,13 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleX();
     }
-
+    /**
+     * Méthode permettant d'augmenter la hauteur du composant.
+     *
+     * @param b La valeur de l'agrandissement à appliquer
+     * @param r Le rectangle à augmenter également
+     */
+    @Override
     public void decalageYout(int b,Rectangle r) {
         int i;
         for (i = 16; i < tabY.length; i++) {
@@ -64,7 +87,13 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleY();
     }
-
+    /**
+     * Méthode permettant de réduire la hauteur du composant
+     *
+     * @param b La valeur de la réduction à appliquer
+     * @param r Le rectangle à réduire également
+     */
+    @Override
     public void decalageYin(int b,Rectangle r) {
         int i;
         for (i = 16; i < tabY.length; i++) {
@@ -73,9 +102,9 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleY();
     }
-	
-	public void initListeners() {
-		
-	}
-
+    /**
+     * Méthode d'initialisation des listeners.
+     */
+    @Override
+	public void initListeners() {}
 }
