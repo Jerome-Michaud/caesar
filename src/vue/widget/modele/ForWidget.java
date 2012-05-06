@@ -15,9 +15,16 @@ import javax.swing.JComponent;
 import modeles.DicoVars;
 import modeles.Erreur;
 import modeles.TypeWidget;
-
+/**
+ * Classe héritant de ModeleWidget et implémentant Serializable modélisant la
+ * forme d'un widget de type For.
+ * 
+ * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ */
 public class ForWidget extends ModeleWidget {
-
+	/**
+	 * Constructeur du modele définissant les différents paramètres du For
+	 */
 	public ForWidget() {
 		super();
 		int[] tX = {0, 5,/**/ 30, 35, 45, 50,/**/ 130, 135,/**/ 135, 130,/**/ 55, 50, 40, 35, /**/ 10, 5,/**/ 5, 10,/**/ 35, 40, 50, 55,/**/ 130, 135, /**/ 135, 130,/**/ 50, 45, 35, 30,/**/ 5, 0};
@@ -38,8 +45,6 @@ public class ForWidget extends ModeleWidget {
 		this.setElementProgramme(new InstructionFor());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
-
-		
 
 		//variable
 		ListeDeroulante lv = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
@@ -76,9 +81,8 @@ public class ForWidget extends ModeleWidget {
 		setInitialization(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
 		
 		initListeners();
-
 	}
-
+	@Override
 	public void decalageXout(int a) {
 		int i;
 		for (i = 6; i < 10; i++) {
@@ -90,7 +94,7 @@ public class ForWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-
+	@Override
 	public void decalageXin(int a) {
 		int i;
 		for (i = 6; i < 10; i++) {
@@ -102,7 +106,7 @@ public class ForWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-
+	@Override
 	public void decalageYout(int b, Rectangle r) {
 		int i;
 		for (i = 16; i < tabY.length; i++) {
@@ -111,7 +115,7 @@ public class ForWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-
+	@Override
 	public void decalageYin(int b, Rectangle r) {
 		int i;
 		for (i = 16; i < tabY.length; i++) {
@@ -120,7 +124,7 @@ public class ForWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-
+	@Override
 	public void initListeners() {
 		for (Zone z : this.getLesZonesSaisies()) {
 			((JComponent) z).addFocusListener(new FocusAdapter() {
@@ -141,7 +145,13 @@ public class ForWidget extends ModeleWidget {
 		}
 		
 	}
-
+	/**
+	 * Méthode permettant de définir la condition d'arrêt de la boucle
+	 * 
+	 * @param v La variable de la condition
+	 * @param o L'opérateur de la condition
+	 * @param fin La valeur e la condition d'arrêt
+	 */
 	public void setCondition(Variable v, Operateur o, String fin) {
 		Condition cond = null;
 		try {
@@ -151,14 +161,24 @@ public class ForWidget extends ModeleWidget {
 		}
 		((InstructionFor) getElementProgramme()).setCondition(cond);
 	}
-
+	/**
+	 * Méthode de définition de l'initialisation de la boucle
+	 * 
+	 * @param v La variable la boucle
+	 * @param deb La valeur de début
+	 */
 	public void setInitialization(Variable v, String deb) {
 		Affectation aff = new Affectation(false);
 		aff.setMembreGauche(v);
 		aff.setMembreDroit(new VariableConstante(TypeVariable.INT, "", deb));
 		((InstructionFor) getElementProgramme()).setIntialization(aff);
 	}
-
+	/**
+	 * Méthode de définition de la valeur d'augmentation après une itération
+	 * 
+	 * @param v La variable concernée
+	 * @param pas La valeur du pas pour une itération
+	 */
 	public void setIteration(Variable v, String pas) {
 		Affectation aff = new Affectation(false);
 		aff.setMembreGauche(v);

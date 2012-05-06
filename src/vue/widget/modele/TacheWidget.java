@@ -13,9 +13,17 @@ import java.io.Serializable;
 import javax.swing.JComponent;
 
 import modeles.TypeWidget;
+/**
+ * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
+ * forme d'un widget de type Tâche
+ * 
+ * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ */
+public class TacheWidget extends ModeleWidget implements Serializable {
 
-public class TacheWidget extends ModeleWidget implements Serializable{
-	
+	/**
+	 * Constructeur du modèle définissant les différents paramètres du Tâche
+	 */
     public TacheWidget(){
         super();
 
@@ -44,6 +52,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
     }
 
+    @Override
     public void decalageXout(int a) {
         int i;
         for (i = 2; i < 6; i++) {
@@ -56,6 +65,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setTailleX();
     }
 
+    @Override
     public void decalageXin(int a) {
         int i;
         for (i = 2; i < 6; i++) {
@@ -68,6 +78,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setTailleX();
     }
 
+    @Override
     public void decalageYout(int b,Rectangle r) {
         int i;
         for (i = 12; i < tabY.length; i++) {
@@ -77,6 +88,7 @@ public class TacheWidget extends ModeleWidget implements Serializable{
         this.setTailleY();
     }
 
+    @Override
     public void decalageYin(int b,Rectangle r) {
         int i;
         for (i = 12; i < tabY.length; i++) {
@@ -98,8 +110,11 @@ public class TacheWidget extends ModeleWidget implements Serializable{
 		});
 	}
 	
+	/**
+	 * Modifie le nom de l'instruction du widget.
+	 * @param nom le nouveau nom de l'instruction
+	 */
 	private void setInstruction(String nom) {
 		((InstructionTache)getElementProgramme()).setNom(nom);
 	}
-
 }

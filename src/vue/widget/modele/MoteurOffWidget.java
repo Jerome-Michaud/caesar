@@ -13,17 +13,21 @@ import javax.swing.JComponent;
 import modeles.TypeWidget;
 
 import java.awt.Rectangle;
-
+/**
+ * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
+ * forme d'un widget de type MoteurOff
+ * 
+ * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ */
 public class MoteurOffWidget extends ModeleWidget {
-
-	
-	
+	/**
+	 * Constructeur du modèle définissant les différents paramètres du MoteurOff.
+	 */
 	public MoteurOffWidget() {
 		super();
 		int tX[] = {0, 5, 30, 35, 45, 50, 130, 135, 135, 130, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
-		
-		
+
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setTailleX();
@@ -48,6 +52,7 @@ public class MoteurOffWidget extends ModeleWidget {
 		initListeners();
 	}
 
+	@Override
 	public void decalageXout(int a) {
         int i;
         for (i = 6; i < 10; i++) {
@@ -57,6 +62,7 @@ public class MoteurOffWidget extends ModeleWidget {
         this.setTailleX();
     }
 
+	@Override
     public void decalageXin(int a) {
         int i;
         for (i = 6; i < 10; i++) {
@@ -66,6 +72,7 @@ public class MoteurOffWidget extends ModeleWidget {
         this.setTailleX();
     }
 
+	@Override
     public void decalageYout(int b,Rectangle r) {
         int i;
         for (i = 8; i < 16; i++) {
@@ -75,7 +82,7 @@ public class MoteurOffWidget extends ModeleWidget {
         this.setTailleY();
     }
 
-
+	@Override
     public void decalageYin(int b,Rectangle r) {
         int i;
         for (i = 8; i < 16; i++) {
@@ -85,10 +92,7 @@ public class MoteurOffWidget extends ModeleWidget {
         this.setTailleY();
     }
 
-
-	
-	
-	
+	@Override
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
 
@@ -99,8 +103,12 @@ public class MoteurOffWidget extends ModeleWidget {
 		});
 	}
 	
+	/**
+	 * Méthode permettant de définir l'instruction moteur du widget
+	 * 
+	 * @param nom L'instruction Moteur à définir sur le modèle
+	 */
 	private void setInstructionMoteur(String nom) {
 		((InstructionMoteurOff) getElementProgramme()).setMoteur(Moteur.values()[Integer.parseInt(nom)]);
 	}
-
 }

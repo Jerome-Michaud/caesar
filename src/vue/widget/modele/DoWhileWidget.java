@@ -8,9 +8,16 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 import modeles.TypeWidget;
-
-public class DoWhileWidget extends ModeleWidget implements Serializable{
-
+/**
+ * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
+ * forme d'un widget de type DoWhile
+ * 
+ * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ */
+public class DoWhileWidget extends ModeleWidget implements Serializable {
+	/**
+	 * Constructeur du modèle définissant les différents paramètres du DoWhile.
+	 */
 	public DoWhileWidget() {
 		super();
 		
@@ -31,7 +38,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
 		
 		initListeners();
 	}
-
+	@Override
 	public void decalageXout(int a) {
         int i;
         for (i = 6; i < 10; i++) {
@@ -43,7 +50,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleX();
     }
-
+	@Override
     public void decalageXin(int a) {
         int i;
         for (i = 6; i < 10; i++) {
@@ -55,7 +62,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleX();
     }
-
+	@Override
     public void decalageYout(int b,Rectangle r) {
         int i;
         for (i = 16; i < tabY.length; i++) {
@@ -64,7 +71,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleY();
     }
-
+	@Override
     public void decalageYin(int b,Rectangle r) {
         int i;
         for (i = 16; i < tabY.length; i++) {
@@ -73,8 +80,6 @@ public class DoWhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleY();
     }
-	
-	public void initListeners() {
-		
-	}
+	@Override
+	public void initListeners() {}
 }

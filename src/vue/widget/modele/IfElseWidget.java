@@ -8,9 +8,16 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 import modeles.TypeWidget;
-
+/**
+ * Classe héritant de ModeleWidget et implémentant Serializable modélisant la
+ * forme d'un widget de type IfElse
+ * 
+ * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ */
 public class IfElseWidget extends ModeleWidget implements Serializable{
-
+	/**
+	 * Constructeur du modèle définissant les différents paramètres du IfElse.
+	 */
 	public IfElseWidget() {
 		super();
 		
@@ -104,8 +111,6 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
  	        this.setTailleY();
          }
     }
-	
-	public void initListeners() {
-		
-	}
+	@Override
+	public void initListeners() {}
 }

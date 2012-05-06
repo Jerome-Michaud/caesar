@@ -13,7 +13,12 @@ import javax.swing.JComponent;
 import modeles.TypeWidget;
 
 import java.awt.Rectangle;
-
+/**
+ * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
+ * forme d'un widget de type Repeat
+ * 
+ * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ */
 public class RepeatWidget extends ModeleWidget {
 
 	public RepeatWidget() {
@@ -104,7 +109,12 @@ public class RepeatWidget extends ModeleWidget {
 			}
 		});
 	}
-
+	
+	/**
+	 * Méthode permettant de définir la valeur de l'instruction moteur
+	 * 
+	 * @param nom La valeur de l'instruction moteur
+	 */
 	private void setInstructionValeur(String nom) {
 		((InstructionRepeat) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
 	}
