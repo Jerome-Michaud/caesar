@@ -8,7 +8,8 @@ import modeles.Erreur;
 public class Scratch {
 
 	/**
-	 * @param args the command line arguments
+	 * Permet le lancement du programme.
+	 * @param args les paramètres du programme
 	 */
 	public static void main(String[] args) {
 		try {
@@ -21,6 +22,6 @@ public class Scratch {
 		} catch (Exception ex) {
 			Erreur.afficher(ex);
 		}
-		Fenetre fen = Fenetre.getInstance();
+		Fenetre.getInstance();
 	}
 }

@@ -1,5 +1,3 @@
-package test.instruction;
-
 import java.util.List;
 
 import instruction.Affectation;
@@ -22,7 +20,6 @@ import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
 
 public class TestEditionModele {
-	
 	
 	static InstructionStructure i1;
 	static InstructionDeclaration i2;

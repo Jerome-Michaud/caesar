@@ -1,9 +1,9 @@
 package vue.widget.modele.zones;
 
 import javax.swing.JTextField;
+
 /**
- * Cette classe représente un champ texte pariculier intégrable dans un widget.
- * @author Vincent Besnard - Quentin Gosselin
+ * Cette classe représente un champ texte particulier intégrable dans un widget.
  */
 public class ChampTexte extends JTextField implements Zone {
 	/**

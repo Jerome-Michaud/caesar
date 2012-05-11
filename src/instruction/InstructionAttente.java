@@ -1,16 +1,20 @@
 package instruction;
 
 import traduction.VisiteurTraduction;
+
 /**
- * Cette instruction permet de mettre en attente
- * le programme pendant un certain temps.
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ * Cette instruction permet de mettre en attente le programme pendant un certain temps.
  */
 public class InstructionAttente implements Instruction {
-	private Expression expression;
+
 	/**
-	 * Créé une instruction d'attente non initialisé.
-	 * L'expression donnant le temps d'attente à pour valeur null.
+	 * L'expression donnant le temps d'attente.
+	 */
+	private Expression expression;
+
+	/**
+	 * Créé une instruction d'attente non initialisé.<br/>
+	 * L'expression donnant le temps d'attente à pour valeur <code>null</code>.
 	 */
 	public InstructionAttente() {
 		super();
@@ -18,15 +22,17 @@ public class InstructionAttente implements Instruction {
 
 	/**
 	 * Créé une instruction d'attente.
+	 *
 	 * @param expression l'expression donnant le temps d'attente.
 	 */
-	public InstructionAttente(Expression expression) {
+	public InstructionAttente(final Expression expression) {
 		super();
 		this.expression = expression;
 	}
 
 	/**
 	 * Accède à l'expression donnant le temps d'attente.
+	 *
 	 * @return l'expression.
 	 */
 	public Expression getExpression() {
@@ -35,20 +41,20 @@ public class InstructionAttente implements Instruction {
 
 	/**
 	 * Modifie l'expression donnant le temps d'attente.
+	 *
 	 * @param expr la nouvelle expression.
 	 */
-	public void setExpression(Expression expr) {
+	public void setExpression(final Expression expr) {
 		this.expression = expr;
 	}
-	
+
 	@Override
 	public Categorie getCategorie() {
 		return Categorie.TEMPS;
 	}
 
 	@Override
-	public void accepte(VisiteurTraduction visiteur) {
+	public void accepte(final VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
-
 }

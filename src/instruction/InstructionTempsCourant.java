@@ -1,11 +1,11 @@
 package instruction;
 
 import traduction.VisiteurTraduction;
+
 /**
  * Instruction donnant le temps écoulé depuis le lancement du programme.
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
  */
-public class InstructionTempsCourant implements Instruction{
+public class InstructionTempsCourant implements Instruction {
 
 	@Override
 	public Categorie getCategorie() {
@@ -13,7 +13,7 @@ public class InstructionTempsCourant implements Instruction{
 	}
 
 	@Override
-	public void accepte(VisiteurTraduction visiteur) {
+	public void accepte(final VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
 }

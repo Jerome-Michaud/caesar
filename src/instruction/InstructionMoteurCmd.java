@@ -1,14 +1,18 @@
 package instruction;
+
 /**
  * Instruction pour un moteur.
- * @author Adrien DUROY, Bastien AUBRY
  */
 public abstract class InstructionMoteurCmd implements Instruction {
 
+	/**
+	 * Le moteur.
+	 */
 	private Moteur moteur;
 
 	/**
-	 * Crée une instruction un moteur non initialisée. Le moteur à pour valeur null.
+	 * Crée une instruction un moteur non initialisée.<br/>
+	 * Le moteur à pour valeur <code>null</code>.
 	 */
 	public InstructionMoteurCmd() {
 		super();
@@ -17,30 +21,33 @@ public abstract class InstructionMoteurCmd implements Instruction {
 
 	/**
 	 * Crée une instruction pour un moteur.
+	 *
 	 * @param moteur le moteur concerné
 	 */
-	public InstructionMoteurCmd(Moteur moteur){
+	public InstructionMoteurCmd(final Moteur moteur) {
 		this.moteur = moteur;
 	}
-	
+
 	@Override
 	public Categorie getCategorie() {
 		return Categorie.MOTEUR;
 	}
-	
+
 	/**
 	 * Modifie le moteur concerné par l'instruction.
+	 *
 	 * @param moteur le nouveau moteur
 	 */
-	public void setMoteur(Moteur moteur){
-			this.moteur = moteur;
+	public void setMoteur(final Moteur moteur) {
+		this.moteur = moteur;
 	}
-	
+
 	/**
 	 * Accède au moteur concerné par l'instruction.
+	 *
 	 * @return le moteur
 	 */
-	public Moteur getMoteur(){
+	public Moteur getMoteur() {
 		return moteur;
 	}
 }

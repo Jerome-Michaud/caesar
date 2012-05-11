@@ -1,40 +1,42 @@
 package instruction;
 
 import traduction.VisiteurTraduction;
+
 /**
- * Boucle conditionnelle simple : "Tant que". 
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ * Boucle conditionnelle simple : "Tant que".
  */
 public class InstructionWhile extends InstructionConditionelle {
 
 	/**
-	 * Crée une boucle sans condition.
-	 * La condition à pour valeur null.
+	 * Crée une boucle sans condition.<br/>
+	 * La condition à pour valeur <code>null</code>.
 	 */
 	public InstructionWhile() {
 		super(null);
 	}
-	
+
 	/**
 	 * Crée une boucle conditionnelle.
+	 *
 	 * @param cond la condition de bouclage.
 	 */
-	public InstructionWhile(Condition cond) {
+	public InstructionWhile(final Condition cond) {
 		super(cond);
 	}
 
 	@Override
-	public void accepte(VisiteurTraduction visiteur) {
+	public void accepte(final VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
-	
-	public String toString(){
+
+	@Override
+	public String toString() {
 		String res = "";
-		res+="While("+getCondition()+"){\n";
-		for (Instruction is : getEnfants()){
+		res += "While(" + getCondition() + "){\n";
+		for (Instruction is : getEnfants()) {
 			res += "\t" + is + ";\n";
 		}
-		res+="\t}\n";
+		res += "\t}\n";
 		return res;
 	}
 }

@@ -22,9 +22,21 @@ import instruction.VariableCapteur;
 
 public abstract class VisiteurTraduction {
 
+	/**
+	 * La traduction.
+	 */
 	protected String traduction;
+	/**
+	 * Le niveau d'indentation.
+	 */
 	protected int nivIndent;
+	/**
+	 * L'indentation totale.
+	 */
 	protected String indent;
+	/**
+	 * La méthode d'indentation.
+	 */
 	protected boolean identationTabulation = false;
 	
 	/**
@@ -38,79 +50,91 @@ public abstract class VisiteurTraduction {
 	/**
 	 * Réinitialise la traduction.
 	 */
-	public void reset(){
+	public void reset() {
 		traduction = "";
 		nivIndent = 0;
 	}
 
 	/**
-	 * Donne l'indention du niveau d'indention courant
-	 * @return la chaine correspondant à l'espace d'indention.
+	 * Donne l'indentation du niveau d'indentation courant.
+	 * 
+	 * @return la chaîne correspondant à l'espace d'indentation.
 	 */
-	protected String indent(){
-		String indent = "";
-		for (int i=0;i<nivIndent;i++){
-			if (identationTabulation)
-				indent+="\t";
-			else
-				indent+="    ";
+	protected String indent() {
+		String indentation = "";
+		for (int i = 0;i < nivIndent;i++) {
+			if (identationTabulation) {
+				indentation += "\t";
+			}
+			else {
+				indentation += "    ";
+			}
 		}
-		return indent;
+		return indentation;
 	}
 	
 	/**
-	 * Permet de savoir si le caractère tabulation est utilisé pour l'indention.
-	 * pour faire l'indention.
-	 * @return true si la tabulation est utilisée pour l'indention, false sinon.
+	 * Permet de savoir si le caractère tabulation est utilisé pour l'indentation.
+	 * 
+	 * @return <code>true</code> si la tabulation est utilisée pour l'indentation, sinon <code>false</code>
 	 */
 	public boolean isIdentationTabulation() {
 		return identationTabulation;
 	}
 
 	/**
-	 * Modifie la façon d'effectuer l'indention dans la traduction.
-	 * @param identationTabulation si false l'indention sera effectuée avec des espaces, sinon c'est le caractère '\t' qui est utilisé.
+	 * Modifie la façon d'effectuer l'indentation dans la traduction.
+	 * 
+	 * @param identationTabulation si <code>false</code> l'indentation sera effectuée avec des espaces, sinon des tabulations
 	 */
-	public void setIdentationTabulation(boolean identationTabulation) {
+	public void setIdentationTabulation(final boolean identationTabulation) {
 		this.identationTabulation = identationTabulation;
 	}
 
 	/**
 	 * Traduit une instruction Declaration.
+	 * 
 	 * @param instructionDeclaration l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionDeclaration instructionDeclaration);
+	
 	/**
 	 * Traduit une instruction Declaration Affectation.
+	 * 
 	 * @param instructionDeclarationAffectation l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation);
 	
 	/**
 	 * Traduit une instruction if.
+	 * 
 	 * @param instructionIf l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionIf instructionIf);
 
 	/**
 	 * Traduit une instruction ifelse.
+	 * 
 	 * @param inst l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionIfElse inst);
 
 	/**
 	 * Traduit une instruction while.
+	 * 
 	 * @param inst l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionWhile inst);
 
 	/**
 	 * Traduit une instruction dowhile.
+	 * 
 	 * @param inst l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionDoWhile inst);
 
 	/**
+	 * Traduit une instruction obtenant la tâche.
 	 * 
 	 * @param inst l'instruction à traduire
 	 */
@@ -118,71 +142,85 @@ public abstract class VisiteurTraduction {
 
 	/**
 	 * Traduit une instruction obtenant le temps courant.
+	 * 
 	 * @param inst l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionTempsCourant inst);
 
 	/**
 	 * Traduit une instruction d'attente.
+	 * 
 	 * @param inst l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionAttente inst);
 	
 	/**
-	 * Traduit une instruction de movement de moteur.
+	 * Traduit une instruction de mouvement de moteur.
+	 * 
 	 * @param inst l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionMoteurMov inst);
 	
 	/**
 	 * Traduit une instruction d'arrêt de moteur.
+	 * 
 	 * @param inst l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionMoteurOff inst);
 
 	/**
 	 * Traduit une instruction for.
+	 * 
 	 * @param instructionFor l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionFor instructionFor);
 
 	/**
 	 * Traduit une instruction de répétition.
+	 * 
 	 * @param instructionRepeat l'instruction à traduire
 	 */
 	public abstract void visiter(InstructionRepeat instructionRepeat);
 	
 	/**
 	 * Traduit une variable.
+	 * 
 	 * @param variable la variable à traduire
 	 */
 	public abstract void visiter(Variable variable);
 
 	/**
 	 * Traduit une affectation.
+	 * 
 	 * @param affectation l'affectation à traduire
 	 */
-	public abstract void visiter(Affectation affectation);
+	public abstract void visiter(final Affectation affectation);
 
 	/**
-	 * Traduit une expression composée.
+	 * Traduit une expression complexe.
+	 * 
 	 * @param expr l'expression à traduire
 	 */
-	public abstract void visiter(ExpressionComplexe expr);
+	public abstract void visiter(final ExpressionComplexe expr);
+	
 	/**
-	 * Traduit une declaration de capteur.
-	 * @param expr l'expression à traduire
+	 * Traduit une déclaration de capteur.
+	 * 
+	 * @param instructionDeclarationCapteur l'expression à traduire
 	 */
-	public abstract void visiter( InstructionDeclarationCapteur instructionDeclarationCapteur) ;
+	public abstract void visiter(final InstructionDeclarationCapteur instructionDeclarationCapteur);
+	
 	/**
 	 * Traduit une valeur de capteur.
-	 * @param variableCapteur
+	 * 
+	 * @param variableCapteur la variable à traduire
 	 */
-	public abstract void visiter ( VariableCapteur variableCapteur);
+	public abstract void visiter(final VariableCapteur variableCapteur);
 
 	/**
 	 * Traduit une instruction de rotation d'un moteur.
+	 * 
 	 * @param instructionMoteurRotate l'instruction à traduire
 	 */
-	public abstract void visiter(InstructionMoteurRotate instructionMoteurRotate);
+	public abstract void visiter(final InstructionMoteurRotate instructionMoteurRotate);
 }

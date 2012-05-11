@@ -1,8 +1,23 @@
 package modeles;
 
-public class Erreur {
+/**
+ * Définit l'action à faire lors d'une erreur.<br/>
+ * Afin de ne pas avoir à rechercher dans tout le code.<br/><br/>
+ * Au lieu de faire <code>Exception.printStackTrace()</code>, faire <code>Erreur.afficher(Exception)</code>.
+ */
+public final class Erreur {
 
-	public static void afficher(Exception e) {
+	/**
+	 * Le constructeur est public pour empêcher l'instanciation.
+	 */
+	private Erreur() { }
+	
+	/**
+	 * Définit l"action à réaliser quand une erreur est rencontrée.
+	 * 
+	 * @param e l'exception à gérer
+	 */
+	public static void afficher(final Exception e) {
 		//JOptionPane.showMessageDialog(Fenetre.getInstance(), e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 		e.printStackTrace();
 		System.exit(1);

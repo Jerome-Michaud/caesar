@@ -164,7 +164,7 @@ public class VisiteurNXC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionFor inst) {		
 		traduction+=indent()+"for (";
-		Affectation affec = inst.getIntialization();
+		Affectation affec = inst.getInitialisation();
 		if(affec != null)
 			affec.accepte(this);
 		traduction+="; ";

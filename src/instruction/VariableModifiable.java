@@ -2,17 +2,17 @@ package instruction;
 
 /**
  * Variable modifiable.
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
  */
-public class VariableModifiable extends Variable{
+public class VariableModifiable extends Variable {
 
 	/**
 	 * Crée une variable modifiable.
-	 * @param type Le type de la variable
-	 * @param nom Le nom de la variable
+	 *
+	 * @param type le type de la variable
+	 * @param nom le nom de la variable
 	 * @param valeur La valeur initiale de la variable.
 	 */
-	public VariableModifiable(TypeVariable type, String nom,  String valeur){
+	public VariableModifiable(final TypeVariable type, final String nom, final String valeur) {
 		super(type, nom, valeur);
 	}
 

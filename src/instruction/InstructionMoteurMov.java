@@ -1,15 +1,21 @@
 package instruction;
 
 import traduction.VisiteurTraduction;
+
 /**
  * Instruction de mouvement pour un moteur.
- * @author Adrien DUROY, Bastien AUBRY
  */
-public class InstructionMoteurMov extends InstructionMoteurCmd{
+public class InstructionMoteurMov extends InstructionMoteurCmd {
 
+	/**
+	 * Définit le sens du moteur.
+	 */
 	private boolean reverse;
+	/**
+	 * L'expression donnant la valeur de rotation.
+	 */
 	private Expression exp;
-	
+
 	/**
 	 * Crée une instruction de mouvement d'un moteur non initialisée.
 	 */
@@ -19,65 +25,71 @@ public class InstructionMoteurMov extends InstructionMoteurCmd{
 
 	/**
 	 * Crée une instruction de mouvement d'un moteur.
+	 *
 	 * @param moteur le moteur concerné
-	 * @param exp l'expression donnant la valeur du movement
-	 * @param reverse booléen inversant le sens du mouvement si la valeur est true
+	 * @param exp l'expression donnant la valeur du mouvement
+	 * @param reverse booléen inversant le sens du mouvement si la valeur est <code>true</code>
 	 */
-	public InstructionMoteurMov(Moteur moteur, Expression exp, boolean reverse) {
+	public InstructionMoteurMov(final Moteur moteur, final Expression exp, final boolean reverse) {
 		super(moteur);
 		this.exp = exp;
 		this.reverse = reverse;
 	}
-	
+
 	/**
-	 * Crée une instruction de mouvement d'un moteur.
+	 * Crée une instruction de mouvement d'un moteur.<br/>
 	 * Le sens du mouvement n'est pas inversé.
+	 *
 	 * @param moteur le moteur concerné
-	 * @param exp l'expression donnant la valeur du movement
+	 * @param exp l'expression donnant la valeur du mouvement
 	 */
-	public InstructionMoteurMov(Moteur moteur, Expression exp) {
+	public InstructionMoteurMov(final Moteur moteur, final Expression exp) {
 		this(moteur, exp, false);
 	}
 
 	@Override
-	public void accepte(VisiteurTraduction visiteur) {
+	public void accepte(final VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
-	
+
 	/**
 	 * Modifie le sens du mouvement.
-	 * @param reverse Si true le mouvement est inversé.
+	 *
+	 * @param reverse Si <code>true</code>, le mouvement est inversé
 	 */
-	public void setReverse(boolean reverse){
+	public void setReverse(boolean reverse) {
 		this.reverse = reverse;
 	}
-	
+
 	/**
 	 * Permet de savoir si le mouvement est inversé.
-	 * @return true si le mouvement est inversé, sinon false.
+	 *
+	 * @return <code>true</code> si le mouvement est inversé, sinon <code>false</code>.
 	 */
 	public boolean isReverse() {
 		return reverse;
 	}
-	
+
 	/**
 	 * Modifie l'expression de la valeur du mouvement.
+	 *
 	 * @param exp la nouvelle expression
 	 */
-	public void setExpression (Expression exp) {
+	public void setExpression(final Expression exp) {
 		this.exp = exp;
 	}
-	
+
 	/**
 	 * Accède à l'expression donnant la valeur du mouvement.
-	 * @return l'expression.
+	 *
+	 * @return l'expression
 	 */
 	public Expression getExpression() {
 		return exp;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "moteurMov("+getMoteur()+")";
+		return "moteurMov(" + getMoteur() + ")";
 	}
 }

@@ -1,58 +1,69 @@
 package instruction;
 
 import traduction.VisiteurTraduction;
+
 /**
  * Boucle d'une situation de départ jusqu'à
  * une condition avec un traitement à chaque tour de boucle.
+ *
  * @author Adrien DUROY, Bastien AUBRY
  */
-public class InstructionFor extends InstructionConditionelle{
+public class InstructionFor extends InstructionConditionelle {
 
-	private Affectation	intialization;
-	private Affectation	iteration;
-	
 	/**
-	 * Crée une boucle For non initialisée. Ses membres ont pour valeur null.
+	 * La valeur d'initialisation.
+	 */
+	private Affectation initialisation;
+	/**
+	 * La valeur d'itération.
+	 */
+	private Affectation iteration;
+
+	/**
+	 * Crée une boucle For non initialisée.<br/>
+	 * Ses membres ont pour valeur <code>null</code>.
 	 */
 	public InstructionFor() {
 		super();
 	}
-	
+
 	/**
 	 * Crée une boucle For.
-	 * @param cond 
-	 * @param initialization l'initialisation
+	 *
+	 * @param initialisation l'initialisation
 	 * @param condition la condition d'arrêt
 	 * @param iteration le traitement de fin de tour de boucle
 	 */
-	public InstructionFor(Affectation initialization,
-			Condition condition, Affectation iteration) {
+	public InstructionFor(final Affectation initialisation, final Condition condition, final Affectation iteration) {
 		super(condition);
-		this.intialization = initialization;
+		this.initialisation = initialisation;
 		this.iteration = iteration;
-		initialization.setIsInstruction(false);
+		initialisation.setIsInstruction(false);
 		iteration.setIsInstruction(false);
 	}
-	
+
 	/**
 	 * Accède à la partie initialisation de la boucle.
-	 * @return l'affectation d'initialisation.
+	 *
+	 * @return l'affectation d'initialisation
 	 */
-	public Affectation getIntialization() {
-		return intialization;
+	public Affectation getInitialisation() {
+		return initialisation;
 	}
 
 	/**
 	 * Modifie l'initialisation de la boucle.
-	 * @param intialization la nouvelle affectation d'initialisation.
+	 *
+	 * @param intialisation la nouvelle affectation d'initialisation
 	 */
-	public void setIntialization(Affectation intialization) {
-		this.intialization = intialization;
+	public void setInitialisation(final Affectation intialisation) {
+		this.initialisation = intialisation;
 	}
 
 	/**
 	 * Accède à l'itération de la boucle.
-	 * @return l'affectation effectuant l'iteration.
+	 *
+	 * @return l'affectation effectuant l'itération
 	 */
 	public Affectation getIteration() {
 		return iteration;
@@ -60,14 +71,15 @@ public class InstructionFor extends InstructionConditionelle{
 
 	/**
 	 * Modifie l'itération de la boucle.
-	 * @param iteration la nouvelle itération.
+	 *
+	 * @param iteration la nouvelle itération
 	 */
-	public void setIteration(Affectation iteration) {
+	public void setIteration(final Affectation iteration) {
 		this.iteration = iteration;
 	}
 
 	@Override
-	public void accepte(VisiteurTraduction visiteur) {
+	public void accepte(final VisiteurTraduction visiteur) {
 		visiteur.visiter(this);
 	}
 }
