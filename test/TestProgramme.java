@@ -1,24 +1,28 @@
-package test.instruction;
-
+import instruction.Affectation;
+import instruction.Condition;
+import instruction.InstructionAttente;
+import instruction.InstructionDeclaration;
+import instruction.InstructionIfElse;
+import instruction.InstructionMoteurMov;
+import instruction.InstructionMoteurOff;
+import instruction.InstructionStructure;
+import instruction.InstructionTache;
+import instruction.InstructionWhile;
+import instruction.Moteur;
+import instruction.Operateur;
+import instruction.TypeVariable;
+import instruction.VariableConstante;
+import instruction.VariableModifiable;
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
-import instruction.*;
 
 public class TestProgramme {
 	
-
-
 	public static void main (String[] args) throws Exception{
-		
-		
-		
 		VisiteurTraduction trad;
 		 	
 		trad = VisiteurNXC.getInstance();
 
-
-		
-		
 		//task main()
 		InstructionStructure i1 = new InstructionTache();
 		
@@ -141,47 +145,5 @@ public class TestProgramme {
 		trad.reset();
 		trad.visiter((InstructionTache) i1);
 		System.out.println(trad.getTraduction());
-		
-		
 	}	
 }
-
-
-/*
- * 
- * task main()
-{
-	
-int i ;
-i = 1 ;
-	
-	
-OnFwd(OUT_A, 75);
-Wait(800);
-OnRev(OUT_A, 75);
-Wait(360);
-Off(OUT_A);
-
- while(i > 3)
-{
-	
-	Wait(100);
-	
-	if ( i == 1 )
-	{
-		OnFwd(OUT_A, 75);
-		i = 2 ;
-	}
-	else
-	{
-		OnRev(OUT_A, 75);
-		i = 1 ;
-	}	
-
-
-
-
-
-}
-
- */

@@ -1,6 +1,4 @@
-package test.instruction;
-
-import instruction.*;
+package instruction;
 
 import static instruction.Operateur.ADDITION;
 import static instruction.Operateur.INFERIEUR;
@@ -23,10 +21,6 @@ import org.junit.Test;
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
 
-/**
- * @author m1022
- * 
- */
 public class InstructionTest {
 
 	Expression expression;

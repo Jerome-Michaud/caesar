@@ -1,11 +1,9 @@
 package instruction;
 
 import traduction.VisiteurTraduction;
+
 /**
- * Concept abstrait regroupant toutes les instructions
- * possèdant un corps contenant d'autres instructions mais
- * ne possèdant pas de condition.
- * @author Adrien DUROY, Bastien AUBRY
+ * Concept abstrait regroupant toutes les instructions possédant un corps contenant d'autres instructions mais ne possédant pas de condition.
  */
 public abstract class InstructionInconditionelle extends InstructionStructure {
 
@@ -14,5 +12,4 @@ public abstract class InstructionInconditionelle extends InstructionStructure {
 
 	@Override
 	public abstract void accepte(VisiteurTraduction visiteur);
-	
 }

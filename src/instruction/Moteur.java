@@ -1,16 +1,16 @@
 package instruction;
 
-import java.util.Collections;
-
 /**
- * Cette énumération correspond aux différents moteurs
- *
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ * Cette énumération regroupe les différents moteurs.
  */
 public enum Moteur {
 
+	/**
+	 * Les moteurs.
+	 */
 	A, B, C;
 
+	@Override
 	public String toString() {
 		switch (this) {
 			case A:

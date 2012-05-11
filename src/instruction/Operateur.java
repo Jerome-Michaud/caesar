@@ -4,21 +4,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Cette énumération regroupe les différents opérateurs disponibles pour les
- * expressions
- *
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ * Cette énumération regroupe les différents opérateurs disponibles pour les expressions.
  */
 public enum Operateur {
-
-	ADDITION, SOUSTRACTION, MULIPLICATION, DIVISION,/*
-	 * Arithmétique
+	/**
+	 * Les opérateurs binaire.
 	 */
-	ET, OU, SUPERIEUR, INFERIEUR, EGALITE, SUPEGAL, INFEGAL,/*
-	 * Logique
+	ADDITION, SOUSTRACTION, MULIPLICATION, DIVISION,
+	/**
+	 * Les opérateurs logiques.
+	 */
+	ET, OU, SUPERIEUR, INFERIEUR, EGALITE, SUPEGAL, INFEGAL,
+	/**
+	 * Les opérateurs d'affectation.
 	 */
 	AFFECTATION;
 
+	@Override
 	public String toString() {
 		switch (this) {
 			case AFFECTATION:
@@ -46,7 +48,7 @@ public enum Operateur {
 			case INFEGAL:
 				return "<=";
 			default:
-				return "";
+				return null;
 		}
 	}
 
@@ -54,13 +56,16 @@ public enum Operateur {
 	 * Permet de savoir si un opérateur est arithmétique.
 	 *
 	 * @param o l'opérateur à tester
-	 * @return true si l'opérateur est arithmétique, false sinon.
+	 * @return <code>true</code> si l'opérateur est arithmétique, sinon <code>false</code>.
 	 */
-	public static boolean isArithmetique(Operateur o) {
+	public static boolean isArithmetique(final Operateur o) {
 		switch (o) {
 			case ADDITION:
+				return true;
 			case DIVISION:
+				return true;
 			case SOUSTRACTION:
+				return true;
 			case MULIPLICATION:
 				return true;
 			default:
@@ -72,9 +77,9 @@ public enum Operateur {
 	 * Permet de savoir si un opérateur est logique.
 	 *
 	 * @param o l'opérateur à tester
-	 * @return true si l'opérateur est logique, false sinon.
+	 * @return <code>true</code> si l'opérateur est logique, sinon <code>false</code>
 	 */
-	public static boolean isLogique(Operateur o) {
+	public static boolean isLogique(final Operateur o) {
 		if (!Operateur.isArithmetique(o) && o != AFFECTATION) {
 			return true;
 		}
@@ -82,7 +87,7 @@ public enum Operateur {
 	}
 
 	/**
-	 * Donne la liste des opérateurs logiques.
+	 * Donne la liste des opérateurs logiques sous forme d'une liste.
 	 *
 	 * @return la liste des opérateurs logiques.
 	 */
@@ -97,18 +102,18 @@ public enum Operateur {
 	}
 
 	/**
-	 * Donne la liste des opérateurs logiques.
+	 * Donne la liste des opérateurs logiques sous forme d'un tableau.
 	 *
-	 * @return la liste des opérateurs logiques.
+	 * @return la liste des opérateurs logiques
 	 */
 	public static Operateur[] logiquesA() {
 		return (Operateur[]) logiques().toArray(new Operateur[0]);
 	}
 
 	/**
-	 * Donne la liste des opérateurs de comparaison.
+	 * Donne la liste des opérateurs de comparaison sous forme d'une liste.
 	 *
-	 * @return la liste des opérateurs de comparaison.
+	 * @return la liste des opérateurs de comparaison
 	 */
 	public static List<Operateur> comparaison() {
 		List<Operateur> ops = new LinkedList<Operateur>();
@@ -120,18 +125,18 @@ public enum Operateur {
 	}
 
 	/**
-	 * Donne la liste des opérateurs de comparaison.
+	 * Donne la liste des opérateurs de comparaison sous forme d'un tableau.
 	 *
-	 * @return la liste des opérateurs de comparaison.
+	 * @return la liste des opérateurs de comparaison
 	 */
 	public static Operateur[] comparaisonA() {
 		return (Operateur[]) comparaison().toArray(new Operateur[0]);
 	}
-	
+
 	/**
-	 * Donne la liste des opérateurs arithmetiques.
+	 * Donne la liste des opérateurs arithmétiques.
 	 *
-	 * @return la liste des opérateurs arithmetiques.
+	 * @return la liste des opérateurs arithmétiques
 	 */
 	public static List<Operateur> arithmetiques() {
 		List<Operateur> ops = new LinkedList<Operateur>();

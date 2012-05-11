@@ -2,8 +2,12 @@ package modeles;
 
 public enum TypeWidget {
 
+	/**
+	 * Les différents types de widget.
+	 */
 	INSTRUCTION, IF, WHILE, NEGATION, TACHE, DOWHILE, IFELSE, MOTEURMOVFWD, MOTEURMOVREV, MOTEUROFF, REPEAT, FOR, WAIT;
 
+	@Override
 	public String toString() {
 		switch (this) {
 			case INSTRUCTION:

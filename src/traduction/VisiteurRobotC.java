@@ -156,7 +156,7 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	public void visiter(InstructionFor inst) {
 
 		traduction += indent() + "for (";
-		inst.getIntialization().accepte(this);
+		inst.getInitialisation().accepte(this);
 		traduction += "; ";
 		inst.getCondition().accepte(this);
 		traduction += "; ";

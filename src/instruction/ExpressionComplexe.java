@@ -1,10 +1,8 @@
 package instruction;
 
 /**
- * Expression composée de deux autres expressions avec lesquelles effectuer une
- * opération. Utilise le design pattern Composite.
- *
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ * Expression composée de deux autres expressions avec lesquelles effectuer une opération.<br/>
+ * Utilise le design pattern Composite.
  */
 public abstract class ExpressionComplexe implements Expression {
 
@@ -26,20 +24,18 @@ public abstract class ExpressionComplexe implements Expression {
 	 * @param membreGauche l'expression à gauche de l'opérateur
 	 * @param membreDroit l'expression à droite de l'opérateur
 	 */
-	public ExpressionComplexe(Operateur operation, Expression membreGauche,
-			Expression membreDroit) {
+	public ExpressionComplexe(final Operateur operation, final Expression membreGauche, final Expression membreDroit) {
 		this.operateur = operation;
 		this.membreGauche = membreGauche;
 		this.membreDroit = membreDroit;
 	}
 
 	/**
-	 * Crée une expression complexe dont seul l'opérateur est défini, les
-	 * membres devront être fournis plus tard.
+	 * Crée une expression complexe dont seul l'opérateur est défini, les membres devront être fournis plus tard.
 	 *
 	 * @param operation l'opérateur de l'expression
 	 */
-	public ExpressionComplexe(Operateur operation) {
+	public ExpressionComplexe(final Operateur operation) {
 		this.operateur = operation;
 	}
 
@@ -48,7 +44,7 @@ public abstract class ExpressionComplexe implements Expression {
 	 *
 	 * @param expression l'expression à mettre en membre droit
 	 */
-	public void setMembreDroit(Expression expression) {
+	public void setMembreDroit(final Expression expression) {
 		membreDroit = expression;
 	}
 
@@ -57,7 +53,7 @@ public abstract class ExpressionComplexe implements Expression {
 	 *
 	 * @param expression l'expression à mettre en membre gauche
 	 */
-	public void setMembreGauche(Expression expression) {
+	public void setMembreGauche(final Expression expression) {
 		membreGauche = expression;
 	}
 
