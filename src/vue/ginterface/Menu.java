@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.*;
+
+import modeles.Erreur;
+
 import org.omg.CORBA.portable.InputStream;
 import ressources.ResourceTools;
 import traduction.VisiteurNXC;
@@ -22,14 +25,36 @@ import traduction.VisiteurRobotC;
  * @since 1.0
  * @version 1.0
  */
-public class Menu extends JMenuBar implements ActionListener {
+public class Menu extends JMenuBar {
 
     private JMenu fichier, exportation, aide;
     private JMenuItem fichierNouveau, fichierOuvrir, fichierEnregistrer, fichierQuitter;
     private JMenuItem exportationNXC, exportationRobotC;
     private JMenuItem aideAPropos;
+    
+    /**
+     * SINGLETON.
+     * 
+     * @since 1.0
+     */
+    private static final Menu instance = new Menu();
+    /**
+     * @see Vue.Interface.Menu.ListenerMenu
+     */
+    private ListenerMenu listener = new ListenerMenu();
+    
+    /**
+     * SINGLETIN.
+     * 
+     * @since 1.0
+     * 
+     * @return L'instance unique de Menu
+     */
+    public static Menu getInstance() {
+    	return instance;
+    }
 
-    public Menu() {
+    private Menu() {
         this.fichier = new JMenu("Fichier");
         this.fichierNouveau = new JMenuItem("Nouveau");
         this.fichierNouveau.setIcon(ResourceTools.getIcon("page_blank.png"));
@@ -52,7 +77,7 @@ public class Menu extends JMenuBar implements ActionListener {
         this.exportationRobotC = new JMenuItem("En RobotC");
         this.exportationRobotC.setIcon(ResourceTools.getIcon("export_robotc.png"));
         this.exportation.add(exportationNXC);
-        this.exportation.add(exportationRobotC);
+        //this.exportation.add(exportationRobotC);
 
         this.aide = new JMenu("?");
         this.aideAPropos = new JMenuItem("A propos");
@@ -63,51 +88,58 @@ public class Menu extends JMenuBar implements ActionListener {
         this.add(exportation);
         this.add(aide);
 
-        fichierNouveau.addActionListener(this);
-        fichierOuvrir.addActionListener(this);
-        fichierEnregistrer.addActionListener(this);
-        fichierQuitter.addActionListener(this);
-        exportationNXC.addActionListener(this);
-        exportationRobotC.addActionListener(this);
-        aideAPropos.addActionListener(this);
+        fichierNouveau.addActionListener(listener);
+        fichierOuvrir.addActionListener(listener);
+        fichierEnregistrer.addActionListener(listener);
+        fichierQuitter.addActionListener(listener);
+        exportationNXC.addActionListener(listener);
+        exportationRobotC.addActionListener(listener);
+        aideAPropos.addActionListener(listener);
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == fichierNouveau) {
-            nouveau();
-        }
-		else if (e.getSource() == fichierOuvrir) {
-            SavingTools.load();
-        }
-		else if (e.getSource() == fichierEnregistrer) {
-            SavingTools.save();
-        }
-		else if (e.getSource() == fichierQuitter) {
-            System.exit(0);
-        }
-		else if (e.getSource() == exportationNXC) {
-			String name = System.getProperty ( "os.name" );
-			//
-			CreationCodeTools.getInstance().ecrire(Variables.CHEMIN_ACCES_NBC+"\\code.nxc", VisiteurNXC.getInstance().getTraduction());
-			if ( name != "Linux" && name != "mac" ){
-				
-					try {
-						String line = "cmd.exe /C start " + Variables.CHEMIN_ACCES_NBC + "\\lancer.bat";
-						Process p = Runtime.getRuntime().exec(line);
-						InputStream in = (InputStream) p.getInputStream(); 
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-			}
-			
-        }
-		else if (e.getSource() == exportationRobotC) {
-        }
-		else if (e.getSource() == aideAPropos) {
-            new FenetreAPropos();
-        }
+    
+    /**
+     * Permet de définir les différentes actions du menu.
+     * 
+     * @since 1.0
+     */
+    private class ListenerMenu implements ActionListener {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+	        if (e.getSource() == fichierNouveau) {
+	            nouveau();
+	        }
+			else if (e.getSource() == fichierOuvrir) {
+	            SavingTools.load();
+	        }
+			else if (e.getSource() == fichierEnregistrer) {
+	            SavingTools.save();
+	        }
+			else if (e.getSource() == fichierQuitter) {
+	            System.exit(0);
+	        }
+			else if (e.getSource() == exportationNXC) {
+				String name = System.getProperty("os.name");
+				CreationCodeTools.ecrire(Variables.CHEMIN_ACCES_NBC + "\\code.nxc", VisiteurNXC.getInstance().getTraduction());
+				String line = "";
+				if (!name.equals("Linux") && !name.equals("mac")) {
+					line = "cmd.exe /C start " + Variables.CHEMIN_ACCES_NBC + "\\lancer.bat";
+				}
+				else {
+					//TODO faire un fichier pour lancer la traduction sous linux
+				}
+				try {
+					Runtime.getRuntime().exec(line);
+				} catch (IOException e1) {
+					Erreur.afficher(e1);
+				}
+	        }
+			else if (e.getSource() == exportationRobotC) {
+				//TODO finir l'implémentation de la traduction RobotC
+	        }
+			else if (e.getSource() == aideAPropos) {
+	            FenetreAPropos p = new FenetreAPropos();
+	        }
+	    }
     }
     /**
      * Permet de créer un nouveau projet.

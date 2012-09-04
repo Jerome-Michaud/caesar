@@ -152,7 +152,7 @@ public class ForWidget extends ModeleWidget {
 	 * @param o L'opérateur de la condition
 	 * @param fin La valeur e la condition d'arrêt
 	 */
-	public void setCondition(Variable v, Operateur o, String fin) {
+	public final void setCondition(Variable v, Operateur o, String fin) {
 		Condition cond = null;
 		try {
 			cond = new Condition(o, v, new VariableConstante(TypeVariable.INT, "", fin));
@@ -167,7 +167,7 @@ public class ForWidget extends ModeleWidget {
 	 * @param v La variable la boucle
 	 * @param deb La valeur de début
 	 */
-	public void setInitialization(Variable v, String deb) {
+	public final void setInitialization(Variable v, String deb) {
 		Affectation aff = new Affectation(false);
 		aff.setMembreGauche(v);
 		aff.setMembreDroit(new VariableConstante(TypeVariable.INT, "", deb));
@@ -179,7 +179,7 @@ public class ForWidget extends ModeleWidget {
 	 * @param v La variable concernée
 	 * @param pas La valeur du pas pour une itération
 	 */
-	public void setIteration(Variable v, String pas) {
+	public final void setIteration(Variable v, String pas) {
 		Affectation aff = new Affectation(false);
 		aff.setMembreGauche(v);
 		Operation op = null;

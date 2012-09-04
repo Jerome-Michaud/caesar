@@ -26,7 +26,6 @@ public class Fenetre extends JFrame {
      */
     private GlassPane glassPane;
     private Dimension ecran;
-    private Menu menu;
     private JSplitPane split;
     
     private Fenetre() {
@@ -45,8 +44,7 @@ public class Fenetre extends JFrame {
         ecran = Toolkit.getDefaultToolkit().getScreenSize();
         this.setMinimumSize(new Dimension(((int) ecran.getWidth() * 2 / 3), ((int) ecran.getHeight() * 2 / 3)));
         
-        this.menu = new Menu();
-        this.setJMenuBar(this.menu);
+        this.setJMenuBar(Menu.getInstance());
         
         
         this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, rootPaneCheckingEnabled, ZoneUtilisateur.getInstance(), PanelCodeConsole.getInstance());
@@ -62,9 +60,6 @@ public class Fenetre extends JFrame {
         this.split.setDividerLocation(0.75);
     }
     
-    public Menu getMenu() {
-        return this.menu;
-    }
     /**
      * SINGLETON.
      *

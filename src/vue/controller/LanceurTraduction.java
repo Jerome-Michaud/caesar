@@ -20,7 +20,7 @@ import vue.widget.modele.ModeleWidget;
  * Utilise le design pattern Singleton.
  * @author Adrien DUROY
  */
-public class LanceurTraduction extends MouseAdapter {
+public class LanceurTraduction {
 
 	private VisiteurTraduction traducteur;
 	private static LanceurTraduction instance = null;
@@ -39,8 +39,12 @@ public class LanceurTraduction extends MouseAdapter {
 		return instance;
 	}
 	
-	@Override
-	public void mouseReleased(MouseEvent e) {
+	/**
+	 * Permet de lancer la traduction.
+	 * 
+	 * @since 1.0
+	 */
+	public void lancerTraduction() {
 		traducteur.reset();
 		List<Instruction> list = trouveTaches();
 		for(Instruction inst : list)
@@ -56,13 +60,11 @@ public class LanceurTraduction extends MouseAdapter {
 	 */
 	private List<Instruction> trouveTaches() {
 		List<Instruction> list = new LinkedList<Instruction>();
-    	for(List<Widget> racine : ArborescenceTools.getInstance().getArborescence())
-    	{
-    		if(!racine.isEmpty())
-    		{
+    	for(List<Widget> racine : ArborescenceTools.getInstance().getArborescence()) {
+    		if(!racine.isEmpty()) {
     			Widget tache = racine.get(0);
     			ModeleWidget m = tache.getModele();
-    			if( m.getType() == TypeWidget.TACHE){
+    			if(m.getType() == TypeWidget.TACHE) {
     				System.out.println("Tâche trouvée : Faire traduction");
     				list.add((Instruction) m.getElementProgramme());
     			}
@@ -74,9 +76,9 @@ public class LanceurTraduction extends MouseAdapter {
 	/**
 	 * Modifie le traducteur utilisé.
 	 * Si n'a jamais été appelé c'est le traducteur vers NXC qui est utilisé.
-	 * @param v le nouveau traducteur
+	 * @param visiteur le nouveau traducteur
 	 */
-	public void setTraducteur(VisiteurTraduction v) {
-		traducteur = v;
+	public void setTraducteur(VisiteurTraduction visiteur) {
+		traducteur = visiteur;
 	}
 }

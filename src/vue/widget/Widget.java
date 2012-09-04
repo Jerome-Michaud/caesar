@@ -97,7 +97,7 @@ public class Widget extends JComponent {
      * Méthode permettant de repeindre le widget, mais aussi le
      * PanelCodeGraphique et le GlassPane
      */
-    private void repaintAll(MouseEvent e) {
+    private void repaintAll() {
         PanelWidget.getInstance().repaint();
         PanelCodeGraphique.getInstance().repaint();
         GlassPane.getInstance().repaint();
@@ -130,14 +130,14 @@ public class Widget extends JComponent {
     /**
 	 * Méthode d'initialisation des listeners du widget (click, drag et drop)
 	 */
-    public void initListeners() {
+    public final void initListeners() {
         this.addMouseListener(new MouseAdapter() {
-
+        	@Override
             public void mousePressed(MouseEvent e) {
                 DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
-                repaintAll(e);
+                repaintAll();
             }
-
+        	@Override
             public void mouseReleased(MouseEvent e) {
                 DragAndDropTools.getInstance().dropWidget();
             }

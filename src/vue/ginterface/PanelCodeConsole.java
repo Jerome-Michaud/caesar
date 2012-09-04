@@ -35,8 +35,6 @@ public class PanelCodeConsole extends JPanel {
 		this.setBorder(BorderFactory.createTitledBorder("Aperçu code console"));
 		
 		this.add(textarea, BorderLayout.CENTER);
-		
-		this.textarea.addMouseListener(LanceurTraduction.getInstance());
 	}
 	/**
 	 * SINGLETON.
