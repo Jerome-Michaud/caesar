@@ -22,14 +22,19 @@ import modeles.Erreur;
  * @since 1.0
  * @version 1.0
  */
-public class FenetreAPropos extends JFrame implements MouseListener {
+public class FenetreAPropos extends JFrame {
 
 	private JScrollPane textPane = null;
 	private JTextPane text = null;
 	private int tW = 300, tH = 350;
 	private Timer t;
+	/**
+	 * @see Vue.Interface.FenetreAPropos.ListenerSourisFenetre
+	 */
+	private ListenerSourisFenetre listenerSouris;
 
 	public FenetreAPropos() {
+		this.listenerSouris = new ListenerSourisFenetre();
 		this.setTitle("A propos");
 		this.setSize(400, 370);
 		this.setResizable(false);
@@ -58,15 +63,15 @@ public class FenetreAPropos extends JFrame implements MouseListener {
 		vp.setViewPosition(new Point(0, 0));
 
 		SwingUtilities.invokeLater(new Runnable() {
-
+			@Override
 			public void run() {
-				t = new Timer(40, new ActionListenerTextTimer(vp, tH, 1800));//24 images par secondes
+				t = new Timer(40, new ActionListenerTextTimer(vp, 1800));//24 images par secondes
 				t.start();
 			}
 		});
 
-		this.text.addMouseListener(this);
-		this.textPane.addMouseListener(this);
+		this.text.addMouseListener(listenerSouris);
+		this.textPane.addMouseListener(listenerSouris);
 
 		this.setLayout(new BorderLayout());
 		this.add(this.textPane, BorderLayout.CENTER);
@@ -82,9 +87,9 @@ public class FenetreAPropos extends JFrame implements MouseListener {
 	private class ActionListenerTextTimer implements ActionListener {
 
 		private int i, posMax;
-		JViewport vp;
+		private JViewport vp;
 
-		ActionListenerTextTimer(JViewport vp, int height, int posMax) {
+		public ActionListenerTextTimer(JViewport vp, int posMax) {
 			super();
 			this.vp = vp;
 			i = 1;
@@ -105,16 +110,24 @@ public class FenetreAPropos extends JFrame implements MouseListener {
 		super.dispose();
 		t.stop();
 	}
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		this.dispose();
+
+	/**
+	 * Définie le comportement lors du clic.
+	 * 
+	 * @since 1.0
+	 */
+	private class ListenerSourisFenetre implements MouseListener {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			dispose();
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {}
+		@Override
+		public void mouseExited(MouseEvent e) {}
+		@Override
+		public void mousePressed(MouseEvent e) {}
+		@Override
+		public void mouseReleased(MouseEvent e) {}
 	}
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-	@Override
-	public void mouseExited(MouseEvent e) {}
-	@Override
-	public void mousePressed(MouseEvent e) {}
-	@Override
-	public void mouseReleased(MouseEvent e) {}
 }

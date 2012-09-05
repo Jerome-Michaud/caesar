@@ -1,5 +1,6 @@
 package vue.tools;
 
+import vue.controller.LanceurTraduction;
 import vue.ginterface.*;
 import vue.widget.IWidget;
 import vue.widget.Widget;
@@ -283,7 +284,7 @@ public class DragAndDropTools {
 				}
 				p.repaint();
 				if (compSurvole != null && compSurvole.isComplexe()) {
-					compSurvole.applyChangeModele();
+					compSurvole.applyChangeModele();//supprimer
 					((WidgetCompose) compSurvole).notifyChange();
 				}
 			} else {
@@ -318,6 +319,7 @@ public class DragAndDropTools {
 		}
 		g.repaint();
 		g.setPointLigneSurEcran(null);
+		LanceurTraduction.getInstance().lancerTraduction();
 	}
 	/**
 	 * Méthode récursive permettant de supprimer un widget du GlassPane.

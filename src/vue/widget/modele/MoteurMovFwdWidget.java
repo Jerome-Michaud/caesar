@@ -130,6 +130,5 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 	private void setInstructionValeur(String nom) {
 		((InstructionMoteurMov) getElementProgramme()).setReverse(false);
 		((InstructionMoteurMov) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
-		System.out.println(((InstructionMoteurMov) getElementProgramme()));
 	}
 }

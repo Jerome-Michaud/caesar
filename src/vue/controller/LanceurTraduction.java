@@ -20,7 +20,8 @@ import vue.widget.modele.ModeleWidget;
  * Cette classe s'occupe de lancer la traduction du programme construit avec les widgets.<br/>
  * Utilise le design pattern Singleton.
  */
-public final class LanceurTraduction extends MouseAdapter {
+
+public class LanceurTraduction {
 
 	/**
 	 * Le visiteur qui doit être éxecuté.
@@ -49,9 +50,13 @@ public final class LanceurTraduction extends MouseAdapter {
 		}
 		return instance;
 	}
-
-	@Override
-	public void mouseReleased(final MouseEvent e) {
+	
+	/**
+	 * Permet de lancer la traduction.
+	 * 
+	 * @since 1.0
+	 */
+	public void lancerTraduction() {
 		traducteur.reset();
 		List<Instruction> list = trouveTaches();
 		for (Instruction inst : list) {
@@ -69,26 +74,26 @@ public final class LanceurTraduction extends MouseAdapter {
 	 */
 	private List<Instruction> trouveTaches() {
 		List<Instruction> list = new LinkedList<Instruction>();
-		for (List<Widget> racine : ArborescenceTools.getInstance().getArborescence()) {
-			if (!racine.isEmpty()) {
-				Widget tache = racine.get(0);
-				ModeleWidget m = tache.getModele();
-				if (m.getType() == TypeWidget.TACHE) {
-					System.out.println("Tâche trouvée : Faire traduction");
-					list.add((Instruction) m.getElementProgramme());
-				}
-			}
-		}
-		return list;
-	}
-
+    	for(List<Widget> racine : ArborescenceTools.getInstance().getArborescence()) {
+    		if(!racine.isEmpty()) {
+    			Widget tache = racine.get(0);
+    			ModeleWidget m = tache.getModele();
+    			if(m.getType() == TypeWidget.TACHE) {
+    				System.out.println("Tâche trouvée : Faire traduction");
+    				list.add((Instruction) m.getElementProgramme());
+    			}
+    		}
+    	}
+    	return list;
+    }
+	
 	/**
-	 * Modifie le traducteur utilisé.<br/>
-	 * Si n'a jamais été appelé, c'est le traducteur vers NXC qui est utilisé.
-	 *
-	 * @param v le nouveau traducteur
+	 * Modifie le traducteur utilisé.<br />
+	 * Si n'a jamais été appelé c'est le traducteur vers NXC qui est utilisé.
+     *
+	 * @param visiteur le nouveau traducteur
 	 */
-	public void setTraducteur(final VisiteurTraduction v) {
-		traducteur = v;
+	public void setTraducteur(VisiteurTraduction visiteur) {
+		traducteur = visiteur;
 	}
 }

@@ -24,7 +24,6 @@ import modeles.TypeWidget;
  * Classe représentant graphiquement un widget.
  */
 public class Widget extends JComponent {
-
 	/**
 	 * Ratio à partir duquel, si on dépose un widget à cheval entre le <code>PanelInstruction</code> et le <code>PanelCodeGraphique</code>,
 	 * on peut choisir soit de déplacer un widget pour qu'il soit entièrement sur le PanelCodeGraphique, ou bien le supprimer.
@@ -91,36 +90,36 @@ public class Widget extends JComponent {
 		for (Zone z : this.modele.getLesZonesSaisies()) {
 			this.add((JComponent) z);
 		}
+        
+        this.parent = null;
+    }
 
-		this.parent = null;
-	}
+    /**
+     * Méthode permettant de repeindre le widget, mais aussi le
+     * PanelCodeGraphique et le GlassPane
+     */
+    private void repaintAll() {
+        PanelWidget.getInstance().repaint();
+        PanelCodeGraphique.getInstance().repaint();
+        GlassPane.getInstance().repaint();
+    }
 
-	/**
-	 * Méthode permettant de repeindre le widget, mais aussi le PanelCodeGraphique et le GlassPane.
-	 * 
-	 * @param e l'évènement
-	 */
-	private void repaintAll(final MouseEvent e) {
-		PanelWidget.getInstance().repaint();
-		PanelCodeGraphique.getInstance().repaint();
-		GlassPane.getInstance().repaint();
-	}
+    /**
+     * Méthode permettant de définir la forme du widget et de calculer ses
+     * nouvelles dimensions et localisations.
+     *
+     * @param setLocation Permet de choisir si il faut également redéfinir la localisation du widget
+     */
+    public void setForme(final boolean setLocation) {
+        int maxX = 0;
+        for (Integer i : this.modele.getForme().xpoints) {
+            maxX = Math.max(maxX, i);
+        }
 
-	/**
-	 * Méthode permettant de définir la forme du widget et de calculer ses nouvelles dimensions et localisations.
-	 *
-	 * @param setLocation <code>true</code> si il faut également redéfinir la localisation du widget
-	 */
-	public void setForme(final boolean setLocation) {
-		int maxX = 0;
-		for (Integer i : this.modele.getForme().xpoints) {
-			maxX = Math.max(maxX, i);
-		}
-
-		int maxY = 0;
-		for (Integer i : this.modele.getForme().ypoints) {
-			maxY = Math.max(maxY, i);
-		}
+        int maxY = 0;
+        for (Integer i : this.modele.getForme().ypoints) {
+            maxY = Math.max(maxY, i);
+        }
 
 		if (setLocation) {
 			this.setBounds(0, 0, maxX + 1, maxY + 1);
@@ -128,8 +127,8 @@ public class Widget extends JComponent {
 		else {
 			this.setSize(maxX + 1, maxY + 1);
 		}
-		this.setPreferredSize(new Dimension(maxX, maxY));
-	}
+        this.setPreferredSize(new Dimension(maxX, maxY));
+    }
 
 	/**
 	 * Méthode d'initialisation des listeners du widget (click, drag et drop).
@@ -140,7 +139,7 @@ public class Widget extends JComponent {
 			@Override
 			public void mousePressed(final MouseEvent e) {
 				DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
-				repaintAll(e);
+				repaintAll();
 			}
 
 			@Override
