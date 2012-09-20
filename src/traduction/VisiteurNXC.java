@@ -1,27 +1,17 @@
 package traduction;
 
-import instruction.Affectation;
 import instruction.CapteurSlot;
 import instruction.Expression;
-import instruction.ExpressionComplexe;
 import instruction.Instruction;
 import instruction.InstructionAttente;
-import instruction.InstructionDeclaration;
-import instruction.InstructionDeclarationAffectation;
 import instruction.InstructionDeclarationCapteur;
-import instruction.InstructionDoWhile;
-import instruction.InstructionFor;
-import instruction.InstructionIf;
-import instruction.InstructionIfElse;
 import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
 import instruction.InstructionMoteurRotate;
 import instruction.InstructionRepeat;
 import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
-import instruction.InstructionWhile;
 import instruction.Moteur;
-import instruction.Variable;
 import instruction.VariableCapteur;
 
 /**
@@ -29,7 +19,7 @@ import instruction.VariableCapteur;
  * Cette classe implémente le design pattern Singleton.
  * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
  */
-public class VisiteurNXC extends VisiteurTraduction {
+public class VisiteurNXC extends VisiteurC {
 	
 	private static VisiteurNXC instance;
 	
@@ -81,109 +71,6 @@ public class VisiteurNXC extends VisiteurTraduction {
 			traduction += "IN_4";
 			break;
 		}
-	}
-	
-	
-	@Override
-	public void visiter(InstructionIf inst) {
-		traduction+=indent();
-		traduction+="if(";
-		ExpressionComplexe cond = inst.getCondition();
-		if(cond != null)
-			cond.accepte(this);
-		traduction+="){\n";
-		
-		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
-			is.accepte(this);
-		}
-		nivIndent--;
-		
-		traduction+=indent()+"}\n";
-	}
-
-	@Override
-	public void visiter(InstructionIfElse inst) {
-		InstructionIf membre = inst.getMembreIf();
-		if(membre != null)
-			membre.accepte(this);
-		// Else
-		traduction+=indent();
-		traduction+="else{\n";
-		
-		nivIndent++;
-		for (Instruction is:inst.getEnfantsElse()){
-			is.accepte(this);
-		}
-		
-		nivIndent--;
-		
-		traduction+=indent()+"}\n";	
-	}
-
-	@Override
-	public void visiter(InstructionWhile inst) {
-		traduction+=indent();
-		
-		traduction+="while(";
-		ExpressionComplexe cond = inst.getCondition();
-		if(cond != null)
-			cond.accepte(this);
-		traduction+="){\n";
-		
-		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
-			is.accepte(this);		
-		}
-		
-		nivIndent--;
-		
-		traduction+=indent()+"}\n";
-	}
-
-	@Override
-	public void visiter(InstructionDoWhile inst) {
-		traduction+=indent();
-		
-		traduction+="do{\n";
-		
-		nivIndent++;
-		for (Instruction is:inst.getEnfants()) {
-			is.accepte(this);		
-		}
-		
-		nivIndent--;
-		
-		traduction+=indent()+"} while(";
-		ExpressionComplexe cond = inst.getCondition();
-		if(cond != null)
-			cond.accepte(this);
-		traduction+=");\n";
-	}
-	
-	@Override
-	public void visiter(InstructionFor inst) {		
-		traduction+=indent()+"for (";
-		Affectation affec = inst.getInitialisation();
-		if(affec != null)
-			affec.accepte(this);
-		traduction+="; ";
-		ExpressionComplexe cond = inst.getCondition();
-		if(cond != null)
-			cond.accepte(this);
-		traduction+="; ";
-		affec = inst.getIteration();
-		if(affec != null)
-			affec.accepte(this);
-		traduction+=" ){\n";
-			
-		nivIndent++;
-		for (Instruction is:inst.getEnfants()){
-			is.accepte(this);
-		}
-		nivIndent--;
-		
-		traduction+=indent()+"}\n";	
 	}
 
 	@Override
@@ -264,72 +151,6 @@ public class VisiteurNXC extends VisiteurTraduction {
 	}
 
 	@Override
-	public void visiter(Affectation affectation) {
-		if(affectation.isInstruction())	
-			traduction += indent();
-		Expression membre = affectation.getMembreGauche();
-		if(membre != null)
-			membre.accepte(this);
-		traduction += " = ";
-		membre = affectation.getMembreDroit();
-		if(membre != null)
-			membre.accepte(this);
-		if(affectation.isInstruction())
-			super.traduction += ";\n";
-	}
-
-	@Override
-	public void visiter(ExpressionComplexe expr) {
-		traduction += "(";
-		Expression membre = expr.getMembreGauche();
-		if(membre != null)
-			membre.accepte(this);
-		traduction += " "+expr.getOperateur()+" ";
-		membre = expr.getMembreDroit();
-		if(membre != null)
-			membre.accepte(this);
-		traduction += ")";
-	}
-
-	@Override
-	public void visiter(Variable variable) {
-		if (variable.isConstante()) {
-			traduction += variable.getValeur();
-		}
-		else {
-			traduction += variable.getNom();
-		}
-	}
-
-	@Override
-	public void visiter(InstructionDeclaration instructionDeclaration) {
-		traduction += indent();
-		Variable var = instructionDeclaration.getMembre();
-		if(var != null)
-		{
-			traduction += var.getType()+" ";
-			var.accepte(this);
-		}
-		traduction += ";\n";		
-	}
-
-	@Override
-	public void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation) {
-		traduction += indent();
-		Variable var = instructionDeclarationAffectation.getMembre();
-		if(var != null)
-		{
-			traduction += var.getType()+" ";
-			var.accepte(this);
-		}
-		traduction += " = ";
-		Expression ex = instructionDeclarationAffectation.getMembreDroit();
-		if(ex != null)
-			ex.accepte(this);
-		traduction += ";\n";	
-	}
-
-	@Override
 	public void visiter(InstructionDeclarationCapteur instructionDeclarationCapteur) {
 		traduction += indent();
 		switch (instructionDeclarationCapteur.getCapteur()){
@@ -343,16 +164,11 @@ public class VisiteurNXC extends VisiteurTraduction {
 	public void visiter(VariableCapteur variableCapteur) {
 		traduction+="Sensor(";
 		ajouterNomCapteur(variableCapteur.getCapteurSlot());
-		traduction+=")";
-		
-		
+		traduction+=")";	
 	}
 
 	@Override
 	public void visiter(InstructionMoteurRotate instructionMoteurRotate) {
 		// TODO Auto-generated method stub
-		
 	}
-
-
 }
