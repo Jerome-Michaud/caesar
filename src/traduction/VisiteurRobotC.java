@@ -1,24 +1,15 @@
 package traduction;
 
-import instruction.Affectation;
 import instruction.CapteurSlot;
 import instruction.ExpressionComplexe;
 import instruction.Instruction;
 import instruction.InstructionAttente;
-import instruction.InstructionDeclaration;
-import instruction.InstructionDeclarationAffectation;
 import instruction.InstructionDeclarationCapteur;
-import instruction.InstructionDoWhile;
-import instruction.InstructionFor;
-import instruction.InstructionIf;
-import instruction.InstructionIfElse;
 import instruction.InstructionMoteurMov;
 import instruction.InstructionMoteurOff;
 import instruction.InstructionMoteurRotate;
-import instruction.InstructionRepeat;
 import instruction.InstructionTache;
 import instruction.InstructionTempsCourant;
-import instruction.InstructionWhile;
 import instruction.Moteur;
 import instruction.Variable;
 import instruction.VariableCapteur;
@@ -29,7 +20,7 @@ import instruction.VariableCapteur;
  *
  * @author Ivan MELNYCHENKO, Adrien DUROY
  */
-public class VisiteurRobotC extends VisiteurTraduction {
+public class VisiteurRobotC extends VisiteurC {
 
 	private static VisiteurRobotC instance;
 
@@ -70,107 +61,6 @@ public class VisiteurRobotC extends VisiteurTraduction {
 			default:
 				return null;
 		}
-	}
-
-	@Override
-	public void visiter(InstructionIf inst) {
-		traduction += indent();
-		traduction += "if(";
-		inst.getCondition().accepte(this);
-		traduction += "){\n";
-
-		nivIndent++;
-		for (Instruction is : inst.getEnfants()) {
-			is.accepte(this);
-		}
-		nivIndent--;
-
-		traduction += indent() + "}\n";
-	}
-
-	@Override
-	public void visiter(InstructionIfElse inst) {
-
-		inst.getMembreIf().accepte(this);
-
-
-		// Else
-
-		traduction += indent();
-		traduction += "else{\n";
-
-		nivIndent++;
-		for (Instruction is : inst.getEnfants()) {
-			is.accepte(this);
-
-		}
-
-		nivIndent--;
-
-		traduction += indent() + "}\n";
-
-	}
-
-	@Override
-	public void visiter(InstructionWhile inst) {
-
-		traduction += indent();
-
-		traduction += "while(";
-		inst.getCondition().accepte(this);
-		traduction += "){\n";
-
-		nivIndent++;
-		for (Instruction is : inst.getEnfants()) {
-			is.accepte(this);
-
-		}
-
-		nivIndent--;
-
-		traduction += indent() + "}\n";
-	}
-
-	@Override
-	public void visiter(InstructionDoWhile inst) {
-
-		traduction += indent();
-
-		traduction += "do{\n";
-
-		nivIndent++;
-		for (Instruction is : inst.getEnfants()) {
-			is.accepte(this);
-
-		}
-
-		nivIndent--;
-
-		traduction += indent() + "} while(";
-		inst.getCondition().accepte(this);
-		traduction += ");\n";
-
-	}
-
-	@Override
-	public void visiter(InstructionFor inst) {
-
-		traduction += indent() + "for (";
-		inst.getInitialisation().accepte(this);
-		traduction += "; ";
-		inst.getCondition().accepte(this);
-		traduction += "; ";
-		inst.getIteration().accepte(this);
-		traduction += " ){\n";
-
-		nivIndent++;
-		for (Instruction is : inst.getEnfants()) {
-			is.accepte(this);
-		}
-		nivIndent--;
-
-		traduction += indent() + "}\n";
-
 	}
 
 	@Override
@@ -229,37 +119,6 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	}
 
 	@Override
-	public void visiter(InstructionRepeat inst) {
-		traduction += indent() + "int variablePourFor";
-		traduction += indent() + "for (";
-		traduction += "variablePourFor = 0 ; ";
-		traduction += "variablePourFor <" + inst.getExpression() + ";";
-		traduction += "variablePourFor++";
-		traduction += " ){\n";
-
-		nivIndent++;
-		for (Instruction is : inst.getEnfants()) {
-			is.accepte(this);
-		}
-		nivIndent--;
-
-		traduction += indent() + "}\n";
-	}
-
-	@Override
-	public void visiter(Affectation affectation) {
-		if (affectation.isInstruction()) {
-			traduction += indent();
-		}
-		affectation.getMembreGauche().accepte(this);
-		traduction += " = ";
-		affectation.getMembreDroit().accepte(this);
-		if (affectation.isInstruction()) {
-			super.traduction += ";\n";
-		}
-	}
-
-	@Override
 	public void visiter(ExpressionComplexe expr) {
 		traduction += "(";
 		expr.getMembreGauche().accepte(this);
@@ -271,27 +130,6 @@ public class VisiteurRobotC extends VisiteurTraduction {
 	@Override
 	public void visiter(Variable variable) {
 		traduction += variable.toString();
-	}
-
-	@Override
-	public void visiter(InstructionDeclaration instructionDeclaration) {
-		traduction += indent();
-		traduction += instructionDeclaration.getMembreGauche().getType() + " ";
-		instructionDeclaration.getMembreGauche().accepte(this);
-
-		traduction += ";\n";
-
-	}
-
-	@Override
-	public void visiter(InstructionDeclarationAffectation instructionDeclarationAffectation) {
-		traduction += indent();
-		traduction += instructionDeclarationAffectation.getMembreGauche().getType() + " ";
-		instructionDeclarationAffectation.getMembreGauche().accepte(this);
-		traduction += " = ";
-		instructionDeclarationAffectation.getMembreDroit().accepte(this);
-		traduction += ";\n";
-
 	}
 
 	@Override
@@ -307,8 +145,6 @@ public class VisiteurRobotC extends VisiteurTraduction {
 		temp += ";\n";
 
 		traduction = temp + "\n\n\n" + traduction;
-
-
 	}
 
 	@Override
@@ -316,9 +152,6 @@ public class VisiteurRobotC extends VisiteurTraduction {
 		traduction += "SensorValue((tSensors)";
 		traduction += getNomCapteur(variableCapteur.getCapteurSlot());
 		traduction += ")";
-
-
-
 	}
 
 	@Override
