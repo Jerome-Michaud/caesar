@@ -202,12 +202,7 @@ public class ForWidget extends ModeleWidget {
 	 * @param fin La valeur e la condition d'arrêt
 	 */
 	public void setCondition(final Variable v, final Operateur o, final String fin) {
-		Condition cond = null;
-		try {
-			cond = new Condition(o, v, new VariableConstante(TypeVariable.INT, "", fin));
-		} catch (Exception e) {
-			Erreur.afficher(e);
-		}
+		Condition cond =  new Condition(o, v, new VariableConstante(TypeVariable.INT, "", fin));
 		((InstructionFor) getElementProgramme()).setCondition(cond);
 	}
 
@@ -233,12 +228,7 @@ public class ForWidget extends ModeleWidget {
 	public void setIteration(final Variable v, final String pas) {
 		Affectation aff = new Affectation(false);
 		aff.setMembreGauche(v);
-		Operation op = null;
-		try {
-			op = new Operation(Operateur.ADDITION, v, new VariableConstante(TypeVariable.INT, "", pas));
-		} catch (Exception e) {
-			Erreur.afficher(e);
-		}
+		Operation op = new Operation(Operateur.ADDITION, v, new VariableConstante(TypeVariable.INT, "", pas));
 		aff.setMembreDroit(op);
 		((InstructionFor) getElementProgramme()).setIteration(aff);
 	}

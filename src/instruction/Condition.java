@@ -13,12 +13,12 @@ public class Condition extends ExpressionComplexe {
 	 * @param operation l'opérateur logique à utiliser
 	 * @param membreDroit le membre gauche de la condition
 	 * @param membreGauche le membre droit de la condition
-	 * @throws Exception Si l'opérateur fourni n'est pas un opérateur logique.
+	 * @throws RuntimeException Si l'opérateur fourni n'est pas un opérateur logique.
 	 */
-	public Condition(Operateur operation, Expression membreGauche, Expression membreDroit) throws Exception {
+	public Condition(Operateur operation, Expression membreGauche, Expression membreDroit) {
 		super(operation, membreGauche, membreDroit);
 		if (!Operateur.isLogique(operation)) {
-			throw new Exception("Opérateur non logique dans Condition.");
+			throw new RuntimeException("Opérateur non logique dans Condition.");
 		}
 	}
 
@@ -26,12 +26,12 @@ public class Condition extends ExpressionComplexe {
 	 * Crée une condition.
 	 *
 	 * @param operateur l'opérateur logique à utiliser
-	 * @throws Exception Si l'opérateur fourni n'est pas un opérateur logique.
+	 * @throws RuntimeException Si l'opérateur fourni n'est pas un opérateur logique.
 	 */
-	public Condition(Operateur operateur) throws Exception {
+	public Condition(Operateur operateur) {
 		super(operateur);
 		if (!Operateur.isLogique(operateur)) {
-			throw new Exception("Opérateur non logique dans Condition.");
+			throw new RuntimeException("Opérateur non logique dans Condition.");
 		}
 	}
 
