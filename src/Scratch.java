@@ -1,4 +1,3 @@
-/* Je m'apelle Bastien et je met un comm bidon*/
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import javax.swing.UIManager;
 import modeles.Erreur;
