@@ -1,4 +1,4 @@
-/*comm de test*/
+/* Je m'apelle Quentin et moi mon comm, c'est le meilleur */
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import javax.swing.UIManager;
 import modeles.Erreur;
