@@ -1,4 +1,4 @@
-/* Je m'apelle Quentin et moi mon comm, c'est le meilleur */
+/* Je m'apelle Bastien et je met un comm bidon*/
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import javax.swing.UIManager;
 import modeles.Erreur;
