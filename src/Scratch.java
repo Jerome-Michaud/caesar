@@ -1,4 +1,4 @@
-
+/*comm de test*/
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import javax.swing.UIManager;
 import modeles.Erreur;
