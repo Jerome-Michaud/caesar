@@ -33,6 +33,8 @@ public class PanelTypeWidget extends JPanel {
 		this.lesCategories.add(new BoutonCategorieAffichage());
 		this.lesCategories.add(new BoutonCategorieIO());
 		this.lesCategories.add(new BoutonCategorieTemps());
+		this.lesCategories.add(new BoutonCategorieVariable());
+                this.lesCategories.add(new BoutonCategorieExpression());
 
 		this.setLayout(null);
 		int i = 0, x = 10, y = 26;
@@ -49,7 +51,7 @@ public class PanelTypeWidget extends JPanel {
 			i++;
 		} while (i < this.lesCategories.size());
 
-		int nb = this.lesCategories.size() / 2;
+		int nb = this.lesCategories.size() / 2 + this.lesCategories.size() % 2;
 		nb = 30 + nb * (Variables.TAILLE_CATEGORIE_Y + 10);
 
 		this.setPreferredSize(new Dimension(Variables.X_MAX_INSTRUCTION, nb));

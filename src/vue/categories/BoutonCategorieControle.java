@@ -29,7 +29,7 @@ public class BoutonCategorieControle extends BoutonCategorie {
 	/**
 	 * Quantité des différentes couleurs.
 	 */
-	private static final int ROUGE = 255, VERT = 153, BLEU = 0;
+	private static final int ROUGE = 230, VERT = 126, BLEU = 77;
 	
 	/**
 	 * Définit le bouton catégorie <code>Contrôle</code>.

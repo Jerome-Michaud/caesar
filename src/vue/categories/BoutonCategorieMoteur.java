@@ -26,7 +26,7 @@ public class BoutonCategorieMoteur extends BoutonCategorie {
 	/**
 	 * Quantité des différentes couleurs.
 	 */
-	private static final int ROUGE = 51, VERT = 153, BLEU = 0;
+	private static final int ROUGE = 133, VERT = 205, BLEU = 68;
 
 	/**
 	 * Définit le bouton catégorie

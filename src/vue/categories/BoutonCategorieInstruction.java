@@ -25,7 +25,7 @@ public class BoutonCategorieInstruction extends BoutonCategorie {
 	/**
 	 * Quantité des différentes couleurs.
 	 */
-	private static final int ROUGE = 0, VERT = 61, BLEU = 245;
+	private static final int ROUGE = 0, VERT = 107, BLEU = 242;
 
 	/**
 	 * Définit le bouton catégorie

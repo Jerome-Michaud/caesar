@@ -12,6 +12,7 @@ import vue.widget.modele.MoteurOffWidget;
 import vue.widget.modele.RepeatWidget;
 import vue.widget.modele.TacheWidget;
 import vue.widget.modele.WaitWidget;
+import vue.widget.modele.VariableWidget;
 import vue.widget.modele.WhileWidget;
 
 /**
@@ -107,6 +108,15 @@ public class FabriqueInstructions {
 	 */
 	public Widget creerWidgetWait() {
 		return new Widget(new WaitWidget());
+	}
+        
+        /**
+	 * Méthode permettant de créer un widget de type "Variable".
+	 *
+	 * @return un widget de type "Variable"
+	 */
+	public Widget creerWidgetVariable() {
+		return new Widget(new VariableWidget());
 	}
 
 	/**
