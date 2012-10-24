@@ -1,21 +1,29 @@
 package vue.ginterface;
 
-import vue.widget.IWidget;
-
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import vue.widget.IWidget;
+
 /**
  * Zone de travail où placer les widgets qui seront ensuite traduits.
  *
  * @since 1.0
  * @version 1.0
  */
-public class PanelCodeGraphique extends JPanel implements IWidget {
+public class PanelCodeGraphique extends JPanel implements IWidget, Observer {
+	
 	/**
-	 * SINGLETON.
-	 *
-	 * @since 1.0
+	 * Le logger.
+	 */
+	private static final Logger logger = Logger.getLogger(PanelCodeGraphique.class.getName());
+	
+	/**
+	 * L'instance unique de PanelCodeGraphique.
 	 */
 	private static PanelCodeGraphique instance = new PanelCodeGraphique();
 
@@ -37,5 +45,11 @@ public class PanelCodeGraphique extends JPanel implements IWidget {
 	@Override
 	public boolean isRacine() {
 		return true;
+	}
+
+	@Override
+	public void update(Observable o, Object o1) {
+		logger.log(Level.INFO, "Observateur : Mise à jour du PanelCodeGraphique");
+		this.repaint();
 	}
 }

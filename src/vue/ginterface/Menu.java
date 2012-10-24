@@ -1,24 +1,24 @@
 package vue.ginterface;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import modeles.Erreur;
+import ressources.ResourceTools;
+import traduction.VisiteurNXC;
 import vue.tools.ArborescenceTools;
 import vue.tools.CreationCodeTools;
 import vue.tools.SavingTools;
 import vue.tools.Variables;
 import vue.widget.Widget;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-import javax.swing.*;
-
-import modeles.Erreur;
-
-import org.omg.CORBA.portable.InputStream;
-import ressources.ResourceTools;
-import traduction.VisiteurNXC;
-import traduction.VisiteurRobotC;
 /**
  * Le menu de l'application.
  * 

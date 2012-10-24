@@ -1,11 +1,11 @@
 package vue.tools;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import vue.ginterface.PanelCodeGraphique;
 import vue.widget.Widget;
 import vue.widget.WidgetCompose;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Classe implémentant le design pattern Singleton permettant de gérer l'arborescence modélisant
@@ -108,11 +108,12 @@ public final class ArborescenceTools {
 	 * @throws ComposantIntrouvableException Si le widget passé en paramètre est introuvable dans l'arborescence
 	 */
 	public boolean ajouterWidgets(final List<Widget> l, final Widget comp, final boolean insererApres) throws ComposantIntrouvableException {
+		boolean res;
 		//cas de non survol
 		if (comp == null) {
 			List<Widget> lst = new LinkedList<Widget>();
 			lst.addAll(l);
-			return arborescence.add(lst);
+			res = arborescence.add(lst);
 		}
 		else {
 			int index = getIndex(comp);
@@ -120,8 +121,9 @@ public final class ArborescenceTools {
 			if (insererApres) {
 				index++;
 			}
-			return getListe(comp).addAll(index, l);
+			res = getListe(comp).addAll(index, l);
 		}
+		return res;
 	}
 
 	/**
@@ -132,7 +134,8 @@ public final class ArborescenceTools {
 	 * @throws ComposantIntrouvableException Si le widget passé en paramètre est introuvable dans l'arborescence
 	 */
 	public boolean supprimerWidgets(final List<Widget> l) throws ComposantIntrouvableException {
-		return getListe(l.get(0)).removeAll(l);
+		boolean res = getListe(l.get(0)).removeAll(l);
+		return res;
 	}
 
 	/**
@@ -203,6 +206,38 @@ public final class ArborescenceTools {
 				}
 			}
 		}
-		PanelCodeGraphique.getInstance().repaint();
+	}
+	
+	/**
+	 * Cette méthode permet de mettre à jour les widgets du PanelCodeGraphique présent dans le widget "Main" passé en paramètre.
+	 * 
+	 * @param main Le widget "Main" à recalculer
+	 */
+	public void updateWidgetsParMain(Widget main) {
+		for (List<Widget> listeWidget : this.arborescence) {
+			if (listeWidget.get(0) == main) {
+				for (Widget w : listeWidget) {
+					if (w.isComplexe()) {
+						((WidgetCompose)w).notifyChange();
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Cette méthode permet de mettre à jour tous les widgets du PanelCodeGraphique.
+	 */
+	public void updateWidgets() {
+		Iterator<List<Widget>> itWidget = this.arborescence.iterator();
+		while(itWidget.hasNext()) {
+			List<Widget> listeWidget = itWidget.next();
+			for (Widget w : listeWidget) {
+				if (w.isComplexe()) {
+					((WidgetCompose)w).notifyChange();
+				}
+				
+			}
+		}
 	}
 }
