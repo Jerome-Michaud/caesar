@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import modeles.TypeWidget;
+import vue.ginterface.PanelCodeGraphique;
 
 /**
  * Classe héritant de Widget et implémentant IWidget permettant de représenter un Widget de type Complexe.
@@ -49,10 +50,6 @@ public class WidgetCompose extends Widget implements IWidget {
 		}
 	}
 
-	/*
-	 * public boolean ajouterWidget(Rectangle cle, Widget widget) { return
-	 * this.mapZone.get(cle).add(widget); }
-	 */
 	/**
 	 * Méthode permettant de supprimer un widget au sein d'une zone d'accroche.
 	 *
@@ -120,13 +117,17 @@ public class WidgetCompose extends Widget implements IWidget {
 	public void notifyChange() {
 		HashMap<Rectangle, Rectangle> mapRect = new HashMap<Rectangle, Rectangle>();
 		HashMap<Rectangle, Integer> mapDecal = new HashMap<Rectangle, Integer>();
+		
 		for (Rectangle r : mapZone.keySet()) {
 			int decalY = 0;
 			Rectangle maxBounds = null;
+			
+			//Redimensionnement les zones d'accroches
 			for (Widget w : mapZone.get(r)) {
 				if (w.isComplexe()) {
 					((WidgetCompose) w).notifyChange();
 				}
+				
 				w.setLocation((int) (this.getLocation().getX() + r.getX()), (int) (this.getLocation().getY() + r.getY() + decalY));
 				if (maxBounds == null) {
 					maxBounds = new Rectangle(w.getBounds());
@@ -137,6 +138,7 @@ public class WidgetCompose extends Widget implements IWidget {
 					decalY += w.getBounds().height - ModeleWidget.OFFSET;
 				}
 			}
+			
 			if (maxBounds == null) {
 				maxBounds = new Rectangle();
 			}

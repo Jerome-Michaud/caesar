@@ -95,16 +95,6 @@ public class Widget extends JComponent {
     }
 
     /**
-     * Méthode permettant de repeindre le widget, mais aussi le
-     * PanelCodeGraphique et le GlassPane
-     */
-    private void repaintAll() {
-        PanelWidget.getInstance().repaint();
-        PanelCodeGraphique.getInstance().repaint();
-        GlassPane.getInstance().repaint();
-    }
-
-    /**
      * Méthode permettant de définir la forme du widget et de calculer ses
      * nouvelles dimensions et localisations.
      *
@@ -139,7 +129,6 @@ public class Widget extends JComponent {
 			@Override
 			public void mousePressed(final MouseEvent e) {
 				DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
-				repaintAll();
 			}
 
 			@Override
