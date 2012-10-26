@@ -161,8 +161,8 @@ public class DragAndDropTools extends Observable {
 			p.y += w.getHeight() - ModeleWidget.OFFSET;
 		}
 		
-		this.setChanged();
-		this.notifyObservers();
+		//this.setChanged();
+		//this.notifyObservers();
 	}
 
 	/**
@@ -294,9 +294,10 @@ public class DragAndDropTools extends Observable {
 					}
 				}
 				
-				if (compSurvole != null && compSurvole.parent() != null && compSurvole.parent() != p && ((Widget)compSurvole.parent()).isComplexe()) {
-					compSurvole.applyChangeModele();
-					((WidgetCompose) compSurvole.parent()).notifyChange();
+				if (compSurvole != null && compSurvole.isComplexe()) {
+					((WidgetCompose)compSurvole).applyChangeModele();
+				} else if (compSurvole != null && !compSurvole.isComplexe()) {
+					((WidgetCompose)compSurvole.parent()).applyChangeModele();
 				}
 			} else {
 				arbo.supprimerWidgets(composantsDrague);

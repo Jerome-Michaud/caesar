@@ -108,12 +108,11 @@ public final class ArborescenceTools {
 	 * @throws ComposantIntrouvableException Si le widget passé en paramètre est introuvable dans l'arborescence
 	 */
 	public boolean ajouterWidgets(final List<Widget> l, final Widget comp, final boolean insererApres) throws ComposantIntrouvableException {
-		boolean res;
 		//cas de non survol
 		if (comp == null) {
 			List<Widget> lst = new LinkedList<Widget>();
 			lst.addAll(l);
-			res = arborescence.add(lst);
+			return arborescence.add(lst);
 		}
 		else {
 			int index = getIndex(comp);
@@ -121,9 +120,8 @@ public final class ArborescenceTools {
 			if (insererApres) {
 				index++;
 			}
-			res = getListe(comp).addAll(index, l);
+			return getListe(comp).addAll(index, l);
 		}
-		return res;
 	}
 
 	/**
@@ -134,8 +132,7 @@ public final class ArborescenceTools {
 	 * @throws ComposantIntrouvableException Si le widget passé en paramètre est introuvable dans l'arborescence
 	 */
 	public boolean supprimerWidgets(final List<Widget> l) throws ComposantIntrouvableException {
-		boolean res = getListe(l.get(0)).removeAll(l);
-		return res;
+		return getListe(l.get(0)).removeAll(l);
 	}
 
 	/**
@@ -203,23 +200,6 @@ public final class ArborescenceTools {
 			if (w.isComplexe()) {
 				for (List<Widget> lst : ((WidgetCompose) w).getMapZone().values()) {
 					setArborescence(lst, initListener);
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Cette méthode permet de mettre à jour les widgets du PanelCodeGraphique présent dans le widget "Main" passé en paramètre.
-	 * 
-	 * @param main Le widget "Main" à recalculer
-	 */
-	public void updateWidgetsParMain(Widget main) {
-		for (List<Widget> listeWidget : this.arborescence) {
-			if (listeWidget.get(0) == main) {
-				for (Widget w : listeWidget) {
-					if (w.isComplexe()) {
-						((WidgetCompose)w).notifyChange();
-					}
 				}
 			}
 		}

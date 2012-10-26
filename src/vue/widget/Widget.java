@@ -245,6 +245,5 @@ public class Widget extends JComponent {
 	/**
 	 * Met à jour l'arborescence des instructions.
 	 */
-	public void applyChangeModele() {
-	}
+	public void applyChangeModele() { }
 }

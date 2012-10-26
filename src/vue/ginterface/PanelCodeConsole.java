@@ -3,19 +3,25 @@ package vue.ginterface;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import vue.controller.LanceurTraduction;
 /**
  * Panneau d'affichage du code traduit.
  * 
  * @since 1.0
  * @version 1.0
  */
-public class PanelCodeConsole extends JPanel {
+public class PanelCodeConsole extends JPanel implements Observer {
+	
+	private static final Logger logger = Logger.getLogger(PanelCodeConsole.class.getName());
+	
 	/**
 	 * SINGLETON.
 	 *
@@ -53,5 +59,13 @@ public class PanelCodeConsole extends JPanel {
 	 */
 	public void setText(String texte) {
 		this.textarea.setText(texte);
+	}
+
+	@Override
+	public void update(Observable o, Object o1) {
+		logger.log(Level.INFO, "Mise à jour de la traduction");
+		// Mise à jour du texte dans la zone, envoyer le code au format String pas un objet
+		this.setText(o1.toString());
+		this.repaint();
 	}
 }

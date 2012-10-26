@@ -1,8 +1,6 @@
 package vue.widget;
 
-import vue.tools.ComposantIntrouvableException;
-import vue.tools.Variables;
-import vue.widget.modele.ModeleWidget;
+
 import instruction.Instruction;
 import instruction.InstructionIfElse;
 import instruction.InstructionStructure;
@@ -12,9 +10,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
 import modeles.TypeWidget;
-import vue.ginterface.PanelCodeGraphique;
+import vue.tools.ComposantIntrouvableException;
+import vue.tools.Variables;
+import vue.widget.modele.ModeleWidget;
 
 /**
  * Classe héritant de Widget et implémentant IWidget permettant de représenter un Widget de type Complexe.

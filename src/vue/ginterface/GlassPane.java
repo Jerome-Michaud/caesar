@@ -9,7 +9,6 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
-import javax.swing.RepaintManager;
 import javax.swing.SwingUtilities;
 
 /**
