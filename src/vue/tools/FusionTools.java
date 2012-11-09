@@ -58,7 +58,7 @@ public class FusionTools {
 			pt = widgetRecup.getLocationOnScreen();
 			Dimension size = widgetRecup.getSize();
 			boolean trouve = false;
-			if (widgetRecup.isComplexe()) {
+			if (widgetRecup.isComplexe() && comp.getModele().isImbricable()) {
 				WidgetCompose wComp = (WidgetCompose) widgetRecup;
 				for (Rectangle r : wComp.getMapZone().keySet()) {
 					Rectangle cpy = new Rectangle(r.x, r.y, r.width, r.height);
