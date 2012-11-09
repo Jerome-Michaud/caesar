@@ -97,10 +97,11 @@ public class DragAndDropTools extends Observable {
 
 				//supression des widgets dans l'arborescence
 				arbo.supprimerWidgets(composantsDrague);
+				
 				if ((comp != null) && (comp.parent() != null) && (!comp.parent().isRacine())) {
 					((Widget) comp.parent()).applyChangeModele();
-					((WidgetCompose) comp.parent()).notifyChange();
 				}
+				
 				comp.defParent(null);
 			} catch (ComposantIntrouvableException ex) {
 				Erreur.afficher(ex);
@@ -296,7 +297,7 @@ public class DragAndDropTools extends Observable {
 				
 				if (compSurvole != null && compSurvole.isComplexe()) {
 					((WidgetCompose)compSurvole).applyChangeModele();
-				} else if (compSurvole != null && !compSurvole.isComplexe()) {
+				} else if (compSurvole != null && !compSurvole.isComplexe() && compSurvole.parent() != null && !compSurvole.parent().isRacine()) {
 					((WidgetCompose)compSurvole.parent()).applyChangeModele();
 				}
 			} else {
