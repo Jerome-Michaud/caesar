@@ -34,7 +34,6 @@ public class DragAndDropTools extends Observable {
 	 * Le logger de DragAndDDropTools.
 	 */
 	private static final Logger logger = Logger.getLogger(DragAndDropTools.class.getName());
-	
 	/**
 	 * List de widgets contenant les widgets en cours de draggage.
 	 */
@@ -97,17 +96,17 @@ public class DragAndDropTools extends Observable {
 
 				//supression des widgets dans l'arborescence
 				arbo.supprimerWidgets(composantsDrague);
-				
+
 				if ((comp != null) && (comp.parent() != null) && (!comp.parent().isRacine())) {
 					((Widget) comp.parent()).applyChangeModele();
 				}
-				
+
 				comp.defParent(null);
 			} catch (ComposantIntrouvableException ex) {
 				Erreur.afficher(ex);
 			}
 		}
-		
+
 		for (Widget w : composantsDrague) {
 			passerSurAutrePanel(w, GlassPane.getInstance());
 		}
@@ -118,7 +117,7 @@ public class DragAndDropTools extends Observable {
 
 		dragGroupeWidget(composantsDrague, p);
 		ArborescenceTools.getInstance().updateWidgets();
-		
+
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -161,7 +160,7 @@ public class DragAndDropTools extends Observable {
 			}
 			p.y += w.getHeight() - ModeleWidget.OFFSET;
 		}
-		
+
 		//this.setChanged();
 		//this.notifyObservers();
 	}
@@ -216,7 +215,7 @@ public class DragAndDropTools extends Observable {
 			p.x -= Fenetre.getInstance().getLocation().getX();
 			p.y -= Fenetre.getInstance().getLocation().getY();
 			dragGroupeWidget(composantsDrague, p);
-			
+
 			this.setChanged();
 			this.notifyObservers();
 			FusionTools.dessinerLigne(comp);
@@ -283,22 +282,29 @@ public class DragAndDropTools extends Observable {
 						w.defParent((IWidget) p);//gestion du parent suivant element survole
 
 					} else {
-						if (compSurvole.isComplexe()) {
-							//Survol d'une zone d'accroche
-							if (a.getVal() == 2) {
-								complexe = true;
-								w.defParent((WidgetCompose) compSurvole);
-							}
+						/*if (compSurvole.isComplexe()) {
+						 //Survol d'une zone d'accroche
+						 if (a.getVal() == 2) {
+						 complexe = true;
+						 w.defParent((WidgetCompose) compSurvole);
+						 }
+						 } else {
+						 w.defParent(compSurvole.parent());
+						 }*/
+						//Survol d'une zone d'accroche
+						if (a.getVal() == 2) {
+							complexe = true;
+							w.defParent((WidgetCompose) compSurvole);
 						} else {
 							w.defParent(compSurvole.parent());
 						}
 					}
 				}
-				
+
 				if (compSurvole != null && compSurvole.isComplexe()) {
-					((WidgetCompose)compSurvole).applyChangeModele();
+					((WidgetCompose) compSurvole).applyChangeModele();
 				} else if (compSurvole != null && !compSurvole.isComplexe() && compSurvole.parent() != null && !compSurvole.parent().isRacine()) {
-					((WidgetCompose)compSurvole.parent()).applyChangeModele();
+					((WidgetCompose) compSurvole.parent()).applyChangeModele();
 				}
 			} else {
 				arbo.supprimerWidgets(composantsDrague);
@@ -332,10 +338,10 @@ public class DragAndDropTools extends Observable {
 			Erreur.afficher(ex);
 		}
 		arbo.updateWidgets();
-		
+
 		this.setChanged();
 		this.notifyObservers();
-		
+
 		g.setPointLigneSurEcran(null);
 		LanceurTraduction.getInstance().lancerTraduction();
 	}
