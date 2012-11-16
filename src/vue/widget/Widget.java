@@ -1,8 +1,5 @@
 package vue.widget;
 
-import vue.ginterface.GlassPane;
-import vue.ginterface.PanelCodeGraphique;
-import vue.ginterface.PanelWidget;
 import vue.tools.DragAndDropTools;
 import vue.widget.modele.ModeleWidget;
 import vue.widget.modele.zones.Zone;

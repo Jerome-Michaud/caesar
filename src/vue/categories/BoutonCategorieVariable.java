@@ -4,8 +4,9 @@
  */
 package vue.categories;
 
+import vue.categories.complexe.ModeleCategorieVariable;
 import java.awt.Color;
-import vue.ginterface.PanelWidget;
+import vue.ginterface.GUI;
 import vue.widget.Widget;
 
 /**
@@ -23,10 +24,10 @@ public class BoutonCategorieVariable extends BoutonCategorie {
 	 * <code>Instructions</code>.
 	 */
 	public BoutonCategorieVariable() {
-		super(new ModeleCategorie("Variable", new Color(ROUGE, VERT, BLEU)));
+		super(new ModeleCategorieVariable("Variable", new Color(ROUGE, VERT, BLEU)));
 
 
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetVariable());
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetVariable());
 
 		for (Widget w : this.getLesWidgets()) {
 			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));

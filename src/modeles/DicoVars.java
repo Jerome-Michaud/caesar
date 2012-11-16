@@ -28,7 +28,7 @@ public final class DicoVars {
 	 */
 	private DicoVars() {
 		dictionnaire = new HashMap<String, Variable>();
-		this.dictionnaire.put("i", new VariableModifiable(TypeVariable.INT, "i", "0"));
+		this.dictionnaire.put("icerkjnfenefn", new VariableModifiable(TypeVariable.INT, "icerkjnfenefn", "0"));
 	}
 
 	/**
@@ -48,7 +48,7 @@ public final class DicoVars {
 	 * @param v 
 	 */
 	public void ajouter(final Variable v) {
-		if (!v.getNom().isEmpty()) {
+		if (!v.getNom().isEmpty() && !dictionnaire.containsKey(v.getNom())) {
 			dictionnaire.put(v.getNom(), v);
 		}
 	}

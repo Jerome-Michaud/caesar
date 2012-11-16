@@ -3,7 +3,7 @@ import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import modeles.Erreur;
-import vue.ginterface.Fenetre;
+import vue.ginterface.GUI;
 
 public class Scratch {
 
@@ -26,6 +26,6 @@ public class Scratch {
 		} catch (Exception ex) {
 			Erreur.afficher(ex);
 		}
-		Fenetre.getInstance();
+		GUI.getFenetre(); // TODO : A SUPPRIMER Fenetre.getInstance();
 	}
 }

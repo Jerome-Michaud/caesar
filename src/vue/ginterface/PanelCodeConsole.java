@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import vue.tools.Variables;
 
 /**
  * Panneau d'affichage du code traduit.
@@ -33,6 +34,8 @@ public class PanelCodeConsole extends JPanel implements Observer {
 	 * @since 1.0
 	 */
 	private PanelCodeConsole() {
+		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
+		
 		this.textarea = new JTextArea();
 		this.textarea.setEditable(false);
 		this.textarea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));
@@ -49,7 +52,7 @@ public class PanelCodeConsole extends JPanel implements Observer {
 	 *
 	 * @return L'instance unique de PanelWidget.
 	 */
-	public static PanelCodeConsole getInstance() {
+	protected static PanelCodeConsole getInstance() {
 		return instance;
 	}
 	/**

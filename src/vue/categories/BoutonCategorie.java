@@ -1,7 +1,7 @@
 package vue.categories;
 
-import vue.ginterface.PanelTypeWidget;
-import vue.ginterface.PanelWidget;
+import vue.categories.complexe.PolygoneAction;
+import vue.categories.complexe.EtatPolygon;
 import vue.widget.Widget;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -9,6 +9,9 @@ import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
+import vue.ginterface.GUI;
+import vue.tools.Variables;
 
 /**
  * Classe permettant de définir les différents comportements des boutons catégories.
@@ -43,11 +46,6 @@ public abstract class BoutonCategorie extends JComponent {
 	 */
 	private boolean active = false;
 	/**
-	 * La quantité de couleur pour le changement de couleur.
-	 */
-	private static final int QUANTITE_COULEUR = 141;
-	
-	/**
 	 * La taille de la police.
 	 */
 	private static final int TAILLE = 12;
@@ -55,6 +53,7 @@ public abstract class BoutonCategorie extends JComponent {
 	@Override
 	public void paintComponent(final Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
+		// Formes de base (icône + corps)
 		g2d.setColor(this.modele.getCouleur());
 		g2d.fillPolygon(this.modele.getFormeCouleur());
 		g2d.setColor(this.fond);
@@ -62,6 +61,16 @@ public abstract class BoutonCategorie extends JComponent {
 		g2d.setColor(Color.BLACK);
 		g2d.drawPolygon(this.modele.getFormeCouleur());
 		g2d.drawPolygon(this.modele.getFormeTexte());
+		
+		// Extras
+		for (PolygoneAction poly : this.modele.getFormesExtras()) {
+			g2d.setColor(poly.getCouleur());
+			g2d.fillPolygon(poly.getPolygon());
+			g2d.setColor(Color.BLACK);
+			g2d.drawPolygon(poly.getPolygon());
+		}
+		
+		// Ecritures
 		g2d.setColor(Color.WHITE);
 		g2d.setFont(this.font);
 		g2d.drawString(this.modele.getMessage(), 15, 17);
@@ -138,7 +147,7 @@ public abstract class BoutonCategorie extends JComponent {
 	 */
 	private void sourisEntree() {
 		if (!active) {
-			this.fond = new Color(QUANTITE_COULEUR, QUANTITE_COULEUR, QUANTITE_COULEUR);
+			this.fond = Variables.GRIS_SURVOLE;
 			this.repaint();
 		}
 	}
@@ -150,9 +159,14 @@ public abstract class BoutonCategorie extends JComponent {
 	 */
 	private void sourisSortie() {
 		if (!active) {
-			this.fond = Color.LIGHT_GRAY;
-			this.repaint();
+			this.fond = Variables.GRIS_INACTIF;
 		}
+		
+		for (PolygoneAction poly : this.modele.getFormesExtras()) {
+			poly.setEtat(EtatPolygon.INACTIF);
+		}
+		
+		this.repaint();
 	}
 
 	/**
@@ -163,18 +177,34 @@ public abstract class BoutonCategorie extends JComponent {
 	private void sourisRelachee() {
 		this.setLocation(this.defaultPos);
 
-		if (!active) {
+		Point p = MouseInfo.getPointerInfo().getLocation();
+		SwingUtilities.convertPointFromScreen(p, GUI.getGlassPane());
+		
+		for (PolygoneAction poly : this.modele.getFormesExtras()) {
+			Rectangle r = poly.getBounds();
+			r = SwingUtilities.convertRectangle(this, r, GUI.getGlassPane());
 
-			for (BoutonCategorie b : PanelTypeWidget.getInstance().getLesCategories()) {
+			if (r.contains(p)) {
+				poly.setEtat(EtatPolygon.ACTIF);
+				poly.executerAction();
+			} else {
+				poly.setEtat(EtatPolygon.INACTIF);
+				
+			}
+		}
+		
+		if (!active) {
+			for (BoutonCategorie b : GUI.getPanelTypeWidget().getLesCategories()) {
 				b.font = new Font("TimesRoman", Font.PLAIN, TAILLE);
-				b.fond = Color.LIGHT_GRAY;
+				b.fond = Variables.GRIS_INACTIF;
 				b.active = false;
 				b.repaint();
 			}
 			this.font = new Font("TimesRoman", Font.BOLD, TAILLE);
 			this.active = true;
-			this.fond = Color.DARK_GRAY;
-			PanelWidget.getInstance().setLesWidgets(this.lesWidgets);
+			this.fond = Variables.GRIS_ACTIF;
+			
+			GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
 		}
 	}
 
