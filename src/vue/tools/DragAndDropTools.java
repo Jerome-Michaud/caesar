@@ -305,7 +305,14 @@ public class DragAndDropTools extends Observable {
 				}
 
 				if (compSurvole != null && compSurvole.isComplexe()) {
-					((WidgetCompose) compSurvole).applyChangeModele();
+					//((WidgetCompose) compSurvole).applyChangeModele();
+					if (a.getVal() == 2) {
+						((WidgetCompose) compSurvole).applyChangeModele();
+					} else {
+						if (compSurvole.parent() != null && !compSurvole.parent().isRacine()) {
+							((WidgetCompose) compSurvole.parent()).applyChangeModele();
+						}
+					}
 				} else if (compSurvole != null && !compSurvole.isComplexe() && compSurvole.parent() != null && !compSurvole.parent().isRacine()) {
 					((WidgetCompose) compSurvole.parent()).applyChangeModele();
 				}
