@@ -17,7 +17,8 @@ import modeles.Erreur;
 import modeles.TypeWidget;
 
 /**
- * Classe héritant de ModeleWidget et implémentant <code>Serializable</code> modélisant la forme d'un widget de type For.
+ * Classe héritant de ModeleWidget et implémentant
+ * <code>Serializable</code> modélisant la forme d'un widget de type For.
  */
 public class ForWidget extends ModeleWidget {
 
@@ -176,7 +177,6 @@ public class ForWidget extends ModeleWidget {
 	public void initListeners() {
 		for (Zone z : this.getLesZonesSaisies()) {
 			((JComponent) z).addFocusListener(new FocusAdapter() {
-
 				@Override
 				public void focusLost(final FocusEvent arg0) {
 					Variable v = DicoVars.getInstance().getLesvariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
@@ -202,7 +202,7 @@ public class ForWidget extends ModeleWidget {
 	 * @param fin La valeur e la condition d'arrêt
 	 */
 	public void setCondition(final Variable v, final Operateur o, final String fin) {
-		Condition cond =  new Condition(o, v, new VariableConstante(TypeVariable.INT, "", fin));
+		Condition cond = new Condition(o, v, new VariableConstante(TypeVariable.INT, "", fin));
 		((InstructionFor) getElementProgramme()).setCondition(cond);
 	}
 

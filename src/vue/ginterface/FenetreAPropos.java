@@ -33,7 +33,7 @@ public class FenetreAPropos extends JFrame {
 	 */
 	private ListenerSourisFenetre listenerSouris;
 
-	public FenetreAPropos() {
+	protected FenetreAPropos() {
 		this.listenerSouris = new ListenerSourisFenetre();
 		this.setTitle("A propos");
 		this.setSize(400, 370);

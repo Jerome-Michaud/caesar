@@ -1,18 +1,16 @@
 package vue.controller;
 
 import instruction.Instruction;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Observable;
+import java.util.logging.Logger;
 import modeles.TypeWidget;
-
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
-import vue.ginterface.PanelCodeConsole;
+import vue.ginterface.GUI;
 import vue.tools.ArborescenceTools;
+import vue.tools.Variables;
 import vue.widget.Widget;
 import vue.widget.modele.ModeleWidget;
 
@@ -21,8 +19,12 @@ import vue.widget.modele.ModeleWidget;
  * Utilise le design pattern Singleton.
  */
 
-public class LanceurTraduction {
+public class LanceurTraduction extends Observable {
 
+	/**
+	 * Le logger de LanceurTraduction.
+	 */
+	private static final Logger logger = Logger.getLogger(LanceurTraduction.class.getName());
 	/**
 	 * Le visiteur qui doit être éxecuté.
 	 */
@@ -36,7 +38,10 @@ public class LanceurTraduction {
 	 * Définit le lanceur de traduction.
 	 */
 	private LanceurTraduction() {
+		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
+		
 		traducteur = VisiteurNXC.getInstance();
+		this.addObserver(GUI.getPanelCodeConsole());
 	}
 
 	/**
@@ -62,8 +67,9 @@ public class LanceurTraduction {
 		for (Instruction inst : list) {
 			inst.accepte(traducteur);
 		}
-		System.out.println(traducteur.getTraduction());
-		PanelCodeConsole.getInstance().setText(traducteur.getTraduction());
+		logger.info(traducteur.getTraduction());
+		this.setChanged();
+		this.notifyObservers(traducteur.getTraduction());
 	}
 
 	/**
@@ -79,7 +85,6 @@ public class LanceurTraduction {
     			Widget tache = racine.get(0);
     			ModeleWidget m = tache.getModele();
     			if(m.getType() == TypeWidget.TACHE) {
-    				System.out.println("Tâche trouvée : Faire traduction");
     				list.add((Instruction) m.getElementProgramme());
     			}
     		}

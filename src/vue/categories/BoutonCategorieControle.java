@@ -1,8 +1,8 @@
 package vue.categories;
 
-import vue.ginterface.PanelWidget;
 import vue.widget.Widget;
 import java.awt.Color;
+import vue.ginterface.GUI;
 
 /**
  * Classe permettant l'instanciation du bouton catégorie "Contôles".
@@ -37,14 +37,14 @@ public class BoutonCategorieControle extends BoutonCategorie {
 	public BoutonCategorieControle() {
 		super(new ModeleCategorie("Contrôles", new Color(ROUGE, VERT, BLEU)));
 
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetFor());
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetRepeat());
-		//
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetWhile());
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetDoWhile());
-		//
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetIf());
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetIfElse());
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetFor());
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetRepeat());
+		
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetWhile());
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetDoWhile());
+		
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetIf());
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetIfElse());
 
 		for (Widget w : this.getLesWidgets()) {
 			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));

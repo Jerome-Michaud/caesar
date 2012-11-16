@@ -68,6 +68,10 @@ public abstract class ModeleWidget implements Serializable {
      * Booléen permettant de définir si un widget peut avoir un widget accroché à lui en bas.
      */
     protected boolean attachableBas;
+	/**
+	 * Booléen permettant de définir si un widget peut être placé dans un widget complexe.
+	 */
+	protected boolean imbricable;
     /**
      * Liste des zones où pourront être imbriqués d'autres widgets.
      */
@@ -88,6 +92,7 @@ public abstract class ModeleWidget implements Serializable {
         this.conditionHaute = true;
         this.attachableBas = true;
         this.attachableHaut = true;
+		this.imbricable = true;
         this.zonesAccroches = new LinkedList<Rectangle>();
 		this.lesZonesSaisies = new LinkedList<Zone>();
 		this.message = new HashMap<Point, String>();
@@ -324,6 +329,13 @@ public abstract class ModeleWidget implements Serializable {
      */
     public boolean isAttachableHaut() {
         return attachableHaut;
+    }
+	/**
+     * Permet de définir si on peut attacher ce widget dans un widget composé (dans une zone d'accroche).
+     * @return true si on peut attacher ce widget dans un widget composé, false dans le cas contraire.
+     */
+    public boolean isImbricable() {
+        return imbricable;
     }
     /**
      * Méthode abstraite permettant d'augmenter la largeur du composant.

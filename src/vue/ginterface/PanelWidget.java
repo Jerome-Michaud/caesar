@@ -1,14 +1,14 @@
 package vue.ginterface;
 
-import vue.tools.Variables;
-import vue.widget.FabriqueInstructions;
-import vue.widget.Widget;
 import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import vue.tools.Variables;
+import vue.widget.FabriqueInstructions;
+import vue.widget.Widget;
 
 /**
  * Cette zone correspond à la zone où sont entreposés les widgets pour que l'utilisateur puisse les prendre.
@@ -45,7 +45,7 @@ public class PanelWidget extends JPanel {
 	 * 
 	 * @return L'instance unique de PanelWidget.
 	 */
-	public static PanelWidget getInstance() {
+	protected static PanelWidget getInstance() {
 		return instance;
 	}
 	/**

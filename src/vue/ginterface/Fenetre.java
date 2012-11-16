@@ -67,7 +67,7 @@ public class Fenetre extends JFrame {
      *
      * @return L'instance unique de Fenetre.
      */
-    public static Fenetre getInstance() {
+    protected static Fenetre getInstance() {
         return instance;
     }
 }

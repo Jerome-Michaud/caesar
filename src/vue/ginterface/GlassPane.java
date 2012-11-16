@@ -4,8 +4,12 @@ import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import vue.tools.Variables;
 
 /**
  * Permet de créer l'objet de type GlassPane.
@@ -13,15 +17,22 @@ import javax.swing.SwingUtilities;
  * @since 1.0
  * @version 1.0
  */
-public class GlassPane extends JPanel {
+public class GlassPane extends JPanel implements Observer {
+	
 	/**
-	 * SINGLETON.
-	 *
-	 * @since 1.0
+	 * Le logger du GlassPane.
+	 */
+	private static final Logger logger = Logger.getLogger(GlassPane.class.getName());
+	
+	/**
+	 * L'instance unique du GlassPane.
 	 */
 	private static final GlassPane instance = new GlassPane();
+	
 	private Point pointLigne;
+	
 	public static final int EPAISSEUR_LIGNE = 5;
+	
 	private int longueurLigne;
 
 	@Override
@@ -35,6 +46,8 @@ public class GlassPane extends JPanel {
 	}
 
 	private GlassPane() {
+		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
+		
 		this.pointLigne = null;
 		this.longueurLigne = 0;
 		this.setLayout(null);
@@ -48,7 +61,7 @@ public class GlassPane extends JPanel {
 	 *
 	 * @return L'instance unique de GlassPane.
 	 */
-	public static GlassPane getInstance() {
+	protected static GlassPane getInstance() {
 		return instance;
 	}
 	/**
@@ -69,5 +82,11 @@ public class GlassPane extends JPanel {
 	 */
 	public void setLongueurLigne(int epaisseur) {
 		this.longueurLigne = epaisseur;
+	}
+
+	@Override
+	public void update(Observable o, Object o1) {
+		logger.info("Observateur : Mise à jour du PanelCodeGraphique");
+		this.repaint();
 	}
 }

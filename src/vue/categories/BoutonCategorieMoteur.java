@@ -1,8 +1,8 @@
 package vue.categories;
 
-import vue.ginterface.PanelWidget;
 import vue.widget.Widget;
 import java.awt.Color;
+import vue.ginterface.GUI;
 
 /**
  * Classe permettant l'instanciation du bouton catégorie "Moteur".
@@ -35,9 +35,9 @@ public class BoutonCategorieMoteur extends BoutonCategorie {
 	public BoutonCategorieMoteur() {
 		super(new ModeleCategorie("Moteur", new Color(ROUGE, VERT, BLEU)));
 
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetMoteurMovFwd());
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetMoteurMovRev());
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetMoteurOff());
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetMoteurMovFwd());
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetMoteurMovRev());
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetMoteurOff());
 
 		for (Widget w : this.getLesWidgets()) {
 			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));

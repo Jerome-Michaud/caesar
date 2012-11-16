@@ -1,11 +1,12 @@
 package vue.tools;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import vue.ginterface.GUI;
 import vue.ginterface.PanelCodeGraphique;
 import vue.widget.Widget;
 import vue.widget.WidgetCompose;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Classe implémentant le design pattern Singleton permettant de gérer l'arborescence modélisant
@@ -189,7 +190,7 @@ public final class ArborescenceTools {
 	 * (cas du chargement d'une projet sauvegardé) ou non (cas du lancement du programme)
 	 */
 	public void setArborescence(final List<Widget> liste, final boolean initListener) {
-		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
+		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
 		p.removeAll();
 
 		for (Widget w : liste) {
@@ -203,6 +204,21 @@ public final class ArborescenceTools {
 				}
 			}
 		}
-		PanelCodeGraphique.getInstance().repaint();
+	}
+	
+	/**
+	 * Cette méthode permet de mettre à jour tous les widgets du PanelCodeGraphique.
+	 */
+	public void updateWidgets() {
+		Iterator<List<Widget>> itWidget = this.arborescence.iterator();
+		while(itWidget.hasNext()) {
+			List<Widget> listeWidget = itWidget.next();
+			for (Widget w : listeWidget) {
+				if (w.isComplexe()) {
+					((WidgetCompose)w).notifyChange();
+				}
+				
+			}
+		}
 	}
 }

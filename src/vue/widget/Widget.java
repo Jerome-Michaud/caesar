@@ -1,8 +1,5 @@
 package vue.widget;
 
-import vue.ginterface.GlassPane;
-import vue.ginterface.PanelCodeGraphique;
-import vue.ginterface.PanelWidget;
 import vue.tools.DragAndDropTools;
 import vue.widget.modele.ModeleWidget;
 import vue.widget.modele.zones.Zone;
@@ -95,16 +92,6 @@ public class Widget extends JComponent {
     }
 
     /**
-     * Méthode permettant de repeindre le widget, mais aussi le
-     * PanelCodeGraphique et le GlassPane
-     */
-    private void repaintAll() {
-        PanelWidget.getInstance().repaint();
-        PanelCodeGraphique.getInstance().repaint();
-        GlassPane.getInstance().repaint();
-    }
-
-    /**
      * Méthode permettant de définir la forme du widget et de calculer ses
      * nouvelles dimensions et localisations.
      *
@@ -139,7 +126,6 @@ public class Widget extends JComponent {
 			@Override
 			public void mousePressed(final MouseEvent e) {
 				DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
-				repaintAll();
 			}
 
 			@Override
@@ -256,6 +242,5 @@ public class Widget extends JComponent {
 	/**
 	 * Met à jour l'arborescence des instructions.
 	 */
-	public void applyChangeModele() {
-	}
+	public void applyChangeModele() { }
 }
