@@ -3,6 +3,7 @@ package vue.tools;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import vue.ginterface.GUI;
 import vue.ginterface.PanelCodeGraphique;
 import vue.widget.Widget;
 import vue.widget.WidgetCompose;
@@ -189,7 +190,7 @@ public final class ArborescenceTools {
 	 * (cas du chargement d'une projet sauvegardé) ou non (cas du lancement du programme)
 	 */
 	public void setArborescence(final List<Widget> liste, final boolean initListener) {
-		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
+		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
 		p.removeAll();
 
 		for (Widget w : liste) {

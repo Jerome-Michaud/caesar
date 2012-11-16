@@ -4,13 +4,13 @@ import instruction.Instruction;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import modeles.TypeWidget;
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
-import vue.ginterface.PanelCodeConsole;
+import vue.ginterface.GUI;
 import vue.tools.ArborescenceTools;
+import vue.tools.Variables;
 import vue.widget.Widget;
 import vue.widget.modele.ModeleWidget;
 
@@ -38,8 +38,10 @@ public class LanceurTraduction extends Observable {
 	 * Définit le lanceur de traduction.
 	 */
 	private LanceurTraduction() {
+		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
+		
 		traducteur = VisiteurNXC.getInstance();
-		this.addObserver(PanelCodeConsole.getInstance());
+		this.addObserver(GUI.getPanelCodeConsole());
 	}
 
 	/**
@@ -65,7 +67,7 @@ public class LanceurTraduction extends Observable {
 		for (Instruction inst : list) {
 			inst.accepte(traducteur);
 		}
-		logger.log(Level.CONFIG, traducteur.getTraduction());
+		logger.info(traducteur.getTraduction());
 		this.setChanged();
 		this.notifyObservers(traducteur.getTraduction());
 	}

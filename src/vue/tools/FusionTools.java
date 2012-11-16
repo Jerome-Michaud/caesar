@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
 import javax.swing.SwingUtilities;
+import vue.ginterface.GUI;
 import vue.ginterface.GlassPane;
 import vue.ginterface.PanelCodeGraphique;
 import vue.widget.Widget;
@@ -20,12 +21,6 @@ import vue.widget.WidgetCompose;
 public class FusionTools {
 
 	/**
-	 * Constante stockant la marge à appliquer lors du calcul du survol d'un
-	 * widget
-	 */
-	public static final int MARGE_AIMENT = 10;
-
-	/**
 	 * Méthode statique permettant de définir si on survol ou non un widget. Si
 	 * oui, définit si on le survole par le dessous, le dessus ou, dans le cas
 	 * d'un widget complexe, si on survole l'une de ses zones d'accroche.
@@ -36,22 +31,24 @@ public class FusionTools {
 	 * au traitement du survol.
 	 */
 	public static Action checkSurvolWidget(Widget comp) {
+		int margeAimant = Variables.MARGE_AIMENT;
+		
 		Rectangle rectComp = new Rectangle(comp.getLocationOnScreen(), comp.getSize());
-		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
+		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
 		Point pt = comp.getLocationOnScreen();
 		SwingUtilities.convertPointFromScreen(pt, p);
-		Component compRecup = p.getComponentAt(pt.x, pt.y - MARGE_AIMENT);
+		Component compRecup = p.getComponentAt(pt.x, pt.y - margeAimant);
 
 		Action act = null;
 
 		if (!(compRecup instanceof Widget)) {
-			compRecup = p.getComponentAt(pt.x + comp.getWidth(), pt.y - MARGE_AIMENT);
+			compRecup = p.getComponentAt(pt.x + comp.getWidth(), pt.y - margeAimant);
 		}
 		if (!(compRecup instanceof Widget)) {
-			compRecup = p.getComponentAt(pt.x, pt.y + comp.getHeight() + MARGE_AIMENT);
+			compRecup = p.getComponentAt(pt.x, pt.y + comp.getHeight() + margeAimant);
 		}
 		if (!(compRecup instanceof Widget)) {
-			compRecup = p.getComponentAt(pt.x + comp.getWidth(), pt.y + comp.getHeight() + MARGE_AIMENT);
+			compRecup = p.getComponentAt(pt.x + comp.getWidth(), pt.y + comp.getHeight() + margeAimant);
 		}
 		if (compRecup instanceof Widget) {
 			Widget widgetRecup = (Widget) compRecup;
@@ -77,10 +74,10 @@ public class FusionTools {
 				}
 			}
 			if (!trouve) {
-				Rectangle rectCUp = new Rectangle(pt.x, pt.y - MARGE_AIMENT, (int) size.getWidth(), (int) (size.getHeight() / 2) + MARGE_AIMENT);
-				Rectangle rectCDown = new Rectangle(pt.x, (int) (pt.y + (size.getHeight() / 2)), (int) size.getWidth(), (int) (size.getHeight() / 2) + MARGE_AIMENT);
+				Rectangle rectCUp = new Rectangle(pt.x, pt.y - margeAimant, (int) size.getWidth(), (int) (size.getHeight() / 2) + margeAimant);
+				Rectangle rectCDown = new Rectangle(pt.x, (int) (pt.y + (size.getHeight() / 2)), (int) size.getWidth(), (int) (size.getHeight() / 2) + margeAimant);
 				boolean compAtt = (comp.getModele().isAttachableBas() || comp.getModele().isAttachableHaut());
-				if (rectCUp.intersects(rectComp) && rectComp.getMinY() < rectCUp.getMinY() + MARGE_AIMENT && widgetRecup.getModele().isAttachableHaut() && compAtt) {
+				if (rectCUp.intersects(rectComp) && rectComp.getMinY() < rectCUp.getMinY() + margeAimant && widgetRecup.getModele().isAttachableHaut() && compAtt) {
 					// Survol d'un widget en haut
 					act = new Action(widgetRecup, 1);
 				} else if (rectCDown.intersects(rectComp) && widgetRecup.getModele().isAttachableBas() && compAtt) {
@@ -104,7 +101,7 @@ public class FusionTools {
 	 * oui ou non il doit donner lieu au dessin d'une ligne
 	 */
 	public static void dessinerLigne(Widget comp) {
-		GlassPane g = GlassPane.getInstance();
+		GlassPane g = GUI.getGlassPane();
 		Action act = FusionTools.checkSurvolWidget(comp);
 		Widget compRecup = act.getComp();
 		switch (act.getVal()) {

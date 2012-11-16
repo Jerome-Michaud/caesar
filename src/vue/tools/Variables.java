@@ -1,6 +1,8 @@
 package vue.tools;
 
+import java.awt.Color;
 import java.awt.Rectangle;
+import java.util.logging.Level;
 
 /**
  * Classe regroupant différentes variables utilisées par le programme
@@ -48,4 +50,15 @@ public class Variables {
 	 * Chemin d'accés au compilateur NXC
 	 */
 	public static final String CHEMIN_ACCES_NBC = "C:\\Users\\Bastien\\Desktop\\\"Projet Robot\"\\Compilateur";
+	
+	/**
+	 * Les informations du logger seront affichés à parti de se niveau.
+	 */
+	public static final Level LEVEL_DES_LOGGERS = Level.WARNING;
+	
+	private static final int QUANTITE_COULEUR = 141;
+	public static final Color GRIS_INACTIF = Color.LIGHT_GRAY;
+	public static final Color GRIS_ACTIF = Color.DARK_GRAY;
+	public static final Color GRIS_SURVOLE = new Color(QUANTITE_COULEUR, QUANTITE_COULEUR, QUANTITE_COULEUR);
+	
 }

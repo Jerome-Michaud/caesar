@@ -12,11 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import modeles.Erreur;
 import vue.controller.LanceurTraduction;
-import vue.ginterface.Fenetre;
+import vue.ginterface.GUI;
 import vue.ginterface.GlassPane;
 import vue.ginterface.PanelCodeGraphique;
 import vue.ginterface.PanelWidget;
-import vue.ginterface.ZoneUtilisateur;
 import vue.widget.IWidget;
 import vue.widget.Widget;
 import vue.widget.WidgetCompose;
@@ -47,9 +46,11 @@ public class DragAndDropTools extends Observable {
 	 * Constructeur privé de la classe initialisant la liste de widgets à vide.
 	 */
 	private DragAndDropTools() {
+		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
+		
 		this.composantsDrague = new LinkedList<Widget>();
-		this.addObserver(GlassPane.getInstance());
-		this.addObserver(PanelCodeGraphique.getInstance());
+		this.addObserver(GUI.getGlassPane());
+		this.addObserver(GUI.getPanelCodeGraphique());
 	}
 
 	/**
@@ -76,9 +77,9 @@ public class DragAndDropTools extends Observable {
 			comp.setDraggable(true);
 			Widget compNouv;
 			try {
-				compNouv = PanelWidget.getInstance().getFabrique().cloner(comp);
+				compNouv = GUI.getPanelWidget().getFabrique().cloner(comp);
 				compNouv.setBounds(comp.getBounds());
-				PanelWidget pw = PanelWidget.getInstance();
+				PanelWidget pw = GUI.getPanelWidget();
 				pw.add(compNouv);
 				int ind = pw.getIndex(comp);
 				pw.supprimerWidget(comp);
@@ -108,10 +109,10 @@ public class DragAndDropTools extends Observable {
 		}
 
 		for (Widget w : composantsDrague) {
-			passerSurAutrePanel(w, GlassPane.getInstance());
+			passerSurAutrePanel(w, GUI.getGlassPane());
 		}
 
-		Point p = GlassPane.getInstance().getMousePosition();
+		Point p = GUI.getGlassPane().getMousePosition();
 		p.x -= ptClick.x;
 		p.y -= ptClick.y;
 
@@ -175,7 +176,7 @@ public class DragAndDropTools extends Observable {
 		if (comp.isDraggable()) {
 			Point ptClick = comp.getPtClick();
 			Point p = MouseInfo.getPointerInfo().getLocation();
-			Rectangle recZoneUtil = new Rectangle(ZoneUtilisateur.getInstance().getLocationOnScreen(), new Dimension(ZoneUtilisateur.getInstance().getWidth(), ZoneUtilisateur.getInstance().getHeight()));
+			Rectangle recZoneUtil = new Rectangle(GUI.getZoneUtilisateur().getLocationOnScreen(), new Dimension(GUI.getZoneUtilisateur().getWidth(), GUI.getZoneUtilisateur().getHeight()));
 			Rectangle boundsGroup = groupeWidgetBounds(composantsDrague, 0);
 
 			Rectangle recWid = new Rectangle(new Point((int) (MouseInfo.getPointerInfo().getLocation().x - ptClick.getX()), (int) (MouseInfo.getPointerInfo().getLocation().y - ptClick.getY())), new Dimension((int) boundsGroup.getWidth(), (int) boundsGroup.getHeight()));
@@ -212,8 +213,8 @@ public class DragAndDropTools extends Observable {
 				p.x -= ptClick.x + 4;
 				p.y -= ptClick.y + 4;
 			}
-			p.x -= Fenetre.getInstance().getLocation().getX();
-			p.y -= Fenetre.getInstance().getLocation().getY();
+			p.x -= GUI.getFenetre().getLocation().getX();
+			p.y -= GUI.getFenetre().getLocation().getY();
 			dragGroupeWidget(composantsDrague, p);
 
 			this.setChanged();
@@ -230,8 +231,8 @@ public class DragAndDropTools extends Observable {
 		Widget comp = composantsDrague.get(0);
 
 		Action a = FusionTools.checkSurvolWidget(comp);
-		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
-		GlassPane g = GlassPane.getInstance();
+		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
+		GlassPane g = GUI.getGlassPane();
 		Rectangle r = (Rectangle) comp.getBounds().clone();
 
 		Point pt = comp.getLocationOnScreen();
@@ -282,6 +283,7 @@ public class DragAndDropTools extends Observable {
 						w.defParent((IWidget) p);//gestion du parent suivant element survole
 
 					} else {
+						//TODO : a supprimer
 						/*if (compSurvole.isComplexe()) {
 						 //Survol d'une zone d'accroche
 						 if (a.getVal() == 2) {
@@ -291,6 +293,7 @@ public class DragAndDropTools extends Observable {
 						 } else {
 						 w.defParent(compSurvole.parent());
 						 }*/
+						
 						//Survol d'une zone d'accroche
 						if (a.getVal() == 2) {
 							complexe = true;
@@ -361,7 +364,7 @@ public class DragAndDropTools extends Observable {
 				}
 			}
 		}
-		GlassPane.getInstance().remove(comp);
+		GUI.getGlassPane().remove(comp);
 	}
 
 	/**
