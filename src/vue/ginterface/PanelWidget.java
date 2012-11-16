@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+
 /**
  * Cette zone correspond à la zone où sont entreposés les widgets pour que l'utilisateur puisse les prendre.
  *
@@ -19,6 +21,7 @@ public class PanelWidget extends JPanel {
 	private static PanelWidget instance = new PanelWidget();
 	private FabriqueInstructions fabrique;
 	private List<Widget> lesWidgets;
+        private JButton newVariableName;
 	/**
 	 * SINGLETON.
 	 * 
@@ -30,6 +33,8 @@ public class PanelWidget extends JPanel {
 
 		this.fabrique = new FabriqueInstructions();
 		this.setLayout(null);
+                
+                
 
 		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 600));
 	}
@@ -122,4 +127,5 @@ public class PanelWidget extends JPanel {
 			i++;
 		}
 	}
+
 }

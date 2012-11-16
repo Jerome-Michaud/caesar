@@ -10,7 +10,7 @@ import vue.widget.Widget;
 
 /**
  *
- * @author zubi
+ * @author zubair
  */
 public class BoutonCategorieVariable extends BoutonCategorie {
     /**
@@ -25,8 +25,10 @@ public class BoutonCategorieVariable extends BoutonCategorie {
 	public BoutonCategorieVariable() {
 		super(new ModeleCategorie("Variable", new Color(ROUGE, VERT, BLEU)));
 
-
+	
 		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetVariable());
+                this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetVariableSetValue());
+
 
 		for (Widget w : this.getLesWidgets()) {
 			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));

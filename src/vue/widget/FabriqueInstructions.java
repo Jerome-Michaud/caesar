@@ -13,6 +13,7 @@ import vue.widget.modele.RepeatWidget;
 import vue.widget.modele.TacheWidget;
 import vue.widget.modele.WaitWidget;
 import vue.widget.modele.VariableWidget;
+import vue.widget.modele.VariableSetValueWidget;
 import vue.widget.modele.WhileWidget;
 
 /**
@@ -119,6 +120,25 @@ public class FabriqueInstructions {
 		return new Widget(new VariableWidget());
 	}
 
+        
+         /**
+	 * Méthode permettant de créer un widget de type "VariableSetValue".
+	 *
+	 * @return un widget de type "VariableSetValue"
+	 */
+	public Widget creerWidgetVariableSetValue() {
+		return new Widget(new VariableSetValueWidget());
+	}       
+                /**
+	 * Méthode permettant de créer un widget de type "Expression".
+	 *
+	 * @return un widget de type "Expression"
+	 */
+	/*public Widget creerWidgetExpression() {
+		return new Widget(new ExpressionWidget());
+	}*/
+
+
 	/**
 	 * Méthode permettant de créer un widget complexe de type "Tâche".
 	 *
@@ -167,6 +187,14 @@ public class FabriqueInstructions {
 		else if (comp.getModele() instanceof WaitWidget) {
 			w = creerWidgetWait();
 		}
+                /* ajout de widget variable */
+                else if (comp.getModele() instanceof VariableWidget) {
+			w = creerWidgetVariable();
+		}
+                else if (comp.getModele() instanceof VariableSetValueWidget) {
+			w = creerWidgetVariableSetValue();
+		}                
+                /* */
 		else if (comp.getModele() instanceof RepeatWidget) {
 			w = creerWidgetRepeat();
 		}

@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JComponent;
+import javax.swing.JButton;
 
 /**
  * Classe permettant de définir les différents comportements des boutons catégories.
@@ -217,4 +218,5 @@ public abstract class BoutonCategorie extends JComponent {
 	protected void ajouterUnWidget(final Widget widget) {
 		this.lesWidgets.add(widget);
 	}
+   
 }

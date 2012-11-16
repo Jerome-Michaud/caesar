@@ -11,13 +11,14 @@ import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
+import javax.swing.JButton;
 import modeles.TypeWidget;
 
 
 
 /**
  *
- * @author zubi
+ * @author zubair
  */
 public class VariableWidget extends ModeleWidget {
 	/**
@@ -25,18 +26,21 @@ public class VariableWidget extends ModeleWidget {
 	 */
 	public VariableWidget() {
 		super();
-		int tX[] = {0, 5, 30, 35, 45, 50, 130, 135, 135, 130, 50, 45, 35, 30, 5, 0};
-		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
-
-
+                
+                
+                       
+		int tX[] = {0, 3, 20, 23, 23, 20, 3, 0};
+                
+		int tY[] = {3, 0, 0,  3,  10, 13, 13,10};
+	
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.VARIABLE);
-		
-
-		message.put(new Point(5, 17), "Variable");
+		//recupère type variable avec son nom
+               // Variable var = new Variable()
+		message.put(new Point(7, 11), "a");
 		//message.put(new Point(108, 17), "ms");
 		
 		this.setElementProgramme(new InstructionAttente());
@@ -56,42 +60,42 @@ public class VariableWidget extends ModeleWidget {
 
 	@Override
 	public void decalageXout(int a) {
-		int i;
+		/*int i;
 		for (i = 6; i < 10; i++) {
 			this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
 		}
 		this.setForme(this.getForme());
-		this.setTailleX();
+		this.setTailleX();*/
 	}
 
 	@Override
 	public void decalageXin(int a) {
-		int i;
+		/*int i;
 		for (i = 6; i < 10; i++) {
 			this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
 		}
 		this.setForme(this.getForme());
-		this.setTailleX();
+		this.setTailleX();*/
 	}
 
 	@Override
 	public void decalageYout(int b, Rectangle r) {
-		int i;
+		/*int i;
 		for (i = 8; i < 16; i++) {
 			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
 		}
 		this.setForme(this.getForme());
-		this.setTailleY();
+		this.setTailleY();*/
 	}
 
 	@Override
 	public void decalageYin(int b, Rectangle r) {
-		int i;
+	/*	int i;
 		for (i = 8; i < 16; i++) {
 			this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
 		}
 		this.setForme(this.getForme());
-		this.setTailleY();
+		this.setTailleY();*/
 	}
 
 	@Override
