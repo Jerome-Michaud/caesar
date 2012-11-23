@@ -13,7 +13,7 @@ import vue.widget.Widget;
  *
  * @author zubair
  */
-public class BoutonCategorieVariable extends BoutonCategorie {
+ public class BoutonCategorieVariable extends BoutonCategorie {
     /**
 	 * Quantité des différentes couleurs.
 	 */
@@ -26,12 +26,5 @@ public class BoutonCategorieVariable extends BoutonCategorie {
 	public BoutonCategorieVariable() {
 		super(new ModeleCategorieVariable("Variable", new Color(ROUGE, VERT, BLEU)));
 
-
-
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetVariable());
-
-		for (Widget w : this.getLesWidgets()) {
-			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
-		}
 	}
 }

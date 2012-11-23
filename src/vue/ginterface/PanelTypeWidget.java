@@ -34,7 +34,7 @@ public class PanelTypeWidget extends JPanel {
 		this.lesCategories.add(new BoutonCategorieIO());
 		this.lesCategories.add(new BoutonCategorieTemps());
 		this.lesCategories.add(new BoutonCategorieVariable());
-        this.lesCategories.add(new BoutonCategorieExpression());
+                this.lesCategories.add(new BoutonCategorieExpression());
 
 		this.setLayout(null);
 		int i = 0, x = 10, y = 26;

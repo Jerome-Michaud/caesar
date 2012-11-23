@@ -110,8 +110,8 @@ public class FabriqueInstructions {
 	public Widget creerWidgetWait() {
 		return new Widget(new WaitWidget());
 	}
-        
-        /**
+
+	/**
 	 * Méthode permettant de créer un widget de type "Variable".
 	 *
 	 * @return un widget de type "Variable"
@@ -120,8 +120,8 @@ public class FabriqueInstructions {
 		return new Widget(new VariableWidget());
 	}
 
-        
-         /**
+
+	/**
 	 * Méthode permettant de créer un widget de type "VariableSetValue".
 	 *
 	 * @return un widget de type "VariableSetValue"
@@ -129,7 +129,7 @@ public class FabriqueInstructions {
 	public Widget creerWidgetVariableSetValue() {
 		return new Widget(new VariableSetValueWidget());
 	}       
-                /**
+	/**
 	 * Méthode permettant de créer un widget de type "Expression".
 	 *
 	 * @return un widget de type "Expression"
@@ -187,14 +187,14 @@ public class FabriqueInstructions {
 		else if (comp.getModele() instanceof WaitWidget) {
 			w = creerWidgetWait();
 		}
-                /* ajout de widget variable */
-                else if (comp.getModele() instanceof VariableWidget) {
+		/* ajout de widget variable */
+		else if (comp.getModele() instanceof VariableWidget) {
 			w = creerWidgetVariable();
 		}
-                else if (comp.getModele() instanceof VariableSetValueWidget) {
+		else if (comp.getModele() instanceof VariableSetValueWidget) {
 			w = creerWidgetVariableSetValue();
 		}                
-                /* */
+		/* */
 		else if (comp.getModele() instanceof RepeatWidget) {
 			w = creerWidgetRepeat();
 		}

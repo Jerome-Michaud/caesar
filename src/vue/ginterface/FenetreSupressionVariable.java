@@ -20,14 +20,14 @@ import modeles.DicoVars;
  */
 public class FenetreSupressionVariable extends JFrame {
 	
-	private JComboBox<Variable> variables;
+	private JComboBox variables;
 	private JButton boutonValider;
 	
 	public FenetreSupressionVariable() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(null);
 		
-		variables = new JComboBox<Variable>(DicoVars.getInstance().getLesvariables());
+		variables = new JComboBox(DicoVars.getInstance().getLesvariables());
 		boutonValider = new JButton("Valider");
 		
 		Box boxV = Box.createVerticalBox();
