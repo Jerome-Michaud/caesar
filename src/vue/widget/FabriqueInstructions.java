@@ -110,7 +110,7 @@ public class FabriqueInstructions {
 	public Widget creerWidgetWait() {
 		return new Widget(new WaitWidget());
 	}
-
+	
 	/**
 	 * Méthode permettant de créer un widget de type "Variable".
 	 *
@@ -118,6 +118,14 @@ public class FabriqueInstructions {
 	 */
 	public Widget creerWidgetVariable() {
 		return new Widget(new VariableWidget());
+	}
+	/**
+	 * Méthode permettant de créer un widget de type "Variable".
+	 *
+	 * @return un widget de type "Variable"
+	 */
+	public Widget creerWidgetVariable(String nom) {
+		return new Widget(new VariableWidget(nom));
 	}
 
 

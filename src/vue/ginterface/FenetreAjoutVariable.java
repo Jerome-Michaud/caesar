@@ -75,7 +75,7 @@ public class FenetreAjoutVariable extends JFrame {
 					for (BoutonCategorie bc : GUI.getPanelTypeWidget().getLesCategories()) {
 						if (bc instanceof BoutonCategorieVariable) {
 							BoutonCategorieVariable bcv = (BoutonCategorieVariable) bc;
-							bcv.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetVariable());
+							bcv.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetVariable(nomVariable.getText()));
 
 							for (Widget w : bcv.getLesWidgets()) {
 								w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
