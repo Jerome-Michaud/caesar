@@ -209,14 +209,14 @@ public final class ArborescenceTools {
 	 * Cette méthode permet de mettre à jour tous les widgets du PanelCodeGraphique.
 	 */
 	public void updateWidgets() {
-		Iterator<List<Widget>> itWidget = this.arborescence.iterator();
-		while(itWidget.hasNext()) {
-			List<Widget> listeWidget = itWidget.next();
+		//Iterator<List<Widget>> itWidget = this.arborescence.iterator();
+		//while(itWidget.hasNext()) {
+			//List<Widget> listeWidget = itWidget.next();
+		for(List<Widget> listeWidget : arborescence){
 			for (Widget w : listeWidget) {
 				if (w.isComplexe()) {
 					((WidgetCompose)w).notifyChange();
-				}
-				
+				}				
 			}
 		}
 	}
