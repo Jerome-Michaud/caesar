@@ -25,10 +25,10 @@ public class VariableWidget extends ModeleWidget {
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
 	 */
 	String nomVariable;
-	public VariableWidget(){
-		
-		
+	public String getNomVariable() {
+		return nomVariable;
 	}
+	private VariableWidget(){}
 	public VariableWidget(String nom) {
 		
 		super();
@@ -46,6 +46,7 @@ public class VariableWidget extends ModeleWidget {
 		this.setType(TypeWidget.VARIABLE);
 	
 		message.put(new Point(7, 11), this.nomVariable );
+		//message.put(new Point(7, 11), "var" );
 		this.setElementProgramme(new InstructionAttente());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 

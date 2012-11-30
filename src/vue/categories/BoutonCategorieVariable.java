@@ -25,6 +25,7 @@ import vue.widget.Widget;
 	 */
 	public BoutonCategorieVariable() {
 		super(new ModeleCategorieVariable("Variable", new Color(ROUGE, VERT, BLEU)));
-
+		
 	}
+	
 }

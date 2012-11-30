@@ -5,6 +5,8 @@
 package vue.ginterface;
 
 import instruction.Variable;
+
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import modeles.DicoVars;
+import vue.categories.BoutonCategorie;
+import vue.categories.BoutonCategorieVariable;
+import vue.ginterface.GUI;
+import vue.widget.Widget;
 
 /**
  *
@@ -52,9 +58,12 @@ public class FenetreSupressionVariable extends JFrame {
 
 		boutonValider.addActionListener(new ActionListener() {
 
-			@Override
+			@ Override
 			public void actionPerformed(ActionEvent ae) {
 				DicoVars.getInstance().supprimer(((Variable)variables.getSelectedItem()).getNom());
+				
+				
+				//GUI.getPanelWidget().setLesWidgets();
 				dispose();
 			}
 		});
