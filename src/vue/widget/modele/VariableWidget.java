@@ -3,18 +3,18 @@ package vue.widget.modele;
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.Zone;
 import instruction.InstructionAttente;
-import instruction.Variable;
 import instruction.VariableConstante;
 import instruction.TypeVariable;
+import instruction.VariableModifiable;
+
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+
 import javax.swing.JComponent;
-import javax.swing.JButton;
 import modeles.TypeWidget;
-import modeles.DicoVars;
 
 
 
@@ -26,10 +26,14 @@ public class VariableWidget extends ModeleWidget {
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
 	 */
-	public VariableWidget() {
+
+	private VariableWidget(){
+		
+	}
+	public VariableWidget(VariableModifiable variableModifiable) {
+		
 		super();
-                
-                
+        
                        
 		int tX[] = {0, 3, 20, 23, 23, 20, 3, 0};
                 
@@ -40,18 +44,9 @@ public class VariableWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.VARIABLE);
-		//recupère type variable avec son nom
-        // Variable var = new Variable()
-		
-		DicoVars.getInstance().getLesvariables();
-		for(Variable vars :  DicoVars.getInstance().getLesvariables()){
-			if(!vars.getNom().contains("icerkjnfenefn"))
-				message.put(new Point(7, 11), vars.getNom().toString());
-		}
-		
-		//message.put(new Point(108, 17), "ms");
-		
-		this.setElementProgramme(new InstructionAttente());
+	
+		message.put(new Point(7, 11), variableModifiable.getNom());
+		this.setElementProgramme(variableModifiable);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ChampTexte f = new ChampTexte();
@@ -59,8 +54,6 @@ public class VariableWidget extends ModeleWidget {
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 
-		//this.setInstructionValeur(f.getText());
-		
 		this.decalageXout(-5);
 		
 		initListeners();
@@ -110,17 +103,14 @@ public class VariableWidget extends ModeleWidget {
 	@Override
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
-
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				//setInstructionValeur(((Zone) getLesZonesSaisies().get(0)).getValeur());
-			}
 		});
 	}
-	/**
-	 * Définie le temps d'attente de l'instruction Wait.
-	 * 
-	 * @param nom La valeur du temps d'attente
-	 */
 	
+	/**
+	 * 
+	 * @return nom de variable
+	 */
+	public String getNomVariable() {
+		return ((VariableModifiable)this.getElementProgramme()).getNom();
+	}
 }

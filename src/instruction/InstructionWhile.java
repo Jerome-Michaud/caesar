@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Boucle conditionnelle simple : "Tant que".
  */
@@ -25,7 +23,7 @@ public class InstructionWhile extends InstructionConditionelle {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction visiteur) {
+	public void accepte(VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
 

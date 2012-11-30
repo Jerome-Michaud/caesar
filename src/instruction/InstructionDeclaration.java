@@ -1,12 +1,11 @@
 																																																																																																																																																							package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * La déclaration est une instruction déclarant une variable.
+ * 
  * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
  */
-public class InstructionDeclaration implements Instruction{
+public class InstructionDeclaration implements Instruction {
 
 	private Variable membreGauche;
 
@@ -20,7 +19,7 @@ public class InstructionDeclaration implements Instruction{
 	}
 	
 	@Override
-	public void accepte(VisiteurTraduction visiteur) {
+	public void accepte(VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
 	

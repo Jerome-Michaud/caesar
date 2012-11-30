@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Boucle d'une situation de départ jusqu'à
  * une condition avec un traitement à chaque tour de boucle.
@@ -79,7 +77,7 @@ public class InstructionFor extends InstructionConditionelle {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction visiteur) {
+	public void accepte(VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
 }

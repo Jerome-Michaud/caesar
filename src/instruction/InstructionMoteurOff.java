@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Instruction d'arrêt d'un moteur.
  */
@@ -24,7 +22,7 @@ public class InstructionMoteurOff extends InstructionMoteurCmd {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction visiteur) {
+	public void accepte(VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
 

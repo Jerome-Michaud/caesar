@@ -1,5 +1,7 @@
 package vue.widget;
 
+import instruction.TypeVariable;
+import instruction.VariableModifiable;
 import vue.tools.NonClonableException;
 import vue.widget.modele.DoWhileWidget;
 import vue.widget.modele.ForWidget;
@@ -111,17 +113,23 @@ public class FabriqueInstructions {
 	public Widget creerWidgetWait() {
 		return new Widget(new WaitWidget());
 	}
-
+	
 	/**
 	 * Méthode permettant de créer un widget de type "Variable".
 	 *
 	 * @return un widget de type "Variable"
 	 */
-	public Widget creerWidgetVariable() {
-		return new Widget(new VariableWidget());
+	
+	/**
+	 * Méthode permettant de créer un widget de type "Variable".
+	 *
+	 * @return un widget de type "Variable"
+	 */
+	public Widget creerWidgetVariable(VariableModifiable variableModifiable) {
+		return new Widget(new VariableWidget(variableModifiable));
 	}
 
-
+	
 	/**
 	 * Méthode permettant de créer un widget de type "VariableSetValue".
 	 *
@@ -130,14 +138,6 @@ public class FabriqueInstructions {
 	public Widget creerWidgetVariableSetValue() {
 		return new Widget(new VariableSetValueWidget());
 	}       
-	/**
-	 * Méthode permettant de créer un widget de type "Expression".
-	 *
-	 * @return un widget de type "Expression"
-	 */
-	/*public Widget creerWidgetExpression() {
-		return new Widget(new ExpressionWidget());
-	}*/
 
 
 	/**
@@ -197,7 +197,7 @@ public class FabriqueInstructions {
 		}
 		/* ajout de widget variable */
 		else if (comp.getModele() instanceof VariableWidget) {
-			w = creerWidgetVariable();
+			w = creerWidgetVariable((VariableModifiable)comp.getModele().getElementProgramme());
 		}
 		else if (comp.getModele() instanceof VariableSetValueWidget) {
 			w = creerWidgetVariableSetValue();

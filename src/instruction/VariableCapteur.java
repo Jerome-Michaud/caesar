@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Variable constante représentant un capteur.
  */
@@ -50,7 +48,7 @@ public class VariableCapteur extends VariableConstante {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction v) {
+	public void accepte(VisiteurElementProg v) {
 		v.visiter(this);
 	}
 }

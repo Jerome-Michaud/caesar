@@ -2,8 +2,6 @@ package instruction;
 
 import java.util.List;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Instruction conditionnelle if-else.
  */
@@ -53,7 +51,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction visiteur) {
+	public void accepte(VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
 

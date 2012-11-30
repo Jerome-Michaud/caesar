@@ -69,14 +69,13 @@ public class FenetreAjoutVariable extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				if (!nomVariable.getText().isEmpty()) {
-					Variable var = new VariableModifiable((TypeVariable)typeVariable.getSelectedItem(), nomVariable.getText(), "");
+					Variable var = new VariableModifiable((TypeVariable)typeVariable.getSelectedItem(), nomVariable.getText(), "0");
 					DicoVars.getInstance().ajouter(var);
 
 					for (BoutonCategorie bc : GUI.getPanelTypeWidget().getLesCategories()) {
 						if (bc instanceof BoutonCategorieVariable) {
 							BoutonCategorieVariable bcv = (BoutonCategorieVariable) bc;
-							bcv.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetVariable());
-
+							bcv.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetVariable((VariableModifiable)var));
 							for (Widget w : bcv.getLesWidgets()) {
 								w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
 							}

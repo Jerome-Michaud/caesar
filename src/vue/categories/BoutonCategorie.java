@@ -205,8 +205,9 @@ public abstract class BoutonCategorie extends JComponent {
 			this.active = true;
 			this.fond = Variables.GRIS_ACTIF;
 
-			GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
+			
 		}
+		GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
 	}
 
 	/**
@@ -220,6 +221,8 @@ public abstract class BoutonCategorie extends JComponent {
 		p.x++;
 		p.y++;
 		this.setLocation(p);
+
+		
 	}
 
 	/**
@@ -250,5 +253,13 @@ public abstract class BoutonCategorie extends JComponent {
 		GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
 	}
 
+	
+	/**
+	 * Retourne vrai si le bouton est actif
+	 * @return true
+	 */
+	public boolean isActive(){
+		return this.active;
+	}
 
 }
