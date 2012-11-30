@@ -6,10 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import vue.tools.Variables;
 
 /**
  * Permet de créer l'objet de type GlassPane.
@@ -46,6 +46,8 @@ public class GlassPane extends JPanel implements Observer {
 	}
 
 	private GlassPane() {
+		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
+		
 		this.pointLigne = null;
 		this.longueurLigne = 0;
 		this.setLayout(null);
@@ -59,7 +61,7 @@ public class GlassPane extends JPanel implements Observer {
 	 *
 	 * @return L'instance unique de GlassPane.
 	 */
-	public static GlassPane getInstance() {
+	protected static GlassPane getInstance() {
 		return instance;
 	}
 	/**
@@ -84,7 +86,7 @@ public class GlassPane extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object o1) {
-		logger.log(Level.INFO, "Observateur : Mise à jour du PanelCodeGraphique");
+		logger.info("Observateur : Mise à jour du PanelCodeGraphique");
 		this.repaint();
 	}
 }

@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Expression logique.
  */
@@ -36,7 +34,7 @@ public class Condition extends ExpressionComplexe {
 	}
 
 	@Override
-	public void accepte(VisiteurTraduction v) {
+	public void accepte(VisiteurElementProg v) {
 		v.visiter(this);
 	}
 }

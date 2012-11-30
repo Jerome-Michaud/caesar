@@ -1,8 +1,11 @@
 package vue.categories;
 
+import vue.categories.complexe.PolygoneAction;
 import vue.tools.Variables;
 import java.awt.Color;
 import java.awt.Polygon;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Permet de définir le modèle d'un bouton de catégorie.<br />
@@ -48,9 +51,11 @@ public class ModeleCategorie {
 	 */
 	private Color couleur;
 	/**
-	 * Les polygones dormant le polygone global.
+	 * Les polygones donnant le polygone global.
 	 */
 	private Polygon formeCouleur, formeTexte;
+	
+	private List<PolygoneAction> formesExtras;
 	/**
 	 * Le nom de la catégorie.
 	 */
@@ -67,6 +72,7 @@ public class ModeleCategorie {
 		this.nom = nom;
 		this.formeCouleur = new Polygon(this.tabXIcone, this.tabYIcone, this.tabXIcone.length);
 		this.formeTexte = new Polygon(this.tabX, this.tabY, this.tabX.length);
+		this.formesExtras = new ArrayList<PolygoneAction>();
 	}
 
 	/**
@@ -85,6 +91,10 @@ public class ModeleCategorie {
 	 */
 	public Polygon getFormeTexte() {
 		return this.formeTexte;
+	}
+	
+	public List<PolygoneAction> getFormesExtras() {
+		return this.formesExtras;
 	}
 
 	/**

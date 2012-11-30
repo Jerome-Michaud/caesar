@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import modeles.Erreur;
+import vue.ginterface.GUI;
 /**
  * Classe regroupant différents outils destinés à la sauvegarde et au chargement
  * de projets JScratch
@@ -26,7 +27,7 @@ public class SavingTools {
         JFileChooser choix = new JFileChooser();
         choix.addChoosableFileFilter(new JScratchFileFilter());
         choix.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int retour = choix.showSaveDialog(Fenetre.getInstance());
+        int retour = choix.showSaveDialog(GUI.getFenetre()); // TODO : A SUPPRIMER Fenetre.getInstance());
         if(retour == JFileChooser.APPROVE_OPTION) {
             String path = choix.getSelectedFile().getAbsolutePath();
             if(!path.endsWith(JScratchFileFilter.EXT)) {
@@ -67,11 +68,11 @@ public class SavingTools {
         JFileChooser choix = new JFileChooser();
         choix.addChoosableFileFilter(new JScratchFileFilter());
         choix.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int retour = choix.showOpenDialog(Fenetre.getInstance());
+        int retour = choix.showOpenDialog(GUI.getFenetre()); // TODO : A SUPPRIMER Fenetre.getInstance());
         if (retour == JFileChooser.APPROVE_OPTION) {
             deserializeArborescence(choix.getSelectedFile().getPath());
         }
-        PanelCodeGraphique.getInstance().repaint();
+        GUI.getPanelCodeGraphique().repaint();
     }
     /**
      * Desérialise une arborescence précédemment sauvegardée.

@@ -40,7 +40,7 @@ public class PanelInstruction extends JPanel {
 	 *
 	 * @return L'instance unique de PanelInstruction.
 	 */
-	public static PanelInstruction getInstance() {
+	protected static PanelInstruction getInstance() {
 		return instance;
 	}
 }

@@ -33,7 +33,7 @@ public class ZoneUtilisateur extends JPanel {
 	 * 
 	 * @return L'unique instance de ZoneUtilisateur.
 	 */
-	public static ZoneUtilisateur getInstance() {
+	protected static ZoneUtilisateur getInstance() {
 		return instance;
 	}
 }

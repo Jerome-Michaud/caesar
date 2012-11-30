@@ -3,10 +3,10 @@ package vue.ginterface;
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import vue.tools.Variables;
 import vue.widget.IWidget;
 
 /**
@@ -28,6 +28,8 @@ public class PanelCodeGraphique extends JPanel implements IWidget, Observer {
 	private static PanelCodeGraphique instance = new PanelCodeGraphique();
 
 	private PanelCodeGraphique() {
+		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
+		
 		this.setMinimumSize(new Dimension(400, 600));
 		this.setLayout(null);
 		this.setBorder(BorderFactory.createTitledBorder("Code graphique"));
@@ -39,7 +41,7 @@ public class PanelCodeGraphique extends JPanel implements IWidget, Observer {
 	 *
 	 * @return L'instance unique de PanelWidget.
 	 */
-	public static PanelCodeGraphique getInstance() {
+	protected static PanelCodeGraphique getInstance() {
 		return instance;
 	}
 	@Override
@@ -49,7 +51,7 @@ public class PanelCodeGraphique extends JPanel implements IWidget, Observer {
 
 	@Override
 	public void update(Observable o, Object o1) {
-		logger.log(Level.INFO, "Observateur : Mise à jour du PanelCodeGraphique");
+		logger.info("Observateur : Mise à jour du PanelCodeGraphique");
 		this.repaint();
 	}
 }

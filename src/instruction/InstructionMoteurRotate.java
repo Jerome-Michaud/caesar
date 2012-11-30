@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Instruction de rotation d'un moteur.
  */
@@ -31,7 +29,7 @@ public class InstructionMoteurRotate extends InstructionMoteurCmd {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction visiteur) {
+	public void accepte(VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
 

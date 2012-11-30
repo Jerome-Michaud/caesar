@@ -19,8 +19,9 @@ import instruction.InstructionTempsCourant;
 import instruction.InstructionWhile;
 import instruction.Variable;
 import instruction.VariableCapteur;
+import instruction.VisiteurElementProg;
 
-public abstract class VisiteurTraduction {
+public abstract class VisiteurTraduction implements VisiteurElementProg {
 
 	/**
 	 * La traduction.

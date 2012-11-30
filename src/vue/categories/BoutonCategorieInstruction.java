@@ -1,8 +1,8 @@
 package vue.categories;
 
-import vue.ginterface.PanelWidget;
 import vue.widget.Widget;
 import java.awt.Color;
+import vue.ginterface.GUI;
 
 /**
  * Classe permettant l'instanciation du bouton catégorie "Instructions".
@@ -34,8 +34,8 @@ public class BoutonCategorieInstruction extends BoutonCategorie {
 	public BoutonCategorieInstruction() {
 		super(new ModeleCategorie("Instructions", new Color(ROUGE, VERT, BLEU)));
 
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetTache());
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetWait());
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetTache());
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetWait());
 
 		for (Widget w : this.getLesWidgets()) {
 			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));

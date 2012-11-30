@@ -10,54 +10,57 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-
 import javax.swing.JComponent;
+import vue.widget.modele.zones.ListeDeroulante;
 import modeles.TypeWidget;
+import modeles.DicoVars;
+import instruction.*;
 
 
 
 /**
  *
- * @author zubair
+ * @author zubi
  */
-public class VariableWidget extends ModeleWidget {
+public class VariableSetValueWidget extends ModeleWidget {
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
 	 */
-	String nomVariable;
-	public VariableWidget(){
-		
-		
-	}
-	public VariableWidget(String nom) {
-		
+	public VariableSetValueWidget() {
 		super();
-                
-        this.nomVariable = nom;       
-                       
-		int tX[] = {0, 3, 20, 23, 23, 20, 3, 0};
-                
-		int tY[] = {3, 0, 0,  3,  10, 13, 13,10};
-	
+
+
+
+		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
+		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
+
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.VARIABLE);
-	
-		message.put(new Point(7, 11), this.nomVariable );
+
+
+		message.put(new Point(5, 17), "Var:");
+		message.put(new Point(100, 17), " = ");
+
 		this.setElementProgramme(new InstructionAttente());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+
+		ListeDeroulante l = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
+		l.setBounds(55, 3, 35, 20);
+		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
 		f.setBounds(65, 3, 40, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 
+		this.setInstructionValeur(l.getValeur());
 		this.setInstructionValeur(f.getText());
-		
+
 		this.decalageXout(-5);
-		
+
 		initListeners();
 	}
 
@@ -93,7 +96,7 @@ public class VariableWidget extends ModeleWidget {
 
 	@Override
 	public void decalageYin(int b, Rectangle r) {
-	/*	int i;
+		/*	int i;
 		for (i = 8; i < 16; i++) {
 			this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
 		}

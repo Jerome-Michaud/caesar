@@ -1,9 +1,8 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Déclaration d'une variable avec initialisation en même temps.
+ * 
  * @author Adrien DUROY, Bastien AUBRY
  */
 public class InstructionDeclarationAffectation extends InstructionDeclaration {
@@ -46,7 +45,7 @@ public class InstructionDeclarationAffectation extends InstructionDeclaration {
 	}
 	
 	@Override
-	public void accepte(VisiteurTraduction visiteur) {
+	public void accepte(VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
 	

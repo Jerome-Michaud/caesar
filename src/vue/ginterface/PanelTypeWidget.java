@@ -63,7 +63,7 @@ public class PanelTypeWidget extends JPanel {
 	 *
 	 * @return L'instance unique de PanelWidget.
 	 */
-	public static PanelTypeWidget getInstance() {
+	protected static PanelTypeWidget getInstance() {
 		return instance;
 	}
 	/**
