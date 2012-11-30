@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Modèle d'une affectation.
  */
@@ -35,7 +33,7 @@ public class Affectation extends ExpressionComplexe implements Instruction {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction v) {
+	public void accepte(final VisiteurElementProg v) {
 		v.visiter(this);
 	}
 

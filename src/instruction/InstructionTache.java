@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Tâche pour un programme d'un robot NXT.
  */
@@ -52,7 +50,7 @@ public class InstructionTache extends InstructionInconditionelle {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction visiteur) {
+	public void accepte(VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
 

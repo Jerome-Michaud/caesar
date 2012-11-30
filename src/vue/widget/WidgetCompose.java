@@ -116,7 +116,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	public void notifyChange() {
 		HashMap<Rectangle, Rectangle> mapRect = new HashMap<Rectangle, Rectangle>();
 		HashMap<Rectangle, Integer> mapDecal = new HashMap<Rectangle, Integer>();
-		
+                
 		for (Rectangle r : mapZone.keySet()) {
 			int decalY = 0;
 			Rectangle maxBounds = null;
@@ -176,6 +176,7 @@ public class WidgetCompose extends Widget implements IWidget {
 		for (Rectangle r : mapRect.keySet()) {
 			this.mapZone.put(mapRect.get(r), this.mapZone.remove(r));
 		}
+		System.out.println("####################");
 	}
 
 	/**

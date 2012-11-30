@@ -1,8 +1,6 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
-public class InstructionDeclarationCapteur implements Instruction{
+public class InstructionDeclarationCapteur implements Instruction {
 
 	private Capteur capteur;
 	private CapteurSlot capteurSlot;
@@ -16,19 +14,16 @@ public class InstructionDeclarationCapteur implements Instruction{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 	public void setCapteur ( Capteur capteur ){
 		this.capteur=  capteur;
 	}
 	
-	public String toString()
-	{
+	public String toString() {
 		return " Instruction Declaration "+capteurSlot.toString() +" "+capteur.toString();
 	}
 	
-	public Capteur getCapteur()
-	{
+	public Capteur getCapteur()	{
 		return capteur;
 	}
 
@@ -36,17 +31,12 @@ public class InstructionDeclarationCapteur implements Instruction{
 		this.capteurSlot=  capteurSlot;
 	}
 	
-	public CapteurSlot getCapteurSlot()
-	{
+	public CapteurSlot getCapteurSlot()	{
 		return capteurSlot;
 	}
 
-
 	@Override
-	public void accepte(VisiteurTraduction visiteur) {
+	public void accepte(VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
-	
-
-
 }
