@@ -84,7 +84,7 @@ public class Widget extends JComponent {
 		this.setFocusable(true);
 		this.setOpaque(true);
 		this.setForme(true);
-
+                
 		initListeners();
 
 		for (Zone z : this.modele.getLesZonesSaisies()) {
