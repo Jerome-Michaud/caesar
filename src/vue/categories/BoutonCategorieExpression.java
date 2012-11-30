@@ -5,12 +5,14 @@
 package vue.categories;
 
 import java.awt.Color;
+
+import vue.ginterface.GUI;
 import vue.ginterface.PanelWidget;
 import vue.widget.Widget;
 
 /**
  *
- * @author zubi
+ * @author zubier, houda 
  */
 public class BoutonCategorieExpression extends BoutonCategorie {
     /**
@@ -25,9 +27,8 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 	public BoutonCategorieExpression() {
 		super(new ModeleCategorie("Expression", new Color(ROUGE, VERT, BLEU)));
 
-		/*this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetTache());
-		this.ajouterUnWidget(PanelWidget.getInstance().getFabrique().creerWidgetWait());*/
-
+		
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionSum());
 		for (Widget w : this.getLesWidgets()) {
 			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
 		}

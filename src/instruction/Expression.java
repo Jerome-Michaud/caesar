@@ -12,6 +12,17 @@ import traduction.VisiteurTraduction;
  */
 public interface Expression extends IElementProgramme {
 
+//	@Override
+//	Categorie getCategorie();
+//	void accepte(VisiteurTraduction v);
+//}
+	/**
+	 * Donne la catégorie de l'instruction.
+	 * 
+	 * @return la catégorie
+	 */
+	Categorie getCategorie();
+
 	@Override
-	void accepte(VisiteurTraduction v);
+	void accepte(VisiteurTraduction visiteur);
 }

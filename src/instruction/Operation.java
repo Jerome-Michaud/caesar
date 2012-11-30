@@ -71,4 +71,10 @@ public class Operation extends ExpressionComplexe {
 	public void accepte(final VisiteurTraduction v) {
 		v.visiter(this);
 	}
+
+	@Override
+	public Categorie getCategorie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

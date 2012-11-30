@@ -232,4 +232,5 @@ public class ForWidget extends ModeleWidget {
 		aff.setMembreDroit(op);
 		((InstructionFor) getElementProgramme()).setIteration(aff);
 	}
-}
+	
+	}

@@ -39,4 +39,10 @@ public class Condition extends ExpressionComplexe {
 	public void accepte(VisiteurTraduction v) {
 		v.visiter(this);
 	}
+
+	@Override
+	public Categorie getCategorie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
