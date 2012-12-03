@@ -123,6 +123,7 @@ public class WidgetCompose extends Widget implements IWidget {
 			
 			//Redimensionnement les zones d'accroches
 			for (Widget w : mapZone.get(r)) {
+				//Widget parent = (Widget)w.parent();
 				if (w.isComplexe()) {
 					((WidgetCompose) w).notifyChange();
 				}

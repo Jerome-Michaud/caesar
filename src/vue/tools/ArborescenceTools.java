@@ -1,6 +1,7 @@
 package vue.tools;
 
-import java.util.Iterator;
+import java.awt.Component;
+import java.awt.LayoutManager;
 import java.util.LinkedList;
 import java.util.List;
 import vue.ginterface.GUI;
@@ -27,7 +28,7 @@ public final class ArborescenceTools {
 	 * Constructeur privé de la classe initialisant l'arborescence.
 	 */
 	private ArborescenceTools() {
-		this.arborescence = new LinkedList<List<Widget>>();
+		this.arborescence = new LinkedList<>();
 	}
 
 	/**
@@ -68,7 +69,7 @@ public final class ArborescenceTools {
 	 */
 	public List<Widget> getListe(final Widget comp) throws ComposantIntrouvableException {
 		if (comp.parent() == null) {
-			List<Widget> l = new LinkedList<Widget>();
+			List<Widget> l = new LinkedList<>();
 			l.add(comp);
 			return l;
 		}
@@ -111,7 +112,7 @@ public final class ArborescenceTools {
 	public boolean ajouterWidgets(final List<Widget> l, final Widget comp, final boolean insererApres) throws ComposantIntrouvableException {
 		//cas de non survol
 		if (comp == null) {
-			List<Widget> lst = new LinkedList<Widget>();
+			List<Widget> lst = new LinkedList<>();
 			lst.addAll(l);
 			return arborescence.add(lst);
 		}
@@ -210,14 +211,31 @@ public final class ArborescenceTools {
 	 * Cette méthode permet de mettre à jour tous les widgets du PanelCodeGraphique.
 	 */
 	public void updateWidgets() {
-		Iterator<List<Widget>> itWidget = this.arborescence.iterator();
-		while(itWidget.hasNext()) {
-			List<Widget> listeWidget = itWidget.next();
+		PanelCodeGraphique pc = GUI.getPanelCodeGraphique();
+		for (List<Widget> listeWidget : this.arborescence) {
 			for (Widget w : listeWidget) {
+				//pc.setComponentZOrder(w, 0);
+				pc.setComponentZOrder(w, pc.getComponentCount() - 1);
 				if (w.isComplexe()) {
+					updateWidgets((WidgetCompose)w);
 					((WidgetCompose)w).notifyChange();
 				}
-				
+			}
+		}
+	}
+	/**
+	 * Cette méthode permet de mettre à jour tous les widgets dans le widget compose passé en paramètre.
+	 * 
+	 * @param w Le widget de début
+	 */
+	public void updateWidgets(WidgetCompose w) {
+		PanelCodeGraphique pc = GUI.getPanelCodeGraphique();
+		for (List<Widget> lw : ((WidgetCompose)w).getMapZone().values()) {
+			for (Widget wid : lw) {
+				pc.setComponentZOrder(wid, pc.getComponentZOrder(w) - 1);
+				if (wid.isComplexe()) {
+					updateWidgets((WidgetCompose)wid);
+				}
 			}
 		}
 	}

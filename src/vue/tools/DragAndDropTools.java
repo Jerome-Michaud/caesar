@@ -48,7 +48,7 @@ public class DragAndDropTools extends Observable {
 	private DragAndDropTools() {
 		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
 		
-		this.composantsDrague = new LinkedList<Widget>();
+		this.composantsDrague = new LinkedList<>();
 		this.addObserver(GUI.getGlassPane());
 		this.addObserver(GUI.getPanelCodeGraphique());
 	}
@@ -87,13 +87,13 @@ public class DragAndDropTools extends Observable {
 			} catch (NonClonableException ex) {
 				Erreur.afficher(ex);
 			}
-			composantsDrague = new LinkedList<Widget>();
+			composantsDrague = new LinkedList<>();
 			composantsDrague.add(comp);
 		} else {
 			ArborescenceTools arbo = ArborescenceTools.getInstance();
 			try {
 				//recuperation et detachement des widgets dragués
-				composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));
+				composantsDrague = new LinkedList<>(arbo.getSuivants(comp, true));
 
 				//supression des widgets dans l'arborescence
 				arbo.supprimerWidgets(composantsDrague);
@@ -230,7 +230,7 @@ public class DragAndDropTools extends Observable {
 	public void dropWidget() {
 		Widget comp = composantsDrague.get(0);
 
-		Action a = FusionTools.checkSurvolWidget(comp);
+		Action a = FusionTools.checkSurvolWidgetV2(comp);
 		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
 		GlassPane g = GUI.getGlassPane();
 		Rectangle r = (Rectangle) comp.getBounds().clone();
@@ -281,19 +281,7 @@ public class DragAndDropTools extends Observable {
 					passerSurAutrePanel(w, p);
 					if (compSurvole == null) {
 						w.defParent((IWidget) p);//gestion du parent suivant element survole
-
 					} else {
-						//TODO : a supprimer
-						/*if (compSurvole.isComplexe()) {
-						 //Survol d'une zone d'accroche
-						 if (a.getVal() == 2) {
-						 complexe = true;
-						 w.defParent((WidgetCompose) compSurvole);
-						 }
-						 } else {
-						 w.defParent(compSurvole.parent());
-						 }*/
-						
 						//Survol d'une zone d'accroche
 						if (a.getVal() == 2) {
 							complexe = true;
