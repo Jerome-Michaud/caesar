@@ -5,15 +5,18 @@
 package vue.categories;
 
 import vue.categories.complexe.ModeleCategorieVariable;
+import instruction.Variable;
+
 import java.awt.Color;
 import vue.ginterface.GUI;
 import vue.widget.Widget;
+import vue.widget.modele.VariableWidget;
 
 /**
  *
- * @author zubi
+ * @author zubair
  */
-public class BoutonCategorieVariable extends BoutonCategorie {
+ public class BoutonCategorieVariable extends BoutonCategorie {
     /**
 	 * Quantité des différentes couleurs.
 	 */
@@ -25,12 +28,23 @@ public class BoutonCategorieVariable extends BoutonCategorie {
 	 */
 	public BoutonCategorieVariable() {
 		super(new ModeleCategorieVariable("Variable", new Color(ROUGE, VERT, BLEU)));
-
-
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetVariable());
-
-		for (Widget w : this.getLesWidgets()) {
-			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
+		
+	}
+	/**
+	 * Supprime une varaible widget
+	 * @param variableWidget
+	 */
+	public void supprimerWidgetVariable(String variableWidget){
+		Widget wid = null;
+		for(Widget w: this.getLesWidgets()){
+			Variable var = (Variable)w.getElementProgramme();
+			if(var.getNom().equals(variableWidget)){
+				wid = w;
+			}
 		}
+		this.getLesWidgets().remove(wid);
+		this.getLesWidgets().remove(variableWidget);
+		GUI.getPanelWidget().setLesWidgets(this.getLesWidgets());
+		
 	}
 }

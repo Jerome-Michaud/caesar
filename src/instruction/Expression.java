@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Une expression est un morceau de code d'un programme qui donne une valeur et qui n'est pas nécessairement une instruction.
  * <ul>
@@ -12,6 +10,17 @@ import traduction.VisiteurTraduction;
  */
 public interface Expression extends IElementProgramme {
 
+//	@Override
+//	Categorie getCategorie();
+//	void accepte(VisiteurTraduction v);
+//}
+	/**
+	 * Donne la catégorie de l'instruction.
+	 * 
+	 * @return la catégorie
+	 */
+	Categorie getCategorie();
+
 	@Override
-	void accepte(VisiteurTraduction v);
+	void accepte(VisiteurElementProg v);
 }

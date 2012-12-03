@@ -31,6 +31,7 @@ public class Variables {
 	/**
 	 * Epaisseur du trait lors de la fusion.
 	 */
+
 	public static final int LINE_STROKE_VALUE = 5;
 	/**
 	 * Indice (en %) pour la conservation du widget dans le PanelCodeGraphique.

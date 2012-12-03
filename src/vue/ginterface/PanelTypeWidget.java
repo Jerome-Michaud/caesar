@@ -34,7 +34,7 @@ public class PanelTypeWidget extends JPanel {
 		this.lesCategories.add(new BoutonCategorieIO());
 		this.lesCategories.add(new BoutonCategorieTemps());
 		this.lesCategories.add(new BoutonCategorieVariable());
-        this.lesCategories.add(new BoutonCategorieExpression());
+		this.lesCategories.add(new BoutonCategorieExpression());
 
 		this.setLayout(null);
 		int i = 0, x = 10, y = 26;
@@ -73,5 +73,18 @@ public class PanelTypeWidget extends JPanel {
 	 */
 	public List<BoutonCategorie> getLesCategories() {
 		return this.lesCategories;
+	}
+	/**
+	 *  
+	 * @return le bouton de la categorie sélectionnée ou null si aucune n'est sélectionnée. 
+	 */
+	public BoutonCategorie getCurrentCategorie() {
+		for(BoutonCategorie bc : this.getLesCategories()){
+			if(bc.isActive())
+				return bc;
+		}
+		return null;
+
+		
 	}
 }

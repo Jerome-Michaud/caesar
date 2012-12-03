@@ -14,6 +14,7 @@ public class ModeleCategorieVariable extends ModeleCategorie {
 		
 		this.getFormesExtras().add(new PolygoneActionPlus());
 		this.getFormesExtras().add(new PolygoneActionMoins());
+                
 	}
 	
 }

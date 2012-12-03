@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Expression arithmétique.
  */
@@ -68,7 +66,13 @@ public class Operation extends ExpressionComplexe {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction v) {
+	public void accepte(VisiteurElementProg v) {
 		v.visiter(this);
+	}
+
+	@Override
+	public Categorie getCategorie() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

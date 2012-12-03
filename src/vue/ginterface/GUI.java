@@ -55,4 +55,5 @@ public class GUI {
 	public static ZoneUtilisateur getZoneUtilisateur() {
 		return ZoneUtilisateur.getInstance();
 	}
+	
 }

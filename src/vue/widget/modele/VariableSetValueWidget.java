@@ -5,62 +5,76 @@ import vue.widget.modele.zones.Zone;
 import instruction.InstructionAttente;
 import instruction.VariableConstante;
 import instruction.TypeVariable;
-import instruction.VariableModifiable;
-
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-
 import javax.swing.JComponent;
+import vue.widget.modele.zones.ListeDeroulante;
 import modeles.TypeWidget;
+import modeles.DicoVars;
+import instruction.*;
 
 
 
 /**
  *
- * @author zubair
+ * @author zubi
  */
-public class VariableWidget extends ModeleWidget {
+public class VariableSetValueWidget extends ModeleWidget {
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
 	 */
-
-	private VariableWidget(){
-		
-	}
-	public VariableWidget(VariableModifiable variableModifiable) {
-		
+	public VariableSetValueWidget() {
 		super();
-        
-                       
-		int tX[] = {0, 3, 20, 23, 23, 20, 3, 0};
+
                 
-		int tY[] = {3, 0, 0,  3,  10, 13, 13,10};
-	
+                
+                      
+		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
+		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
+                
+
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.VARIABLE);
-	
-		message.put(new Point(7, 11), variableModifiable.getNom());
-		this.setElementProgramme(variableModifiable);
+
+		message.put(new Point(5, 17), "Var:");
+		message.put(new Point(100, 17), " = ");
+
+		this.setElementProgramme(new InstructionAttente());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+
+		ListeDeroulante l = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
+		l.setBounds(55, 3, 35, 20);
+		this.getLesZonesSaisies().add(l);
+
 
 		ChampTexte f = new ChampTexte();
 		f.setBounds(65, 3, 40, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
 
+
+                this.setInstructionValeur(l.getValeur());
+		this.setInstructionValeur(f.getText());
+		
 		this.decalageXout(-5);
 		
+
+		this.setInstructionValeur(l.getValeur());
+		this.setInstructionValeur(f.getText());
+
+		this.decalageXout(-5);
+
+
 		initListeners();
 	}
 
 	@Override
-	//
 	public void decalageXout(int a) {
 		/*int i;
 		for (i = 6; i < 10; i++) {
@@ -77,12 +91,12 @@ public class VariableWidget extends ModeleWidget {
 			this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
 		}
 		this.setForme(this.getForme());
-	this.setTailleX();*/
+		this.setTailleX();*/
 	}
 
 	@Override
 	public void decalageYout(int b, Rectangle r) {
-	/*	int i;
+		/*int i;
 		for (i = 8; i < 16; i++) {
 			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
 		}
@@ -92,25 +106,34 @@ public class VariableWidget extends ModeleWidget {
 
 	@Override
 	public void decalageYin(int b, Rectangle r) {
-		/*int i;
+
+	/*	int i;
+=======
+		/*	int i;
+>>>>>>> 0abdc23e7a9aa5cd73adc7f585fa594b440125f1
 		for (i = 8; i < 16; i++) {
 			this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
 		}
 		this.setForme(this.getForme());
 		this.setTailleY();*/
 	}
-//
+
 	@Override
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				setInstructionValeur(((Zone) getLesZonesSaisies().get(0)).getValeur());
+			}
 		});
 	}
-	
 	/**
+	 * Définie le temps d'attente de l'instruction Wait.
 	 * 
-	 * @return nom de variable
+	 * @param nom La valeur du temps d'attente
 	 */
-	public String getNomVariable() {
-		return ((VariableModifiable)this.getElementProgramme()).getNom();
+	private void setInstructionValeur(String nom) {
+		((InstructionAttente) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
 	}
 }

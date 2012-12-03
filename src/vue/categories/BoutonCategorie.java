@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JComponent;
+
 import javax.swing.SwingUtilities;
 import vue.ginterface.GUI;
 import vue.tools.Variables;
@@ -61,7 +62,7 @@ public abstract class BoutonCategorie extends JComponent {
 		g2d.setColor(Color.BLACK);
 		g2d.drawPolygon(this.modele.getFormeCouleur());
 		g2d.drawPolygon(this.modele.getFormeTexte());
-		
+
 		// Extras
 		for (PolygoneAction poly : this.modele.getFormesExtras()) {
 			g2d.setColor(poly.getCouleur());
@@ -69,7 +70,7 @@ public abstract class BoutonCategorie extends JComponent {
 			g2d.setColor(Color.BLACK);
 			g2d.drawPolygon(poly.getPolygon());
 		}
-		
+
 		// Ecritures
 		g2d.setColor(Color.WHITE);
 		g2d.setFont(this.font);
@@ -161,11 +162,11 @@ public abstract class BoutonCategorie extends JComponent {
 		if (!active) {
 			this.fond = Variables.GRIS_INACTIF;
 		}
-		
+
 		for (PolygoneAction poly : this.modele.getFormesExtras()) {
 			poly.setEtat(EtatPolygon.INACTIF);
 		}
-		
+
 		this.repaint();
 	}
 
@@ -179,7 +180,7 @@ public abstract class BoutonCategorie extends JComponent {
 
 		Point p = MouseInfo.getPointerInfo().getLocation();
 		SwingUtilities.convertPointFromScreen(p, GUI.getGlassPane());
-		
+
 		for (PolygoneAction poly : this.modele.getFormesExtras()) {
 			Rectangle r = poly.getBounds();
 			r = SwingUtilities.convertRectangle(this, r, GUI.getGlassPane());
@@ -189,10 +190,10 @@ public abstract class BoutonCategorie extends JComponent {
 				poly.executerAction();
 			} else {
 				poly.setEtat(EtatPolygon.INACTIF);
-				
+
 			}
 		}
-		
+
 		if (!active) {
 			for (BoutonCategorie b : GUI.getPanelTypeWidget().getLesCategories()) {
 				b.font = new Font("TimesRoman", Font.PLAIN, TAILLE);
@@ -203,9 +204,10 @@ public abstract class BoutonCategorie extends JComponent {
 			this.font = new Font("TimesRoman", Font.BOLD, TAILLE);
 			this.active = true;
 			this.fond = Variables.GRIS_ACTIF;
+
 			
-			GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
 		}
+		GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
 	}
 
 	/**
@@ -219,6 +221,8 @@ public abstract class BoutonCategorie extends JComponent {
 		p.x++;
 		p.y++;
 		this.setLocation(p);
+
+		
 	}
 
 	/**
@@ -244,7 +248,18 @@ public abstract class BoutonCategorie extends JComponent {
 	 *
 	 * @param widget le widget à ajouter dans la catégorie
 	 */
-	protected void ajouterUnWidget(final Widget widget) {
+	public void ajouterUnWidget(final Widget widget) {
 		this.lesWidgets.add(widget);
+		GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
 	}
+
+	
+	/**
+	 * Retourne vrai si le bouton est actif
+	 * @return true
+	 */
+	public boolean isActive(){
+		return this.active;
+	}
+
 }

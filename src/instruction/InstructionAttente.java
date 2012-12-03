@@ -1,6 +1,4 @@
-package instruction;
-
-import traduction.VisiteurTraduction;
+																																																																																																																																								package instruction;
 
 /**
  * Cette instruction permet de mettre en attente le programme pendant un certain temps.
@@ -54,7 +52,7 @@ public class InstructionAttente implements Instruction {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction visiteur) {
+	public void accepte(final VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
 }

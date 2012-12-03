@@ -15,7 +15,7 @@ public abstract class PolygoneAction {
 	private EtatPolygon etat;
 
 	public PolygoneAction() {
-		this.couleurs = new HashMap<>();
+		this.couleurs = new HashMap<EtatPolygon, Color>();
 		this.etat = EtatPolygon.INACTIF;
 	}
 	

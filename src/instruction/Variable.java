@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Concept abstrait regroupant les variables.
  */
@@ -45,7 +43,7 @@ public abstract class Variable implements Expression {
 	}
 
 	@Override
-	public void accepte(final VisiteurTraduction v) {
+	public void accepte(VisiteurElementProg v) {
 		v.visiter(this);
 	}
 

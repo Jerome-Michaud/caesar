@@ -1,5 +1,7 @@
 package vue.widget;
 
+import instruction.TypeVariable;
+import instruction.VariableModifiable;
 import vue.tools.NonClonableException;
 import vue.widget.modele.DoWhileWidget;
 import vue.widget.modele.ForWidget;
@@ -13,7 +15,9 @@ import vue.widget.modele.RepeatWidget;
 import vue.widget.modele.TacheWidget;
 import vue.widget.modele.WaitWidget;
 import vue.widget.modele.VariableWidget;
+import vue.widget.modele.VariableSetValueWidget;
 import vue.widget.modele.WhileWidget;
+import vue.widget.modele.ExpressionSumWidget;
 
 /**
  * Classe implémentant le design pattern Factory permettant la création de tous les types de widgets.
@@ -109,15 +113,32 @@ public class FabriqueInstructions {
 	public Widget creerWidgetWait() {
 		return new Widget(new WaitWidget());
 	}
-        
-        /**
+	
+	/**
 	 * Méthode permettant de créer un widget de type "Variable".
 	 *
 	 * @return un widget de type "Variable"
 	 */
-	public Widget creerWidgetVariable() {
-		return new Widget(new VariableWidget());
+	
+	/**
+	 * Méthode permettant de créer un widget de type "Variable".
+	 *
+	 * @return un widget de type "Variable"
+	 */
+	public Widget creerWidgetVariable(VariableModifiable variableModifiable) {
+		return new Widget(new VariableWidget(variableModifiable));
 	}
+
+	
+	/**
+	 * Méthode permettant de créer un widget de type "VariableSetValue".
+	 *
+	 * @return un widget de type "VariableSetValue"
+	 */
+	public Widget creerWidgetVariableSetValue() {
+		return new Widget(new VariableSetValueWidget());
+	}       
+
 
 	/**
 	 * Méthode permettant de créer un widget complexe de type "Tâche".
@@ -127,7 +148,14 @@ public class FabriqueInstructions {
 	public Widget creerWidgetTache() {
 		return new WidgetCompose(new TacheWidget());
 	}
-
+	/**
+	 * Méthode permettant de créer un widget complexe de type "Tâche".
+	 *
+	 * @return un widget complexe de type "Tâche"
+	 */
+	public Widget creerWidgetExpressionSum() {
+		return new WidgetCompose(new ExpressionSumWidget());
+	}
 	/**
 	 * Méthode permettant de créér une copie d'un widget.
 	 *
@@ -167,11 +195,22 @@ public class FabriqueInstructions {
 		else if (comp.getModele() instanceof WaitWidget) {
 			w = creerWidgetWait();
 		}
+		/* ajout de widget variable */
+		else if (comp.getModele() instanceof VariableWidget) {
+			w = creerWidgetVariable((VariableModifiable)comp.getModele().getElementProgramme());
+		}
+		else if (comp.getModele() instanceof VariableSetValueWidget) {
+			w = creerWidgetVariableSetValue();
+		}                
+		/* */
 		else if (comp.getModele() instanceof RepeatWidget) {
 			w = creerWidgetRepeat();
 		}
 		else if (comp.getModele() instanceof ForWidget) {
 			w = creerWidgetFor();
+		}
+		else if (comp.getModele() instanceof ExpressionSumWidget) {
+			w = creerWidgetExpressionSum();
 		}
 		if (w == null) {
 			throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");

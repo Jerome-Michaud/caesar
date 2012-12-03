@@ -1,7 +1,5 @@
 package instruction;
 
-import traduction.VisiteurTraduction;
-
 /**
  * Une instruction est une commande exécutable d'un programme.<br/>
  * Les instructions peuvent être divisées en plusieurs catégories et peuvent être traduites dans différents langages.
@@ -14,7 +12,4 @@ public interface Instruction extends IElementProgramme {
 	 * @return la catégorie
 	 */
 	Categorie getCategorie();
-
-	@Override
-	void accepte(VisiteurTraduction visiteur);
 }

@@ -32,70 +32,70 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEURMOVFWD);
-		
+
 		//this.setMessage("Moteur           avance de");
 		message.put(new Point(5, 17), "Moteur");
 		message.put(new Point(94, 17), "avance à");
-		
+//recupere le element prog
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
 		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
-		
+
 		ChampTexte f = new ChampTexte();
 		f.setBounds(142, 3, 40, 20);
 		f.setText("0");
 		this.getLesZonesSaisies().add(f);
-		
+
 		setInstructionMoteur(l.getValeur());
 		setInstructionValeur(f.getValeur());
-			
+
 		this.decalageXout(11);
-		
+
 		initListeners();
-	}
+	}//fin constructeur
 
 	@Override
 	public void decalageXout(int a) {
-        int i;
-        for (i = 6; i < 10; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
-        }
-        this.setForme(this.getForme());
-        this.setTailleX();
-    }
+		int i;
+		for (i = 6; i < 10; i++) {
+			this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+		}
+		this.setForme(this.getForme());
+		this.setTailleX();
+	}
 
 	@Override
-    public void decalageXin(int a) {
-        int i;
-        for (i = 6; i < 10; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
-        }
-        this.setForme(this.getForme());
-        this.setTailleX();
-    }
+	public void decalageXin(int a) {
+		int i;
+		for (i = 6; i < 10; i++) {
+			this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+		}
+		this.setForme(this.getForme());
+		this.setTailleX();
+	}
 
 	@Override
-    public void decalageYout(int b, Rectangle r) {
-        int i;
-        for (i = 8; i < 16; i++) {
-            this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
-        }
-        this.setForme(this.getForme());
-        this.setTailleY();
-    }
+	public void decalageYout(int b, Rectangle r) {
+		int i;
+		for (i = 8; i < 16; i++) {
+			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
+		}
+		this.setForme(this.getForme());
+		this.setTailleY();
+	}
 
 	@Override
-    public void decalageYin(int b, Rectangle r) {
-        int i;
-        for (i = 8; i < 16; i++) {
-            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
-        }
-        this.setForme(this.getForme());
-        this.setTailleY();
-    }
+	public void decalageYin(int b, Rectangle r) {
+		int i;
+		for (i = 8; i < 16; i++) {
+			this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+		}
+		this.setForme(this.getForme());
+		this.setTailleY();
+	}
 
 	@Override
 	public void initListeners() {
