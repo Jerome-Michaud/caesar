@@ -48,7 +48,7 @@ public class DragAndDropTools extends Observable {
 	private DragAndDropTools() {
 		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
 		
-		this.composantsDrague = new LinkedList<>();
+		this.composantsDrague = new LinkedList<Widget>();
 		this.addObserver(GUI.getGlassPane());
 		this.addObserver(GUI.getPanelCodeGraphique());
 	}
@@ -87,13 +87,13 @@ public class DragAndDropTools extends Observable {
 			} catch (NonClonableException ex) {
 				Erreur.afficher(ex);
 			}
-			composantsDrague = new LinkedList<>();
+			composantsDrague = new LinkedList<Widget>();
 			composantsDrague.add(comp);
 		} else {
 			ArborescenceTools arbo = ArborescenceTools.getInstance();
 			try {
 				//recuperation et detachement des widgets dragués
-				composantsDrague = new LinkedList<>(arbo.getSuivants(comp, true));
+				composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));
 
 				//supression des widgets dans l'arborescence
 				arbo.supprimerWidgets(composantsDrague);

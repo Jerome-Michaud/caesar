@@ -60,7 +60,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 
                 this.setInstructionValeur(l.getValeur());
-		this.setInstructionValeur(f.getText());
+		this.setInstructionValeur(f.getValeur());
 		
 		this.decalageXout(-5);
 		
