@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.RepaintManager;
 import javax.swing.SwingUtilities;
 import modeles.Erreur;
 import vue.controller.LanceurTraduction;
@@ -22,8 +23,7 @@ import vue.widget.WidgetCompose;
 import vue.widget.modele.ModeleWidget;
 
 /**
- * Classe implémentant le design pattern Singleton permettant de gérer le
- * système de drag & drop.
+ * Classe implémentant le design pattern Singleton permettant de gérer le système de drag & drop.
  *
  * @author Bastien Andru - Quentin Gosselin
  */
@@ -161,9 +161,6 @@ public class DragAndDropTools extends Observable {
 			}
 			p.y += w.getHeight() - ModeleWidget.OFFSET;
 		}
-
-		//this.setChanged();
-		//this.notifyObservers();
 	}
 
 	/**
