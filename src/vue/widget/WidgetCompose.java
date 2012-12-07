@@ -177,7 +177,6 @@ public class WidgetCompose extends Widget implements IWidget {
 		for (Rectangle r : mapRect.keySet()) {
 			this.mapZone.put(mapRect.get(r), this.mapZone.remove(r));
 		}
-		System.out.println("####################");
 	}
 
 	/**
