@@ -60,10 +60,12 @@ public class FenetreSupressionVariable extends JFrame {
 
 			@ Override
 			public void actionPerformed(ActionEvent ae) {
-				DicoVars.getInstance().supprimer(((Variable)variables.getSelectedItem()).getNom());
+				String variable = ((Variable)variables.getSelectedItem()).getNom();
+				DicoVars.getInstance().supprimer(variable);
 				
+				BoutonCategorieVariable bcv = (BoutonCategorieVariable)GUI.getPanelTypeWidget().getCurrentCategorie();
+				bcv.supprimerWidgetVariable(variable);
 				
-				//GUI.getPanelWidget().setLesWidgets();
 				dispose();
 			}
 		});

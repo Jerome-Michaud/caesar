@@ -15,7 +15,7 @@ public class Action {
 	/**
 	 * La valeur (au dessus, en dessous ou bien survol d'un zone d'accroche) associée au widget.
 	 */
-	private int val;
+	private TypeAction val;
 	/**
 	 * Le point utilisé pour calculer la transtaion à appliquer à la ligne à dessiner lors du survol d'un zone d'accroche.
 	 */
@@ -41,7 +41,7 @@ public class Action {
 	 * <li>-1 : Pas de survol</li>
 	 * </ul>
 	 */
-	public Action(final Widget comp, final int val) {
+	public Action(final Widget comp, final TypeAction val) {
 		this.comp = comp;
 		this.val = val;
 	}
@@ -105,6 +105,6 @@ public class Action {
 	 * <ul>
 	 */
 	public int getVal() {
-		return val;
+		return val.toInt();
 	}
 }

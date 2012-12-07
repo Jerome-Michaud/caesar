@@ -10,10 +10,11 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JComponent;
 
 import modeles.DicoVars;
-import modeles.Erreur;
 import modeles.TypeWidget;
 
 /**
@@ -91,7 +92,11 @@ public class ForWidget extends ModeleWidget {
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 
 		//variable
-		ListeDeroulante lv = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
+		ListeDeroulante lv = new ListeDeroulante<Variable>();
+		if (DicoVars.getInstance().getLesvariables().length > 0) {
+			List<Variable> liste = new ArrayList(DicoVars.getInstance().getDictionnaire().values());
+			lv.setLesItems(liste);
+		}
 		lv.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(lv);
 
@@ -120,10 +125,11 @@ public class ForWidget extends ModeleWidget {
 
 		this.decalageXout(188);
 
-		setCondition(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
-		setIteration(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
-		setInitialization(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
-
+		if (DicoVars.getInstance().getLesvariables().length > 0) {
+			setCondition(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
+			setIteration(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
+			setInitialization(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
+		}
 		initListeners();
 	}
 
@@ -232,4 +238,5 @@ public class ForWidget extends ModeleWidget {
 		aff.setMembreDroit(op);
 		((InstructionFor) getElementProgramme()).setIteration(aff);
 	}
-}
+	
+	}

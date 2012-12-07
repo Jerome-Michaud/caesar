@@ -254,5 +254,12 @@ public abstract class BoutonCategorie extends JComponent {
 	}
 
 	
+	/**
+	 * Retourne vrai si le bouton est actif
+	 * @return true
+	 */
+	public boolean isActive(){
+		return this.active;
+	}
 
 }

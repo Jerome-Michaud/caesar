@@ -1,4 +1,4 @@
-package instruction;
+																																																																																																																																																							package instruction;
 
 /**
  * La déclaration est une instruction déclarant une variable.

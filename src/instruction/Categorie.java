@@ -8,7 +8,7 @@ public enum Categorie {
 	/**
 	 * Les différents types d'instructions.
 	 */
-	MOTEUR, CONTROL, OPERATEURS, VARIABLES, CAPTEURS, TEMPS, AFFICHAGE;
+	MOTEUR, CONTROL, OPERATEURS, VARIABLES, CAPTEURS, TEMPS, AFFICHAGE, EXPRESSION;
 
 	@Override
 	public String toString() {
@@ -27,6 +27,8 @@ public enum Categorie {
 				return "Gestion du temps";
 			case AFFICHAGE:
 				return "Affichage";
+			case EXPRESSION:
+				return "Expression";
 			default:
 				return null;
 		}
