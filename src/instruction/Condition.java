@@ -37,4 +37,10 @@ public class Condition extends ExpressionComplexe {
 	public void accepte(VisiteurElementProg v) {
 		v.visiter(this);
 	}
+
+	@Override
+	public Categorie getCategorie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

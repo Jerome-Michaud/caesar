@@ -1,4 +1,4 @@
-package instruction;
+																																																																																																																																								package instruction;
 
 /**
  * Cette instruction permet de mettre en attente le programme pendant un certain temps.

@@ -29,17 +29,18 @@ public class VariableSetValueWidget extends ModeleWidget {
 	public VariableSetValueWidget() {
 		super();
 
-
-
+                
+                
+                      
 		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
+                
 
 		this.setTabX(tX);
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.VARIABLE);
-
 
 		message.put(new Point(5, 17), "Var:");
 		message.put(new Point(100, 17), " = ");
@@ -51,15 +52,24 @@ public class VariableSetValueWidget extends ModeleWidget {
 		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 
+
 		ChampTexte f = new ChampTexte();
 		f.setBounds(65, 3, 40, 20);
-		f.setText("0");
+		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 
+
+                this.setInstructionValeur(l.getValeur());
+		this.setInstructionValeur(f.getValeur());
+		
+		this.decalageXout(-5);
+		
+
 		this.setInstructionValeur(l.getValeur());
-		this.setInstructionValeur(f.getText());
+		this.setInstructionValeur(f.getValeur());
 
 		this.decalageXout(-5);
+
 
 		initListeners();
 	}
@@ -96,7 +106,11 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 	@Override
 	public void decalageYin(int b, Rectangle r) {
+
+	/*	int i;
+=======
 		/*	int i;
+>>>>>>> 0abdc23e7a9aa5cd73adc7f585fa594b440125f1
 		for (i = 8; i < 16; i++) {
 			this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
 		}

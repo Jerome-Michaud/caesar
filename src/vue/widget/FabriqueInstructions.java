@@ -17,6 +17,7 @@ import vue.widget.modele.WaitWidget;
 import vue.widget.modele.VariableWidget;
 import vue.widget.modele.VariableSetValueWidget;
 import vue.widget.modele.WhileWidget;
+import vue.widget.modele.ExpressionSumWidget;
 
 /**
  * Classe implémentant le design pattern Factory permettant la création de tous les types de widgets.
@@ -142,7 +143,14 @@ public class FabriqueInstructions {
 	public Widget creerWidgetTache() {
 		return new WidgetCompose(new TacheWidget());
 	}
-
+	/**
+	 * Méthode permettant de créer un widget complexe de type "Tâche".
+	 *
+	 * @return un widget complexe de type "Tâche"
+	 */
+	public Widget creerWidgetExpressionSum() {
+		return new WidgetCompose(new ExpressionSumWidget());
+	}
 	/**
 	 * Méthode permettant de créér une copie d'un widget.
 	 *
@@ -195,6 +203,9 @@ public class FabriqueInstructions {
 		}
 		else if (comp.getModele() instanceof ForWidget) {
 			w = creerWidgetFor();
+		}
+		else if (comp.getModele() instanceof ExpressionSumWidget) {
+			w = creerWidgetExpressionSum();
 		}
 		if (w == null) {
 			throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");

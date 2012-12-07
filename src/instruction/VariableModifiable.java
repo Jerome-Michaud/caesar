@@ -20,4 +20,10 @@ public class VariableModifiable extends Variable {
 	public boolean isConstante() {
 		return false;
 	}
+
+	@Override
+	public Categorie getCategorie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

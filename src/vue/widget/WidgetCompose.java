@@ -123,6 +123,7 @@ public class WidgetCompose extends Widget implements IWidget {
 			
 			//Redimensionnement les zones d'accroches
 			for (Widget w : mapZone.get(r)) {
+				//Widget parent = (Widget)w.parent();
 				if (w.isComplexe()) {
 					((WidgetCompose) w).notifyChange();
 				}
@@ -176,7 +177,6 @@ public class WidgetCompose extends Widget implements IWidget {
 		for (Rectangle r : mapRect.keySet()) {
 			this.mapZone.put(mapRect.get(r), this.mapZone.remove(r));
 		}
-		System.out.println("####################");
 	}
 
 	/**
