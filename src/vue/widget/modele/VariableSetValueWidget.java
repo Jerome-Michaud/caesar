@@ -20,7 +20,7 @@ import instruction.*;
 
 /**
  *
- * @author zubi
+ * @author zubair
  */
 public class VariableSetValueWidget extends ModeleWidget {
 	/**

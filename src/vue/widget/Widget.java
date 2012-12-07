@@ -91,6 +91,7 @@ public class Widget extends JComponent {
         this.parent = null;
     }
 
+	
     /**
      * Méthode permettant de définir la forme du widget et de calculer ses
      * nouvelles dimensions et localisations.

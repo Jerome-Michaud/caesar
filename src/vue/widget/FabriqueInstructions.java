@@ -113,12 +113,7 @@ public class FabriqueInstructions {
 		return new Widget(new WaitWidget());
 	}
 	
-	/**
-	 * Méthode permettant de créer un widget de type "Variable".
-	 *
-	 * @return un widget de type "Variable"
-	 */
-	
+
 	/**
 	 * Méthode permettant de créer un widget de type "Variable".
 	 *
