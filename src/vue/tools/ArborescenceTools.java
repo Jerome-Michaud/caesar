@@ -28,7 +28,7 @@ public final class ArborescenceTools {
 	 * Constructeur privé de la classe initialisant l'arborescence.
 	 */
 	private ArborescenceTools() {
-		this.arborescence = new LinkedList<>();
+		this.arborescence = new LinkedList<List<Widget>>();
 	}
 
 	/**
@@ -69,7 +69,7 @@ public final class ArborescenceTools {
 	 */
 	public List<Widget> getListe(final Widget comp) throws ComposantIntrouvableException {
 		if (comp.parent() == null) {
-			List<Widget> l = new LinkedList<>();
+			List<Widget> l = new LinkedList<Widget>();
 			l.add(comp);
 			return l;
 		}
@@ -112,7 +112,7 @@ public final class ArborescenceTools {
 	public boolean ajouterWidgets(final List<Widget> l, final Widget comp, final boolean insererApres) throws ComposantIntrouvableException {
 		//cas de non survol
 		if (comp == null) {
-			List<Widget> lst = new LinkedList<>();
+			List<Widget> lst = new LinkedList<Widget>();
 			lst.addAll(l);
 			return arborescence.add(lst);
 		}

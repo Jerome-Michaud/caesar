@@ -51,7 +51,7 @@ public class VariableWidget extends ModeleWidget {
 
 		ChampTexte f = new ChampTexte();
 		f.setBounds(65, 3, 40, 20);
-		f.setText("0");
+		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 
 		this.decalageXout(-5);
