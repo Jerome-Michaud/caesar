@@ -98,7 +98,7 @@ public class ForWidget extends ModeleWidget {
 		//valeur depart
 		ChampTexte fd = new ChampTexte();
 		fd.setBounds(115, 3, 20, 20);
-		fd.setText("0");
+		fd.setValeur("0");
 		this.getLesZonesSaisies().add(fd);
 
 		//condition
@@ -109,13 +109,13 @@ public class ForWidget extends ModeleWidget {
 		//valeur fin
 		ChampTexte ff = new ChampTexte();
 		ff.setBounds(235, 3, 20, 20);
-		ff.setText("5");
+		ff.setValeur("5");
 		this.getLesZonesSaisies().add(ff);
 
 		//pas
 		ChampTexte fp = new ChampTexte();
 		fp.setBounds(300, 3, 20, 20);
-		fp.setText("1");
+		fp.setValeur("1");
 		this.getLesZonesSaisies().add(fp);
 
 		this.decalageXout(188);

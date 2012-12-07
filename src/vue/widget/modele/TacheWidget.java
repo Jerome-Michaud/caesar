@@ -45,7 +45,7 @@ public class TacheWidget extends ModeleWidget implements Serializable {
 		
 		ChampTexte f = new ChampTexte();
 		f.setBounds(50, 3, 80, 20);
-		f.setText("main");
+		f.setValeur("main");
 		this.getLesZonesSaisies().add(f);
 		
 		initListeners();
