@@ -1,6 +1,7 @@
 package vue.widget.modele;
 
 
+
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
 import vue.widget.modele.zones.Zone;
@@ -17,25 +18,17 @@ import modeles.TypeWidget;
 
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
- * forme d'un widget de type ExpressionSum.
+ * forme d'un widget de type ExpressionNotEqualTO.
  * 
  * @author CHOUKET Houda
  */
-public class ExpressionSumWidget extends ModeleWidget {
+public class ExpressionNEqualToWidget extends ModeleWidget {
 	/**
-	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
+	 * Constructeur du modele definissant les differents parametres du ExpressionNotEqualTO .
 	 */
 
-	public ExpressionSumWidget() {
+	public ExpressionNEqualToWidget() {
 		super();
-		/*int tabX[] = {0, 5, 170, 175, 175, 170,  5, 0};
-		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
-*/
-		/*int tabX[] = {0, 5, 110, 115, 115, 110,  5, 0};
-		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};*/
-		
-		/*int tabX[] = {0, 5, 106, 111, 111, 106,  5, 0};
-		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};*/
 		int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
 
@@ -81,6 +74,8 @@ public class ExpressionSumWidget extends ModeleWidget {
 		initListeners();
 	}
 //	fin constructeur
+
+
 	/**
 	 * Methode abstraite permettant de diminuer la largeur du composant
 	 *
@@ -153,5 +148,6 @@ public class ExpressionSumWidget extends ModeleWidget {
 			}
 		});
 	}
+
 
 }

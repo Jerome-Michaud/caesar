@@ -1,6 +1,6 @@
 package vue.widget.modele;
 
-
+import java.awt.Rectangle;
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
 import vue.widget.modele.zones.Zone;
@@ -8,34 +8,27 @@ import instruction.*;
 
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.Rectangle;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 
 import modeles.TypeWidget;
-
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
- * forme d'un widget de type ExpressionSum.
+ * forme d'un widget de type ExpressionModulus.
  * 
  * @author CHOUKET Houda
  */
-public class ExpressionSumWidget extends ModeleWidget {
+public class ExpressionModulusWidget extends ModeleWidget {
 	/**
-	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
+	 * Constructeur du modele definissant les differents parametres du ExpressionModulus .
 	 */
 
-	public ExpressionSumWidget() {
+
+	public ExpressionModulusWidget() {
 		super();
-		/*int tabX[] = {0, 5, 170, 175, 175, 170,  5, 0};
-		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
-*/
-		/*int tabX[] = {0, 5, 110, 115, 115, 110,  5, 0};
-		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};*/
-		
-		/*int tabX[] = {0, 5, 106, 111, 111, 106,  5, 0};
-		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};*/
+
 		int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
 
@@ -57,7 +50,7 @@ public class ExpressionSumWidget extends ModeleWidget {
 
 
 
-		message.put(new Point(30, 17), "+");
+		message.put(new Point(30, 17), "%");
 
 
 		this.setElementProgramme(new InstructionAttente());
@@ -70,7 +63,7 @@ public class ExpressionSumWidget extends ModeleWidget {
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
-		//f.setBounds(80, 3, 20, 20);
+
 		f.setBounds(40, 3, 20, 20);
 		this.getLesZonesSaisies().add(f);
 
@@ -153,5 +146,6 @@ public class ExpressionSumWidget extends ModeleWidget {
 			}
 		});
 	}
+
 
 }

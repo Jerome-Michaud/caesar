@@ -227,7 +227,7 @@ public class DragAndDropTools extends Observable {
 	public void dropWidget() {
 		Widget comp = composantsDrague.get(0);
 
-		Action a = FusionTools.checkSurvolWidgetV2(comp);
+		Action a = FusionTools.checkSurvolWidget(comp);
 		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
 		GlassPane g = GUI.getGlassPane();
 		Rectangle r = (Rectangle) comp.getBounds().clone();
