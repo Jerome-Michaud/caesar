@@ -9,7 +9,8 @@ import java.awt.Color;
 import vue.ginterface.GUI;
 import vue.ginterface.PanelWidget;
 import vue.widget.Widget;
-
+import instruction.Condition;
+import instruction.Operateur;
 /**
  *
  * @author zubier, houda 
@@ -28,20 +29,26 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 		super(new ModeleCategorie("Expression", new Color(ROUGE, VERT, BLEU)));
 
 
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionSum());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionSubtraction());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionMultiplication());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionDivision());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionModulus());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionOR());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionAND());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionEqualTO());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionNEqualTO());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionOperatorSup());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionOperatorInf());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionOperatorSupEqual());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionOperatorInfEqual());
-		
+		 
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.ADDITION));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.DIVISION));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.MULIPLICATION));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.SOUSTRACTION));
+
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.OU));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPERIEUR));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFERIEUR));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.ET));
+
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
+
+
+
+
+
 		for (Widget w : this.getLesWidgets()) {
 			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
 		}
