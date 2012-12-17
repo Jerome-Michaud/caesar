@@ -1,4 +1,4 @@
-package vue.tools;
+package vue.tools.comparators;
 
 import java.awt.Component;
 import java.util.Comparator;
@@ -8,7 +8,7 @@ import vue.widget.Widget;
  *
  * @author Quentin
  */
-class ComparateurWidgetZ implements Comparator<Component> {
+public class ComparateurWidgetZ implements Comparator<Component> {
 
 	public ComparateurWidgetZ() { }
 

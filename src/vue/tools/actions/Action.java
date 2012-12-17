@@ -1,4 +1,4 @@
-package vue.tools;
+package vue.tools.actions;
 
 import vue.widget.Widget;
 import java.awt.Point;

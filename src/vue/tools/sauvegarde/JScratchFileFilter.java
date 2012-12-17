@@ -1,4 +1,4 @@
-package vue.tools;
+package vue.tools.sauvegarde;
 
 import java.io.File;
 import javax.swing.filechooser.FileFilter;

@@ -1,5 +1,6 @@
 package vue.tools;
 
+import vue.tools.actions.Action;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -9,7 +10,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
-import javax.swing.RepaintManager;
 import javax.swing.SwingUtilities;
 import modeles.Erreur;
 import vue.controller.LanceurTraduction;
@@ -48,7 +48,7 @@ public class DragAndDropTools extends Observable {
 	private DragAndDropTools() {
 		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
 		
-		this.composantsDrague = new LinkedList<>();
+		this.composantsDrague = new LinkedList<Widget>();
 		this.addObserver(GUI.getGlassPane());
 		this.addObserver(GUI.getPanelCodeGraphique());
 	}
@@ -87,13 +87,13 @@ public class DragAndDropTools extends Observable {
 			} catch (NonClonableException ex) {
 				Erreur.afficher(ex);
 			}
-			composantsDrague = new LinkedList<>();
+			composantsDrague = new LinkedList<Widget>();
 			composantsDrague.add(comp);
 		} else {
 			ArborescenceTools arbo = ArborescenceTools.getInstance();
 			try {
 				//recuperation et detachement des widgets dragués
-				composantsDrague = new LinkedList<>(arbo.getSuivants(comp, true));
+				composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));
 
 				//supression des widgets dans l'arborescence
 				arbo.supprimerWidgets(composantsDrague);

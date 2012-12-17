@@ -1,8 +1,4 @@
-package vue.tools;
-
-import vue.ginterface.Fenetre;
-import vue.ginterface.PanelCodeGraphique;
-import vue.widget.Widget;
+package sauvegarde.binaire;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -10,20 +6,44 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import modeles.Erreur;
+import sauvegarde.SauvegardeTools;
 import vue.ginterface.GUI;
+import vue.tools.ArborescenceTools;
+import vue.tools.sauvegarde.JScratchFileFilter;
+import vue.widget.Widget;
 /**
  * Classe regroupant différents outils destinés à la sauvegarde et au chargement
  * de projets JScratch
  *
  * @author Andru Bastien
  */
-public class SavingTools {
+public class SauvegardeBinaireTools implements SauvegardeTools {
+	
 	/**
-	 * Permet à l'utilisateur de sauvegarder son projet au format JScratch où il veut.
+	 * L'instance unique de SauvegardeBinaireTools
 	 */
-    public static void save() {
+	private static SauvegardeBinaireTools instance = null;
+	
+	/**
+	 * Le constructeur privé pour éviter la déclaration externe.
+	 */
+	private SauvegardeBinaireTools() { }
+	
+	/**
+	 * Le getter pour récupérer l'instance unique de SauvegardeBinaireTools.
+	 * 
+	 * @return l'instance unique de SauvegardeBBinaireTools
+	 */
+	public static SauvegardeBinaireTools getInstance() {
+		if (instance == null) {
+			instance = new SauvegardeBinaireTools();
+		}
+		return instance;
+	}
+	
+	@Override
+    public void save() {
         JFileChooser choix = new JFileChooser();
         choix.addChoosableFileFilter(new JScratchFileFilter());
         choix.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -46,11 +66,24 @@ public class SavingTools {
             }
         }
     }
+	
+	@Override
+    public void load() {
+        JFileChooser choix = new JFileChooser();
+        choix.addChoosableFileFilter(new JScratchFileFilter());
+        choix.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int retour = choix.showOpenDialog(GUI.getFenetre()); // TODO : A SUPPRIMER Fenetre.getInstance());
+        if (retour == JFileChooser.APPROVE_OPTION) {
+            deserializeArborescence(choix.getSelectedFile().getPath());
+        }
+        GUI.getPanelCodeGraphique().repaint();
+    }
+    
     /**
      * Permet la sérialisation de l'arborescence des widgets.
      * @param path Le chemin où sauvegarder le l'arborescence
      */
-    private static void serializeArborescence(String path) {
+    private void serializeArborescence(final String path) {
         try {
             FileOutputStream fichier = new FileOutputStream(path);
             ObjectOutputStream oos = new ObjectOutputStream(fichier);
@@ -61,25 +94,13 @@ public class SavingTools {
             Erreur.afficher(e);
         }
     }
-    /**
-     * Permet à l'utilisateur de charger un projet JScratch précédemment sauvegardé.
-     */
-    public static void load() {
-        JFileChooser choix = new JFileChooser();
-        choix.addChoosableFileFilter(new JScratchFileFilter());
-        choix.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int retour = choix.showOpenDialog(GUI.getFenetre()); // TODO : A SUPPRIMER Fenetre.getInstance());
-        if (retour == JFileChooser.APPROVE_OPTION) {
-            deserializeArborescence(choix.getSelectedFile().getPath());
-        }
-        GUI.getPanelCodeGraphique().repaint();
-    }
+	
     /**
      * Desérialise une arborescence précédemment sauvegardée.
      *
      * @param path Le chemin d'accès à l'arborscence sauvegardée
      */
-    private static void deserializeArborescence(String path) {
+    private void deserializeArborescence(final String path) {
         try {
             FileInputStream fichier = new FileInputStream(path);
             ObjectInputStream ois = new ObjectInputStream(fichier);

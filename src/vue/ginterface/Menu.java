@@ -15,7 +15,8 @@ import ressources.ResourceTools;
 import traduction.VisiteurNXC;
 import vue.tools.ArborescenceTools;
 import vue.tools.CreationCodeTools;
-import vue.tools.SavingTools;
+import sauvegarde.binaire.SauvegardeBinaireTools;
+import sauvegarde.xml.SauvegardeXMLTools;
 import vue.tools.Variables;
 import vue.widget.Widget;
 
@@ -109,10 +110,12 @@ public class Menu extends JMenuBar {
 	            nouveau();
 	        }
 			else if (e.getSource() == fichierOuvrir) {
-	            SavingTools.load();
+	            //SauvegardeBinaireTools.getInstance().load();
+				SauvegardeXMLTools.getInstance().load();
 	        }
 			else if (e.getSource() == fichierEnregistrer) {
-	            SavingTools.save();
+	            //SauvegardeBinaireTools.getInstance().save();
+				SauvegardeXMLTools.getInstance().save();
 	        }
 			else if (e.getSource() == fichierQuitter) {
 	            System.exit(0);
