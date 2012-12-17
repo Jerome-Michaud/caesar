@@ -1,9 +1,15 @@
 package vue.widget;
 
+import instruction.Condition;
+import instruction.Operateur;
+import instruction.Operation;
 import instruction.TypeVariable;
 import instruction.VariableModifiable;
 import vue.tools.NonClonableException;
 import vue.widget.modele.DoWhileWidget;
+
+import vue.widget.modele.ExpressionArithmeticWidget;
+import vue.widget.modele.ExpressionLogicalWidget;
 import vue.widget.modele.ForWidget;
 import vue.widget.modele.IfElseWidget;
 import vue.widget.modele.IfWidget;
@@ -17,10 +23,13 @@ import vue.widget.modele.WaitWidget;
 import vue.widget.modele.VariableWidget;
 import vue.widget.modele.VariableSetValueWidget;
 import vue.widget.modele.WhileWidget;
-import vue.widget.modele.ExpressionSumWidget;
+
 
 /**
  * Classe implémentant le design pattern Factory permettant la création de tous les types de widgets.
+ */
+/**
+ * modification CHOUKET Houda
  */
 public class FabriqueInstructions {
 
@@ -113,13 +122,8 @@ public class FabriqueInstructions {
 	public Widget creerWidgetWait() {
 		return new Widget(new WaitWidget());
 	}
-	
-	/**
-	 * Méthode permettant de créer un widget de type "Variable".
-	 *
-	 * @return un widget de type "Variable"
-	 */
-	
+
+
 	/**
 	 * Méthode permettant de créer un widget de type "Variable".
 	 *
@@ -129,7 +133,7 @@ public class FabriqueInstructions {
 		return new Widget(new VariableWidget(variableModifiable));
 	}
 
-	
+
 	/**
 	 * Méthode permettant de créer un widget de type "VariableSetValue".
 	 *
@@ -149,13 +153,22 @@ public class FabriqueInstructions {
 		return new WidgetCompose(new TacheWidget());
 	}
 	/**
-	 * Méthode permettant de créer un widget complexe de type "Tâche".
+	 * Méthode permettant de créer un widget complexe de type "Expression".
 	 *
-	 * @return un widget complexe de type "Tâche"
+	 * @return un widget complexe de type "expression arithmetique"
 	 */
-	public Widget creerWidgetExpressionSum() {
-		return new WidgetCompose(new ExpressionSumWidget());
+	public Widget creerWidgetExpressionArithmetic(Operateur op) {
+		return new WidgetCompose(new ExpressionArithmeticWidget(op));
 	}
+	/**
+	 * Méthode permettant de créer un widget complexe de type "Expression".
+	 *
+	 * @return un widget complexe de type "expression logique"
+	 */
+	public Widget creerWidgetExpressionLogical(Operateur op) {
+		return new WidgetCompose(new ExpressionLogicalWidget(op));
+	}
+
 	/**
 	 * Méthode permettant de créér une copie d'un widget.
 	 *
@@ -209,9 +222,18 @@ public class FabriqueInstructions {
 		else if (comp.getModele() instanceof ForWidget) {
 			w = creerWidgetFor();
 		}
-		else if (comp.getModele() instanceof ExpressionSumWidget) {
-			w = creerWidgetExpressionSum();
+		else if (comp.getModele() instanceof ExpressionArithmeticWidget) {
+			Operation op = (Operation)comp.getModele().getElementProgramme();
+			w = creerWidgetExpressionArithmetic(op.getOperateur());
 		}
+		else if (comp.getModele() instanceof ExpressionLogicalWidget) {
+			Condition con = (Condition)comp.getModele().getElementProgramme();
+
+			w = creerWidgetExpressionLogical(con.getOperateur());
+
+		}
+
+
 		if (w == null) {
 			throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
 		}

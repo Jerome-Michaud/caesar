@@ -23,32 +23,32 @@ public enum Operateur {
 	@Override
 	public String toString() {
 		switch (this) {
-			case AFFECTATION:
-				return "=";
-			case ADDITION:
-				return "+";
-			case SOUSTRACTION:
-				return "-";
-			case MULIPLICATION:
-				return "*";
-			case DIVISION:
-				return "/";
-			case ET:
-				return "&&";
-			case OU:
-				return "||";
-			case SUPERIEUR:
-				return ">";
-			case INFERIEUR:
-				return "<";
-			case EGALITE:
-				return "==";
-			case SUPEGAL:
-				return ">=";
-			case INFEGAL:
-				return "<=";
-			default:
-				return null;
+		case AFFECTATION:
+			return "=";
+		case ADDITION:
+			return "+";
+		case SOUSTRACTION:
+			return "-";
+		case MULIPLICATION:
+			return "*";
+		case DIVISION:
+			return "/";
+		case ET:
+			return "&&";
+		case OU:
+			return "||";
+		case SUPERIEUR:
+			return ">";
+		case INFERIEUR:
+			return "<";
+		case EGALITE:
+			return "==";
+		case SUPEGAL:
+			return ">=";
+		case INFEGAL:
+			return "<=";
+		default:
+			return null;
 		}
 	}
 
@@ -60,16 +60,16 @@ public enum Operateur {
 	 */
 	public static boolean isArithmetique(final Operateur o) {
 		switch (o) {
-			case ADDITION:
-				return true;
-			case DIVISION:
-				return true;
-			case SOUSTRACTION:
-				return true;
-			case MULIPLICATION:
-				return true;
-			default:
-				return false;
+		case ADDITION:
+			return true;
+		case DIVISION:
+			return true;
+		case SOUSTRACTION:
+			return true;
+		case MULIPLICATION:
+			return true;
+		default:
+			return false;
 		}
 	}
 
