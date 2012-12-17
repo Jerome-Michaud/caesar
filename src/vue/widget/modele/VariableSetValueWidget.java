@@ -54,6 +54,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 
 		ChampTexte f = new ChampTexte();
+                f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		f.setBounds(65, 3, 40, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
