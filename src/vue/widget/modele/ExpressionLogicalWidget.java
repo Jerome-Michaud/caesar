@@ -15,8 +15,8 @@ import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-
 import modeles.TypeWidget;
+
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
  * forme d'un widget de type Expression logique.
@@ -78,43 +78,23 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		f.setBounds(40, 3, 18, 18);
 		this.getLesZonesSaisies().add(f);
 
-
-
+		this.decalageX(-5);
 
 
 	}
 //	fin constructeur
-	/**
-	 * Methode abstraite permettant de diminuer la largeur du composant
-	 *
-	 * @param x La valeur de la reduction à appliquer
-	 */
-	public void decalageXin(int x) {
-		// TODO Auto-generated method stub
-
-	}
+	
 	/**
 	 * Méthode abstraite permettant d'augmenter la largeur du composant.
 	 *
 	 * @param x La valeur de l'agrandissement à appliquer
 	 */
 	@Override
-	public void decalageXout(int x) {
+	public void decalageX(int x) {
 		// TODO Auto-generated method stub
 
 	}
-	/**
-	 * Méthode abstraite permettant de réduire la hauteur du composant.
-	 *
-	 * @param b La valeur de la réduction à appliquer
-	 * @param r Le rectangle à réduire également
-	 */
-	@Override
-	public void decalageYin(int b, Rectangle r) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	@Override
 	/**
 	 * Méthode abstraite permettant d'augmenter la hauteur du composant
@@ -122,7 +102,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 	 * @param b La valeur de l'agrandissement à appliquer
 	 * @param r Le rectangle à augmenter également
 	 */
-	public void decalageYout(int b, Rectangle r) {
+	public void decalageY(int b, Rectangle r) {
 		// TODO Auto-generated method stub
 
 	}

@@ -3,7 +3,6 @@ package vue.widget;
 import instruction.Condition;
 import instruction.Operateur;
 import instruction.Operation;
-import instruction.TypeVariable;
 import instruction.VariableModifiable;
 import vue.tools.NonClonableException;
 import vue.widget.modele.DoWhileWidget;
@@ -153,6 +152,7 @@ public class FabriqueInstructions {
 		return new WidgetCompose(new TacheWidget());
 	}
 	/**
+
 	 * Méthode permettant de créer un widget complexe de type "Expression".
 	 *
 	 * @return un widget complexe de type "expression arithmetique"
@@ -162,7 +162,6 @@ public class FabriqueInstructions {
 	}
 	/**
 	 * Méthode permettant de créer un widget complexe de type "Expression".
-	 *
 	 * @return un widget complexe de type "expression logique"
 	 */
 	public Widget creerWidgetExpressionLogical(Operateur op) {
@@ -170,6 +169,7 @@ public class FabriqueInstructions {
 	}
 
 	/**
+
 	 * Méthode permettant de créér une copie d'un widget.
 	 *
 	 * @param comp le widget à cloner
@@ -212,6 +212,7 @@ public class FabriqueInstructions {
 		else if (comp.getModele() instanceof VariableWidget) {
 			w = creerWidgetVariable((VariableModifiable)comp.getModele().getElementProgramme());
 		}
+		
 		else if (comp.getModele() instanceof VariableSetValueWidget) {
 			w = creerWidgetVariableSetValue();
 		}                

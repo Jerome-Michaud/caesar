@@ -136,8 +136,12 @@ public class VisiteurC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(InstructionTempsCourant inst) {
-		traduction += indent() + "clock();\n";
-		//TODO résultat de l'instruction doit être stocké dans une variable : TempsCourant = expression ? 
+		traduction += indent();
+        if(inst.getVariable() != null) {
+            inst.getVariable().accepte(this);
+            traduction += " = ";
+        }
+        traduction += "clock();\n";
 	}
 
 	@Override

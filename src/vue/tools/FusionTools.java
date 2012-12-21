@@ -1,5 +1,7 @@
 package vue.tools;
 
+import vue.tools.actions.Action;
+import vue.tools.actions.TypeAction;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -13,6 +15,7 @@ import modeles.TypeWidget;
 import vue.ginterface.GUI;
 import vue.ginterface.GlassPane;
 import vue.ginterface.PanelCodeGraphique;
+import vue.tools.comparators.ComparateurWidgetZ;
 import vue.widget.Widget;
 import vue.widget.WidgetCompose;
 import vue.widget.modele.zones.ChampTexte;

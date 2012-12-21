@@ -411,26 +411,29 @@ public abstract class ModeleWidget implements Serializable {
     }
 
     /**
-     * Méthode abstraite permettant d'augmenter la largeur du composant.
+     * Méthode abstraite permettant d'augmenter ou diminuer la largeur du composant.
      *
      * @param x La valeur de l'agrandissement à appliquer
      */
-    public abstract void decalageXout(int x);
+
+    public abstract void decalageX(int x);
 
     /**
      * Méthode abstraite permettant de diminuer la largeur du composant
      *
      * @param x La valeur de la réduction à appliquer
      */
-    public abstract void decalageXin(int x);
+
+    /*public abstract void decalageXin(int x);*/
 
     /**
-     * Méthode abstraite permettant d'augmenter la hauteur du composant
+     * Méthode abstraite permettant d'augmenter ou diminuer la hauteur du composant
      *
      * @param x La valeur de l'agrandissement à appliquer
      * @param r Le rectangle à augmenter également
      */
-    public abstract void decalageYout(int x, Rectangle r);
+
+    public abstract void decalageY(int x,Rectangle r);
 
     /**
      * Méthode abstraite permettant de réduire la hauteur du composant.
@@ -438,7 +441,8 @@ public abstract class ModeleWidget implements Serializable {
      * @param x La valeur de la réduction à appliquer
      * @param r Le rectangle à réduire également
      */
-    public abstract void decalageYin(int x, Rectangle r);
+
+   /*public abstract void decalageYin(int x,Rectangle r);*/
 
     /**
      * Méthode permettant de récupérer la liste des messages du widget.
