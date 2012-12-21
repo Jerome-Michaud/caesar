@@ -47,13 +47,13 @@ public class WaitWidget extends ModeleWidget {
 
 		this.setInstructionValeur(f.getValeur());
 		
-		this.decalageXout(-5);
+		this.decalageX(-5);
 		
 		initListeners();
 	}
 
 	@Override
-	public void decalageXout(int a) {
+	public void decalageX(int a) {
 		int i;
 		for (i = 6; i < 10; i++) {
 			this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -61,7 +61,7 @@ public class WaitWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-
+	/*
 	@Override
 	public void decalageXin(int a) {
 		int i;
@@ -71,9 +71,9 @@ public class WaitWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-
+	*/
 	@Override
-	public void decalageYout(int b, Rectangle r) {
+	public void decalageY(int b, Rectangle r) {
 		int i;
 		for (i = 8; i < 16; i++) {
 			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
@@ -81,7 +81,7 @@ public class WaitWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-
+	/*
 	@Override
 	public void decalageYin(int b, Rectangle r) {
 		int i;
@@ -91,7 +91,7 @@ public class WaitWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-
+	*/
 	@Override
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {

@@ -126,7 +126,7 @@ public class ForWidget extends ModeleWidget {
         fp.setValeur("1");
         this.getLesZonesSaisies().add(fp);
 
-        this.decalageXout(188);
+        this.decalageX(188);
 
         if (DicoVars.getInstance().getLesvariables().length > 0) {
             setCondition(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
@@ -137,7 +137,7 @@ public class ForWidget extends ModeleWidget {
     }
 
     @Override
-    public void decalageXout(final int a) {
+    public void decalageX(final int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -148,7 +148,7 @@ public class ForWidget extends ModeleWidget {
         this.setForme(this.getForme());
         this.setTailleX();
     }
-
+    /*
     @Override
     public void decalageXin(final int a) {
         int i;
@@ -161,9 +161,9 @@ public class ForWidget extends ModeleWidget {
         this.setForme(this.getForme());
         this.setTailleX();
     }
-
+	*/
     @Override
-    public void decalageYout(final int b, final Rectangle r) {
+    public void decalageY(final int b, final Rectangle r) {
         int i;
         for (i = 16; i < tabY.length; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
@@ -171,7 +171,7 @@ public class ForWidget extends ModeleWidget {
         this.setForme(this.getForme());
         this.setTailleY();
     }
-
+    /*
     @Override
     public void decalageYin(final int b, final Rectangle r) {
         int i;
@@ -181,7 +181,7 @@ public class ForWidget extends ModeleWidget {
         this.setForme(this.getForme());
         this.setTailleY();
     }
-
+	*/
     @Override
     public void initListeners() {
         for (Zone z : this.getLesZonesSaisies()) {

@@ -33,10 +33,10 @@ public class ChampTexte extends JPanel implements Zone {
         super();
         this.setOpaque(false);
         this.setLayout(new BorderLayout());
-        textField = new JTextField();
-        widgetContenu = null;
+        this.textField = new JTextField();
+        this.widgetContenu = null;
         this.add(textField, BorderLayout.CENTER);
-        etat = 0;
+        this.etat = 0;
         this.addContainerListener(new ContainerAdapter() {
             @Override
             public void componentRemoved(ContainerEvent e) {

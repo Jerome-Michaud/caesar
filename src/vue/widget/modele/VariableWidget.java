@@ -1,112 +1,118 @@
+
 package vue.widget.modele;
 
+import vue.widget.modele.zones.ChampTexte;
+import vue.widget.modele.zones.Zone;
+import instruction.InstructionAttente;
+import instruction.VariableConstante;
+import instruction.TypeVariable;
 import instruction.VariableModifiable;
+
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.geom.Rectangle2D;
+
 import javax.swing.JComponent;
 import modeles.TypeWidget;
-import vue.widget.modele.zones.ChampTexte;
+
+
 
 /**
  *
  * @author zubair
  */
 public class VariableWidget extends ModeleWidget {
+	/**
+	 * Constructeur du modèle définissant les différents paramètres du Variable.
+	 */
 
-    /**
-     * Constructeur du modèle définissant les différents paramètres du Variable.
-     */
-    private VariableWidget() {
-    }
+	private VariableWidget(){
 
-    public VariableWidget(VariableModifiable variableModifiable) {
+	}
+	public VariableWidget(VariableModifiable variableModifiable) {
 
-        super();
+		super();
 
 
-        int tX[] = {0, 3, 20, 23, 23, 20, 3, 0};
+		int tX[] = {0, 3, 7, 10, 10, 7, 3, 0};
 
-        int tY[] = {3, 0, 0, 3, 10, 13, 13, 10};
+		int tY[] = {3, 0, 0,  3,  11, 14, 14,10};
 
-        this.setTabX(tX);
-        this.setTabY(tY);
-        this.setTailleX();
-        this.setTailleY();
-        this.setType(TypeWidget.VARIABLE);
+		this.setTabX(tX);
+		this.setTabY(tY);
+		this.setTailleX();
+		this.setTailleY();
+		this.setType(TypeWidget.VARIABLE);
 
-        message.put(new Point(7, 11), variableModifiable.getNom());
-        this.setElementProgramme(variableModifiable);
-        this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
-/*
-        ChampTexte f = new ChampTexte();
-        f.setBounds(65, 3, 40, 20);
-        f.setValeur("0");
-        this.getLesZonesSaisies().add(f);*/
+		message.put(new Point(7, 11), variableModifiable.getNom());
+		this.setElementProgramme(variableModifiable);
+		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+		
 
-        this.attachableBas = false;
-        this.attachableHaut = false;
-        this.imbricable = false;
-        this.attachableInterne = true;
-        
-        this.decalageXout(-5);
+		ChampTexte f = new ChampTexte();
+		f.setBounds(65, variableModifiable.getNom().length(), 40, 20);
+		f.setToolTipText("0");
+		this.getLesZonesSaisies().add(f);
 
-        initListeners();
-    }
+		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
+		FontMetrics metrics = new FontMetrics(font){};  
+		Rectangle2D bounds = metrics.getStringBounds(variableModifiable.getNom(), null);  
+		this.decalageX((int) bounds.getWidth()+2);
 
-    @Override
-    //
-    public void decalageXout(int a) {
-        /*int i;
-         for (i = 6; i < 10; i++) {
-         this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
-         }
-         this.setForme(this.getForme());
-         this.setTailleX();*/
-    }
+		initListeners();
+	}
 
-    @Override
-    public void decalageXin(int a) {
-        /*int i;
-         for (i = 6; i < 10; i++) {
-         this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
-         }
-         this.setForme(this.getForme());
-         this.setTailleX();*/
-    }
+	public void decalageX(int a) {
+		int i;
+		for (i = 2; i < this.getTabX().length-2; i++) {
+			this.getForme().xpoints[i] = this.getForme().xpoints[i] + a ;
+		}
+		this.setForme(this.getForme());
+		this.setTailleX();
+	}
+	/*
+	@Override
+	public void decalageXin(int a) {
+		int i;
+		for (i = 2; i < 10; i++) {
+			this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
+		}
+		this.setForme(this.getForme());
+		this.setTailleX();
+	}
+	*/
+	@Override
+	public void decalageY(int b, Rectangle r) {
+		
+	}
+	/*
+	@Override
+	public void decalageYin(int b, Rectangle r) {
+		int i;
+		for (i = 8; i < 16; i++) {
+			this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+		}
+		this.setForme(this.getForme());
+		this.setTailleY();
+	}
+	*/
+	@Override
+	public void initListeners() {
+	
+	}
 
-    @Override
-    public void decalageYout(int b, Rectangle r) {
-        /*	int i;
-         for (i = 8; i < 16; i++) {
-         this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
-         }
-         this.setForme(this.getForme());
-         this.setTailleY();*/
-    }
+	/**
+	 * 
+	 * @return nom de variable
+	 */
+	public String getNomVariable() {
+		return ((VariableModifiable)this.getElementProgramme()).getNom();
+	}
 
-    @Override
-    public void decalageYin(int b, Rectangle r) {
-        /*int i;
-         for (i = 8; i < 16; i++) {
-         this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
-         }
-         this.setForme(this.getForme());
-         this.setTailleY();*/
-    }
-//
-
-    @Override
-    public void initListeners() {
-        
-    }
-
-    /**
-     *
-     * @return nom de variable
-     */
-    public String getNomVariable() {
-        return ((VariableModifiable) this.getElementProgramme()).getNom();
-    }
 }
+

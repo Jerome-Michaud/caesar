@@ -2,7 +2,6 @@ package modeles;
 
 import instruction.TypeVariable;
 import instruction.Variable;
-import instruction.VariableModifiable;
 
 import java.util.ArrayList;
 import java.util.HashMap;

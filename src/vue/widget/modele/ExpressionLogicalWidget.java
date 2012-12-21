@@ -15,8 +15,8 @@ import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-
 import modeles.TypeWidget;
+
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
  * forme d'un widget de type Expression logique.
@@ -35,8 +35,10 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		/*int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
 		 */
-		int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
-		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
+
+
+		int tabX[] = {0, 12, 55, 67, 55, 12};
+		int tabY[] = {12, 0, 0, 12, 24, 24};
 
 
 		/**
@@ -53,7 +55,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		 */
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.EXPRESSION);
+		this.setType(TypeWidget.EXPRESSION_LOGIQUE);
 
 
 		message.put(new Point(30, 17), op.toString());
@@ -64,68 +66,35 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 
 		ChampTexte l = new ChampTexte();
-		l.setBounds(10, 3, 20, 20);
+		l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+		l.ajouterTypeWidgetAccepte(TypeWidget.EXPRESSION_ARITHMETIQUE);
+		l.setBounds(10, 3, 18, 18);
 
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
-		//f.setBounds(80, 3, 20, 20);
-		f.setBounds(40, 3, 20, 20);
+		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeWidget.EXPRESSION_ARITHMETIQUE);
+		f.setBounds(40, 3, 18, 18);
 		this.getLesZonesSaisies().add(f);
 
+		this.decalageX(-5);
 
 
-		this.decalageXout(-5);
-
-		initListeners();
 	}
 //	fin constructeur
-	/**
-	 * Methode abstraite permettant de diminuer la largeur du composant
-	 *
-	 * @param x La valeur de la reduction à appliquer
-	 */
-	public void decalageXin(int x) {
-		// TODO Auto-generated method stub
-		/*int i;
-		for (i = 6; i < 10; i++) {
-			this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
-		}
-		this.setForme(this.getForme());
-		this.setTailleX();*/
-	}
+	
 	/**
 	 * Méthode abstraite permettant d'augmenter la largeur du composant.
 	 *
 	 * @param x La valeur de l'agrandissement à appliquer
 	 */
 	@Override
-	public void decalageXout(int x) {
+	public void decalageX(int x) {
 		// TODO Auto-generated method stub
-		/*int i;
-		for (i = 6; i < 10; i++) {
-			this.getForme().xpoints[i] = this.getForme().xpoints[i] + x;
-		}
-		this.setForme(this.getForme());
-		this.setTailleX();*/
-	}
-	/**
-	 * Méthode abstraite permettant de réduire la hauteur du composant.
-	 *
-	 * @param b La valeur de la réduction à appliquer
-	 * @param r Le rectangle à réduire également
-	 */
-	@Override
-	public void decalageYin(int b, Rectangle r) {
-		// TODO Auto-generated method stub
-		/*int i;
-		for (i = 8; i < 16; i++) {
-			this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
-		}
-		this.setForme(this.getForme());
-		this.setTailleY();*/
-	}
 
+	}
+	
 	@Override
 	/**
 	 * Méthode abstraite permettant d'augmenter la hauteur du composant
@@ -133,24 +102,13 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 	 * @param b La valeur de l'agrandissement à appliquer
 	 * @param r Le rectangle à augmenter également
 	 */
-	public void decalageYout(int b, Rectangle r) {
+	public void decalageY(int b, Rectangle r) {
 		// TODO Auto-generated method stub
-		/*int i;
-		for (i = 8; i < 16; i++) {
-			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
-		}
-		this.setForme(this.getForme());
-		this.setTailleY();*/
+
 	}
 
 	public void initListeners() {
-		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
 
-			@Override
-			public void focusLost(FocusEvent arg0) {
-
-			}
-		});
 	}
 
 

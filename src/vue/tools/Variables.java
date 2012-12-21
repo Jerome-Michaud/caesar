@@ -11,7 +11,6 @@ import java.util.logging.Level;
  * Melnychenko Ivan
  */
 public class Variables {
-
 	/**
 	 * Taille en X des boutons des catégories.
 	 */
@@ -25,33 +24,11 @@ public class Variables {
 	 */
 	public static final int X_MAX_INSTRUCTION = TAILLE_CATEGORIE_X * 2 + 33;
 	/**
-	 * Taille en Y de la marge pour la fusion de deux widgets.
-	 */
-	public static final int MARGE_AIMENT = 10;
-	/**
-	 * Epaisseur du trait lors de la fusion.
-	 */
-
-	public static final int LINE_STROKE_VALUE = 5;
-	/**
-	 * Indice (en %) pour la conservation du widget dans le PanelCodeGraphique.
-	 */
-	public static final float TAUX_TRANSFERT_PANEL = (float) 0.6;
-	/**
 	 * Rectangles pour la zone d'accroche des Widgets Compose
 	 */
 	public static final Rectangle ZONE_ACCROCHE_PAR_DEFAULT = new Rectangle(5, 26, 130, 15);
 	public static final Rectangle ZONE_ACCROCHE_ELSE = new Rectangle(5, 56, 130, 15);
 	public static final Rectangle ZONE_ACCROCHE_DOWHILE = new Rectangle(5, 16, 130, 15);
-	/**
-	 * Espacement WidgetCompose vide
-	 */
-	public static final int ECART_PAR_DEFAULT = 15;
-	/**
-	 * Chemin d'accés au compilateur NXC
-	 */
-	public static final String CHEMIN_ACCES_NBC = "C:\\Users\\Bastien\\Desktop\\\"Projet Robot\"\\Compilateur";
-	
 	/**
 	 * Les informations du logger seront affichés à parti de se niveau.
 	 */
@@ -62,4 +39,29 @@ public class Variables {
 	public static final Color GRIS_ACTIF = Color.DARK_GRAY;
 	public static final Color GRIS_SURVOLE = new Color(QUANTITE_COULEUR, QUANTITE_COULEUR, QUANTITE_COULEUR);
 	
+	/**
+	 * Taille en Y de la marge pour la fusion de deux widgets.
+	 * @see properties
+	 */
+	public static final int MARGE_AIMENT = 10;
+	/**
+	 * Epaisseur du trait lors de la fusion.
+	 * @see propertie
+	 */
+	public static final int LINE_STROKE_VALUE = 5;
+	/**
+	 * Indice (en %) pour la conservation du widget dans le PanelCodeGraphique.
+	 * @see properties
+	 */
+	public static final float TAUX_TRANSFERT_PANEL = (float) 0.6;
+	/**
+	 * Espacement WidgetCompose vide
+	 * @see properties
+	 */
+	public static final int ECART_PAR_DEFAULT = 15;
+	/**
+	 * Chemin d'accés au compilateur NXC
+	 * @see properties
+	 */
+	public static final String CHEMIN_ACCES_NBC = "C:\\Users\\Bastien\\Desktop\\Projet\\ Robot\\Compilateur";
 }

@@ -44,7 +44,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
      * @param a La valeur de l'augmentation à appliquer
      */
     @Override
-    public void decalageXout(int a) {
+    public void decalageX(int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -60,6 +60,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
      *
      * @param a La valeur de la diminution à appliquer
      */
+    /*
     @Override
     public void decalageXin(int a) {
         int i;
@@ -71,7 +72,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         }
         this.setForme(this.getForme());
         this.setTailleX();
-    }
+    }*/
     /**
      * Méthode permettant d'augmenter la hauteur du composant.
      *
@@ -79,7 +80,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
      * @param r Le rectangle à augmenter également
      */
     @Override
-    public void decalageYout(int b,Rectangle r) {
+    public void decalageY(int b,Rectangle r) {
         int i;
         for (i = 16; i < tabY.length; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
@@ -93,6 +94,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
      * @param b La valeur de la réduction à appliquer
      * @param r Le rectangle à réduire également
      */
+    /*
     @Override
     public void decalageYin(int b,Rectangle r) {
         int i;
@@ -102,6 +104,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleY();
     }
+    */
     /**
      * Méthode d'initialisation des listeners.
      */

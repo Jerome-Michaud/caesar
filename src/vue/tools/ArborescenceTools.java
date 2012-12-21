@@ -1,7 +1,5 @@
 package vue.tools;
 
-import java.awt.Component;
-import java.awt.LayoutManager;
 import java.util.LinkedList;
 import java.util.List;
 import vue.ginterface.GUI;
@@ -26,12 +24,12 @@ public final class ArborescenceTools {
      */
     private static ArborescenceTools instance = new ArborescenceTools();
 
-    /**
-     * Constructeur privé de la classe initialisant l'arborescence.
-     */
-    private ArborescenceTools() {
-        this.arborescence = new LinkedList<List<Widget>>();
-    }
+	/**
+	 * Constructeur privé de la classe initialisant l'arborescence.
+	 */
+	private ArborescenceTools() {
+		this.arborescence = new LinkedList<List<Widget>>();
+	}
 
     /**
      * Méthode statique permettant de récupérer l'instance unique de la classe.
@@ -67,36 +65,34 @@ public final class ArborescenceTools {
         return getListe(comp).get(0);
     }
 
-    /**
-     * Méthode permettant de récuperer la liste de widgets modélisant le groupe
-     * auquel appartient le widget passé en paramètre.
-     *
-     * @param comp Le widget pour lequel on veut récuperer le group auquel il
-     * appartient
-     * @return Une liste e widget représentant le groupe de widgets qui contient
-     * le widget passé en paramètre
-     * @throws ComposantIntrouvableException Si le widget passé en paramètre est
-     * introuvable dans l'arborescence
-     */
-    public List<Widget> getListe(final Widget comp) throws ComposantIntrouvableException {
-        if (comp.parent() == null) {
-            List<Widget> l = new LinkedList<Widget>();
-            l.add(comp);
-            return l;
-        } else {
-            if (!comp.parent().isRacine()) {
-                WidgetCompose parent = (WidgetCompose) (comp.parent());
-                return parent.getWidgetsAssocies(comp);
-            } else {
-                for (List<Widget> lst : arborescence) {
-                    if (lst.contains(comp)) {
-                        return lst;
-                    }
-                } // Ne devrait jamais arriver
-                throw new ComposantIntrouvableException("Composant non trouvé dans l'arborescence (getPremier())");
-            }
-        }
-    }
+	/**
+	 * Méthode permettant de récuperer la liste de widgets modélisant le groupe auquel appartient le widget passé en paramètre.
+	 *
+	 * @param comp Le widget pour lequel on veut récuperer le group auquel il appartient
+	 * @return Une liste e widget représentant le groupe de widgets qui contient le widget passé en paramètre
+	 * @throws ComposantIntrouvableException Si le widget passé en paramètre est introuvable dans l'arborescence
+	 */
+	public List<Widget> getListe(final Widget comp) throws ComposantIntrouvableException {
+		if (comp.parent() == null) {
+			List<Widget> l = new LinkedList<Widget>();
+			l.add(comp);
+			return l;
+		}
+		else {
+			if (!comp.parent().isRacine()) {
+				WidgetCompose parent = (WidgetCompose) (comp.parent());
+				return parent.getWidgetsAssocies(comp);
+			}
+			else {
+				for (List<Widget> lst : arborescence) {
+					if (lst.contains(comp)) {
+						return lst;
+					}
+				} // Ne devrait jamais arriver
+				throw new ComposantIntrouvableException("Composant non trouvé dans l'arborescence (getPremier())");
+			}
+		}
+	}
 
     /**
      * Méthode permettant de récupérer la position du widget passé en paramètre
@@ -142,19 +138,21 @@ public final class ArborescenceTools {
         }
     }
 
-    /**
-     * Méthode permettant de supprimer une liste de widgets au groupe de widgets
-     * associé au premier élément de la liste passée en paramètre.
-     *
-     * @param l La liste de widgets à supprimer du groupe associé au premier
-     * élèment de la liste
-     * @return Le résultat de la suppression dans le groupe de widgets
-     * @throws ComposantIntrouvableException Si le widget passé en paramètre est
-     * introuvable dans l'arborescence
-     */
-    public boolean supprimerWidgets(final List<Widget> l) throws ComposantIntrouvableException {
-        return getListe(l.get(0)).removeAll(l);
-    }
+	/**
+	 * Méthode permettant de supprimer une liste de widgets au groupe de widgets associé au premier élément de la liste passée en paramètre.
+	 *
+	 * @param l La liste de widgets à supprimer du groupe associé au premier élèment de la liste
+	 * @return Le résultat de la suppression dans le groupe de widgets
+	 * @throws ComposantIntrouvableException Si le widget passé en paramètre est introuvable dans l'arborescence
+	 */
+	public boolean supprimerWidgets(final List<Widget> l) throws ComposantIntrouvableException {
+		List<Widget> liste = getListe(l.get(0));
+		boolean b = liste.removeAll(l);
+		if (liste.isEmpty()) {
+			this.arborescence.remove(liste);
+		}
+		return b;
+	}
 
     /**
      * Méthode permettant de récupérer les widgets situés après le widget passé

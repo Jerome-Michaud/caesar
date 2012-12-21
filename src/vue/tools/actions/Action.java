@@ -1,4 +1,4 @@
-package vue.tools;
+package vue.tools.actions;
 
 import vue.widget.Widget;
 import java.awt.Point;
@@ -117,7 +117,7 @@ public class Action {
     /**
      * Recupère l'indice ou trouver le composant à fusionner dans un champ texte
      * @return l'indice au sein de la liste de zones
-     */    
+     */
     public int getZoneIndex() {
         return zoneIndex;
     }

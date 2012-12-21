@@ -11,9 +11,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import modeles.TypeWidget;
+import org.jdom2.Attribute;
+import org.jdom2.Element;
 import vue.tools.ComposantIntrouvableException;
 import vue.tools.Variables;
 import vue.widget.modele.ModeleWidget;
+import vue.widget.modele.zones.Zone;
 
 /**
  * Classe héritant de Widget et implémentant IWidget permettant de représenter un Widget de type Complexe.
@@ -148,11 +151,11 @@ public class WidgetCompose extends Widget implements IWidget {
 
 			//On stocke le décalage qu'on voudra appliquer sur les zones d'accroche du composant
 			if (diff < 0 - ModeleWidget.OFFSET) {
-				this.getModele().decalageYin(Math.abs(diff), r);
+				this.getModele().decalageY(- Math.abs(diff), r);
 				decaleZonesEnDessousDe(r.y, diff, mapDecal);
 			}
 			else if (diff > 0 - ModeleWidget.OFFSET) {
-				this.getModele().decalageYout(diff, r);
+				this.getModele().decalageY(diff, r);
 				decaleZonesEnDessousDe(r.y, diff, mapDecal);
 			}
 
@@ -254,5 +257,46 @@ public class WidgetCompose extends Widget implements IWidget {
 			Instruction inst = (Instruction) widget.getElementProgramme();
 			structInst.insererFin(inst);
 		}
+	}
+
+	@Override
+	public Element toXml() {
+		Element widget = new Element("widgetcompose");
+		widget.setAttribute(new Attribute("class", this.getModele().getClass().getSimpleName()));
+		
+		Element coordonnees = new Element("coordonnees");
+		coordonnees.setAttribute(new Attribute("x", String.valueOf(this.getLocation().x)));
+		coordonnees.setAttribute(new Attribute("y", String.valueOf(this.getLocation().y)));
+		widget.addContent(coordonnees);
+		
+		int i;
+		// Gestion des zones du widget (valeurs, variables, ...)
+		if (this.getModele().getLesZonesSaisies().size() > 0) {
+			Element attribut = new Element("attributs");
+			
+			i = 0;
+			for (Zone z : this.getModele().getLesZonesSaisies()) {
+				Element zone = new Element("zone");
+				zone.setAttribute(new Attribute("id", String.valueOf(i)));
+				i++;
+				zone.setAttribute(new Attribute("value", String.valueOf(z.getValeur())));
+				attribut.addContent(zone);
+			}
+			widget.addContent(attribut);
+		}
+		
+		// Gestion des widgets internes
+		i = 0;
+		for (Rectangle zone : this.mapZone.keySet()) {
+			Element accroche = new Element("accroche");
+			accroche.setAttribute(new Attribute("id", String.valueOf(i)));
+			i++;
+			
+			for (Widget widgetInterne : this.mapZone.get(zone)) {
+				accroche.addContent(widgetInterne.toXml());
+			}
+			widget.addContent(accroche);
+		}
+		return widget;
 	}
 }

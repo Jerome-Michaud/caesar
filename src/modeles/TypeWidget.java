@@ -5,7 +5,7 @@ public enum TypeWidget {
 	/**
 	 * Les différents types de widget.
 	 */
-	INSTRUCTION, IF, WHILE, NEGATION, TACHE, DOWHILE, IFELSE, MOTEURMOVFWD, MOTEURMOVREV, MOTEUROFF, REPEAT, FOR, WAIT, VARIABLE, EXPRESSION;
+	INSTRUCTION, IF, WHILE, NEGATION, TACHE, DOWHILE, IFELSE, MOTEURMOVFWD, MOTEURMOVREV, MOTEUROFF, REPEAT, FOR, WAIT, VARIABLE, SETVALUEVARIABLE, EXPRESSION_LOGIQUE, EXPRESSION_ARITHMETIQUE;
 
 	@Override
 	public String toString() {
@@ -38,10 +38,12 @@ public enum TypeWidget {
 				return "Wait";
 			case VARIABLE:
 				return "Variable";
-			case EXPRESSION:
-				return "Expression";                         
-                            
-                           
+			case SETVALUEVARIABLE:
+				return "Set Value Variable";
+			case EXPRESSION_LOGIQUE:
+				return "Expression Logique";  
+			case EXPRESSION_ARITHMETIQUE:
+				return "Expression Arithmetique";
 			default:
 				return null;
 		}
