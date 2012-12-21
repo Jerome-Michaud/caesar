@@ -1,10 +1,13 @@
 package vue.widget.modele;
 
-import java.awt.Rectangle;
+
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
 import vue.widget.modele.zones.Zone;
-import instruction.*;
+import instruction.Condition;
+import instruction.Operateur;
+import instruction.Operation;
+import instruction.Variable;
 
 import java.awt.Point;
 import java.awt.Polygon;
@@ -16,19 +19,25 @@ import javax.swing.JComponent;
 import modeles.TypeWidget;
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
- * forme d'un widget de type ExpressionEqualTo.
+ * forme d'un widget de type Expression logique.
  * 
  * @author CHOUKET Houda
  */
-public class ExpressionEqualToWidget extends ModeleWidget {
+
+public class ExpressionLogicalWidget extends ModeleWidget {
+
 	/**
-	 * Constructeur du modele definissant les differents parametres du ExpressionEqualTo .
+	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
 
-	public ExpressionEqualToWidget() {
+	public ExpressionLogicalWidget(Operateur op) {
 		super();
+		/*int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
+		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
+		 */
 		int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
+
 
 		/**
 		 * Méthode permettant de définir un tableau représentant les coordonnées des
@@ -47,11 +56,10 @@ public class ExpressionEqualToWidget extends ModeleWidget {
 		this.setType(TypeWidget.EXPRESSION);
 
 
+		message.put(new Point(30, 17), op.toString());
 
-		message.put(new Point(30, 17), "==");
 
-
-		this.setElementProgramme(new InstructionAttente());
+		this.setElementProgramme(new Condition(op));
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 
@@ -72,7 +80,6 @@ public class ExpressionEqualToWidget extends ModeleWidget {
 		initListeners();
 	}
 //	fin constructeur
-	
 	/**
 	 * Methode abstraite permettant de diminuer la largeur du composant
 	 *

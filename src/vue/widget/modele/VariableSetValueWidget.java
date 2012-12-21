@@ -37,7 +37,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 	 */
 
 
-	
+
 	public VariableSetValueWidget() {
 		super();
 
@@ -66,6 +66,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 
 		ChampTexte f = new ChampTexte();
+		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		f.setBounds(65, 3, 40, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
@@ -96,7 +97,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-	*/
+	 */
 	@Override
 	public void decalageY(int b, Rectangle r) {
 		int i;
@@ -116,7 +117,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-	*/
+	 */
 	@Override
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {

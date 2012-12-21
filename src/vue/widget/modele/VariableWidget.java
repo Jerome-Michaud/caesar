@@ -1,3 +1,4 @@
+
 package vue.widget.modele;
 
 import vue.widget.modele.zones.ChampTexte;
@@ -87,12 +88,7 @@ public class VariableWidget extends ModeleWidget {
 	*/
 	@Override
 	public void decalageY(int b, Rectangle r) {
-		int i;
-		for (i = 8; i < 16; i++) {
-			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
-		}
-		this.setForme(this.getForme());
-		this.setTailleY();
+		
 	}
 	/*
 	@Override
@@ -107,10 +103,7 @@ public class VariableWidget extends ModeleWidget {
 	*/
 	@Override
 	public void initListeners() {
-		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
-
-
-		});
+	
 	}
 
 	/**
@@ -122,3 +115,4 @@ public class VariableWidget extends ModeleWidget {
 	}
 
 }
+

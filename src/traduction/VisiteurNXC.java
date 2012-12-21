@@ -127,8 +127,11 @@ public class VisiteurNXC extends VisiteurC {
 	@Override
 	public void visiter(InstructionTempsCourant inst) {
 		traduction += indent();
+        if(inst.getVariable() != null) {
+            inst.getVariable().accepte(this);
+            traduction += " = ";
+        }
 		traduction += "CurrentTick();\n";
-		//TODO CurrentTick(s)?
 	}
 
 	@Override

@@ -1,17 +1,17 @@
-package vue.widget.modele;
 
-import java.awt.Rectangle;
-import java.awt.Rectangle;
+package vue.widget.modele;
 
 
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
 import vue.widget.modele.zones.Zone;
-import instruction.*;
+import instruction.Operateur;
+import instruction.Operation;
+import instruction.Variable;
 
 import java.awt.Point;
 import java.awt.Polygon;
-
+import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
@@ -19,18 +19,25 @@ import javax.swing.JComponent;
 import modeles.TypeWidget;
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
- * forme d'un widget de type ExpressionOperatorInfEqual.
+ * forme d'un widget de type Expression arethmetique.
  * 
  * @author CHOUKET Houda
  */
-public class ExpressionOperatorInfEqualWidget extends ModeleWidget {
+
+public class ExpressionArithmeticWidget extends ModeleWidget {
+
+
 
 	/**
-	 * Constructeur du modele definissant les differents parametres du ExpressionOperatorInfEqual .
+	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
 
-	public ExpressionOperatorInfEqualWidget() {
+	public ExpressionArithmeticWidget(Operateur op) {
 		super();
+
+		/*int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
+			int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
+		 */
 		int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
 
@@ -51,11 +58,10 @@ public class ExpressionOperatorInfEqualWidget extends ModeleWidget {
 		this.setType(TypeWidget.EXPRESSION);
 
 
+		message.put(new Point(30, 17), op.toString());
 
-		message.put(new Point(30, 17), "<=");
 
-
-		this.setElementProgramme(new InstructionAttente());
+		this.setElementProgramme(new Operation(op, (Variable)null, (Variable)null));
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 
@@ -75,7 +81,7 @@ public class ExpressionOperatorInfEqualWidget extends ModeleWidget {
 
 		initListeners();
 	}
-//	fin constructeur
+	//		fin constructeur
 	/**
 	 * Methode abstraite permettant de diminuer la largeur du composant
 	 *
@@ -84,11 +90,11 @@ public class ExpressionOperatorInfEqualWidget extends ModeleWidget {
 	//public void decalageXin(int x) {
 		// TODO Auto-generated method stub
 		/*int i;
-		for (i = 6; i < 10; i++) {
-			this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
-		}
-		this.setForme(this.getForme());
-		this.setTailleX();*/
+			for (i = 6; i < 10; i++) {
+				this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
+			}
+			this.setForme(this.getForme());
+			this.setTailleX();*/
 	//}
 	/**
 	 * Méthode abstraite permettant d'augmenter la largeur du composant.
@@ -99,11 +105,11 @@ public class ExpressionOperatorInfEqualWidget extends ModeleWidget {
 	public void decalageX(int x) {
 		// TODO Auto-generated method stub
 		/*int i;
-		for (i = 6; i < 10; i++) {
-			this.getForme().xpoints[i] = this.getForme().xpoints[i] + x;
-		}
-		this.setForme(this.getForme());
-		this.setTailleX();*/
+			for (i = 6; i < 10; i++) {
+				this.getForme().xpoints[i] = this.getForme().xpoints[i] + x;
+			}
+			this.setForme(this.getForme());
+			this.setTailleX();*/
 	}
 	/**
 	 * Méthode abstraite permettant de réduire la hauteur du composant.
@@ -115,11 +121,11 @@ public class ExpressionOperatorInfEqualWidget extends ModeleWidget {
 	//public void decalageYin(int b, Rectangle r) {
 		// TODO Auto-generated method stub
 		/*int i;
-		for (i = 8; i < 16; i++) {
-			this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
-		}
-		this.setForme(this.getForme());
-		this.setTailleY();*/
+			for (i = 8; i < 16; i++) {
+				this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+			}
+			this.setForme(this.getForme());
+			this.setTailleY();*/
 	//}
 
 	@Override
@@ -132,22 +138,15 @@ public class ExpressionOperatorInfEqualWidget extends ModeleWidget {
 	public void decalageY(int b, Rectangle r) {
 		// TODO Auto-generated method stub
 		/*int i;
-		for (i = 8; i < 16; i++) {
-			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
-		}
-		this.setForme(this.getForme());
-		this.setTailleY();*/
+			for (i = 8; i < 16; i++) {
+				this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
+			}
+			this.setForme(this.getForme());
+			this.setTailleY();*/
 	}
 
 	public void initListeners() {
-		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
-
-			@Override
-			public void focusLost(FocusEvent arg0) {
-
-			}
-		});
+		
 	}
-
 
 }
