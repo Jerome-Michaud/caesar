@@ -180,7 +180,6 @@ public class WidgetCompose extends Widget implements IWidget {
 		for (Rectangle r : mapRect.keySet()) {
 			this.mapZone.put(mapRect.get(r), this.mapZone.remove(r));
 		}
-		System.out.println("####################");
 	}
 
 	/**
@@ -263,7 +262,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	@Override
 	public Element toXml() {
 		Element widget = new Element("widgetcompose");
-		widget.setAttribute(new Attribute("class", this.getModele().getClass().getName()));
+		widget.setAttribute(new Attribute("class", this.getModele().getClass().getSimpleName()));
 		
 		Element coordonnees = new Element("coordonnees");
 		coordonnees.setAttribute(new Attribute("x", String.valueOf(this.getLocation().x)));

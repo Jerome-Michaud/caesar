@@ -1,13 +1,8 @@
 package sauvegarde.xml;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,7 +16,6 @@ import org.jdom2.output.XMLOutputter;
 import sauvegarde.SauvegardeTools;
 import vue.tools.ArborescenceTools;
 import vue.widget.Widget;
-import vue.widget.WidgetCompose;
 
 /**
  *
@@ -52,13 +46,13 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 	}
 	
 	@Override
-    public void save() {
-		serializeArborescence("C:\\Users\\Quentin\\Documents\\xml.xml");
+    public void save(String path) {
+		serializeArborescence(path);
 	}
 	
 	@Override
-    public void load() {
-		deserializeArborescence("C:\\Users\\Quentin\\Documents\\xml.xml");
+    public void load(String path) {
+		deserializeArborescence(path);
 	}
 	
 	/**
@@ -84,7 +78,9 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 				fichier.createNewFile();
 			}
 			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-		   sortie.output(docXml, new FileOutputStream(fichier));
+			FileOutputStream fo = new FileOutputStream(fichier);
+			sortie.output(docXml, fo);
+			fo.close();
 		} catch (IOException ex){
 			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "La sauvegarde n'a pas pu être effectuée corectement");
 		}
@@ -117,7 +113,7 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 				ArborescenceTools.getInstance().initArborescence(arbos, true);
 			}
 		} catch (IOException ex) {
-			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "La sauvegarde n'a pas pu être chargée corectement");
+			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "La sauvegarde n'a pas pu être chargée corectement : " + ex.getMessage());
 		}
 	}
 }

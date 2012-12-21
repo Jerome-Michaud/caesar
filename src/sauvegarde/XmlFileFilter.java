@@ -1,4 +1,4 @@
-package vue.tools.sauvegarde;
+package sauvegarde;
 
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
@@ -8,19 +8,17 @@ import javax.swing.filechooser.FileFilter;
  * pour l'explorateur lors du chargement ou de la sauvegarde d'un projet.
  * @author Bastien ANDRU
  */
-public class JScratchFileFilter extends FileFilter {
-	/**
-	 * Constante stockant l'extension à appliquer aux fichiers JSCRATCH.
-	 */
-    public static final String EXT = "jsc";
+public class XmlFileFilter extends ApplicationFileFilter {
+	
     /**
      * La description des fichiers de type JSCRATCH à afficher dans
      * l'explorateur
      */
     private String descr;
     
-    public JScratchFileFilter() {
-        this.descr = "Fichiers JScratch";
+    public XmlFileFilter() {
+		super("xscr");
+        this.descr = "Fichiers XScratch";
     }
     /**
      * Méthode redéfinissant la méthode accept de FileFilter afin qu'elle
@@ -35,7 +33,7 @@ public class JScratchFileFilter extends FileFilter {
             return true;
         }
         String nomFichier = pathname.getName().toLowerCase();
-        return nomFichier.endsWith(EXT);
+        return nomFichier.endsWith(getExtension());
     }
     /**
      * Méthode redéfinissant la méthode getDescription de FileFilter afin

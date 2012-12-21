@@ -93,6 +93,7 @@ public class Widget extends JComponent {
         this.parent = null;
     }
 
+	
     /**
      * Méthode permettant de définir la forme du widget et de calculer ses
      * nouvelles dimensions et localisations.
@@ -251,7 +252,7 @@ public class Widget extends JComponent {
 	 */
 	public Element toXml() {
 		Element widget = new Element("widget");
-		widget.setAttribute(new Attribute("class", this.modele.getClass().getName()));
+		widget.setAttribute(new Attribute("class", this.modele.getClass().getSimpleName()));
 		
 		Element coordonnees = new Element("coordonnees");
 		coordonnees.setAttribute(new Attribute("x", String.valueOf(this.getLocation().x)));

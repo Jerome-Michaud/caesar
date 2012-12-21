@@ -40,11 +40,12 @@ public class WaitWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ChampTexte f = new ChampTexte();
+                f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		f.setBounds(65, 3, 40, 20);
-		f.setText("0");
+		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 
-		this.setInstructionValeur(f.getText());
+		this.setInstructionValeur(f.getValeur());
 		
 		this.decalageXout(-5);
 		

@@ -45,8 +45,9 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
+                f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		f.setBounds(142, 3, 40, 20);
-		f.setText("0");
+		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 
 		setInstructionMoteur(l.getValeur());

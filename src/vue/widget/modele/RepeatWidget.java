@@ -43,11 +43,12 @@ public class RepeatWidget extends ModeleWidget {
 
 
 		ChampTexte f = new ChampTexte();
+                f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		f.setBounds(60, 3, 20, 20);
-		f.setText("0");
+		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 
-		this.setInstructionValeur(f.getText());
+		this.setInstructionValeur(f.getValeur());
 		
 		
 		initListeners();

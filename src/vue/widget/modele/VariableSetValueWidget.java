@@ -20,7 +20,7 @@ import instruction.*;
 
 /**
  *
- * @author zubi
+ * @author zubair
  */
 public class VariableSetValueWidget extends ModeleWidget {
 	/**
@@ -54,19 +54,20 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 
 		ChampTexte f = new ChampTexte();
+                f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		f.setBounds(65, 3, 40, 20);
-		f.setText("0");
+		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 
 
                 this.setInstructionValeur(l.getValeur());
-		this.setInstructionValeur(f.getText());
+		this.setInstructionValeur(f.getValeur());
 		
 		this.decalageXout(-5);
 		
 
 		this.setInstructionValeur(l.getValeur());
-		this.setInstructionValeur(f.getText());
+		this.setInstructionValeur(f.getValeur());
 
 		this.decalageXout(-5);
 

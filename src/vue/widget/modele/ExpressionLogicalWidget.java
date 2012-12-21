@@ -15,8 +15,8 @@ import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-
 import modeles.TypeWidget;
+
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
  * forme d'un widget de type Expression logique.
@@ -64,11 +64,13 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 
 		ChampTexte l = new ChampTexte();
+		l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		l.setBounds(10, 3, 20, 20);
 
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
+		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		//f.setBounds(80, 3, 20, 20);
 		f.setBounds(40, 3, 20, 20);
 		this.getLesZonesSaisies().add(f);

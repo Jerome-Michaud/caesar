@@ -1,16 +1,15 @@
 package sauvegarde.binaire;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.List;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import modeles.Erreur;
 import sauvegarde.SauvegardeTools;
 import vue.ginterface.GUI;
 import vue.tools.ArborescenceTools;
-import vue.tools.sauvegarde.JScratchFileFilter;
 import vue.widget.Widget;
 /**
  * Classe regroupant différents outils destinés à la sauvegarde et au chargement
@@ -43,39 +42,13 @@ public class SauvegardeBinaireTools implements SauvegardeTools {
 	}
 	
 	@Override
-    public void save() {
-        JFileChooser choix = new JFileChooser();
-        choix.addChoosableFileFilter(new JScratchFileFilter());
-        choix.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int retour = choix.showSaveDialog(GUI.getFenetre()); // TODO : A SUPPRIMER Fenetre.getInstance());
-        if(retour == JFileChooser.APPROVE_OPTION) {
-            String path = choix.getSelectedFile().getAbsolutePath();
-            if(!path.endsWith(JScratchFileFilter.EXT)) {
-                path += "." + JScratchFileFilter.EXT;
-            }
-            boolean ok = true;
-            if(new File(path).exists()) {
-                int opt = JOptionPane.showConfirmDialog(choix, new JLabel("<html>Un fichier portant ce nom existe déjà.<br><br>"
-                        + "Souhaitez vous l'écraser?"), "Fichier existant", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (opt != JOptionPane.YES_OPTION) {
-                    ok = false;
-                }
-            }
-            if(ok) {
-                serializeArborescence(path);
-            }
-        }
+    public void save(final String path) {
+        serializeArborescence(path);
     }
 	
 	@Override
-    public void load() {
-        JFileChooser choix = new JFileChooser();
-        choix.addChoosableFileFilter(new JScratchFileFilter());
-        choix.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int retour = choix.showOpenDialog(GUI.getFenetre()); // TODO : A SUPPRIMER Fenetre.getInstance());
-        if (retour == JFileChooser.APPROVE_OPTION) {
-            deserializeArborescence(choix.getSelectedFile().getPath());
-        }
+    public void load(final String path) {
+        deserializeArborescence(path);
         GUI.getPanelCodeGraphique().repaint();
     }
     

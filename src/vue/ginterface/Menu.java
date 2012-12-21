@@ -15,8 +15,6 @@ import ressources.ResourceTools;
 import traduction.VisiteurNXC;
 import vue.tools.ArborescenceTools;
 import vue.tools.CreationCodeTools;
-import sauvegarde.binaire.SauvegardeBinaireTools;
-import sauvegarde.xml.SauvegardeXMLTools;
 import vue.tools.Variables;
 import vue.widget.Widget;
 
@@ -32,6 +30,8 @@ public class Menu extends JMenuBar {
     private JMenuItem fichierNouveau, fichierOuvrir, fichierEnregistrer, fichierQuitter;
     private JMenuItem exportationNXC, exportationRobotC;
     private JMenuItem aideAPropos;
+	
+	private SelecteurFichier selecteur;
     
     /**
      * SINGLETON.
@@ -96,6 +96,8 @@ public class Menu extends JMenuBar {
         exportationNXC.addActionListener(listener);
         exportationRobotC.addActionListener(listener);
         aideAPropos.addActionListener(listener);
+		
+		selecteur = new SelecteurFichier();
     }
     
     /**
@@ -111,11 +113,11 @@ public class Menu extends JMenuBar {
 	        }
 			else if (e.getSource() == fichierOuvrir) {
 	            //SauvegardeBinaireTools.getInstance().load();
-				SauvegardeXMLTools.getInstance().load();
+				selecteur.chargement();
 	        }
 			else if (e.getSource() == fichierEnregistrer) {
 	            //SauvegardeBinaireTools.getInstance().save();
-				SauvegardeXMLTools.getInstance().save();
+				selecteur.sauvegarde();
 	        }
 			else if (e.getSource() == fichierQuitter) {
 	            System.exit(0);

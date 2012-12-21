@@ -46,7 +46,7 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		
 		ChampTexte f = new ChampTexte();
 		f.setBounds(142, 3, 40, 20);
-		f.setText("0");
+		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 		
 		setInstructionMoteur(l.getValeur());
