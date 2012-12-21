@@ -35,12 +35,12 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		public ExpressionArithmeticWidget(Operateur op) {
 			super();
 
-			/*int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
-			int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
-			*/
+			/*
 			int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 			int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
-
+*/
+			int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
+			int tabY[] = {5, 0, 0, 5, 19, 24,24, 19};
 			/**
 			 * Méthode permettant de définir un tableau représentant les coordonnées des
 			 * ordonnées de la forme du widget.
@@ -55,7 +55,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 			 */
 			this.setTailleX();
 			this.setTailleY();
-			this.setType(TypeWidget.EXPRESSION);
+			this.setType(TypeWidget.EXPRESSION_ARITHMETIQUE);
 
 
 			message.put(new Point(30, 17), op.toString());
@@ -66,20 +66,20 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 
 			ChampTexte l = new ChampTexte();
-			l.setBounds(10, 3, 20, 20);
+			l.setBounds(10, 3, 18, 18);
+			l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 
 			this.getLesZonesSaisies().add(l);
 
 			ChampTexte f = new ChampTexte();
+			f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 			//f.setBounds(80, 3, 20, 20);
-			f.setBounds(40, 3, 20, 20);
+			f.setBounds(40, 3, 18, 18);
 			this.getLesZonesSaisies().add(f);
 
 
 
-			this.decalageXout(-5);
-
-			initListeners();
+			
 		}
 //		fin constructeur
 		/**
@@ -89,12 +89,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		 */
 		public void decalageXin(int x) {
 			// TODO Auto-generated method stub
-			/*int i;
-			for (i = 6; i < 10; i++) {
-				this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
-			}
-			this.setForme(this.getForme());
-			this.setTailleX();*/
+			
 		}
 		/**
 		 * Méthode abstraite permettant d'augmenter la largeur du composant.
@@ -104,12 +99,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		@Override
 		public void decalageXout(int x) {
 			// TODO Auto-generated method stub
-			/*int i;
-			for (i = 6; i < 10; i++) {
-				this.getForme().xpoints[i] = this.getForme().xpoints[i] + x;
-			}
-			this.setForme(this.getForme());
-			this.setTailleX();*/
+			
 		}
 		/**
 		 * Méthode abstraite permettant de réduire la hauteur du composant.
@@ -120,12 +110,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		@Override
 		public void decalageYin(int b, Rectangle r) {
 			// TODO Auto-generated method stub
-			/*int i;
-			for (i = 8; i < 16; i++) {
-				this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
-			}
-			this.setForme(this.getForme());
-			this.setTailleY();*/
+		
 		}
 
 		@Override
@@ -137,22 +122,11 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		 */
 		public void decalageYout(int b, Rectangle r) {
 			// TODO Auto-generated method stub
-			/*int i;
-			for (i = 8; i < 16; i++) {
-				this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
-			}
-			this.setForme(this.getForme());
-			this.setTailleY();*/
+		
 		}
 
 		public void initListeners() {
-			((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
-
-				@Override
-				public void focusLost(FocusEvent arg0) {
-
-				}
-			});
+			
 		}
 
 	}
