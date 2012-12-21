@@ -15,14 +15,15 @@ import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-
 import modeles.TypeWidget;
-/**
- * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
- * forme d'un widget de type Expression arethmetique.
- * 
- * @author CHOUKET Houda
- */
+
+
+	/**
+	 * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
+	 * forme d'un widget de type Expression arethmetique.
+	 * 
+	 * @author CHOUKET Houda
+	 */
 
 public class ExpressionArithmeticWidget extends ModeleWidget {
 
@@ -65,15 +66,19 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 
-		ChampTexte l = new ChampTexte();
-		l.setBounds(10, 3, 20, 20);
+
+			ChampTexte l = new ChampTexte();
+			l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+			l.setBounds(10, 3, 20, 20);
 
 		this.getLesZonesSaisies().add(l);
 
-		ChampTexte f = new ChampTexte();
-		//f.setBounds(80, 3, 20, 20);
-		f.setBounds(40, 3, 20, 20);
-		this.getLesZonesSaisies().add(f);
+
+			ChampTexte f = new ChampTexte();
+			f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+			//f.setBounds(80, 3, 20, 20);
+			f.setBounds(40, 3, 20, 20);
+			this.getLesZonesSaisies().add(f);
 
 
 

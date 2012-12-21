@@ -3,7 +3,6 @@ package vue.widget;
 import instruction.Condition;
 import instruction.Operateur;
 import instruction.Operation;
-import instruction.TypeVariable;
 import instruction.VariableModifiable;
 import vue.tools.NonClonableException;
 import vue.widget.modele.DoWhileWidget;

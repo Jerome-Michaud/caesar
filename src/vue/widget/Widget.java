@@ -16,6 +16,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 
 import modeles.TypeWidget;
+import org.jdom2.Attribute;
+import org.jdom2.Element;
 
 /**
  * Classe représentant graphiquement un widget.
@@ -245,4 +247,33 @@ public class Widget extends JComponent {
 	 * Met à jour l'arborescence des instructions.
 	 */
 	public void applyChangeModele() { }
+	
+	/**
+	 * Permet d'avoir comment le widget doit se sérialiser.
+	 */
+	public Element toXml() {
+		Element widget = new Element("widget");
+		widget.setAttribute(new Attribute("class", this.modele.getClass().getSimpleName()));
+		
+		Element coordonnees = new Element("coordonnees");
+		coordonnees.setAttribute(new Attribute("x", String.valueOf(this.getLocation().x)));
+		coordonnees.setAttribute(new Attribute("y", String.valueOf(this.getLocation().y)));
+		widget.addContent(coordonnees);
+		
+		// Gestion des zones du widget (valeurs, variables, ...)
+		if (this.modele.getLesZonesSaisies().size() > 0) {
+			Element attribut = new Element("attributs");
+			
+			int i = 0;
+			for (Zone z : this.modele.getLesZonesSaisies()) {
+				Element zone = new Element("zone");
+				zone.setAttribute(new Attribute("id", String.valueOf(i)));
+				i++;
+				zone.setAttribute(new Attribute("value", String.valueOf(z.getValeur())));
+				attribut.addContent(zone);
+			}
+			widget.addContent(attribut);
+		}
+		return widget;
+	}
 }
