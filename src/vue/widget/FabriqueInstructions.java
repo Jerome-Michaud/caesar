@@ -128,16 +128,6 @@ public class FabriqueInstructions {
 	public Widget creerWidgetWait() {
 		return new Widget(new WaitWidget());
 	}
-<<<<<<< HEAD
-	
-=======
-
-	/**
-	 * Méthode permettant de créer un widget de type "Variable".
-	 *
-	 * @return un widget de type "Variable"
-	 */
->>>>>>> 0676834f00c184e75919bbff3a63cd9e8793f49c
 
 	/**
 	 * Méthode permettant de créer un widget de type "Variable".
@@ -170,7 +160,7 @@ public class FabriqueInstructions {
 	/**
 	 * Méthode permettant de créer un widget complexe de type "Expression" (addition).
 	 *
-	 * @return un widget complexe de type "ExpressionAritm�thique"
+	 * @return un widget complexe de type "ExpressionAritm�thique"
 	 */
 	public Widget creerWidgetExpressionSum() {
 		return new WidgetCompose(new ExpressionSumWidget());
@@ -179,7 +169,7 @@ public class FabriqueInstructions {
 	/**
 	 * Méthode permettant de créer un widget complexe de type "Expression" (soustraction).
 	 *
-	 * @return un widget complexe de type "ExpressionAritm�thique"
+	 * @return un widget complexe de type "ExpressionAritm�thique"
 	 */
 	public Widget creerWidgetExpressionSubtraction() {
 		return new WidgetCompose(new ExpressionSubtractionWidget());
@@ -190,7 +180,7 @@ public class FabriqueInstructions {
 	/**
 	 * Méthode permettant de créer un widget complexe de type "Expression" (Multiplication).
 	 *
-	 * @return un widget complexe de type "ExpressionAritm�thique"
+	 * @return un widget complexe de type "ExpressionAritm�thique"
 	 */
 	public Widget creerWidgetExpressionMultiplication() {
 		return new WidgetCompose(new ExpressionMultiplicationWidget());
@@ -199,7 +189,7 @@ public class FabriqueInstructions {
 	/**
 	 * Méthode permettant de créer un widget complexe de type "Expression" (Division).
 	 *
-	 * @return un widget complexe de type "ExpressionAritm�thique"
+	 * @return un widget complexe de type "ExpressionAritm�thique"
 	 */
 	public Widget creerWidgetExpressionDivision() {
 		return new WidgetCompose(new ExpressionDivisionWidget());
@@ -207,7 +197,7 @@ public class FabriqueInstructions {
 	/**
 	 * Méthode permettant de créer un widget complexe de type "Expression" (modulo).
 	 *
-	 * @return un widget complexe de type "ExpressionAritm�thique"
+	 * @return un widget complexe de type "ExpressionAritm�thique"
 	 */
 	public Widget creerWidgetExpressionModulus() {
 		return new WidgetCompose(new ExpressionModulusWidget());
@@ -319,6 +309,7 @@ public class FabriqueInstructions {
 		else if (comp.getModele() instanceof VariableWidget) {
 			w = creerWidgetVariable((VariableModifiable)comp.getModele().getElementProgramme());
 		}
+		
 		else if (comp.getModele() instanceof VariableSetValueWidget) {
 			w = creerWidgetVariableSetValue();
 		}                

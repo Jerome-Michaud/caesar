@@ -76,7 +76,7 @@ public class ExpressionSumWidget extends ModeleWidget {
 
 
 
-		this.decalageXout(-5);
+		this.decalageX(-5);
 
 		initListeners();
 	}
@@ -86,22 +86,7 @@ public class ExpressionSumWidget extends ModeleWidget {
 	 *
 	 * @param x La valeur de la reduction à appliquer
 	 */
-	public void decalageXin(int x) {
-		// TODO Auto-generated method stub
-		/*int i;
-		for (i = 6; i < 10; i++) {
-			this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
-		}
-		this.setForme(this.getForme());
-		this.setTailleX();*/
-	}
-	/**
-	 * Méthode abstraite permettant d'augmenter la largeur du composant.
-	 *
-	 * @param x La valeur de l'agrandissement à appliquer
-	 */
-	@Override
-	public void decalageXout(int x) {
+	public void decalageX(int x) {
 		// TODO Auto-generated method stub
 		/*int i;
 		for (i = 6; i < 10; i++) {
@@ -111,17 +96,33 @@ public class ExpressionSumWidget extends ModeleWidget {
 		this.setTailleX();*/
 	}
 	/**
+	 * Méthode abstraite permettant d'augmenter la largeur du composant.
+	 *
+	 * @param x La valeur de l'agrandissement à appliquer
+	 */
+	/*
+	@Override
+	public void decalageXout(int x) {
+		// TODO Auto-generated method stub
+		int i;
+		for (i = 6; i < 10; i++) {
+			this.getForme().xpoints[i] = this.getForme().xpoints[i] + x;
+		}
+		this.setForme(this.getForme());
+		this.setTailleX();
+	}*/
+	/**
 	 * Méthode abstraite permettant de réduire la hauteur du composant.
 	 *
 	 * @param b La valeur de la réduction à appliquer
 	 * @param r Le rectangle à réduire également
 	 */
 	@Override
-	public void decalageYin(int b, Rectangle r) {
+	public void decalageY(int b, Rectangle r) {
 		// TODO Auto-generated method stub
 		/*int i;
 		for (i = 8; i < 16; i++) {
-			this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
 		}
 		this.setForme(this.getForme());
 		this.setTailleY();*/
@@ -134,16 +135,17 @@ public class ExpressionSumWidget extends ModeleWidget {
 	 * @param b La valeur de l'agrandissement à appliquer
 	 * @param r Le rectangle à augmenter également
 	 */
+	/*
 	public void decalageYout(int b, Rectangle r) {
 		// TODO Auto-generated method stub
-		/*int i;
+		int i;
 		for (i = 8; i < 16; i++) {
 			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
 		}
 		this.setForme(this.getForme());
-		this.setTailleY();*/
+		this.setTailleY();
 	}
-
+	*/
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
 

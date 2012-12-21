@@ -69,7 +69,7 @@ public class ExpressionOperatorSupEqualWidget extends ModeleWidget {
 
 
 
-		this.decalageXout(-5);
+		this.decalageX(-5);
 
 		initListeners();
 	}
@@ -80,7 +80,7 @@ public class ExpressionOperatorSupEqualWidget extends ModeleWidget {
 	 *
 	 * @param x La valeur de la reduction à appliquer
 	 */
-	public void decalageXin(int x) {
+	//public void decalageXin(int x) {
 		// TODO Auto-generated method stub
 		/*int i;
 		for (i = 6; i < 10; i++) {
@@ -88,14 +88,14 @@ public class ExpressionOperatorSupEqualWidget extends ModeleWidget {
 		}
 		this.setForme(this.getForme());
 		this.setTailleX();*/
-	}
+	//}
 	/**
 	 * Méthode abstraite permettant d'augmenter la largeur du composant.
 	 *
 	 * @param x La valeur de l'agrandissement à appliquer
 	 */
 	@Override
-	public void decalageXout(int x) {
+	public void decalageX(int x) {
 		// TODO Auto-generated method stub
 		/*int i;
 		for (i = 6; i < 10; i++) {
@@ -110,8 +110,8 @@ public class ExpressionOperatorSupEqualWidget extends ModeleWidget {
 	 * @param b La valeur de la réduction à appliquer
 	 * @param r Le rectangle à réduire également
 	 */
-	@Override
-	public void decalageYin(int b, Rectangle r) {
+	//@Override
+	//public void decalageYin(int b, Rectangle r) {
 		// TODO Auto-generated method stub
 		/*int i;
 		for (i = 8; i < 16; i++) {
@@ -119,7 +119,7 @@ public class ExpressionOperatorSupEqualWidget extends ModeleWidget {
 		}
 		this.setForme(this.getForme());
 		this.setTailleY();*/
-	}
+	//}
 
 	@Override
 	/**
@@ -128,7 +128,7 @@ public class ExpressionOperatorSupEqualWidget extends ModeleWidget {
 	 * @param b La valeur de l'agrandissement à appliquer
 	 * @param r Le rectangle à augmenter également
 	 */
-	public void decalageYout(int b, Rectangle r) {
+	public void decalageY(int b, Rectangle r) {
 		// TODO Auto-generated method stub
 		/*int i;
 		for (i = 8; i < 16; i++) {

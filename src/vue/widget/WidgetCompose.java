@@ -148,11 +148,11 @@ public class WidgetCompose extends Widget implements IWidget {
 
 			//On stocke le décalage qu'on voudra appliquer sur les zones d'accroche du composant
 			if (diff < 0 - ModeleWidget.OFFSET) {
-				this.getModele().decalageYin(Math.abs(diff), r);
+				this.getModele().decalageY(- Math.abs(diff), r);
 				decaleZonesEnDessousDe(r.y, diff, mapDecal);
 			}
 			else if (diff > 0 - ModeleWidget.OFFSET) {
-				this.getModele().decalageYout(diff, r);
+				this.getModele().decalageY(diff, r);
 				decaleZonesEnDessousDe(r.y, diff, mapDecal);
 			}
 

@@ -40,7 +40,7 @@ public class VariableWidget extends ModeleWidget {
 
 		int tX[] = {0, 3, 7, 10, 10, 7, 3, 0};
 
-		int tY[] = {3, 0, 0,  3,  10, 13, 13,10};
+		int tY[] = {3, 0, 0,  3,  11, 14, 14,10};
 
 		this.setTabX(tX);
 		this.setTabY(tY);
@@ -51,6 +51,7 @@ public class VariableWidget extends ModeleWidget {
 		message.put(new Point(7, 11), variableModifiable.getNom());
 		this.setElementProgramme(variableModifiable);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+		
 
 		ChampTexte f = new ChampTexte();
 		f.setBounds(65, variableModifiable.getNom().length(), 40, 20);
@@ -60,13 +61,12 @@ public class VariableWidget extends ModeleWidget {
 		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
 		FontMetrics metrics = new FontMetrics(font){};  
 		Rectangle2D bounds = metrics.getStringBounds(variableModifiable.getNom(), null);  
-		this.decalageXout((int) bounds.getWidth()+2);
+		this.decalageX((int) bounds.getWidth()+2);
 
 		initListeners();
 	}
 
-	@Override
-	public void decalageXout(int a) {
+	public void decalageX(int a) {
 		int i;
 		for (i = 2; i < this.getTabX().length-2; i++) {
 			this.getForme().xpoints[i] = this.getForme().xpoints[i] + a ;
@@ -74,7 +74,7 @@ public class VariableWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-
+	/*
 	@Override
 	public void decalageXin(int a) {
 		int i;
@@ -84,9 +84,9 @@ public class VariableWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-
+	*/
 	@Override
-	public void decalageYout(int b, Rectangle r) {
+	public void decalageY(int b, Rectangle r) {
 		int i;
 		for (i = 8; i < 16; i++) {
 			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
@@ -94,7 +94,7 @@ public class VariableWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-
+	/*
 	@Override
 	public void decalageYin(int b, Rectangle r) {
 		int i;
@@ -104,7 +104,7 @@ public class VariableWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-
+	*/
 	@Override
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {

@@ -39,7 +39,7 @@ public class IfWidget extends ModeleWidget{
 
 	}
 	@Override
-	public void decalageXout(int a) {
+	public void decalageX(int a) {
         int i;
         for (i = 6; i < 10; i++) {
             this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
@@ -50,6 +50,7 @@ public class IfWidget extends ModeleWidget{
         this.setForme(this.getForme());
         this.setTailleX();
     }
+	/*
 	@Override
     public void decalageXin(int a) {
         int i;
@@ -62,8 +63,9 @@ public class IfWidget extends ModeleWidget{
         this.setForme(this.getForme());
         this.setTailleX();
     }
+    */
     @Override
-    public void decalageYout(int b,Rectangle r) {
+    public void decalageY(int b,Rectangle r) {
         int i;
         for (i = 16; i < tabY.length; i++) {
             this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
@@ -71,6 +73,7 @@ public class IfWidget extends ModeleWidget{
         this.setForme(this.getForme());
         this.setTailleY();
     }
+    /*
     @Override
     public void decalageYin(int b,Rectangle r) {
         int i;
@@ -80,6 +83,7 @@ public class IfWidget extends ModeleWidget{
         this.setForme(this.getForme());
         this.setTailleY();
     }
+    */
 	@Override
 	public void initListeners() {}
 }
