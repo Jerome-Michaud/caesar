@@ -37,8 +37,8 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		 */
 
 
-		int tabX[] = {0, 12, 55, 67, 55, 12};
-		int tabY[] = {12, 0, 0, 12, 24, 24};
+		int tabX[] = {0, 10, 57, 67, 57, 10};
+		int tabY[] = {10, 0, 0, 10, 20, 20};
 
 
 		/**
@@ -58,8 +58,8 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		this.setType(TypeWidget.EXPRESSION_LOGIQUE);
 
 
-		message.put(new Point(30, 17), op.toString());
-
+		//message.put(new Point(30, 17), op.toString());
+		
 
 		this.setElementProgramme(new Condition(op));
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
@@ -68,14 +68,17 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		ChampTexte l = new ChampTexte();
 		l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeWidget.EXPRESSION_ARITHMETIQUE);
-		l.setBounds(10, 3, 18, 18);
+		l.setBounds(10, 3, 14, 14);
 
+
+		message.put(new Point((int) (l.getLocation().getX()+ l.getWidth()), 17), op.toString());
+		
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeWidget.EXPRESSION_ARITHMETIQUE);
-		f.setBounds(40, 3, 18, 18);
+		f.setBounds(40, 3, 14, 14);
 		this.getLesZonesSaisies().add(f);
 
 		this.decalageX(-5);
@@ -83,7 +86,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 	}
 //	fin constructeur
-	
+
 	/**
 	 * Méthode abstraite permettant d'augmenter la largeur du composant.
 	 *
@@ -94,7 +97,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	/**
 	 * Méthode abstraite permettant d'augmenter la hauteur du composant

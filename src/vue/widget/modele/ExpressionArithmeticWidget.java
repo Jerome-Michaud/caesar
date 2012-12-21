@@ -18,12 +18,12 @@ import javax.swing.JComponent;
 import modeles.TypeWidget;
 
 
-	/**
-	 * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
-	 * forme d'un widget de type Expression arethmetique.
-	 * 
-	 * @author CHOUKET Houda
-	 */
+/**
+ * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
+ * forme d'un widget de type Expression arethmetique.
+ * 
+ * @author CHOUKET Houda
+ */
 
 public class ExpressionArithmeticWidget extends ModeleWidget {
 
@@ -39,7 +39,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 			int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
 		 */
 		int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
-		int tabY[] = {5, 0, 0, 5, 19, 24,24, 19};
+		int tabY[] = {5, 0, 0, 5, 15, 20,20, 15};
 
 		/**
 		 * Méthode permettant de définir un tableau représentant les coordonnées des
@@ -65,19 +65,19 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 
 
-			ChampTexte l = new ChampTexte();
-			l.setBounds(10, 3, 18, 18);
-			l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+		ChampTexte l = new ChampTexte();
+		l.setBounds(10, 3, 14, 14);
+		l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 
 		this.getLesZonesSaisies().add(l);
 
 
-			ChampTexte f = new ChampTexte();
-			f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
-			//f.setBounds(80, 3, 20, 20);
-			f.setBounds(40, 3, 18, 18);
-			this.getLesZonesSaisies().add(f);
-decalageX(-5);
+		ChampTexte f = new ChampTexte();
+		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+		//f.setBounds(80, 3, 20, 20);
+		f.setBounds(40, 3, 14, 14);
+		this.getLesZonesSaisies().add(f);
+		decalageX(-5);
 
 		initListeners();
 	}
@@ -88,8 +88,8 @@ decalageX(-5);
 	 * @param x La valeur de la reduction à appliquer
 	 */
 	//public void decalageXin(int x) {
-		// TODO Auto-generated method stub
-		/*int i;
+	// TODO Auto-generated method stub
+	/*int i;
 			for (i = 6; i < 10; i++) {
 				this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
 			}
@@ -119,8 +119,8 @@ decalageX(-5);
 	 */
 	//@Override
 	//public void decalageYin(int b, Rectangle r) {
-		// TODO Auto-generated method stub
-		/*int i;
+	// TODO Auto-generated method stub
+	/*int i;
 			for (i = 8; i < 16; i++) {
 				this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
 			}
@@ -146,7 +146,7 @@ decalageX(-5);
 	}
 
 	public void initListeners() {
-		
+
 	}
 
 }
