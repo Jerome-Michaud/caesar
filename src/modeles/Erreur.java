@@ -31,7 +31,7 @@ public final class Erreur {
 
 	public static void afficher(final Exception e, final String message) {
 		//JOptionPane.showMessageDialog(Fenetre.getInstance(), e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-		Logger.getGlobal().log(Level.SEVERE, message);
+		Logger.getLogger(Erreur.class.getName()).log(Level.SEVERE, message);
 		e.printStackTrace();
 		System.exit(1);
 	}

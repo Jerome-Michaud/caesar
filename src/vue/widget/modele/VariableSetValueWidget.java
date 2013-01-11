@@ -28,7 +28,8 @@ public class VariableSetValueWidget extends ModeleWidget {
 		super();
 
 		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
-		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
+		int tY[] = {5, 0, 0,  5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
+
 
 		this.setTabX(tX);
 		this.setTabY(tY);
@@ -41,17 +42,19 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
+	
 		ListeDeroulante l = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
-		l.setBounds(55, 3, 35, 20);
+		l.setBounds(55, 3, 40, 20);
 		this.getLesZonesSaisies().add(l);
+		
 
 		ChampTexte f = new ChampTexte();
-		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
-		f.setBounds(65, 3, 40, 20);
+		f.ajouterTypeWidgetAccepte(TypeWidget.SETVALUEVARIABLE);
+		f.setBounds(130, 3, 30, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
+		
 
-		this.decalageX(-5);
 
 		initListeners();
 	}

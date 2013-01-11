@@ -34,8 +34,6 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		int tabX[] = {0, 10, 57, 67, 57, 10};
 		int tabY[] = {10, 0, 0, 10, 20, 20};
 
-		int tabX[] = {0, 10, 57, 67, 57, 10};
-		int tabY[] = {10, 0, 0, 10, 20, 20};
 
 		this.setTabX(tabX);
 		this.setTabY(tabY);
