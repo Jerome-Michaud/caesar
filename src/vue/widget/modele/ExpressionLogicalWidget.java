@@ -1,16 +1,13 @@
 package vue.widget.modele;
 
 import vue.widget.modele.zones.ChampTexte;
-import instruction.Condition;
-import instruction.Operateur;
 
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import javax.swing.JComponent;
 import modeles.TypeWidget;
+import nxtim.instruction.Condition;
+import nxtim.instruction.Operateur;
 
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
@@ -29,10 +26,6 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		/*int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
 		 */
-
-
-		int tabX[] = {0, 10, 57, 67, 57, 10};
-		int tabY[] = {10, 0, 0, 10, 20, 20};
 
 		int tabX[] = {0, 10, 57, 67, 57, 10};
 		int tabY[] = {10, 0, 0, 10, 20, 20};

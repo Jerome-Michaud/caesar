@@ -1,8 +1,5 @@
 package vue.ginterface;
 
-import instruction.TypeVariable;
-import instruction.Variable;
-import instruction.VariableModifiable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
@@ -12,7 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import modeles.DicoVars;
 import java.awt.Color;
-import vue.ginterface.GUI;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.Variable;
+import nxtim.instruction.VariableModifiable;
 import vue.widget.Widget;
 import vue.categories.BoutonCategorieVariable;
 import vue.categories.BoutonCategorie;

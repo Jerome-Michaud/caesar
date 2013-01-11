@@ -1,26 +1,26 @@
 package traduction;
 
-import instruction.Affectation;
-import instruction.Expression;
-import instruction.ExpressionComplexe;
-import instruction.Instruction;
-import instruction.InstructionAttente;
-import instruction.InstructionDeclaration;
-import instruction.InstructionDeclarationAffectation;
-import instruction.InstructionDeclarationCapteur;
-import instruction.InstructionDoWhile;
-import instruction.InstructionFor;
-import instruction.InstructionIf;
-import instruction.InstructionIfElse;
-import instruction.InstructionMoteurMov;
-import instruction.InstructionMoteurOff;
-import instruction.InstructionMoteurRotate;
-import instruction.InstructionRepeat;
-import instruction.InstructionTache;
-import instruction.InstructionTempsCourant;
-import instruction.InstructionWhile;
-import instruction.Variable;
-import instruction.VariableCapteur;
+import nxtim.instruction.Affectation;
+import nxtim.instruction.Expression;
+import nxtim.instruction.ExpressionComplexe;
+import nxtim.instruction.Instruction;
+import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.InstructionDeclaration;
+import nxtim.instruction.InstructionDeclarationAffectation;
+import nxtim.instruction.InstructionDeclarationCapteur;
+import nxtim.instruction.InstructionDoWhile;
+import nxtim.instruction.InstructionFor;
+import nxtim.instruction.InstructionIf;
+import nxtim.instruction.InstructionIfElse;
+import nxtim.instruction.InstructionMoteurMov;
+import nxtim.instruction.InstructionMoteurOff;
+import nxtim.instruction.InstructionMoteurRotate;
+import nxtim.instruction.InstructionRepeat;
+import nxtim.instruction.InstructionTache;
+import nxtim.instruction.InstructionTempsCourant;
+import nxtim.instruction.InstructionWhile;
+import nxtim.instruction.Variable;
+import nxtim.instruction.VariableCapteur;
 
 public class VisiteurC extends VisiteurTraduction {
 

@@ -1,7 +1,6 @@
 package vue.widget.modele;
 
 import vue.widget.modele.zones.Zone;
-import instruction.IElementProgramme;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -12,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import modeles.TypeWidget;
+import nxtim.instruction.IElementProgramme;
 import vue.widget.modele.zones.ChampTexte;
 
 /**

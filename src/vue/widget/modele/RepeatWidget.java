@@ -1,8 +1,5 @@
 package vue.widget.modele;
 
-import instruction.InstructionRepeat;
-import instruction.TypeVariable;
-import instruction.VariableConstante;
 import vue.tools.Variables;
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.Zone;
@@ -15,6 +12,9 @@ import javax.swing.JComponent;
 import modeles.TypeWidget;
 
 import java.awt.Rectangle;
+import nxtim.instruction.InstructionRepeat;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.VariableConstante;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la

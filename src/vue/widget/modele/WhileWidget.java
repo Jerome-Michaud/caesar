@@ -2,7 +2,7 @@ package vue.widget.modele;
 
 import vue.tools.Variables;
 
-import instruction.InstructionWhile;
+import nxtim.instruction.InstructionWhile;
 import java.awt.Point;
 
 import java.awt.Polygon;

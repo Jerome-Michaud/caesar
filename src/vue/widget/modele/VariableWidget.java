@@ -1,24 +1,14 @@
-
 package vue.widget.modele;
-
-import vue.widget.modele.zones.ChampTexte;
-import vue.widget.modele.zones.Zone;
-import instruction.InstructionAttente;
-import instruction.VariableConstante;
-import instruction.TypeVariable;
-import instruction.VariableModifiable;
 
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.geom.Rectangle2D;
 
-import javax.swing.JComponent;
 import modeles.TypeWidget;
+import nxtim.instruction.VariableModifiable;
 
 
 
@@ -58,14 +48,10 @@ public class VariableWidget extends ModeleWidget {
         this.imbricable = false;
         this.attachableInterne = true;
 
-		ChampTexte f = new ChampTexte();
-		f.setBounds(65, variableModifiable.getNom().length(), 40, 20);
-		f.setToolTipText("0");
-		this.getLesZonesSaisies().add(f);
-
 		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
 		FontMetrics metrics = new FontMetrics(font){};  
 		Rectangle2D bounds = metrics.getStringBounds(variableModifiable.getNom(), null);  
+		
 		this.decalageX((int) bounds.getWidth()+2);
 
 		initListeners();

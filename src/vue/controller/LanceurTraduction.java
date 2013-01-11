@@ -1,16 +1,14 @@
 package vue.controller;
 
-import instruction.Instruction;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
-import java.util.logging.Logger;
 import modeles.TypeWidget;
+import nxtim.instruction.Instruction;
 import traduction.VisiteurNXC;
 import traduction.VisiteurTraduction;
 import vue.ginterface.GUI;
 import vue.tools.ArborescenceTools;
-import vue.tools.Variables;
 import vue.widget.Widget;
 import vue.widget.modele.ModeleWidget;
 

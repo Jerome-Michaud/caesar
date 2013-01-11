@@ -1,13 +1,5 @@
 package vue.widget.modele;
 
-import instruction.Affectation;
-import instruction.Condition;
-import instruction.InstructionFor;
-import instruction.Operateur;
-import instruction.Operation;
-import instruction.TypeVariable;
-import instruction.Variable;
-import instruction.VariableConstante;
 import vue.tools.Variables;
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
@@ -23,6 +15,14 @@ import javax.swing.JComponent;
 
 import modeles.DicoVars;
 import modeles.TypeWidget;
+import nxtim.instruction.Affectation;
+import nxtim.instruction.Condition;
+import nxtim.instruction.InstructionFor;
+import nxtim.instruction.Operateur;
+import nxtim.instruction.Operation;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.Variable;
+import nxtim.instruction.VariableConstante;
 
 /**
  * Classe héritant de ModeleWidget et implémentant

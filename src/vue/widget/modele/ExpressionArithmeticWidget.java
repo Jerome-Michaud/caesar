@@ -1,14 +1,14 @@
 package vue.widget.modele;
 
 import vue.widget.modele.zones.ChampTexte;
-import instruction.Operateur;
-import instruction.Operation;
-import instruction.Variable;
 
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import modeles.TypeWidget;
+import nxtim.instruction.Operateur;
+import nxtim.instruction.Operation;
+import nxtim.instruction.Variable;
 
 
 /**

@@ -3,7 +3,6 @@ package vue.widget;
 import vue.tools.DragAndDropTools;
 import vue.widget.modele.ModeleWidget;
 import vue.widget.modele.zones.Zone;
-import instruction.IElementProgramme;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,8 +15,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 
 import modeles.TypeWidget;
+import nxtim.instruction.IElementProgramme;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
+import vue.ginterface.GUI;
+import vue.widget.modele.VariableWidget;
 
 /**
  * Classe représentant graphiquement un widget.
@@ -251,27 +253,35 @@ public class Widget extends JComponent {
 	 */
 	public Element toXml() {
 		Element widget = new Element("widget");
-		widget.setAttribute(new Attribute("class", this.modele.getClass().getSimpleName()));
+		widget.setAttribute(new Attribute("classe", this.modele.getClass().getSimpleName()));
 
-		Element coordonnees = new Element("coordonnees");
-		coordonnees.setAttribute(new Attribute("x", String.valueOf(this.getLocation().x)));
-		coordonnees.setAttribute(new Attribute("y", String.valueOf(this.getLocation().y)));
-		widget.addContent(coordonnees);
-
+		// Si le widget est une variable, ajout du nom de la variable
+		if (VariableWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
+			widget.setAttribute("variable", ((VariableWidget)this.getModele()).getNomVariable());
+		}
+		
+		// Si le widget est placé sur le PanelCodeGraphique, ajout des coordonnées. Sinon, les oordonnées seront recalculées automatiquement.
+		if (this.parent == GUI.getPanelCodeGraphique()) {
+			Element coordonnees = new Element("coordonnees");
+			coordonnees.setAttribute(new Attribute("x", String.valueOf(this.getLocation().x)));
+			coordonnees.setAttribute(new Attribute("y", String.valueOf(this.getLocation().y)));
+			widget.addContent(coordonnees);
+		}
+		
 		// Gestion des zones du widget (valeurs, variables, ...)
 		if (this.modele.getLesZonesSaisies().size() > 0) {
 			Element attribut = new Element("attributs");
 
 			int i = 0;
 			for (Zone z : this.modele.getLesZonesSaisies()) {
-				Element zone = new Element("zone");
+				Element zone = z.toXml();
 				zone.setAttribute(new Attribute("id", String.valueOf(i)));
 				i++;
-				zone.setText(z.getValeur());
 				attribut.addContent(zone);
 			}
 			widget.addContent(attribut);
 		}
+		
 		return widget;
 	}
 }

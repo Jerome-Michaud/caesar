@@ -2,9 +2,9 @@ package vue.widget.modele;
 
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.Zone;
-import instruction.InstructionAttente;
-import instruction.VariableConstante;
-import instruction.TypeVariable;
+import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.VariableConstante;
+import nxtim.instruction.TypeVariable;
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;

@@ -1,9 +1,9 @@
 package vue.widget;
 
-import instruction.Condition;
-import instruction.Operateur;
-import instruction.Operation;
-import instruction.VariableModifiable;
+import nxtim.instruction.Condition;
+import nxtim.instruction.Operateur;
+import nxtim.instruction.Operation;
+import nxtim.instruction.VariableModifiable;
 import vue.tools.NonChargeableException;
 import vue.tools.NonClonableException;
 import vue.widget.modele.DoWhileWidget;

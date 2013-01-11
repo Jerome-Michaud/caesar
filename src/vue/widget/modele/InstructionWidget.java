@@ -1,12 +1,12 @@
 package vue.widget.modele;
 
-import instruction.Instruction;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
 import modeles.TypeWidget;
+import nxtim.instruction.Instruction;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la

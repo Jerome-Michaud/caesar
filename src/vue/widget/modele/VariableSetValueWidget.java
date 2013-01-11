@@ -2,18 +2,15 @@ package vue.widget.modele;
 
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
-import instruction.Variable;
-import instruction.VariableModifiable;
 
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.event.FocusAdapter;
-
-import javax.swing.JComponent;
 
 import modeles.DicoVars;
 import modeles.TypeWidget;
+import nxtim.instruction.Variable;
+import nxtim.instruction.VariableModifiable;
 
 /**
  *

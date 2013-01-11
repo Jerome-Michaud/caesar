@@ -1,9 +1,5 @@
 package vue.widget.modele;
 
-import instruction.InstructionMoteurMov;
-import instruction.Moteur;
-import instruction.TypeVariable;
-import instruction.VariableConstante;
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
 import vue.widget.modele.zones.Zone;
@@ -15,6 +11,10 @@ import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 
 import modeles.TypeWidget;
+import nxtim.instruction.InstructionMoteurMov;
+import nxtim.instruction.Moteur;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.VariableConstante;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la

@@ -1,18 +1,18 @@
 package traduction;
 
-import instruction.CapteurSlot;
-import instruction.Expression;
-import instruction.Instruction;
-import instruction.InstructionAttente;
-import instruction.InstructionDeclarationCapteur;
-import instruction.InstructionMoteurMov;
-import instruction.InstructionMoteurOff;
-import instruction.InstructionMoteurRotate;
-import instruction.InstructionRepeat;
-import instruction.InstructionTache;
-import instruction.InstructionTempsCourant;
-import instruction.Moteur;
-import instruction.VariableCapteur;
+import nxtim.instruction.CapteurSlot;
+import nxtim.instruction.Expression;
+import nxtim.instruction.Instruction;
+import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.InstructionDeclarationCapteur;
+import nxtim.instruction.InstructionMoteurMov;
+import nxtim.instruction.InstructionMoteurOff;
+import nxtim.instruction.InstructionMoteurRotate;
+import nxtim.instruction.InstructionRepeat;
+import nxtim.instruction.InstructionTache;
+import nxtim.instruction.InstructionTempsCourant;
+import nxtim.instruction.Moteur;
+import nxtim.instruction.VariableCapteur;
 
 /**
  * Traducteur d'instructions dans le langage NXC.

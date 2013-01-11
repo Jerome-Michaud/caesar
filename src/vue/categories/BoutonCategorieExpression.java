@@ -1,10 +1,10 @@
 package vue.categories;
 
 import java.awt.Color;
+import nxtim.instruction.Operateur;
 
 import vue.ginterface.GUI;
 import vue.widget.Widget;
-import instruction.Operateur;
 
 /**
  *
