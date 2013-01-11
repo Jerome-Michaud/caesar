@@ -17,45 +17,39 @@ public class ExpressionTest {
 
 	static Expression expression;
 	static InstructionTache tache;
-	
+
 	/**
 	 * @throws Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		VariableModifiable e = new VariableModifiable(BOOL,"e","");
-		VariableModifiable a = new VariableModifiable(INT,"a","");
-		VariableModifiable b = new VariableModifiable(INT,"b","");
-		VariableModifiable c = new VariableModifiable(FLOAT,"c","");
-		VariableModifiable d = new VariableModifiable(FLOAT,"d","");
-		VariableConstante const1 = new VariableConstante(INT,"","1");
-		VariableConstante const2 = new VariableConstante(FLOAT,"","8.2");
-		
+		VariableModifiable e = new VariableModifiable(BOOL, "e", "");
+		VariableModifiable a = new VariableModifiable(INT, "a", "");
+		VariableModifiable b = new VariableModifiable(INT, "b", "");
+		VariableModifiable c = new VariableModifiable(FLOAT, "c", "");
+		VariableModifiable d = new VariableModifiable(FLOAT, "d", "");
+		VariableConstante const1 = new VariableConstante(INT, "", "1");
+		VariableConstante const2 = new VariableConstante(FLOAT, "", "8.2");
+
 		Condition cond = new Condition(// ||
 				OU,
 				new Condition(// >
-						SUPERIEUR,
-						new Operation(// +
-								ADDITION,
-								a,
-								b
-								),
-						const1
-						),
+				SUPERIEUR,
+				new Operation(// +
+				ADDITION,
+				a,
+				b),
+				const1),
 				new Condition(// <
-						INFERIEUR,
-						new Operation(// *
-								MULIPLICATION,
-								c, 
-								d
-								),
-						const2
-						)
-				);
+				INFERIEUR,
+				new Operation(// *
+				MULIPLICATION,
+				c,
+				d),
+				const2));
 		expression = new Affectation(// =
 				e,
-				cond
-				,false);
+				cond, false);
 	}
 
 	/**
@@ -69,21 +63,24 @@ public class ExpressionTest {
 	 * @throws Exception
 	 */
 	@Before
-	public void setUp() throws Exception { }
+	public void setUp() throws Exception {
+	}
 
 	/**
 	 * @throws Exception
 	 */
 	@After
-	public void tearDown() throws Exception { }
-				
+	public void tearDown() throws Exception {
+	}
+
 	@Test
-	public void testComposeExpression() throws Exception{
+	public void testComposeExpression() throws Exception {
 		VisiteurTraduction trad = VisiteurNXC.getInstance();
 		trad.reset();
-		trad.visiter((Affectation)expression);
+		trad.visiter((Affectation) expression);
 		assertTrue(expression.toString().equals("e=(((a+b)>1)||((c*d)<8.2))"));
 
 		assertTrue(trad.getTraduction().equals("e = (((a + b) > 1) || ((c * d) < 8.2))"));
-	};
+	}
+;
 }

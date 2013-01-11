@@ -16,12 +16,11 @@ import vue.widget.IWidget;
  * @version 1.0
  */
 public class PanelCodeGraphique extends JPanel implements IWidget, Observer {
-	
+
 	/**
 	 * Le logger.
 	 */
 	private static final Logger logger = Logger.getLogger(PanelCodeGraphique.class.getName());
-	
 	/**
 	 * L'instance unique de PanelCodeGraphique.
 	 */
@@ -29,11 +28,12 @@ public class PanelCodeGraphique extends JPanel implements IWidget, Observer {
 
 	private PanelCodeGraphique() {
 		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
-		
+
 		this.setMinimumSize(new Dimension(400, 600));
 		this.setLayout(null);
 		this.setBorder(BorderFactory.createTitledBorder("Code graphique"));
 	}
+
 	/**
 	 * SINGLETON.
 	 *
@@ -44,6 +44,7 @@ public class PanelCodeGraphique extends JPanel implements IWidget, Observer {
 	protected static PanelCodeGraphique getInstance() {
 		return instance;
 	}
+
 	@Override
 	public boolean isRacine() {
 		return true;

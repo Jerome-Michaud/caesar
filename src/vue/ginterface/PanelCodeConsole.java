@@ -15,14 +15,13 @@ import vue.tools.Variables;
 
 /**
  * Panneau d'affichage du code traduit.
- * 
+ *
  * @since 1.0
  * @version 1.0
  */
 public class PanelCodeConsole extends JPanel implements Observer {
-	
+
 	private static final Logger logger = Logger.getLogger(PanelCodeConsole.class.getName());
-	
 	/**
 	 * SINGLETON.
 	 *
@@ -30,21 +29,23 @@ public class PanelCodeConsole extends JPanel implements Observer {
 	 */
 	private static PanelCodeConsole instance = new PanelCodeConsole();
 	private JTextArea textarea;
+
 	/**
 	 * @since 1.0
 	 */
 	private PanelCodeConsole() {
 		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
-		
+
 		this.textarea = new JTextArea();
 		this.textarea.setEditable(false);
 		this.textarea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));
 		this.setLayout(new BorderLayout());
 		this.setMinimumSize(new Dimension(100, 600));
 		this.setBorder(BorderFactory.createTitledBorder("Aperçu code console"));
-		
+
 		this.add(textarea, BorderLayout.CENTER);
 	}
+
 	/**
 	 * SINGLETON.
 	 *
@@ -55,9 +56,10 @@ public class PanelCodeConsole extends JPanel implements Observer {
 	protected static PanelCodeConsole getInstance() {
 		return instance;
 	}
+
 	/**
 	 * @since 1.0
-	 * 
+	 *
 	 * @param texte Le texte à afficher dans la zone.
 	 */
 	public void setText(String texte) {

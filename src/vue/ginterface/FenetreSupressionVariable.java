@@ -23,8 +23,9 @@ import vue.widget.Widget;
 /**
  *
  * @author Quentin
- * 
- * */
+ *
+ *
+ */
 public class FenetreSupressionVariable extends JFrame {
 
 	private JComboBox variables;
@@ -57,15 +58,14 @@ public class FenetreSupressionVariable extends JFrame {
 		this.setVisible(true);
 
 		boutonValider.addActionListener(new ActionListener() {
-
 			@ Override
 			public void actionPerformed(ActionEvent ae) {
-				String variable = ((Variable)variables.getSelectedItem()).getNom();
+				String variable = ((Variable) variables.getSelectedItem()).getNom();
 				DicoVars.getInstance().supprimer(variable);
-				
-				BoutonCategorieVariable bcv = (BoutonCategorieVariable)GUI.getPanelTypeWidget().getCurrentCategorie();
+
+				BoutonCategorieVariable bcv = (BoutonCategorieVariable) GUI.getPanelTypeWidget().getCurrentCategorie();
 				bcv.supprimerWidgetVariable(variable);
-				
+
 				dispose();
 			}
 		});

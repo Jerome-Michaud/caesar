@@ -23,8 +23,11 @@ import org.jdom2.Element;
  * Classe représentant graphiquement un widget.
  */
 public class Widget extends JComponent {
+
 	/**
-	 * Ratio à partir duquel, si on dépose un widget à cheval entre le <code>PanelInstruction</code> et le <code>PanelCodeGraphique</code>,
+	 * Ratio à partir duquel, si on dépose un widget à cheval entre le
+	 * <code>PanelInstruction</code> et le
+	 * <code>PanelCodeGraphique</code>,
 	 * on peut choisir soit de déplacer un widget pour qu'il soit entièrement sur le PanelCodeGraphique, ou bien le supprimer.
 	 */
 	public static final float TAUX_TRANSFERT_PANEL = (float) 0.6;
@@ -46,11 +49,11 @@ public class Widget extends JComponent {
 	private Font font;
 	/**
 	 * Le parent du Widget.<br/>
-	 * Il peut être soit un composant complexe, soit le PanelCodeGraphique, soit <code>null</code> quand le Widget est en cours de draggage.
+	 * Il peut être soit un composant complexe, soit le PanelCodeGraphique, soit
+	 * <code>null</code> quand le Widget est en cours de draggage.
 	 */
 	private IWidget parent;
 
-	
 	@Override
 	public void paintComponent(final Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -63,8 +66,7 @@ public class Widget extends JComponent {
 		for (Point p : this.modele.getMessage().keySet()) {
 			if (this.modele.isConditionHaute()) {
 				g2d.drawString(this.modele.getMessage().get(p), p.x, p.y);
-			}
-			else {
+			} else {
 				g2d.drawString(this.modele.getMessage().get(p), p.x, this.getHeight() - p.y);
 			}
 		}
@@ -77,56 +79,52 @@ public class Widget extends JComponent {
 	 * @param modele le modèle de structure à appliquer au Widget
 	 */
 	public Widget(final ModeleWidget modele) {
-		this.font = new Font("TimesRoman ", Font.PLAIN, 12);
+		this.font = new Font("TimesRoman", Font.PLAIN, 12);
 		this.modele = modele;
 		this.setFont(this.font);
 		this.setFocusable(true);
 		this.setOpaque(true);
 		this.setForme(true);
-		
-                
+
 		initListeners();
 
 		for (Zone z : this.modele.getLesZonesSaisies()) {
 			this.add((JComponent) z);
 		}
-        
-        this.parent = null;
-    }
 
-	
-    /**
-     * Méthode permettant de définir la forme du widget et de calculer ses
-     * nouvelles dimensions et localisations.
-     *
-     * @param setLocation Permet de choisir si il faut également redéfinir la localisation du widget
-     */
-    public void setForme(final boolean setLocation) {
-        int maxX = 0;
-        for (Integer i : this.modele.getForme().xpoints) {
-            maxX = Math.max(maxX, i);
-        }
+		this.parent = null;
+	}
 
-        int maxY = 0;
-        for (Integer i : this.modele.getForme().ypoints) {
-            maxY = Math.max(maxY, i);
-        }
+	/**
+	 * Méthode permettant de définir la forme du widget et de calculer ses
+	 * nouvelles dimensions et localisations.
+	 *
+	 * @param setLocation Permet de choisir si il faut également redéfinir la localisation du widget
+	 */
+	public void setForme(final boolean setLocation) {
+		int maxX = 0;
+		for (Integer i : this.modele.getForme().xpoints) {
+			maxX = Math.max(maxX, i);
+		}
+
+		int maxY = 0;
+		for (Integer i : this.modele.getForme().ypoints) {
+			maxY = Math.max(maxY, i);
+		}
 
 		if (setLocation) {
 			this.setBounds(0, 0, maxX + 1, maxY + 1);
-		}
-		else {
+		} else {
 			this.setSize(maxX + 1, maxY + 1);
 		}
-        this.setPreferredSize(new Dimension(maxX, maxY));
-    }
+		this.setPreferredSize(new Dimension(maxX, maxY));
+	}
 
 	/**
 	 * Méthode d'initialisation des listeners du widget (click, drag et drop).
 	 */
 	public void initListeners() {
 		this.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mousePressed(final MouseEvent e) {
 				DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
@@ -139,7 +137,6 @@ public class Widget extends JComponent {
 		});
 
 		this.addMouseMotionListener(new MouseAdapter() {
-
 			@Override
 			public void mouseDragged(final MouseEvent e) {
 				DragAndDropTools.getInstance().dragWidget((Widget) e.getComponent());
@@ -246,30 +243,31 @@ public class Widget extends JComponent {
 	/**
 	 * Met à jour l'arborescence des instructions.
 	 */
-	public void applyChangeModele() { }
-	
+	public void applyChangeModele() {
+	}
+
 	/**
 	 * Permet d'avoir comment le widget doit se sérialiser.
 	 */
 	public Element toXml() {
 		Element widget = new Element("widget");
 		widget.setAttribute(new Attribute("class", this.modele.getClass().getSimpleName()));
-		
+
 		Element coordonnees = new Element("coordonnees");
 		coordonnees.setAttribute(new Attribute("x", String.valueOf(this.getLocation().x)));
 		coordonnees.setAttribute(new Attribute("y", String.valueOf(this.getLocation().y)));
 		widget.addContent(coordonnees);
-		
+
 		// Gestion des zones du widget (valeurs, variables, ...)
 		if (this.modele.getLesZonesSaisies().size() > 0) {
 			Element attribut = new Element("attributs");
-			
+
 			int i = 0;
 			for (Zone z : this.modele.getLesZonesSaisies()) {
 				Element zone = new Element("zone");
 				zone.setAttribute(new Attribute("id", String.valueOf(i)));
 				i++;
-				zone.setAttribute(new Attribute("value", String.valueOf(z.getValeur())));
+				zone.setText(z.getValeur());
 				attribut.addContent(zone);
 			}
 			widget.addContent(attribut);

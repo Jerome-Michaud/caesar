@@ -25,7 +25,6 @@ public class InstructionTest {
 
 	Expression expression;
 	Condition cond;
-
 	static InstructionStructure n1;
 	static InstructionStructure i1;
 	static VisiteurTraduction trad;
@@ -42,9 +41,9 @@ public class InstructionTest {
 				"VariableModifiable", "");
 		DicoVars dico = DicoVars.getInstance();
 		dico.ajouter(var);
-		
+
 		System.out.println(dico.getLesvariables()[0].toString());
-		
+
 		i1 = new InstructionTache();
 		InstructionDeclaration i2 = new InstructionDeclaration();
 		InstructionDeclarationAffectation i3 = new InstructionDeclarationAffectation();
@@ -66,13 +65,13 @@ public class InstructionTest {
 
 		Condition cond = new Condition(// ||
 				OU, new Condition(// >
-						SUPERIEUR, new Operation(// +
-								ADDITION, a, b), const1), new Condition(// <
-						INFERIEUR, new Operation(// *
-								MULIPLICATION, c, d), const2));
+				SUPERIEUR, new Operation(// +
+				ADDITION, a, b), const1), new Condition(// <
+				INFERIEUR, new Operation(// *
+				MULIPLICATION, c, d), const2));
 
 		Expression expression = new Affectation(// =
-				e, cond,false);
+				e, cond, false);
 
 		InstructionIf instrIf1 = new InstructionIf(cond);
 		InstructionIf instrIf2 = new InstructionIf(cond);
@@ -118,13 +117,13 @@ public class InstructionTest {
 
 		cond = new Condition(// ||
 				OU, new Condition(// >
-						SUPERIEUR, new Operation(// +
-								ADDITION, a, b), const1), new Condition(// <
-						INFERIEUR, new Operation(// *
-								MULIPLICATION, c, d), const2));
+				SUPERIEUR, new Operation(// +
+				ADDITION, a, b), const1), new Condition(// <
+				INFERIEUR, new Operation(// *
+				MULIPLICATION, c, d), const2));
 
 		expression = new Affectation(// =
-				e, cond,false);
+				e, cond, false);
 	}
 
 	/**
@@ -141,7 +140,9 @@ public class InstructionTest {
 
 		System.out.println(i1);
 
-	};
+	}
+
+	;
 
 	@Test
 	public void testVisiteurNXC() throws Exception {
@@ -156,14 +157,14 @@ public class InstructionTest {
 
 		cond = new Condition(// ||
 				OU, new Condition(// >
-						SUPERIEUR, new Operation(// +
-								ADDITION, a, b), const1), new Condition(// <
-						INFERIEUR, new Operation(// *
-								MULIPLICATION, c, d), const2));
+				SUPERIEUR, new Operation(// +
+				ADDITION, a, b), const1), new Condition(// <
+				INFERIEUR, new Operation(// *
+				MULIPLICATION, c, d), const2));
 
 		expression = new Affectation(// =
-				e, cond,false);
-		
+				e, cond, false);
+
 		// trad.reset();
 		// trad.visiter((InstructionTache)n1);
 
@@ -199,14 +200,14 @@ public class InstructionTest {
 				new VariableModifiable(TypeVariable.INT, "g", "10"));
 		InstructionFor iFor = new InstructionFor(new Affectation(new VariableModifiable(
 				TypeVariable.FLOAT, "i", "1"), new VariableConstante(
-				TypeVariable.FLOAT, "i", "1"),false), cond, new Affectation(
+				TypeVariable.FLOAT, "i", "1"), false), cond, new Affectation(
 				new VariableModifiable(TypeVariable.FLOAT, "i", "1"),
 				new Operation(Operateur.ADDITION, new VariableModifiable(
-						TypeVariable.FLOAT, "i", "1"), new VariableConstante(
-								TypeVariable.FLOAT, "i", "1")),false));
+				TypeVariable.FLOAT, "i", "1"), new VariableConstante(
+				TypeVariable.FLOAT, "i", "1")), false));
 		InstructionTempsCourant iTemps = new InstructionTempsCourant();
 		InstructionMoteurOff iOff = new InstructionMoteurOff(Moteur.B);
-		
+
 
 		a1.insererFin(a2);
 
@@ -218,15 +219,15 @@ public class InstructionTest {
 
 		a3.insererDebut(iMotReculer);
 		a3.insererDebut(iMotAvancer);
-		
+
 		a1.insererFin(a3);
 		a1.insererFin(a4);
 		a1.insererFin(iRepeat);
 		a1.insererFin(iWait);
 		a1.insererFin(iFor);
 		iFor.insererFin(iRepeat);
-		iFor.inserer(InstructionStructure.POSITION_FIN_CODE,iTemps);
-		iFor.inserer(InstructionStructure.POSITION_DEBUT_CODE,iOff);
+		iFor.inserer(InstructionStructure.POSITION_FIN_CODE, iTemps);
+		iFor.inserer(InstructionStructure.POSITION_DEBUT_CODE, iOff);
 		iRepeat.insererFin(iWait);
 		iRepeat.insererDebut(iWait);
 		// System.out.println(a1);
@@ -237,6 +238,7 @@ public class InstructionTest {
 
 		System.out.println(trad.getTraduction());
 
-	};
+	}
+;
 
 }

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package vue.categories;
 
 import vue.categories.complexe.ModeleCategorieVariable;
@@ -11,13 +7,13 @@ import instruction.Variable;
 import java.awt.Color;
 import vue.ginterface.GUI;
 import vue.widget.Widget;
-import vue.widget.modele.VariableWidget;
 
 /**
  *
  * @author zubair
  */
 public class BoutonCategorieVariable extends BoutonCategorie {
+
 	/**
 	 * Quantité des différentes couleurs.
 	 */
@@ -26,7 +22,7 @@ public class BoutonCategorieVariable extends BoutonCategorie {
 	/**
 	 * Définit le bouton catégorie
 	 * <code>Instructions</code>.
-	 */ 
+	 */
 	public BoutonCategorieVariable() {
 		super(new ModeleCategorieVariable("Variable", new Color(ROUGE, VERT, BLEU)));
 
@@ -36,18 +32,20 @@ public class BoutonCategorieVariable extends BoutonCategorie {
 		}
 
 	}
+
 	/**
 	 * Supprime une varaible widget
+	 *
 	 * @param variableWidget
 	 */
-	public void supprimerWidgetVariable(String variableWidget){
+	public void supprimerWidgetVariable(String variableWidget) {
 		Widget wid = null;
-		for(Widget w: this.getLesWidgets()){
+		for (Widget w : this.getLesWidgets()) {
 			IElementProgramme elem = w.getElementProgramme();
 
 			if (elem instanceof Variable) {
 				Variable var = (Variable) elem;
-				if(var.getNom().equals(variableWidget)){
+				if (var.getNom().equals(variableWidget)) {
 					wid = w;
 				}
 			}

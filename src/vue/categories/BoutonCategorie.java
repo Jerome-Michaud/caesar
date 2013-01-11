@@ -1,9 +1,16 @@
 package vue.categories;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.Rectangle;
 import vue.categories.complexe.PolygoneAction;
 import vue.categories.complexe.EtatPolygon;
 import vue.widget.Widget;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
@@ -43,7 +50,8 @@ public abstract class BoutonCategorie extends JComponent {
 	 */
 	private Point defaultPos;
 	/**
-	 * L'état du bouton <code>true</code> si activé.
+	 * L'état du bouton
+	 * <code>true</code> si activé.
 	 */
 	private boolean active = false;
 	/**
@@ -80,7 +88,7 @@ public abstract class BoutonCategorie extends JComponent {
 
 	/**
 	 * Définit le bouton de catégorie.
-	 * 
+	 *
 	 * @param modele le modèle du bouton
 	 */
 	public BoutonCategorie(final ModeleCategorie modele) {
@@ -94,7 +102,6 @@ public abstract class BoutonCategorie extends JComponent {
 		this.lesWidgets = new LinkedList<Widget>();
 
 		this.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseEntered(final MouseEvent e) {
 				super.mouseEntered(e);
@@ -205,7 +212,7 @@ public abstract class BoutonCategorie extends JComponent {
 			this.active = true;
 			this.fond = Variables.GRIS_ACTIF;
 
-			
+
 		}
 		GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
 	}
@@ -222,7 +229,7 @@ public abstract class BoutonCategorie extends JComponent {
 		p.y++;
 		this.setLocation(p);
 
-		
+
 	}
 
 	/**
@@ -253,13 +260,12 @@ public abstract class BoutonCategorie extends JComponent {
 		GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
 	}
 
-	
 	/**
 	 * Retourne vrai si le bouton est actif
+	 *
 	 * @return true
 	 */
-	public boolean isActive(){
+	public boolean isActive() {
 		return this.active;
 	}
-
 }

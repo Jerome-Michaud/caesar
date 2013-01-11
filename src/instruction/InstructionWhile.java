@@ -7,7 +7,8 @@ public class InstructionWhile extends InstructionConditionelle {
 
 	/**
 	 * Crée une boucle sans condition.<br/>
-	 * La condition à pour valeur <code>null</code>.
+	 * La condition à pour valeur
+	 * <code>null</code>.
 	 */
 	public InstructionWhile() {
 		super(null);

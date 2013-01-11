@@ -14,7 +14,8 @@ public class InstructionIfElse extends InstructionConditionelle {
 
 	/**
 	 * Crée une instruction if-else non initialisée.<br/>
-	 * Ses membres ont pour valeur <code>null</code>.
+	 * Ses membres ont pour valeur
+	 * <code>null</code>.
 	 */
 	public InstructionIfElse() {
 		this(null);
@@ -30,7 +31,6 @@ public class InstructionIfElse extends InstructionConditionelle {
 		membreIf = new InstructionIf(cond);
 	}
 
-	
 	@Override
 	public Condition getCondition() {
 		return getMembreIf().getCondition();
@@ -57,7 +57,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 
 	/**
 	 * Insère une instruction dans le corps de if.
-	 * 
+	 *
 	 * @param position la position où insérer
 	 * @param inst l'instruction à insérer
 	 */
@@ -67,7 +67,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 
 	/**
 	 * Insère une instruction dans le corps de if.
-	 * 
+	 *
 	 * @param inst l'instruction à insérer
 	 */
 	public void insererDebutIf(final Instruction inst) {
@@ -76,7 +76,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 
 	/**
 	 * Insère une instruction dans le corps de if.
-	 * 
+	 *
 	 * @param inst l'instruction à insérer à la fin du IF
 	 */
 	public void insererFinIf(final Instruction inst) {
@@ -85,7 +85,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 
 	/**
 	 * Insère une liste des instructions dans le corps de if.
-	 * 
+	 *
 	 * @param position la position où insérer les instructions
 	 * @param instListe la liste des instructions à insérer
 	 */
@@ -95,7 +95,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 
 	/**
 	 * Insère une liste des instructions dans le corps de if.
-	 * 
+	 *
 	 * @param instListe la liste des instructions à insérer à au début du IF
 	 */
 	public void insererDebutIf(final List<Instruction> instListe) {
@@ -104,7 +104,7 @@ public class InstructionIfElse extends InstructionConditionelle {
 
 	/**
 	 * Insère une liste des instructions dans le corps de if.
-	 * 
+	 *
 	 * @param instListe la liste des instructions à insérer à la fin du IF
 	 */
 	public void insererFinIf(final List<Instruction> instListe) {

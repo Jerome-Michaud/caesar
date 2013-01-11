@@ -15,9 +15,10 @@ public class BoutonCategorieAffichage extends BoutonCategorie {
 	 * Quantité des différentes couleurs.
 	 */
 	private static final int ROUGE = 204, VERT = 51, BLEU = 0;
-	
+
 	/**
-	 * Définit le bouton catégorie <code>Affichage</code>.
+	 * Définit le bouton catégorie
+	 * <code>Affichage</code>.
 	 */
 	public BoutonCategorieAffichage() {
 

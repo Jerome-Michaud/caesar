@@ -26,6 +26,6 @@ public class Scratch {
 		} catch (Exception ex) {
 			Erreur.afficher(ex);
 		}
-		GUI.getFenetre(); // TODO : A SUPPRIMER Fenetre.getInstance();
+		GUI.getFenetre();
 	}
 }

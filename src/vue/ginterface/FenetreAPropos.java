@@ -16,9 +16,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import modeles.Erreur;
+
 /**
  * Fenêtre pour afficher les infirmations de l'application.
- * 
+ *
  * @since 1.0
  * @version 1.0
  */
@@ -79,9 +80,10 @@ public class FenetreAPropos extends JFrame {
 
 		this.setVisible(true);
 	}
+
 	/**
 	 * Permet de gérer le défilement vertical du texte.
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	private class ActionListenerTextTimer implements ActionListener {
@@ -95,6 +97,7 @@ public class FenetreAPropos extends JFrame {
 			i = 1;
 			this.posMax = posMax;
 		}
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (i <= posMax) {
@@ -105,6 +108,7 @@ public class FenetreAPropos extends JFrame {
 			}
 		}
 	}
+
 	@Override
 	public void dispose() {
 		super.dispose();
@@ -113,21 +117,30 @@ public class FenetreAPropos extends JFrame {
 
 	/**
 	 * Définie le comportement lors du clic.
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	private class ListenerSourisFenetre implements MouseListener {
+
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			dispose();
 		}
+
 		@Override
-		public void mouseEntered(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e) {
+		}
+
 		@Override
-		public void mouseExited(MouseEvent e) {}
+		public void mouseExited(MouseEvent e) {
+		}
+
 		@Override
-		public void mousePressed(MouseEvent e) {}
+		public void mousePressed(MouseEvent e) {
+		}
+
 		@Override
-		public void mouseReleased(MouseEvent e) {}
+		public void mouseReleased(MouseEvent e) {
+		}
 	}
 }

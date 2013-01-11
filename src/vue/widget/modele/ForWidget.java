@@ -148,20 +148,7 @@ public class ForWidget extends ModeleWidget {
         this.setForme(this.getForme());
         this.setTailleX();
     }
-    /*
-    @Override
-    public void decalageXin(final int a) {
-        int i;
-        for (i = 6; i < 10; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
-        }
-        for (i = 22; i < 26; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
-        }
-        this.setForme(this.getForme());
-        this.setTailleX();
-    }
-	*/
+	
     @Override
     public void decalageY(final int b, final Rectangle r) {
         int i;
@@ -171,17 +158,7 @@ public class ForWidget extends ModeleWidget {
         this.setForme(this.getForme());
         this.setTailleY();
     }
-    /*
-    @Override
-    public void decalageYin(final int b, final Rectangle r) {
-        int i;
-        for (i = 16; i < tabY.length; i++) {
-            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
-        }
-        this.setForme(this.getForme());
-        this.setTailleY();
-    }
-	*/
+	
     @Override
     public void initListeners() {
         for (Zone z : this.getLesZonesSaisies()) {

@@ -31,8 +31,9 @@ public final class DicoVars {
 	}
 
 	/**
-	 * Récupère l'instance unique de <code>DicoVars</code>.
-	 * 
+	 * Récupère l'instance unique de
+	 * <code>DicoVars</code>.
+	 *
 	 * @return l'instance de <code>DicoVars</code>
 	 */
 	public static synchronized DicoVars getInstance() {
@@ -44,7 +45,8 @@ public final class DicoVars {
 
 	/**
 	 * Ajouter la variable dans le dictionnaire.
-	 * @param v 
+	 *
+	 * @param v
 	 */
 	public void ajouter(final Variable v) {
 		if (!v.getNom().isEmpty() && !dictionnaire.containsKey(v.getNom())) {
@@ -54,7 +56,7 @@ public final class DicoVars {
 
 	/**
 	 * Supprimer la variable portant le nom.
-	 * 
+	 *
 	 * @param nom le nom de la variable
 	 */
 	public void supprimer(final String nom) {
@@ -79,7 +81,7 @@ public final class DicoVars {
 
 	/**
 	 * Récupère le dictionnaire.
-	 * 
+	 *
 	 * @return le dictionnaire contenant toutes les variables avec leur nom
 	 */
 	public HashMap<String, Variable> getDictionnaire() {
@@ -88,7 +90,7 @@ public final class DicoVars {
 
 	/**
 	 * Récupère toutes les variables du dictionnaire.
-	 * 
+	 *
 	 * @return les variables du dictionnaire
 	 */
 	public Variable[] getLesvariables() {

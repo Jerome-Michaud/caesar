@@ -1,16 +1,16 @@
 package vue.tools;
 
 /**
- * Erreur à lever quand un composant n'est pas clonable.
+ * Erreur à lever quand un composant n'est pas chargeable à partir d'un fichier.
  *
  * @author Gosselin Quentin
  */
-public class NonClonableException extends Exception {
+public class NonChargeableException extends Exception {
 
 	/**
 	 * Constructeur faisant appel au constructeur de la classe Exception.
 	 */
-	public NonClonableException() {
+	public NonChargeableException() {
 		super();
 	}
 
@@ -19,7 +19,7 @@ public class NonClonableException extends Exception {
 	 *
 	 * @param msg Le message d'erreur type lorsque cette exception est levée
 	 */
-	public NonClonableException(String msg) {
+	public NonChargeableException(String msg) {
 		super(msg);
 	}
 }
