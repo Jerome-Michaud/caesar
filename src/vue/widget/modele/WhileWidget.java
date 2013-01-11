@@ -2,7 +2,6 @@ package vue.widget.modele;
 
 import vue.tools.Variables;
 
-import instruction.InstructionWhile;
 import java.awt.Point;
 
 import java.awt.Polygon;
@@ -10,6 +9,8 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 import modeles.TypeWidget;
+import nxtim.instruction.InstructionWhile;
+
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type While.

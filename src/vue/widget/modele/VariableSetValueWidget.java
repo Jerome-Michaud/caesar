@@ -2,26 +2,14 @@ package vue.widget.modele;
 
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
-import vue.widget.modele.zones.Zone;
-import instruction.InstructionAttente;
-import instruction.Variable;
-import instruction.VariableConstante;
-import instruction.TypeVariable;
-import instruction.VariableModifiable;
-
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.geom.Rectangle2D;
-
-import javax.swing.JComponent;
 
 import modeles.DicoVars;
 import modeles.TypeWidget;
+import nxtim.instruction.Variable;
+import nxtim.instruction.VariableModifiable;
 
 
 
@@ -89,12 +77,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 	}
 	
 	@Override
-	public void initListeners() {
-		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
-
-
-		});
-	}
+	public void initListeners() { }
 
 	/**
 	 * 
@@ -103,5 +86,4 @@ public class VariableSetValueWidget extends ModeleWidget {
 	public String getNomVariable() {
 		return ((VariableModifiable)this.getElementProgramme()).getNom();
 	}
-
 }

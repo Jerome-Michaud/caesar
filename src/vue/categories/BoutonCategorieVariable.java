@@ -1,10 +1,10 @@
 package vue.categories;
 
 import vue.categories.complexe.ModeleCategorieVariable;
-import instruction.IElementProgramme;
-import instruction.Variable;
 
 import java.awt.Color;
+import nxtim.instruction.IElementProgramme;
+import nxtim.instruction.Variable;
 import vue.ginterface.GUI;
 import vue.widget.Widget;
 

@@ -4,7 +4,6 @@ import vue.tools.Variables;
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
 import vue.widget.modele.zones.Zone;
-import instruction.*;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -16,6 +15,14 @@ import javax.swing.JComponent;
 
 import modeles.DicoVars;
 import modeles.TypeWidget;
+import nxtim.instruction.Affectation;
+import nxtim.instruction.Condition;
+import nxtim.instruction.InstructionFor;
+import nxtim.instruction.Operateur;
+import nxtim.instruction.Operation;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.Variable;
+import nxtim.instruction.VariableConstante;
 
 /**
  * Classe héritant de ModeleWidget et implémentant

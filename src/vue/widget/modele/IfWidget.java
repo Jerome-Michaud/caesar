@@ -1,13 +1,13 @@
 package vue.widget.modele;
 
 import vue.tools.Variables;
-import instruction.InstructionIf;
 import java.awt.Point;
 
 import java.awt.Polygon;
 import java.awt.Rectangle;
 
 import modeles.TypeWidget;
+import nxtim.instruction.InstructionIf;
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la 
  * forme d'un widget de type If.
@@ -62,5 +62,5 @@ public class IfWidget extends ModeleWidget{
     }
     
 	@Override
-	public void initListeners() {}
+	public void initListeners() { }
 }

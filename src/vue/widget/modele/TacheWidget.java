@@ -3,7 +3,6 @@ package vue.widget.modele;
 import vue.tools.Variables;
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.Zone;
-import instruction.InstructionTache;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -13,6 +12,7 @@ import java.io.Serializable;
 import javax.swing.JComponent;
 
 import modeles.TypeWidget;
+import nxtim.instruction.InstructionTache;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la

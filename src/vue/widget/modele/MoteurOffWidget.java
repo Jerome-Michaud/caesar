@@ -2,8 +2,6 @@ package vue.widget.modele;
 
 import vue.widget.modele.zones.ListeDeroulante;
 import vue.widget.modele.zones.Zone;
-import instruction.InstructionMoteurOff;
-import instruction.Moteur;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
@@ -13,6 +11,8 @@ import javax.swing.JComponent;
 import modeles.TypeWidget;
 
 import java.awt.Rectangle;
+import nxtim.instruction.InstructionMoteurOff;
+import nxtim.instruction.Moteur;
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type MoteurOff

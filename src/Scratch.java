@@ -1,4 +1,3 @@
-
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;

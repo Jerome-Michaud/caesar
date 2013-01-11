@@ -1,13 +1,13 @@
 package vue.widget.modele;
 
 import vue.tools.Variables;
-import instruction.InstructionDoWhile;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
 import modeles.TypeWidget;
+import nxtim.instruction.InstructionDoWhile;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
@@ -30,7 +30,6 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		this.setTabY(tY);
 		this.setType(TypeWidget.DOWHILE);
 
-		//this.setMessage("Do ... While");
 		message.put(new Point(5, 13), "Faire tant que");
 
 		this.setElementProgramme(new InstructionDoWhile());
@@ -53,7 +52,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-	
+
 	@Override
 	public void decalageY(int b, Rectangle r) {
 		int i;
@@ -63,7 +62,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-	
+
 	@Override
 	public void initListeners() {
 	}

@@ -1,11 +1,11 @@
 package modeles;
 
-import instruction.TypeVariable;
-import instruction.Variable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.Variable;
 
 /**
  * Définit le dictionnaire de variables.

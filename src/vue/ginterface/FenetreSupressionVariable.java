@@ -4,10 +4,7 @@
  */
 package vue.ginterface;
 
-import instruction.Variable;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
@@ -15,10 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import modeles.DicoVars;
-import vue.categories.BoutonCategorie;
+import nxtim.instruction.Variable;
 import vue.categories.BoutonCategorieVariable;
-import vue.ginterface.GUI;
-import vue.widget.Widget;
 
 /**
  *

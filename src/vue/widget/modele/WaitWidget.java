@@ -2,9 +2,6 @@ package vue.widget.modele;
 
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.Zone;
-import instruction.InstructionAttente;
-import instruction.VariableConstante;
-import instruction.TypeVariable;
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -12,6 +9,9 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 import modeles.TypeWidget;
+import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.VariableConstante;
 /**
  * Cette classe modèlise la forme d'un widget de type Wait.
  * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin

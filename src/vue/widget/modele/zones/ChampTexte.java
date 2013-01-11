@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import modeles.TypeWidget;
+import org.jdom2.Element;
 import vue.widget.Widget;
 
 /**
@@ -19,6 +20,7 @@ public class ChampTexte extends JPanel implements Zone {
 	private Widget widgetContenu;
 	private JTextField textField;
 	private List<TypeWidget> typesWidgetsAcceptes;
+
 	/*
 	 * Etat à 0 quand on affiche uniquement le champ texte
 	 * Etat à 1 quand on affiche les widgets contenus
@@ -29,13 +31,13 @@ public class ChampTexte extends JPanel implements Zone {
 	 * Constructeur faisant appel au constructeur équivalent de la classe mère.
 	 */
 	public ChampTexte() {
-		super();
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
 		this.textField = new JTextField();
 		this.widgetContenu = null;
 		this.add(textField, BorderLayout.CENTER);
 		this.etat = 0;
+
 		this.addContainerListener(new ContainerAdapter() {
 			@Override
 			public void componentRemoved(ContainerEvent e) {
@@ -49,8 +51,6 @@ public class ChampTexte extends JPanel implements Zone {
 	}
 
 	private void composantSupp(ContainerEvent e) {
-		System.out.println("Child : " + e.getChild().toString() + "------ Comp : " + e.getComponent().toString());
-		System.out.println("widget : " + widgetContenu);
 		if (e.getChild() == widgetContenu && e.getComponent() == this) {
 			setWidgetContenu(null);
 		}
@@ -106,20 +106,38 @@ public class ChampTexte extends JPanel implements Zone {
 			this.etat = 1;
 			this.setComponent(w);
 		}
-		System.out.println("Old : " + oldW + " new :" + this.getWidth());
-		Widget parent = ((Widget)(this.getParent()));
+		Widget parent = ((Widget) (this.getParent()));
 		int decal = this.getWidth() - oldW;
 		parent.getModele().decalageX(decal);
 		parent.setForme(false);
 		parent.getModele().decalerComposantsSuivants(this.getX(), decal);
 		/*this.revalidate();
-		this.repaint();*/
+		 this.repaint();*/
 		this.widgetContenu = w;
 	}
 
 	private void setComponent(JComponent comp) {
 		this.setSize(comp.getSize());
 		this.add(comp, BorderLayout.CENTER);
+	}
+
+	@Override
+	public int getEtat() {
+		return this.etat;
+	}
+
+	@Override
+	public Element toXml() {
+		Element zone = new Element("zone");
+		zone.setAttribute("isWidget", String.valueOf(this.etat == 1));
+
+		System.out.println("etat : " + etat);
+		if (this.etat == 0) {
+			zone.setAttribute("valeur", this.getValeur());
+		} else if (this.etat == 1) {
+			zone.addContent(this.widgetContenu.toXml());
+		}
+		return zone;
 	}
 
 	@Override

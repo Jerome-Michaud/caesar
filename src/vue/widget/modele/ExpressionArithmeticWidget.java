@@ -1,13 +1,13 @@
 package vue.widget.modele;
 
+import vue.widget.modele.zones.ChampTexte;
 
-import instruction.Operateur;
-import instruction.Operation;
-import instruction.Variable;
 import java.awt.Point;
 import java.awt.Polygon;
 import modeles.TypeWidget;
-import vue.widget.modele.zones.ChampTexte;
+import nxtim.instruction.Operateur;
+import nxtim.instruction.Operation;
+import nxtim.instruction.Variable;
 
 
 /**
@@ -19,14 +19,10 @@ import vue.widget.modele.zones.ChampTexte;
 
 public class ExpressionArithmeticWidget extends ModeleWidget {
 
-
 	/**
 	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
-
 	public ExpressionArithmeticWidget(Operateur op) {
-		super();
-
 		/*int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 			int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
 		 */
@@ -77,12 +73,9 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 		initListeners();
 	}
-	//		fin constructeur
 	
-	public void initListeners() {
-
-	}
-
+	public void initListeners() { }
+	
 	@Override
 	public void decalageX(int x) {
 		int i;
