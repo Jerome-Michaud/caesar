@@ -54,23 +54,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
         this.setForme(this.getForme());
         this.setTailleX();
     }
-    /*
-    @Override
-    public void decalageXin(int x) {
-    	int i;
-        for (i = 6; i < 10; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
-        }
-        for (i = 22; i < 26; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
-        }
-        for (i = 38; i < 42; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
-        }
-        this.setForme(this.getForme());
-        this.setTailleX();
-    }
-	*/
+	
     @Override
     public void decalageY(int x,Rectangle r) {
     	 if(r.getY()==Variables.ZONE_ACCROCHE_PAR_DEFAULT.getY()){
@@ -91,26 +75,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
          }
         
     }
-    /*
-    @Override
-    public void decalageYin(int x,Rectangle r) {
-    	if(r.getY()==Variables.ZONE_ACCROCHE_PAR_DEFAULT.getY()){
-    		int i;
-	        for (i = 16; i < tabY.length; i++) {
-	            this.getForme().ypoints[i] = this.getForme().ypoints[i] - x;
-	        }
-	        this.setForme(this.getForme());
-	        this.setTailleY();
-         }
-		else {// if(r.getY()==Variables.ZONE_ACCROCHE_ELSE.getY()){
-        	 int i;
- 	        for (i = 32; i < tabY.length; i++) {
- 	            this.getForme().ypoints[i] = this.getForme().ypoints[i] - x;
- 	        }
- 	        this.setForme(this.getForme());
- 	        this.setTailleY();
-         }
-    }*/
+    
 	@Override
 	public void initListeners() {}
 }

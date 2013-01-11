@@ -413,36 +413,30 @@ public abstract class ModeleWidget implements Serializable {
     /**
      * Méthode abstraite permettant d'augmenter ou diminuer la largeur du composant.
      *
+	 * Un comportement de base a été définit est ce comportement doit être redefinit pour des widgets plus complexes
+	 * 
      * @param x La valeur de l'agrandissement à appliquer
      */
 
-    public abstract void decalageX(int x);
-
-    /**
-     * Méthode abstraite permettant de diminuer la largeur du composant
-     *
-     * @param x La valeur de la réduction à appliquer
-     */
-
-    /*public abstract void decalageXin(int x);*/
+    public void decalageX(int x){
+		int i;
+		for (i = 6; i < 10; i++) {
+			this.getForme().xpoints[i] = this.getForme().xpoints[i] + x;
+		}
+		this.setForme(this.getForme());
+		this.setTailleX();
+	}
 
     /**
      * Méthode abstraite permettant d'augmenter ou diminuer la hauteur du composant
+	 * 
+	 * Si la méthode n'a pas été redéfinie dans les classes concrètes filles, aucune action n'est effectuée
      *
      * @param x La valeur de l'agrandissement à appliquer
      * @param r Le rectangle à augmenter également
      */
 
-    public abstract void decalageY(int x,Rectangle r);
-
-    /**
-     * Méthode abstraite permettant de réduire la hauteur du composant.
-     *
-     * @param x La valeur de la réduction à appliquer
-     * @param r Le rectangle à réduire également
-     */
-
-   /*public abstract void decalageYin(int x,Rectangle r);*/
+    public void decalageY(int x,Rectangle r){}
 
     /**
      * Méthode permettant de récupérer la liste des messages du widget.

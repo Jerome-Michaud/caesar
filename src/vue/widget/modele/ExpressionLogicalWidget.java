@@ -80,35 +80,8 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		f.ajouterTypeWidgetAccepte(TypeWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(40, 3, 14, 14);
 		this.getLesZonesSaisies().add(f);
-
-		this.decalageX(-5);
-
-
 	}
 //	fin constructeur
-
-	/**
-	 * Méthode abstraite permettant d'augmenter la largeur du composant.
-	 *
-	 * @param x La valeur de l'agrandissement à appliquer
-	 */
-	@Override
-	public void decalageX(int x) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	/**
-	 * Méthode abstraite permettant d'augmenter la hauteur du composant
-	 *
-	 * @param b La valeur de l'agrandissement à appliquer
-	 * @param r Le rectangle à augmenter également
-	 */
-	public void decalageY(int b, Rectangle r) {
-		// TODO Auto-generated method stub
-
-	}
 
 	public void initListeners() {
 

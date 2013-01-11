@@ -66,20 +66,7 @@ public class TacheWidget extends ModeleWidget implements Serializable {
         this.setForme(this.getForme());
         this.setTailleX();
     }
-    /*
-    @Override
-    public void decalageXin(int a) {
-        int i;
-        for (i = 2; i < 6; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
-        }
-        for (i = 18; i < 22; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
-        }
-        this.setForme(this.getForme());
-        this.setTailleX();
-    }
-	*/
+    
     @Override
 
     public void decalageY(int b,Rectangle r) {
@@ -91,19 +78,7 @@ public class TacheWidget extends ModeleWidget implements Serializable {
         this.setForme(this.getForme());
         this.setTailleY();
     }
-    /*
-    @Override
-    public void decalageYin(int b, Rectangle r) {
-        int i;
-        for (i = 12; i < tabY.length; i++) {
-            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
-        }
-        this.setForme(this.getForme());
-        this.setTailleY();
-    }
-	*/
-
-
+    
     @Override
     public void initListeners() {
         ((JComponent) ((Zone) getLesZonesSaisies().get(0))).addFocusListener(new FocusAdapter() {
