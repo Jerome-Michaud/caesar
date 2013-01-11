@@ -21,10 +21,11 @@ public class PanelWidget extends JPanel {
 	private static PanelWidget instance = new PanelWidget();
 	private FabriqueInstructions fabrique;
 	private List<Widget> lesWidgets;
-        private JButton newVariableName;
+	private JButton newVariableName;
+
 	/**
 	 * SINGLETON.
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	private PanelWidget() {
@@ -33,34 +34,37 @@ public class PanelWidget extends JPanel {
 
 		this.fabrique = new FabriqueInstructions();
 		this.setLayout(null);
-                
-                
+
+
 
 		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 600));
 	}
+
 	/**
 	 * SINGLETON.
-	 * 
+	 *
 	 * @since 1.0
-	 * 
+	 *
 	 * @return L'instance unique de PanelWidget.
 	 */
 	protected static PanelWidget getInstance() {
 		return instance;
 	}
+
 	/**
 	 * @since 1.0
-	 * 
+	 *
 	 * @return La fabrique de widgets
 	 */
 	public FabriqueInstructions getFabrique() {
 		return this.fabrique;
 	}
+
 	/**
 	 * Permet de modifier la liste des widgets à afficher.
-	 * 
+	 *
 	 * @since 1.0
-	 * 
+	 *
 	 * @param liste La liste des widgets à afficher (suivant la catégorie active).
 	 */
 	public void setLesWidgets(List<Widget> liste) {
@@ -69,54 +73,59 @@ public class PanelWidget extends JPanel {
 		placerWidgets();
 		this.repaint();
 	}
+
 	/**
 	 * Permet d'ajouter le widget à la fin de la liste.
-	 * 
+	 *
 	 * @since 1.0
-	 * 
+	 *
 	 * @param widget La widget à ajouter.
 	 */
-    public void ajouterWidget(Widget widget) {
-        this.ajouterWidget(widget,this.lesWidgets.size());
-    }
-    /**
-     * Permet d'ajouter un widget à l'index définit.
-     * 
-     * @since 1.0
-     * 
-     * @param widget La widget à ajouter.
-     * @param index L'index où ajouter le widget.
-     */
-    public void ajouterWidget(Widget widget,int index) {
-    	this.lesWidgets.add(index,widget);
-    }
-    /**
-     * @since 1.0
-     * 
-     * @param widget Le widget.
-     * @return L'index du widget passé en paramètre.
-     */
-    public int getIndex(Widget w){
-        return this.lesWidgets.indexOf(w);
-    }
-    /**
-     * @since 1.0
-     * 
-     * @param widget Le widget à supprimer.
-     * @return true si le widget est correctement supprimé.
-     */
+	public void ajouterWidget(Widget widget) {
+		this.ajouterWidget(widget, this.lesWidgets.size());
+	}
+
+	/**
+	 * Permet d'ajouter un widget à l'index définit.
+	 *
+	 * @since 1.0
+	 *
+	 * @param widget La widget à ajouter.
+	 * @param index L'index où ajouter le widget.
+	 */
+	public void ajouterWidget(Widget widget, int index) {
+		this.lesWidgets.add(index, widget);
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @param widget Le widget.
+	 * @return L'index du widget passé en paramètre.
+	 */
+	public int getIndex(Widget w) {
+		return this.lesWidgets.indexOf(w);
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @param widget Le widget à supprimer.
+	 * @return true si le widget est correctement supprimé.
+	 */
 	public boolean supprimerWidget(Widget widget) {
 		return this.lesWidgets.remove(widget);
 	}
+
 	/**
 	 * Permet de placer les widgets.
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	private void placerWidgets() {
 		int i = 1;
 		int y = 30;
-		
+
 		for (Widget w : this.lesWidgets) {
 			w.setDraggable(false);
 
@@ -127,5 +136,4 @@ public class PanelWidget extends JPanel {
 			i++;
 		}
 	}
-
 }

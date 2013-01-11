@@ -26,8 +26,8 @@ public class FenetreAjoutVariable extends JFrame {
 	private JComboBox typeVariable;
 	private JTextField nomVariable;
 	private JButton boutonValider, boutonAnnuler;
-
 	private static final int ROUGE = 212, VERT = 82, BLEU = 144;
+
 	public FenetreAjoutVariable() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(null);
@@ -65,18 +65,17 @@ public class FenetreAjoutVariable extends JFrame {
 		this.setVisible(true);
 
 		boutonValider.addActionListener(new ActionListener() {
-
-						@Override
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				if (!nomVariable.getText().isEmpty()) {
-					Variable var = new VariableModifiable((TypeVariable)typeVariable.getSelectedItem(), nomVariable.getText(), "0");
+					Variable var = new VariableModifiable((TypeVariable) typeVariable.getSelectedItem(), nomVariable.getText(), "0");
 					DicoVars.getInstance().ajouter(var);
 					BoutonCategorieVariable bcv = null;
-					
+
 					for (BoutonCategorie bc : GUI.getPanelTypeWidget().getLesCategories()) {
 						if (bc instanceof BoutonCategorieVariable) {
 							bcv = (BoutonCategorieVariable) bc;
-							bcv.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetVariable((VariableModifiable)var));
+							bcv.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetVariable((VariableModifiable) var));
 
 
 							for (Widget w : bcv.getLesWidgets()) {
@@ -85,19 +84,18 @@ public class FenetreAjoutVariable extends JFrame {
 
 						}
 					}
-				
-					
-				dispose();
+
+
+					dispose();
+				}
 			}
-		}
-	});
+		});
 
 		boutonAnnuler.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				dispose();
 			}
 		});
-}
+	}
 }

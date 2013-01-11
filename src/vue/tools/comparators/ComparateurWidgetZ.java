@@ -10,13 +10,13 @@ import vue.widget.Widget;
  */
 public class ComparateurWidgetZ implements Comparator<Component> {
 
-	public ComparateurWidgetZ() { }
+	public ComparateurWidgetZ() {
+	}
 
 	@Override
 	public int compare(Component t, Component t1) {
-		Widget wT = (Widget)t;
-		Widget wT1 = (Widget)t1;
+		Widget wT = (Widget) t;
+		Widget wT1 = (Widget) t1;
 		return wT.getParent().getComponentZOrder(wT) - wT1.getParent().getComponentZOrder(wT1);
 	}
-	
 }

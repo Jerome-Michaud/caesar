@@ -4,6 +4,7 @@ import instruction.Condition;
 import instruction.Operateur;
 import instruction.Operation;
 import instruction.VariableModifiable;
+import vue.tools.NonChargeableException;
 import vue.tools.NonClonableException;
 import vue.widget.modele.DoWhileWidget;
 
@@ -23,12 +24,8 @@ import vue.widget.modele.VariableWidget;
 import vue.widget.modele.VariableSetValueWidget;
 import vue.widget.modele.WhileWidget;
 
-
 /**
  * Classe implémentant le design pattern Factory permettant la création de tous les types de widgets.
- */
-/**
- * modification CHOUKET Houda
  */
 public class FabriqueInstructions {
 
@@ -122,7 +119,6 @@ public class FabriqueInstructions {
 		return new Widget(new WaitWidget());
 	}
 
-
 	/**
 	 * Méthode permettant de créer un widget de type "Variable".
 	 *
@@ -132,7 +128,6 @@ public class FabriqueInstructions {
 		return new Widget(new VariableWidget(variableModifiable));
 	}
 
-
 	/**
 	 * Méthode permettant de créer un widget de type "VariableSetValue".
 	 *
@@ -140,8 +135,7 @@ public class FabriqueInstructions {
 	 */
 	public Widget creerWidgetVariableSetValue() {
 		return new Widget(new VariableSetValueWidget());
-	}       
-
+	}
 
 	/**
 	 * Méthode permettant de créer un widget complexe de type "Tâche".
@@ -151,8 +145,8 @@ public class FabriqueInstructions {
 	public Widget creerWidgetTache() {
 		return new WidgetCompose(new TacheWidget());
 	}
-	/**
 
+	/**
 	 * Méthode permettant de créer un widget complexe de type "Expression".
 	 *
 	 * @return un widget complexe de type "expression arithmetique"
@@ -160,8 +154,10 @@ public class FabriqueInstructions {
 	public Widget creerWidgetExpressionArithmetic(Operateur op) {
 		return new WidgetCompose(new ExpressionArithmeticWidget(op));
 	}
+
 	/**
 	 * Méthode permettant de créer un widget complexe de type "Expression".
+	 *
 	 * @return un widget complexe de type "expression logique"
 	 */
 	public Widget creerWidgetExpressionLogical(Operateur op) {
@@ -169,7 +165,6 @@ public class FabriqueInstructions {
 	}
 
 	/**
-
 	 * Méthode permettant de créér une copie d'un widget.
 	 *
 	 * @param comp le widget à cloner
@@ -180,65 +175,102 @@ public class FabriqueInstructions {
 		Widget w = null;
 		if (comp.getModele() instanceof InstructionWidget) {
 			//w = creerWidgetMoteurFwd();
-		}
-		else if (comp.getModele() instanceof IfWidget) {
+		} else if (comp.getModele() instanceof IfWidget) {
 			w = creerWidgetIf();
-		}
-		else if (comp.getModele() instanceof IfElseWidget) {
+		} else if (comp.getModele() instanceof IfElseWidget) {
 			w = creerWidgetIfElse();
-		}
-		else if (comp.getModele() instanceof TacheWidget) {
+		} else if (comp.getModele() instanceof TacheWidget) {
 			w = creerWidgetTache();
-		}
-		else if (comp.getModele() instanceof WhileWidget) {
+		} else if (comp.getModele() instanceof WhileWidget) {
 			w = creerWidgetWhile();
-		}
-		else if (comp.getModele() instanceof DoWhileWidget) {
+		} else if (comp.getModele() instanceof DoWhileWidget) {
 			w = creerWidgetDoWhile();
-		}
-		else if (comp.getModele() instanceof MoteurMovFwdWidget) {
+		} else if (comp.getModele() instanceof MoteurMovFwdWidget) {
 			w = creerWidgetMoteurMovFwd();
-		}
-		else if (comp.getModele() instanceof MoteurMovRevWidget) {
+		} else if (comp.getModele() instanceof MoteurMovRevWidget) {
 			w = creerWidgetMoteurMovRev();
-		}
-		else if (comp.getModele() instanceof MoteurOffWidget) {
+		} else if (comp.getModele() instanceof MoteurOffWidget) {
 			w = creerWidgetMoteurOff();
-		}
-		else if (comp.getModele() instanceof WaitWidget) {
+		} else if (comp.getModele() instanceof WaitWidget) {
 			w = creerWidgetWait();
-		}
-		/* ajout de widget variable */
-		else if (comp.getModele() instanceof VariableWidget) {
-			w = creerWidgetVariable((VariableModifiable)comp.getModele().getElementProgramme());
-		}
-		
-		else if (comp.getModele() instanceof VariableSetValueWidget) {
+		} /* ajout de widget variable */ else if (comp.getModele() instanceof VariableWidget) {
+			w = creerWidgetVariable((VariableModifiable) comp.getModele().getElementProgramme());
+		} else if (comp.getModele() instanceof VariableSetValueWidget) {
 			w = creerWidgetVariableSetValue();
-		}                
-		/* */
-		else if (comp.getModele() instanceof RepeatWidget) {
+		} /* */ else if (comp.getModele() instanceof RepeatWidget) {
 			w = creerWidgetRepeat();
-		}
-		else if (comp.getModele() instanceof ForWidget) {
+		} else if (comp.getModele() instanceof ForWidget) {
 			w = creerWidgetFor();
-		}
-		else if (comp.getModele() instanceof ExpressionArithmeticWidget) {
-			Operation op = (Operation)comp.getModele().getElementProgramme();
+		} else if (comp.getModele() instanceof ExpressionArithmeticWidget) {
+			Operation op = (Operation) comp.getModele().getElementProgramme();
 			w = creerWidgetExpressionArithmetic(op.getOperateur());
-		}
-		else if (comp.getModele() instanceof ExpressionLogicalWidget) {
-			Condition con = (Condition)comp.getModele().getElementProgramme();
+		} else if (comp.getModele() instanceof ExpressionLogicalWidget) {
+			Condition con = (Condition) comp.getModele().getElementProgramme();
 
 			w = creerWidgetExpressionLogical(con.getOperateur());
 
 		}
 
-
 		if (w == null) {
 			throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
 		}
 		w.getModele().setCouleur(comp.getModele().getCouleur());
+		return w;
+	}
+
+	/**
+	 * Méthode permettant de créér une copie d'un widget.
+	 *
+	 * @param comp le widget à cloner
+	 * @return la copie du widget passé en paramètre
+	 * @throws NonClonableException Si on essaye de cloner un widget qui n'est pas clonable
+	 */
+	public Widget creerWidget(final String nomClasse) throws NonChargeableException {
+		Widget w = null;
+		if ("InstructionWidget".equals(nomClasse)) {
+			//w = creerWidgetMoteurFwd();
+		} else if ("IfWidget".equals(nomClasse)) {
+			w = creerWidgetIf();
+		} else if ("IfElseWidget".equals(nomClasse)) {
+			w = creerWidgetIfElse();
+		} else if ("TacheWidget".equals(nomClasse)) {
+			w = creerWidgetTache();
+		} else if ("WhileWidget".equals(nomClasse)) {
+			w = creerWidgetWhile();
+		} else if ("DoWhileWidget".equals(nomClasse)) {
+			w = creerWidgetDoWhile();
+		} else if ("MoteurMovFwdWidget".equals(nomClasse)) {
+			w = creerWidgetMoteurMovFwd();
+		} else if ("MoteurMovRevWidget".equals(nomClasse)) {
+			w = creerWidgetMoteurMovRev();
+		} else if ("MoteurOffWidget".equals(nomClasse)) {
+			w = creerWidgetMoteurOff();
+		} else if ("WaitWidget".equals(nomClasse)) {
+			w = creerWidgetWait();
+		} /* ajout de widget variable */ /*else if ("VariableWidget".equals(nomClasse)) {
+		 w = creerWidgetVariable((VariableModifiable)comp.getModele().getElementProgramme());
+		 }*/ else if ("VariableSetValueWidget".equals(nomClasse)) {
+			w = creerWidgetVariableSetValue();
+		} /* */ else if ("RepeatWidget".equals(nomClasse)) {
+			w = creerWidgetRepeat();
+		} else if ("ForWidget".equals(nomClasse)) {
+			w = creerWidgetFor();
+		}
+		/*else if ("ExpressionArithmeticWidget".equals(nomClasse)) {
+		 Operation op = (Operation)comp.getModele().getElementProgramme();
+		 w = creerWidgetExpressionArithmetic(op.getOperateur());
+		 }
+		 else if ("ExpressionLogicalWidget".equals(nomClasse)) {
+		 Condition con = (Condition)comp.getModele().getElementProgramme();
+
+		 w = creerWidgetExpressionLogical(con.getOperateur());
+
+		 }*/
+
+		if (w == null) {
+			throw new NonChargeableException("Impossible de charger le widget " + nomClasse);
+		}
+		//w.getModele().setCouleur(comp.getModele().getCouleur());
 		return w;
 	}
 }

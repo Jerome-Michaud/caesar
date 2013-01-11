@@ -9,18 +9,19 @@ import java.awt.Color;
  * @since 1.0
  * @version 1.0
  */
-public class BoutonCategorieIO extends BoutonCategorie {
+public class BoutonCategorieCapteur extends BoutonCategorie {
 
 	/**
 	 * Quantité des différentes couleurs.
 	 */
 	private static final int ROUGE = 102, VERT = 51, BLEU = 204;
-	
+
 	/**
-	 * Définit le bouton catégorie <code>I/O</code>.
+	 * Définit le bouton catégorie
+	 * <code>I/O</code>.
 	 */
-	public BoutonCategorieIO() {
-		super(new ModeleCategorie("I/O", new Color(ROUGE, VERT, BLEU)));
+	public BoutonCategorieCapteur() {
+		super(new ModeleCategorie("Capteurs", new Color(ROUGE, VERT, BLEU)));
 
 		for (Widget w : this.getLesWidgets()) {
 			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));

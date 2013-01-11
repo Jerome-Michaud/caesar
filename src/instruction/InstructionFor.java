@@ -19,7 +19,8 @@ public class InstructionFor extends InstructionConditionelle {
 
 	/**
 	 * Crée une boucle For non initialisée.<br/>
-	 * Ses membres ont pour valeur <code>null</code>.
+	 * Ses membres ont pour valeur
+	 * <code>null</code>.
 	 */
 	public InstructionFor() {
 		super();

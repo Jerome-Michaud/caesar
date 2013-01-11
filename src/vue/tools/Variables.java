@@ -11,6 +11,7 @@ import java.util.logging.Level;
  * Melnychenko Ivan
  */
 public class Variables {
+
 	/**
 	 * Taille en X des boutons des catégories.
 	 */
@@ -33,34 +34,37 @@ public class Variables {
 	 * Les informations du logger seront affichés à parti de se niveau.
 	 */
 	public static final Level LEVEL_DES_LOGGERS = Level.WARNING;
-	
 	private static final int QUANTITE_COULEUR = 141;
 	public static final Color GRIS_INACTIF = Color.LIGHT_GRAY;
 	public static final Color GRIS_ACTIF = Color.DARK_GRAY;
 	public static final Color GRIS_SURVOLE = new Color(QUANTITE_COULEUR, QUANTITE_COULEUR, QUANTITE_COULEUR);
-	
 	/**
 	 * Taille en Y de la marge pour la fusion de deux widgets.
+	 *
 	 * @see properties
 	 */
 	public static final int MARGE_AIMENT = 10;
 	/**
 	 * Epaisseur du trait lors de la fusion.
+	 *
 	 * @see propertie
 	 */
 	public static final int LINE_STROKE_VALUE = 5;
 	/**
 	 * Indice (en %) pour la conservation du widget dans le PanelCodeGraphique.
+	 *
 	 * @see properties
 	 */
 	public static final float TAUX_TRANSFERT_PANEL = (float) 0.6;
 	/**
 	 * Espacement WidgetCompose vide
+	 *
 	 * @see properties
 	 */
 	public static final int ECART_PAR_DEFAULT = 15;
 	/**
 	 * Chemin d'accés au compilateur NXC
+	 *
 	 * @see properties
 	 */
 	public static final String CHEMIN_ACCES_NBC = "C:\\Users\\Bastien\\Desktop\\Projet\\ Robot\\Compilateur";

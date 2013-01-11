@@ -12,7 +12,8 @@ public abstract class InstructionConditionelle extends InstructionStructure {
 
 	/**
 	 * Créé une instruction conditionnelle sans initialisé la condition.<br/>
-	 * La condition à pour valeur <code>null</code>.
+	 * La condition à pour valeur
+	 * <code>null</code>.
 	 */
 	public InstructionConditionelle() {
 		super();

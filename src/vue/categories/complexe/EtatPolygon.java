@@ -7,21 +7,18 @@ package vue.categories.complexe;
 public enum EtatPolygon {
 
 	SURVOLE, INACTIF, ACTIF;
-	
+
 	@Override
 	public String toString() {
-		switch(this) {
-			case SURVOLE :
+		switch (this) {
+			case SURVOLE:
 				return "Survole";
-			case INACTIF :
+			case INACTIF:
 				return "Inactif";
-			case ACTIF :
+			case ACTIF:
 				return "Actif";
-			default :
+			default:
 				return "Erreur";
 		}
 	}
 }
-
-	
-	

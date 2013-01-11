@@ -54,7 +54,6 @@ public class ModeleCategorie {
 	 * Les polygones donnant le polygone global.
 	 */
 	private Polygon formeCouleur, formeTexte;
-	
 	private List<PolygoneAction> formesExtras;
 	/**
 	 * Le nom de la catégorie.
@@ -92,7 +91,7 @@ public class ModeleCategorie {
 	public Polygon getFormeTexte() {
 		return this.formeTexte;
 	}
-	
+
 	public List<PolygoneAction> getFormesExtras() {
 		return this.formesExtras;
 	}

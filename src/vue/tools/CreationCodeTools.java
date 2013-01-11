@@ -1,18 +1,23 @@
 package vue.tools;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import modeles.Erreur;
+
 /**
  * Classe utilitaire permettant d'écrire les fichiers .NXC correspondant à l'arborescence graphique.
  */
 public class CreationCodeTools {
-	private CreationCodeTools() {}
+
 	/**
-	 * Méthode statique permettant d'écrire le code NXC dans à l'endroit précisé
-	 * en paramètre.
+	 * Constructeur privé de CreationCodeTools.
+	 */
+	private CreationCodeTools() {
+	}
+
+	/**
+	 * Méthode statique permettant d'écrire le code NXC dans à l'endroit précisé en paramètre.
 	 *
 	 * @param path Le chemin où creer le fichier NXC
 	 * @param text Le nom à donner au fihier NXC
@@ -24,12 +29,10 @@ public class CreationCodeTools {
 			ecri.print(text);
 			ecri.flush();
 			ecri.close();
+		} catch (NullPointerException a) {
+			Erreur.afficher(a, "Erreur : pointeur null");
+		} catch (IOException a) {
+			Erreur.afficher(a, "Problème lors de l'écriture");
 		}
-		catch (NullPointerException a) {
-			System.err.println("Erreur : pointeur null");
-		}
-		catch (IOException a) {
-			System.err.println("Problème lors de l'écriture : " + a.getMessage());
-		}
-	} 
+	}
 }

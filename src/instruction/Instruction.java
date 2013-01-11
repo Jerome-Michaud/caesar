@@ -8,7 +8,7 @@ public interface Instruction extends IElementProgramme {
 
 	/**
 	 * Donne la catégorie de l'instruction.
-	 * 
+	 *
 	 * @return la catégorie
 	 */
 	Categorie getCategorie();

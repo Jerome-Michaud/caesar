@@ -11,6 +11,7 @@ import sauvegarde.SauvegardeTools;
 import vue.ginterface.GUI;
 import vue.tools.ArborescenceTools;
 import vue.widget.Widget;
+
 /**
  * Classe regroupant différents outils destinés à la sauvegarde et au chargement
  * de projets JScratch
@@ -18,20 +19,21 @@ import vue.widget.Widget;
  * @author Andru Bastien
  */
 public class SauvegardeBinaireTools implements SauvegardeTools {
-	
+
 	/**
 	 * L'instance unique de SauvegardeBinaireTools
 	 */
 	private static SauvegardeBinaireTools instance = null;
-	
+
 	/**
 	 * Le constructeur privé pour éviter la déclaration externe.
 	 */
-	private SauvegardeBinaireTools() { }
-	
+	private SauvegardeBinaireTools() {
+	}
+
 	/**
 	 * Le getter pour récupérer l'instance unique de SauvegardeBinaireTools.
-	 * 
+	 *
 	 * @return l'instance unique de SauvegardeBBinaireTools
 	 */
 	public static SauvegardeBinaireTools getInstance() {
@@ -40,47 +42,48 @@ public class SauvegardeBinaireTools implements SauvegardeTools {
 		}
 		return instance;
 	}
-	
+
 	@Override
-    public void save(final String path) {
-        serializeArborescence(path);
-    }
-	
+	public void save(final String path) {
+		serializeArborescence(path);
+	}
+
 	@Override
-    public void load(final String path) {
-        deserializeArborescence(path);
-        GUI.getPanelCodeGraphique().repaint();
-    }
-    
-    /**
-     * Permet la sérialisation de l'arborescence des widgets.
-     * @param path Le chemin où sauvegarder le l'arborescence
-     */
-    private void serializeArborescence(final String path) {
-        try {
-            FileOutputStream fichier = new FileOutputStream(path);
-            ObjectOutputStream oos = new ObjectOutputStream(fichier);
-            oos.writeObject(ArborescenceTools.getInstance().getArborescence());
-            oos.flush();
-            oos.close();
-        } catch (Exception e) {
-            Erreur.afficher(e);
-        }
-    }
-	
-    /**
-     * Desérialise une arborescence précédemment sauvegardée.
-     *
-     * @param path Le chemin d'accès à l'arborscence sauvegardée
-     */
-    private void deserializeArborescence(final String path) {
-        try {
-            FileInputStream fichier = new FileInputStream(path);
-            ObjectInputStream ois = new ObjectInputStream(fichier);
+	public void load(final String path) {
+		deserializeArborescence(path);
+		GUI.getPanelCodeGraphique().repaint();
+	}
+
+	/**
+	 * Permet la sérialisation de l'arborescence des widgets.
+	 *
+	 * @param path Le chemin où sauvegarder le l'arborescence
+	 */
+	private void serializeArborescence(final String path) {
+		try {
+			FileOutputStream fichier = new FileOutputStream(path);
+			ObjectOutputStream oos = new ObjectOutputStream(fichier);
+			oos.writeObject(ArborescenceTools.getInstance().getArborescence());
+			oos.flush();
+			oos.close();
+		} catch (Exception e) {
+			Erreur.afficher(e);
+		}
+	}
+
+	/**
+	 * Desérialise une arborescence précédemment sauvegardée.
+	 *
+	 * @param path Le chemin d'accès à l'arborscence sauvegardée
+	 */
+	private void deserializeArborescence(final String path) {
+		try {
+			FileInputStream fichier = new FileInputStream(path);
+			ObjectInputStream ois = new ObjectInputStream(fichier);
 			LinkedList<List<Widget>> arbos = (LinkedList<List<Widget>>) ois.readObject();
 			ArborescenceTools.getInstance().initArborescence(arbos, true);
-        } catch (Exception e) {
-            Erreur.afficher(e);
-        }
-    }
+		} catch (Exception e) {
+			Erreur.afficher(e);
+		}
+	}
 }

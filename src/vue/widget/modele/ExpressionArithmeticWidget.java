@@ -1,4 +1,3 @@
-
 package vue.widget.modele;
 
 

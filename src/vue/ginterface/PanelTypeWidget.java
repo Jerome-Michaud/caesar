@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+
 /**
  * Panel où sont entreposés les boutons des différentes catégories disponibles.
  *
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
  * @version 1.0
  */
 public class PanelTypeWidget extends JPanel {
+
 	/**
 	 * SINGLETON.
 	 *
@@ -31,7 +33,7 @@ public class PanelTypeWidget extends JPanel {
 		this.lesCategories.add(new BoutonCategorieControle());
 		this.lesCategories.add(new BoutonCategorieMoteur());
 		this.lesCategories.add(new BoutonCategorieAffichage());
-		this.lesCategories.add(new BoutonCategorieIO());
+		this.lesCategories.add(new BoutonCategorieCapteur());
 		this.lesCategories.add(new BoutonCategorieTemps());
 		this.lesCategories.add(new BoutonCategorieVariable());
 		this.lesCategories.add(new BoutonCategorieExpression());
@@ -56,6 +58,7 @@ public class PanelTypeWidget extends JPanel {
 
 		this.setPreferredSize(new Dimension(Variables.X_MAX_INSTRUCTION, nb));
 	}
+
 	/**
 	 * SINGLETON.
 	 *
@@ -66,6 +69,7 @@ public class PanelTypeWidget extends JPanel {
 	protected static PanelTypeWidget getInstance() {
 		return instance;
 	}
+
 	/**
 	 * @since 1.0
 	 *
@@ -74,17 +78,19 @@ public class PanelTypeWidget extends JPanel {
 	public List<BoutonCategorie> getLesCategories() {
 		return this.lesCategories;
 	}
+
 	/**
-	 *  
-	 * @return le bouton de la categorie sélectionnée ou null si aucune n'est sélectionnée. 
+	 *
+	 * @return le bouton de la categorie sélectionnée ou null si aucune n'est sélectionnée.
 	 */
 	public BoutonCategorie getCurrentCategorie() {
-		for(BoutonCategorie bc : this.getLesCategories()){
-			if(bc.isActive())
+		for (BoutonCategorie bc : this.getLesCategories()) {
+			if (bc.isActive()) {
 				return bc;
+			}
 		}
 		return null;
 
-		
+
 	}
 }

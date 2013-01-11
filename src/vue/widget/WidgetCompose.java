@@ -1,6 +1,5 @@
 package vue.widget;
 
-
 import instruction.Instruction;
 import instruction.InstructionIfElse;
 import instruction.InstructionStructure;
@@ -36,11 +35,11 @@ public class WidgetCompose extends Widget implements IWidget {
 	@Override
 	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
-
 	}
 
 	/**
-	 * Constructeur du Widget Compose faisant appel au constructeur de sa classe mère (<code>Widget</code>).
+	 * Constructeur du Widget Compose faisant appel au constructeur de sa classe mère (
+	 * <code>Widget</code>).
 	 *
 	 * @param comp le modèle du widget à créer
 	 */
@@ -119,29 +118,28 @@ public class WidgetCompose extends Widget implements IWidget {
 	public void notifyChange() {
 		HashMap<Rectangle, Rectangle> mapRect = new HashMap<Rectangle, Rectangle>();
 		HashMap<Rectangle, Integer> mapDecal = new HashMap<Rectangle, Integer>();
-                
+
 		for (Rectangle r : mapZone.keySet()) {
 			int decalY = 0;
 			Rectangle maxBounds = null;
-			
+
 			//Redimensionnement les zones d'accroches
 			for (Widget w : mapZone.get(r)) {
 				//Widget parent = (Widget)w.parent();
 				if (w.isComplexe()) {
 					((WidgetCompose) w).notifyChange();
 				}
-				
+
 				w.setLocation((int) (this.getLocation().getX() + r.getX()), (int) (this.getLocation().getY() + r.getY() + decalY));
 				if (maxBounds == null) {
 					maxBounds = new Rectangle(w.getBounds());
 					decalY += w.getBounds().height - ModeleWidget.OFFSET;
-				}
-				else {
+				} else {
 					maxBounds = maxBounds.union(w.getBounds());
 					decalY += w.getBounds().height - ModeleWidget.OFFSET;
 				}
 			}
-			
+
 			if (maxBounds == null) {
 				maxBounds = new Rectangle();
 			}
@@ -151,10 +149,9 @@ public class WidgetCompose extends Widget implements IWidget {
 
 			//On stocke le décalage qu'on voudra appliquer sur les zones d'accroche du composant
 			if (diff < 0 - ModeleWidget.OFFSET) {
-				this.getModele().decalageY(- Math.abs(diff), r);
+				this.getModele().decalageY(-Math.abs(diff), r);
 				decaleZonesEnDessousDe(r.y, diff, mapDecal);
-			}
-			else if (diff > 0 - ModeleWidget.OFFSET) {
+			} else if (diff > 0 - ModeleWidget.OFFSET) {
 				this.getModele().decalageY(diff, r);
 				decaleZonesEnDessousDe(r.y, diff, mapDecal);
 			}
@@ -220,8 +217,7 @@ public class WidgetCompose extends Widget implements IWidget {
 				structInst.insererFinElse(inst);
 			}
 
-		}
-		else {
+		} else {
 			// Cas des instructions structures autre que IfElse
 			this.applyChangeStructInst();
 		}
@@ -263,17 +259,17 @@ public class WidgetCompose extends Widget implements IWidget {
 	public Element toXml() {
 		Element widget = new Element("widgetcompose");
 		widget.setAttribute(new Attribute("class", this.getModele().getClass().getSimpleName()));
-		
+
 		Element coordonnees = new Element("coordonnees");
 		coordonnees.setAttribute(new Attribute("x", String.valueOf(this.getLocation().x)));
 		coordonnees.setAttribute(new Attribute("y", String.valueOf(this.getLocation().y)));
 		widget.addContent(coordonnees);
-		
+
 		int i;
 		// Gestion des zones du widget (valeurs, variables, ...)
 		if (this.getModele().getLesZonesSaisies().size() > 0) {
 			Element attribut = new Element("attributs");
-			
+
 			i = 0;
 			for (Zone z : this.getModele().getLesZonesSaisies()) {
 				Element zone = new Element("zone");
@@ -284,14 +280,14 @@ public class WidgetCompose extends Widget implements IWidget {
 			}
 			widget.addContent(attribut);
 		}
-		
+
 		// Gestion des widgets internes
 		i = 0;
 		for (Rectangle zone : this.mapZone.keySet()) {
 			Element accroche = new Element("accroche");
 			accroche.setAttribute(new Attribute("id", String.valueOf(i)));
 			i++;
-			
+
 			for (Widget widgetInterne : this.mapZone.get(zone)) {
 				accroche.addContent(widgetInterne.toXml());
 			}
