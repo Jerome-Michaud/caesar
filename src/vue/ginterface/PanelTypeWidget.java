@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import modeles.DicoBoutonsCategories;
 
 /**
  * Panel où sont entreposés les boutons des différentes catégories disponibles.
@@ -29,14 +30,7 @@ public class PanelTypeWidget extends JPanel {
 		this.setBorder(BorderFactory.createTitledBorder("Catégories"));
 
 		this.lesCategories = new LinkedList<BoutonCategorie>();
-		this.lesCategories.add(new BoutonCategorieInstruction());
-		this.lesCategories.add(new BoutonCategorieControle());
-		this.lesCategories.add(new BoutonCategorieMoteur());
-		this.lesCategories.add(new BoutonCategorieAffichage());
-		this.lesCategories.add(new BoutonCategorieCapteur());
-		this.lesCategories.add(new BoutonCategorieTemps());
-		this.lesCategories.add(new BoutonCategorieVariable());
-		this.lesCategories.add(new BoutonCategorieExpression());
+		this.lesCategories.addAll(DicoBoutonsCategories.getInstance().getBoutons());
 
 		this.setLayout(null);
 		int i = 0, x = 10, y = 26;

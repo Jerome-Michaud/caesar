@@ -1,7 +1,7 @@
 package sauvegarde.xml;
 
 import java.util.List;
-import modeles.DicoVars;
+import modeles.DicoVariables;
 import nxtim.instruction.Variable;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -29,7 +29,7 @@ public class SerialiseurXML {
 
 		// Sauvegarde du dictionnaire
 		Element dictionnaire = new Element("dictionnaire");
-		for (Variable v : DicoVars.getInstance().getLesvariables()) {
+		for (Variable v : DicoVariables.getInstance().getLesvariables()) {
 			Element variable = new Element("variable");
 			variable.setAttribute("nom", v.getNom());	
 			variable.setAttribute("type", v.getType().toString());

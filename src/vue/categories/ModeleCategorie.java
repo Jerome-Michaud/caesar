@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.List;
+import modeles.DicoCouleursCategories;
+import nxtim.instruction.Categorie;
 
 /**
  * Permet de définir le modèle d'un bouton de catégorie.<br />
@@ -55,20 +57,21 @@ public class ModeleCategorie {
 	 */
 	private Polygon formeCouleur, formeTexte;
 	private List<PolygoneAction> formesExtras;
+	
 	/**
-	 * Le nom de la catégorie.
+	 * La catégorie correspondant au bouton.
 	 */
-	private String nom;
-
+	private Categorie categorie;
+	
 	/**
 	 * Définit un nouveau modèle de catégorie.
 	 *
 	 * @param nom le nom de la catégorie
 	 * @param couleur la couleur de la catégorie
 	 */
-	public ModeleCategorie(final String nom, final Color couleur) {
-		this.couleur = couleur;
-		this.nom = nom;
+	public ModeleCategorie(final Categorie categorie) {
+		this.couleur = DicoCouleursCategories.getInstance().getCouleur(categorie);
+		this.categorie = categorie;
 		this.formeCouleur = new Polygon(this.tabXIcone, this.tabYIcone, this.tabXIcone.length);
 		this.formeTexte = new Polygon(this.tabX, this.tabY, this.tabX.length);
 		this.formesExtras = new ArrayList<PolygoneAction>();
@@ -111,6 +114,15 @@ public class ModeleCategorie {
 	 * @return le message de la catégorie
 	 */
 	public String getMessage() {
-		return this.nom;
+		return this.categorie.toString();
+	}
+	
+	/**
+	 * Retourne la catégorie du bouton.
+	 * 
+	 * @return la categorie
+	 */
+	public Categorie getCategorie() {
+		return this.categorie;
 	}
 }

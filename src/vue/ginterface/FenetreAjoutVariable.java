@@ -7,14 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import modeles.DicoVars;
-import java.awt.Color;
+import modeles.DicoVariables;
+import modeles.DicoWidgetsCategories;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
-import vue.widget.Widget;
-import vue.categories.BoutonCategorieVariable;
-import vue.categories.BoutonCategorie;
 
 /**
  *
@@ -25,7 +22,6 @@ public class FenetreAjoutVariable extends JFrame {
 	private JComboBox typeVariable;
 	private JTextField nomVariable;
 	private JButton boutonValider, boutonAnnuler;
-	private static final int ROUGE = 212, VERT = 82, BLEU = 144;
 
 	public FenetreAjoutVariable() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -68,23 +64,16 @@ public class FenetreAjoutVariable extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 				if (!nomVariable.getText().isEmpty()) {
 					Variable var = new VariableModifiable((TypeVariable) typeVariable.getSelectedItem(), nomVariable.getText(), "0");
-					DicoVars.getInstance().ajouter(var);
-					BoutonCategorieVariable bcv = null;
-
-					for (BoutonCategorie bc : GUI.getPanelTypeWidget().getLesCategories()) {
-						if (bc instanceof BoutonCategorieVariable) {
-							bcv = (BoutonCategorieVariable) bc;
-							bcv.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetVariable((VariableModifiable) var));
-
-
-							for (Widget w : bcv.getLesWidgets()) {
-								w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
-							}
-
-						}
-					}
-
-
+					
+					// Ajout dans le dictionnaire
+					DicoVariables.getInstance().ajouter(var);
+					
+					// Ajout du widget dans la catégorie
+					DicoWidgetsCategories.getInstance().ajouterWidgetVariable(var);
+					
+					// Mise à jour du panel widget
+					GUI.getPanelWidget().setLesWidgets(DicoWidgetsCategories.getInstance().getWidgets(GUI.getPanelTypeWidget().getCurrentCategorie().getCategorie()));
+					
 					dispose();
 				}
 			}

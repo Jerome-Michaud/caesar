@@ -1,6 +1,6 @@
 package vue.categories.complexe;
 
-import java.awt.Color;
+import nxtim.instruction.Categorie;
 import vue.categories.ModeleCategorie;
 
 /**
@@ -9,8 +9,8 @@ import vue.categories.ModeleCategorie;
  */
 public class ModeleCategorieVariable extends ModeleCategorie {
 
-	public ModeleCategorieVariable(String nom, Color couleur) {
-		super(nom, couleur);
+	public ModeleCategorieVariable(Categorie categorie) {
+		super(categorie);
 
 		this.getFormesExtras().add(new PolygoneActionPlus());
 		this.getFormesExtras().add(new PolygoneActionMoins());

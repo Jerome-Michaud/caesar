@@ -1,7 +1,6 @@
 package vue.categories;
 
-import vue.widget.Widget;
-import java.awt.Color;
+import nxtim.instruction.Categorie;
 
 /**
  * Classe permettant l'instanciation du bouton catégorie "Affichage".
@@ -12,20 +11,10 @@ import java.awt.Color;
 public class BoutonCategorieAffichage extends BoutonCategorie {
 
 	/**
-	 * Quantité des différentes couleurs.
-	 */
-	private static final int ROUGE = 204, VERT = 51, BLEU = 0;
-
-	/**
 	 * Définit le bouton catégorie
 	 * <code>Affichage</code>.
 	 */
 	public BoutonCategorieAffichage() {
-
-		super(new ModeleCategorie("Affichage", new Color(ROUGE, VERT, BLEU)));
-
-		for (Widget w : this.getLesWidgets()) {
-			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
-		}
+		super(new ModeleCategorie(Categorie.AFFICHAGE));
 	}
 }

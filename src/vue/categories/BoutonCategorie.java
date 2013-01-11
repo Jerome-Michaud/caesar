@@ -10,14 +10,13 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import vue.categories.complexe.PolygoneAction;
 import vue.categories.complexe.EtatPolygon;
-import vue.widget.Widget;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.LinkedList;
-import java.util.List;
 import javax.swing.JComponent;
 
 import javax.swing.SwingUtilities;
+import modeles.DicoWidgetsCategories;
+import nxtim.instruction.Categorie;
 import vue.ginterface.GUI;
 import vue.tools.Variables;
 
@@ -29,10 +28,6 @@ import vue.tools.Variables;
  */
 public abstract class BoutonCategorie extends JComponent {
 
-	/**
-	 * Liste des widgets disponibles dans la catégorie.
-	 */
-	private List<Widget> lesWidgets;
 	/**
 	 * @see Vue.Categories.ModeleCategorie
 	 */
@@ -99,7 +94,6 @@ public abstract class BoutonCategorie extends JComponent {
 		this.setFocusable(true);
 		this.setOpaque(false);
 		this.setForme();
-		this.lesWidgets = new LinkedList<Widget>();
 
 		this.addMouseListener(new MouseAdapter() {
 			@Override
@@ -214,7 +208,7 @@ public abstract class BoutonCategorie extends JComponent {
 
 
 		}
-		GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
+		GUI.getPanelWidget().setLesWidgets(DicoWidgetsCategories.getInstance().getWidgets(this.modele.getCategorie()));
 	}
 
 	/**
@@ -242,30 +236,19 @@ public abstract class BoutonCategorie extends JComponent {
 	}
 
 	/**
-	 * Récupérer les widgets de la catégorie.
-	 *
-	 * @return la liste des widgets de cette catégorie
-	 */
-	public List<Widget> getLesWidgets() {
-		return this.lesWidgets;
-	}
-
-	/**
-	 * Ajouter un widget dans la catégorie.
-	 *
-	 * @param widget le widget à ajouter dans la catégorie
-	 */
-	public void ajouterUnWidget(final Widget widget) {
-		this.lesWidgets.add(widget);
-		GUI.getPanelWidget().setLesWidgets(this.lesWidgets);
-	}
-
-	/**
 	 * Retourne vrai si le bouton est actif
 	 *
 	 * @return true
 	 */
 	public boolean isActive() {
 		return this.active;
+	}
+	
+	/**
+	 * Retourne la catégorie liée au bouton.
+	 * @return la catégorie
+	 */
+	public Categorie getCategorie() {
+		return this.modele.getCategorie();
 	}
 }

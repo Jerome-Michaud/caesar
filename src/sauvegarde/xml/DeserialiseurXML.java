@@ -1,19 +1,17 @@
 package sauvegarde.xml;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import modeles.Erreur;
+import modeles.DicoVariables;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.Variable;
+import nxtim.instruction.VariableModifiable;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
 import vue.tools.NonChargeableException;
 import vue.widget.FabriqueInstructions;
 import vue.widget.Widget;
 import vue.widget.WidgetCompose;
-import vue.widget.modele.zones.Zone;
 
 /**
  *
@@ -34,38 +32,58 @@ public class DeserialiseurXML {
 	 * @throws NonChargeableException Si un des composants n'est pas chargeable (non définit dans la fabrique)
 	 */
 	public static List<List<Widget>> load(final Document docXml) throws NonChargeableException {
-		List<List<Widget>> arbo = null;
+		List<List<Widget>> arbo = new LinkedList<List<Widget>>();
 		
 		// Chargement du dictionnaire
-		
+		Element dictionnaire = docXml.getRootElement().getChild("dictionnaire");
+		for (Element variable : dictionnaire.getChildren()) {
+			Variable var = new VariableModifiable(TypeVariable.fromString(variable.getAttributeValue("type")), variable.getAttributeValue("nom"), "");
+			DicoVariables.getInstance().ajouter(var);
+		}
 		
 		// Chargement de l'arborescence
+		List<Element> groupes = docXml.getRootElement().getChild("arborescence").getChildren("groupe");
 		
-		
+		for (Element groupe : groupes) {
+			List l = new LinkedList<Widget>();
+			for (Element widget : groupe.getChildren()) {
+				l.add(deserializeWidget(widget));
+			}
+			arbo.add(l);
+		}
 		return arbo;
 	}
 	
 	private static Widget deserializeWidget(Element widget) throws NonChargeableException {
 		String classe = widget.getAttributeValue("classe");
-		Element coordonnees = widget.getChild("coordonnees");
-		List<Element> attributs = widget.getChild("attributs").getChildren();
-		List<Element> accroches = widget.getChildren("accroche");
+		Element coordonneesXml = widget.getChild("coordonnees");
+		List<Element> attributsXml = widget.getChild("attributs").getChildren();
+		List<Element> accrochesXml = widget.getChildren("accroche");
 
+		// Récupération d'un objet Widget correspondant à la classe
 		FabriqueInstructions fabrique = new FabriqueInstructions();
 		Widget w = fabrique.creerWidget(classe);
-
-		// Remplissage des zones
-		List<Zone> lesZones = w.getModele().getLesZonesSaisies();
-		for (int i = 0; i < lesZones.size(); i++) {
-			lesZones.get(i).setValeur(attributs.get(i).getText());
+		
+		// Remplissage des coordonnées
+		if (coordonneesXml != null) {
+			w.setLocation(Integer.parseInt(coordonneesXml.getAttributeValue("x")), Integer.parseInt(coordonneesXml.getAttributeValue("y")));
 		}
+	
+		// Remplissage des zones
+		/*List<Zone> lesZones = w.getModele().getLesZonesSaisies();
+		for (int i = 0; i < lesZones.size(); i++) {
+			lesZones.get(i).setValeur(attributsXml.get(i).getText());
+		}*/
 
 		// Remplissage des zones d'accroche
 		if (w.isComplexe()) {
 			WidgetCompose wComp = (WidgetCompose) w;
 			int i = 0;
 			for (List<Widget> accroche : wComp.getMapZone().values()) {
-				//accroches.get(i).
+				Element accrocheXml = accrochesXml.get(i);
+				for (Element widgetXml : accrocheXml.getChildren()) {
+					accroche.add(deserializeWidget(widgetXml));
+				}
 				i++;
 			}
 		}

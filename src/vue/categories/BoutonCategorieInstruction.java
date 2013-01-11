@@ -1,7 +1,7 @@
 package vue.categories;
 
-import vue.widget.Widget;
-import java.awt.Color;
+import modeles.DicoWidgetsCategories;
+import nxtim.instruction.Categorie;
 import vue.ginterface.GUI;
 
 /**
@@ -23,22 +23,13 @@ import vue.ginterface.GUI;
 public class BoutonCategorieInstruction extends BoutonCategorie {
 
 	/**
-	 * Quantité des différentes couleurs.
-	 */
-	private static final int ROUGE = 0, VERT = 107, BLEU = 242;
-
-	/**
 	 * Définit le bouton catégorie
 	 * <code>Instructions</code>.
 	 */
 	public BoutonCategorieInstruction() {
-		super(new ModeleCategorie("Instructions", new Color(ROUGE, VERT, BLEU)));
+		super(new ModeleCategorie(Categorie.INSTRUCTION));
 
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetTache());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetWait());
-
-		for (Widget w : this.getLesWidgets()) {
-			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
-		}
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.INSTRUCTION, GUI.getPanelWidget().getFabrique().creerWidgetTache());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.INSTRUCTION, GUI.getPanelWidget().getFabrique().creerWidgetWait());
 	}
 }

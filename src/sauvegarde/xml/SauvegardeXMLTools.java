@@ -10,6 +10,7 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import sauvegarde.SauvegardeTools;
+import vue.ginterface.GUI;
 import vue.tools.ArborescenceTools;
 import vue.tools.NonChargeableException;
 
@@ -89,6 +90,7 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 				try {
 					SAXBuilder sxb = new SAXBuilder();
 					ArborescenceTools.getInstance().initArborescence(DeserialiseurXML.load(sxb.build(fichier)), true);
+					GUI.getPanelCodeGraphique().repaint();
 				} catch (JDOMException ex) {
 					Erreur.afficher(ex, "Le fichier fournit n'est pas correct");
 				}

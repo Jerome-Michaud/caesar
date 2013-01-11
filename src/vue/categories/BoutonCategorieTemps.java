@@ -1,7 +1,6 @@
 package vue.categories;
 
-import vue.widget.Widget;
-import java.awt.Color;
+import nxtim.instruction.Categorie;
 
 /**
  * Classe permettant l'instanciation du bouton catégorie "Temps".
@@ -12,19 +11,10 @@ import java.awt.Color;
 public class BoutonCategorieTemps extends BoutonCategorie {
 
 	/**
-	 * Quantité des différentes couleurs.
-	 */
-	private static final int ROUGE = 0, VERT = 179, BLEU = 214;
-
-	/**
 	 * Définit le bouton catégorie
 	 * <code>Temps</code>.
 	 */
 	public BoutonCategorieTemps() {
-		super(new ModeleCategorie("Temps", new Color(ROUGE, VERT, BLEU)));
-
-		for (Widget w : this.getLesWidgets()) {
-			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
-		}
+		super(new ModeleCategorie(Categorie.TEMPS));
 	}
 }

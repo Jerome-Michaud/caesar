@@ -3,7 +3,7 @@ package vue.widget.modele;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
-import modeles.DicoVars;
+import modeles.DicoVariables;
 import modeles.TypeWidget;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
@@ -46,7 +46,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		/*variables = new JComboBox(DicoVars.getInstance().getLesvariables());
 		variables.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add((Zone) variables);*/
-		ListeDeroulante l = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
+		ListeDeroulante l = new ListeDeroulante<Variable>(DicoVariables.getInstance().getLesvariables());
 		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 

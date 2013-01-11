@@ -3,9 +3,12 @@ package vue.ginterface;
 import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import modeles.DicoWidgetsCategories;
 import vue.tools.Variables;
 import vue.widget.FabriqueInstructions;
 import vue.widget.Widget;
@@ -71,6 +74,8 @@ public class PanelWidget extends JPanel {
 		this.removeAll();
 		this.lesWidgets = liste;
 		placerWidgets();
+		
+		this.validate();
 		this.repaint();
 	}
 

@@ -1,10 +1,11 @@
 package vue.categories;
 
-import java.awt.Color;
+import java.util.Observable;
+import modeles.DicoWidgetsCategories;
+import nxtim.instruction.Categorie;
 import nxtim.instruction.Operateur;
 
 import vue.ginterface.GUI;
-import vue.widget.Widget;
 
 /**
  *
@@ -13,48 +14,36 @@ import vue.widget.Widget;
 public class BoutonCategorieExpression extends BoutonCategorie {
 
 	/**
-	 * Quantité des différentes couleurs.
-	 */
-	private static final int ROUGE = 255, VERT = 189, BLEU = 0;
-
-	/**
 	 * Définit le bouton catégorie
 	 * <code>Instructions</code>.
 	 */
 	public BoutonCategorieExpression() {
-		super(new ModeleCategorie("Expression", new Color(ROUGE, VERT, BLEU)));
+		super(new ModeleCategorie(Categorie.EXPRESSION));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.ADDITION));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.DIVISION));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.MULIPLICATION));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.SOUSTRACTION));
 
+		/*
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.OU, null));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL, null));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPERIEUR, null));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFERIEUR, null));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.ET, null));
 
-
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.ADDITION));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.DIVISION));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.MULIPLICATION));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.SOUSTRACTION));
-
-		/*this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.OU, null));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL, null));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPERIEUR, null));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFERIEUR, null));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.ET, null));
-
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE, null));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL, null));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL, null));
-*/
-
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE, null));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL, null));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL, null));
+		*/
 		
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.OU));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPERIEUR));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFERIEUR));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.ET));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.OU));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPERIEUR));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFERIEUR));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.ET));
 
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL));
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
-
-		for (Widget w : this.getLesWidgets()) {
-			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
-		}
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
 	}
 }

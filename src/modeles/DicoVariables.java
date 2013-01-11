@@ -10,13 +10,13 @@ import nxtim.instruction.Variable;
 /**
  * Définit le dictionnaire de variables.
  */
-public final class DicoVars {
+public final class DicoVariables {
 
 	/**
 	 * L'instance de
 	 * <code>DicoVars</code>.
 	 */
-	private static DicoVars instance;
+	private static DicoVariables instance;
 	/**
 	 * Les différentes variables.
 	 */
@@ -25,7 +25,7 @@ public final class DicoVars {
 	/**
 	 *
 	 */
-	private DicoVars() {
+	private DicoVariables() {
 		dictionnaire = new HashMap<String, Variable>();
 		//this.dictionnaire.put("icerkjnfenefn", new VariableModifiable(TypeVariable.INT, "icerkjnfenefn", "0"));
 	}
@@ -36,9 +36,9 @@ public final class DicoVars {
 	 *
 	 * @return l'instance de <code>DicoVars</code>
 	 */
-	public static synchronized DicoVars getInstance() {
+	public static synchronized DicoVariables getInstance() {
 		if (instance == null) {
-			instance = new DicoVars();
+			instance = new DicoVariables();
 		}
 		return instance;
 	}

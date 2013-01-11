@@ -11,9 +11,9 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import modeles.DicoVars;
+import modeles.DicoVariables;
+import modeles.DicoWidgetsCategories;
 import nxtim.instruction.Variable;
-import vue.categories.BoutonCategorieVariable;
 
 /**
  *
@@ -30,7 +30,7 @@ public class FenetreSupressionVariable extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(null);
 
-		variables = new JComboBox(DicoVars.getInstance().getLesvariables());
+		variables = new JComboBox(DicoVariables.getInstance().getLesvariables());
 		boutonValider = new JButton("Valider");
 
 		Box boxV = Box.createVerticalBox();
@@ -56,11 +56,16 @@ public class FenetreSupressionVariable extends JFrame {
 			@ Override
 			public void actionPerformed(ActionEvent ae) {
 				String variable = ((Variable) variables.getSelectedItem()).getNom();
-				DicoVars.getInstance().supprimer(variable);
+				
+				// Suppression du widget dans la catégorie "Variables"
+				DicoWidgetsCategories.getInstance().supprimerWidgetVariable(variable);
+				
+				// Suppression de la vaiable dans le dictionnaire
+				DicoVariables.getInstance().supprimer(variable);
 
-				BoutonCategorieVariable bcv = (BoutonCategorieVariable) GUI.getPanelTypeWidget().getCurrentCategorie();
-				bcv.supprimerWidgetVariable(variable);
-
+				// Mise à jour du panel widget
+				GUI.getPanelWidget().setLesWidgets(DicoWidgetsCategories.getInstance().getWidgets(GUI.getPanelTypeWidget().getCurrentCategorie().getCategorie()));
+				
 				dispose();
 			}
 		});

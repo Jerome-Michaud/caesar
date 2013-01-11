@@ -2,6 +2,10 @@ package vue.categories;
 
 import vue.widget.Widget;
 import java.awt.Color;
+import java.util.List;
+import modeles.DicoCouleursCategories;
+import modeles.DicoWidgetsCategories;
+import nxtim.instruction.Categorie;
 import vue.ginterface.GUI;
 
 /**
@@ -24,23 +28,14 @@ import vue.ginterface.GUI;
 public class BoutonCategorieMoteur extends BoutonCategorie {
 
 	/**
-	 * Quantité des différentes couleurs.
-	 */
-	private static final int ROUGE = 133, VERT = 205, BLEU = 68;
-
-	/**
 	 * Définit le bouton catégorie
 	 * <code>Moteur</code>.
 	 */
 	public BoutonCategorieMoteur() {
-		super(new ModeleCategorie("Moteur", new Color(ROUGE, VERT, BLEU)));
+		super(new ModeleCategorie(Categorie.MOTEUR));
 
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetMoteurMovFwd());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetMoteurMovRev());
-		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetMoteurOff());
-
-		for (Widget w : this.getLesWidgets()) {
-			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
-		}
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMovFwd());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMovRev());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurOff());
 	}
 }

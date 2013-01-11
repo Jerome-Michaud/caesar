@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComponent;
 
-import modeles.DicoVars;
+import modeles.DicoVariables;
 import modeles.TypeWidget;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
@@ -99,8 +99,8 @@ public class ForWidget extends ModeleWidget {
 
         //variable
         ListeDeroulante lv = new ListeDeroulante<Variable>();
-        if (DicoVars.getInstance().getLesvariables().length > 0) {
-            List<Variable> liste = new ArrayList(DicoVars.getInstance().getDictionnaire().values());
+        if (DicoVariables.getInstance().getLesvariables().length > 0) {
+            List<Variable> liste = new ArrayList(DicoVariables.getInstance().getDictionnaire().values());
             lv.setLesItems(liste);
         }
         lv.setBounds(55, 3, 35, 20);
@@ -134,10 +134,10 @@ public class ForWidget extends ModeleWidget {
 
         this.decalageX(188);
 
-        if (DicoVars.getInstance().getLesvariables().length > 0) {
-            setCondition(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
-            setIteration(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
-            setInitialization(DicoVars.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
+        if (DicoVariables.getInstance().getLesvariables().length > 0) {
+            setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
+            setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
+            setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
         }
         initListeners();
     }
@@ -171,7 +171,7 @@ public class ForWidget extends ModeleWidget {
             ((JComponent) z).addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(final FocusEvent arg0) {
-                    Variable v = DicoVars.getInstance().getLesvariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
+                    Variable v = DicoVariables.getInstance().getLesvariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
                     String deb = ((Zone) getLesZonesSaisies().get(1)).getValeur();
                     Operateur o = Operateur.comparaisonA()[Integer.parseInt(((Zone) getLesZonesSaisies().get(2)).getValeur())];
                     String fin = ((Zone) getLesZonesSaisies().get(3)).getValeur();
