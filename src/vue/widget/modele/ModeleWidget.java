@@ -8,6 +8,8 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -281,11 +283,11 @@ public abstract class ModeleWidget implements Serializable {
      * @return la plus petite abscisse.
      */
     public int getXMin() {
-        int max = this.tabX[0];
+        int min = this.tabX[0];
         for (Integer i : tabX) {
-            max = Math.min(max, i);
+            min = Math.min(min, i);
         }
-        return max;
+        return min;
     }
 
     /**
@@ -307,11 +309,11 @@ public abstract class ModeleWidget implements Serializable {
      * @return la plus petite ordonnée.
      */
     public int getYMin() {
-        int max = this.tabY[0];
+        int min = this.tabY[0];
         for (Integer i : tabY) {
-            max = Math.min(max, i);
+            min = Math.min(min, i);
         }
-        return max;
+        return min;
     }
 
     /**
@@ -411,7 +413,7 @@ public abstract class ModeleWidget implements Serializable {
     }
 
     /**
-     * Méthode abstraite permettant d'augmenter ou diminuer la largeur du composant.
+     * Méthode permettant d'augmenter ou diminuer la largeur du composant.
      *
 	 * Un comportement de base a été définit est ce comportement doit être redefinit pour des widgets plus complexes
 	 * 
@@ -428,7 +430,7 @@ public abstract class ModeleWidget implements Serializable {
 	}
 
     /**
-     * Méthode abstraite permettant d'augmenter ou diminuer la hauteur du composant
+     * Méthode permettant d'augmenter ou diminuer la hauteur du composant
 	 * 
 	 * Si la méthode n'a pas été redéfinie dans les classes concrètes filles, aucune action n'est effectuée
      *
@@ -437,6 +439,32 @@ public abstract class ModeleWidget implements Serializable {
      */
 
     public void decalageY(int x,Rectangle r){}
+	
+	public void decalerComposantsSuivants(int positionX, int decalage){
+		for(Zone z : this.lesZonesSaisies){
+			int zonePosX = z.getPositionX();
+			if(zonePosX > positionX){
+				z.setPositionX(zonePosX + decalage);
+			}
+		}
+		Iterator<Point> i = message.keySet().iterator();
+		HashMap<Point,String> mapTemp = new LinkedHashMap<Point, String>();
+		while(i.hasNext()){
+			Point pt = i.next();
+			int messPosX = (int) pt.getX();
+			if(messPosX > positionX){
+				Point pt2 = new Point();
+				pt2.setLocation(messPosX + decalage,pt.getY());
+				mapTemp.put(pt2, message.get(pt));
+				i.remove();
+			}
+		}
+		i = mapTemp.keySet().iterator();
+		while(i.hasNext()){
+			Point pt = i.next();
+			message.put(pt, mapTemp.get(pt));
+		}
+	}
 
     /**
      * Méthode permettant de récupérer la liste des messages du widget.

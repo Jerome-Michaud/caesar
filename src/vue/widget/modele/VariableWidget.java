@@ -81,11 +81,6 @@ public class VariableWidget extends ModeleWidget {
 	}
 	
 	@Override
-	public void decalageY(int b, Rectangle r) {
-		
-	}
-	
-	@Override
 	public void initListeners() {
 	
 	}

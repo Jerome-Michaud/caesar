@@ -65,7 +65,11 @@ public class ChampTexte extends JPanel implements Zone {
 	}
 
 	/**
-	 * Récupère le texte du champ texte.
+	 * Recupère la valeur actuelle du champ texte.
+	 *
+	 * Deux cas possibles:
+	 * Soit le champ texte ne contient pas de widget et on retourne la valeur du champ texte
+	 * Soit le champ texte contient un widget, auquel cas on retourne le nom de la variable.
 	 *
 	 * @return la valeur du champ texte.
 	 */
@@ -93,9 +97,8 @@ public class ChampTexte extends JPanel implements Zone {
 	}
 
 	public void setWidgetContenu(Widget w) {
-		System.out.println(this.getComponents().length);
 		this.removeAll();
-		System.out.println(this.getComponents().length);
+		int oldW = this.getWidth();
 		if (w == null) {
 			this.etat = 0;
 			this.setComponent(textField);
@@ -103,13 +106,29 @@ public class ChampTexte extends JPanel implements Zone {
 			this.etat = 1;
 			this.setComponent(w);
 		}
-		this.revalidate();
-		this.repaint();
+		System.out.println("Old : " + oldW + " new :" + this.getWidth());
+		Widget parent = ((Widget)(this.getParent()));
+		int decal = this.getWidth() - oldW;
+		parent.getModele().decalageX(decal);
+		parent.setForme(false);
+		parent.getModele().decalerComposantsSuivants(this.getX(), decal);
+		/*this.revalidate();
+		this.repaint();*/
 		this.widgetContenu = w;
 	}
 
 	private void setComponent(JComponent comp) {
 		this.setSize(comp.getSize());
 		this.add(comp, BorderLayout.CENTER);
+	}
+
+	@Override
+	public int getPositionX() {
+		return this.getX();
+	}
+
+	@Override
+	public void setPositionX(int posX) {
+		this.setLocation(posX, this.getY());
 	}
 }

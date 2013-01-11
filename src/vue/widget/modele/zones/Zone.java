@@ -20,4 +20,8 @@ public interface Zone {
 	 * @return le valeur de la zone.
 	 */
 	public String getValeur();
+	
+	public int getPositionX();
+	
+	public void setPositionX(int posX);
 }

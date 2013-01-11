@@ -1,21 +1,12 @@
 package vue.widget.modele;
 
 
-import vue.widget.modele.zones.ChampTexte;
-import vue.widget.modele.zones.ListeDeroulante;
-import vue.widget.modele.zones.Zone;
 import instruction.Condition;
 import instruction.Operateur;
-import instruction.Operation;
-import instruction.Variable;
-
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import javax.swing.JComponent;
 import modeles.TypeWidget;
+import vue.widget.modele.zones.ChampTexte;
 
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
@@ -40,7 +31,11 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		int tabX[] = {0, 10, 57, 67, 57, 10};
 		int tabY[] = {10, 0, 0, 10, 20, 20};
 
-
+		this.attachableBas = false;
+        this.attachableHaut = false;
+        this.imbricable = false;
+        this.attachableInterne = true;		
+		
 		/**
 		 * Méthode permettant de définir un tableau représentant les coordonnées des
 		 * ordonnées de la forme du widget.
@@ -87,5 +82,16 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 	}
 
+	@Override
+	public void decalageX(int x) {
+		int i;
+		for (i = 2; i < this.getTabX().length-1; i++) {
+			this.getForme().xpoints[i] = this.getForme().xpoints[i] + x ;
+		}
+		this.setForme(this.getForme());
+		this.setTailleX();
+	}
+	
+	
 
 }

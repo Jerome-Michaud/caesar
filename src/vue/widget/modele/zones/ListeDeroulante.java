@@ -63,4 +63,15 @@ public class ListeDeroulante<T> extends JComboBox implements Zone {
 	public String getValeur() {
 		return String.valueOf(this.getSelectedIndex());
 	}
+	
+	@Override
+	public int getPositionX() {
+		return this.getX();
+	}
+	
+
+	@Override
+	public void setPositionX(int posX) {
+		this.setLocation(posX, this.getY());
+	}
 }

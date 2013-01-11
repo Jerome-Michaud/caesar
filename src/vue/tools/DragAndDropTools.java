@@ -75,7 +75,6 @@ public class DragAndDropTools extends Observable {
 	 */
 	public void clickWidget(Widget comp, Point ptClick) {
 		comp.setPtClick(ptClick);
-
 		if (!comp.isDraggable()) {
 			comp.setDraggable(true);
 			Widget compNouv;
