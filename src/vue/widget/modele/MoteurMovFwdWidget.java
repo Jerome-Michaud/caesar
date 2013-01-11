@@ -15,15 +15,13 @@ import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
-
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type MoteurFwd.
- *
+ * 
  * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
  */
 public class MoteurMovFwdWidget extends ModeleWidget {
-
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du MoteurFwd.
 	 */
@@ -38,9 +36,10 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEURMOVFWD);
 
+		//this.setMessage("Moteur           avance de");
 		message.put(new Point(5, 17), "Moteur");
 		message.put(new Point(94, 17), "avance à");
-
+//recupere le element prog
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
@@ -49,7 +48,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
-		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+                f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		f.setBounds(142, 3, 40, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
@@ -60,18 +59,8 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.decalageX(11);
 
 		initListeners();
-	}
-
-	@Override
-	public void decalageX(int a) {
-		int i;
-		for (i = 6; i < 10; i++) {
-			this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
-		}
-		this.setForme(this.getForme());
-		this.setTailleX();
-	}
-
+	}//fin constructeur
+	
 	@Override
 	public void decalageY(int b, Rectangle r) {
 		int i;
@@ -81,35 +70,35 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-
+	
 	@Override
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
+
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				setInstructionMoteur(((Zone) getLesZonesSaisies().get(0)).getValeur());
 			}
 		});
 		((JComponent) this.getLesZonesSaisies().get(1)).addFocusListener(new FocusAdapter() {
+
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				setInstructionValeur(((Zone) getLesZonesSaisies().get(1)).getValeur());
 			}
 		});
 	}
-
 	/**
 	 * Méthode permettant de définir l'instruction moteur du widget.
-	 *
+	 * 
 	 * @param nom L'instruction Moteur à définir sur le modèle
 	 */
 	private void setInstructionMoteur(String nom) {
 		((InstructionMoteurMov) getElementProgramme()).setMoteur(Moteur.values()[Integer.parseInt(nom)]);
 	}
-
 	/**
 	 * Méthode permettant de définir la valeur de l'instruction moteur
-	 *
+	 * 
 	 * @param nom La valeur de l'instruction moteur
 	 */
 	private void setInstructionValeur(String nom) {

@@ -2,7 +2,6 @@ package vue.widget.modele;
 
 import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
-
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -12,20 +11,28 @@ import modeles.TypeWidget;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 
+
+
 /**
  *
  * @author zubair
  */
 public class VariableSetValueWidget extends ModeleWidget {
 
+
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
 	 */
+
+
+
 	public VariableSetValueWidget() {
 		super();
 
+
 		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
+
 
 		this.setTabX(tX);
 		this.setTabY(tY);
@@ -38,9 +45,13 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
+		/*variables = new JComboBox(DicoVars.getInstance().getLesvariables());
+		variables.setBounds(55, 3, 35, 20);
+		this.getLesZonesSaisies().add((Zone) variables);*/
 		ListeDeroulante l = new ListeDeroulante<Variable>(DicoVars.getInstance().getLesvariables());
 		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
+
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
@@ -48,21 +59,13 @@ public class VariableSetValueWidget extends ModeleWidget {
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 
+
+
 		this.decalageX(-5);
 
 		initListeners();
 	}
-
-	@Override
-	public void decalageX(int a) {
-		int i;
-		for (i = 2; i < this.getTabX().length - 2; i++) {
-			this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
-		}
-		this.setForme(this.getForme());
-		this.setTailleX();
-	}
-
+	
 	@Override
 	public void decalageY(int b, Rectangle r) {
 		int i;
@@ -72,17 +75,15 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-
+	
 	@Override
-	public void initListeners() {
-	}
+	public void initListeners() { }
 
 	/**
-	 * Retourne le nom de la variable.
-	 *
+	 * 
 	 * @return nom de variable
 	 */
 	public String getNomVariable() {
-		return ((VariableModifiable) this.getElementProgramme()).getNom();
+		return ((VariableModifiable)this.getElementProgramme()).getNom();
 	}
 }

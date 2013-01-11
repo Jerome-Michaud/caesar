@@ -1,10 +1,10 @@
 package vue.widget.modele;
 
+
 import vue.widget.modele.zones.ChampTexte;
 
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.Rectangle;
 import modeles.TypeWidget;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
@@ -20,10 +20,8 @@ import nxtim.instruction.Variable;
 
 public class ExpressionArithmeticWidget extends ModeleWidget {
 
-
 	/**
-	 * Constructeur du modele definissant les differents parametres du
-	 * ExpressionSum .
+	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
 	public ExpressionArithmeticWidget(Operateur op) {
 		super();
@@ -34,16 +32,26 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 		int tabY[] = {5, 0, 0, 5, 15, 20,20, 15};
 
+		/**
+		 * Méthode permettant de définir un tableau représentant les coordonnées des
+		 * ordonnées de la forme du widget.
+		 *
+		 * @param tabY Le tableau représentant les coordonnées des ordonnées de la
+		 * forme du widget.
+		 */
 		this.setTabX(tabX);
 		this.setTabY(tabY);
-
+		/**
+		 * Recalcule la largeur du widget.
+		 */
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.EXPRESSION_ARITHMETIQUE);
 
 		message.put(new Point(30, 17), op.toString());
 
-		this.setElementProgramme(new Operation(op, (Variable) null, (Variable) null));
+
+		this.setElementProgramme(new Operation(op, (Variable)null, (Variable)null));
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 
@@ -60,71 +68,9 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		//f.setBounds(80, 3, 20, 20);
 		f.setBounds(40, 3, 14, 14);
 		this.getLesZonesSaisies().add(f);
-		decalageX(-5);
 
 		initListeners();
 	}
-
-	//		fin constructeur
-	/**
-	 * Methode abstraite permettant de diminuer la largeur du composant
-	 *
-	 * @param x La valeur de la reduction à appliquer
-	 */
-	//public void decalageXin(int x) {
-	// TODO Auto-generated method stub
-	/*int i;
-			for (i = 6; i < 10; i++) {
-				this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
-			}
-			this.setForme(this.getForme());
-			this.setTailleX();*/
-	//}
-	/**
-	 * Méthode abstraite permettant d'augmenter la largeur du composant.
-	 *
-	 * @param x La valeur de l'agrandissement à appliquer
-	 */
-
-	@Override
-	public void decalageX(int x) {
-		/*int i;
-		 for (i = 6; i < 10; i++) {
-		 this.getForme().xpoints[i] = this.getForme().xpoints[i] + x;
-		 }
-		 this.setForme(this.getForme());
-		 this.setTailleX();*/
-	}
-
-	/**
-	 * Méthode abstraite permettant de réduire la hauteur du composant.
-	 *
-	 * @param b La valeur de la réduction à appliquer
-	 * @param r Le rectangle à réduire également
-	 */
-	//@Override
-	//public void decalageYin(int b, Rectangle r) {
-	// TODO Auto-generated method stub
-	/*int i;
-			for (i = 8; i < 16; i++) {
-				this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
-			}
-			this.setForme(this.getForme());
-			this.setTailleY();*/
-	//}
-
-	@Override
-	public void decalageY(int b, Rectangle r) {
-		/*int i;
-		 for (i = 8; i < 16; i++) {
-		 this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
-		 }
-		 this.setForme(this.getForme());
-		 this.setTailleY();*/
-	}
-
-	public void initListeners() {
-
-	}
-
+	
+	public void initListeners() { }
 }

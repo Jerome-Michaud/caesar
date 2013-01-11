@@ -160,10 +160,12 @@ public class FabriqueInstructions {
 	 *
 	 * @return un widget complexe de type "expression logique"
 	 */
+	/*public Widget creerWidgetExpressionLogical(Operateur op, ExpressionModifiable expressionModifiable) {
+		return new WidgetCompose(new ExpressionLogicalWidget(op, expressionModifiable));
+	}*/
 	public Widget creerWidgetExpressionLogical(Operateur op) {
 		return new WidgetCompose(new ExpressionLogicalWidget(op));
 	}
-
 	/**
 	 * Méthode permettant de créér une copie d'un widget.
 	 *
@@ -208,7 +210,7 @@ public class FabriqueInstructions {
 			Condition con = (Condition) comp.getModele().getElementProgramme();
 
 			w = creerWidgetExpressionLogical(con.getOperateur());
-
+			//w = creerWidgetExpressionLogical(con.getOperateur(), null);
 		}
 
 		if (w == null) {

@@ -10,27 +10,21 @@ import java.awt.geom.Rectangle2D;
 import modeles.TypeWidget;
 import nxtim.instruction.VariableModifiable;
 
-
-
 /**
  *
  * @author zubair
  */
 public class VariableWidget extends ModeleWidget {
+
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
 	 */
-
-	private VariableWidget(){
-
-	}
+	private VariableWidget() { }
+	
 	public VariableWidget(VariableModifiable variableModifiable) {
-
 		super();
 
-
 		int tX[] = {0, 3, 7, 10, 10, 7, 3, 0};
-
 		int tY[] = {3, 0, 0,  3,  11, 14, 14,10};
 
 		this.setTabX(tX);
@@ -65,36 +59,14 @@ public class VariableWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-	/*
-	@Override
-	public void decalageXin(int a) {
-		int i;
-		for (i = 2; i < 10; i++) {
-			this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
-		}
-		this.setForme(this.getForme());
-		this.setTailleX();
-	}
-	*/
+	
 	@Override
 	public void decalageY(int b, Rectangle r) {
 		
 	}
-	/*
-	@Override
-	public void decalageYin(int b, Rectangle r) {
-		int i;
-		for (i = 8; i < 16; i++) {
-			this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
-		}
-		this.setForme(this.getForme());
-		this.setTailleY();
-	}
-	*/
-	@Override
-	public void initListeners() {
 	
-	}
+	@Override
+	public void initListeners() { }
 
 	/**
 	 * 
