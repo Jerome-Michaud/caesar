@@ -13,11 +13,12 @@ import modeles.TypeWidget;
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
  * forme d'un widget de type Expression arethmetique.
- *
+ * 
  * @author CHOUKET Houda
  */
 public class ExpressionArithmeticWidget extends ModeleWidget {
 
+	
 	/**
 	 * Constructeur du modele definissant les differents parametres du
 	 * ExpressionSum .
@@ -25,15 +26,19 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 	public ExpressionArithmeticWidget(Operateur op) {
 		super();
 
-		int tabX[] = {0, 5, 62, 67, 67, 62, 5, 0};
-		int tabY[] = {7, 0, 0, 7, 20, 25, 25, 20};
+		/*int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
+			int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
+		 */
+		int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
+		int tabY[] = {5, 0, 0, 5, 15, 20,20, 15};
 
 		this.setTabX(tabX);
 		this.setTabY(tabY);
 
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.EXPRESSION);
+
+		this.setType(TypeWidget.EXPRESSION_ARITHMETIQUE);
 
 		message.put(new Point(30, 17), op.toString());
 
@@ -41,20 +46,41 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ChampTexte l = new ChampTexte();
+		l.setBounds(10, 3, 14, 14);
 		l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
-		l.setBounds(10, 3, 20, 20);
 
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
-		f.setBounds(40, 3, 20, 20);
+		//f.setBounds(80, 3, 20, 20);
+		f.setBounds(40, 3, 14, 14);
 		this.getLesZonesSaisies().add(f);
-
-		this.decalageX(-5);
+		decalageX(-5);
 
 		initListeners();
 	}
+
+	//		fin constructeur
+	/**
+	 * Methode abstraite permettant de diminuer la largeur du composant
+	 *
+	 * @param x La valeur de la reduction à appliquer
+	 */
+	//public void decalageXin(int x) {
+	// TODO Auto-generated method stub
+	/*int i;
+			for (i = 6; i < 10; i++) {
+				this.getForme().xpoints[i] = this.getForme().xpoints[i] - x;
+			}
+			this.setForme(this.getForme());
+			this.setTailleX();*/
+	//}
+	/**
+	 * Méthode abstraite permettant d'augmenter la largeur du composant.
+	 *
+	 * @param x La valeur de l'agrandissement à appliquer
+	 */
 
 	@Override
 	public void decalageX(int x) {
@@ -65,6 +91,23 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		 this.setForme(this.getForme());
 		 this.setTailleX();*/
 	}
+
+	/**
+	 * Méthode abstraite permettant de réduire la hauteur du composant.
+	 *
+	 * @param b La valeur de la réduction à appliquer
+	 * @param r Le rectangle à réduire également
+	 */
+	//@Override
+	//public void decalageYin(int b, Rectangle r) {
+	// TODO Auto-generated method stub
+	/*int i;
+			for (i = 8; i < 16; i++) {
+				this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
+			}
+			this.setForme(this.getForme());
+			this.setTailleY();*/
+	//}
 
 	@Override
 	public void decalageY(int b, Rectangle r) {
@@ -77,6 +120,5 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 	}
 
 	@Override
-	public void initListeners() {
-	}
+	public void initListeners() { }
 }

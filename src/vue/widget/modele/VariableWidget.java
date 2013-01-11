@@ -34,7 +34,6 @@ public class VariableWidget extends ModeleWidget {
 		this.setElementProgramme(variableModifiable);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
-
 		ChampTexte f = new ChampTexte();
 		f.setBounds(65, variableModifiable.getNom().length(), 40, 20);
 		f.setToolTipText("0");
