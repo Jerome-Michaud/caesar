@@ -12,7 +12,8 @@ public class InstructionRepeat extends InstructionInconditionelle {
 
 	/**
 	 * Crée une boucle de répétition vide sans précision du nombre de répétition.<br/>
-	 * L'expression donnant ce nombre vaut <code>null</code>.
+	 * L'expression donnant ce nombre vaut
+	 * <code>null</code>.
 	 */
 	public InstructionRepeat() {
 		super();

@@ -27,7 +27,7 @@ public class VisiteurRobotC extends VisiteurC {
 	private VisiteurRobotC() {
 		super();
 	}
-	
+
 	public synchronized static VisiteurRobotC getInstance() {
 		if (instance == null) {
 			instance = new VisiteurRobotC();
@@ -48,7 +48,6 @@ public class VisiteurRobotC extends VisiteurC {
 				break;
 		}
 	}
-	
 
 	private String getNomCapteur(CapteurSlot c) {
 		switch (c) {
@@ -115,10 +114,10 @@ public class VisiteurRobotC extends VisiteurC {
 	@Override
 	public void visiter(InstructionTempsCourant inst) {
 		traduction += indent();
-        if(inst.getVariable() != null) {
-            inst.getVariable().accepte(this);
-            traduction += " = ";
-        }
+		if (inst.getVariable() != null) {
+			inst.getVariable().accepte(this);
+			traduction += " = ";
+		}
 		traduction += "CurrentTick();\n";
 	}
 
@@ -161,6 +160,5 @@ public class VisiteurRobotC extends VisiteurC {
 	@Override
 	public void visiter(InstructionMoteurRotate instructionMoteurRotate) {
 		// TODO Auto-generated method stub
-		
 	}
 }

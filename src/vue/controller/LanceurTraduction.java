@@ -18,19 +18,15 @@ import vue.widget.modele.ModeleWidget;
  * Cette classe s'occupe de lancer la traduction du programme construit avec les widgets.<br/>
  * Utilise le design pattern Singleton.
  */
-
 public class LanceurTraduction extends Observable {
 
-	/**
-	 * Le logger de LanceurTraduction.
-	 */
-	private static final Logger logger = Logger.getLogger(LanceurTraduction.class.getName());
 	/**
 	 * Le visiteur qui doit être éxecuté.
 	 */
 	private VisiteurTraduction traducteur;
 	/**
-	 * L'instance de <code>LanceurTraduction</code>.
+	 * L'instance de
+	 * <code>LanceurTraduction</code>.
 	 */
 	private static LanceurTraduction instance = null;
 
@@ -38,8 +34,6 @@ public class LanceurTraduction extends Observable {
 	 * Définit le lanceur de traduction.
 	 */
 	private LanceurTraduction() {
-		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
-		
 		traducteur = VisiteurNXC.getInstance();
 		this.addObserver(GUI.getPanelCodeConsole());
 	}
@@ -55,10 +49,10 @@ public class LanceurTraduction extends Observable {
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * Permet de lancer la traduction.
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public void lancerTraduction() {
@@ -67,7 +61,6 @@ public class LanceurTraduction extends Observable {
 		for (Instruction inst : list) {
 			inst.accepte(traducteur);
 		}
-		logger.info(traducteur.getTraduction());
 		this.setChanged();
 		this.notifyObservers(traducteur.getTraduction());
 	}
@@ -80,22 +73,22 @@ public class LanceurTraduction extends Observable {
 	 */
 	private List<Instruction> trouveTaches() {
 		List<Instruction> list = new LinkedList<Instruction>();
-    	for(List<Widget> racine : ArborescenceTools.getInstance().getArborescence()) {
-    		if(!racine.isEmpty()) {
-    			Widget tache = racine.get(0);
-    			ModeleWidget m = tache.getModele();
-    			if(m.getType() == TypeWidget.TACHE) {
-    				list.add((Instruction) m.getElementProgramme());
-    			}
-    		}
-    	}
-    	return list;
-    }
-	
+		for (List<Widget> racine : ArborescenceTools.getInstance().getArborescence()) {
+			if (!racine.isEmpty()) {
+				Widget tache = racine.get(0);
+				ModeleWidget m = tache.getModele();
+				if (m.getType() == TypeWidget.TACHE) {
+					list.add((Instruction) m.getElementProgramme());
+				}
+			}
+		}
+		return list;
+	}
+
 	/**
 	 * Modifie le traducteur utilisé.<br />
 	 * Si n'a jamais été appelé c'est le traducteur vers NXC qui est utilisé.
-     *
+	 *
 	 * @param visiteur le nouveau traducteur
 	 */
 	public void setTraducteur(VisiteurTraduction visiteur) {

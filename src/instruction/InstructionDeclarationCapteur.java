@@ -8,30 +8,30 @@ public class InstructionDeclarationCapteur implements Instruction {
 	public InstructionDeclarationCapteur() {
 		super();
 	}
-	
+
 	@Override
 	public Categorie getCategorie() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void setCapteur ( Capteur capteur ){
-		this.capteur=  capteur;
+	public void setCapteur(Capteur capteur) {
+		this.capteur = capteur;
 	}
-	
+
 	public String toString() {
-		return " Instruction Declaration "+capteurSlot.toString() +" "+capteur.toString();
+		return " Instruction Declaration " + capteurSlot.toString() + " " + capteur.toString();
 	}
-	
-	public Capteur getCapteur()	{
+
+	public Capteur getCapteur() {
 		return capteur;
 	}
 
-	public void setCapteurSlot ( CapteurSlot capteurSlot ){
-		this.capteurSlot=  capteurSlot;
+	public void setCapteurSlot(CapteurSlot capteurSlot) {
+		this.capteurSlot = capteurSlot;
 	}
-	
-	public CapteurSlot getCapteurSlot()	{
+
+	public CapteurSlot getCapteurSlot() {
 		return capteurSlot;
 	}
 

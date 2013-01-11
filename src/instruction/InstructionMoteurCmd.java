@@ -12,7 +12,8 @@ public abstract class InstructionMoteurCmd implements Instruction {
 
 	/**
 	 * Crée une instruction un moteur non initialisée.<br/>
-	 * Le moteur à pour valeur <code>null</code>.
+	 * Le moteur à pour valeur
+	 * <code>null</code>.
 	 */
 	public InstructionMoteurCmd() {
 		super();

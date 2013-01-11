@@ -41,9 +41,9 @@ public enum TypeWidget {
 			case SETVALUEVARIABLE:
 				return "SetValueVariable";
 			case EXPRESSION:
-				return "Expression";                         
-                            
-                           
+				return "Expression";
+
+
 			default:
 				return null;
 		}

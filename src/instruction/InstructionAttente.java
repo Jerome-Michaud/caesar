@@ -1,4 +1,4 @@
-																																																																																																																																								package instruction;
+package instruction;
 
 /**
  * Cette instruction permet de mettre en attente le programme pendant un certain temps.
@@ -12,7 +12,8 @@ public class InstructionAttente implements Instruction {
 
 	/**
 	 * Créé une instruction d'attente non initialisé.<br/>
-	 * L'expression donnant le temps d'attente à pour valeur <code>null</code>.
+	 * L'expression donnant le temps d'attente à pour valeur
+	 * <code>null</code>.
 	 */
 	public InstructionAttente() {
 		super();

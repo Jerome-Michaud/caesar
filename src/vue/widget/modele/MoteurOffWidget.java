@@ -13,13 +13,15 @@ import javax.swing.JComponent;
 import modeles.TypeWidget;
 
 import java.awt.Rectangle;
+
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type MoteurOff
- * 
+ *
  * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
  */
 public class MoteurOffWidget extends ModeleWidget {
+
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du MoteurOff.
 	 */
@@ -33,79 +35,57 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.MOTEUROFF);
-		
-		//this.setMessage("Moteur           off");
+
 		message.put(new Point(5, 17), "Moteur");
 		message.put(new Point(95, 17), "off");
-		
+
 		this.setElementProgramme(new InstructionMoteurOff());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
 		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
-		
+
 		setInstructionMoteur(l.getValeur());
-		
+
 		this.decalageX(-20);
-		
+
 		initListeners();
 	}
 
 	@Override
 	public void decalageX(int a) {
-        int i;
-        for (i = 6; i < 10; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
-        }
-        this.setForme(this.getForme());
-        this.setTailleX();
-    }
-	/*
+		int i;
+		for (i = 6; i < 10; i++) {
+			this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+		}
+		this.setForme(this.getForme());
+		this.setTailleX();
+	}
+
 	@Override
-    public void decalageXin(int a) {
-        int i;
-        for (i = 6; i < 10; i++) {
-            this.getForme().xpoints[i] = this.getForme().xpoints[i] - a;
-        }
-        this.setForme(this.getForme());
-        this.setTailleX();
-    }
-	*/
-	@Override
-    public void decalageY(int b,Rectangle r) {
-        int i;
-        for (i = 8; i < 16; i++) {
-            this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
-        }
-        this.setForme(this.getForme());
-        this.setTailleY();
-    }
-	/*
-	@Override
-    public void decalageYin(int b,Rectangle r) {
-        int i;
-        for (i = 8; i < 16; i++) {
-            this.getForme().ypoints[i] = this.getForme().ypoints[i] - b;
-        }
-        this.setForme(this.getForme());
-        this.setTailleY();
-    }
-	*/
+	public void decalageY(int b, Rectangle r) {
+		int i;
+		for (i = 8; i < 16; i++) {
+			this.getForme().ypoints[i] = this.getForme().ypoints[i] + b;
+		}
+		this.setForme(this.getForme());
+		this.setTailleY();
+	}
+
 	@Override
 	public void initListeners() {
 		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
-
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				setInstructionMoteur(((Zone) getLesZonesSaisies().get(0)).getValeur());
 			}
 		});
 	}
-	
+
 	/**
 	 * Méthode permettant de définir l'instruction moteur du widget
-	 * 
+	 *
 	 * @param nom L'instruction Moteur à définir sur le modèle
 	 */
 	private void setInstructionMoteur(String nom) {

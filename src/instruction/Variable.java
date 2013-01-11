@@ -20,7 +20,8 @@ public abstract class Variable implements Expression {
 
 	/**
 	 * Crée une variable sans valeur.<br/>
-	 * La valeur est initialisée à <code>null</code>
+	 * La valeur est initialisée à
+	 * <code>null</code>
 	 *
 	 * @param type le type de la variable
 	 * @param nom le nom de la variable

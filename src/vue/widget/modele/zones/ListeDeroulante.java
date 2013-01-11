@@ -3,6 +3,7 @@ package vue.widget.modele.zones;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JComboBox;
+
 /**
  * Classe représentant une liste déroulante particulière qui pourra être insérée au sein d'un widget.
  *
@@ -10,10 +11,12 @@ import javax.swing.JComboBox;
  * @param <T> Le type des valeurs de la liste.
  */
 public class ListeDeroulante<T> extends JComboBox implements Zone {
+
 	/**
 	 * La liste regroupant les items de la liste déroulante
 	 */
 	private List<T> lesItems;
+
 	/**
 	 * Constructeur du composant faisant appel au constructeur équivalent de la
 	 * classe mère et initialisant la liste d'items.
@@ -22,13 +25,16 @@ public class ListeDeroulante<T> extends JComboBox implements Zone {
 		super();
 		this.lesItems = new LinkedList<T>();
 	}
+
 	/**
 	 * Constructeur du composant faisant appel au constructeur équivalent de la classe mère.
+	 *
 	 * @param a un tableau représentant les items qui seront présents dans la liste déroulante
 	 */
 	public ListeDeroulante(T[] a) {
 		super(a);
 	}
+
 	/**
 	 * Modifie la liste d'items du composant.
 	 *
@@ -37,14 +43,17 @@ public class ListeDeroulante<T> extends JComboBox implements Zone {
 	public void setLesItems(List<T> l) {
 		this.lesItems = l;
 	}
+
 	/**
 	 * Modifie la valeur selectionée de la liste déroulante.
+	 *
 	 * @param v L'indice de l'élèment à sélectionner
 	 */
 	@Override
 	public void setValeur(String v) {
 		this.setSelectedIndex(Integer.parseInt(v));
 	}
+
 	/**
 	 * Récupère la valeur de l'élément selectionné.
 	 *

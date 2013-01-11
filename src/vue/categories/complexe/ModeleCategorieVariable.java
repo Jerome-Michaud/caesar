@@ -11,10 +11,8 @@ public class ModeleCategorieVariable extends ModeleCategorie {
 
 	public ModeleCategorieVariable(String nom, Color couleur) {
 		super(nom, couleur);
-		
+
 		this.getFormesExtras().add(new PolygoneActionPlus());
 		this.getFormesExtras().add(new PolygoneActionMoins());
-                
 	}
-	
 }

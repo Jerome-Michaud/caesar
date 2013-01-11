@@ -7,7 +7,8 @@ public class InstructionIf extends InstructionConditionelle {
 
 	/**
 	 * Crée une instruction if sans condition.<br/>
-	 * La condition a pour valeur <code>null</code>.
+	 * La condition a pour valeur
+	 * <code>null</code>.
 	 */
 	public InstructionIf() {
 		super(null);

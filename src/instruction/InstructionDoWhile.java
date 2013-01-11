@@ -7,7 +7,8 @@ public class InstructionDoWhile extends InstructionConditionelle {
 
 	/**
 	 * Créé une boucle DoWhile non initialisée.
-	 * La condition à pour valeur <code>null</code>.
+	 * La condition à pour valeur
+	 * <code>null</code>.
 	 */
 	public InstructionDoWhile() {
 		super();

@@ -47,8 +47,7 @@ public abstract class InstructionStructure implements Instruction {
 	public void inserer(final int position, final Instruction inst) {
 		if (position == POSITION_FIN_CODE) {
 			insererFin(inst);
-		}
-		else {
+		} else {
 			enfants.add(position, inst);
 		}
 	}
@@ -80,8 +79,7 @@ public abstract class InstructionStructure implements Instruction {
 	public void inserer(final int position, final List<Instruction> instListe) {
 		if (position == POSITION_FIN_CODE) {
 			enfants.addAll(instListe);
-		}
-		else {
+		} else {
 			enfants.addAll(position, instListe);
 		}
 	}

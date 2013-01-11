@@ -1,21 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package vue.categories;
 
 import java.awt.Color;
 
 import vue.ginterface.GUI;
-import vue.ginterface.PanelWidget;
 import vue.widget.Widget;
-import instruction.Condition;
 import instruction.Operateur;
+
 /**
  *
- * @author zubier, houda 
+ * @author zubier, houda
  */
 public class BoutonCategorieExpression extends BoutonCategorie {
+
 	/**
 	 * Quantité des différentes couleurs.
 	 */
@@ -29,7 +25,7 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 		super(new ModeleCategorie("Expression", new Color(ROUGE, VERT, BLEU)));
 
 
-		 
+
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.ADDITION));
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.DIVISION));
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.MULIPLICATION));
@@ -44,10 +40,6 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE));
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL));
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
-
-
-
-
 
 		for (Widget w : this.getLesWidgets()) {
 			w.getModele().setCouleur(new Color(ROUGE, VERT, BLEU));
