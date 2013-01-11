@@ -19,8 +19,6 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
 	 * l'Instruction.
 	 */
 	public InstructionWidget(String msg, Instruction i) {
-		super();
-				
 		int[] tX = {0, 5, 30, 35, 45, 50, 130, 135, 135, 130, 50, 45, 35, 30, 5, 0};
 		int[] tY = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
 		

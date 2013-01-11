@@ -26,7 +26,6 @@ public class TacheWidget extends ModeleWidget implements Serializable {
      * Constructeur du modèle définissant les différents paramètres du Tâche
      */
     public TacheWidget() {
-        super();
 
         int[] tX = {0, 5,/**/ /**/ 130, 135,/**/ 135, 130,/**/ 55, 50, 40, 35, /**/ 10, 5,/**/ 5, 10,/**/ 35, 40, 50, 55,/**/ 130, 135,/**/ 135, 130,/**/ 5, 0};
         int[] tY = {5, 0,/**/ /**/ 0, 5,/**/ 20, 25,/**/ 25, 30, 30, 25, /**/ 25, 30,/**/ 35, 40,/**/ 40, 45, 45, 40,/**/ 40, 45,/**/ 50, 55,/**/ 55, 50};

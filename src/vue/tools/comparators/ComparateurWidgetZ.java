@@ -10,9 +10,6 @@ import vue.widget.Widget;
  */
 public class ComparateurWidgetZ implements Comparator<Component> {
 
-	public ComparateurWidgetZ() {
-	}
-
 	@Override
 	public int compare(Component t, Component t1) {
 		Widget wT = (Widget) t;

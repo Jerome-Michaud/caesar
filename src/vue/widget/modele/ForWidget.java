@@ -34,7 +34,6 @@ public class ForWidget extends ModeleWidget {
      * Constructeur du modele définissant les différents paramètres du For.
      */
     public ForWidget() {
-        super();
         int[] tX = {0, 5,/*
              * 
              */ 30, 35, 45, 50,/*

@@ -26,7 +26,6 @@ public class MoteurMovRevWidget extends ModeleWidget {
 	 * Constructeur du modèle définissant les différents paramètres du MoteurFwd.
 	 */
 	public MoteurMovRevWidget() {
-		super();
 		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
 

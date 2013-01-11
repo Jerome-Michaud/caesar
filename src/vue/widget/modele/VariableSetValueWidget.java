@@ -1,15 +1,15 @@
 package vue.widget.modele;
 
-import vue.widget.modele.zones.ChampTexte;
-import vue.widget.modele.zones.ListeDeroulante;
-import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
-
+import java.awt.Rectangle;
 import modeles.DicoVars;
 import modeles.TypeWidget;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
+import vue.widget.modele.zones.ChampTexte;
+import vue.widget.modele.zones.ListeDeroulante;
+
 
 
 
@@ -27,8 +27,6 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 
 	public VariableSetValueWidget() {
-		super();
-
 
 		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
