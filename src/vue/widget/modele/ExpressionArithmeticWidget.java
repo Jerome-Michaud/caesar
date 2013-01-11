@@ -10,15 +10,17 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import modeles.TypeWidget;
 
+
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
  * forme d'un widget de type Expression arethmetique.
  * 
  * @author CHOUKET Houda
  */
+
 public class ExpressionArithmeticWidget extends ModeleWidget {
 
-	
+
 	/**
 	 * Constructeur du modele definissant les differents parametres du
 	 * ExpressionSum .
@@ -37,7 +39,6 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 		this.setTailleX();
 		this.setTailleY();
-
 		this.setType(TypeWidget.EXPRESSION_ARITHMETIQUE);
 
 		message.put(new Point(30, 17), op.toString());
@@ -45,11 +46,14 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		this.setElementProgramme(new Operation(op, (Variable) null, (Variable) null));
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
+
+
 		ChampTexte l = new ChampTexte();
 		l.setBounds(10, 3, 14, 14);
 		l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 
 		this.getLesZonesSaisies().add(l);
+
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
@@ -119,6 +123,8 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		 this.setTailleY();*/
 	}
 
-	@Override
-	public void initListeners() { }
+	public void initListeners() {
+
+	}
+
 }
