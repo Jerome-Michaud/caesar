@@ -35,6 +35,18 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.MULIPLICATION));
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.SOUSTRACTION));
 
+		/*this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.OU, null));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL, null));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPERIEUR, null));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFERIEUR, null));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.ET, null));
+
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE, null));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL, null));
+		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL, null));
+*/
+
+		
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.OU));
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPERIEUR));
@@ -44,7 +56,6 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE));
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL));
 		this.ajouterUnWidget(GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
-
 
 
 

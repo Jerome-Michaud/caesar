@@ -15,4 +15,12 @@ public class ExpressionModifiable extends ExpressionA {
 	public ExpressionModifiable(final TypeExpression type, final String nom) {
 		super(type, nom);
 	}
+	public boolean isConstante() {
+		return false;
+	}
+
+	public Categorie getCategorie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

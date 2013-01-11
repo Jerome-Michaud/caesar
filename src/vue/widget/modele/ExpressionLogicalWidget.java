@@ -5,6 +5,7 @@ import vue.widget.modele.zones.ChampTexte;
 import vue.widget.modele.zones.ListeDeroulante;
 import vue.widget.modele.zones.Zone;
 import instruction.Condition;
+import instruction.ExpressionModifiable;
 import instruction.Operateur;
 import instruction.Operation;
 import instruction.Variable;
@@ -29,8 +30,8 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 	/**
 	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
-
 	public ExpressionLogicalWidget(Operateur op) {
+	//public ExpressionLogicalWidget(Operateur op, ExpressionModifiable expressionModifiable) {
 		super();
 		/*int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 		int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
@@ -58,27 +59,43 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		this.setType(TypeWidget.EXPRESSION_LOGIQUE);
 
 
-		//message.put(new Point(30, 17), op.toString());
+		message.put(new Point(30, 17), op.toString());
 		
 
 		this.setElementProgramme(new Condition(op));
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
-
+		
 		ChampTexte l = new ChampTexte();
+		
 		l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeWidget.EXPRESSION_ARITHMETIQUE);
 		l.setBounds(10, 3, 14, 14);
-
-
-		message.put(new Point((int) (l.getLocation().getX()+ l.getWidth()), 17), op.toString());
+		//l.setBounds(10, expressionModifiable.getnom().length(), 14, 14);
+		//System.out.println("___"+expressionModifiable.getnom().length());
 		
+		//l.validate();//force à recalculer les positions
+		
+/*
+ *
+ * for (int i = 0; i<nombreChoisi; i++){
+   JTextField field = new JTextField();
+   listeFields.add(field);
+   fenetre.getContentPane().add(field);
+}
+fenetre.getContentPane().validate(); //force à recalculer les positions
+ * */
+ 
+
+		//message.put(new Point((int) (l.getLocation().getX()+ l.getWidth()), 17), op.toString()+expressionModifiable);
+		//message.put(new Point((int) (l.getLocation().getX()+ l.getWidth()), 17), op.toString());
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(40, 3, 14, 14);
+		//f.setBounds(40, expressionModifiable.getnom().length(), 14, 14);
 		this.getLesZonesSaisies().add(f);
 
 		this.decalageX(-5);
