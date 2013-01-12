@@ -3,6 +3,7 @@ package jscratch.sauvegarde.xml;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import jscratch.modeles.Erreur;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
@@ -11,13 +12,10 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import jscratch.sauvegarde.SauvegardeTools;
 import jscratch.vue.ginterface.GUI;
-import vue.tools.ArborescenceTools;
-import vue.tools.NonChargeableException;
+import jscratch.vue.tools.ArborescenceTools;
+import jscratch.vue.tools.NonChargeableException;
+import jscratch.vue.widget.Widget;
 
-/**
- *
- * @author Quentin
- */
 public class SauvegardeXMLTools implements SauvegardeTools {
 
 	/**
@@ -51,6 +49,7 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 	public void load(String path) {
 		try {
 			deserializeArborescence(path);
+			GUI.getPanelCodeGraphique().repaint();
 		} catch (NonChargeableException ex) {
 			Erreur.afficher(ex);
 		}
@@ -89,8 +88,8 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 			if (fichier.exists()) {
 				try {
 					SAXBuilder sxb = new SAXBuilder();
-					ArborescenceTools.getInstance().initArborescence(DeserialiseurXML.load(sxb.build(fichier)), true);
-					GUI.getPanelCodeGraphique().repaint();
+					List<List<Widget>> l = DeserialiseurXML.load(sxb.build(fichier));
+					ArborescenceTools.getInstance().initArborescence(l, true);
 				} catch (JDOMException ex) {
 					Erreur.afficher(ex, "Le fichier fournit n'est pas correct");
 				}

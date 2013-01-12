@@ -1,6 +1,5 @@
 package jscratch.vue.widget.modele;
 
-import vue.tools.Variables;
 import jscratch.vue.widget.modele.zones.ChampTexte;
 import jscratch.vue.widget.modele.zones.Zone;
 import java.awt.Point;
@@ -12,9 +11,11 @@ import javax.swing.JComponent;
 import jscratch.modeles.TypeWidget;
 
 import java.awt.Rectangle;
+import jscratch.vue.tools.Variables;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
+
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type Repeat

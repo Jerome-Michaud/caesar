@@ -1,6 +1,5 @@
 package jscratch.vue.widget.modele;
 
-import vue.tools.Variables;
 import jscratch.vue.widget.modele.zones.ChampTexte;
 import jscratch.vue.widget.modele.zones.Zone;
 import java.awt.Point;
@@ -12,6 +11,7 @@ import java.io.Serializable;
 import javax.swing.JComponent;
 
 import jscratch.modeles.TypeWidget;
+import jscratch.vue.tools.Variables;
 import nxtim.instruction.InstructionTache;
 
 /**

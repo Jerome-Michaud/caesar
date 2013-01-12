@@ -1,4 +1,4 @@
-package vue.tools;
+package jscratch.vue.tools;
 
 import java.awt.Dimension;
 import java.awt.MouseInfo;

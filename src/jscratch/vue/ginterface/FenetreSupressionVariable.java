@@ -1,9 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jscratch.vue.ginterface;
-
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,12 +10,6 @@ import jscratch.modeles.DicoVariables;
 import jscratch.modeles.DicoWidgetsCategories;
 import nxtim.instruction.Variable;
 
-/**
- *
- * @author Quentin
- *
- *
- */
 public class FenetreSupressionVariable extends JFrame {
 
 	private JComboBox variables;
@@ -64,7 +53,7 @@ public class FenetreSupressionVariable extends JFrame {
 				DicoVariables.getInstance().supprimer(variable);
 
 				// Mise à jour du panel widget
-				GUI.getPanelWidget().setLesWidgets(DicoWidgetsCategories.getInstance().getWidgets(GUI.getPanelTypeWidget().getCurrentCategorie().getCategorie()));
+				GUI.getPanelWidget().setLesWidgets(DicoWidgetsCategories.getInstance().getWidgets(GUI.getPanelTypeWidget().getCurrentCategorie()));
 				
 				dispose();
 			}

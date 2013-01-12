@@ -8,7 +8,7 @@ import nxtim.instruction.Instruction;
 import jscratch.traduction.VisiteurNXC;
 import jscratch.traduction.VisiteurTraduction;
 import jscratch.vue.ginterface.GUI;
-import vue.tools.ArborescenceTools;
+import jscratch.vue.tools.ArborescenceTools;
 import jscratch.vue.widget.Widget;
 import jscratch.vue.widget.modele.ModeleWidget;
 

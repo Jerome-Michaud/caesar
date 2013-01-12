@@ -1,6 +1,5 @@
 package jscratch.vue.widget.modele;
 
-import vue.tools.Variables;
 import jscratch.vue.widget.modele.zones.ChampTexte;
 import jscratch.vue.widget.modele.zones.ListeDeroulante;
 import jscratch.vue.widget.modele.zones.Zone;
@@ -15,6 +14,7 @@ import javax.swing.JComponent;
 
 import jscratch.modeles.DicoVariables;
 import jscratch.modeles.TypeWidget;
+import jscratch.vue.tools.Variables;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionFor;

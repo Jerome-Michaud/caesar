@@ -10,7 +10,7 @@ import java.util.Observer;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import vue.tools.Variables;
+import jscratch.vue.tools.Variables;
 
 /**
  * Permet de créer l'objet de type GlassPane.

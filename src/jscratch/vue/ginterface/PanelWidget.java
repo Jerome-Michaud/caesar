@@ -3,13 +3,9 @@ package jscratch.vue.ginterface;
 import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.JButton;
-import jscratch.modeles.DicoWidgetsCategories;
-import vue.tools.Variables;
+import jscratch.vue.tools.Variables;
 import jscratch.vue.widget.FabriqueInstructions;
 import jscratch.vue.widget.Widget;
 
@@ -24,7 +20,6 @@ public class PanelWidget extends JPanel {
 	private static PanelWidget instance = new PanelWidget();
 	private FabriqueInstructions fabrique;
 	private List<Widget> lesWidgets;
-	private JButton newVariableName;
 
 	/**
 	 * SINGLETON.
@@ -37,8 +32,6 @@ public class PanelWidget extends JPanel {
 
 		this.fabrique = new FabriqueInstructions();
 		this.setLayout(null);
-
-
 
 		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 600));
 	}

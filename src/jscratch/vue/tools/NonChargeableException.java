@@ -1,4 +1,4 @@
-package vue.tools;
+package jscratch.vue.tools;
 
 /**
  * Erreur à lever quand un composant n'est pas chargeable à partir d'un fichier.

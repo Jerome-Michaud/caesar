@@ -6,7 +6,7 @@ import java.util.Observer;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import vue.tools.Variables;
+import jscratch.vue.tools.Variables;
 import jscratch.vue.widget.IWidget;
 
 /**

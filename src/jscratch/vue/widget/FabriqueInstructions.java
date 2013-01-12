@@ -1,11 +1,11 @@
 package jscratch.vue.widget;
 
+import jscratch.vue.tools.NonChargeableException;
+import jscratch.vue.tools.NonClonableException;
 import nxtim.instruction.Condition;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.VariableModifiable;
-import vue.tools.NonChargeableException;
-import vue.tools.NonClonableException;
 import jscratch.vue.widget.modele.DoWhileWidget;
 
 import jscratch.vue.widget.modele.ExpressionArithmeticWidget;

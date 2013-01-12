@@ -7,13 +7,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import jscratch.modeles.TypeWidget;
+import jscratch.vue.tools.ComposantIntrouvableException;
+import jscratch.vue.tools.Variables;
 import nxtim.instruction.Instruction;
 import nxtim.instruction.InstructionIfElse;
 import nxtim.instruction.InstructionStructure;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
-import vue.tools.ComposantIntrouvableException;
-import vue.tools.Variables;
 import jscratch.vue.widget.modele.ModeleWidget;
 
 /**

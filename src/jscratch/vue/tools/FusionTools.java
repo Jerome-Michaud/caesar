@@ -1,4 +1,4 @@
-package vue.tools;
+package jscratch.vue.tools;
 
 import jscratch.vue.tools.actions.Action;
 import jscratch.vue.tools.actions.TypeAction;

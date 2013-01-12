@@ -1,7 +1,6 @@
 package jscratch.sauvegarde.filtres;
 
 import java.io.File;
-import javax.swing.filechooser.FileFilter;
 
 /**
  * Classe permettant de définir un filtre de fichier sur les extension JSCRATCH (.jsc)

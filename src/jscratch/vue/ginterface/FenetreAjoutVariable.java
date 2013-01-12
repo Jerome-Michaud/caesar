@@ -13,10 +13,6 @@ import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 
-/**
- *
- * @author Quentin
- */
 public class FenetreAjoutVariable extends JFrame {
 
 	private JComboBox typeVariable;
@@ -72,7 +68,7 @@ public class FenetreAjoutVariable extends JFrame {
 					DicoWidgetsCategories.getInstance().ajouterWidgetVariable(var);
 					
 					// Mise à jour du panel widget
-					GUI.getPanelWidget().setLesWidgets(DicoWidgetsCategories.getInstance().getWidgets(GUI.getPanelTypeWidget().getCurrentCategorie().getCategorie()));
+					GUI.getPanelWidget().setLesWidgets(DicoWidgetsCategories.getInstance().getWidgets(GUI.getPanelTypeWidget().getCurrentCategorie()));
 					
 					dispose();
 				}

@@ -2,16 +2,12 @@ package jscratch.sauvegarde.xml;
 
 import java.util.List;
 import jscratch.modeles.DicoVariables;
+import jscratch.vue.tools.ArborescenceTools;
 import nxtim.instruction.Variable;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import vue.tools.ArborescenceTools;
 import jscratch.vue.widget.Widget;
 
-/**
- *
- * @author Quentin GOSSELIN <quentin.gosselin@gmail.com>
- */
 public class SerialiseurXML {
 
 	/**

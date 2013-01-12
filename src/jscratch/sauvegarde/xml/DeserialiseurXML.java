@@ -3,20 +3,18 @@ package jscratch.sauvegarde.xml;
 import java.util.LinkedList;
 import java.util.List;
 import jscratch.modeles.DicoVariables;
+import jscratch.vue.ginterface.GUI;
+import jscratch.vue.tools.NonChargeableException;
+import jscratch.vue.widget.FabriqueInstructions;
+import jscratch.vue.widget.IWidget;
+import jscratch.vue.widget.Widget;
+import jscratch.vue.widget.WidgetCompose;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import vue.tools.NonChargeableException;
-import jscratch.vue.widget.FabriqueInstructions;
-import jscratch.vue.widget.Widget;
-import jscratch.vue.widget.WidgetCompose;
 
-/**
- *
- * @author Quentin GOSSELIN <quentin.gosselin@gmail.com>
- */
 public class DeserialiseurXML {
 
 	/**
@@ -42,19 +40,19 @@ public class DeserialiseurXML {
 		}
 		
 		// Chargement de l'arborescence
-		List<Element> groupes = docXml.getRootElement().getChild("arborescence").getChildren("groupe");
+		List<Element> groupesXml = docXml.getRootElement().getChild("arborescence").getChildren("groupe");
 		
-		for (Element groupe : groupes) {
+		for (Element groupe : groupesXml) {
 			List l = new LinkedList<Widget>();
-			for (Element widget : groupe.getChildren()) {
-				l.add(deserializeWidget(widget));
+			for (Element widgetXml : groupe.getChildren()) {
+				l.add(deserializeWidget(widgetXml, GUI.getPanelCodeGraphique()));
 			}
 			arbo.add(l);
 		}
 		return arbo;
 	}
 	
-	private static Widget deserializeWidget(Element widget) throws NonChargeableException {
+	private static Widget deserializeWidget(Element widget, IWidget parent) throws NonChargeableException {
 		String classe = widget.getAttributeValue("classe");
 		Element coordonneesXml = widget.getChild("coordonnees");
 		List<Element> attributsXml = widget.getChild("attributs").getChildren();
@@ -68,6 +66,8 @@ public class DeserialiseurXML {
 		if (coordonneesXml != null) {
 			w.setLocation(Integer.parseInt(coordonneesXml.getAttributeValue("x")), Integer.parseInt(coordonneesXml.getAttributeValue("y")));
 		}
+		
+		w.defParent(parent);
 	
 		// Remplissage des zones
 		/*List<Zone> lesZones = w.getModele().getLesZonesSaisies();
@@ -82,7 +82,7 @@ public class DeserialiseurXML {
 			for (List<Widget> accroche : wComp.getMapZone().values()) {
 				Element accrocheXml = accrochesXml.get(i);
 				for (Element widgetXml : accrocheXml.getChildren()) {
-					accroche.add(deserializeWidget(widgetXml));
+					accroche.add(deserializeWidget(widgetXml, wComp));
 				}
 				i++;
 			}

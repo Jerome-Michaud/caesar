@@ -16,6 +16,9 @@ import javax.swing.JPanel;
  */
 public class ZoneUtilisateur extends JPanel {
 
+	/**
+	 * Instance unique de <code>ZoneUtilisateur</code>.
+	 */
 	private static ZoneUtilisateur instance = new ZoneUtilisateur();
 
 	/**

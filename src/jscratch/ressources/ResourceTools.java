@@ -8,12 +8,14 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import jscratch.modeles.Erreur;
 
-/**
- *
- * @author Pierre Laumiere
- */
 public class ResourceTools {
 
+	/**
+	 * Permet de récupérer une image.
+	 * 
+	 * @param name nom du fichier
+	 * @return l'image
+	 */
 	public static Image getImage(String name) {
 		URL url = ResourceTools.class.getResource(name);
 
@@ -27,6 +29,12 @@ public class ResourceTools {
 		return null;
 	}
 
+	/**
+	 * Permet de récupérer une icône.
+	 * 
+	 * @param name nom du fichier
+	 * @return l'icône
+	 */
 	public static Icon getIcon(String name) {
 		URL url = ResourceTools.class.getResource(name);
 		if (url != null) {

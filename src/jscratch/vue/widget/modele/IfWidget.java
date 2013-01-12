@@ -1,13 +1,14 @@
 package jscratch.vue.widget.modele;
 
-import vue.tools.Variables;
 import java.awt.Point;
 
 import java.awt.Polygon;
 import java.awt.Rectangle;
 
 import jscratch.modeles.TypeWidget;
+import jscratch.vue.tools.Variables;
 import nxtim.instruction.InstructionIf;
+
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la 
  * forme d'un widget de type If.

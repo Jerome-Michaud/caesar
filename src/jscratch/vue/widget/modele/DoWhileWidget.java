@@ -1,12 +1,12 @@
 package jscratch.vue.widget.modele;
 
-import vue.tools.Variables;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
 import jscratch.modeles.TypeWidget;
+import jscratch.vue.tools.Variables;
 import nxtim.instruction.InstructionDoWhile;
 
 /**
@@ -62,6 +62,5 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 	}
 
 	@Override
-	public void initListeners() {
-	}
+	public void initListeners() { }
 }

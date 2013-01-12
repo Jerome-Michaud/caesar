@@ -2,7 +2,6 @@ package jscratch.vue.widget.modele;
 
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;

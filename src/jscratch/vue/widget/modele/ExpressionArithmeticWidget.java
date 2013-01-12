@@ -16,7 +16,6 @@ import nxtim.instruction.Variable;
  * 
  * @author CHOUKET Houda
  */
-
 public class ExpressionArithmeticWidget extends ModeleWidget {
 
 	/**
@@ -33,37 +32,24 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
         this.attachableHaut = false;
         this.imbricable = false;
         this.attachableInterne = true;
-		
-		/**
-		 * Méthode permettant de définir un tableau représentant les coordonnées des
-		 * ordonnées de la forme du widget.
-		 *
-		 * @param tabY Le tableau représentant les coordonnées des ordonnées de la
-		 * forme du widget.
-		 */
+
 		this.setTabX(tabX);
 		this.setTabY(tabY);
-		/**
-		 * Recalcule la largeur du widget.
-		 */
+		
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeWidget.EXPRESSION_ARITHMETIQUE);
 
 		message.put(new Point(30, 17), op.toString());
 
-
 		this.setElementProgramme(new Operation(op, (Variable)null, (Variable)null));
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
-
-
 
 		ChampTexte l = new ChampTexte();
 		l.setBounds(10, 3, 14, 14);
 		l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
 
 		this.getLesZonesSaisies().add(l);
-
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);

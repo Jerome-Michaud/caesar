@@ -9,7 +9,7 @@ import java.util.List;
 import jscratch.modeles.Erreur;
 import jscratch.sauvegarde.SauvegardeTools;
 import jscratch.vue.ginterface.GUI;
-import vue.tools.ArborescenceTools;
+import jscratch.vue.tools.ArborescenceTools;
 import jscratch.vue.widget.Widget;
 
 /**

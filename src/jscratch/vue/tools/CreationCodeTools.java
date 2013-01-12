@@ -1,4 +1,4 @@
-package vue.tools;
+package jscratch.vue.tools;
 
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,6 +1,5 @@
 package jscratch.vue.widget;
 
-import vue.tools.DragAndDropTools;
 import jscratch.vue.widget.modele.ModeleWidget;
 import jscratch.vue.widget.modele.zones.Zone;
 import java.awt.BasicStroke;
@@ -19,6 +18,7 @@ import nxtim.instruction.IElementProgramme;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
 import jscratch.vue.ginterface.GUI;
+import jscratch.vue.tools.DragAndDropTools;
 import jscratch.vue.widget.modele.VariableWidget;
 
 /**

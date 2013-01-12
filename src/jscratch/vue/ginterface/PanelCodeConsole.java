@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import vue.tools.Variables;
+import jscratch.vue.tools.Variables;
 
 /**
  * Panneau d'affichage du code traduit.

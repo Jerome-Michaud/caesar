@@ -1,9 +1,5 @@
 package jscratch.vue.categories;
 
-import jscratch.vue.widget.Widget;
-import java.awt.Color;
-import java.util.List;
-import jscratch.modeles.DicoCouleursCategories;
 import jscratch.modeles.DicoWidgetsCategories;
 import nxtim.instruction.Categorie;
 import jscratch.vue.ginterface.GUI;

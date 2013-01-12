@@ -1,12 +1,12 @@
 package jscratch.vue.categories;
 
 import jscratch.vue.categories.complexe.PolygoneAction;
-import vue.tools.Variables;
 import java.awt.Color;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.List;
 import jscratch.modeles.DicoCouleursCategories;
+import jscratch.vue.tools.Variables;
 import nxtim.instruction.Categorie;
 
 /**

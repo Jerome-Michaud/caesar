@@ -1,6 +1,5 @@
 package jscratch.vue.categories;
 
-import java.util.Observable;
 import jscratch.modeles.DicoWidgetsCategories;
 import nxtim.instruction.Categorie;
 import nxtim.instruction.Operateur;

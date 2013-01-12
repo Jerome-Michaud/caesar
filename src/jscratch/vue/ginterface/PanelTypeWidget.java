@@ -1,7 +1,6 @@
 package jscratch.vue.ginterface;
 
 import jscratch.vue.categories.BoutonCategorie;
-import vue.tools.Variables;
 
 import java.awt.Dimension;
 import java.util.LinkedList;
@@ -9,6 +8,8 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import jscratch.modeles.DicoBoutonsCategories;
+import jscratch.vue.tools.Variables;
+import nxtim.instruction.Categorie;
 
 /**
  * Panel où sont entreposés les boutons des différentes catégories disponibles.
@@ -74,17 +75,16 @@ public class PanelTypeWidget extends JPanel {
 	}
 
 	/**
-	 *
-	 * @return le bouton de la categorie sélectionnée ou null si aucune n'est sélectionnée.
+	 * Permet de connaître la catégorie active.
+	 * 
+	 * @return la categorie sélectionnée ou null si aucune n'est sélectionnée.
 	 */
-	public BoutonCategorie getCurrentCategorie() {
+	public Categorie getCurrentCategorie() {
 		for (BoutonCategorie bc : this.getLesCategories()) {
 			if (bc.isActive()) {
-				return bc;
+				return bc.getCategorie();
 			}
 		}
 		return null;
-
-
 	}
 }

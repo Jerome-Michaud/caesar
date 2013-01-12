@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
 import jscratch.modeles.Erreur;
 import jscratch.ressources.ResourceTools;
 import jscratch.traduction.VisiteurNXC;
-import vue.tools.ArborescenceTools;
-import vue.tools.CreationCodeTools;
-import vue.tools.Variables;
+import jscratch.vue.tools.ArborescenceTools;
+import jscratch.vue.tools.CreationCodeTools;
+import jscratch.vue.tools.Variables;
 import jscratch.vue.widget.Widget;
 
 /**

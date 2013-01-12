@@ -15,6 +15,7 @@ import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
+
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type MoteurRev

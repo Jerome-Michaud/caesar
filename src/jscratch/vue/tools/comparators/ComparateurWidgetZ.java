@@ -4,10 +4,6 @@ import java.awt.Component;
 import java.util.Comparator;
 import jscratch.vue.widget.Widget;
 
-/**
- *
- * @author Quentin
- */
 public class ComparateurWidgetZ implements Comparator<Component> {
 
 	@Override

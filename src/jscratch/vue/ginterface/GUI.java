@@ -1,17 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jscratch.vue.ginterface;
 
 /**
- *
- * @author Quentin
+ * Facade pour la GUI.
  */
 public class GUI {
 
-	private GUI() {
-	}
+	private GUI() { }
 
 	public static Fenetre getFenetre() {
 		return Fenetre.getInstance();

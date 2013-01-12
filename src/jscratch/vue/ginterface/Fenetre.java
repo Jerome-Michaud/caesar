@@ -59,6 +59,8 @@ public class Fenetre extends JFrame {
 
 		this.setVisible(true);
 		this.split.setDividerLocation(0.75);
+		
+		this.setLocationRelativeTo(null);
 	}
 
 	/**

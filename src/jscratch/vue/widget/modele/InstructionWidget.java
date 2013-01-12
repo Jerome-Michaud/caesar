@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 import jscratch.modeles.TypeWidget;
 import nxtim.instruction.Instruction;
+
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type Instruction.

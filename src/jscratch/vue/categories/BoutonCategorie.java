@@ -18,7 +18,7 @@ import javax.swing.SwingUtilities;
 import jscratch.modeles.DicoWidgetsCategories;
 import nxtim.instruction.Categorie;
 import jscratch.vue.ginterface.GUI;
-import vue.tools.Variables;
+import jscratch.vue.tools.Variables;
 
 /**
  * Classe permettant de définir les différents comportements des boutons catégories.

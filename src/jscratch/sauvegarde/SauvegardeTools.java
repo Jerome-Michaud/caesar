@@ -1,9 +1,5 @@
 package jscratch.sauvegarde;
 
-/**
- *
- * @author Quentin
- */
 public interface SauvegardeTools {
 
 	/**

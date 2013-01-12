@@ -1,10 +1,9 @@
 package jscratch.vue.ginterface;
 
-import vue.tools.Variables;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import jscratch.vue.tools.Variables;
 
 /**
  * Cette zone correspond à la zone où l'utilisateur peut choisir ses widgets.<br />

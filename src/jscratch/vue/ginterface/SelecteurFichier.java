@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jscratch.vue.ginterface;
 
 import java.io.File;
@@ -9,7 +5,6 @@ import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
 import jscratch.sauvegarde.filtres.ApplicationFileFilter;
 import jscratch.sauvegarde.filtres.JScratchFileFilter;
 import jscratch.sauvegarde.SauvegardeTools;
