@@ -203,7 +203,9 @@ public final class ArborescenceTools {
 	 */
 	public void initArborescence(final List<List<Widget>> l, final boolean initListeners) {
 		this.arborescence = l;
+		GUI.getPanelCodeGraphique().removeAll();
 		for (List<Widget> ls : l) {
+			System.out.println("boucle");
 			setArborescence(ls, initListeners);
 		}
 	}
@@ -220,11 +222,8 @@ public final class ArborescenceTools {
 	 * non (cas du lancement du programme)
 	 */
 	public void setArborescence(final List<Widget> liste, final boolean initListener) {
-		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
-		p.removeAll();
-
 		for (Widget w : liste) {
-			p.add(w);
+			GUI.getPanelCodeGraphique().add(w);
 			if (initListener) {
 				w.initListeners();
 			}

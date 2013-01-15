@@ -14,6 +14,7 @@ import java.util.List;
 
 import nxtim.instruction.IElementProgramme;
 import jscratch.vue.widget.modele.zones.ChampTexte;
+import nxtim.instruction.Categorie;
 
 /**
  * Classe abstraite permet de définir une structure commune pour chaque widget.
@@ -97,6 +98,11 @@ public abstract class ModeleWidget implements Serializable {
      * Liste des zones de saisies du widget.
      */
     private List<Zone> lesZonesSaisies;
+	
+	/**
+	 * Catégorie du widget.
+	 */
+	private Categorie categorie;
 
     /**
      * Constructeur initialisant différentes valeurs du modèle.
@@ -143,6 +149,24 @@ public abstract class ModeleWidget implements Serializable {
     public List<Zone> getLesZonesSaisies() {
         return lesZonesSaisies;
     }
+
+	/**
+	 * Récupère la catégorie du widget.
+	 * 
+	 * @return la catégorie 
+	 */
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	/**
+	 * Définit la catégorie du widget.
+	 * 
+	 * @param categorie la catégorie
+	 */
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
 
     /**
      * Méthode permettant de définir les zones de saisie du programme.

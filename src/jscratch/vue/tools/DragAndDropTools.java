@@ -93,6 +93,8 @@ public class DragAndDropTools extends Observable {
 			composantsDrague.add(comp);
 		} else {
 			ArborescenceTools arbo = ArborescenceTools.getInstance();
+			System.out.println(GUI.getPanelCodeGraphique().getComponentCount());
+			System.out.println(comp);
 			try {
 				//recuperation et detachement des widgets dragués
 				composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));
