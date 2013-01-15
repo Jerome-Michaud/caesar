@@ -8,7 +8,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 
-import jscratch.modeles.TypeWidget;
 
 import java.awt.Rectangle;
 import jscratch.vue.tools.Variables;
@@ -33,7 +32,7 @@ public class RepeatWidget extends ModeleWidget {
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.REPEAT);
+		this.setType(TypeModeleWidget.REPEAT);
 		
 		//this.setMessage("Repeat");
 		message.put(new Point(5, 17), "Répéter");
@@ -45,8 +44,8 @@ public class RepeatWidget extends ModeleWidget {
 
 
 		ChampTexte f = new ChampTexte();
-		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
-		f.ajouterTypeWidgetAccepte(TypeWidget.EXPRESSION_ARITHMETIQUE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(60, 3, 20, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);

@@ -8,7 +8,6 @@ import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-import jscratch.modeles.TypeWidget;
 import nxtim.instruction.InstructionAttente;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
@@ -29,7 +28,7 @@ public class WaitWidget extends ModeleWidget {
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.WAIT);
+		this.setType(TypeModeleWidget.WAIT);
 		
 		//this.setMessage("Wait");
 		message.put(new Point(5, 17), "Attendre");
@@ -39,7 +38,7 @@ public class WaitWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ChampTexte f = new ChampTexte();
-                f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+                f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.setBounds(65, 3, 40, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);

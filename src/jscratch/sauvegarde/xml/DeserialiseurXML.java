@@ -3,12 +3,14 @@ package jscratch.sauvegarde.xml;
 import java.util.LinkedList;
 import java.util.List;
 import jscratch.modeles.DicoVariables;
+import jscratch.modeles.DicoWidgetsCategories;
 import jscratch.vue.ginterface.GUI;
 import jscratch.vue.tools.NonChargeableException;
 import jscratch.vue.widget.FabriqueInstructions;
 import jscratch.vue.widget.IWidget;
 import jscratch.vue.widget.Widget;
 import jscratch.vue.widget.WidgetCompose;
+import jscratch.vue.widget.modele.zones.Zone;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
@@ -37,6 +39,7 @@ public class DeserialiseurXML {
 		for (Element variable : dictionnaire.getChildren()) {
 			Variable var = new VariableModifiable(TypeVariable.fromString(variable.getAttributeValue("type")), variable.getAttributeValue("nom"), "");
 			DicoVariables.getInstance().ajouter(var);
+			DicoWidgetsCategories.getInstance().ajouterWidgetVariable(var);
 		}
 		
 		// Chargement de l'arborescence
@@ -45,10 +48,12 @@ public class DeserialiseurXML {
 		for (Element groupe : groupesXml) {
 			List l = new LinkedList<Widget>();
 			for (Element widgetXml : groupe.getChildren()) {
-				l.add(deserializeWidget(widgetXml, GUI.getPanelCodeGraphique()));
+				Widget w = deserializeWidget(widgetXml, GUI.getPanelCodeGraphique());
+				l.add(w);
 			}
 			arbo.add(l);
 		}
+		System.out.println("Composants sur pcg : " + GUI.getPanelCodeGraphique().getComponents().length);
 		return arbo;
 	}
 	
@@ -60,20 +65,28 @@ public class DeserialiseurXML {
 
 		// Récupération d'un objet Widget correspondant à la classe
 		FabriqueInstructions fabrique = new FabriqueInstructions();
+		
 		Widget w = fabrique.creerWidget(classe);
+		w.setDraggable(true);
+		w.defParent(parent);
+		w.applyChangeModele();
+		
+		GUI.getPanelCodeGraphique().add(w);
 		
 		// Remplissage des coordonnées
 		if (coordonneesXml != null) {
 			w.setLocation(Integer.parseInt(coordonneesXml.getAttributeValue("x")), Integer.parseInt(coordonneesXml.getAttributeValue("y")));
 		}
+		else {
+			w.setLocation(0, 0);
+		}
 		
-		w.defParent(parent);
 	
 		// Remplissage des zones
-		/*List<Zone> lesZones = w.getModele().getLesZonesSaisies();
+		List<Zone> lesZones = w.getModele().getLesZonesSaisies();
 		for (int i = 0; i < lesZones.size(); i++) {
-			lesZones.get(i).setValeur(attributsXml.get(i).getText());
-		}*/
+			lesZones.get(i).setValeur(attributsXml.get(i).getAttributeValue("valeur"));
+		}
 
 		// Remplissage des zones d'accroche
 		if (w.isComplexe()) {
@@ -82,10 +95,12 @@ public class DeserialiseurXML {
 			for (List<Widget> accroche : wComp.getMapZone().values()) {
 				Element accrocheXml = accrochesXml.get(i);
 				for (Element widgetXml : accrocheXml.getChildren()) {
-					accroche.add(deserializeWidget(widgetXml, wComp));
+					Widget wid = deserializeWidget(widgetXml, wComp);
+					accroche.add(wid);
 				}
 				i++;
 			}
+			wComp.notifyChange();
 		}
 
 		return w;

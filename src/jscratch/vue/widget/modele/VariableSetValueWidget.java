@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import jscratch.modeles.DicoVariables;
-import jscratch.modeles.TypeWidget;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 import jscratch.vue.widget.modele.zones.ChampTexte;
@@ -36,7 +35,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.SETVALUEVARIABLE);
+		this.setType(TypeModeleWidget.SETVALUEVARIABLE);
 
 		message.put(new Point(5, 17), "set");
 		message.put(new Point(100, 17), " to ");
@@ -52,7 +51,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 
 		ChampTexte f = new ChampTexte();
-		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.setBounds(65, 3, 40, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);

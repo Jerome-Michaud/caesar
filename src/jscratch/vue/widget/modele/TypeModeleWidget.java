@@ -1,6 +1,6 @@
-package jscratch.modeles;
+package jscratch.vue.widget.modele;
 
-public enum TypeWidget {
+public enum TypeModeleWidget {
 
 	/**
 	 * Les différents types de widget.

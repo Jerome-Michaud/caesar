@@ -28,8 +28,7 @@ public class SauvegardeBinaireTools implements SauvegardeTools {
 	/**
 	 * Le constructeur privé pour éviter la déclaration externe.
 	 */
-	private SauvegardeBinaireTools() {
-	}
+	private SauvegardeBinaireTools() { }
 
 	/**
 	 * Le getter pour récupérer l'instance unique de SauvegardeBinaireTools.

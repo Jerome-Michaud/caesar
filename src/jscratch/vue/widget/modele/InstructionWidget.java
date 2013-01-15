@@ -5,7 +5,6 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
-import jscratch.modeles.TypeWidget;
 import nxtim.instruction.Instruction;
 
 /**
@@ -25,7 +24,7 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
 		
 		this.setTabX(tX);
 		this.setTabY(tY);
-		this.setType(TypeWidget.INSTRUCTION);
+		this.setType(TypeModeleWidget.INSTRUCTION);
 		
 		//this.setMessage(msg);
 		message.put(new Point(5, 17), msg);

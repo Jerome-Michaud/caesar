@@ -5,7 +5,6 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 
-import jscratch.modeles.TypeWidget;
 import jscratch.vue.tools.Variables;
 import nxtim.instruction.InstructionIf;
 
@@ -28,7 +27,7 @@ public class IfWidget extends ModeleWidget{
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.IF);
+		this.setType(TypeModeleWidget.IF);
 		
 		//this.setMessage("If");
 		message.put(new Point(5, 17), "Si");

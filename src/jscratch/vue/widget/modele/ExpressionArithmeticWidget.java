@@ -4,7 +4,6 @@ import jscratch.vue.widget.modele.zones.ChampTexte;
 
 import java.awt.Point;
 import java.awt.Polygon;
-import jscratch.modeles.TypeWidget;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.Variable;
@@ -38,7 +37,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.EXPRESSION_ARITHMETIQUE);
+		this.setType(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 
 		message.put(new Point(30, 17), op.toString());
 
@@ -47,12 +46,12 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 		ChampTexte l = new ChampTexte();
 		l.setBounds(10, 3, 14, 14);
-		l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
-		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		//f.setBounds(80, 3, 20, 20);
 		f.setBounds(40, 3, 14, 14);
 		this.getLesZonesSaisies().add(f);

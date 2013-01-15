@@ -10,7 +10,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 
-import jscratch.modeles.TypeWidget;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.TypeVariable;
@@ -34,7 +33,7 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.MOTEURMOVREV);
+		this.setType(TypeModeleWidget.MOTEURMOVREV);
 		
 		//this.setMessage("Moteur           recul de");
 		message.put(new Point(5, 17), "Moteur");

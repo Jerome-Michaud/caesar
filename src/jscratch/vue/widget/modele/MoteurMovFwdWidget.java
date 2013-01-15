@@ -10,7 +10,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 
-import jscratch.modeles.TypeWidget;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.TypeVariable;
@@ -33,7 +32,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.MOTEURMOVFWD);
+		this.setType(TypeModeleWidget.MOTEURMOVFWD);
 
 		//this.setMessage("Moteur           avance de");
 		message.put(new Point(5, 17), "Moteur");
@@ -47,7 +46,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
-                f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+                f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.setBounds(142, 3, 40, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import jscratch.modeles.TypeWidget;
+import jscratch.vue.widget.modele.TypeModeleWidget;
 import jscratch.vue.tools.ComposantIntrouvableException;
 import jscratch.vue.tools.Variables;
 import nxtim.instruction.Instruction;
@@ -196,7 +196,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	@Override
 	public void applyChangeModele() {
 		// Testé le type du modele widget courant
-		if (this.getModele().getType() == TypeWidget.IFELSE) {
+		if (this.getModele().getType() == TypeModeleWidget.IFELSE) {
 			// Cas du if...else
 			InstructionIfElse structInst = (InstructionIfElse) this.getModele().getElementProgramme();
 			// Récupéré clé mapZone du if et du else clé du if <=> rectangle supérieur clé du else <=> rectangle inféreur

@@ -8,7 +8,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 
-import jscratch.modeles.TypeWidget;
 
 import java.awt.Rectangle;
 import nxtim.instruction.InstructionMoteurOff;
@@ -31,7 +30,7 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.MOTEUROFF);
+		this.setType(TypeModeleWidget.MOTEUROFF);
 		
 		//this.setMessage("Moteur           off");
 		message.put(new Point(5, 17), "Moteur");

@@ -8,7 +8,7 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import jscratch.modeles.TypeWidget;
+import jscratch.vue.widget.modele.TypeModeleWidget;
 import org.jdom2.Element;
 import jscratch.vue.widget.Widget;
 
@@ -19,7 +19,7 @@ public class ChampTexte extends JPanel implements Zone {
 
 	private Widget widgetContenu;
 	private JTextField textField;
-	private List<TypeWidget> typesWidgetsAcceptes;
+	private List<TypeModeleWidget> typesWidgetsAcceptes;
 
 	/*
 	 * Etat à 0 quand on affiche uniquement le champ texte
@@ -45,7 +45,7 @@ public class ChampTexte extends JPanel implements Zone {
 			}
 		});
 
-		this.typesWidgetsAcceptes = new LinkedList<TypeWidget>();
+		this.typesWidgetsAcceptes = new LinkedList<TypeModeleWidget>();
 
 		this.validate();
 	}
@@ -56,11 +56,11 @@ public class ChampTexte extends JPanel implements Zone {
 		}
 	}
 
-	public boolean ajouterTypeWidgetAccepte(TypeWidget type) {
+	public boolean ajouterTypeWidgetAccepte(TypeModeleWidget type) {
 		return this.typesWidgetsAcceptes.add(type);
 	}
 
-	public boolean accepteTypeWidget(TypeWidget type) {
+	public boolean accepteTypeWidget(TypeModeleWidget type) {
 		return this.typesWidgetsAcceptes.contains(type);
 	}
 
@@ -111,8 +111,7 @@ public class ChampTexte extends JPanel implements Zone {
 		parent.getModele().decalageX(decal);
 		parent.setForme(false);
 		parent.getModele().decalerComposantsSuivants(this.getX(), decal);
-		/*this.revalidate();
-		 this.repaint();*/
+		
 		this.widgetContenu = w;
 	}
 
@@ -125,13 +124,19 @@ public class ChampTexte extends JPanel implements Zone {
 	public int getEtat() {
 		return this.etat;
 	}
+	
+	/**
+	 * Empêche la zone de prendre du texte. La seule chose possible est de mettre un widget dedans.
+	 */
+	public void supprimerTexte() {
+		this.textField.setEditable(false);
+	}
 
 	@Override
 	public Element toXml() {
 		Element zone = new Element("zone");
 		zone.setAttribute("isWidget", String.valueOf(this.etat == 1));
 
-		System.out.println("etat : " + etat);
 		if (this.etat == 0) {
 			zone.setAttribute("valeur", this.getValeur());
 		} else if (this.etat == 1) {

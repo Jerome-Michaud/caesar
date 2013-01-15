@@ -5,7 +5,6 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
-import jscratch.modeles.TypeWidget;
 import jscratch.vue.tools.Variables;
 import nxtim.instruction.InstructionIfElse;
 
@@ -26,7 +25,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
     
 		this.setTabX(tX);
 		this.setTabY(tY);
-		this.setType(TypeWidget.IFELSE);
+		this.setType(TypeModeleWidget.IFELSE);
 		
 		//this.setMessage("If");
 		message.put(new Point(5, 17), "Si");

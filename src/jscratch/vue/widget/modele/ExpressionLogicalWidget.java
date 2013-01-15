@@ -4,7 +4,6 @@ import jscratch.vue.widget.modele.zones.ChampTexte;
 
 import java.awt.Point;
 import java.awt.Polygon;
-import jscratch.modeles.TypeWidget;
 import nxtim.instruction.Condition;
 import nxtim.instruction.Operateur;
 
@@ -41,7 +40,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		// Recalcule la largeur du widget.
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.EXPRESSION_LOGIQUE);
+		this.setType(TypeModeleWidget.EXPRESSION_LOGIQUE);
 
 		message.put(new Point(30, 17), op.toString());
 
@@ -50,8 +49,8 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 		ChampTexte l = new ChampTexte();
 		
-		l.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
-		l.ajouterTypeWidgetAccepte(TypeWidget.EXPRESSION_ARITHMETIQUE);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		l.setBounds(10, 3, 14, 14);
 		//l.setBounds(10, expressionModifiable.getnom().length(), 14, 14);
 		//System.out.println("___"+expressionModifiable.getnom().length());
@@ -74,8 +73,8 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
-		f.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
-		f.ajouterTypeWidgetAccepte(TypeWidget.EXPRESSION_ARITHMETIQUE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(40, 3, 14, 14);
 		//f.setBounds(40, expressionModifiable.getnom().length(), 14, 14);
 		this.getLesZonesSaisies().add(f);

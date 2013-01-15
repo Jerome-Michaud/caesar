@@ -13,7 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 
-import jscratch.modeles.TypeWidget;
+import jscratch.vue.widget.modele.TypeModeleWidget;
 import nxtim.instruction.IElementProgramme;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
@@ -229,7 +229,7 @@ public class Widget extends JComponent {
 	 *
 	 * @return le type du modèle du Widget
 	 */
-	public TypeWidget getType() {
+	public TypeModeleWidget getType() {
 		return this.modele.getType();
 	}
 

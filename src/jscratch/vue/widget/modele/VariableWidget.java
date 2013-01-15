@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
 
-import jscratch.modeles.TypeWidget;
 import nxtim.instruction.VariableModifiable;
 
 /**
@@ -28,7 +27,7 @@ public class VariableWidget extends ModeleWidget {
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		this.setType(TypeWidget.VARIABLE);
+		this.setType(TypeModeleWidget.VARIABLE);
 
 		message.put(new Point(7, 11), variableModifiable.getNom());
 		this.setElementProgramme(variableModifiable);

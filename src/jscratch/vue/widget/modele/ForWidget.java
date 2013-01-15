@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.JComponent;
 
 import jscratch.modeles.DicoVariables;
-import jscratch.modeles.TypeWidget;
 import jscratch.vue.tools.Variables;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
@@ -85,7 +84,7 @@ public class ForWidget extends ModeleWidget {
         this.setTabY(tY);
         this.setTailleX();
         this.setTailleY();
-        this.setType(TypeWidget.FOR);
+        this.setType(TypeModeleWidget.FOR);
 
         //this.setMessage("For");
         message.put(new Point(5, 17), "Pour");
@@ -108,7 +107,7 @@ public class ForWidget extends ModeleWidget {
 
         //valeur depart
         ChampTexte fd = new ChampTexte();
-        fd.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+        fd.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
         fd.setBounds(115, 3, 20, 20);
         fd.setValeur("0");
         this.getLesZonesSaisies().add(fd);
@@ -120,14 +119,14 @@ public class ForWidget extends ModeleWidget {
 
         //valeur fin
         ChampTexte ff = new ChampTexte();
-        ff.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+        ff.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
         ff.setBounds(235, 3, 20, 20);
         ff.setValeur("5");
         this.getLesZonesSaisies().add(ff);
 
         //pas
         ChampTexte fp = new ChampTexte();
-        fp.ajouterTypeWidgetAccepte(TypeWidget.VARIABLE);
+        fp.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
         fp.setBounds(300, 3, 20, 20);
         fp.setValeur("1");
         this.getLesZonesSaisies().add(fp);

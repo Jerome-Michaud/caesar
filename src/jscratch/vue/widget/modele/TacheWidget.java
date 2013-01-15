@@ -10,7 +10,6 @@ import java.awt.event.FocusEvent;
 import java.io.Serializable;
 import javax.swing.JComponent;
 
-import jscratch.modeles.TypeWidget;
 import jscratch.vue.tools.Variables;
 import nxtim.instruction.InstructionTache;
 
@@ -32,7 +31,7 @@ public class TacheWidget extends ModeleWidget implements Serializable {
 
         this.setTabX(tX);
         this.setTabY(tY);
-        this.setType(TypeWidget.TACHE);
+        this.setType(TypeModeleWidget.TACHE);
 
         //this.setMessage("Tâche");
         message.put(new Point(5, 17), "Tâche");

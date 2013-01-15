@@ -12,7 +12,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import jscratch.modeles.TypeWidget;
 import nxtim.instruction.IElementProgramme;
 import jscratch.vue.widget.modele.zones.ChampTexte;
 
@@ -52,7 +51,7 @@ public abstract class ModeleWidget implements Serializable {
     /**
      * Le type du widget choisit parmis l'enumeration TypeWidget.
      */
-    private TypeWidget type;
+    private TypeModeleWidget type;
     /**
      * La largeur du widget.
      */
@@ -352,7 +351,7 @@ public abstract class ModeleWidget implements Serializable {
      *
      * @return le type du widget.
      */
-    public TypeWidget getType() {
+    public TypeModeleWidget getType() {
         return type;
     }
 
@@ -361,7 +360,7 @@ public abstract class ModeleWidget implements Serializable {
      *
      * @param type le nouveau type.
      */
-    public void setType(TypeWidget type) {
+    public void setType(TypeModeleWidget type) {
         this.type = type;
     }
 

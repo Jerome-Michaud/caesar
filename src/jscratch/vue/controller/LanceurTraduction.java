@@ -3,7 +3,7 @@ package jscratch.vue.controller;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
-import jscratch.modeles.TypeWidget;
+import jscratch.vue.widget.modele.TypeModeleWidget;
 import nxtim.instruction.Instruction;
 import jscratch.traduction.VisiteurNXC;
 import jscratch.traduction.VisiteurTraduction;
@@ -75,7 +75,7 @@ public class LanceurTraduction extends Observable {
 			if (!racine.isEmpty()) {
 				Widget tache = racine.get(0);
 				ModeleWidget m = tache.getModele();
-				if (m.getType() == TypeWidget.TACHE) {
+				if (m.getType() == TypeModeleWidget.TACHE) {
 					list.add((Instruction) m.getElementProgramme());
 				}
 			}

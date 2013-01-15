@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.SwingUtilities;
-import jscratch.modeles.TypeWidget;
+import jscratch.vue.widget.modele.TypeModeleWidget;
 import jscratch.vue.ginterface.GUI;
 import jscratch.vue.ginterface.GlassPane;
 import jscratch.vue.ginterface.PanelCodeGraphique;
@@ -288,7 +288,7 @@ public class FusionTools {
 		}
 	}
 
-	private static int checkFusionZone(Widget compRecup, Rectangle rectComp, TypeWidget type) {
+	private static int checkFusionZone(Widget compRecup, Rectangle rectComp, TypeModeleWidget type) {
 		int index = -1;
 		Point p = GUI.getGlassPane().getLocationOnScreen();
 		rectComp.translate(0 - p.x, 0 - p.y);
