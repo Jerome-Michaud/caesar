@@ -1,4 +1,4 @@
-package jscratch.vue.categories;
+package jscratch.vue.categories.boutons;
 
 import jscratch.vue.categories.complexe.ModeleCategorieVariable;
 
@@ -18,7 +18,10 @@ public class BoutonCategorieVariable extends BoutonCategorie {
 	 */
 	public BoutonCategorieVariable() {
 		super(new ModeleCategorieVariable(Categorie.VARIABLES));
+	}
 
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetVariableSetValue());
+	@Override
+	public int getNbColonnes() {
+		return 2;
 	}
 }

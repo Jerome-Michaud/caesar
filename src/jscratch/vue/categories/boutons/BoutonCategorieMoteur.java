@@ -1,6 +1,7 @@
-package jscratch.vue.categories;
+package jscratch.vue.categories.boutons;
 
 import jscratch.modeles.DicoWidgetsCategories;
+import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
 import jscratch.vue.ginterface.GUI;
 
@@ -33,5 +34,10 @@ public class BoutonCategorieMoteur extends BoutonCategorie {
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMovFwd());
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMovRev());
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurOff());
+	}
+
+	@Override
+	public int getNbColonnes() {
+		return 1;
 	}
 }

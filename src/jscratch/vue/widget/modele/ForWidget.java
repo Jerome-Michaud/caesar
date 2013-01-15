@@ -1,15 +1,12 @@
 package jscratch.vue.widget.modele;
 
 import jscratch.vue.widget.modele.zones.ChampTexte;
-import jscratch.vue.widget.modele.zones.ListeDeroulante;
 import jscratch.vue.widget.modele.zones.Zone;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JComponent;
 
 import jscratch.modeles.DicoVariables;
@@ -33,52 +30,8 @@ public class ForWidget extends ModeleWidget {
      * Constructeur du modele définissant les différents paramètres du For.
      */
     public ForWidget() {
-        int[] tX = {0, 5,/*
-             * 
-             */ 30, 35, 45, 50,/*
-             * 
-             */ 130, 135,/*
-             * 
-             */ 135, 130,/*
-             * 
-             */ 55, 50, 40, 35, /*
-             * 
-             */ 10, 5,/*
-             * 
-             */ 5, 10,/*
-             * 
-             */ 35, 40, 50, 55,/*
-             * 
-             */ 130, 135, /*
-             * 
-             */ 135, 130,/*
-             * 
-             */ 50, 45, 35, 30,/*
-             * 
-             */ 5, 0};
-        int[] tY = {5, 0,/*
-             * 
-             */ 0, 5, 5, 0,/*
-             * 
-             */ 0, 5,/*
-             * 
-             */ 20, 25,/*
-             * 
-             */ 25, 30, 30, 25, /*
-             * 
-             */ 25, 30,/*
-             * 
-             */ 35, 40,/*
-             * 
-             */ 40, 45, 45, 40,/*
-             * 
-             */ 40, 45, /*
-             * 
-             */ 50, 55,/*
-             * 
-             */ 55, 60, 60, 55,/*
-             * 
-             */ 55, 50};
+        int[] tX = {0, 5,/**/ 30, 35, 45, 50,/**/ 130, 135,/**/ 135, 130,/**/ 55, 50, 40, 35, /**/ 10, 5,/**/ 5, 10,/**/ 35, 40, 50, 55,/**/ 130, 135, /**/ 135, 130,/**/ 50, 45, 35, 30,/**/ 5, 0};
+        int[] tY = {5, 0,/**/ 0, 5, 5, 0,/**/ 0, 5,/**/ 20, 25,/**/ 25, 30, 30, 25, /**/ 25, 30,/**/ 35, 40,/**/ 40, 45, 45, 40,/**/ 40, 45, /**/ 50, 55,/**/ 55, 60, 60, 55,/**/ 55, 50};
 
         this.setTabX(tX);
         this.setTabY(tY);
@@ -86,57 +39,42 @@ public class ForWidget extends ModeleWidget {
         this.setTailleY();
         this.setType(TypeModeleWidget.FOR);
 
-        //this.setMessage("For");
         message.put(new Point(5, 17), "Pour");
-        message.put(new Point(94, 17), "de");
-        message.put(new Point(140, 17), "tant qu'");
-        message.put(new Point(265, 17), "pas :");
+        message.put(new Point(94, 17), "condition :");
+        message.put(new Point(210, 17), "pas :");
 
         this.setElementProgramme(new InstructionFor());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 
         //variable
-        ListeDeroulante lv = new ListeDeroulante<Variable>();
-        if (DicoVariables.getInstance().getLesvariables().length > 0) {
-            List<Variable> liste = new ArrayList(DicoVariables.getInstance().getDictionnaire().values());
-            lv.setLesItems(liste);
-        }
+        ChampTexte lv = new ChampTexte();
+        lv.supprimerTexte();
+		lv.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
         lv.setBounds(55, 3, 35, 20);
         this.getLesZonesSaisies().add(lv);
 
-        //valeur depart
-        ChampTexte fd = new ChampTexte();
-        fd.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-        fd.setBounds(115, 3, 20, 20);
-        fd.setValeur("0");
-        this.getLesZonesSaisies().add(fd);
-
-        //condition
-        ListeDeroulante lo = new ListeDeroulante<Operateur>(Operateur.comparaisonA());
-        lo.setBounds(190, 3, 40, 20);
-        this.getLesZonesSaisies().add(lo);
-
-        //valeur fin
+		//valeur logique
         ChampTexte ff = new ChampTexte();
-        ff.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-        ff.setBounds(235, 3, 20, 20);
-        ff.setValeur("5");
+        ff.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
+        ff.setBounds(155, 3, 50, 20);
         this.getLesZonesSaisies().add(ff);
-
+		
         //pas
         ChampTexte fp = new ChampTexte();
         fp.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-        fp.setBounds(300, 3, 20, 20);
+		fp.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		fp.supprimerTexte();
+        fp.setBounds(240, 3, 20, 20);
         fp.setValeur("1");
         this.getLesZonesSaisies().add(fp);
 
-        this.decalageX(188);
+        this.decalageX(138);
 
         if (DicoVariables.getInstance().getLesvariables().length > 0) {
-            setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
-            setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
-            setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
+            //setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
+            //setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
+            //setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
         }
         initListeners();
     }

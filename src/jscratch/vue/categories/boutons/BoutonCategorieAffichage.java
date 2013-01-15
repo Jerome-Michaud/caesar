@@ -1,5 +1,6 @@
-package jscratch.vue.categories;
+package jscratch.vue.categories.boutons;
 
+import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
 
 /**
@@ -16,5 +17,10 @@ public class BoutonCategorieAffichage extends BoutonCategorie {
 	 */
 	public BoutonCategorieAffichage() {
 		super(new ModeleCategorie(Categorie.AFFICHAGE));
+	}
+
+	@Override
+	public int getNbColonnes() {
+		return 1;
 	}
 }

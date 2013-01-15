@@ -1,4 +1,4 @@
-package jscratch.vue.tools;
+package jscratch.vue.tools.exceptions;
 
 /**
  * Classe héritant d'Exception permettant de définir une erreur à lever quand un composant n'est pas trouvé dans l'arborescence.

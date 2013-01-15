@@ -1,6 +1,7 @@
-package jscratch.vue.categories;
+package jscratch.vue.categories.boutons;
 
 import jscratch.modeles.DicoWidgetsCategories;
+import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
 import jscratch.vue.ginterface.GUI;
 
@@ -31,5 +32,11 @@ public class BoutonCategorieInstruction extends BoutonCategorie {
 
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.INSTRUCTION, GUI.getPanelWidget().getFabrique().creerWidgetTache());
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.INSTRUCTION, GUI.getPanelWidget().getFabrique().creerWidgetWait());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.INSTRUCTION, GUI.getPanelWidget().getFabrique().creerWidgetVariableSetValue());
+	}
+
+	@Override
+	public int getNbColonnes() {
+		return 1;
 	}
 }

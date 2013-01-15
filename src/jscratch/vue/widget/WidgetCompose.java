@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import jscratch.vue.widget.modele.TypeModeleWidget;
-import jscratch.vue.tools.ComposantIntrouvableException;
+import jscratch.vue.tools.exceptions.ComposantIntrouvableException;
 import jscratch.vue.tools.Variables;
 import nxtim.instruction.Instruction;
 import nxtim.instruction.InstructionIfElse;

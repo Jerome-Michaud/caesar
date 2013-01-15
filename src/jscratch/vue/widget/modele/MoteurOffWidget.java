@@ -12,6 +12,7 @@ import javax.swing.JComponent;
 import java.awt.Rectangle;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.Moteur;
+
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type MoteurOff
@@ -19,6 +20,7 @@ import nxtim.instruction.Moteur;
  * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
  */
 public class MoteurOffWidget extends ModeleWidget {
+	
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du MoteurOff.
 	 */

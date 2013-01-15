@@ -23,78 +23,94 @@ import nxtim.instruction.Categorie;
  * @author Bastien Andru - Bastien Aubry - Vincent Besnard - Quentin Gosselin
  */
 public abstract class ModeleWidget implements Serializable {
-    /*
+    
+	/*
      * Constante donnant la hauteur du "décrochement" des widgets.
      */
-
     public static final int OFFSET = 5;
-    /**
+
+	/**
      * Liste des abscisses pour chaque point composant la forme du widget.
      */
     protected int[] tabX;
-    /**
+    
+	/**
      * Liste des ordonnées pour chaque point composant la forme du widget.
      */
     protected int[] tabY;
-    /**
+    
+	/**
      * La couleur de fond du widget.
      */
     private Color couleur;
-    /**
+    
+	/**
      * La forme du widget.
      */
     private Polygon forme;
-    /**
+   
+	/**
      * Hashmap stockant les messages affichés sur le widget et les points où ils
      * doivent se positionner.
      */
     protected HashMap<Point, String> message;
-    /**
+    
+	/**
      * Le type du widget choisit parmis l'enumeration TypeWidget.
      */
     private TypeModeleWidget type;
-    /**
+    
+	/**
      * La largeur du widget.
      */
     private int tailleX;
-    /**
+    
+	/**
      * La hauteur du widget.
      */
     private int tailleY;
-    /**
+    
+	/**
      * Booléen permettant de définir s'il faut afficher les conditions d'arrêt
      * sur le haut ou le bas du widget (différence entre While et DoWhile).
      */
     private boolean conditionHaute;
-    /**
+    
+	/**
      * Booleen permettant de définir si un widget peut avoir un widget accroché
      * à lui en haut.
      */
     protected boolean attachableHaut;
-    /**
+    
+	/**
      * Booléen permettant de définir si un widget peut avoir un widget accroché
      * à lui en bas.
      */
     protected boolean attachableBas;
-    /**
+    
+	/**
      * Booléen permettant de définir si un peut etre utilisé au sein d'un autre
      * widget en tant que valeur
      */
     protected boolean attachableInterne;
-    /**
+    
+	/**
      * Booléen permettant de définir si un widget peut être placé dans un widget
      * complexe.
      */
     protected boolean imbricable;
-    /**
+    
+	/**
      * Liste des zones où pourront être imbriqués d'autres widgets.
      */
     protected List<Rectangle> zonesAccroches;
-    /**
+    
+	/**
      * Élément du programme de traduction.
      */
     private IElementProgramme elementProgramme;
-    /**
+    
+	/**
      * Liste des zones de saisies du widget.
      */
     private List<Zone> lesZonesSaisies;
@@ -410,7 +426,6 @@ public abstract class ModeleWidget implements Serializable {
         return attachableHaut;
     }
 
-
     /**
      * Permet de savoir si on peut utiliser ce widget pour l'utiliser en guise de valeur
      * en le droppant dans un ChampTexte
@@ -460,7 +475,6 @@ public abstract class ModeleWidget implements Serializable {
      * @param x La valeur de l'agrandissement à appliquer
      * @param r Le rectangle à augmenter également
      */
-
     public void decalageY(int x,Rectangle r){}
 
 	public void decalerComposantsSuivants(int positionX, int decalage){

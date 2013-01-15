@@ -5,8 +5,8 @@ import java.util.List;
 import jscratch.modeles.DicoVariables;
 import jscratch.modeles.DicoWidgetsCategories;
 import jscratch.vue.ginterface.GUI;
-import jscratch.vue.tools.NonChargeableException;
-import jscratch.vue.widget.FabriqueInstructions;
+import jscratch.vue.tools.exceptions.NonChargeableException;
+import jscratch.vue.widget.fabrique.FabriqueInstructions;
 import jscratch.vue.widget.IWidget;
 import jscratch.vue.widget.Widget;
 import jscratch.vue.widget.WidgetCompose;
@@ -83,6 +83,7 @@ public class DeserialiseurXML {
 		// Remplissage des zones
 		List<Zone> lesZones = w.getModele().getLesZonesSaisies();
 		for (int i = 0; i < lesZones.size(); i++) {
+			//TODO : prendre en compte variables
 			lesZones.get(i).setValeur(attributsXml.get(i).getAttributeValue("valeur"));
 		}
 

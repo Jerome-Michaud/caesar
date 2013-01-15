@@ -14,6 +14,7 @@ import nxtim.instruction.Instruction;
  * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
  */
 public class InstructionWidget extends ModeleWidget implements Serializable{
+	
 	/**
 	 * Constructeur du modele définissant les différents paramètres de
 	 * l'Instruction.

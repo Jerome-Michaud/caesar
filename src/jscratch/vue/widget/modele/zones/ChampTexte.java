@@ -130,6 +130,7 @@ public class ChampTexte extends JPanel implements Zone {
 	 */
 	public void supprimerTexte() {
 		this.textField.setEditable(false);
+		this.textField.setEnabled(false);
 	}
 
 	@Override

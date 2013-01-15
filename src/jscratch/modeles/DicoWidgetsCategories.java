@@ -86,6 +86,7 @@ public class DicoWidgetsCategories {
 	public void ajouterWidgetVariable(Variable var) {
 		List<Widget> l = (List<Widget>)this.dico.get(Categorie.VARIABLES);
 		Widget w = GUI.getPanelWidget().getFabrique().creerWidgetVariable((VariableModifiable) var);
+		w.getModele().setCategorie(Categorie.VARIABLES);
 		w.getModele().setCouleur(DicoCouleursCategories.getInstance().getCouleur(Categorie.VARIABLES));
 		l.add(w);
 	}

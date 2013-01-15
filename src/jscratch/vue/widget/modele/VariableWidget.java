@@ -19,6 +19,11 @@ public class VariableWidget extends ModeleWidget {
 	 */
 	private VariableWidget() { }
 	
+	/**
+	 * Constructeur par défaut de <code>VariableWidget</code>.
+	 * 
+	 * @param variableModifiable la variable
+	 */
 	public VariableWidget(VariableModifiable variableModifiable) {
 		int tX[] = {0, 3, 7, 10, 10, 7, 3, 0};
 		int tY[] = {3, 0, 0,  3,  11, 14, 14,10};

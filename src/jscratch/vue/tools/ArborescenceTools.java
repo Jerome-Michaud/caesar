@@ -1,5 +1,6 @@
 package jscratch.vue.tools;
 
+import jscratch.vue.tools.exceptions.ComposantIntrouvableException;
 import java.util.LinkedList;
 import java.util.List;
 import jscratch.vue.ginterface.GUI;
@@ -205,7 +206,6 @@ public final class ArborescenceTools {
 		this.arborescence = l;
 		GUI.getPanelCodeGraphique().removeAll();
 		for (List<Widget> ls : l) {
-			System.out.println("boucle");
 			setArborescence(ls, initListeners);
 		}
 	}
