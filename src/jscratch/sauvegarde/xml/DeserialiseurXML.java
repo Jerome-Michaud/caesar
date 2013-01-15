@@ -53,12 +53,12 @@ public class DeserialiseurXML {
 			}
 			arbo.add(l);
 		}
-		System.out.println("Composants sur pcg : " + GUI.getPanelCodeGraphique().getComponents().length);
 		return arbo;
 	}
 	
 	private static Widget deserializeWidget(Element widget, IWidget parent) throws NonChargeableException {
 		String classe = widget.getAttributeValue("classe");
+		String categorie = widget.getAttributeValue("categorie");
 		Element coordonneesXml = widget.getChild("coordonnees");
 		List<Element> attributsXml = widget.getChild("attributs").getChildren();
 		List<Element> accrochesXml = widget.getChildren("accroche");
@@ -66,13 +66,11 @@ public class DeserialiseurXML {
 		// Récupération d'un objet Widget correspondant à la classe
 		FabriqueInstructions fabrique = new FabriqueInstructions();
 		
-		Widget w = fabrique.creerWidget(classe);
+		Widget w = fabrique.creerWidget(classe, categorie);
 		w.setDraggable(true);
 		w.defParent(parent);
 		w.applyChangeModele();
-		
-		GUI.getPanelCodeGraphique().add(w);
-		
+				
 		// Remplissage des coordonnées
 		if (coordonneesXml != null) {
 			w.setLocation(Integer.parseInt(coordonneesXml.getAttributeValue("x")), Integer.parseInt(coordonneesXml.getAttributeValue("y")));

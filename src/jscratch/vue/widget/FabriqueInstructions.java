@@ -1,5 +1,6 @@
 package jscratch.vue.widget;
 
+import jscratch.modeles.DicoCouleursCategories;
 import jscratch.vue.tools.NonChargeableException;
 import jscratch.vue.tools.NonClonableException;
 import nxtim.instruction.Condition;
@@ -23,6 +24,7 @@ import jscratch.vue.widget.modele.WaitWidget;
 import jscratch.vue.widget.modele.VariableWidget;
 import jscratch.vue.widget.modele.VariableSetValueWidget;
 import jscratch.vue.widget.modele.WhileWidget;
+import nxtim.instruction.Categorie;
 
 /**
  * Classe implémentant le design pattern Factory permettant la création de tous les types de widgets.
@@ -161,11 +163,12 @@ public class FabriqueInstructions {
 	 * @return un widget complexe de type "expression logique"
 	 */
 	/*public Widget creerWidgetExpressionLogical(Operateur op, ExpressionModifiable expressionModifiable) {
-		return new WidgetCompose(new ExpressionLogicalWidget(op, expressionModifiable));
-	}*/
+	 return new WidgetCompose(new ExpressionLogicalWidget(op, expressionModifiable));
+	 }*/
 	public Widget creerWidgetExpressionLogical(Operateur op) {
 		return new WidgetCompose(new ExpressionLogicalWidget(op));
 	}
+
 	/**
 	 * Méthode permettant de créér une copie d'un widget.
 	 *
@@ -227,7 +230,7 @@ public class FabriqueInstructions {
 	 * @return la copie du widget passé en paramètre
 	 * @throws NonClonableException Si on essaye de cloner un widget qui n'est pas clonable
 	 */
-	public Widget creerWidget(final String nomClasse) throws NonChargeableException {
+	public Widget creerWidget(final String nomClasse, final String categorie) throws NonChargeableException {
 		Widget w = null;
 		if ("InstructionWidget".equals(nomClasse)) {
 			//w = creerWidgetMoteurFwd();
@@ -272,7 +275,24 @@ public class FabriqueInstructions {
 		if (w == null) {
 			throw new NonChargeableException("Impossible de charger le widget " + nomClasse);
 		}
+
+		w.getModele().setCouleur(DicoCouleursCategories.getInstance().getCouleur(fromString(categorie)));
+
 		//w.getModele().setCouleur(comp.getModele().getCouleur());
 		return w;
+	}
+
+	/**
+	 * Permet de connaître la catégorie en fonction d'une chaîne de caractère.
+	 *
+	 * @return la catégorie
+	 */
+	public Categorie fromString(final String categorie) {
+		for (Categorie c : Categorie.values()) {
+			if (c.toString().equals(categorie)) {
+				return c;
+			}
+		}
+		return null;
 	}
 }

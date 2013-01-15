@@ -88,8 +88,11 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 			if (fichier.exists()) {
 				try {
 					SAXBuilder sxb = new SAXBuilder();
+		System.out.println("Composants sur pcg : " + GUI.getPanelCodeGraphique().getComponents().length);
 					List<List<Widget>> l = DeserialiseurXML.load(sxb.build(fichier));
-					ArborescenceTools.getInstance().initArborescence(l, true);
+		System.out.println("Composants sur pcg : " + GUI.getPanelCodeGraphique().getComponents().length);
+					ArborescenceTools.getInstance().initArborescence(l, false);
+		System.out.println("Composants sur pcg : " + GUI.getPanelCodeGraphique().getComponents().length);
 				} catch (JDOMException ex) {
 					Erreur.afficher(ex, "Le fichier fournit n'est pas correct");
 				}

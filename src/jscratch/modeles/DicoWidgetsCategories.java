@@ -64,6 +64,7 @@ public class DicoWidgetsCategories {
 	 */
 	public void ajouterWidget(Categorie c, Widget w) {
 		this.dico.get(c).add(w);
+		w.getModele().setCategorie(c);
 		w.getModele().setCouleur(DicoCouleursCategories.getInstance().getCouleur(c));
 	}
 	

@@ -254,7 +254,8 @@ public class Widget extends JComponent {
 	public Element toXml() {
 		Element widget = new Element("widget");
 		widget.setAttribute(new Attribute("classe", this.modele.getClass().getSimpleName()));
-
+		widget.setAttribute("categorie", this.modele.getCategorie().toString());
+		
 		// Si le widget est une variable, ajout du nom de la variable
 		if (VariableWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
 			widget.setAttribute("variable", ((VariableWidget)this.getModele()).getNomVariable());
