@@ -52,6 +52,7 @@ public class RepeatWidget extends ModeleWidget {
 
 		this.setInstructionValeur(f.getValeur());
 		
+		this.decalageX(-25);
 		
 		initListeners();
 	}

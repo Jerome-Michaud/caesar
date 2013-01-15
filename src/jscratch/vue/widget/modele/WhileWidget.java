@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 import jscratch.vue.tools.Variables;
+import jscratch.vue.widget.modele.zones.ChampTexte;
 import nxtim.instruction.InstructionWhile;
 
 /**
@@ -31,17 +32,33 @@ public class WhileWidget extends ModeleWidget implements Serializable{
 		message.put(new Point(5, 17), "Tant que");
 		message.put(new Point(85, 17), "faire");
 		
+		ChampTexte f = new ChampTexte();
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		f.setBounds(60, 3, 20, 20);
+		f.setValeur("0");
+		this.getLesZonesSaisies().add(f);
+		
 		this.setElementProgramme(new InstructionWhile());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
+		
+		this.decalageX(-20);
+    }
+	
+	@Override
+    public void decalageX(final int a) {
+        int i;
+        for (i = 6; i < 10; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        for (i = 22; i < 26; i++) {
+            this.getForme().xpoints[i] = this.getForme().xpoints[i] + a;
+        }
+        this.setForme(this.getForme());
+        this.setTailleX();
     }
     
-    /**
-     * Méthode permettant d'augmenter la hauteur du composant.
-     *
-     * @param b La valeur de l'agrandissement à appliquer
-     * @param r Le rectangle à augmenter également
-     */
     @Override
     public void decalageY(int b,Rectangle r) {
         int i;

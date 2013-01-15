@@ -9,9 +9,6 @@ import nxtim.instruction.VariableModifiable;
 import jscratch.vue.widget.modele.zones.ChampTexte;
 import jscratch.vue.widget.modele.zones.ListeDeroulante;
 
-
-
-
 /**
  *
  * @author zubair
@@ -22,14 +19,9 @@ public class VariableSetValueWidget extends ModeleWidget {
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
 	 */
-
-
-
 	public VariableSetValueWidget() {
-
 		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
-
 
 		this.setTabX(tX);
 		this.setTabY(tY);
@@ -37,23 +29,25 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeModeleWidget.SETVALUEVARIABLE);
 
-		message.put(new Point(5, 17), "set");
-		message.put(new Point(100, 17), " to ");
+		message.put(new Point(5, 17), "attribuer");
+		message.put(new Point(95, 17), "à");
 
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		/*variables = new JComboBox(DicoVars.getInstance().getLesvariables());
 		variables.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add((Zone) variables);*/
-		ListeDeroulante l = new ListeDeroulante<Variable>(DicoVariables.getInstance().getLesvariables());
-		l.setBounds(55, 3, 35, 20);
-		this.getLesZonesSaisies().add(l);
-
-
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.setBounds(65, 3, 40, 20);
-		f.setValeur("0");
+		f.setBounds(55, 3, 35, 20);
+		f.setValeur("0");	
+		this.getLesZonesSaisies().add(f);
+
+
+		f = new ChampTexte();
+		f.supprimerTexte();
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.setBounds(110, 3, 40, 20);
 		this.getLesZonesSaisies().add(f);
 
 
