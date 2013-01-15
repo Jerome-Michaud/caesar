@@ -1,5 +1,7 @@
 package jscratch.vue.tools;
 
+import jscratch.vue.tools.exceptions.ComposantIntrouvableException;
+import jscratch.vue.tools.exceptions.NonClonableException;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -93,8 +95,6 @@ public class DragAndDropTools extends Observable {
 			composantsDrague.add(comp);
 		} else {
 			ArborescenceTools arbo = ArborescenceTools.getInstance();
-			System.out.println(GUI.getPanelCodeGraphique().getComponentCount());
-			System.out.println(comp);
 			try {
 				//recuperation et detachement des widgets dragués
 				composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));

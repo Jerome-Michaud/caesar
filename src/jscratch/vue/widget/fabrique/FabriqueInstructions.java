@@ -1,8 +1,10 @@
-package jscratch.vue.widget;
+package jscratch.vue.widget.fabrique;
 
 import jscratch.modeles.DicoCouleursCategories;
-import jscratch.vue.tools.NonChargeableException;
-import jscratch.vue.tools.NonClonableException;
+import jscratch.vue.tools.exceptions.NonChargeableException;
+import jscratch.vue.tools.exceptions.NonClonableException;
+import jscratch.vue.widget.Widget;
+import jscratch.vue.widget.WidgetCompose;
 import nxtim.instruction.Condition;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
@@ -198,11 +200,11 @@ public class FabriqueInstructions {
 			w = creerWidgetMoteurOff();
 		} else if (comp.getModele() instanceof WaitWidget) {
 			w = creerWidgetWait();
-		} /* ajout de widget variable */ else if (comp.getModele() instanceof VariableWidget) {
+		} else if (comp.getModele() instanceof VariableWidget) {
 			w = creerWidgetVariable((VariableModifiable) comp.getModele().getElementProgramme());
 		} else if (comp.getModele() instanceof VariableSetValueWidget) {
 			w = creerWidgetVariableSetValue();
-		} /* */ else if (comp.getModele() instanceof RepeatWidget) {
+		} else if (comp.getModele() instanceof RepeatWidget) {
 			w = creerWidgetRepeat();
 		} else if (comp.getModele() instanceof ForWidget) {
 			w = creerWidgetFor();
@@ -211,15 +213,16 @@ public class FabriqueInstructions {
 			w = creerWidgetExpressionArithmetic(op.getOperateur());
 		} else if (comp.getModele() instanceof ExpressionLogicalWidget) {
 			Condition con = (Condition) comp.getModele().getElementProgramme();
-
 			w = creerWidgetExpressionLogical(con.getOperateur());
-			//w = creerWidgetExpressionLogical(con.getOperateur(), null);
 		}
 
 		if (w == null) {
 			throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
 		}
+		
 		w.getModele().setCouleur(comp.getModele().getCouleur());
+		w.getModele().setCategorie(comp.getModele().getCategorie());
+		
 		return w;
 	}
 
@@ -232,9 +235,10 @@ public class FabriqueInstructions {
 	 */
 	public Widget creerWidget(final String nomClasse, final String categorie) throws NonChargeableException {
 		Widget w = null;
-		if ("InstructionWidget".equals(nomClasse)) {
+		// Les widgets de variable n'ont pas besoin d'être présent
+		/*if ("InstructionWidget".equals(nomClasse)) {
 			//w = creerWidgetMoteurFwd();
-		} else if ("IfWidget".equals(nomClasse)) {
+		} else*/ if ("IfWidget".equals(nomClasse)) {
 			w = creerWidgetIf();
 		} else if ("IfElseWidget".equals(nomClasse)) {
 			w = creerWidgetIfElse();
@@ -252,47 +256,33 @@ public class FabriqueInstructions {
 			w = creerWidgetMoteurOff();
 		} else if ("WaitWidget".equals(nomClasse)) {
 			w = creerWidgetWait();
-		} /* ajout de widget variable */ /*else if ("VariableWidget".equals(nomClasse)) {
-		 w = creerWidgetVariable((VariableModifiable)comp.getModele().getElementProgramme());
-		 }*/ else if ("VariableSetValueWidget".equals(nomClasse)) {
+		} else if ("VariableSetValueWidget".equals(nomClasse)) {
 			w = creerWidgetVariableSetValue();
-		} /* */ else if ("RepeatWidget".equals(nomClasse)) {
+		} else if ("RepeatWidget".equals(nomClasse)) {
 			w = creerWidgetRepeat();
 		} else if ("ForWidget".equals(nomClasse)) {
 			w = creerWidgetFor();
+		} else if ("ExpressionArithmeticWidget".equals(nomClasse)) {
+			//Operation op = (Operation)comp.getModele().getElementProgramme();
+			//w = creerWidgetExpressionArithmetic(op.getOperateur());
+		} else if ("ExpressionLogicalWidget".equals(nomClasse)) {
+			//Condition con = (Condition)comp.getModele().getElementProgramme();
+			//w = creerWidgetExpressionLogical(con.getOperateur());
 		}
-		/*else if ("ExpressionArithmeticWidget".equals(nomClasse)) {
-		 Operation op = (Operation)comp.getModele().getElementProgramme();
-		 w = creerWidgetExpressionArithmetic(op.getOperateur());
-		 }
-		 else if ("ExpressionLogicalWidget".equals(nomClasse)) {
-		 Condition con = (Condition)comp.getModele().getElementProgramme();
 
-		 w = creerWidgetExpressionLogical(con.getOperateur());
-
-		 }*/
-
+		// Le composant n'est pas dans le if précédent, il doit être ajouté
 		if (w == null) {
 			throw new NonChargeableException("Impossible de charger le widget " + nomClasse);
 		}
 
-		w.getModele().setCouleur(DicoCouleursCategories.getInstance().getCouleur(fromString(categorie)));
-
-		//w.getModele().setCouleur(comp.getModele().getCouleur());
-		return w;
-	}
-
-	/**
-	 * Permet de connaître la catégorie en fonction d'une chaîne de caractère.
-	 *
-	 * @return la catégorie
-	 */
-	public Categorie fromString(final String categorie) {
+		// On remet la couleur du widget suivant sa catégorie
 		for (Categorie c : Categorie.values()) {
 			if (c.toString().equals(categorie)) {
-				return c;
+				w.getModele().setCouleur(DicoCouleursCategories.getInstance().getCouleur(c));
+				break;
 			}
 		}
-		return null;
+		
+		return w;
 	}
 }

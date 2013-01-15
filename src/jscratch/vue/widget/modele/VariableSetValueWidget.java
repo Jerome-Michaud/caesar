@@ -3,18 +3,14 @@ package jscratch.vue.widget.modele;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
-import jscratch.modeles.DicoVariables;
-import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 import jscratch.vue.widget.modele.zones.ChampTexte;
-import jscratch.vue.widget.modele.zones.ListeDeroulante;
 
 /**
  *
  * @author zubair
  */
 public class VariableSetValueWidget extends ModeleWidget {
-
 
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
@@ -29,20 +25,16 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeModeleWidget.SETVALUEVARIABLE);
 
-		message.put(new Point(5, 17), "attribuer");
+		message.put(new Point(5, 17), "Attribuer");
 		message.put(new Point(95, 17), "à");
 
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
-		/*variables = new JComboBox(DicoVars.getInstance().getLesvariables());
-		variables.setBounds(55, 3, 35, 20);
-		this.getLesZonesSaisies().add((Zone) variables);*/
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.setBounds(55, 3, 35, 20);
 		f.setValeur("0");	
 		this.getLesZonesSaisies().add(f);
-
 
 		f = new ChampTexte();
 		f.supprimerTexte();
@@ -50,9 +42,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		f.setBounds(110, 3, 40, 20);
 		this.getLesZonesSaisies().add(f);
 
-
-
-		this.decalageX(-5);
+		this.decalageX(-20);
 
 		initListeners();
 	}
@@ -71,8 +61,9 @@ public class VariableSetValueWidget extends ModeleWidget {
 	public void initListeners() { }
 
 	/**
+	 * Permet de récupérer le nom de la variable.
 	 * 
-	 * @return nom de variable
+	 * @return le nom de variable
 	 */
 	public String getNomVariable() {
 		return ((VariableModifiable)this.getElementProgramme()).getNom();

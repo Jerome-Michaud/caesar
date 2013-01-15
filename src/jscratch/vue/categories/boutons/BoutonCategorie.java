@@ -1,4 +1,4 @@
-package jscratch.vue.categories;
+package jscratch.vue.categories.boutons;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,6 +16,7 @@ import javax.swing.JComponent;
 
 import javax.swing.SwingUtilities;
 import jscratch.modeles.DicoWidgetsCategories;
+import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
 import jscratch.vue.ginterface.GUI;
 import jscratch.vue.tools.Variables;
@@ -208,7 +209,7 @@ public abstract class BoutonCategorie extends JComponent {
 
 
 		}
-		GUI.getPanelWidget().setLesWidgets(DicoWidgetsCategories.getInstance().getWidgets(this.modele.getCategorie()));
+		GUI.getPanelWidget().setLesWidgets(getNbColonnes());
 	}
 
 	/**
@@ -251,4 +252,11 @@ public abstract class BoutonCategorie extends JComponent {
 	public Categorie getCategorie() {
 		return this.modele.getCategorie();
 	}
+
+	/**
+	 * Donne le nombre de colonne pour la catégorie.
+	 * 
+	 * @return le nombre colonne
+	 */
+	public abstract int getNbColonnes();
 }

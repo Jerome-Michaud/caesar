@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import nxtim.instruction.Categorie;
-import jscratch.vue.categories.BoutonCategorie;
-import jscratch.vue.categories.BoutonCategorieAffichage;
-import jscratch.vue.categories.BoutonCategorieCapteur;
-import jscratch.vue.categories.BoutonCategorieControle;
-import jscratch.vue.categories.BoutonCategorieExpression;
-import jscratch.vue.categories.BoutonCategorieInstruction;
-import jscratch.vue.categories.BoutonCategorieMoteur;
-import jscratch.vue.categories.BoutonCategorieTemps;
-import jscratch.vue.categories.BoutonCategorieVariable;
+import jscratch.vue.categories.boutons.BoutonCategorie;
+import jscratch.vue.categories.boutons.BoutonCategorieAffichage;
+import jscratch.vue.categories.boutons.BoutonCategorieCapteur;
+import jscratch.vue.categories.boutons.BoutonCategorieControle;
+import jscratch.vue.categories.boutons.BoutonCategorieExpression;
+import jscratch.vue.categories.boutons.BoutonCategorieInstruction;
+import jscratch.vue.categories.boutons.BoutonCategorieMoteur;
+import jscratch.vue.categories.boutons.BoutonCategorieTemps;
+import jscratch.vue.categories.boutons.BoutonCategorieVariable;
 
 /**
  *

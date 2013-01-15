@@ -59,7 +59,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.decalageX(11);
 
 		initListeners();
-	}//fin constructeur
+	}
 	
 	@Override
 	public void decalageY(int b, Rectangle r) {
@@ -88,6 +88,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 			}
 		});
 	}
+	
 	/**
 	 * Méthode permettant de définir l'instruction moteur du widget.
 	 * 
@@ -96,6 +97,7 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 	private void setInstructionMoteur(String nom) {
 		((InstructionMoteurMov) getElementProgramme()).setMoteur(Moteur.values()[Integer.parseInt(nom)]);
 	}
+	
 	/**
 	 * Méthode permettant de définir la valeur de l'instruction moteur
 	 * 

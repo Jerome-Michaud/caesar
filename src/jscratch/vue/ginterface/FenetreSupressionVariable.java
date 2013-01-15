@@ -15,10 +15,19 @@ public class FenetreSupressionVariable extends JFrame {
 	private JComboBox variables;
 	private JButton boutonValider;
 
-	public FenetreSupressionVariable() {
+	/**
+	 * L'instance unique de <code>FenetreSuppressionVariable</code>.
+	 */
+	private static FenetreSupressionVariable instance = null;
+	
+	/**
+	 * Le constructeur privé de <code>FenetreSuppressionVariable</code>.
+	 */
+	private FenetreSupressionVariable() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(null);
-
+		this.setAlwaysOnTop(true);
+		
 		variables = new JComboBox(DicoVariables.getInstance().getLesvariables());
 		boutonValider = new JButton("Valider");
 
@@ -40,7 +49,8 @@ public class FenetreSupressionVariable extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(GUI.getFenetre());
 		this.setVisible(true);
-
+		this.variables.requestFocus();
+		
 		boutonValider.addActionListener(new ActionListener() {
 			@ Override
 			public void actionPerformed(ActionEvent ae) {
@@ -53,10 +63,32 @@ public class FenetreSupressionVariable extends JFrame {
 				DicoVariables.getInstance().supprimer(variable);
 
 				// Mise à jour du panel widget
-				GUI.getPanelWidget().setLesWidgets(DicoWidgetsCategories.getInstance().getWidgets(GUI.getPanelTypeWidget().getCurrentCategorie()));
+				GUI.getPanelWidget().setLesWidgets(1);
 				
 				dispose();
 			}
 		});
+	}
+	
+	/**
+	 * Permet de récupérer l'instance unique de <code>FenetreSuppressionVariable</code>.
+	 *
+	 * @return l'instance unique
+	 */
+	public static FenetreSupressionVariable getInstance() {
+		if (instance == null) {
+			instance = new FenetreSupressionVariable();
+		}
+		else {
+			instance.reset();
+		}
+		return instance;
+	}
+
+	/**
+	 * RAZ de la fenêtre.
+	 */
+	private void reset() {
+		this.setVisible(true);
 	}
 }

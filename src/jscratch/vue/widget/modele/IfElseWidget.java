@@ -64,7 +64,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
 	        this.setForme(this.getForme());
 	        this.setTailleY();
          }
-		 else {// if(r.getY()==Variables.ZONE_ACCROCHE_ELSE.getY()){
+		 else {
         	 int i;
  	        for (i = 32; i < tabY.length; i++) {
  	            this.getForme().ypoints[i] = this.getForme().ypoints[i] + x;

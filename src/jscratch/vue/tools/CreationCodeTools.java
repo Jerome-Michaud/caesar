@@ -13,8 +13,7 @@ public class CreationCodeTools {
 	/**
 	 * Constructeur privé de CreationCodeTools.
 	 */
-	private CreationCodeTools() {
-	}
+	private CreationCodeTools() { }
 
 	/**
 	 * Méthode statique permettant d'écrire le code NXC dans à l'endroit précisé en paramètre.

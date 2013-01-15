@@ -5,6 +5,9 @@ package jscratch.vue.ginterface;
  */
 public class GUI {
 
+	/**
+	 * Le constructeur privé de <code>GUI</code>.
+	 */
 	private GUI() { }
 
 	public static Fenetre getFenetre() {
@@ -15,12 +18,12 @@ public class GUI {
 		return new FenetreAPropos();
 	}
 
-	public static FenetreAjoutVariable getFenetreAjoutVariable() {
-		return new FenetreAjoutVariable();
+	public static void getFenetreAjoutVariable() {
+		FenetreAjoutVariable.getInstance();
 	}
 
-	public static FenetreSupressionVariable getFenetreSupressionVariable() {
-		return new FenetreSupressionVariable();
+	public static void getFenetreSupressionVariable() {
+		FenetreSupressionVariable.getInstance();
 	}
 
 	public static GlassPane getGlassPane() {

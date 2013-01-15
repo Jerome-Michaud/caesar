@@ -22,6 +22,7 @@ import nxtim.instruction.VariableConstante;
  * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
  */
 public class MoteurMovRevWidget extends ModeleWidget {
+	
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du MoteurFwd.
 	 */

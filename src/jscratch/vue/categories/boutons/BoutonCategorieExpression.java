@@ -1,6 +1,7 @@
-package jscratch.vue.categories;
+package jscratch.vue.categories.boutons;
 
 import jscratch.modeles.DicoWidgetsCategories;
+import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
 import nxtim.instruction.Operateur;
 
@@ -44,5 +45,10 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
+	}
+
+	@Override
+	public int getNbColonnes() {
+		return 2;
 	}
 }

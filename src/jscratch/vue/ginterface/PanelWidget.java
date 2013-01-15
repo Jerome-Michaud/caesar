@@ -5,8 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import jscratch.modeles.DicoWidgetsCategories;
 import jscratch.vue.tools.Variables;
-import jscratch.vue.widget.FabriqueInstructions;
+import jscratch.vue.widget.fabrique.FabriqueInstructions;
 import jscratch.vue.widget.Widget;
 
 /**
@@ -55,18 +56,18 @@ public class PanelWidget extends JPanel {
 	public FabriqueInstructions getFabrique() {
 		return this.fabrique;
 	}
-
+	
 	/**
-	 * Permet de modifier la liste des widgets à afficher.
+	 * Permet de modifier la liste des widgets à afficher sur X colonnes.
 	 *
 	 * @since 1.0
 	 *
-	 * @param liste La liste des widgets à afficher (suivant la catégorie active).
+	 * @param nbColonnes Le nombre de colonnes désiré
 	 */
-	public void setLesWidgets(List<Widget> liste) {
+	public void setLesWidgets(final int nbColonnes) {
 		this.removeAll();
-		this.lesWidgets = liste;
-		placerWidgets();
+		this.lesWidgets = DicoWidgetsCategories.getInstance().getWidgets(GUI.getPanelTypeWidget().getCurrentCategorie());
+		placerWidgets(nbColonnes);
 		
 		this.validate();
 		this.repaint();
@@ -120,16 +121,27 @@ public class PanelWidget extends JPanel {
 	 *
 	 * @since 1.0
 	 */
-	private void placerWidgets() {
+	private void placerWidgets(final int colonnes) {
 		int i = 1;
+		int maxW = 0;
+		int x = 15;
 		int y = 30;
 
 		for (Widget w : this.lesWidgets) {
 			w.setDraggable(false);
-
-			w.setLocation(15, y);
+			
+			if (maxW < w.getWidth()) {
+				maxW = w.getWidth();
+			}
+			
+			if (this.lesWidgets.size() > 5 && i == this.lesWidgets.size()/colonnes + 1) {
+				x += maxW + 20;
+				y = 30;
+			}
+			
+			w.setLocation(x, y);
 			y += w.getHeight() + 20;
-
+			
 			this.add(w);
 			i++;
 		}

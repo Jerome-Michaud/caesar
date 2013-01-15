@@ -13,7 +13,7 @@ import org.jdom2.output.XMLOutputter;
 import jscratch.sauvegarde.SauvegardeTools;
 import jscratch.vue.ginterface.GUI;
 import jscratch.vue.tools.ArborescenceTools;
-import jscratch.vue.tools.NonChargeableException;
+import jscratch.vue.tools.exceptions.NonChargeableException;
 import jscratch.vue.widget.Widget;
 
 public class SauvegardeXMLTools implements SauvegardeTools {
@@ -49,6 +49,7 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 	public void load(String path) {
 		try {
 			deserializeArborescence(path);
+			ArborescenceTools.getInstance().updateWidgets();
 			GUI.getPanelCodeGraphique().repaint();
 		} catch (NonChargeableException ex) {
 			Erreur.afficher(ex);
@@ -88,11 +89,8 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 			if (fichier.exists()) {
 				try {
 					SAXBuilder sxb = new SAXBuilder();
-		System.out.println("Composants sur pcg : " + GUI.getPanelCodeGraphique().getComponents().length);
 					List<List<Widget>> l = DeserialiseurXML.load(sxb.build(fichier));
-		System.out.println("Composants sur pcg : " + GUI.getPanelCodeGraphique().getComponents().length);
 					ArborescenceTools.getInstance().initArborescence(l, false);
-		System.out.println("Composants sur pcg : " + GUI.getPanelCodeGraphique().getComponents().length);
 				} catch (JDOMException ex) {
 					Erreur.afficher(ex, "Le fichier fournit n'est pas correct");
 				}

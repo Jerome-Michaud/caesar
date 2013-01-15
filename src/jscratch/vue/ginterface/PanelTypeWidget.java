@@ -1,6 +1,6 @@
 package jscratch.vue.ginterface;
 
-import jscratch.vue.categories.BoutonCategorie;
+import jscratch.vue.categories.boutons.BoutonCategorie;
 
 import java.awt.Dimension;
 import java.util.LinkedList;

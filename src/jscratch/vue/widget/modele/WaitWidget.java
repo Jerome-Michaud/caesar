@@ -11,6 +11,7 @@ import javax.swing.JComponent;
 import nxtim.instruction.InstructionAttente;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
+
 /**
  * Cette classe modèlise la forme d'un widget de type Wait.
  * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
@@ -22,7 +23,6 @@ public class WaitWidget extends ModeleWidget {
 	public WaitWidget() {
 		int tX[] = {0, 5, 30, 35, 45, 50, 130, 135, 135, 130, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
-
 
 		this.setTabX(tX);
 		this.setTabY(tY);
@@ -70,6 +70,7 @@ public class WaitWidget extends ModeleWidget {
 			}
 		});
 	}
+	
 	/**
 	 * Définie le temps d'attente de l'instruction Wait.
 	 * 

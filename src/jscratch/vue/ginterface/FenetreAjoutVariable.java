@@ -19,10 +19,19 @@ public class FenetreAjoutVariable extends JFrame {
 	private JTextField nomVariable;
 	private JButton boutonValider, boutonAnnuler;
 
-	public FenetreAjoutVariable() {
+	/**
+	 * L'instance unique de <code>FenetreAjoutVariable</code>.
+	 */
+	private static FenetreAjoutVariable instance = null;
+	
+	/**
+	 * Le constructeur privé de <code>FenetreAjoutVariable</code>.
+	 */
+	private FenetreAjoutVariable() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(null);
-
+		this.setAlwaysOnTop(true);
+		
 		Box boxV = Box.createVerticalBox();
 		Box boxH1 = Box.createHorizontalBox();
 		Box boxH2 = Box.createHorizontalBox();
@@ -54,6 +63,7 @@ public class FenetreAjoutVariable extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(GUI.getFenetre());
 		this.setVisible(true);
+		this.nomVariable.requestFocus();
 
 		boutonValider.addActionListener(new ActionListener() {
 			@Override
@@ -68,7 +78,7 @@ public class FenetreAjoutVariable extends JFrame {
 					DicoWidgetsCategories.getInstance().ajouterWidgetVariable(var);
 					
 					// Mise à jour du panel widget
-					GUI.getPanelWidget().setLesWidgets(DicoWidgetsCategories.getInstance().getWidgets(GUI.getPanelTypeWidget().getCurrentCategorie()));
+					GUI.getPanelWidget().setLesWidgets(1);
 					
 					dispose();
 				}
@@ -81,5 +91,28 @@ public class FenetreAjoutVariable extends JFrame {
 				dispose();
 			}
 		});
+	}
+	
+	/**
+	 * Permet de récupérer l'instance unique de <code>FenetreAjoutVariable</code>.
+	 *
+	 * @return l'instance unique
+	 */
+	public static FenetreAjoutVariable getInstance() {
+		if (instance == null) {
+			instance = new FenetreAjoutVariable();
+		}
+		else {
+			instance.reset();
+		}
+		return instance;
+	}
+
+	/**
+	 * RAZ de la fenêtre.
+	 */
+	private void reset() {
+		this.nomVariable.setText("");
+		this.setVisible(true);
 	}
 }

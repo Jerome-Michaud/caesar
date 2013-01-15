@@ -27,13 +27,13 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 		int tabY[] = {5, 0, 0, 5, 15, 20,20, 15};
 
+		this.setTabX(tabX);
+		this.setTabY(tabY);
+
 		this.attachableBas = false;
         this.attachableHaut = false;
         this.imbricable = false;
         this.attachableInterne = true;
-
-		this.setTabX(tabX);
-		this.setTabY(tabY);
 		
 		this.setTailleX();
 		this.setTailleY();

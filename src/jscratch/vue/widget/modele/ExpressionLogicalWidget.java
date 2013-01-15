@@ -20,22 +20,15 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 	 */
 	public ExpressionLogicalWidget(Operateur op) {
 		int tabX[] = {0, 10, 57, 67, 57, 10};
-		int tabY[] = {10, 0, 0, 10, 20, 20};
+		int tabY[] = {10, 0, 0, 10, 20, 20};		
+		
+		this.setTabX(tabX);
+		this.setTabY(tabY);
 
 		this.attachableBas = false;
         this.attachableHaut = false;
         this.imbricable = false;
-        this.attachableInterne = true;		
-		
-		/**
-		 * Méthode permettant de définir un tableau représentant les coordonnées des
-		 * ordonnées de la forme du widget.
-		 *
-		 * @param tabY Le tableau représentant les coordonnées des ordonnées de la
-		 * forme du widget.
-		 */
-		this.setTabX(tabX);
-		this.setTabY(tabY);
+        this.attachableInterne = true;
 		
 		// Recalcule la largeur du widget.
 		this.setTailleX();
@@ -53,7 +46,6 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		l.setBounds(10, 3, 14, 14);
 		//l.setBounds(10, expressionModifiable.getnom().length(), 14, 14);
-		//System.out.println("___"+expressionModifiable.getnom().length());
 		
 		//l.validate();//force à recalculer les positions
 		
