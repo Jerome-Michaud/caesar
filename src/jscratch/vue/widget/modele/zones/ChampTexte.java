@@ -17,13 +17,16 @@ import jscratch.vue.widget.Widget;
  */
 public class ChampTexte extends JPanel implements Zone {
 
+	public static final int ETAT_SAISIE = 0;
+	public static final int ETAT_CONTIENT_WIDGET = 1;
+	
 	private Widget widgetContenu;
 	private JTextField textField;
 	private List<TypeModeleWidget> typesWidgetsAcceptes;
 
 	/*
-	 * Etat à 0 quand on affiche uniquement le champ texte
-	 * Etat à 1 quand on affiche les widgets contenus
+	 * Etat à ETAT_SAISIE (0) quand on affiche uniquement le champ texte
+	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus
 	 */
 	int etat;
 
@@ -36,7 +39,7 @@ public class ChampTexte extends JPanel implements Zone {
 		this.textField = new JTextField();
 		this.widgetContenu = null;
 		this.add(textField, BorderLayout.CENTER);
-		this.etat = 0;
+		this.etat = ETAT_SAISIE;
 
 		this.addContainerListener(new ContainerAdapter() {
 			@Override
@@ -75,9 +78,9 @@ public class ChampTexte extends JPanel implements Zone {
 	 */
 	@Override
 	public String getValeur() {
-		if (etat == 0) {
+		if (etat == ETAT_SAISIE) {
 			return textField.getText();
-		} else if (etat == 1) {
+		} else if (etat == ETAT_CONTIENT_WIDGET) {
 			return textField.getText();
 		} else {
 			return "";
@@ -91,7 +94,7 @@ public class ChampTexte extends JPanel implements Zone {
 	 */
 	@Override
 	public void setValeur(String v) {
-		if (etat == 0) {
+		if (etat == ETAT_SAISIE) {
 			this.textField.setText(v);
 		}
 	}
@@ -100,10 +103,10 @@ public class ChampTexte extends JPanel implements Zone {
 		this.removeAll();
 		int oldW = this.getWidth();
 		if (w == null) {
-			this.etat = 0;
+			this.etat = ETAT_SAISIE;
 			this.setComponent(textField);
 		} else {
-			this.etat = 1;
+			this.etat = ETAT_CONTIENT_WIDGET;
 			this.setComponent(w);
 		}
 		Widget parent = ((Widget) (this.getParent()));
@@ -136,14 +139,18 @@ public class ChampTexte extends JPanel implements Zone {
 	@Override
 	public Element toXml() {
 		Element zone = new Element("zone");
-		zone.setAttribute("isWidget", String.valueOf(this.etat == 1));
+		zone.setAttribute("isWidget", String.valueOf(this.etat == ETAT_CONTIENT_WIDGET));
 
-		if (this.etat == 0) {
+		if (this.etat == ETAT_SAISIE) {
 			zone.setAttribute("valeur", this.getValeur());
-		} else if (this.etat == 1) {
+		} else if (this.etat == ETAT_CONTIENT_WIDGET) {
 			zone.addContent(this.widgetContenu.toXml());
 		}
 		return zone;
+	}
+
+	public Widget getWidgetContenu() {
+		return widgetContenu;
 	}
 
 	@Override
