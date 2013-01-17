@@ -19,11 +19,11 @@ import jscratch.vue.widget.modele.ForWidget;
 import jscratch.vue.widget.modele.IfElseWidget;
 import jscratch.vue.widget.modele.IfWidget;
 import jscratch.vue.widget.modele.InstructionWidget;
-import jscratch.vue.widget.modele.MoteurMovFwdWidget;
-import jscratch.vue.widget.modele.MoteurMovRevWidget;
+import jscratch.vue.widget.modele.MoteurMarcheWidget;
 import jscratch.vue.widget.modele.MoteurOffWidget;
 import jscratch.vue.widget.modele.RepeatWidget;
 import jscratch.vue.widget.modele.TacheWidget;
+import jscratch.vue.widget.modele.TempsCourantWidget;
 import jscratch.vue.widget.modele.WaitWidget;
 import jscratch.vue.widget.modele.VariableWidget;
 import jscratch.vue.widget.modele.VariableSetValueWidget;
@@ -37,22 +37,15 @@ import nxtim.instruction.Variable;
 public class FabriqueInstructions {
 
 	/**
-	 * Méthode permettant de créer un widget de type "Avance Moteur Marche Avant".
+	 * Méthode permettant de créer un widget de type " Moteur Marche ".
 	 *
-	 * @return un widget de type "Avance Moteur Marche Avant"
+	 * @return un widget de type " Moteur Marche"
 	 */
-	public Widget creerWidgetMoteurMovFwd() {
-		return new Widget(new MoteurMovFwdWidget());
+	public Widget creerWidgetMoteurMarche() {
+		return new Widget(new MoteurMarcheWidget());
 	}
 
-	/**
-	 * Méthode permettant de créer un widget de type "Avance Moteur Marche Arrière".
-	 *
-	 * @return un widget de type "Avance Moteur Marche Arrière"
-	 */
-	public Widget creerWidgetMoteurMovRev() {
-		return new Widget(new MoteurMovRevWidget());
-	}
+	
 
 	/**
 	 * Méthode permettant de créer un widget de type "Arrêt Moteur".
@@ -145,6 +138,15 @@ public class FabriqueInstructions {
 	}
 
 	/**
+	 * Méthode permettant de créer un widget de type "Temps Courant".
+	 *
+	 * @return un widget de type "Temps Courant"
+	 */
+	public Widget creerWidgetTempsCourant() {
+		return new Widget(new TempsCourantWidget());
+	}
+
+	/**
 	 * Méthode permettant de créer un widget complexe de type "Tâche".
 	 *
 	 * @return un widget complexe de type "Tâche"
@@ -195,10 +197,8 @@ public class FabriqueInstructions {
 			w = creerWidgetWhile();
 		} else if (comp.getModele() instanceof DoWhileWidget) {
 			w = creerWidgetDoWhile();
-		} else if (comp.getModele() instanceof MoteurMovFwdWidget) {
-			w = creerWidgetMoteurMovFwd();
-		} else if (comp.getModele() instanceof MoteurMovRevWidget) {
-			w = creerWidgetMoteurMovRev();
+		} else if (comp.getModele() instanceof MoteurMarcheWidget) {
+			w = creerWidgetMoteurMarche();
 		} else if (comp.getModele() instanceof MoteurOffWidget) {
 			w = creerWidgetMoteurOff();
 		} else if (comp.getModele() instanceof WaitWidget) {
@@ -207,6 +207,8 @@ public class FabriqueInstructions {
 			w = creerWidgetVariable((VariableModifiable) comp.getModele().getElementProgramme());
 		} else if (comp.getModele() instanceof VariableSetValueWidget) {
 			w = creerWidgetVariableSetValue();
+		} else if (comp.getModele() instanceof TempsCourantWidget) {
+			w = creerWidgetTempsCourant();
 		} else if (comp.getModele() instanceof RepeatWidget) {
 			w = creerWidgetRepeat();
 		} else if (comp.getModele() instanceof ForWidget) {
@@ -253,16 +255,16 @@ public class FabriqueInstructions {
 			w = creerWidgetWhile();
 		} else if ("DoWhileWidget".equals(nomClasse)) {
 			w = creerWidgetDoWhile();
-		} else if ("MoteurMovFwdWidget".equals(nomClasse)) {
-			w = creerWidgetMoteurMovFwd();
-		} else if ("MoteurMovRevWidget".equals(nomClasse)) {
-			w = creerWidgetMoteurMovRev();
+		} else if ("MoteurMarcheWidget".equals(nomClasse)) {
+			w = creerWidgetMoteurMarche();
 		} else if ("MoteurOffWidget".equals(nomClasse)) {
 			w = creerWidgetMoteurOff();
 		} else if ("WaitWidget".equals(nomClasse)) {
 			w = creerWidgetWait();
 		} else if ("VariableSetValueWidget".equals(nomClasse)) {
 			w = creerWidgetVariableSetValue();
+		} else if ("TempsCourantWidget".equals(nomClasse)) {
+			w = creerWidgetTempsCourant();
 		} else if ("RepeatWidget".equals(nomClasse)) {
 			w = creerWidgetRepeat();
 		} else if ("ForWidget".equals(nomClasse)) {
