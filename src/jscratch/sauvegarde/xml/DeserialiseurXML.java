@@ -40,8 +40,8 @@ public class DeserialiseurXML {
 		for (Element variable : dictionnaire.getChildren()) {
 			Variable var = new VariableModifiable(TypeVariable.fromString(variable.getAttributeValue("type")), variable.getAttributeValue("nom"), "");
 			DicoVariables.getInstance().ajouter(var);
-			DicoWidgetsCategories.getInstance().ajouterWidgetVariable(var);
 		}
+		DicoWidgetsCategories.getInstance().updateWidgetsVariables();
 		
 		// Chargement de l'arborescence
 		List<Element> groupesXml = docXml.getRootElement().getChild("arborescence").getChildren("groupe");
@@ -76,28 +76,22 @@ public class DeserialiseurXML {
 		Widget w = fabrique.creerWidget(classe, categorie, supplement);
 		w.setDraggable(true);
 		w.defParent(parent);
-		//w.applyChangeModele();
 				
 		// Remplissage des coordonnées
 		if (coordonneesXml != null) {
 			w.setLocation(Integer.parseInt(coordonneesXml.getAttributeValue("x")), Integer.parseInt(coordonneesXml.getAttributeValue("y")));
 		}
-		else {
-			w.setLocation(0, 0);
-		}
-		
 	
 		// Remplissage des zones
 		List<Zone> lesZones = w.getModele().getLesZonesSaisies();
 		for (int i = 0; i < lesZones.size(); i++) {
 			Element zoneXml = zonesXml.get(i);
 			Zone zone = lesZones.get(i);
-			if (!Boolean.parseBoolean((zoneXml.getAttributeValue("isWidget")))){
+			if (!Boolean.parseBoolean(zoneXml.getAttributeValue("isWidget"))) {
 				zone.setValeur(zoneXml.getAttributeValue("valeur"));
 			}
 			else {
 				// Il y a forcement qu'un widget dans une zone
-				// TODO : suppression variable, champtexte disparait
 				Element widgetsDansZoneXml = zoneXml.getChildren().get(0);
 				Widget widgetDansZone = deserializeWidget(widgetsDansZoneXml, null);
 				((ChampTexte)zone).setWidgetContenu(widgetDansZone);
@@ -116,9 +110,10 @@ public class DeserialiseurXML {
 				}
 				i++;
 			}
-			//wComp.notifyChange();
+			wComp.notifyChange();
 		}
 
+		w.applyChangeModele();
 		return w;
 	}
 }
