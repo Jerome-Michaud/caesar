@@ -83,12 +83,17 @@ public class DicoWidgetsCategories {
 	 * 
 	 * @param var la variable à ajouter
 	 */
-	public void ajouterWidgetVariable(Variable var) {
-		List<Widget> l = (List<Widget>)this.dico.get(Categorie.VARIABLES);
-		Widget w = GUI.getPanelWidget().getFabrique().creerWidgetVariable((VariableModifiable) var);
-		w.getModele().setCategorie(Categorie.VARIABLES);
-		w.getModele().setCouleur(DicoCouleursCategories.getInstance().getCouleur(Categorie.VARIABLES));
-		l.add(w);
+	public void updateWidgetsVariables() {
+		Variable[] vars = DicoVariables.getInstance().getLesvariables();
+		List<Widget> widgetsVar = DicoWidgetsCategories.getInstance().getWidgets(Categorie.VARIABLES);
+		widgetsVar.clear();
+		
+		for (Variable var : vars) {
+			Widget w = GUI.getPanelWidget().getFabrique().creerWidgetVariable((VariableModifiable) var);
+			w.getModele().setCategorie(Categorie.VARIABLES);
+			w.getModele().setCouleur(DicoCouleursCategories.getInstance().getCouleur(Categorie.VARIABLES));
+			widgetsVar.add(w);
+		}
 	}
 
 	/**

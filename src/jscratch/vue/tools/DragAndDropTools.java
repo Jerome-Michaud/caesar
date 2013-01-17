@@ -9,7 +9,6 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import jscratch.modeles.Erreur;
@@ -35,10 +34,6 @@ import jscratch.vue.widget.modele.zones.Zone;
 public class DragAndDropTools extends Observable {
 
 	/**
-	 * Le logger de DragAndDDropTools.
-	 */
-	private static final Logger logger = Logger.getLogger(DragAndDropTools.class.getName());
-	/**
 	 * List de widgets contenant les widgets en cours de draggage.
 	 */
 	private List<Widget> composantsDrague;
@@ -51,11 +46,10 @@ public class DragAndDropTools extends Observable {
 	 * Constructeur privé de la classe initialisant la liste de widgets à vide.
 	 */
 	private DragAndDropTools() {
-		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
-
 		this.composantsDrague = new LinkedList<Widget>();
 		this.addObserver(GUI.getGlassPane());
 		this.addObserver(GUI.getPanelCodeGraphique());
+		this.addObserver(GUI.getPanelWidget());
 	}
 
 	/**
@@ -116,12 +110,12 @@ public class DragAndDropTools extends Observable {
 			passerSurAutrePanel(w, GUI.getGlassPane());
 		}
 
-
 		Point p = GUI.getGlassPane().getMousePosition();
 		p.x -= ptClick.x;
 		p.y -= ptClick.y;
 
 		dragGroupeWidget(composantsDrague, p);
+		
 		ArborescenceTools.getInstance().updateWidgets();
 
 		this.setChanged();
@@ -352,6 +346,7 @@ public class DragAndDropTools extends Observable {
 
 		g.setPointLigneSurEcran(null);
 		g.setRectFusion(null);
+		
 		LanceurTraduction.getInstance().lancerTraduction();
 	}
 

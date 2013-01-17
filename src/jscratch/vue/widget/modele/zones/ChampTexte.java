@@ -20,7 +20,7 @@ public class ChampTexte extends JPanel implements Zone {
 	private Widget widgetContenu;
 	private JTextField textField;
 	private List<TypeModeleWidget> typesWidgetsAcceptes;
-
+	
 	/*
 	 * Etat à 0 quand on affiche uniquement le champ texte
 	 * Etat à 1 quand on affiche les widgets contenus
@@ -49,7 +49,7 @@ public class ChampTexte extends JPanel implements Zone {
 
 		this.validate();
 	}
-
+	
 	private void composantSupp(ContainerEvent e) {
 		if (e.getChild() == widgetContenu && e.getComponent() == this) {
 			setWidgetContenu(null);
@@ -104,6 +104,7 @@ public class ChampTexte extends JPanel implements Zone {
 			this.setComponent(textField);
 		} else {
 			this.etat = 1;
+			this.textField.setSize(this.getSize());
 			this.setComponent(w);
 		}
 		Widget parent = ((Widget) (this.getParent()));
@@ -119,7 +120,7 @@ public class ChampTexte extends JPanel implements Zone {
 		this.setSize(comp.getSize());
 		this.add(comp, BorderLayout.CENTER);
 	}
-
+	
 	@Override
 	public int getEtat() {
 		return this.etat;
