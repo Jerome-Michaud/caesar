@@ -9,9 +9,9 @@ import jscratch.vue.ginterface.GUI;
 public class Scratch {
 
 	/**
-	 * Permet le lancement du programme.
+	 * Permet le lancement du programme
 	 *
-	 * @param args les paramètres du programme
+	 * @param args les paramètres du programme.
 	 */
 	public static void main(String[] args) {
 		try {
