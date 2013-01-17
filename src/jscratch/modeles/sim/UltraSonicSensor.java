@@ -12,9 +12,8 @@ import jscratch.controleur.sim.MapController;
  */
 public class UltraSonicSensor extends Sensor<Integer> {
 	
-	private List<Point2D> listPoint;
 	private double distance;
-	private Point2D positionFinal;
+	private Point2D pointFinal;
 	private Robot robot;
 	
 	public UltraSonicSensor(SensorPort port, MapController mapC, double x,
@@ -22,15 +21,15 @@ public class UltraSonicSensor extends Sensor<Integer> {
 		super(port, mapC, x, y, orientation);
 		this.distance = distance;
 		this.robot = robot;
-		this.positionFinal = new Point2D.Double();
+		this.pointFinal = new Point2D.Double();
 		update();
 	}
 
 	/**
 	 * @return le positionFinal
 	 */
-	public Point2D getPositionFinal() {
-		return positionFinal;
+	public Point2D getPointFinal() {
+		return pointFinal;
 	}
 
 	@Override
@@ -44,7 +43,7 @@ public class UltraSonicSensor extends Sensor<Integer> {
 		double x1 = position.getX()+(distance)*Math.cos(orientation+robot.getOrientation());
 		double y1 = position.getY()+(distance)*Math.sin(orientation+robot.getOrientation());
 		
-		positionFinal.setLocation(x1, y1);
+		pointFinal.setLocation(x1, y1);
 		
 		/*
 		 * Tracage d'une droite entre la position du capteur et le point final 
@@ -55,13 +54,13 @@ public class UltraSonicSensor extends Sensor<Integer> {
 		double x;
 		double y;
 		
-		double dx = positionFinal.getX()-position.getX();
-		double dy = positionFinal.getY()-position.getY();
+		double dx = pointFinal.getX()-position.getX();
+		double dy = pointFinal.getY()-position.getY();
 		
 		int distanceObs = -1;
 		int nbPoints = 0;
 		
-		for(x = position.getX();x<positionFinal.getX();x++)
+		for(x = position.getX();x<pointFinal.getX();x++)
 		{
 			nbPoints++;
 			y = position.getY()+dy * (x-position.getX())/dx;
@@ -87,12 +86,4 @@ public class UltraSonicSensor extends Sensor<Integer> {
 	public void setDistance(double distance) {
 		this.distance = distance;
 	}
-
-	/**
-	 * @return le listPoint
-	 */
-	public List<Point2D> getListPoint() {
-		return listPoint;
-	}
-
 }
