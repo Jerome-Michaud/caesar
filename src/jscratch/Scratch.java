@@ -5,6 +5,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import jscratch.modeles.Erreur;
 import jscratch.vue.ginterface.GUI;
+import jscratch.vue.sim.Fenetre;
 
 public class Scratch {
 
@@ -28,5 +29,7 @@ public class Scratch {
 			Erreur.afficher(ex);
 		}
 		GUI.getFenetre();
+		
+		//new Fenetre();
 	}
 }
