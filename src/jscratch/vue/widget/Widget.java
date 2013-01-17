@@ -19,7 +19,11 @@ import org.jdom2.Attribute;
 import org.jdom2.Element;
 import jscratch.vue.ginterface.GUI;
 import jscratch.vue.tools.DragAndDropTools;
+import jscratch.vue.widget.modele.ExpressionArithmeticWidget;
+import jscratch.vue.widget.modele.ExpressionLogicalWidget;
 import jscratch.vue.widget.modele.VariableWidget;
+import nxtim.instruction.Condition;
+import nxtim.instruction.Operation;
 
 /**
  * Classe représentant graphiquement un widget.
@@ -245,8 +249,7 @@ public class Widget extends JComponent {
 	/**
 	 * Met à jour l'arborescence des instructions.
 	 */
-	public void applyChangeModele() {
-	}
+	public void applyChangeModele() { }
 
 	/**
 	 * Permet d'avoir comment le widget doit se sérialiser.
@@ -258,7 +261,17 @@ public class Widget extends JComponent {
 		
 		// Si le widget est une variable, ajout du nom de la variable
 		if (VariableWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
-			widget.setAttribute("variable", ((VariableWidget)this.getModele()).getNomVariable());
+			widget.setAttribute("supplement", ((VariableWidget)this.getModele()).getNomVariable());
+		}
+		
+		// Si le widget est une expression arithmtique, ajout de l'operateur
+		if (ExpressionArithmeticWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
+			widget.setAttribute("supplement", ((Operation)this.getModele().getElementProgramme()).getOperateur().toString());
+		}
+		
+		// Si le widget est une expression logique, ajout de l'opérateur
+		if (ExpressionLogicalWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
+			widget.setAttribute("supplement", ((Condition)this.getModele().getElementProgramme()).getOperateur().toString());
 		}
 		
 		// Si le widget est placé sur le PanelCodeGraphique, ajout des coordonnées. Sinon, les oordonnées seront recalculées automatiquement.

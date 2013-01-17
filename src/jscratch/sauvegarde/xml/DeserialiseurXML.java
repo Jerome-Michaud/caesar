@@ -10,6 +10,7 @@ import jscratch.vue.widget.fabrique.FabriqueInstructions;
 import jscratch.vue.widget.IWidget;
 import jscratch.vue.widget.Widget;
 import jscratch.vue.widget.WidgetCompose;
+import jscratch.vue.widget.modele.zones.ChampTexte;
 import jscratch.vue.widget.modele.zones.Zone;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
@@ -59,17 +60,23 @@ public class DeserialiseurXML {
 	private static Widget deserializeWidget(Element widget, IWidget parent) throws NonChargeableException {
 		String classe = widget.getAttributeValue("classe");
 		String categorie = widget.getAttributeValue("categorie");
+		String supplement = widget.getAttributeValue("supplement");
 		Element coordonneesXml = widget.getChild("coordonnees");
-		List<Element> attributsXml = widget.getChild("attributs").getChildren();
+		
+		List<Element> zonesXml = null;
+		if (widget.getChild("attributs") != null) {
+			zonesXml = widget.getChild("attributs").getChildren();
+		}
+		
 		List<Element> accrochesXml = widget.getChildren("accroche");
 
 		// Récupération d'un objet Widget correspondant à la classe
 		FabriqueInstructions fabrique = new FabriqueInstructions();
 		
-		Widget w = fabrique.creerWidget(classe, categorie);
+		Widget w = fabrique.creerWidget(classe, categorie, supplement);
 		w.setDraggable(true);
 		w.defParent(parent);
-		w.applyChangeModele();
+		//w.applyChangeModele();
 				
 		// Remplissage des coordonnées
 		if (coordonneesXml != null) {
@@ -83,8 +90,18 @@ public class DeserialiseurXML {
 		// Remplissage des zones
 		List<Zone> lesZones = w.getModele().getLesZonesSaisies();
 		for (int i = 0; i < lesZones.size(); i++) {
-			//TODO : prendre en compte variables
-			lesZones.get(i).setValeur(attributsXml.get(i).getAttributeValue("valeur"));
+			Element zoneXml = zonesXml.get(i);
+			Zone zone = lesZones.get(i);
+			if (!Boolean.parseBoolean((zoneXml.getAttributeValue("isWidget")))){
+				zone.setValeur(zoneXml.getAttributeValue("valeur"));
+			}
+			else {
+				// Il y a forcement qu'un widget dans une zone
+				// TODO : suppression variable, champtexte disparait
+				Element widgetsDansZoneXml = zoneXml.getChildren().get(0);
+				Widget widgetDansZone = deserializeWidget(widgetsDansZoneXml, null);
+				((ChampTexte)zone).setWidgetContenu(widgetDansZone);
+			}
 		}
 
 		// Remplissage des zones d'accroche
@@ -99,7 +116,7 @@ public class DeserialiseurXML {
 				}
 				i++;
 			}
-			wComp.notifyChange();
+			//wComp.notifyChange();
 		}
 
 		return w;

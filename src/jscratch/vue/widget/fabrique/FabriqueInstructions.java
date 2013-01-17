@@ -1,6 +1,8 @@
 package jscratch.vue.widget.fabrique;
 
+import java.util.List;
 import jscratch.modeles.DicoCouleursCategories;
+import jscratch.modeles.DicoVariables;
 import jscratch.vue.tools.exceptions.NonChargeableException;
 import jscratch.vue.tools.exceptions.NonClonableException;
 import jscratch.vue.widget.Widget;
@@ -27,6 +29,7 @@ import jscratch.vue.widget.modele.VariableWidget;
 import jscratch.vue.widget.modele.VariableSetValueWidget;
 import jscratch.vue.widget.modele.WhileWidget;
 import nxtim.instruction.Categorie;
+import nxtim.instruction.Variable;
 
 /**
  * Classe implémentant le design pattern Factory permettant la création de tous les types de widgets.
@@ -230,10 +233,12 @@ public class FabriqueInstructions {
 	 * Méthode permettant de créér une copie d'un widget.
 	 *
 	 * @param comp le widget à cloner
+	 * @param categorie la catégorie du widget
+	 * @param variable la variable attachée au widget variable, <code>null</code> si pas un widget variable
 	 * @return la copie du widget passé en paramètre
 	 * @throws NonClonableException Si on essaye de cloner un widget qui n'est pas clonable
 	 */
-	public Widget creerWidget(final String nomClasse, final String categorie) throws NonChargeableException {
+	public Widget creerWidget(final String nomClasse, final String categorie, final String supplement) throws NonChargeableException {
 		Widget w = null;
 		// Les widgets de variable n'ont pas besoin d'être présent
 		/*if ("InstructionWidget".equals(nomClasse)) {
@@ -263,11 +268,29 @@ public class FabriqueInstructions {
 		} else if ("ForWidget".equals(nomClasse)) {
 			w = creerWidgetFor();
 		} else if ("ExpressionArithmeticWidget".equals(nomClasse)) {
-			//Operation op = (Operation)comp.getModele().getElementProgramme();
-			//w = creerWidgetExpressionArithmetic(op.getOperateur());
+			List<Operateur> opes = Operateur.arithmetiques();
+			for (Operateur o : opes) {
+				if (o.toString().equals(supplement)) {
+					w = creerWidgetExpressionArithmetic(o);
+					break;
+				}
+			}
 		} else if ("ExpressionLogicalWidget".equals(nomClasse)) {
-			//Condition con = (Condition)comp.getModele().getElementProgramme();
-			//w = creerWidgetExpressionLogical(con.getOperateur());
+			List<Operateur> opes = Operateur.logiques();
+			for (Operateur o : opes) {
+				if (o.toString().equals(supplement)) {
+					w = creerWidgetExpressionLogical(o);
+					break;
+				}
+			}
+		} else if ("VariableWidget".equals(nomClasse)) {
+			Variable[] vars = DicoVariables.getInstance().getLesvariables();
+			for (Variable v : vars) {
+				if (v.getNom().equals(supplement)) {
+					w = creerWidgetVariable((VariableModifiable)v);
+					break;
+				}
+			}
 		}
 
 		// Le composant n'est pas dans le if précédent, il doit être ajouté
@@ -278,6 +301,7 @@ public class FabriqueInstructions {
 		// On remet la couleur du widget suivant sa catégorie
 		for (Categorie c : Categorie.values()) {
 			if (c.toString().equals(categorie)) {
+				w.getModele().setCategorie(c);
 				w.getModele().setCouleur(DicoCouleursCategories.getInstance().getCouleur(c));
 				break;
 			}
