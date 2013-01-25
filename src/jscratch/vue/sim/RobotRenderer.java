@@ -90,7 +90,7 @@ public class RobotRenderer implements Renderer {
 			if(s instanceof UltraSonicSensor)
 			{
 				g.setColor(Color.ORANGE);
-				g.drawRect((int)((UltraSonicSensor) s).getPositionFinal().getX(),(int)((UltraSonicSensor) s).getPositionFinal().getY(), 1, 1);
+				g.drawRect((int)((UltraSonicSensor) s).getPointFinal().getX(),(int)((UltraSonicSensor) s).getPointFinal().getY(), 1, 1);
 			}
 		}
 	}
