@@ -31,6 +31,7 @@ public class FenetreAjoutVariable extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(null);
 		this.setAlwaysOnTop(true);
+		this.setResizable(false);
 		
 		Box boxV = Box.createVerticalBox();
 		Box boxH1 = Box.createHorizontalBox();

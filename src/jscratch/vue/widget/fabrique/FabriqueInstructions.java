@@ -159,7 +159,7 @@ public class FabriqueInstructions {
 	 * @return un widget complexe de type "expression arithmetique"
 	 */
 	public Widget creerWidgetExpressionArithmetic(Operateur op) {
-		return new WidgetCompose(new ExpressionArithmeticWidget(op));
+		return new Widget(new ExpressionArithmeticWidget(op));
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class FabriqueInstructions {
 	 return new WidgetCompose(new ExpressionLogicalWidget(op, expressionModifiable));
 	 }*/
 	public Widget creerWidgetExpressionLogical(Operateur op) {
-		return new WidgetCompose(new ExpressionLogicalWidget(op));
+		return new Widget(new ExpressionLogicalWidget(op));
 	}
 
 	/**

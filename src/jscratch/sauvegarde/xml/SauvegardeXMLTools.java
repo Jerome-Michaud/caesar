@@ -97,7 +97,7 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 				}
 			}
 		} catch (IOException ex) {
-			Erreur.afficher(ex, "La sauvegarde n'a pas pu être chargée corectement");
+			Erreur.afficher(ex, "La sauvegarde n'a pas pu être chargée correctement");
 		}
 	}
 }
