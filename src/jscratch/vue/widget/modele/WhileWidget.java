@@ -14,7 +14,8 @@ import nxtim.instruction.InstructionWhile;
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type While.
  * 
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public class WhileWidget extends ModeleWidget implements Serializable{
 	/**

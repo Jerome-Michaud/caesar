@@ -17,7 +17,8 @@ import nxtim.instruction.Moteur;
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type MoteurOff
  * 
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public class MoteurOffWidget extends ModeleWidget {
 	
@@ -34,9 +35,8 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeModeleWidget.MOTEUROFF);
 		
-		//this.setMessage("Moteur           off");
 		message.put(new Point(5, 17), "Moteur");
-		message.put(new Point(95, 17), "off");
+		message.put(new Point(95, 17), "arrêt");
 		
 		this.setElementProgramme(new InstructionMoteurOff());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
@@ -47,7 +47,7 @@ public class MoteurOffWidget extends ModeleWidget {
 		
 		setInstructionMoteur(l.getValeur());
 		
-		this.decalageX(-20);
+		this.decalageX(-10);
 		
 		initListeners();
 	}

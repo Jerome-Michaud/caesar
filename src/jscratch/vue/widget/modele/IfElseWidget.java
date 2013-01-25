@@ -6,15 +6,17 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 import jscratch.vue.tools.Variables;
+import jscratch.vue.widget.modele.zones.ChampTexte;
 import nxtim.instruction.InstructionIfElse;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Serializable modélisant la
  * forme d'un widget de type IfElse
  * 
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
-public class IfElseWidget extends ModeleWidget implements Serializable{
+public class IfElseWidget extends ModeleWidget implements Serializable {
 	
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du IfElse.
@@ -27,15 +29,23 @@ public class IfElseWidget extends ModeleWidget implements Serializable{
 		this.setTabY(tY);
 		this.setType(TypeModeleWidget.IFELSE);
 		
-		//this.setMessage("If");
 		message.put(new Point(5, 17), "Si");
+		message.put(new Point(80, 17), "alors");
 		message.put(new Point(5, 52), "sinon");
 		
+		ChampTexte f = new ChampTexte();
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		f.setBounds(55, 3, 20, 20);
+		f.supprimerTexte();
+		this.getLesZonesSaisies().add(f);
+
 		this.setElementProgramme(new InstructionIfElse());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_ELSE);
 		
+		this.decalageX(-20);
 	}
 
     @Override

@@ -10,7 +10,8 @@ import nxtim.instruction.VariableModifiable;
 
 /**
  *
- * @author zubair
+ * @since 1.0
+ * @version 1.0
  */
 public class VariableWidget extends ModeleWidget {
 
@@ -48,8 +49,6 @@ public class VariableWidget extends ModeleWidget {
 		Rectangle2D bounds = metrics.getStringBounds(variableModifiable.getNom(), null);  
 		
 		this.decalageX((int) bounds.getWidth()+2);
-
-		initListeners();
 	}
 
 	@Override
@@ -66,12 +65,11 @@ public class VariableWidget extends ModeleWidget {
 	public void initListeners() { }
 
 	/**
+	 * Retourne le nom de la variable qui lui est rattaché.
 	 * 
 	 * @return nom de variable
 	 */
 	public String getNomVariable() {
 		return ((VariableModifiable)this.getElementProgramme()).getNom();
 	}
-
 }
-

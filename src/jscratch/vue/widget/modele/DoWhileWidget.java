@@ -12,7 +12,8 @@ import nxtim.instruction.InstructionDoWhile;
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type DoWhile
  *
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public class DoWhileWidget extends ModeleWidget implements Serializable {
 
@@ -33,8 +34,6 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		this.setConditionHaute(false);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_DOWHILE);
-
-		initListeners();
 	}
 
 	@Override

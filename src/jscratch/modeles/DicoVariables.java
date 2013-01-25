@@ -27,7 +27,6 @@ public final class DicoVariables {
 	 */
 	private DicoVariables() {
 		dictionnaire = new HashMap<String, Variable>();
-		//this.dictionnaire.put("icerkjnfenefn", new VariableModifiable(TypeVariable.INT, "icerkjnfenefn", "0"));
 	}
 
 	/**

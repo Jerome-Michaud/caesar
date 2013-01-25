@@ -5,13 +5,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import jscratch.vue.tools.Variables;
 
 /**
  * Panneau d'affichage du code traduit.
@@ -38,7 +35,7 @@ public class PanelCodeConsole extends JPanel implements Observer {
 		this.textarea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));
 		this.setLayout(new BorderLayout());
 		this.setMinimumSize(new Dimension(100, 600));
-		this.setBorder(BorderFactory.createTitledBorder("Aperçu code console"));
+		this.setBorder(BorderFactory.createTitledBorder("Code NXC"));
 
 		this.add(textarea, BorderLayout.CENTER);
 	}

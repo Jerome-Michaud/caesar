@@ -25,10 +25,8 @@ public class DicoWidgetsCategories {
 	private DicoWidgetsCategories() {
 		this.dico = new HashMap<Categorie, List<Widget>>();
 		
-		this.dico.put(Categorie.INSTRUCTION, new LinkedList<Widget>());
-		this.dico.put(Categorie.CONTROLE, new LinkedList<Widget>());
+		this.dico.put(Categorie.STRUCTURES, new LinkedList<Widget>());
 		this.dico.put(Categorie.MOTEUR, new LinkedList<Widget>());
-		this.dico.put(Categorie.AFFICHAGE, new LinkedList<Widget>());
 		this.dico.put(Categorie.CAPTEURS, new LinkedList<Widget>());
 		this.dico.put(Categorie.TEMPS, new LinkedList<Widget>());
 		this.dico.put(Categorie.VARIABLES, new LinkedList<Widget>());

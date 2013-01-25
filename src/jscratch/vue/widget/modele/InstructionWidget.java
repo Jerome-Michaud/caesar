@@ -11,7 +11,8 @@ import nxtim.instruction.Instruction;
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type Instruction.
  * 
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public class InstructionWidget extends ModeleWidget implements Serializable{
 	
@@ -27,7 +28,6 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
 		this.setTabY(tY);
 		this.setType(TypeModeleWidget.INSTRUCTION);
 		
-		//this.setMessage(msg);
 		message.put(new Point(5, 17), msg);
 		
 		this.setElementProgramme(i);
@@ -45,5 +45,5 @@ public class InstructionWidget extends ModeleWidget implements Serializable{
     }
     
 	@Override
-	public void initListeners() {}
+	public void initListeners() { }
 }

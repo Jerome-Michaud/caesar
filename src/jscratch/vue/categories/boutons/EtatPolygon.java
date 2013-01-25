@@ -1,4 +1,4 @@
-package jscratch.vue.categories.complexe;
+package jscratch.vue.categories.boutons;
 
 /**
  *

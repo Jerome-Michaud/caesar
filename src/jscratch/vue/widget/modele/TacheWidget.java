@@ -1,14 +1,9 @@
 package jscratch.vue.widget.modele;
 
-import jscratch.vue.widget.modele.zones.ChampTexte;
-import jscratch.vue.widget.modele.zones.Zone;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.io.Serializable;
-import javax.swing.JComponent;
 
 import jscratch.vue.tools.Variables;
 import nxtim.instruction.InstructionTache;
@@ -17,7 +12,8 @@ import nxtim.instruction.InstructionTache;
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type Tâche
  *
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public class TacheWidget extends ModeleWidget implements Serializable {
 
@@ -33,8 +29,7 @@ public class TacheWidget extends ModeleWidget implements Serializable {
         this.setTabY(tY);
         this.setType(TypeModeleWidget.TACHE);
 
-        //this.setMessage("Tâche");
-        message.put(new Point(5, 17), "Tâche");
+        message.put(new Point(5, 17), "Tâche principale");
 
         this.setElementProgramme(new InstructionTache());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
@@ -42,14 +37,9 @@ public class TacheWidget extends ModeleWidget implements Serializable {
         this.attachableHaut = false;
         this.imbricable = false;
 
-        ChampTexte f = new ChampTexte();
-        f.setBounds(50, 3, 80, 20);
-        f.setValeur("main");
-        this.getLesZonesSaisies().add(f);
-
-        initListeners();
-
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
+		
+		this.decalageX(-30);
     }
 
     @Override
@@ -78,21 +68,5 @@ public class TacheWidget extends ModeleWidget implements Serializable {
     }
     
     @Override
-    public void initListeners() {
-        ((JComponent) ((Zone) getLesZonesSaisies().get(0))).addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent arg0) {
-                setInstruction(((Zone) getLesZonesSaisies().get(0)).getValeur());
-            }
-        });
-    }
-
-    /**
-     * Modifie le nom de l'instruction du widget.
-     *
-     * @param nom le nouveau nom de l'instruction
-     */
-    private void setInstruction(String nom) {
-        ((InstructionTache) getElementProgramme()).setNom(nom);
-    }
+    public void initListeners() { }
 }

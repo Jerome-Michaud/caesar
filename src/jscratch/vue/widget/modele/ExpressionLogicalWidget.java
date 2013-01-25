@@ -11,7 +11,8 @@ import nxtim.instruction.Operateur;
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
  * forme d'un widget de type Expression logique.
  * 
- * @author CHOUKET Houda
+ * @since 1.0
+ * @version 1.0
  */
 public class ExpressionLogicalWidget extends ModeleWidget {
 
@@ -30,7 +31,6 @@ public class ExpressionLogicalWidget extends ModeleWidget {
         this.imbricable = false;
         this.attachableInterne = true;
 		
-		// Recalcule la largeur du widget.
 		this.setTailleX();
 		this.setTailleY();
 		this.setType(TypeModeleWidget.EXPRESSION_LOGIQUE);
@@ -45,30 +45,12 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		l.setBounds(10, 3, 14, 14);
-		//l.setBounds(10, expressionModifiable.getnom().length(), 14, 14);
-		
-		//l.validate();//force à recalculer les positions
-		
-		/*
-		 *
-		 * for (int i = 0; i<nombreChoisi; i++){
-		   JTextField field = new JTextField();
-		   listeFields.add(field);
-		   fenetre.getContentPane().add(field);
-		}
-		fenetre.getContentPane().validate(); //force à recalculer les positions
-		 * */
- 
-
-		//message.put(new Point((int) (l.getLocation().getX()+ l.getWidth()), 17), op.toString()+expressionModifiable);
-		//message.put(new Point((int) (l.getLocation().getX()+ l.getWidth()), 17), op.toString());
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(40, 3, 14, 14);
-		//f.setBounds(40, expressionModifiable.getnom().length(), 14, 14);
 		this.getLesZonesSaisies().add(f);
 	}
 

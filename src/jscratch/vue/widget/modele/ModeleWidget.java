@@ -20,7 +20,8 @@ import nxtim.instruction.Categorie;
  * Classe abstraite permet de définir une structure commune pour chaque widget.
  * Cette classe implemente Serializable.
  *
- * @author Bastien Andru - Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public abstract class ModeleWidget implements Serializable {
     

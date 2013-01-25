@@ -19,7 +19,8 @@ import nxtim.instruction.VariableConstante;
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type MoteurRev
  * 
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public class MoteurMovRevWidget extends ModeleWidget {
 	
@@ -36,7 +37,6 @@ public class MoteurMovRevWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeModeleWidget.MOTEURMOVREV);
 		
-		//this.setMessage("Moteur           recul de");
 		message.put(new Point(5, 17), "Moteur");
 		message.put(new Point(94, 17), "recul à");
 		

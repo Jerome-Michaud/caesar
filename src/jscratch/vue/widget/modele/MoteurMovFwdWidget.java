@@ -19,7 +19,8 @@ import nxtim.instruction.VariableConstante;
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
  * forme d'un widget de type MoteurFwd.
  * 
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public class MoteurMovFwdWidget extends ModeleWidget {
 	
@@ -36,10 +37,9 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeModeleWidget.MOTEURMOVFWD);
 
-		//this.setMessage("Moteur           avance de");
 		message.put(new Point(5, 17), "Moteur");
-		message.put(new Point(94, 17), "avance à");
-		//recupere le element prog
+		message.put(new Point(94, 17), "puissance");
+
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
@@ -49,14 +49,14 @@ public class MoteurMovFwdWidget extends ModeleWidget {
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.setBounds(142, 3, 40, 20);
+		f.setBounds(155, 3, 40, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 
 		setInstructionMoteur(l.getValeur());
 		setInstructionValeur(f.getValeur());
 
-		this.decalageX(11);
+		this.decalageX(23);
 
 		initListeners();
 	}

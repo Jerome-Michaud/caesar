@@ -3,10 +3,8 @@ package jscratch.vue.ginterface;
 import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import jscratch.vue.tools.Variables;
 import jscratch.vue.widget.IWidget;
 
 /**

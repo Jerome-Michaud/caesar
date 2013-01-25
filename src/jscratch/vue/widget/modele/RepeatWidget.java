@@ -8,7 +8,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 
-
 import java.awt.Rectangle;
 import jscratch.vue.tools.Variables;
 import nxtim.instruction.InstructionRepeat;
@@ -16,10 +15,10 @@ import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
 
 /**
- * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
- * forme d'un widget de type Repeat
+ * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la forme d'un widget de type Repeat.
  * 
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public class RepeatWidget extends ModeleWidget {
 
@@ -33,14 +32,12 @@ public class RepeatWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeModeleWidget.REPEAT);
 		
-		//this.setMessage("Repeat");
 		message.put(new Point(5, 17), "Répéter");
 		message.put(new Point(85, 17), "fois");
 		
 		this.setElementProgramme(new InstructionRepeat());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
-
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);

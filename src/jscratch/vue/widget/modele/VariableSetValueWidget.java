@@ -8,7 +8,8 @@ import jscratch.vue.widget.modele.zones.ChampTexte;
 
 /**
  *
- * @author zubair
+ * @since 1.0
+ * @version 1.0
  */
 public class VariableSetValueWidget extends ModeleWidget {
 
@@ -25,8 +26,8 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setTailleY();
 		this.setType(TypeModeleWidget.SETVALUEVARIABLE);
 
-		message.put(new Point(5, 17), "Attribuer");
-		message.put(new Point(95, 17), "à");
+		message.put(new Point(5, 17), "Mettre");
+		message.put(new Point(95, 17), "dans");
 
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
@@ -39,12 +40,8 @@ public class VariableSetValueWidget extends ModeleWidget {
 		f = new ChampTexte();
 		f.supprimerTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.setBounds(110, 3, 40, 20);
+		f.setBounds(128, 3, 40, 20);
 		this.getLesZonesSaisies().add(f);
-
-		this.decalageX(-20);
-
-		initListeners();
 	}
 	
 	@Override

@@ -14,7 +14,9 @@ import nxtim.instruction.VariableConstante;
 
 /**
  * Cette classe modèlise la forme d'un widget de type Wait.
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * 
+ * @since 1.0
+ * @version 1.0
  */
 public class WaitWidget extends ModeleWidget {
 	/**
@@ -38,7 +40,7 @@ public class WaitWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		ChampTexte f = new ChampTexte();
-                f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.setBounds(65, 3, 40, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);

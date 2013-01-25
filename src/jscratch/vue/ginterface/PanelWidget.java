@@ -1,6 +1,6 @@
 package jscratch.vue.ginterface;
 
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class PanelWidget extends JPanel implements Observer {
 	 */
 	private PanelWidget() {
 		this.lesWidgets = new LinkedList<Widget>();
-		this.setBorder(BorderFactory.createTitledBorder("Instructions"));
+		this.setBorder(BorderFactory.createTitledBorder(""));
 
 		this.fabrique = new FabriqueInstructions();
 		this.setLayout(null);

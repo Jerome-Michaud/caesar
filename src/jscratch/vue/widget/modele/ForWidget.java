@@ -21,8 +21,10 @@ import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
 
 /**
- * Classe héritant de ModeleWidget et implémentant
- * <code>Serializable</code> modélisant la forme d'un widget de type For.
+ * Classe héritant de ModeleWidget et implémentant <code>Serializable</code> modélisant la forme d'un widget de type For.
+ * 
+ * @since 1.0
+ * @version 1.0
  */
 public class ForWidget extends ModeleWidget {
 
@@ -69,9 +71,10 @@ public class ForWidget extends ModeleWidget {
         fp.setValeur("1");
         this.getLesZonesSaisies().add(fp);
 
-        this.decalageX(138);
+        this.decalageX(130);
 
-        if (DicoVariables.getInstance().getLesvariables().length > 0) {
+        //TODO : faire fonctionner mise à jour FOR
+		if (DicoVariables.getInstance().getLesvariables().length > 0) {
             //setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
             //setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
             //setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
@@ -104,7 +107,8 @@ public class ForWidget extends ModeleWidget {
 	
     @Override
     public void initListeners() {
-        for (Zone z : this.getLesZonesSaisies()) {
+        //TODO : faire fonctionner mise à jour FOR
+		for (Zone z : this.getLesZonesSaisies()) {
             ((JComponent) z).addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(final FocusEvent arg0) {

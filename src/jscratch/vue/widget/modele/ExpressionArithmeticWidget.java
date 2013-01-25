@@ -13,7 +13,8 @@ import nxtim.instruction.Variable;
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
  * forme d'un widget de type Expression arethmetique.
  * 
- * @author CHOUKET Houda
+ * @since 1.0
+ * @version 1.0
  */
 public class ExpressionArithmeticWidget extends ModeleWidget {
 
@@ -21,9 +22,6 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
 	public ExpressionArithmeticWidget(Operateur op) {
-		/*int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
-			int tabY[] = {7, 0, 0, 7, 20, 25,25, 20};
-		 */
 		int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
 		int tabY[] = {5, 0, 0, 5, 15, 20,20, 15};
 
@@ -52,13 +50,11 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		//f.setBounds(80, 3, 20, 20);
 		f.setBounds(40, 3, 14, 14);
 		this.getLesZonesSaisies().add(f);
-
-		initListeners();
 	}
-	
+
+	@Override
 	public void initListeners() { }
 	
 	@Override

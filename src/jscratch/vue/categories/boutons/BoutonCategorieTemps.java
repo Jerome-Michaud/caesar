@@ -1,6 +1,8 @@
 package jscratch.vue.categories.boutons;
 
+import jscratch.modeles.DicoWidgetsCategories;
 import jscratch.vue.categories.ModeleCategorie;
+import jscratch.vue.ginterface.GUI;
 import nxtim.instruction.Categorie;
 
 /**
@@ -17,6 +19,8 @@ public class BoutonCategorieTemps extends BoutonCategorie {
 	 */
 	public BoutonCategorieTemps() {
 		super(new ModeleCategorie(Categorie.TEMPS));
+		
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.TEMPS, GUI.getPanelWidget().getFabrique().creerWidgetWait());
 	}
 
 	@Override

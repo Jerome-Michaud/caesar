@@ -6,13 +6,15 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 
 import jscratch.vue.tools.Variables;
+import jscratch.vue.widget.modele.zones.ChampTexte;
 import nxtim.instruction.InstructionIf;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la 
  * forme d'un widget de type If.
  * 
- * @author Bastien Aubry - Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public class IfWidget extends ModeleWidget{
 	
@@ -29,14 +31,23 @@ public class IfWidget extends ModeleWidget{
 		this.setTailleY();
 		this.setType(TypeModeleWidget.IF);
 		
-		//this.setMessage("If");
-		message.put(new Point(5, 17), "Si");
+		this.message.put(new Point(5, 17), "Si");
+		this.message.put(new Point(80, 17), "alors");
 		
+		ChampTexte f = new ChampTexte();
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		f.setBounds(55, 3, 20, 20);
+		f.supprimerTexte();
+		this.getLesZonesSaisies().add(f);
+
 		this.setElementProgramme(new InstructionIf());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 
+		this.decalageX(-20);
 	}
+	
 	@Override
 	public void decalageX(int a) {
         int i;

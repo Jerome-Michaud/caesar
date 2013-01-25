@@ -8,9 +8,12 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import jscratch.vue.controller.LanceurTraduction;
 import jscratch.vue.widget.modele.TypeModeleWidget;
 import org.jdom2.Element;
 import jscratch.vue.widget.Widget;
+import nxtim.instruction.IElementProgramme;
+import nxtim.instruction.VariableConstante;
 
 /**
  * Cette classe représente un champ texte particulier intégrable dans un widget.
@@ -76,9 +79,9 @@ public class ChampTexte extends JPanel implements Zone {
 	@Override
 	public String getValeur() {
 		if (etat == 0) {
-			return textField.getText();
+			return this.textField.getText();
 		} else if (etat == 1) {
-			return textField.getText();
+			return "";
 		} else {
 			return "";
 		}

@@ -7,15 +7,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.awt.Rectangle;
-import jscratch.vue.categories.complexe.PolygoneAction;
-import jscratch.vue.categories.complexe.EtatPolygon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 
 import javax.swing.SwingUtilities;
-import jscratch.modeles.DicoWidgetsCategories;
 import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
 import jscratch.vue.ginterface.GUI;
@@ -67,13 +63,6 @@ public abstract class BoutonCategorie extends JComponent {
 		g2d.drawPolygon(this.modele.getFormeCouleur());
 		g2d.drawPolygon(this.modele.getFormeTexte());
 
-		// Extras
-		for (PolygoneAction poly : this.modele.getFormesExtras()) {
-			g2d.setColor(poly.getCouleur());
-			g2d.fillPolygon(poly.getPolygon());
-			g2d.setColor(Color.BLACK);
-			g2d.drawPolygon(poly.getPolygon());
-		}
 
 		// Ecritures
 		g2d.setColor(Color.WHITE);
@@ -165,10 +154,6 @@ public abstract class BoutonCategorie extends JComponent {
 			this.fond = Variables.GRIS_INACTIF;
 		}
 
-		for (PolygoneAction poly : this.modele.getFormesExtras()) {
-			poly.setEtat(EtatPolygon.INACTIF);
-		}
-
 		this.repaint();
 	}
 
@@ -182,19 +167,6 @@ public abstract class BoutonCategorie extends JComponent {
 
 		Point p = MouseInfo.getPointerInfo().getLocation();
 		SwingUtilities.convertPointFromScreen(p, GUI.getGlassPane());
-
-		for (PolygoneAction poly : this.modele.getFormesExtras()) {
-			Rectangle r = poly.getBounds();
-			r = SwingUtilities.convertRectangle(this, r, GUI.getGlassPane());
-
-			if (r.contains(p)) {
-				poly.setEtat(EtatPolygon.ACTIF);
-				poly.executerAction();
-			} else {
-				poly.setEtat(EtatPolygon.INACTIF);
-
-			}
-		}
 
 		if (!active) {
 			for (BoutonCategorie b : GUI.getPanelTypeWidget().getLesCategories()) {
