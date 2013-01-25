@@ -21,7 +21,6 @@ import jscratch.vue.tools.Variables;
  */
 public class PanelCodeConsole extends JPanel implements Observer {
 
-	private static final Logger logger = Logger.getLogger(PanelCodeConsole.class.getName());
 	/**
 	 * SINGLETON.
 	 *
@@ -34,8 +33,6 @@ public class PanelCodeConsole extends JPanel implements Observer {
 	 * @since 1.0
 	 */
 	private PanelCodeConsole() {
-		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
-
 		this.textarea = new JTextArea();
 		this.textarea.setEditable(false);
 		this.textarea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));
@@ -68,7 +65,6 @@ public class PanelCodeConsole extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object o1) {
-		logger.log(Level.INFO, "Mise à jour de la traduction");
 		// Mise à jour du texte dans la zone, envoyer le code au format String pas un objet
 		this.setText(o1.toString());
 		this.repaint();

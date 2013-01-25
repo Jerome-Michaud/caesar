@@ -3,6 +3,7 @@ package jscratch.vue.tools;
 import jscratch.vue.tools.exceptions.ComposantIntrouvableException;
 import java.util.LinkedList;
 import java.util.List;
+import jscratch.vue.controller.LanceurTraduction;
 import jscratch.vue.ginterface.GUI;
 import jscratch.vue.ginterface.PanelCodeGraphique;
 import jscratch.vue.widget.Widget;
@@ -208,6 +209,7 @@ public final class ArborescenceTools {
 		for (List<Widget> ls : l) {
 			setArborescence(ls, initListeners);
 		}
+		LanceurTraduction.getInstance().lancerTraduction();
 	}
 
 	/**
@@ -248,6 +250,7 @@ public final class ArborescenceTools {
 				if (w.isComplexe()) {
 					updateWidgets((WidgetCompose) w);
 					((WidgetCompose) w).notifyChange();
+					//w.validate();
 				}
 			}
 		}

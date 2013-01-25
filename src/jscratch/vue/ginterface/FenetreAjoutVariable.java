@@ -74,8 +74,8 @@ public class FenetreAjoutVariable extends JFrame {
 					// Ajout dans le dictionnaire
 					DicoVariables.getInstance().ajouter(var);
 					
-					// Ajout du widget dans la catégorie
-					DicoWidgetsCategories.getInstance().ajouterWidgetVariable(var);
+					// Mise à jour des widgets liés au variables
+					DicoWidgetsCategories.getInstance().updateWidgetsVariables();
 					
 					// Mise à jour du panel widget
 					GUI.getPanelWidget().setLesWidgets(1);

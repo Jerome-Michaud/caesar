@@ -62,6 +62,7 @@ public class Widget extends JComponent {
 
 	@Override
 	public void paintComponent(final Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(new BasicStroke(1));
 		g2d.setColor(this.modele.getCouleur());
@@ -76,7 +77,7 @@ public class Widget extends JComponent {
 				g2d.drawString(this.modele.getMessage().get(p), p.x, this.getHeight() - p.y);
 			}
 		}
-		super.paintComponent(g);
+		//
 	}
 
 	/**
