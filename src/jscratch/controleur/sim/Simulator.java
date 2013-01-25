@@ -26,7 +26,7 @@ public class Simulator {
 	
 	public Simulator() {
 		
-		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/map2.xml"));
+		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/map1.xml"));
 		
 		mapController = new MapController(map);
 		

@@ -1,6 +1,11 @@
 package jscratch.vue.sim;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -13,12 +18,14 @@ import jscratch.controleur.sim.Simulator;
  * @author Guillaume Delorme
  *
  */
-public class PanelSimulator extends JPanel implements Runnable {
+public class PanelSimulator extends JPanel implements Runnable, MouseWheelListener, MouseMotionListener {
 	Simulator simulator;
 
 	public PanelSimulator() {
 		super();
 		this.simulator = new Simulator();
+		this.addMouseWheelListener(this);
+		this.addMouseMotionListener(this);
 	}
 
 	/**
@@ -70,4 +77,17 @@ public class PanelSimulator extends JPanel implements Runnable {
 			}
 		}
 	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent event) {		
+		simulator.getRobotController().changerAngleRobot(event.getUnitsToScroll() * 0.02);
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent event) {
+		simulator.getRobotController().deplacerRobot(event.getX(), event.getY());
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {}
 }

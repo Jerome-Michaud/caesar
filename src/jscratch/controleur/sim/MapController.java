@@ -73,7 +73,6 @@ public class MapController {
 		return ColorValue.getSimilarColor(color);
 	}
 
-
 	/**
 	 * Récupérer la distance entre un obstacle et le robot
 	 * @param point le point dans la map
@@ -83,6 +82,7 @@ public class MapController {
 		// TODO Stub de la méthode généré automatiquement
 		return null;
 	}
+	
 	/**
 	 * Récupérer la couleur RGB d'un point dans la map
 	 * @param point le point dans la map
@@ -90,5 +90,21 @@ public class MapController {
 	 */
 	public Color getColorRGB(Point2D point) {
 		return new Color(map.getImageMap().getRGB((int) point.getX(), (int) point.getY()));
+	}
+		
+	/**
+	 * Test si le déplacement du robot est bien dans la map
+	 * @param point le point à tester
+	 * @return vrai si le point est à l'intérieur de la map
+	 */
+	public boolean pointDeplacementRobot(Point2D point) {
+		System.out.println(point);
+		
+		System.out.println(map.getTailleX() + " " + map.getTailleY());
+		
+		if (point.getX() < 0 || point.getX() >= map.getTailleX() - 34 || point.getY() < 0 || point.getY() >= map.getTailleY() - 40)
+			return false;
+		else
+			return true;
 	}
 }
