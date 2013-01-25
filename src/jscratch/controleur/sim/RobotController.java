@@ -1,11 +1,17 @@
 package jscratch.controleur.sim;
 
+import java.awt.geom.Point2D;
 import java.util.*;
 
 import jscratch.modeles.sim.MotorPort;
 import jscratch.modeles.sim.Robot;
 
 
+/**
+ * Controller du robot
+ * @author Guillaume Delorme
+ * @author Nicolas Detan
+ */
 public class RobotController {
 
 	private LinkedList<Command> listCommand;
@@ -39,22 +45,7 @@ public class RobotController {
 		double dx = v*Math.cos(robot.getOrientation()); // déplacement en x
 		double dy = v*Math.sin(robot.getOrientation()); // déplacement en y
 		
-		robot.setX(robot.getX() + dx);
-		robot.setY(robot.getY() + dy);
-		robot.setOrientation(robot.getOrientation() - w);
-		
-		robot.updatePointCentral(dx, dy);
-		robot.updateListePoints();
-		robot.updateSensor();
-		
-		if (!mapController.positionPossible(robot)) {
-			robot.setX(robot.getX() - dx);
-			robot.setY(robot.getY() - dy);
-			robot.setOrientation(robot.getOrientation() + w);
-			
-			robot.updatePointCentral(-dx, -dy);
-			robot.updateListePoints();
-		}
+		deplacementRobot(dx, dy, w);
 	}	
 
 	/**
@@ -135,5 +126,53 @@ public class RobotController {
 		robot.reset(200, 200);
 		addCommand(new StopCommand(this,0, MotorPort.OUT_B));
 		addCommand(new StopCommand(this,0, MotorPort.OUT_C));
+	}
+	
+	/**
+	 * Augmentation de l'angle du robot
+	 */
+	public void changerAngleRobot(double pas) {
+		deplacementRobot(0, 0, pas);
+	}
+	
+	/**
+	 * Déplacer le robot à une position
+	 * @param x les coordonnées en x
+	 * @param y les coordonnées en y
+	 */
+	public void deplacerRobot(double x, double y) {
+		// on vérifie si l'utilisateur n'essai pas de déplacer le robot en dehors de la map			
+		if (mapController.pointDeplacementRobot(new Point2D.Double(x, y))) {
+			double dx = x - robot.getLargeur() / 2 - robot.getX();
+			double dy = y - robot.getLongueur() / 2 - robot.getY();
+			
+			deplacementRobot(dx, dy, 0);
+		}
+	}
+	
+	/**
+	 * Déplacement le robot
+	 * @param x le décalage en x
+	 * @param y le décalage en y
+	 * @param w l'angle
+	 */
+	private void deplacementRobot(double dx, double dy, double w) {	
+		robot.setX(robot.getX() + dx);
+		robot.setY(robot.getY() + dy);
+		robot.setOrientation(robot.getOrientation() - w);
+		
+		robot.updatePointCentral(dx, dy);
+		robot.updateListePoints();
+		robot.updateSensor();
+		
+		if (!mapController.positionPossible(robot)) {
+			robot.setX(robot.getX() - dx);
+			robot.setY(robot.getY() - dy);
+			robot.setOrientation(robot.getOrientation() + w);
+			
+			robot.updatePointCentral(-dx, -dy);
+			robot.updateListePoints();
+			robot.updateSensor();
+		}
 	}
 }

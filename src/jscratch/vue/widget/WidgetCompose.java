@@ -195,6 +195,7 @@ public class WidgetCompose extends Widget implements IWidget {
 
 	@Override
 	public void applyChangeModele() {
+		this.getModele().applyChangeModele();
 		// Testé le type du modele widget courant
 		if (this.getModele().getType() == TypeModeleWidget.IFELSE) {
 			// Cas du if...else

@@ -19,8 +19,8 @@ public class BoutonCategorieTemps extends BoutonCategorie {
 	 */
 	public BoutonCategorieTemps() {
 		super(new ModeleCategorie(Categorie.TEMPS));
-		
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.TEMPS, GUI.getPanelWidget().getFabrique().creerWidgetWait());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.TEMPS, GUI.getPanelWidget().getFabrique().creerWidgetTempsCourant());
+
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import jscratch.controleur.sim.MapController;
  */
 public class UltraSonicSensor extends Sensor<Integer> {
 	
+	private List<Point2D> listPoint;
 	private double distance;
 	private Point2D pointFinal;
 	private Robot robot;
@@ -85,5 +86,13 @@ public class UltraSonicSensor extends Sensor<Integer> {
 	 */
 	public void setDistance(double distance) {
 		this.distance = distance;
+	}
+	
+
+	/**
+	 * @return le listPoint
+	 */
+	public List<Point2D> getListPoint() {
+		return listPoint;
 	}
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 import jscratch.vue.widget.modele.TypeModeleWidget;
 import jscratch.vue.ginterface.GUI;
@@ -191,22 +192,20 @@ public class FusionTools {
 
 		Rectangle rectCUp = new Rectangle(pt.x, pt.y - margeAimant / 2, (int) compRecup.getWidth(), margeAimant);
 		Rectangle rectCDown = new Rectangle(pt.x, (int) (pt.y + compRecup.getHeight() - margeAimant / 2), (int) compRecup.getWidth(), margeAimant);
-		int index = -1;
 		if (compDrague.getModele().isAttachableInterne()) {
-			index = checkFusionZone(compRecup, rectComp, compDrague.getType());
+			act = checkFusionZone(compRecup, rectComp, compDrague.getType(), compRecup, act);
 		}
-		if (index != -1) {
-			act = new Action(compRecup, TypeAction.INTERNE);
-			act.setZoneIndex(index);
-		} else if (rectCUp.intersects(rectComp) && rectComp.getMinY() < rectCUp.getMinY() + margeAimant && compRecup.getModele().isAttachableHaut() && compAtt) {
-			// Survol d'un widget en haut
-			act = new Action(compRecup, TypeAction.DESSUS);
-		} else if (rectCDown.intersects(rectComp) && compRecup.getModele().isAttachableBas() && compAtt) {
-			// Survol d'un widget en bas
-			act = new Action(compRecup, TypeAction.DESSOUS);
-		} else if (compRecup.isComplexe() && compDrague.getModele().isImbricable()) {
-			// Survol d'une zone d'accroche
-			act = checkZoneAccroche((WidgetCompose) compRecup, rectComp, pt);
+		if (act == null) {
+			if (rectCUp.intersects(rectComp) && rectComp.getMinY() < rectCUp.getMinY() + margeAimant && compRecup.getModele().isAttachableHaut() && compAtt) {
+				// Survol d'un widget en haut
+				act = new Action(compRecup, TypeAction.DESSUS);
+			} else if (rectCDown.intersects(rectComp) && compRecup.getModele().isAttachableBas() && compAtt) {
+				// Survol d'un widget en bas
+				act = new Action(compRecup, TypeAction.DESSOUS);
+			} else if (compRecup.isComplexe() && compDrague.getModele().isImbricable()) {
+				// Survol d'une zone d'accroche
+				act = checkZoneAccroche((WidgetCompose) compRecup, rectComp, pt);
+			}
 		}
 		return act;
 	}
@@ -288,19 +287,26 @@ public class FusionTools {
 		}
 	}
 
-	private static int checkFusionZone(Widget compRecup, Rectangle rectComp, TypeModeleWidget type) {
-		int index = -1;
+	private static Action checkFusionZone(Widget compRecup, Rectangle rectComp, TypeModeleWidget type, JComponent ref, Action a) {
 		Point p = GUI.getGlassPane().getLocationOnScreen();
-		rectComp.translate(0 - p.x, 0 - p.y);
-		Rectangle bnds = SwingUtilities.convertRectangle(GUI.getGlassPane(), rectComp, compRecup);
-		List<Zone> lstZones = compRecup.getModele().getLesZonesSaisies();
+		Rectangle rectComp2 = new Rectangle(rectComp.x,rectComp.y,rectComp.width,rectComp.height);
+		rectComp2.translate(0 - p.x, 0 - p.y);
+		Rectangle bnds = SwingUtilities.convertRectangle(GUI.getGlassPane(), rectComp2, ref);
+		List< Zone> lstZones = compRecup.getModele().getLesZonesSaisies();
 		for (Zone zone : lstZones) {
 			if (zone instanceof ChampTexte) {
-				if (((ChampTexte) zone).getBounds().intersects(bnds) && ((ChampTexte) zone).accepteTypeWidget(type)) {
-					index = lstZones.indexOf(zone);
+				ChampTexte champ = (ChampTexte) zone;
+				if ((champ.getBounds().intersects(bnds) && champ.accepteTypeWidget(type))) {
+					if (champ.getEtat() != ChampTexte.ETAT_CONTIENT_WIDGET) {
+						a = new Action(compRecup, TypeAction.INTERNE);
+						a.setZoneIndex(lstZones.indexOf(zone));
+						break;
+					} else {
+						a = checkFusionZone(champ.getWidgetContenu(), rectComp, type, champ, a);
+					}
 				}
 			}
 		}
-		return index;
+		return a;
 	}
 }

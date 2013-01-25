@@ -2,8 +2,12 @@ package jscratch.vue.widget.modele;
 
 import jscratch.vue.widget.modele.zones.ChampTexte;
 
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.geom.Rectangle2D;
+
 import nxtim.instruction.Condition;
 import nxtim.instruction.Operateur;
 
@@ -15,43 +19,60 @@ import nxtim.instruction.Operateur;
  * @version 1.0
  */
 public class ExpressionLogicalWidget extends ModeleWidget {
-
+	private int largeur;
+	private final int LARG_EXTREMITE;
 	/**
 	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
 	public ExpressionLogicalWidget(Operateur op) {
-		int tabX[] = {0, 10, 57, 67, 57, 10};
-		int tabY[] = {10, 0, 0, 10, 20, 20};		
-		
-		this.setTabX(tabX);
-		this.setTabY(tabY);
+		//modèle
+		this.setElementProgramme(new Condition(op));
 
+		//propriétés d'attachement du widget
 		this.attachableBas = false;
-        this.attachableHaut = false;
-        this.imbricable = false;
-        this.attachableInterne = true;
-		
-		this.setTailleX();
-		this.setTailleY();
+		this.attachableHaut = false;
+		this.imbricable = false;
+		this.attachableInterne = true;
 		this.setType(TypeModeleWidget.EXPRESSION_LOGIQUE);
 
-		message.put(new Point(30, 17), op.toString());
-
-		this.setElementProgramme(new Condition(op));
-		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+		//graphisme
+		this.LARG_EXTREMITE = 10;
+		final int LARG_CHAMP = 14;
 
 		ChampTexte l = new ChampTexte();
-		
+
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
-		l.setBounds(10, 3, 14, 14);
+		l.setBounds(this.LARG_EXTREMITE, 3, LARG_CHAMP, 14);
+
+		message.put(new Point(29, 15), op.toString());
+
+
+		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
+		FontMetrics metrics = new FontMetrics(font){};  
+		Rectangle2D bounds = metrics.getStringBounds(op.toString(), null);
+
+
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
-		f.setBounds(40, 3, 14, 14);
+		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
+		//f.setBounds(40, expressionModifiable.getnom().length(), 14, 14);
 		this.getLesZonesSaisies().add(f);
+
+		this.largeur = LARG_CHAMP * 2 + 10 + (int) bounds.getWidth();
+		int tabX[] = {0, 10, 10 + largeur, largeur + this.LARG_EXTREMITE * 2, this.LARG_EXTREMITE + largeur, 10};
+		int tabY[] = {10, 0, 0, 10, 20, 20};		
+
+		this.setTabX(tabX);
+		this.setTabY(tabY);
+		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+
+		// Recalcule la largeur du widget.
+		this.setTailleX();
+		this.setTailleY();
 	}
 
 	@Override
