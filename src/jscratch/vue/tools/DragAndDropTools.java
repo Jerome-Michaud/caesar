@@ -101,7 +101,7 @@ public class DragAndDropTools extends Observable {
 
 				//supression des widgets dans l'arborescence
 				arbo.supprimerWidgets(composantsDrague);
-
+				
 				if ((comp != null) && (comp.parent() != null) && (!comp.parent().isRacine())) {
 					((Widget) comp.parent()).applyChangeModele();
 				}
@@ -243,7 +243,7 @@ public class DragAndDropTools extends Observable {
 		int inter = (int) (r.getMaxX() - p.getBounds().getMinX());
 		ArborescenceTools arbo = ArborescenceTools.getInstance();
 		boolean complexe = false;
-
+		Widget compSurvole= null;
 		try {
 			if (inter >= decal) {
 				p.add(comp);
@@ -253,7 +253,9 @@ public class DragAndDropTools extends Observable {
 					pt.x += (comp.getWidth() - inter) + 3;
 				}
 
-				Widget compSurvole = a.getComp();
+				compSurvole = a.getComp();
+				if (compSurvole != null)
+				
 				if (a.getVal() == 3) {
 					Zone z = compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
 					((ChampTexte) z).setWidgetContenu(composantsDrague.get(0));
@@ -313,6 +315,8 @@ public class DragAndDropTools extends Observable {
 						((WidgetCompose) compSurvole.parent()).applyChangeModele();
 					}
 				}
+					
+
 			} else {
 				arbo.supprimerWidgets(composantsDrague);
 				for (Widget w : composantsDrague) {
@@ -352,6 +356,11 @@ public class DragAndDropTools extends Observable {
 
 		g.setPointLigneSurEcran(null);
 		g.setRectFusion(null);
+		
+		if( compSurvole != null)
+			compSurvole.getModele().applyChangeModele();
+		
+			
 		LanceurTraduction.getInstance().lancerTraduction();
 	}
 

@@ -32,6 +32,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(55, 3, 35, 20);
 		f.setValeur("0");	
 		this.getLesZonesSaisies().add(f);

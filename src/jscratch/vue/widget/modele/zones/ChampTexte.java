@@ -9,6 +9,10 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import jscratch.vue.widget.modele.TypeModeleWidget;
+import jscratch.vue.widget.modele.VariableWidget;
+
+import nxtim.instruction.VariableModifiable;
+
 import org.jdom2.Element;
 import jscratch.vue.widget.Widget;
 
@@ -82,8 +86,26 @@ public class ChampTexte extends JPanel implements Zone {
 		} else {
 			return "";
 		}
+		
+	}
+	
+	/**
+	 * 
+	 * @return le contenu du widget
+	 */
+	public Widget getContentWidget(){
+		
+		return widgetContenu;
 	}
 
+	/**
+	 * Retourne 1 si le contenu du champ est un widget.
+	 */
+	public boolean isContentWidget(){
+				return etat == 1;
+			
+	}
+	
 	/**
 	 * Modifie le texte du champ texte.
 	 *

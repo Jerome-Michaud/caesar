@@ -511,4 +511,12 @@ public abstract class ModeleWidget implements Serializable {
     public HashMap<Point, String> getMessage() {
         return this.message;
     }
+    
+    /**
+     * Mettre à jour le modèle
+     */
+    public void applyChangeModele(){}
+    	
+    	
+    
 }
