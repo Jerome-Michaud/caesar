@@ -1,6 +1,5 @@
 package jscratch.modeles.sim;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -65,19 +64,6 @@ public class MapFactory {
 					listeObstacle.add(new ObstaclePolygon(e));
 			}
 		}
-
-		int tailleLimite = 10;
-		int tailleX = image.getWidth();
-		int tailleY = image.getHeight();
-
-		// bord haut
-		listeObstacle.add(new ObstacleRectangle(-tailleLimite, -tailleLimite, tailleX + tailleLimite * 2, tailleLimite, Color.BLACK));
-		// bord gauche
-		listeObstacle.add(new ObstacleRectangle(-tailleLimite, -tailleLimite, tailleLimite, tailleLimite * 2 + tailleY, Color.BLACK));
-		// bord droite
-		listeObstacle.add(new ObstacleRectangle(tailleX, -tailleLimite, tailleLimite, tailleLimite * 2 + tailleY, Color.BLACK));	
-		// bord bas
-		listeObstacle.add(new ObstacleRectangle(-tailleLimite, tailleY, tailleLimite * 2 + tailleX, tailleLimite, Color.BLACK));
 
 		return new Map(image, listeObstacle);
 	}

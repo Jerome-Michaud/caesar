@@ -27,6 +27,7 @@ public class FenetreSupressionVariable extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(null);
 		this.setAlwaysOnTop(true);
+		this.setResizable(false);
 		
 		variables = new JComboBox(DicoVariables.getInstance().getLesvariables());
 		boutonValider = new JButton("Valider");

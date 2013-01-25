@@ -18,17 +18,11 @@ import jscratch.vue.widget.IWidget;
 public class PanelCodeGraphique extends JPanel implements IWidget, Observer {
 
 	/**
-	 * Le logger.
-	 */
-	private static final Logger logger = Logger.getLogger(PanelCodeGraphique.class.getName());
-	/**
 	 * L'instance unique de PanelCodeGraphique.
 	 */
 	private static PanelCodeGraphique instance = new PanelCodeGraphique();
 
 	private PanelCodeGraphique() {
-		logger.setLevel(Variables.LEVEL_DES_LOGGERS);
-
 		this.setMinimumSize(new Dimension(400, 600));
 		this.setLayout(null);
 		this.setBorder(BorderFactory.createTitledBorder("Code graphique"));
@@ -52,7 +46,6 @@ public class PanelCodeGraphique extends JPanel implements IWidget, Observer {
 
 	@Override
 	public void update(Observable o, Object o1) {
-		logger.info("Observateur : Mise à jour du PanelCodeGraphique");
 		this.repaint();
 	}
 }

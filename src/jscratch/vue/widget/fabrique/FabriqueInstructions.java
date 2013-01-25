@@ -161,7 +161,7 @@ public class FabriqueInstructions {
 	 * @return un widget complexe de type "expression arithmetique"
 	 */
 	public Widget creerWidgetExpressionArithmetic(Operateur op) {
-		return new WidgetCompose(new ExpressionArithmeticWidget(op));
+		return new Widget(new ExpressionArithmeticWidget(op));
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class FabriqueInstructions {
 	 return new WidgetCompose(new ExpressionLogicalWidget(op, expressionModifiable));
 	 }*/
 	public Widget creerWidgetExpressionLogical(Operateur op) {
-		return new WidgetCompose(new ExpressionLogicalWidget(op));
+		return new Widget(new ExpressionLogicalWidget(op));
 	}
 
 	/**
@@ -232,20 +232,17 @@ public class FabriqueInstructions {
 	}
 
 	/**
-	 * Méthode permettant de créér une copie d'un widget.
+	 * Méthode permettant de créér un widget à partir d'informations données.
 	 *
-	 * @param comp le widget à cloner
+	 * @param nomClasse le nom de la classe du widget
 	 * @param categorie la catégorie du widget
-	 * @param variable la variable attachée au widget variable, <code>null</code> si pas un widget variable
-	 * @return la copie du widget passé en paramètre
-	 * @throws NonClonableException Si on essaye de cloner un widget qui n'est pas clonable
+	 * @param supplement la variable attachée au widget variable, <code>null</code> si pas un widget variable
+	 * @return le widget
+	 * @throws NonChargeableException Si on essaye de charger un widget qui n'est pas pris en compte
 	 */
 	public Widget creerWidget(final String nomClasse, final String categorie, final String supplement) throws NonChargeableException {
 		Widget w = null;
-		// Les widgets de variable n'ont pas besoin d'être présent
-		/*if ("InstructionWidget".equals(nomClasse)) {
-			//w = creerWidgetMoteurFwd();
-		} else*/ if ("IfWidget".equals(nomClasse)) {
+		if ("IfWidget".equals(nomClasse)) {
 			w = creerWidgetIf();
 		} else if ("IfElseWidget".equals(nomClasse)) {
 			w = creerWidgetIfElse();

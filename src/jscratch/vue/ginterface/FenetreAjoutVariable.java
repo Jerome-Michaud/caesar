@@ -31,6 +31,7 @@ public class FenetreAjoutVariable extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(null);
 		this.setAlwaysOnTop(true);
+		this.setResizable(false);
 		
 		Box boxV = Box.createVerticalBox();
 		Box boxH1 = Box.createHorizontalBox();
@@ -74,8 +75,8 @@ public class FenetreAjoutVariable extends JFrame {
 					// Ajout dans le dictionnaire
 					DicoVariables.getInstance().ajouter(var);
 					
-					// Ajout du widget dans la catégorie
-					DicoWidgetsCategories.getInstance().ajouterWidgetVariable(var);
+					// Mise à jour des widgets liés au variables
+					DicoWidgetsCategories.getInstance().updateWidgetsVariables();
 					
 					// Mise à jour du panel widget
 					GUI.getPanelWidget().setLesWidgets(1);

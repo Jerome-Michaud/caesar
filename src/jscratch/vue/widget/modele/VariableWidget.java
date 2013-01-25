@@ -47,7 +47,8 @@ public class VariableWidget extends ModeleWidget {
 		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
 		FontMetrics metrics = new FontMetrics(font){};  
 		Rectangle2D bounds = metrics.getStringBounds(variableModifiable.getNom(), null);  
-		
+	
+
 		this.decalageX((int) bounds.getWidth()+2);
 
 		initListeners();

@@ -1,8 +1,11 @@
 package jscratch.vue.ginterface;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import jscratch.modeles.DicoWidgetsCategories;
@@ -16,7 +19,7 @@ import jscratch.vue.widget.Widget;
  * @since 1.0
  * @version 1.0
  */
-public class PanelWidget extends JPanel {
+public class PanelWidget extends JPanel implements Observer {
 
 	private static PanelWidget instance = new PanelWidget();
 	private FabriqueInstructions fabrique;
@@ -145,5 +148,10 @@ public class PanelWidget extends JPanel {
 			this.add(w);
 			i++;
 		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		validate();
 	}
 }

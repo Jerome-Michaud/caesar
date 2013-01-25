@@ -11,6 +11,7 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import jscratch.sauvegarde.SauvegardeTools;
+import jscratch.vue.controller.LanceurTraduction;
 import jscratch.vue.ginterface.GUI;
 import jscratch.vue.tools.ArborescenceTools;
 import jscratch.vue.tools.exceptions.NonChargeableException;
@@ -96,7 +97,7 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 				}
 			}
 		} catch (IOException ex) {
-			Erreur.afficher(ex, "La sauvegarde n'a pas pu être chargée corectement");
+			Erreur.afficher(ex, "La sauvegarde n'a pas pu être chargée correctement");
 		}
 	}
 }
