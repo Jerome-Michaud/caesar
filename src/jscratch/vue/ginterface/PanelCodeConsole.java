@@ -3,12 +3,17 @@ package jscratch.vue.ginterface;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import nxtim.instruction.Categorie;
 
 /**
  * Panneau d'affichage du code traduit.
@@ -38,6 +43,16 @@ public class PanelCodeConsole extends JPanel implements Observer {
 		this.setBorder(BorderFactory.createTitledBorder("Code NXC"));
 
 		this.add(textarea, BorderLayout.CENTER);
+		
+		this.textarea.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					GUI.getPopupCodeNxc().show(e.getComponent(), e.getX(), e.getY());
+				}
+			}
+		});
 	}
 
 	/**
@@ -59,7 +74,16 @@ public class PanelCodeConsole extends JPanel implements Observer {
 	public void setText(String texte) {
 		this.textarea.setText(texte);
 	}
-
+	
+	/**
+	 * @since 1.0
+	 *
+	 * @return la traduction
+	 */
+	public String getText() {
+		return this.textarea.getText();
+	}
+	
 	@Override
 	public void update(Observable o, Object o1) {
 		// Mise à jour du texte dans la zone, envoyer le code au format String pas un objet

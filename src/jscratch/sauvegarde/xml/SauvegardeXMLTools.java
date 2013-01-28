@@ -11,7 +11,6 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import jscratch.sauvegarde.SauvegardeTools;
-import jscratch.vue.controller.LanceurTraduction;
 import jscratch.vue.ginterface.GUI;
 import jscratch.vue.tools.ArborescenceTools;
 import jscratch.vue.tools.exceptions.NonChargeableException;

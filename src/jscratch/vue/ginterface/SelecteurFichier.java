@@ -10,6 +10,8 @@ import jscratch.sauvegarde.filtres.JScratchFileFilter;
 import jscratch.sauvegarde.SauvegardeTools;
 import jscratch.sauvegarde.filtres.XmlFileFilter;
 import jscratch.sauvegarde.binaire.SauvegardeBinaireTools;
+import jscratch.sauvegarde.filtres.NxcFileFilter;
+import jscratch.sauvegarde.nxc.SauvegardeNxcTools;
 import jscratch.sauvegarde.xml.SauvegardeXMLTools;
 
 /**
@@ -21,14 +23,25 @@ public class SelecteurFichier extends JFileChooser {
 	private HashMap<ApplicationFileFilter, SauvegardeTools> sauvegardes;
 	private XmlFileFilter xml = new XmlFileFilter();
 	private JScratchFileFilter jsc = new JScratchFileFilter();
+	private NxcFileFilter nxc = new NxcFileFilter();
 
-	public SelecteurFichier() {
+	/**
+	 * 
+	 * @param code <code>true</code>, si le selecteur n'accepte que les fichiers NXC
+	 */
+	public SelecteurFichier(final boolean code) {
 		sauvegardes = new HashMap<ApplicationFileFilter, SauvegardeTools>();
 		sauvegardes.put(xml, SauvegardeXMLTools.getInstance());
+		sauvegardes.put(nxc, SauvegardeNxcTools.getInstance());
 		sauvegardes.put(jsc, SauvegardeBinaireTools.getInstance());
 
-		setFileFilter(xml);
-		addChoosableFileFilter(jsc);
+		if (!code) {
+			setFileFilter(xml);
+			addChoosableFileFilter(jsc);
+		}
+		else {
+			setFileFilter(nxc);
+		}
 		setFileSelectionMode(JFileChooser.FILES_ONLY);
 	}
 

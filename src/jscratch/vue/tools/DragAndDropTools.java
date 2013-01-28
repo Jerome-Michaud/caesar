@@ -237,7 +237,7 @@ public class DragAndDropTools extends Observable {
 		int inter = (int) (r.getMaxX() - p.getBounds().getMinX());
 		ArborescenceTools arbo = ArborescenceTools.getInstance();
 		boolean complexe = false;
-		Widget compSurvole= null;
+		Widget compSurvole = null;
 		try {
 			if (inter >= decal) {
 				p.add(comp);
@@ -248,8 +248,6 @@ public class DragAndDropTools extends Observable {
 				}
 
 				compSurvole = a.getComp();
-				if (compSurvole != null)
-				
 				if (a.getVal() == 3) {
 					Zone z = compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
 					((ChampTexte) z).setWidgetContenu(composantsDrague.get(0));
@@ -309,8 +307,6 @@ public class DragAndDropTools extends Observable {
 						((WidgetCompose) compSurvole.parent()).applyChangeModele();
 					}
 				}
-					
-
 			} else {
 				arbo.supprimerWidgets(composantsDrague);
 				for (Widget w : composantsDrague) {

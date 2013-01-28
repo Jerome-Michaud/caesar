@@ -18,7 +18,7 @@ public class XmlFileFilter extends ApplicationFileFilter {
 
 	public XmlFileFilter() {
 		super("xscr");
-		this.descr = "Fichiers XScratch";
+		this.descr = "Fichier XScratch (XML)";
 	}
 
 	/**

@@ -50,7 +50,9 @@ public class FenetreSupressionVariable extends JFrame {
 		this.pack();
 		this.setLocationRelativeTo(GUI.getFenetre());
 		this.setVisible(true);
+
 		this.variables.requestFocus();
+		this.boutonValider.setDefaultCapable(true);
 		
 		boutonValider.addActionListener(new ActionListener() {
 			@ Override

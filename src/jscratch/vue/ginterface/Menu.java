@@ -95,7 +95,7 @@ public class Menu extends JMenuBar {
 		exportationRobotC.addActionListener(listener);
 		aideAPropos.addActionListener(listener);
 
-		selecteur = new SelecteurFichier();
+		selecteur = new SelecteurFichier(false);
 	}
 
 	/**
@@ -118,19 +118,7 @@ public class Menu extends JMenuBar {
 			} else if (e.getSource() == fichierQuitter) {
 				System.exit(0);
 			} else if (e.getSource() == exportationNXC) {
-				String name = System.getProperty("os.name");
-				CreationCodeTools.ecrire(Variables.CHEMIN_ACCES_NBC + "\\code.nxc", VisiteurNXC.getInstance().getTraduction());
-				String line = "";
-				if (!name.equals("Linux") && !name.equals("mac")) {
-					line = "cmd.exe /C start " + Variables.CHEMIN_ACCES_NBC + "\\lancer.bat";
-				} else {
-					//TODO faire un fichier pour lancer la traduction sous linux
-				}
-				try {
-					Runtime.getRuntime().exec(line);
-				} catch (IOException e1) {
-					Erreur.afficher(e1);
-				}
+				new SelecteurFichier(true).sauvegarde();
 			} else if (e.getSource() == exportationRobotC) {
 				//TODO finir l'implémentation de la traduction RobotC
 			} else if (e.getSource() == aideAPropos) {

@@ -3,22 +3,23 @@ package jscratch.sauvegarde.filtres;
 import java.io.File;
 
 /**
- * Classe permettant de définir un filtre de fichier sur les extension JSCRATCH (.jsc)
- * pour l'explorateur lors du chargement ou de la sauvegarde d'un projet.
+ * Classe permettant de définir un filtre de fichier sur les extension JSCRATCH (.nxc)
+ * pour l'explorateur lors du chargement ou de la sauvegarde du code.
  *
- * @author Bastien ANDRU
+ * @since 1.0
+ * @version 1.0
  */
-public class JScratchFileFilter extends ApplicationFileFilter {
+public class NxcFileFilter extends ApplicationFileFilter {
 
 	/**
-	 * La description des fichiers de type JSCRATCH à afficher dans
+	 * La description des fichiers de type NXC à afficher dans
 	 * l'explorateur
 	 */
 	private String descr;
 
-	public JScratchFileFilter() {
-		super("jsc");
-		this.descr = "Fichier JScratch";
+	public NxcFileFilter() {
+		super("nxc");
+		this.descr = "Fichier NXC";
 	}
 
 	/**

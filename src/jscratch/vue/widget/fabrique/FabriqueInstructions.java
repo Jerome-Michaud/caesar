@@ -33,6 +33,9 @@ import nxtim.instruction.Variable;
 
 /**
  * Classe implémentant le design pattern Factory permettant la création de tous les types de widgets.
+ * 
+ * @since 1.0
+ * @version 1.0
  */
 public class FabriqueInstructions {
 
@@ -44,8 +47,6 @@ public class FabriqueInstructions {
 	public Widget creerWidgetMoteurMarche() {
 		return new Widget(new MoteurMarcheWidget());
 	}
-
-	
 
 	/**
 	 * Méthode permettant de créer un widget de type "Arrêt Moteur".

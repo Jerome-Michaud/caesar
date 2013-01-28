@@ -1,7 +1,8 @@
 package jscratch.vue.ginterface;
 
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
@@ -12,6 +13,7 @@ import jscratch.modeles.DicoWidgetsCategories;
 import jscratch.vue.tools.Variables;
 import jscratch.vue.widget.fabrique.FabriqueInstructions;
 import jscratch.vue.widget.Widget;
+import nxtim.instruction.Categorie;
 
 /**
  * Cette zone correspond à la zone où sont entreposés les widgets pour que l'utilisateur puisse les prendre.
@@ -38,6 +40,16 @@ public class PanelWidget extends JPanel implements Observer {
 		this.setLayout(null);
 
 		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 600));
+		
+		this.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (GUI.getPanelTypeWidget().getCurrentCategorie() == Categorie.VARIABLES && e.isPopupTrigger()) {
+					GUI.getPopupVariable().show(e.getComponent(), e.getX(), e.getY());
+				}
+			}
+		});
 	}
 
 	/**

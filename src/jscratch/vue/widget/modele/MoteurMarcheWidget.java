@@ -27,11 +27,9 @@ public class MoteurMarcheWidget extends ModeleWidget{
 		this.setTabY(tY);
 		this.setTailleX();
 		this.setTailleY();
-		//this.setType(TypeModeleWidget.MOTEURMOVFWD);
 		this.setType(TypeModeleWidget.MOTEURMARCHE);
 		message.put(new Point(5, 17), "Moteur");
-		//message.put(new Point(94, 17), "avance à");
-		message.put(new Point(94, 17), "marche à");
+		message.put(new Point(94, 17), "puissance");
 
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));

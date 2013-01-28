@@ -37,10 +37,10 @@ public class FenetreAjoutVariable extends JFrame {
 		Box boxH1 = Box.createHorizontalBox();
 		Box boxH2 = Box.createHorizontalBox();
 
-		typeVariable = new JComboBox(TypeVariable.values());
-		nomVariable = new JTextField(20);
-		boutonValider = new JButton("Valider");
-		boutonAnnuler = new JButton("Annuler");
+		this.typeVariable = new JComboBox(TypeVariable.values());
+		this.nomVariable = new JTextField(20);
+		this.boutonValider = new JButton("Valider");
+		this.boutonAnnuler = new JButton("Annuler");
 
 		this.setContentPane(boxV);
 		boxV.add(Box.createVerticalStrut(10));
@@ -50,21 +50,22 @@ public class FenetreAjoutVariable extends JFrame {
 		boxV.add(Box.createVerticalStrut(10));
 
 		boxH1.add(Box.createHorizontalStrut(10));
-		boxH1.add(typeVariable);
+		boxH1.add(this.typeVariable);
 		boxH1.add(Box.createHorizontalStrut(10));
-		boxH1.add(nomVariable);
+		boxH1.add(this.nomVariable);
 		boxH1.add(Box.createHorizontalStrut(10));
 
 		boxH2.add(Box.createHorizontalStrut(10));
-		boxH2.add(boutonValider);
+		boxH2.add(this.boutonValider);
 		boxH2.add(Box.createHorizontalStrut(10));
-		boxH2.add(boutonAnnuler);
+		boxH2.add(this.boutonAnnuler);
 		boxH2.add(Box.createHorizontalStrut(10));
 
 		this.pack();
-		this.setLocationRelativeTo(GUI.getFenetre());
+		this.setLocationRelativeTo(GUI.getPanelWidget());
 		this.setVisible(true);
 		this.nomVariable.requestFocus();
+		this.boutonValider.setDefaultCapable(true);
 
 		boutonValider.addActionListener(new ActionListener() {
 			@Override

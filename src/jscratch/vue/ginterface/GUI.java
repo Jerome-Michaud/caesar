@@ -1,5 +1,7 @@
 package jscratch.vue.ginterface;
 
+import javax.swing.JPopupMenu;
+
 /**
  * Facade pour la GUI.
  */
@@ -12,6 +14,14 @@ public class GUI {
 
 	public static Fenetre getFenetre() {
 		return Fenetre.getInstance();
+	}
+	
+	public static JPopupMenu getPopupVariable() {
+		return new PopupAjoutVariable();
+	}
+	
+	public static JPopupMenu getPopupCodeNxc() {
+		return new PopupCodeNxc();
 	}
 
 	public static FenetreAPropos getAPropos() {
