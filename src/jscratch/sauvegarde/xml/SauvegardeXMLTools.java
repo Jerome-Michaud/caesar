@@ -4,18 +4,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-import jscratch.modeles.Erreur;
+import jscratch.helpers.ErreurHelper;
+import jscratch.sauvegarde.SauvegardeTools;
+import jscratch.vue.arborescence.ArborescenceTools;
+import jscratch.exceptions.NonChargeableException;
+import jscratch.vue.ginterface.principales.GUI;
+import jscratch.vue.widgets.Widget;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-import jscratch.sauvegarde.SauvegardeTools;
-import jscratch.vue.controller.LanceurTraduction;
-import jscratch.vue.ginterface.GUI;
-import jscratch.vue.tools.ArborescenceTools;
-import jscratch.vue.tools.exceptions.NonChargeableException;
-import jscratch.vue.widget.Widget;
 
 public class SauvegardeXMLTools implements SauvegardeTools {
 
@@ -53,7 +52,7 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 			ArborescenceTools.getInstance().updateWidgets();
 			GUI.getPanelCodeGraphique().repaint();
 		} catch (NonChargeableException ex) {
-			Erreur.afficher(ex);
+			ErreurHelper.afficher(ex);
 		}
 	}
 
@@ -75,7 +74,7 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 			sortie.output(doc, fo);
 			fo.close();
 		} catch (IOException ex) {
-			Erreur.afficher(ex, "La sauvegarde n'a pas pu être effectuée corectement");
+			ErreurHelper.afficher(ex, "La sauvegarde n'a pas pu être effectuée corectement");
 		}
 	}
 
@@ -93,11 +92,11 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 					List<List<Widget>> l = DeserialiseurXML.load(sxb.build(fichier));
 					ArborescenceTools.getInstance().initArborescence(l, false);
 				} catch (JDOMException ex) {
-					Erreur.afficher(ex, "Le fichier fournit n'est pas correct");
+					ErreurHelper.afficher(ex, "Le fichier fournit n'est pas correct");
 				}
 			}
 		} catch (IOException ex) {
-			Erreur.afficher(ex, "La sauvegarde n'a pas pu être chargée correctement");
+			ErreurHelper.afficher(ex, "La sauvegarde n'a pas pu être chargée correctement");
 		}
 	}
 }

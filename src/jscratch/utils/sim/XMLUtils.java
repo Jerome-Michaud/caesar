@@ -21,7 +21,11 @@ import org.xml.sax.SAXException;
  *
  */
 public class XMLUtils {
-	private XMLUtils() {}
+	
+	/**
+	 * Constructeur privé de <code>XMLUtils</code>.
+	 */
+	private XMLUtils() { }
 
 	/**
 	 * Récupérer la racine d'un document XML
@@ -44,8 +48,9 @@ public class XMLUtils {
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node node = nodeList.item(i);
 			
-			if (node.getNodeType() == Node.ELEMENT_NODE)
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				return (Element) node;
+			}
 		}
 		
 		return null;
@@ -76,8 +81,9 @@ public class XMLUtils {
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node node = nodeList.item(i);
 			
-			if (node.getNodeType() == Node.ELEMENT_NODE)
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				elements.add((Element) node);
+			}
 		}
 		
 		return elements;

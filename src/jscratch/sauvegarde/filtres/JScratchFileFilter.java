@@ -18,7 +18,7 @@ public class JScratchFileFilter extends ApplicationFileFilter {
 
 	public JScratchFileFilter() {
 		super("jsc");
-		this.descr = "Fichiers JScratch";
+		this.descr = "Fichier JScratch";
 	}
 
 	/**

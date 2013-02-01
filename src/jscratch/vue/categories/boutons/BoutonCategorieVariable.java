@@ -1,10 +1,11 @@
 package jscratch.vue.categories.boutons;
 
-import jscratch.vue.categories.complexe.ModeleCategorieVariable;
+import jscratch.dictionnaires.DicoWidgetsCategories;
+import jscratch.helpers.PropertiesHelper;
+import jscratch.vue.categories.ModeleCategorie;
+import jscratch.vue.ginterface.principales.GUI;
 
-import jscratch.modeles.DicoWidgetsCategories;
 import nxtim.instruction.Categorie;
-import jscratch.vue.ginterface.GUI;
 
 /**
  *
@@ -17,7 +18,9 @@ public class BoutonCategorieVariable extends BoutonCategorie {
 	 * <code>Instructions</code>.
 	 */
 	public BoutonCategorieVariable() {
-		super(new ModeleCategorieVariable(Categorie.VARIABLES));
+		super(new ModeleCategorie(Categorie.VARIABLES));
+		
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetVariableSetValue());
 	}
 
 	@Override

@@ -1,12 +1,10 @@
 package jscratch.vue.categories;
 
-import jscratch.vue.categories.complexe.PolygoneAction;
 import java.awt.Color;
 import java.awt.Polygon;
-import java.util.ArrayList;
-import java.util.List;
-import jscratch.modeles.DicoCouleursCategories;
-import jscratch.vue.tools.Variables;
+import jscratch.dictionnaires.DicoCouleursCategories;
+import jscratch.dictionnaires.DicoWidgetsCategories;
+import jscratch.parametrages.Variables;
 import nxtim.instruction.Categorie;
 
 /**
@@ -56,7 +54,6 @@ public class ModeleCategorie {
 	 * Les polygones donnant le polygone global.
 	 */
 	private Polygon formeCouleur, formeTexte;
-	private List<PolygoneAction> formesExtras;
 	
 	/**
 	 * La catégorie correspondant au bouton.
@@ -74,7 +71,6 @@ public class ModeleCategorie {
 		this.categorie = categorie;
 		this.formeCouleur = new Polygon(this.tabXIcone, this.tabYIcone, this.tabXIcone.length);
 		this.formeTexte = new Polygon(this.tabX, this.tabY, this.tabX.length);
-		this.formesExtras = new ArrayList<PolygoneAction>();
 	}
 
 	/**
@@ -95,10 +91,6 @@ public class ModeleCategorie {
 		return this.formeTexte;
 	}
 
-	public List<PolygoneAction> getFormesExtras() {
-		return this.formesExtras;
-	}
-
 	/**
 	 * Retourne la couleur de la catégorie.
 	 *
@@ -111,9 +103,13 @@ public class ModeleCategorie {
 	/**
 	 * Retourne le nom de la catégorie.
 	 *
+	 * @param nombreWidget <code>true</code>, si on veut afficher le nombre de widget dans la catégorie
 	 * @return le message de la catégorie
 	 */
-	public String getMessage() {
+	public String getMessage(final boolean nombreWidget) {
+		if (nombreWidget) {
+			return this.categorie.toString() + " (" + DicoWidgetsCategories.getInstance().getWidgets(this.categorie, true).size() + ")" ;
+		}
 		return this.categorie.toString();
 	}
 	

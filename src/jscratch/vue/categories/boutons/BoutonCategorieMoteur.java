@@ -1,9 +1,9 @@
 package jscratch.vue.categories.boutons;
 
-import jscratch.modeles.DicoWidgetsCategories;
+import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
-import jscratch.vue.ginterface.GUI;
+import jscratch.vue.ginterface.principales.GUI;
 
 /**
  * Classe permettant l'instanciation du bouton catégorie "Moteur".
@@ -31,8 +31,7 @@ public class BoutonCategorieMoteur extends BoutonCategorie {
 	public BoutonCategorieMoteur() {
 		super(new ModeleCategorie(Categorie.MOTEUR));
 
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMovFwd());
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMovRev());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMarche());
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurOff());
 	}
 
