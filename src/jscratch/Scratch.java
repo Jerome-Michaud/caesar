@@ -16,10 +16,16 @@ public class Scratch {
 	 */
 	public static void main(String[] args) {
 		try {
+			//Cle du lookandfeel
 			String[] li = {"Licensee=Bastien Andru", "LicenseRegistrationNumber=NCBA120326", "Product=Synthetica", "LicenseType=Non Commercial", "ExpireDate=--.--.----", "MaxVersion=2.999.999"};
 			UIManager.put("Synthetica.license.info", li);
 			UIManager.put("Synthetica.license.key", "5DE6EB11-524B1D59-CD2B3EC7-3243D187-6EA8B694");
 
+			// Cle des addons
+			String[] li2 = {"Licensee=Bastien Andru", "LicenseRegistrationNumber=NCBA130131", "Product=SyntheticaAddons", "LicenseType=Non Commercial", "ExpireDate=--.--.----", "MaxVersion=1.999.999"};
+			UIManager.put("SyntheticaAddons.license.info", li2);
+			UIManager.put("SyntheticaAddons.license.key", "664973DE-55A50F80-8176ABB3-2BAFF4B7-5F2EEDB2");
+			
 			try {
 				UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
 			} catch (UnsupportedLookAndFeelException e) {

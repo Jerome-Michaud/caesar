@@ -10,6 +10,7 @@ import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.widgets.Widget;
+import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import jscratch.vue.widgets.modeles.VariableWidget;
 
 /**
@@ -51,7 +52,7 @@ public class DicoWidgetsCategories {
 	 * Permet de récupérer les widgets d'une catégorie.
 	 * 
 	 * @param categorie 
-	 * @param tri 
+	 * @param tri la liste renvoyée est une COPIE dans le cas ou le paramètre est à <code>true</code>, sinon, c'est l'originale.
 	 * @return  les widgets
 	 */
 	public List<Widget> getWidgets(Categorie categorie, final boolean tri) {
@@ -97,7 +98,13 @@ public class DicoWidgetsCategories {
 	public void updateWidgetsVariables() {
 		Variable[] vars = DicoVariables.getInstance().getLesvariables();
 		List<Widget> widgetsVar = DicoWidgetsCategories.getInstance().getWidgets(Categorie.VARIABLES, false);
-		widgetsVar.clear();
+		
+		// Suppression des widgets variables
+		for (int i = 0;i < widgetsVar.size();i++) {
+			if (!widgetsVar.get(i).getType().equals(TypeModeleWidget.SETVALUEVARIABLE)) {
+				widgetsVar.remove(widgetsVar.get(i));
+			}
+		}
 		
 		for (Variable var : vars) {
 			Widget w = GUI.getPanelWidget().getFabrique().creerWidgetVariable((VariableModifiable) var);

@@ -58,6 +58,13 @@ public class PanelWidget extends JPanel implements Observer {
 					GUI.getPopupVariable().show(e.getComponent(), e.getX(), e.getY());
 				}
 			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (GUI.getPanelTypeWidget().getCurrentCategorie() == Categorie.VARIABLES && e.isPopupTrigger()) {
+					GUI.getPopupVariable().show(e.getComponent(), e.getX(), e.getY());
+				}
+			}
 		});
 	}
 
@@ -182,6 +189,6 @@ public class PanelWidget extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		validate();
+		this.validate();
 	}
 }
