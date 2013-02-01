@@ -35,7 +35,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
 		
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.setBounds(60, 3, 20, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
