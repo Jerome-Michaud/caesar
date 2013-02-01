@@ -3,10 +3,13 @@ package jscratch.controleur.sim;
 import java.awt.Graphics;
 import java.io.File;
 
+import javax.swing.JFrame;
+
 import jscratch.modeles.sim.Map;
 import jscratch.modeles.sim.MapFactory;
 import jscratch.modeles.sim.Robot;
 import jscratch.vue.sim.MapRenderer;
+import jscratch.vue.sim.PanelInfosRobot;
 import jscratch.vue.sim.RobotRenderer;
 
 
@@ -23,6 +26,7 @@ public class Simulator {
 	private RobotController robotController;
 	private MapRenderer mapRenderer;
 	private RobotRenderer robotRenderer;
+	private PanelInfosRobot infosRobot;
 	
 	public Simulator() {
 		
@@ -35,6 +39,14 @@ public class Simulator {
 		
 		mapRenderer = new MapRenderer(map);
 		robotRenderer = new RobotRenderer(robot);
+		
+		// TEST Panel infos
+		JFrame fenInfo = new JFrame();
+		infosRobot = new PanelInfosRobot(robot);
+		fenInfo.add(infosRobot);
+		fenInfo.pack();
+		fenInfo.setVisible(true);
+		// Fin test Panel infos
 	}
 
 	/**
@@ -43,6 +55,7 @@ public class Simulator {
 	 */
 	public void update(float deltaTime) {
 		robotController.update(deltaTime);
+		infosRobot.update(deltaTime);
 	}
 
 	/**
@@ -52,6 +65,7 @@ public class Simulator {
 	public void render(Graphics g) {
 		mapRenderer.render(g);
 		robotRenderer.render(g);
+		
 	}
 
 	/**
