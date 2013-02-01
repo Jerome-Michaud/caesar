@@ -250,7 +250,7 @@ public final class ArborescenceTools {
 				if (w.isComplexe()) {
 					updateWidgets((WidgetCompose) w);
 					((WidgetCompose) w).notifyChange();
-					//w.validate();
+					w.validate();
 				}
 			}
 		}

@@ -41,7 +41,7 @@ public enum TypeAction {
 			case INTERNE:
 				return "3";
 			default:
-				return "Erreur";
+				return "-1";
 		}
 	}
 }

@@ -56,16 +56,10 @@ public class DicoWidgetsCategories {
 	 * @return  les widgets
 	 */
 	public List<Widget> getWidgets(Categorie categorie, final boolean tri) {
-		if (!tri) {
-			return this.dico.get(categorie);
+		if (tri) {
+			nettoyer(categorie);
 		}
-		List<Widget> lw = new ArrayList<Widget>();
-		for (Widget w : this.dico.get(categorie)) {
-			if (Boolean.valueOf(PropertiesHelper.getInstance().get("user.widget.afficher." + w.getType().toString()))) {
-				lw.add(w);
-			}
-		}
-		return lw;
+		return this.dico.get(categorie);
 	}
 
 	/**
@@ -128,6 +122,20 @@ public class DicoWidgetsCategories {
 					l.remove(l.get(i));
 					break;
 				}
+			}
+		}
+	}
+
+	/**
+	 * Permet de nettoyer la liste des widgets en fonction des properties.
+	 * 
+	 * @param categorie la categorie à trier
+	 */
+	private void nettoyer(final Categorie categorie) {
+		List<Widget> l = this.dico.get(categorie);
+		for (int i = 0;i < l.size();i++) {
+			if (!Boolean.valueOf(PropertiesHelper.getInstance().get("user.widget.afficher." + l.get(i).getType().toString()))) {
+				l.remove(l.get(i));
 			}
 		}
 	}
