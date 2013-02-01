@@ -3,9 +3,9 @@ package jscratch;
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import jscratch.modeles.Erreur;
-import jscratch.vue.ginterface.GUI;
-import jscratch.vue.sim.Fenetre;
+import jscratch.helpers.ErreurHelper;
+import jscratch.vue.ginterface.principales.GUI;
+import jscratch.vue.ginterface.parametrages.ParametrageUI;
 
 public class Scratch {
 
@@ -26,10 +26,14 @@ public class Scratch {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			}
 		} catch (Exception ex) {
-			Erreur.afficher(ex);
+			ErreurHelper.afficher(ex);
 		}
-		GUI.getFenetre();
 		
-		//new Fenetre();
+		if (args.length > 0 && "param".equals(args[0])) {
+			ParametrageUI.getInstance();
+		}
+		else {
+			GUI.getFenetre();
+		}
 	}
 }

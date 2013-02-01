@@ -6,11 +6,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.List;
-import jscratch.modeles.Erreur;
+import jscratch.helpers.ErreurHelper;
 import jscratch.sauvegarde.SauvegardeTools;
-import jscratch.vue.ginterface.GUI;
-import jscratch.vue.tools.ArborescenceTools;
-import jscratch.vue.widget.Widget;
+import jscratch.vue.ginterface.principales.GUI;
+import jscratch.vue.arborescence.ArborescenceTools;
+import jscratch.vue.widgets.Widget;
 
 /**
  * Classe regroupant différents outils destinés à la sauvegarde et au chargement
@@ -66,7 +66,7 @@ public class SauvegardeBinaireTools implements SauvegardeTools {
 			oos.flush();
 			oos.close();
 		} catch (Exception e) {
-			Erreur.afficher(e);
+			ErreurHelper.afficher(e);
 		}
 	}
 
@@ -82,7 +82,7 @@ public class SauvegardeBinaireTools implements SauvegardeTools {
 			LinkedList<List<Widget>> arbos = (LinkedList<List<Widget>>) ois.readObject();
 			ArborescenceTools.getInstance().initArborescence(arbos, true);
 		} catch (Exception e) {
-			Erreur.afficher(e);
+			ErreurHelper.afficher(e);
 		}
 	}
 }

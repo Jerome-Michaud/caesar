@@ -3,9 +3,9 @@ package jscratch.sauvegarde.nxc;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import jscratch.modeles.Erreur;
+import jscratch.helpers.ErreurHelper;
 import jscratch.sauvegarde.SauvegardeTools;
-import jscratch.vue.ginterface.GUI;
+import jscratch.vue.ginterface.principales.GUI;
 
 /**
  *
@@ -49,7 +49,7 @@ public class SauvegardeNxcTools implements SauvegardeTools {
 			fw.append(GUI.getPanelCodeConsole().getText());
 			fw.close();
 		} catch (IOException ex) {
-			Erreur.afficher(ex);
+			ErreurHelper.afficher(ex);
 		}
 	}
  }

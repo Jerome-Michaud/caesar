@@ -12,10 +12,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 
 import javax.swing.SwingUtilities;
+import jscratch.helpers.PropertiesHelper;
 import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
-import jscratch.vue.ginterface.GUI;
-import jscratch.vue.tools.Variables;
+import jscratch.vue.ginterface.principales.GUI;
+import jscratch.parametrages.Variables;
 
 /**
  * Classe permettant de définir les différents comportements des boutons catégories.
@@ -67,7 +68,7 @@ public abstract class BoutonCategorie extends JComponent {
 		// Ecritures
 		g2d.setColor(Color.WHITE);
 		g2d.setFont(this.font);
-		g2d.drawString(this.modele.getMessage(), 15, 17);
+		g2d.drawString(this.modele.getMessage(Variables.AFFICHAGE_NOMBRE_WIDGET), 15, 17);
 		super.paintComponent(g);
 	}
 
@@ -182,6 +183,7 @@ public abstract class BoutonCategorie extends JComponent {
 
 		}
 		GUI.getPanelWidget().setLesWidgets(getNbColonnes());
+		GUI.getPanelWidget().setText(PropertiesHelper.getInstance().get("user.categorie.message." + GUI.getPanelTypeWidget().getCurrentCategorie().toString().toLowerCase()));
 	}
 
 	/**

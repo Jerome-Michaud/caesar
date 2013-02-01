@@ -1,29 +1,15 @@
 package jscratch.vue.categories.boutons;
 
-import jscratch.modeles.DicoWidgetsCategories;
+import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
-import jscratch.vue.ginterface.GUI;
+import jscratch.vue.ginterface.principales.GUI;
 
 /**
  * Classe permettant l'instanciation du bouton catégorie "Contôles".
  *
  * @since 1.0
- * @version
- * Historique des versions :<br />
- * <ul>
- * <li>
- * 1.0 : 6 widgets disponibles :
- * <ul>
- * <li>For</li>
- * <li>Repeat</li>
- * <li>While</li>
- * <li>Do ... While</li>
- * <li>If</li>
- * <li>If ... Else</li>
- * <ul>
- * </li>
- * <ul>
+ * @version 1.0
  */
 public class BoutonCategorieStructure extends BoutonCategorie {
 

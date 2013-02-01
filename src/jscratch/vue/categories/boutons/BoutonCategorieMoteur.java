@@ -1,9 +1,9 @@
 package jscratch.vue.categories.boutons;
 
-import jscratch.modeles.DicoWidgetsCategories;
+import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
-import jscratch.vue.ginterface.GUI;
+import jscratch.vue.ginterface.principales.GUI;
 
 /**
  * Classe permettant l'instanciation du bouton catégorie "Moteur".

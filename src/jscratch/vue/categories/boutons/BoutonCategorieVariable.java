@@ -1,8 +1,9 @@
 package jscratch.vue.categories.boutons;
 
-import jscratch.modeles.DicoWidgetsCategories;
+import jscratch.dictionnaires.DicoWidgetsCategories;
+import jscratch.helpers.PropertiesHelper;
 import jscratch.vue.categories.ModeleCategorie;
-import jscratch.vue.ginterface.GUI;
+import jscratch.vue.ginterface.principales.GUI;
 
 import nxtim.instruction.Categorie;
 

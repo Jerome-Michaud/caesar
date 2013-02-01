@@ -2,9 +2,9 @@ package jscratch.vue.categories;
 
 import java.awt.Color;
 import java.awt.Polygon;
-import jscratch.modeles.DicoCouleursCategories;
-import jscratch.modeles.DicoWidgetsCategories;
-import jscratch.vue.tools.Variables;
+import jscratch.dictionnaires.DicoCouleursCategories;
+import jscratch.dictionnaires.DicoWidgetsCategories;
+import jscratch.parametrages.Variables;
 import nxtim.instruction.Categorie;
 
 /**
@@ -103,10 +103,14 @@ public class ModeleCategorie {
 	/**
 	 * Retourne le nom de la catégorie.
 	 *
+	 * @param nombreWidget <code>true</code>, si on veut afficher le nombre de widget dans la catégorie
 	 * @return le message de la catégorie
 	 */
-	public String getMessage() {
-		return this.categorie.toString() + " (" + DicoWidgetsCategories.getInstance().getWidgets(this.categorie).size() + ")" ;
+	public String getMessage(final boolean nombreWidget) {
+		if (nombreWidget) {
+			return this.categorie.toString() + " (" + DicoWidgetsCategories.getInstance().getWidgets(this.categorie, true).size() + ")" ;
+		}
+		return this.categorie.toString();
 	}
 	
 	/**
