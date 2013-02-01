@@ -22,4 +22,8 @@ public class TouchSensor extends Sensor<Boolean> {
 		value = mapC.pointInObstacle(position);
 	}
 
+	@Override
+	public String toString() {
+		return "<strong>Touch (" + port + ") :</strong> " + value;
+	}
 }

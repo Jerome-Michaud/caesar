@@ -95,4 +95,9 @@ public class UltraSonicSensor extends Sensor<Integer> {
 	public List<Point2D> getListPoint() {
 		return listPoint;
 	}
+	
+	@Override
+	public String toString() {
+		return "<strong>UltraSonic (" + port + ") :</strong> " + value;
+	}
 }
