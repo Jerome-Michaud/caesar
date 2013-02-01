@@ -47,11 +47,13 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		ChampTexte l = new ChampTexte();
 		l.setBounds(10, 3, 14, 14);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 
 		this.getLesZonesSaisies().add(l);
 
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		//f.setBounds(80, 3, 20, 20);
 		f.setBounds(40, 3, 14, 14);
 		this.getLesZonesSaisies().add(f);

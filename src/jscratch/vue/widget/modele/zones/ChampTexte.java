@@ -1,6 +1,7 @@
 package jscratch.vue.widget.modele.zones;
 
 import java.awt.BorderLayout;
+import java.awt.Rectangle;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 import java.util.LinkedList;
@@ -19,11 +20,9 @@ public class ChampTexte extends JPanel implements Zone {
 
 	public static final int ETAT_SAISIE = 0;
 	public static final int ETAT_CONTIENT_WIDGET = 1;
-	
 	private Widget widgetContenu;
 	private JTextField textField;
 	private List<TypeModeleWidget> typesWidgetsAcceptes;
-	
 	/*
 	 * Etat à ETAT_SAISIE (0) quand on affiche uniquement le champ texte
 	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus
@@ -52,7 +51,7 @@ public class ChampTexte extends JPanel implements Zone {
 
 		this.validate();
 	}
-	
+
 	private void composantSupp(ContainerEvent e) {
 		if (e.getChild() == widgetContenu && e.getComponent() == this) {
 			setWidgetContenu(null);
@@ -110,25 +109,68 @@ public class ChampTexte extends JPanel implements Zone {
 			this.textField.setSize(this.getSize());
 			this.setComponent(w);
 		}
-		Widget parent = ((Widget) (this.getParent()));
 		int decal = this.getWidth() - oldW;
-		parent.getModele().decalageX(decal);
-		parent.setForme(false);
-		parent.getModele().decalerComposantsSuivants(this.getX(), decal);
-		
+		//Appel à la méthode de redimensionnement en X, avec si nécessaire appel recursif pour le redimensionnement des parents
+		decaleWidgetParents(this, decal);
 		this.widgetContenu = w;
+	}
+
+	/**
+	 * Méthode récursive de redimensionnement d'un widget en largeur ainsi que de ses parents
+	 * @param w Le composant pour lequel on cherche à redimensionner le parent
+	 * @param decal La valeur de l'agrandissement
+	 */
+	private void decaleWidgetParents(JComponent w, int decal) {
+		Widget parent = null;
+		int positionX = 0;
+		boolean champ = false;
+		//Si le parent est un widget (quand on a remonté tous les champs textes de la zone sur laquelle on travaille)
+		if (w.getParent() instanceof Widget) {
+			//Alors on stocke ce parent pour travailer dessus
+			parent = ((Widget) (w.getParent()));
+			positionX = w.getX();
+		} else if (w.getParent() instanceof ChampTexte) {//Si le parent est un champTexte ...
+			if (w.getParent().getParent() instanceof Widget) {
+				 /*... alors on regarde si le parent du parent est un widget,
+				  * ceci afin de remonter au delà de la contenance du ChampTexte
+				  * et donc travailler sur le ChamTexte en lui même				  * 
+				  */
+				parent = (Widget) (w.getParent().getParent());
+				positionX = w.getParent().getX();
+				//Booleen permettant d'effectuer des actions supplémentaires plus loin dans ce cas
+				champ = true;
+			}
+		}
+
+		//Si on a définit que le parent du composant courant nous intéressait ...
+		if (parent != null) {
+			//... alor on entame les procédures de redimensionnement
+			parent.getModele().decalageX(decal);
+			parent.setForme(false);
+			parent.getModele().decalerComposantsSuivants(positionX, decal);
+			//Dans le cas on l'on trvaille sur un ChampTexte, des actions supplémentaires sont nécessaires
+			if(champ){
+				//On agrandit les bounds du composant en lui même
+				ChampTexte par = ((ChampTexte)w.getParent());
+				Rectangle rect = par.getBounds();
+				rect.width += decal;				
+				par.setBounds(rect);
+			}
+			//Lancement de l'appel récursif à partir du parent
+			decaleWidgetParents(parent, decal);
+		}
 	}
 
 	private void setComponent(JComponent comp) {
 		this.setSize(comp.getSize());
 		this.add(comp, BorderLayout.CENTER);
 	}
-	
+
 	@Override
 	public int getEtat() {
 		return this.etat;
 	}
-	
+
 	/**
 	 * Empêche la zone de prendre du texte. La seule chose possible est de mettre un widget dedans.
 	 */

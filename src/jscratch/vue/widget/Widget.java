@@ -124,7 +124,10 @@ public class Widget extends JComponent {
 		} else {
 			this.setSize(maxX + 1, maxY + 1);
 		}
-		this.setPreferredSize(new Dimension(maxX, maxY));
+		Dimension newDim = new Dimension(maxX, maxY);
+		this.setPreferredSize(newDim);
+		this.validate();
+		this.repaint();
 	}
 
 	/**
