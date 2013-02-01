@@ -35,7 +35,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable {
 		
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.setBounds(55, 3, 20, 20);
 		f.supprimerTexte();
 		this.getLesZonesSaisies().add(f);
