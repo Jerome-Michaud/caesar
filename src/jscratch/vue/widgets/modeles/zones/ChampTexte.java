@@ -21,9 +21,11 @@ public class ChampTexte extends JPanel implements Zone {
 
 	public static final int ETAT_SAISIE = 0;
 	public static final int ETAT_CONTIENT_WIDGET = 1;
+	
 	private Widget widgetContenu;
 	private JTextField textField;
 	private List<TypeModeleWidget> typesWidgetsAcceptes;
+	
 	/*
 	 * Etat à ETAT_SAISIE (0) quand on affiche uniquement le champ texte
 	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus

@@ -42,4 +42,8 @@ public class LightSensor extends Sensor<Integer> {
 		this.value = (int) (l * 100);
 	}
 
+	@Override
+	public String toString() {
+		return "<strong>Light (" + port + ") :</strong> " + value;
+	}
 }

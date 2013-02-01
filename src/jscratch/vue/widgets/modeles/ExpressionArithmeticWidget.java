@@ -43,8 +43,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		ChampTexte l = new ChampTexte();
 		l.setBounds(10, 3, LARG_CHAMP, 14);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
-		
+
 		message.put(new Point(29, 15), op.toString());
 
 		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
@@ -52,10 +51,9 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		Rectangle2D bounds = metrics.getStringBounds(op.toString(), null);
 		this.getLesZonesSaisies().add(l);
 
-
 		ChampTexte f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);		
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 
 		//f.setBounds(40, 3, 14, 14);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
@@ -75,7 +73,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 		this.setTailleX();
 		this.setTailleY();
-		
+
 		initListeners();
 	}
 

@@ -22,4 +22,8 @@ public class ColorSensor extends Sensor<ColorValue> {
 		value = mapC.getColorValue(position);
 	}
 
+	@Override
+	public String toString() {
+		return "<strong>Couleur (" + port + ") :</strong> " + value;
+	}
 }

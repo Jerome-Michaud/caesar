@@ -8,19 +8,21 @@ import java.awt.Color;
  *
  */
 public enum ColorValue {
-	INPUT_BLACKCOLOR (1, new Color(0, 0, 0)),
-	INPUT_BLUECOLOR (2, new Color(0, 0, 255)),
-	INPUT_GREENCOLOR (3, new Color(0, 255, 0)),
-	INPUT_YELLOWCOLOR (4, new Color(255, 255, 0)),
-	INPUT_REDCOLOR (5, new Color(255, 0, 0)),
-	INPUT_WHITECOLOR (6, new Color(255, 255, 255));
+	INPUT_BLACKCOLOR (1, new Color(0, 0, 0), "Noir"),
+	INPUT_BLUECOLOR (2, new Color(0, 0, 255), "Bleu"),
+	INPUT_GREENCOLOR (3, new Color(0, 255, 0), "Vert"),
+	INPUT_YELLOWCOLOR (4, new Color(255, 255, 0), "Jaune"),
+	INPUT_REDCOLOR (5, new Color(255, 0, 0), "Rouge"),
+	INPUT_WHITECOLOR (6, new Color(255, 255, 255), "Blanc");
 	
 	private final int value;
 	private final Color color;
+	private final String name;
 	
-	ColorValue(int value, Color color) {
+	ColorValue(int value, Color color, String name) {
 		this.value = value;
 		this.color = color;
+		this.name = name;
 	}
 	
 	public static ColorValue getSimilarColor(Color color2) {
@@ -47,5 +49,10 @@ public enum ColorValue {
 
 	public Color getColor() {
 		return color;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}	
 }

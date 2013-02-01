@@ -95,7 +95,8 @@ public class Robot{
 		// TODO TEST: Supprimer les adds et gérer via le panneau de control	
 		this.sensors.add(new ColorSensor(SensorPort.S1, mapC, 10,10, 0));
 		this.sensors.add(new UltraSonicSensor(SensorPort.S2, mapC, 33,0, 0,200,this));
-		this.sensors.add(new LightSensor(SensorPort.S2, mapC, 10,10, 0));
+		this.sensors.add(new LightSensor(SensorPort.S3, mapC, 10,10, 0));
+		this.sensors.add(new TouchSensor(SensorPort.S4, mapC, 40,0, 0));
 
 		this.motors = new ArrayList<Motor>(3);
 		this.motors.add(new Motor(MotorPort.OUT_A));
