@@ -1,6 +1,6 @@
 package jscratch.dictionnaires;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +21,7 @@ public class DicoWidgetsCategories {
 
 	private static DicoWidgetsCategories instance = null;
 	private HashMap<Categorie, List<Widget>> dico;
+	private boolean nettoye = false;
 	
 	/**
 	 * Constructeur privé de <code>DicoCategories</code>.
@@ -55,9 +56,9 @@ public class DicoWidgetsCategories {
 	 * @param tri la liste renvoyée est une COPIE dans le cas ou le paramètre est à <code>true</code>, sinon, c'est l'originale.
 	 * @return  les widgets
 	 */
-	public List<Widget> getWidgets(Categorie categorie, final boolean tri) {
-		if (tri) {
-			nettoyer(categorie);
+	public List<Widget> getWidgets(final Categorie categorie, final boolean tri) {
+		if (!this.nettoye && tri) {
+			nettoyer();
 		}
 		return this.dico.get(categorie);
 	}
@@ -91,7 +92,7 @@ public class DicoWidgetsCategories {
 	 */
 	public void updateWidgetsVariables() {
 		Variable[] vars = DicoVariables.getInstance().getLesvariables();
-		List<Widget> widgetsVar = DicoWidgetsCategories.getInstance().getWidgets(Categorie.VARIABLES, false);
+		List<Widget> widgetsVar = DicoWidgetsCategories.getInstance().getWidgets(Categorie.VARIABLES, true);
 		
 		// Suppression des widgets variables
 		for (int i = 0;i < widgetsVar.size();i++) {
@@ -128,14 +129,15 @@ public class DicoWidgetsCategories {
 
 	/**
 	 * Permet de nettoyer la liste des widgets en fonction des properties.
-	 * 
-	 * @param categorie la categorie à trier
 	 */
-	private void nettoyer(final Categorie categorie) {
-		List<Widget> l = this.dico.get(categorie);
-		for (int i = 0;i < l.size();i++) {
-			if (!Boolean.valueOf(PropertiesHelper.getInstance().get("user.widget.afficher." + l.get(i).getType().toString()))) {
-				l.remove(l.get(i));
+	private void nettoyer() {
+		Collection<List<Widget>> categories = this.dico.values();
+		for (List<Widget> l : categories) {
+			for (int i = 0;i < l.size();i++) {
+				System.out.println("user.widget.afficher." + l.get(i).getType().toString() + " - " + Boolean.valueOf(PropertiesHelper.getInstance().get("user.widget.afficher." + l.get(i).getType().toString())));
+				if (!Boolean.valueOf(PropertiesHelper.getInstance().get("user.widget.afficher." + l.get(i).getType().toString()))) {
+					l.remove(l.get(i));
+				}
 			}
 		}
 	}
