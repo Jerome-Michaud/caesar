@@ -38,9 +38,10 @@ public class MoteurMarcheWidget extends ModeleWidget{
 		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 
-		ChampTexte f = new ChampTexte();
+		int widthChamp = 40;
+		ChampTexte f = new ChampTexte(widthChamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.setBounds(155, 3, 40, 20);
+		f.setBounds(155, 3, widthChamp, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 

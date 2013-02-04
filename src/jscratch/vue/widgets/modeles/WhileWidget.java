@@ -33,10 +33,11 @@ public class WhileWidget extends ModeleWidget implements Serializable{
 		message.put(new Point(5, 17), "Tant que");
 		message.put(new Point(85, 17), "faire");
 		
-		ChampTexte f = new ChampTexte();
+		int widthChamp = 20;
+		ChampTexte f = new ChampTexte(widthChamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
-		f.setBounds(60, 3, 20, 20);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
+		f.setBounds(60, 3, widthChamp, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 		

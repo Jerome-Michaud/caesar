@@ -34,10 +34,11 @@ public class IfWidget extends ModeleWidget{
 		this.message.put(new Point(5, 17), "Si");
 		this.message.put(new Point(80, 17), "alors");
 		
-		ChampTexte f = new ChampTexte();
+		int widthChamp = 20;
+		ChampTexte f = new ChampTexte(widthChamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
-		f.setBounds(55, 3, 20, 20);
+		f.setBounds(55, 3, widthChamp, 20);
 		f.supprimerTexte();
 		this.getLesZonesSaisies().add(f);
 

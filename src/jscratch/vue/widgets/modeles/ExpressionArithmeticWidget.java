@@ -15,7 +15,7 @@ import nxtim.instruction.Variable;
 
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
- * forme d'un widget de type Expression arethmetique.
+ * forme d'un widget de type Expression arithmetique.
  * 
  * @since 1.0
  * @version 1.0
@@ -40,9 +40,10 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		final int LARG_CHAMP = 14;
 
 
-		ChampTexte l = new ChampTexte();
+		ChampTexte l = new ChampTexte(LARG_CHAMP);
 		l.setBounds(10, 3, LARG_CHAMP, 14);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 
 		message.put(new Point(29, 15), op.toString());
 
@@ -51,7 +52,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		Rectangle2D bounds = metrics.getStringBounds(op.toString(), null);
 		this.getLesZonesSaisies().add(l);
 
-		ChampTexte f = new ChampTexte();
+		ChampTexte f = new ChampTexte(LARG_CHAMP);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 

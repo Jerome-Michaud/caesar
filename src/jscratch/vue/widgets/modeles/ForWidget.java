@@ -50,24 +50,27 @@ public class ForWidget extends ModeleWidget {
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 
         //variable
-        ChampTexte lv = new ChampTexte();
+		int widthChamp = 35;
+        ChampTexte lv = new ChampTexte(widthChamp);
         lv.supprimerTexte();
 		lv.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-        lv.setBounds(55, 3, 35, 20);
+        lv.setBounds(55, 3, widthChamp, 20);
         this.getLesZonesSaisies().add(lv);
 
 		//valeur logique
-        ChampTexte ff = new ChampTexte();
+		widthChamp = 50;
+        ChampTexte ff = new ChampTexte(widthChamp);
         ff.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
-        ff.setBounds(155, 3, 50, 20);
+        ff.setBounds(155, 3, widthChamp, 20);
         this.getLesZonesSaisies().add(ff);
 		
         //pas
-        ChampTexte fp = new ChampTexte();
+		widthChamp = 20;
+        ChampTexte fp = new ChampTexte(widthChamp);
         fp.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		fp.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		fp.supprimerTexte();
-        fp.setBounds(240, 3, 20, 20);
+        fp.setBounds(240, 3, widthChamp, 20);
         fp.setValeur("1");
         this.getLesZonesSaisies().add(fp);
 

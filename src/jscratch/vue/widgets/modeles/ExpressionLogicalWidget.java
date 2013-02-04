@@ -39,7 +39,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		this.LARG_EXTREMITE = 10;
 		final int LARG_CHAMP = 14;
 
-		ChampTexte l = new ChampTexte();
+		ChampTexte l = new ChampTexte(LARG_CHAMP);
 
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
@@ -55,7 +55,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 		this.getLesZonesSaisies().add(l);
 
-		ChampTexte f = new ChampTexte();
+		ChampTexte f = new ChampTexte(LARG_CHAMP);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
