@@ -134,7 +134,6 @@ public class DicoWidgetsCategories {
 		Collection<List<Widget>> categories = this.dico.values();
 		for (List<Widget> l : categories) {
 			for (int i = 0;i < l.size();i++) {
-				System.out.println("user.widget.afficher." + l.get(i).getType().toString() + " - " + Boolean.valueOf(PropertiesHelper.getInstance().get("user.widget.afficher." + l.get(i).getType().toString())));
 				if (!Boolean.valueOf(PropertiesHelper.getInstance().get("user.widget.afficher." + l.get(i).getType().toString()))) {
 					l.remove(l.get(i));
 				}
