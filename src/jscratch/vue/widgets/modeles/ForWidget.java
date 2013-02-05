@@ -14,11 +14,13 @@ import jscratch.parametrages.Variables;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionFor;
+import nxtim.instruction.InstructionTempsCourant;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
+import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant <code>Serializable</code> modélisant la forme d'un widget de type For.
@@ -28,6 +30,7 @@ import nxtim.instruction.VariableConstante;
  */
 public class ForWidget extends ModeleWidget {
 
+	private ChampTexte lv, ff, fp;
     /**
      * Constructeur du modele définissant les différents paramètres du For.
      */
@@ -59,6 +62,7 @@ public class ForWidget extends ModeleWidget {
 		//valeur logique
         ChampTexte ff = new ChampTexte();
         ff.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
+		ff.supprimerTexte();
         ff.setBounds(155, 3, 50, 20);
         this.getLesZonesSaisies().add(ff);
 		
@@ -81,6 +85,22 @@ public class ForWidget extends ModeleWidget {
         }
         initListeners();
     }
+    
+    @Override
+	public void applyChangeModele(){
+
+		InstructionFor forins = ((InstructionFor) getElementProgramme());
+		Affectation affectG  = (Affectation) lv.getContentWidget().getElementProgramme();
+		Affectation affectD  = (Affectation) fp.getContentWidget().getElementProgramme();
+		Condition cond = (Condition) ff.getContentWidget().getElementProgramme();
+		
+		forins.setInitialisation(affectG);
+		forins.setCondition(cond);
+		forins.setInitialisation(affectD);
+		
+
+	}
+
 
     @Override
     public void decalageX(final int a) {

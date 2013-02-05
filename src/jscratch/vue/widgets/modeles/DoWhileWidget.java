@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 import jscratch.parametrages.Variables;
 import nxtim.instruction.InstructionDoWhile;
+import nxtim.instruction.InstructionTempsCourant;
+import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
@@ -35,6 +37,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_DOWHILE);
 	}
+
 
 	@Override
 	public void decalageX(int a) {

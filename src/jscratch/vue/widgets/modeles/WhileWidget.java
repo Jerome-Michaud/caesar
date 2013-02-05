@@ -8,7 +8,10 @@ import java.io.Serializable;
 
 import jscratch.parametrages.Variables;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
+import nxtim.instruction.Condition;
+import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionWhile;
+import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
@@ -18,6 +21,7 @@ import nxtim.instruction.InstructionWhile;
  * @version 1.0
  */
 public class WhileWidget extends ModeleWidget implements Serializable{
+	private ChampTexte f;
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du While.
 	 */
@@ -33,7 +37,7 @@ public class WhileWidget extends ModeleWidget implements Serializable{
 		message.put(new Point(5, 17), "Tant que");
 		message.put(new Point(85, 17), "faire");
 		
-		ChampTexte f = new ChampTexte();
+		f = new ChampTexte();
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(60, 3, 20, 20);
@@ -46,6 +50,16 @@ public class WhileWidget extends ModeleWidget implements Serializable{
 		
 		this.decalageX(-20);
     }
+    
+	@Override
+	public void applyChangeModele(){
+
+		InstructionWhile whileIns = ((InstructionWhile) getElementProgramme());
+
+		Condition  cond = (Condition)f.getContentWidget().getElementProgramme();
+		whileIns.setCondition(cond);
+	
+	}
 	
 	@Override
     public void decalageX(final int a) {
