@@ -165,6 +165,9 @@ public class VisiteurNXC extends VisiteurC {
 		switch (instructionDeclarationCapteur.getCapteur()) {
 			case TOUCH:
 				traduction += "SetSensorTouch(";
+				break;
+			default:
+				break;
 		}
 		ajouterNomCapteur(instructionDeclarationCapteur.getCapteurSlot());
 		traduction += ");\n";

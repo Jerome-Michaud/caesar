@@ -2,6 +2,7 @@ package jscratch.vue.ginterface.principales.panels;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import jscratch.helpers.PropertiesHelper;
 
 /**

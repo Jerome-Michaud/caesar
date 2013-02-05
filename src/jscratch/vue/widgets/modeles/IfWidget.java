@@ -7,7 +7,9 @@ import java.awt.Rectangle;
 
 import jscratch.parametrages.Variables;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
+import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionIf;
+import nxtim.instruction.InstructionIfElse;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la 
@@ -17,7 +19,7 @@ import nxtim.instruction.InstructionIf;
  * @version 1.0
  */
 public class IfWidget extends ModeleWidget{
-	
+	private ChampTexte f;
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du If.
 	 */
@@ -34,10 +36,12 @@ public class IfWidget extends ModeleWidget{
 		this.message.put(new Point(5, 17), "Si");
 		this.message.put(new Point(80, 17), "alors");
 		
-		ChampTexte f = new ChampTexte();
+
+		int widthChamp = 20;
+		f = new ChampTexte(widthChamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
-		f.setBounds(55, 3, 20, 20);
+		f.setBounds(55, 3, widthChamp, 20);
 		f.supprimerTexte();
 		this.getLesZonesSaisies().add(f);
 
@@ -48,6 +52,15 @@ public class IfWidget extends ModeleWidget{
 		this.decalageX(-20);
 	}
 	
+	@Override
+	public void applyChangeModele(){
+
+		InstructionIf ifIns = ((InstructionIf) getElementProgramme());
+
+		Condition cand = (Condition)f.getContentWidget().getElementProgramme();
+		ifIns.setCondition(cand);
+	
+	}
 	@Override
 	public void decalageX(int a) {
         int i;

@@ -14,11 +14,13 @@ import jscratch.parametrages.Variables;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionFor;
+import nxtim.instruction.InstructionTempsCourant;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
+import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant <code>Serializable</code> modélisant la forme d'un widget de type For.
@@ -28,6 +30,7 @@ import nxtim.instruction.VariableConstante;
  */
 public class ForWidget extends ModeleWidget {
 
+	private ChampTexte lv, ff, fp;
     /**
      * Constructeur du modele définissant les différents paramètres du For.
      */
@@ -50,24 +53,28 @@ public class ForWidget extends ModeleWidget {
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 
         //variable
-        ChampTexte lv = new ChampTexte();
+		int widthChamp = 35;
+        ChampTexte lv = new ChampTexte(widthChamp);
         lv.supprimerTexte();
 		lv.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-        lv.setBounds(55, 3, 35, 20);
+        lv.setBounds(55, 3, widthChamp, 20);
         this.getLesZonesSaisies().add(lv);
 
 		//valeur logique
-        ChampTexte ff = new ChampTexte();
+		widthChamp = 50;
+        ChampTexte ff = new ChampTexte(widthChamp);
         ff.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
-        ff.setBounds(155, 3, 50, 20);
+		ff.supprimerTexte();
+        ff.setBounds(155, 3, widthChamp, 20);
         this.getLesZonesSaisies().add(ff);
 		
         //pas
-        ChampTexte fp = new ChampTexte();
+		widthChamp = 20;
+        ChampTexte fp = new ChampTexte(widthChamp);
         fp.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		fp.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		fp.supprimerTexte();
-        fp.setBounds(240, 3, 20, 20);
+        fp.setBounds(240, 3, widthChamp, 20);
         fp.setValeur("1");
         this.getLesZonesSaisies().add(fp);
 
@@ -81,6 +88,22 @@ public class ForWidget extends ModeleWidget {
         }
         initListeners();
     }
+    
+    @Override
+	public void applyChangeModele(){
+
+		InstructionFor forins = ((InstructionFor) getElementProgramme());
+		Affectation affectG  = (Affectation) lv.getContentWidget().getElementProgramme();
+		Affectation affectD  = (Affectation) fp.getContentWidget().getElementProgramme();
+		Condition cond = (Condition) ff.getContentWidget().getElementProgramme();
+		
+		forins.setInitialisation(affectG);
+		forins.setCondition(cond);
+		forins.setInitialisation(affectD);
+		
+
+	}
+
 
     @Override
     public void decalageX(final int a) {

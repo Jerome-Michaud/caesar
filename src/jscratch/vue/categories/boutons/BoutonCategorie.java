@@ -189,8 +189,9 @@ public abstract class BoutonCategorie extends JComponent {
 
 
 		}
+		String text = PropertiesHelper.getInstance().get("user.categorie.message." + GUI.getPanelTypeWidget().getCurrentCategorie().toString().toLowerCase());
+		GUI.getPanelWidget().setText(text);
 		GUI.getPanelWidget().setLesWidgets(getNbColonnes());
-		GUI.getPanelWidget().setText(PropertiesHelper.getInstance().get("user.categorie.message." + GUI.getPanelTypeWidget().getCurrentCategorie().toString().toLowerCase()));
 	}
 
 	/**

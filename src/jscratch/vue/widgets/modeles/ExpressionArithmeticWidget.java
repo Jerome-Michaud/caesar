@@ -8,14 +8,18 @@ import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 
+import nxtim.instruction.Expression;
+import nxtim.instruction.ExpressionComplexe;
+import nxtim.instruction.InstructionDoWhile;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.Variable;
+import nxtim.instruction.VariableModifiable;
 
 
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
- * forme d'un widget de type Expression arethmetique.
+ * forme d'un widget de type Expression arithmetique.
  * 
  * @since 1.0
  * @version 1.0
@@ -23,6 +27,7 @@ import nxtim.instruction.Variable;
 public class ExpressionArithmeticWidget extends ModeleWidget {
 	private int largeur;
 	private final int LARG_EXTREMITE;
+	private ChampTexte f, l;
 	/**
 	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
@@ -40,9 +45,10 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		final int LARG_CHAMP = 14;
 
 
-		ChampTexte l = new ChampTexte();
+		l = new ChampTexte(LARG_CHAMP);
 		l.setBounds(10, 3, LARG_CHAMP, 14);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 
 		message.put(new Point(29, 15), op.toString());
 
@@ -51,7 +57,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		Rectangle2D bounds = metrics.getStringBounds(op.toString(), null);
 		this.getLesZonesSaisies().add(l);
 
-		ChampTexte f = new ChampTexte();
+		f = new ChampTexte(LARG_CHAMP);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 
@@ -76,6 +82,24 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 		initListeners();
 	}
+	
+
+	
+	@Override
+	public void applyChangeModele(){
+
+		Operation expArith = ((Operation) getElementProgramme());
+
+		VariableModifiable varMemGauche = (VariableModifiable)l.getContentWidget().getElementProgramme();
+		expArith.setMembreGauche(varMemGauche);
+		
+		VariableModifiable varMemDroite = (VariableModifiable)f.getContentWidget().getElementProgramme();
+		expArith.setMembreGauche(varMemDroite);
+		
+
+	}
+	
+	
 
 	public void initListeners() { }
 

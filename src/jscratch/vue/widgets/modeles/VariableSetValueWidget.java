@@ -3,6 +3,9 @@ package jscratch.vue.widgets.modeles;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+
+import nxtim.instruction.Affectation;
+import nxtim.instruction.ExpressionComplexe;
 import nxtim.instruction.VariableModifiable;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 
@@ -12,7 +15,7 @@ import jscratch.vue.widgets.modeles.zones.ChampTexte;
  * @version 1.0
  */
 public class VariableSetValueWidget extends ModeleWidget {
-
+	private ChampTexte f,l;
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
 	 */
@@ -31,20 +34,35 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
-		ChampTexte f = new ChampTexte();
+		int widthChamp = 35;
+		f = new ChampTexte(widthChamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
-		f.setBounds(55, 3, 35, 20);
+		f.setBounds(55, 3, widthChamp, 20);
 		f.setValeur("0");	
 		this.getLesZonesSaisies().add(f);
 
-		f = new ChampTexte();
-		f.supprimerTexte();
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.setBounds(128, 3, 40, 20);
-		this.getLesZonesSaisies().add(f);
+		widthChamp = 40;
+		l = new ChampTexte(widthChamp);
+		l.supprimerTexte();
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		l.setBounds(128, 3, widthChamp, 20);
+		this.getLesZonesSaisies().add(l);
 	}
 	
+	@Override
+	public void applyChangeModele(){
+
+		Affectation setValueIns = ((Affectation) getElementProgramme());
+		VariableModifiable var  = (VariableModifiable)l.getContentWidget().getElementProgramme();
+		setValueIns.setMembreGauche(var);
+		setValueIns.setIsInstruction(true);
+		
+		ExpressionComplexe expComp = (ExpressionComplexe)f.getContentWidget().getElementProgramme();
+		setValueIns.setMembreDroit(expComp);	
+		
+	
+	}
 	@Override
 	public void decalageY(int b, Rectangle r) {
 		int i;
