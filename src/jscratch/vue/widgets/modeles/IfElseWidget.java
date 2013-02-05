@@ -7,7 +7,9 @@ import java.io.Serializable;
 
 import jscratch.parametrages.Variables;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
+import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionIfElse;
+import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Serializable modélisant la
@@ -17,7 +19,7 @@ import nxtim.instruction.InstructionIfElse;
  * @version 1.0
  */
 public class IfElseWidget extends ModeleWidget implements Serializable {
-	
+	private ChampTexte f;
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du IfElse.
 	 */
@@ -33,10 +35,11 @@ public class IfElseWidget extends ModeleWidget implements Serializable {
 		message.put(new Point(80, 17), "alors");
 		message.put(new Point(5, 52), "sinon");
 		
+
 		int widthCamp = 20;
-		ChampTexte f = new ChampTexte(widthCamp);
+		f = new ChampTexte(widthCamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.setBounds(55, 3, widthCamp, 20);
 		f.supprimerTexte();
 		this.getLesZonesSaisies().add(f);
@@ -49,6 +52,15 @@ public class IfElseWidget extends ModeleWidget implements Serializable {
 		this.decalageX(-20);
 	}
 
+	@Override
+	public void applyChangeModele(){
+
+		InstructionIfElse ifElseIns = ((InstructionIfElse) getElementProgramme());
+
+		Condition cand = (Condition)f.getContentWidget().getElementProgramme();
+		ifElseIns.setCondition(cand);
+	
+	}
     @Override
     public void decalageX(int x) {
     	int i;

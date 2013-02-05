@@ -10,6 +10,8 @@ import java.awt.geom.Rectangle2D;
 
 import nxtim.instruction.Condition;
 import nxtim.instruction.Operateur;
+import nxtim.instruction.Operation;
+import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
@@ -21,6 +23,7 @@ import nxtim.instruction.Operateur;
 public class ExpressionLogicalWidget extends ModeleWidget {
 	private int largeur;
 	private final int LARG_EXTREMITE;
+	private ChampTexte f, l;
 	/**
 	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
@@ -39,8 +42,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		this.LARG_EXTREMITE = 10;
 		final int LARG_CHAMP = 14;
 
-		ChampTexte l = new ChampTexte(LARG_CHAMP);
-
+		l = new ChampTexte(LARG_CHAMP);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		l.setBounds(this.LARG_EXTREMITE, 3, LARG_CHAMP, 14);
@@ -55,7 +57,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 		this.getLesZonesSaisies().add(l);
 
-		ChampTexte f = new ChampTexte(LARG_CHAMP);
+		f = new ChampTexte(LARG_CHAMP);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
@@ -75,6 +77,19 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		this.setTailleY();
 	}
 
+	@Override
+	public void applyChangeModele(){
+
+		Condition expLogique = ((Condition) getElementProgramme());
+
+		VariableModifiable varMemGauche = (VariableModifiable)l.getContentWidget().getElementProgramme();
+		expLogique.setMembreGauche(varMemGauche);
+		
+		VariableModifiable varMemDroite = (VariableModifiable)f.getContentWidget().getElementProgramme();
+		expLogique.setMembreGauche(varMemDroite);
+		
+
+	}
 	@Override
 	public void decalageX(int x) {
 		int i;

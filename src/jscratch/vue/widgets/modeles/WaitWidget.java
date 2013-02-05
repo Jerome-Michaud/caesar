@@ -9,8 +9,10 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
+import nxtim.instruction.VariableModifiable;
 
 /**
  * Cette classe modèlise la forme d'un widget de type Wait.
@@ -19,6 +21,7 @@ import nxtim.instruction.VariableConstante;
  * @version 1.0
  */
 public class WaitWidget extends ModeleWidget {
+	private ChampTexte f;
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Wait.
 	 */
@@ -40,7 +43,7 @@ public class WaitWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		int widthChamp = 40;
-		ChampTexte f = new ChampTexte(widthChamp);
+		f = new ChampTexte(widthChamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.setBounds(65, 3, widthChamp, 20);
 		f.setValeur("0");
@@ -52,7 +55,15 @@ public class WaitWidget extends ModeleWidget {
 		
 		initListeners();
 	}
+	@Override
+	public void applyChangeModele(){
+
+		InstructionAttente attenteIns = ((InstructionAttente) getElementProgramme());
+
+		VariableModifiable var = (VariableModifiable)f.getContentWidget().getElementProgramme();
+		attenteIns.setExpression(var);
 	
+	}
 	@Override
 	public void decalageY(int b, Rectangle r) {
 		int i;

@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
 
+import nxtim.instruction.InstructionTempsCourant;
 import nxtim.instruction.VariableModifiable;
 
 /**
@@ -52,7 +53,14 @@ public class VariableWidget extends ModeleWidget {
 
 		this.decalageX((int) bounds.getWidth()+2);
 	}
+/*
+	@Override
+	public void applyChangeModele(){
 
+		VariableModifiable var = ((VariableModifiable) getElementProgramme());
+		
+
+	}*/
 	@Override
 	public void decalageX(int a) {
 		int i;

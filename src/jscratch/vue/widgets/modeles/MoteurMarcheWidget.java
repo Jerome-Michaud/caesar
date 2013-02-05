@@ -1,10 +1,14 @@
 package jscratch.vue.widgets.modeles;
 
 
+import nxtim.instruction.Condition;
+import nxtim.instruction.InstructionIf;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
+import nxtim.instruction.VariableModifiable;
+
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -17,7 +21,7 @@ import jscratch.vue.widgets.modeles.zones.ListeDeroulante;
 import jscratch.vue.widgets.modeles.zones.Zone;
 
 public class MoteurMarcheWidget extends ModeleWidget{
-
+	private ChampTexte f;
 	public MoteurMarcheWidget(){
 		super();
 		int tX[] = {0, 5, 30, 35, 45, 50, 183, 188, 188, 183, 50, 45, 35, 30, 5, 0};
@@ -39,7 +43,8 @@ public class MoteurMarcheWidget extends ModeleWidget{
 		this.getLesZonesSaisies().add(l);
 
 		int widthChamp = 40;
-		ChampTexte f = new ChampTexte(widthChamp);
+		f = new ChampTexte(widthChamp);
+
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.setBounds(155, 3, widthChamp, 20);
 		f.setValeur("0");
@@ -51,6 +56,15 @@ public class MoteurMarcheWidget extends ModeleWidget{
 		this.decalageX(11);
 
 		initListeners();
+	}
+	@Override
+	public void applyChangeModele(){
+
+		InstructionMoteurMov moteurMarcheIns = ((InstructionMoteurMov) getElementProgramme());
+
+		VariableModifiable var = (VariableModifiable)f.getContentWidget().getElementProgramme();
+		moteurMarcheIns.setExpression(var);
+	
 	}
 	@Override
 	public void decalageX(int a) {
