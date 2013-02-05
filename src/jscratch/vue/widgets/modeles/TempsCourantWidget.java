@@ -45,9 +45,10 @@ public class TempsCourantWidget extends ModeleWidget{
 
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
-		f = new ChampTexte();
+		int widthChamp = 20;
+		f = new ChampTexte(widthChamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.setBounds(170, 3, 20, 20);
+		f.setBounds(170, 3, widthChamp, 20);
 		f.supprimerTexte();
 		this.getLesZonesSaisies().add(f);
 		

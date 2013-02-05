@@ -35,10 +35,12 @@ public class IfElseWidget extends ModeleWidget implements Serializable {
 		message.put(new Point(80, 17), "alors");
 		message.put(new Point(5, 52), "sinon");
 		
-		f = new ChampTexte();
+
+		int widthCamp = 20;
+		f = new ChampTexte(widthCamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
-		f.setBounds(55, 3, 20, 20);
+		f.setBounds(55, 3, widthCamp, 20);
 		f.supprimerTexte();
 		this.getLesZonesSaisies().add(f);
 

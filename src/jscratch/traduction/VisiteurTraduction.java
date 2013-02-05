@@ -32,13 +32,14 @@ public abstract class VisiteurTraduction implements VisiteurElementProg {
 	 */
 	protected int nivIndent;
 	/**
-	 * L'indentation totale.
-	 */
-	protected String indent;
-	/**
 	 * La méthode d'indentation.
 	 */
 	protected boolean identationTabulation = false;
+	
+	public VisiteurTraduction() {
+		traduction = "";
+		nivIndent = 0;
+	}
 
 	/**
 	 * Donne la traduction.

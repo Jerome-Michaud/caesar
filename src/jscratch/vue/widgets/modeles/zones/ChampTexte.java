@@ -1,13 +1,20 @@
 package jscratch.vue.widgets.modeles.zones;
 
 import java.awt.BorderLayout;
+import java.awt.FontMetrics;
+import java.awt.Rectangle;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
 
 import org.jdom2.Element;
@@ -20,11 +27,10 @@ public class ChampTexte extends JPanel implements Zone {
 
 	public static final int ETAT_SAISIE = 0;
 	public static final int ETAT_CONTIENT_WIDGET = 1;
-	
 	private Widget widgetContenu;
 	private JTextField textField;
 	private List<TypeModeleWidget> typesWidgetsAcceptes;
-	
+	private int minimumWidth;
 	/*
 	 * Etat à ETAT_SAISIE (0) quand on affiche uniquement le champ texte
 	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus
@@ -34,10 +40,11 @@ public class ChampTexte extends JPanel implements Zone {
 	/**
 	 * Constructeur faisant appel au constructeur équivalent de la classe mère.
 	 */
-	public ChampTexte() {
+	public ChampTexte(int minimumWidth) {
+		this.minimumWidth = minimumWidth;
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
-		this.textField = new JTextField();
+		this.textField = new JNumberTextField();
 		this.widgetContenu = null;
 		this.add(textField, BorderLayout.CENTER);
 		this.etat = ETAT_SAISIE;
@@ -49,14 +56,46 @@ public class ChampTexte extends JPanel implements Zone {
 			}
 		});
 
+		textField.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				updateTextFieldWidth(e);
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				updateTextFieldWidth(e);
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				updateTextFieldWidth(e);
+			}
+		});
+
 		this.typesWidgetsAcceptes = new LinkedList<TypeModeleWidget>();
 
 		this.validate();
 	}
-	
+
 	private void composantSupp(ContainerEvent e) {
 		if (e.getChild() == widgetContenu && e.getComponent() == this) {
 			setWidgetContenu(null);
+		}
+	}
+
+	private void updateTextFieldWidth(DocumentEvent e) {
+		try {			
+			int width = Math.max(this.minimumWidth,(int) new FontMetrics(textField.getFont()) {} .getStringBounds(e.getDocument().getText(0, e.getDocument().getLength()), null).getWidth()+10);
+			
+			Rectangle bnds = this.getBounds();
+			bnds.width = width;
+			
+			decaleWidgetParents(this, width - this.getWidth());
+			textField.setSize(width, textField.getHeight());
+			this.setBounds(bnds);
+		} catch (BadLocationException ex) {
+			Logger.getLogger(ChampTexte.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -86,26 +125,26 @@ public class ChampTexte extends JPanel implements Zone {
 		} else {
 			return "";
 		}
-		
+
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return le contenu du widget
 	 */
-	public Widget getContentWidget(){
-		
+	public Widget getContentWidget() {
+
 		return widgetContenu;
 	}
 
 	/**
 	 * Retourne 1 si le contenu du champ est un widget.
 	 */
-	public boolean isContentWidget(){
-				return etat == 1;
-			
+	public boolean isContentWidget() {
+		return etat == 1;
+
 	}
-	
+
 	/**
 	 * Modifie le texte du champ texte.
 	 *
@@ -129,25 +168,69 @@ public class ChampTexte extends JPanel implements Zone {
 			this.textField.setSize(this.getSize());
 			this.setComponent(w);
 		}
-		Widget parent = ((Widget) (this.getParent()));
 		int decal = this.getWidth() - oldW;
-		parent.getModele().decalageX(decal);
-		parent.setForme(false);
-		parent.getModele().decalerComposantsSuivants(this.getX(), decal);
-		
+		//Appel à la méthode de redimensionnement en X, avec si nécessaire appel recursif pour le redimensionnement des parents
+		decaleWidgetParents(this, decal);
 		this.widgetContenu = w;
 	}
 
+	/**
+	 * Méthode récursive de redimensionnement d'un widget en largeur ainsi que de ses parents
+	 *
+	 * @param w Le composant pour lequel on cherche à redimensionner le parent
+	 * @param decal La valeur de l'agrandissement
+	 */
+	private void decaleWidgetParents(JComponent w, int decal) {
+		Widget parent = null;
+		int positionX = 0;
+		boolean champ = false;
+		//Si le parent est un widget (quand on a remonté tous les champs textes de la zone sur laquelle on travaille)
+		if (w.getParent() instanceof Widget) {
+			//Alors on stocke ce parent pour travailer dessus
+			parent = ((Widget) (w.getParent()));
+			positionX = w.getX();
+		} else if (w.getParent() instanceof ChampTexte) {//Si le parent est un champTexte ...
+			if (w.getParent().getParent() instanceof Widget) {
+				/*... alors on regarde si le parent du parent est un widget,
+				 * ceci afin de remonter au delà de la contenance du ChampTexte
+				 * et donc travailler sur le ChamTexte en lui même				  * 
+				 */
+				parent = (Widget) (w.getParent().getParent());
+				positionX = w.getParent().getX();
+				//Booleen permettant d'effectuer des actions supplémentaires plus loin dans ce cas
+				champ = true;
+			}
+		}
+
+		//Si on a définit que le parent du composant courant nous intéressait ...
+		if (parent != null) {
+			//... alors on entame les procédures de redimensionnement
+			parent.getModele().decalageX(decal);
+			parent.setForme(false);
+			parent.getModele().decalerComposantsSuivants(positionX, decal);
+			//Dans le cas on l'on trvaille sur un ChampTexte, des actions supplémentaires sont nécessaires
+			if (champ) {
+				//On agrandit les bounds du composant en lui même
+				ChampTexte par = ((ChampTexte) w.getParent());
+				Rectangle rect = par.getBounds();
+				rect.width += decal;
+				par.setBounds(rect);
+			}
+			//Lancement de l'appel récursif à partir du parent
+			decaleWidgetParents(parent, decal);
+		}
+	}
+
 	private void setComponent(JComponent comp) {
-		this.setSize(comp.getSize());
+		calculateNewBounds(comp);
 		this.add(comp, BorderLayout.CENTER);
 	}
-	
+
 	@Override
 	public int getEtat() {
 		return this.etat;
 	}
-	
+
 	/**
 	 * Empêche la zone de prendre du texte. La seule chose possible est de mettre un widget dedans.
 	 */
@@ -181,5 +264,13 @@ public class ChampTexte extends JPanel implements Zone {
 	@Override
 	public void setPositionX(int posX) {
 		this.setLocation(posX, this.getY());
+	}
+
+	private void calculateNewBounds(JComponent comp) {
+		int translate = 0 - ((comp.getHeight() / 2) - (this.getHeight() / 2));
+		Rectangle bnds = this.getBounds();
+		bnds.translate(0, translate);
+		bnds.setSize(comp.getSize());
+		this.setBounds(bnds);
 	}
 }

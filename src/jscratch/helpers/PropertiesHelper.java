@@ -3,8 +3,11 @@ package jscratch.helpers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -34,12 +37,12 @@ public class PropertiesHelper {
 			File fichier = new File("properties.properties");
 			if (fichier.exists()) {
 				this.properties = new SortedProperties();
-				this.properties.load(new FileInputStream(fichier));
+				this.properties.load(new InputStreamReader(new FileInputStream(fichier), "UTF8"));
 				
 				File fichierdistant = new File(this.properties.getProperty("user.chemin.properties.distant"));
 				if (fichierdistant.exists()) {
 					this.propertiesDistant = new SortedProperties();
-					this.propertiesDistant.load(new FileInputStream(fichierdistant));
+					this.propertiesDistant.load(new InputStreamReader(new FileInputStream(fichierdistant), "UTF8"));
 				}
 			}
 		} catch (FileNotFoundException ex) {
@@ -113,8 +116,8 @@ public class PropertiesHelper {
 			if (!fichier.exists()) {
 				fichier.createNewFile();
 			}
-			this.propertiesDistant.store(new FileWriter(fichier), "");
-			this.properties.store(new FileWriter(new File("properties.properties")), "");
+			this.propertiesDistant.store(new OutputStreamWriter(new FileOutputStream(fichier), "UTF8"), "");
+			this.properties.store(new OutputStreamWriter(new FileOutputStream(new File("properties.properties")), "UTF8"), "");
 		} catch (IOException ex) {
 			ErreurHelper.afficher(ex);
 		}

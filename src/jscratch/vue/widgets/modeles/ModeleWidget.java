@@ -516,7 +516,7 @@ public abstract class ModeleWidget implements Serializable {
     /**
      * Mettre à jour le modèle
      */
-    public void applyChangeModele(){}
+    public void applyChangeModele(){ }
     	
     	
     

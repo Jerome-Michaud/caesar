@@ -42,9 +42,10 @@ public class WaitWidget extends ModeleWidget {
 		this.setElementProgramme(new InstructionAttente());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
-		f = new ChampTexte();
+		int widthChamp = 40;
+		f = new ChampTexte(widthChamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.setBounds(65, 3, 40, 20);
+		f.setBounds(65, 3, widthChamp, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
 

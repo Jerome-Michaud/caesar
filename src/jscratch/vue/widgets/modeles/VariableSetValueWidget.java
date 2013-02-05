@@ -34,17 +34,19 @@ public class VariableSetValueWidget extends ModeleWidget {
 
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
-		f = new ChampTexte();
+		int widthChamp = 35;
+		f = new ChampTexte(widthChamp);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
-		f.setBounds(55, 3, 35, 20);
+		f.setBounds(55, 3, widthChamp, 20);
 		f.setValeur("0");	
 		this.getLesZonesSaisies().add(f);
 
-		l = new ChampTexte();
+		widthChamp = 40;
+		l = new ChampTexte(widthChamp);
 		l.supprimerTexte();
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		l.setBounds(128, 3, 40, 20);
+		l.setBounds(128, 3, widthChamp, 20);
 		this.getLesZonesSaisies().add(l);
 	}
 	

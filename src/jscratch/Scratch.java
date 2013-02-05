@@ -3,6 +3,7 @@ package jscratch;
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import jscratch.dictionnaires.DicoBoutonsCategories;
 import jscratch.helpers.ErreurHelper;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.parametrages.ParametrageUI;
@@ -28,8 +29,9 @@ public class Scratch {
 			
 			try {
 				UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
-			} catch (UnsupportedLookAndFeelException e) {
+			} catch (UnsupportedLookAndFeelException ex) {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				ErreurHelper.afficher(ex);
 			}
 		} catch (Exception ex) {
 			ErreurHelper.afficher(ex);
@@ -39,6 +41,8 @@ public class Scratch {
 			ParametrageUI.getInstance();
 		}
 		else {
+			DicoBoutonsCategories.getInstance();
+		
 			GUI.getFenetre();
 		}
 	}
