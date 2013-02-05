@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -14,6 +13,7 @@ import java.util.Properties;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jscratch.dictionnaires.DicoWidgetsCategories;
 
 /**
  *
@@ -51,6 +51,17 @@ public class PropertiesHelper {
 			ErreurHelper.afficher(ex);
 		}
 	}
+	
+	public void reset(File fichier) {
+		if (fichier.exists()) {
+			try {
+				this.propertiesDistant = new SortedProperties();
+				this.propertiesDistant.load(new InputStreamReader(new FileInputStream(fichier), "UTF8"));
+			} catch (IOException ex) {
+				ErreurHelper.afficher(ex);
+			}
+		}
+	}
 
 	/**
 	 * Accessor for <code>PropertiesHelper</code>.
@@ -63,6 +74,15 @@ public class PropertiesHelper {
 		}
 		return instance;
     }
+	
+	/**
+	 * Perrmet de connaître le nombre de clés dans le properties.
+	 * 
+	 * @return la nombre de clé
+	 */
+	public int size() {
+		return this.propertiesDistant.size();
+	}
 	
 	/**
 	 * Récupère la valeur d'un propriété.

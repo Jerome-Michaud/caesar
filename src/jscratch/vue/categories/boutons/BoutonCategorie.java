@@ -111,7 +111,14 @@ public abstract class BoutonCategorie extends JComponent {
 				sourisAppuyee();
 			}
 		});
+		
+		ajouterWidgets();
 	}
+	
+	/**
+	 * Permet d'ajouter des widgets.
+	 */
+	public abstract void ajouterWidgets();
 
 	/**
 	 * Calcul les bounds du composant en fonction du polygone gris.

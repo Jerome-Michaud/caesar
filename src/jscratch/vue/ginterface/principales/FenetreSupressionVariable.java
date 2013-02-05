@@ -48,7 +48,7 @@ public class FenetreSupressionVariable extends JFrame {
 		boxH1.add(Box.createHorizontalStrut(10));
 
 		this.pack();
-		this.setLocationRelativeTo(GUI.getFenetre());
+		this.setLocationRelativeTo(GUI.getPanelWidget());
 		this.setVisible(true);
 
 		this.variables.requestFocus();

@@ -30,13 +30,16 @@ public class BoutonCategorieMoteur extends BoutonCategorie {
 	 */
 	public BoutonCategorieMoteur() {
 		super(new ModeleCategorie(Categorie.MOTEUR));
-
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMarche());
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurOff());
 	}
 
 	@Override
 	public int getNbColonnes() {
 		return 1;
+	}
+
+	@Override
+	public void ajouterWidgets() {
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMarche());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurOff());
 	}
 }

@@ -19,6 +19,15 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 	 */
 	public BoutonCategorieExpression() {
 		super(new ModeleCategorie(Categorie.EXPRESSION));
+	}
+
+	@Override
+	public int getNbColonnes() {
+		return 2;
+	}
+
+	@Override
+	public void ajouterWidgets() {
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.ADDITION));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.DIVISION));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.MULIPLICATION));
@@ -32,10 +41,5 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
-	}
-
-	@Override
-	public int getNbColonnes() {
-		return 2;
 	}
 }

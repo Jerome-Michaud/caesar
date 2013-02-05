@@ -1,4 +1,4 @@
-package jscratch.vue.ginterface.principales;
+package jscratch.vue.ginterface.principales.selecteur;
 
 import java.io.File;
 import java.util.HashMap;
@@ -11,8 +11,11 @@ import jscratch.sauvegarde.SauvegardeTools;
 import jscratch.sauvegarde.filtres.XmlFileFilter;
 import jscratch.sauvegarde.binaire.SauvegardeBinaireTools;
 import jscratch.sauvegarde.filtres.NxcFileFilter;
+import jscratch.sauvegarde.filtres.PropertiesFileFilter;
 import jscratch.sauvegarde.nxc.SauvegardeNxcTools;
+import jscratch.sauvegarde.properties.SauvegardePropertiesTools;
 import jscratch.sauvegarde.xml.SauvegardeXMLTools;
+import jscratch.vue.ginterface.principales.GUI;
 
 /**
  *
@@ -24,23 +27,28 @@ public class SelecteurFichier extends JFileChooser {
 	private XmlFileFilter xml = new XmlFileFilter();
 	private JScratchFileFilter jsc = new JScratchFileFilter();
 	private NxcFileFilter nxc = new NxcFileFilter();
+	private PropertiesFileFilter pro = new PropertiesFileFilter();
 
 	/**
 	 * 
-	 * @param code <code>true</code>, si le selecteur n'accepte que les fichiers NXC
+	 * @param type choisi le type du selecteur
 	 */
-	public SelecteurFichier(final boolean code) {
+	public SelecteurFichier(final TypeSelecteur type) {
 		sauvegardes = new HashMap<ApplicationFileFilter, SauvegardeTools>();
 		sauvegardes.put(xml, SauvegardeXMLTools.getInstance());
 		sauvegardes.put(nxc, SauvegardeNxcTools.getInstance());
 		sauvegardes.put(jsc, SauvegardeBinaireTools.getInstance());
+		sauvegardes.put(pro, SauvegardePropertiesTools.getInstance());
 
-		if (!code) {
+		if (TypeSelecteur.ARBORESCENCE == type) {
 			setFileFilter(xml);
 			addChoosableFileFilter(jsc);
 		}
-		else {
+		else if (TypeSelecteur.CODE == type) {
 			setFileFilter(nxc);
+		}
+		else if (TypeSelecteur.PROPERTIES == type) {
+			setFileFilter(pro);
 		}
 		setFileSelectionMode(JFileChooser.FILES_ONLY);
 	}

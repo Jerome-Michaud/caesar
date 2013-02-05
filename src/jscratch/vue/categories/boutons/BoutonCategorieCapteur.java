@@ -23,4 +23,9 @@ public class BoutonCategorieCapteur extends BoutonCategorie {
 	public int getNbColonnes() {
 		return 1;
 	}
+
+	@Override
+	public void ajouterWidgets() {
+		
+	}
 }

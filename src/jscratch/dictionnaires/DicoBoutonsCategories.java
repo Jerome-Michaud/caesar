@@ -11,6 +11,7 @@ import jscratch.vue.categories.boutons.BoutonCategorieExpression;
 import jscratch.vue.categories.boutons.BoutonCategorieMoteur;
 import jscratch.vue.categories.boutons.BoutonCategorieTemps;
 import jscratch.vue.categories.boutons.BoutonCategorieVariable;
+import jscratch.vue.widgets.Widget;
 
 /**
  *
@@ -54,6 +55,19 @@ public class DicoBoutonsCategories {
 			instance = new DicoBoutonsCategories();
 		}
 		return instance;
+	}
+	
+	/**
+	 * Permet de remettre tous les widget dans l'application en détruisant l'object <code>DicoBoutonsCategories</code> et en créant un nouveau.
+	 * 
+	 * @return la nouvelle instance de <code>DicoBoutonsCategories</code>
+	 */
+	public void reset() {
+		DicoWidgetsCategories.getInstance().reset();
+			
+		for (Categorie c : this.dico.keySet()) {
+			this.dico.get(c).ajouterWidgets();
+		}
 	}
 	
 	/**
