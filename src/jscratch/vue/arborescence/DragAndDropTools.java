@@ -80,7 +80,7 @@ public class DragAndDropTools extends Observable {
 				compNouv = GUI.getPanelWidget().getFabrique().cloner(comp);
 				compNouv.setBounds(comp.getBounds());
 				PanelWidget pw = GUI.getPanelWidget();
-				pw.add(compNouv);
+				pw.getPanelDeWidget().add(compNouv);
 				int ind = pw.getIndex(comp);
 				pw.supprimerWidget(comp);
 				pw.ajouterWidget(compNouv, ind);
