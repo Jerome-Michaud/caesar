@@ -6,10 +6,10 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 
 import jscratch.parametrages.Variables;
+import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionIf;
-import nxtim.instruction.InstructionIfElse;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la 
@@ -53,14 +53,17 @@ public class IfWidget extends ModeleWidget{
 	}
 	
 	@Override
-	public void applyChangeModele(){
-
-		InstructionIf ifIns = ((InstructionIf) getElementProgramme());
-
-		Condition cand = (Condition)f.getContentWidget().getElementProgramme();
-		ifIns.setCondition(cand);
-	
+	public void applyChangeModele(){		
+		Widget contentWidget = f.getContentWidget();
+		
+		// On met à jour la condition dans l'elementProgramme si elle existe
+		if (contentWidget != null) {
+			InstructionIf ifIns = ((InstructionIf) getElementProgramme());
+			Condition cond = (Condition) contentWidget.getElementProgramme();
+			ifIns.setCondition(cond);
+		}
 	}
+	
 	@Override
 	public void decalageX(int a) {
         int i;
