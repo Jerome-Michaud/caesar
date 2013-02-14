@@ -43,7 +43,7 @@ public class RepeatWidget extends ModeleWidget {
 
 
 		int widthChamp = 20;
-		f = new ChampTexte(widthChamp);
+		f = new ChampTexte(widthChamp, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(60, 3, widthChamp, 20);
@@ -60,13 +60,15 @@ public class RepeatWidget extends ModeleWidget {
 	@Override
 	public void applyChangeModele(){		
 		Widget contentWidget = f.getContentWidget();
+		InstructionRepeat repeatIns = (InstructionRepeat) getElementProgramme();
 		
 		// On met à jour la condition dans l'elementProgramme si elle existe
-		if (contentWidget != null) {
-			InstructionRepeat repeatIns = (InstructionRepeat) getElementProgramme();
+		if (contentWidget != null) {			
 			Expression exp = (Expression) contentWidget.getElementProgramme();
 			repeatIns.setExpression(exp);
-		}	
+		} else {
+			repeatIns.setExpression(new VariableConstante(TypeVariable.INT, f.getValeur()));
+		}
 	}
 
 	@Override

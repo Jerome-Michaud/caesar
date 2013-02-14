@@ -5,8 +5,9 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 
 import nxtim.instruction.Affectation;
-import nxtim.instruction.ExpressionComplexe;
+import nxtim.instruction.Expression;
 import nxtim.instruction.VariableModifiable;
+import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 
 /**
@@ -35,7 +36,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		int widthChamp = 35;
-		f = new ChampTexte(widthChamp);
+		f = new ChampTexte(widthChamp, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(55, 3, widthChamp, 20);
@@ -43,25 +44,33 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.getLesZonesSaisies().add(f);
 
 		widthChamp = 40;
-		l = new ChampTexte(widthChamp);
+		l = new ChampTexte(widthChamp, this);
 		l.supprimerTexte();
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.setBounds(128, 3, widthChamp, 20);
 		this.getLesZonesSaisies().add(l);
+		
+		System.out.println(l);
 	}
-	
+
 	@Override
 	public void applyChangeModele(){
-
+		Widget contentWidget = f.getContentWidget();
+		Widget contentWidgetVar = null;
+		if (l != null)
+			contentWidgetVar = l.getContentWidget();
 		Affectation setValueIns = ((Affectation) getElementProgramme());
-		VariableModifiable var  = (VariableModifiable)l.getContentWidget().getElementProgramme();
-		setValueIns.setMembreGauche(var);
-		setValueIns.setIsInstruction(true);
-		
-		ExpressionComplexe expComp = (ExpressionComplexe)f.getContentWidget().getElementProgramme();
-		setValueIns.setMembreDroit(expComp);	
-		
-	
+
+		// On met à jour le contenu dans l'elementProgramme
+		if (contentWidget != null) {
+			Expression expComp = (Expression) contentWidget.getElementProgramme();
+			setValueIns.setMembreDroit(expComp);
+		}
+		if (contentWidgetVar != null) {
+			VariableModifiable var  = (VariableModifiable) contentWidgetVar.getElementProgramme();
+			setValueIns.setMembreGauche(var);
+			setValueIns.setIsInstruction(true);
+		}
 	}
 	@Override
 	public void decalageY(int b, Rectangle r) {
@@ -72,7 +81,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-	
+
 	@Override
 	public void initListeners() { }
 

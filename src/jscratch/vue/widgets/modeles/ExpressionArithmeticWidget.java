@@ -8,9 +8,6 @@ import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 
-import nxtim.instruction.Expression;
-import nxtim.instruction.ExpressionComplexe;
-import nxtim.instruction.InstructionDoWhile;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.Variable;
@@ -45,7 +42,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		final int LARG_CHAMP = 14;
 
 
-		l = new ChampTexte(LARG_CHAMP);
+		l = new ChampTexte(LARG_CHAMP, this);
 		l.setBounds(10, 3, LARG_CHAMP, 14);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
@@ -57,7 +54,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		Rectangle2D bounds = metrics.getStringBounds(op.toString(), null);
 		this.getLesZonesSaisies().add(l);
 
-		f = new ChampTexte(LARG_CHAMP);
+		f = new ChampTexte(LARG_CHAMP, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 
