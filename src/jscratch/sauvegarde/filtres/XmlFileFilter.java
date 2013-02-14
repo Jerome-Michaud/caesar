@@ -6,9 +6,10 @@ import java.io.File;
  * Classe permettant de définir un filtre de fichier sur les extension JSCRATCH (.jsc)
  * pour l'explorateur lors du chargement ou de la sauvegarde d'un projet.
  *
- * @author Bastien ANDRU
+ * @since 1.0
+ * @version 1.0
  */
-public class XmlFileFilter extends ApplicationFileFilter {
+public final class XmlFileFilter extends ApplicationFileFilter {
 
 	/**
 	 * La description des fichiers de type JSCRATCH à afficher dans
@@ -17,8 +18,7 @@ public class XmlFileFilter extends ApplicationFileFilter {
 	private String descr;
 
 	public XmlFileFilter() {
-		super("xscr");
-		this.descr = "Fichier XScratch (XML)";
+		super("xscr", "Fichier XScratch (XML)");
 	}
 
 	/**
@@ -35,16 +35,5 @@ public class XmlFileFilter extends ApplicationFileFilter {
 		}
 		String nomFichier = pathname.getName().toLowerCase();
 		return nomFichier.endsWith(getExtension());
-	}
-
-	/**
-	 * Méthode redéfinissant la méthode getDescription de FileFilter afin
-	 * qu'elle retourne la description définie plus haut.
-	 *
-	 * @return La descrption définie dans le constructeur de la classe.
-	 */
-	@Override
-	public String getDescription() {
-		return this.descr;
 	}
 }

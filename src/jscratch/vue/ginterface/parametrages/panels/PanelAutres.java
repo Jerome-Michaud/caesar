@@ -3,6 +3,7 @@ package jscratch.vue.ginterface.parametrages.panels;
 import de.javasoft.swing.JYPropertyTable;
 import de.javasoft.swing.table.PropertyTableModel;
 import java.awt.BorderLayout;
+import java.io.File;
 import jscratch.helpers.ImagesHelper;
 import jscratch.helpers.PropertiesHelper;
 import jscratch.parametrages.Variables;
@@ -29,12 +30,12 @@ public class PanelAutres extends PanelParametrage {
 		
 		this.table = new JYPropertyTable();
 		
-		this.table.addProperty("Chemin vers le compilateur",  Variables.CHEMIN_ACCES_NBC);
+		this.table.addProperty("Chemin vers le compilateur",  new File(Variables.CHEMIN_ACCES_NBC));
 		this.table.addProperty("Emplacement du fichier properties",  PropertiesHelper.getInstance().get("user.chemin.properties.distant"));
 		
 		this.add(this.table);
 		
-		this.add(new JXHeader("La partie 'autres' permet de configurer diverses informations", "Vous pouvez modifier les informations comme l'url du compilateur, le chemin vers le properties distant, etc.", ImagesHelper.getIcon("remove.png")), BorderLayout.NORTH);
+		this.add(new JXHeader("La partie 'autres' permet de configurer diverses informations", "Vous pouvez modifier les informations comme l'url du compilateur, le chemin vers le properties distant, etc.", ImagesHelper.getIcon("info.png")), BorderLayout.NORTH);
 		this.add(this.table, BorderLayout.CENTER);
 	}
 	

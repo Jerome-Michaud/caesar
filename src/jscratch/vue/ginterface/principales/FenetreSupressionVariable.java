@@ -10,7 +10,7 @@ import jscratch.dictionnaires.DicoVariables;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import nxtim.instruction.Variable;
 
-public class FenetreSupressionVariable extends JFrame {
+public final class FenetreSupressionVariable extends JFrame {
 
 	private JComboBox variables;
 	private JButton boutonValider;

@@ -9,25 +9,32 @@ import jscratch.vue.categories.boutons.BoutonCategorie;
 import jscratch.vue.ginterface.principales.GUI;
 
 /**
- *
+ * Permet de gérer le chargement des fichier properties.
+ * 
  * @since 1.0
  * @version 1.0
  */
-public class SauvegardePropertiesTools implements SauvegardeTools {
+public final class SauvegardePropertiesTools implements SauvegardeTools {
 
 	/**
-	 * L'instance unique de SauvegardePropertiesTools
+	 * L'instance unique de SauvegardePropertiesTools.
+	 * 
+	 * @since 1.0
 	 */
 	private static SauvegardePropertiesTools instance = null;
 
 	/**
 	 * Le constructeur privé pour éviter la déclaration externe.
+	 * 
+	 * @since 1.0
 	 */
 	private SauvegardePropertiesTools() { }
 
 	/**
 	 * Le getter pour récupérer l'instance unique de SauvegardePropertiesTools.
 	 *
+	 * @since 1.0
+	 * 
 	 * @return l'instance unique de SauvegardePropertiesTools
 	 */
 	public static SauvegardePropertiesTools getInstance() {
@@ -40,17 +47,21 @@ public class SauvegardePropertiesTools implements SauvegardeTools {
 	@Override
 	public void load(String path) {
 		PropertiesHelper.getInstance().reset(new File(path));
-		
-		// Remise à zéro des widgets
-		DicoBoutonsCategories.getInstance().reset();
-		
+				
 		// Suppression des widgets
 		DicoWidgetsCategories.getInstance().nettoyer();
 		
-		BoutonCategorie b = DicoBoutonsCategories.getInstance().getDico().get(GUI.getPanelTypeWidget().getCurrentCategorie());
-		GUI.getPanelWidget().setLesWidgets(b.getNbColonnes());
+		if (GUI.getPanelTypeWidget().getCurrentCategorie() != null) {
+			BoutonCategorie b = DicoBoutonsCategories.getInstance().getDico().get(GUI.getPanelTypeWidget().getCurrentCategorie());
+			GUI.getPanelWidget().setLesWidgets(b.getNbColonnes());
+		}
+		
+		// Mise à jour de l'interface
+		GUI.getZoneUtilisateur().reset();
 	}
 
 	@Override
-	public void save(String path) { }
+	public File save(String path) {
+		return null;
+	}
  }

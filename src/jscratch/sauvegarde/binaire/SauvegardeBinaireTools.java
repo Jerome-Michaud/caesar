@@ -1,5 +1,6 @@
 package jscratch.sauvegarde.binaire;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -13,10 +14,10 @@ import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.widgets.Widget;
 
 /**
- * Classe regroupant différents outils destinés à la sauvegarde et au chargement
- * de projets JScratch
+ * Classe regroupant différents outils destinés à la sauvegarde et au chargement de projets JScratch
  *
- * @author Andru Bastien
+ * @since 1.0
+ * @version 1.0
  */
 public class SauvegardeBinaireTools implements SauvegardeTools {
 
@@ -33,6 +34,8 @@ public class SauvegardeBinaireTools implements SauvegardeTools {
 	/**
 	 * Le getter pour récupérer l'instance unique de SauvegardeBinaireTools.
 	 *
+	 * @since 1.0
+	 * 
 	 * @return l'instance unique de SauvegardeBBinaireTools
 	 */
 	public static SauvegardeBinaireTools getInstance() {
@@ -43,8 +46,8 @@ public class SauvegardeBinaireTools implements SauvegardeTools {
 	}
 
 	@Override
-	public void save(final String path) {
-		serializeArborescence(path);
+	public File save(final String path) {
+		return serializeArborescence(path);
 	}
 
 	@Override
@@ -56,22 +59,30 @@ public class SauvegardeBinaireTools implements SauvegardeTools {
 	/**
 	 * Permet la sérialisation de l'arborescence des widgets.
 	 *
+	 * @since 1.0
+	 *
 	 * @param path Le chemin où sauvegarder le l'arborescence
 	 */
-	private void serializeArborescence(final String path) {
+	private File serializeArborescence(final String path) {
 		try {
 			FileOutputStream fichier = new FileOutputStream(path);
 			ObjectOutputStream oos = new ObjectOutputStream(fichier);
 			oos.writeObject(ArborescenceTools.getInstance().getArborescence());
 			oos.flush();
 			oos.close();
+			
+			return new File(path);
 		} catch (Exception e) {
 			ErreurHelper.afficher(e);
 		}
+		
+		return null;
 	}
 
 	/**
 	 * Desérialise une arborescence précédemment sauvegardée.
+	 *
+	 * @since 1.0
 	 *
 	 * @param path Le chemin d'accès à l'arborscence sauvegardée
 	 */

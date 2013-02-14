@@ -8,15 +8,23 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import jscratch.vue.widgets.Widget;
 
+/**
+ * @since 1.0
+ * @version 1.0
+ */
 public class SerialiseurXML {
 
 	/**
 	 * Default constructor of <code>SauveurXML</code>.
+	 *
+	 * @since 1.0
 	 */
 	private SerialiseurXML() { }
 	
 	/**
 	 * Permet de sauvegarder l'arborescence et le dictionnaire au format XML.
+	 *
+	 * @since 1.0
 	 * 
 	 * @return le document XML prêt à être sauvegarder ou utilisé
 	 */

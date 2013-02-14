@@ -9,17 +9,13 @@ import java.io.File;
  * @since 1.0
  * @version 1.0
  */
-public class PropertiesFileFilter extends ApplicationFileFilter {
+public final class PropertiesFileFilter extends ApplicationFileFilter {
 
 	/**
-	 * La description des fichiers de type PROPERTIES à afficher dans
-	 * l'explorateur
+	 * Constructeur privé de <code>PropertiesFileFilter</code>.
 	 */
-	private String descr;
-
 	public PropertiesFileFilter() {
-		super("properties");
-		this.descr = "Fichier properties";
+		super("properties", "Fichier properties");
 	}
 
 	/**
@@ -36,16 +32,5 @@ public class PropertiesFileFilter extends ApplicationFileFilter {
 		}
 		String nomFichier = pathname.getName().toLowerCase();
 		return nomFichier.endsWith(getExtension());
-	}
-
-	/**
-	 * Méthode redéfinissant la méthode getDescription de FileFilter afin
-	 * qu'elle retourne la description définie plus haut.
-	 *
-	 * @return La descrption définie dans le constructeur de la classe.
-	 */
-	@Override
-	public String getDescription() {
-		return this.descr;
 	}
 }
