@@ -1,5 +1,6 @@
 package jscratch.vue.widgets.modeles;
 
+import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.Zone;
 import java.awt.Point;
@@ -10,12 +11,10 @@ import javax.swing.JComponent;
 
 import java.awt.Rectangle;
 import jscratch.parametrages.Variables;
-import nxtim.instruction.Condition;
-import nxtim.instruction.InstructionIf;
+import nxtim.instruction.Expression;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
-import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la forme d'un widget de type Repeat.
@@ -57,14 +56,17 @@ public class RepeatWidget extends ModeleWidget {
 		
 		initListeners();
 	}
-	@Override
-	public void applyChangeModele(){
-
-		InstructionRepeat repeatIns = ((InstructionRepeat) getElementProgramme());
-
-		VariableModifiable exp = (VariableModifiable)f.getContentWidget().getElementProgramme();
-		repeatIns.setExpression(exp);
 	
+	@Override
+	public void applyChangeModele(){		
+		Widget contentWidget = f.getContentWidget();
+		
+		// On met à jour la condition dans l'elementProgramme si elle existe
+		if (contentWidget != null) {
+			InstructionRepeat repeatIns = (InstructionRepeat) getElementProgramme();
+			Expression exp = (Expression) contentWidget.getElementProgramme();
+			repeatIns.setExpression(exp);
+		}	
 	}
 
 	@Override

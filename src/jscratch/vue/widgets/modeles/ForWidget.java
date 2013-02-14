@@ -1,5 +1,6 @@
 package jscratch.vue.widgets.modeles;
 
+import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.Zone;
 import java.awt.Point;
@@ -52,7 +53,7 @@ public class ForWidget extends ModeleWidget {
 
         //variable
 		int widthChamp = 35;
-        ChampTexte lv = new ChampTexte(widthChamp);
+        lv = new ChampTexte(widthChamp);
         lv.supprimerTexte();
 		lv.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
         lv.setBounds(55, 3, widthChamp, 20);
@@ -60,7 +61,7 @@ public class ForWidget extends ModeleWidget {
 
 		//valeur logique
 		widthChamp = 50;
-        ChampTexte ff = new ChampTexte(widthChamp);
+        ff = new ChampTexte(widthChamp);
         ff.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		ff.supprimerTexte();
         ff.setBounds(155, 3, widthChamp, 20);
@@ -68,7 +69,7 @@ public class ForWidget extends ModeleWidget {
 		
         //pas
 		widthChamp = 20;
-        ChampTexte fp = new ChampTexte(widthChamp);
+        fp = new ChampTexte(widthChamp);
         fp.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		fp.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		fp.supprimerTexte();
@@ -88,20 +89,26 @@ public class ForWidget extends ModeleWidget {
     }
     
     @Override
-	public void applyChangeModele(){
-
-		InstructionFor forins = ((InstructionFor) getElementProgramme());
-		Affectation affectG  = (Affectation) lv.getContentWidget().getElementProgramme();
-		Affectation affectD  = (Affectation) fp.getContentWidget().getElementProgramme();
-		Condition cond = (Condition) ff.getContentWidget().getElementProgramme();
+	public void applyChangeModele(){		
+		Widget contentLv = lv.getContentWidget();		
+		Widget contentFf = ff.getContentWidget();
+		Widget contentFp = fp.getContentWidget();
+		InstructionFor forIns = (InstructionFor) getElementProgramme();
 		
-		forins.setInitialisation(affectG);
-		forins.setCondition(cond);
-		forins.setInitialisation(affectD);
-		
-
+		// On met à jour l'elementProgramme si les éléments existent
+		if (contentLv != null) {
+			Affectation aff  = (Affectation) contentLv.getElementProgramme();
+			forIns.setInitialisation(aff);
+		}		
+		if (contentFf != null) {			
+			Condition cond  = (Condition) contentFf.getElementProgramme();
+			forIns.setCondition(cond);
+		}
+		if (contentFp != null) {
+			Affectation aff  = (Affectation) contentFp.getElementProgramme();
+			forIns.setIteration(aff);
+		}
 	}
-
 
     @Override
     public void decalageX(final int a) {

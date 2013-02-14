@@ -30,7 +30,7 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 	public void ajouterWidgets() {
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.ADDITION));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.DIVISION));
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.MULIPLICATION));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.MULTIPLICATION));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.SOUSTRACTION));
 		
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSION, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.OU));
