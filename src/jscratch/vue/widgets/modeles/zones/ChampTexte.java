@@ -15,6 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
+
+import jscratch.traduction.LanceurTraduction;
+import jscratch.vue.widgets.modeles.ModeleWidget;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
 
 import org.jdom2.Element;
@@ -40,7 +43,7 @@ public class ChampTexte extends JPanel implements Zone {
 	/**
 	 * Constructeur faisant appel au constructeur équivalent de la classe mère.
 	 */
-	public ChampTexte(int minimumWidth) {
+	public ChampTexte(int minimumWidth, final ModeleWidget widgetParent) {
 		this.minimumWidth = minimumWidth;
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
@@ -60,16 +63,22 @@ public class ChampTexte extends JPanel implements Zone {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				updateTextFieldWidth(e);
+				widgetParent.applyChangeModele();
+				LanceurTraduction.getInstance().lancerTraduction();
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				updateTextFieldWidth(e);
+				widgetParent.applyChangeModele();
+				LanceurTraduction.getInstance().lancerTraduction();
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				updateTextFieldWidth(e);
+				widgetParent.applyChangeModele();
+				LanceurTraduction.getInstance().lancerTraduction();
 			}
 		});
 
