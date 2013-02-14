@@ -73,6 +73,7 @@ public class DragAndDropTools extends Observable {
 	 */
 	public void clickWidget(Widget comp, Point ptClick) {
 		comp.setPtClick(ptClick);
+		ArborescenceTools arbo = ArborescenceTools.getInstance();
 		if (!comp.isDraggable()) {
 			comp.setDraggable(true);
 			Widget compNouv;
@@ -91,7 +92,6 @@ public class DragAndDropTools extends Observable {
 			composantsDrague = new LinkedList<Widget>();
 			composantsDrague.add(comp);
 		} else {
-			ArborescenceTools arbo = ArborescenceTools.getInstance();
 			try {
 				//recuperation et detachement des widgets dragués
 				composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));
@@ -119,8 +119,9 @@ public class DragAndDropTools extends Observable {
 
 		dragGroupeWidget(composantsDrague, p);
 
-		ArborescenceTools.getInstance().updateWidgets();
+		arbo.updateWidgets();
 
+		updatePanelGraphiqueSize(arbo.getArborescence());
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -191,7 +192,7 @@ public class DragAndDropTools extends Observable {
 					p.x = (int) recZoneUtil.getMinX() + 4;
 					p.y -= ptClick.y;
 					noX = true;
-				} else if (recWid.getMaxX() > recZoneUtil.getMaxX()) {
+				}else if (recWid.getMaxX() > recZoneUtil.getMaxX()) {
 					// A droite
 					p.x = (int) recZoneUtil.getMaxX() - recWid.width - 4;
 					p.y -= ptClick.y;
@@ -204,7 +205,7 @@ public class DragAndDropTools extends Observable {
 					if (!noX) {
 						p.x -= ptClick.x;
 					}
-				} else if (recWid.getMaxY() >= recZoneUtil.getMaxY()) {
+				}else if (recWid.getMaxY() >= recZoneUtil.getMaxY()) {
 					// En bas
 					p.y = (int) recZoneUtil.getMaxY() - recWid.height - 4;
 					if (!noX) {
@@ -413,7 +414,6 @@ public class DragAndDropTools extends Observable {
 				if(w.isComplexe()){
 					WidgetCompose comp = (WidgetCompose)w;
 					for(List<Widget> l : comp.getMapZone().values()){
-						System.out.println("boucle");
 						rect = groupeWidgetBounds(l, 0, rect);
 					}
 				}
@@ -441,8 +441,7 @@ public class DragAndDropTools extends Observable {
 		}
 		if(bounds != null){
 			p.setPreferredSize(new Dimension((int)(bounds.getX() + bounds.getWidth()),(int)(bounds.getY() + bounds.getHeight())));
-			System.out.println(p.getPreferredSize());
-			p.validate();
+			p.getScroll().validate();
 		}
 	}
 }
