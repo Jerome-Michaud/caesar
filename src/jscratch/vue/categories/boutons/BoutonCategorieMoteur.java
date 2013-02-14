@@ -29,7 +29,7 @@ public class BoutonCategorieMoteur extends BoutonCategorie {
 	 * <code>Moteur</code>.
 	 */
 	public BoutonCategorieMoteur() {
-		super(new ModeleCategorie(Categorie.MOTEUR));
+		super(new ModeleCategorie(Categorie.MOTEURS));
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class BoutonCategorieMoteur extends BoutonCategorie {
 
 	@Override
 	public void ajouterWidgets() {
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMarche());
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEUR, GUI.getPanelWidget().getFabrique().creerWidgetMoteurOff());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEURS, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMarche());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEURS, GUI.getPanelWidget().getFabrique().creerWidgetMoteurOff());
 	}
 }

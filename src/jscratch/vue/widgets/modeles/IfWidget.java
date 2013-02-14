@@ -1,10 +1,8 @@
 package jscratch.vue.widgets.modeles;
 
 import java.awt.Point;
-
 import java.awt.Polygon;
 import java.awt.Rectangle;
-
 import jscratch.parametrages.Variables;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
@@ -18,8 +16,10 @@ import nxtim.instruction.InstructionIf;
  * @since 1.0
  * @version 1.0
  */
-public class IfWidget extends ModeleWidget{
+public class IfWidget extends ModeleWidget {
+	
 	private ChampTexte f;
+	
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du If.
 	 */

@@ -39,11 +39,11 @@ public final class DicoBoutonsCategories {
 		this.dico = new LinkedHashMap<Categorie, BoutonCategorie>();
 		
 		this.dico.put(Categorie.STRUCTURES, new BoutonCategorieStructure());
-		this.dico.put(Categorie.MOTEUR, new BoutonCategorieMoteur());
+		this.dico.put(Categorie.MOTEURS, new BoutonCategorieMoteur());
 		this.dico.put(Categorie.CAPTEURS, new BoutonCategorieCapteur());
 		this.dico.put(Categorie.TEMPS, new BoutonCategorieTemps());
 		this.dico.put(Categorie.VARIABLES, new BoutonCategorieVariable());
-		this.dico.put(Categorie.EXPRESSION, new BoutonCategorieExpression());
+		this.dico.put(Categorie.EXPRESSIONS, new BoutonCategorieExpression());
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public final class DicoBoutonsCategories {
 		List<Categorie> l = new LinkedList<Categorie>();
 		
 		for (Categorie c : this.dico.keySet()) {
-			if (!DicoWidgetsCategories.getInstance().getWidgets(c, false).isEmpty() && c != Categorie.EXPRESSION) {
+			if (!DicoWidgetsCategories.getInstance().getWidgets(c, false).isEmpty() && c != Categorie.EXPRESSIONS) {
 				l.add(c);
 			}
 		}

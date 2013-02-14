@@ -6,12 +6,12 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-
 import nxtim.instruction.IElementProgramme;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Categorie;
@@ -242,7 +242,7 @@ public abstract class ModeleWidget implements Serializable {
      * forme du widget
      */
     public void setTabX(int[] tabX) {
-        this.tabX = tabX;
+		this.tabX = Arrays.copyOf(tabX, tabX.length);
     }
 
     /**
@@ -264,7 +264,7 @@ public abstract class ModeleWidget implements Serializable {
      * forme du widget.
      */
     public void setTabY(int[] tabY) {
-        this.tabY = tabY;
+		this.tabY = Arrays.copyOf(tabY, tabY.length);
     }
 
     /**

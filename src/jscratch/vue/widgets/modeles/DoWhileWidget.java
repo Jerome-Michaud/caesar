@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
-
 import jscratch.parametrages.Variables;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
@@ -19,6 +18,7 @@ import nxtim.instruction.InstructionDoWhile;
  * @version 1.0
  */
 public class DoWhileWidget extends ModeleWidget implements Serializable {
+	
 	private ChampTexte f;
 	
 	/**

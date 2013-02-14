@@ -7,8 +7,6 @@ import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-
-
 import java.awt.Rectangle;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.Moteur;

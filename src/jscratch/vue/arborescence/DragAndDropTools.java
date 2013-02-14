@@ -261,6 +261,7 @@ public class DragAndDropTools extends Observable {
 				}
 				
 				compSurvole = a.getComp();
+				
 				if (a.getVal() == 3) {
 					Zone z = compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
 					((ChampTexte) z).setWidgetContenu(composantsDrague.get(0));

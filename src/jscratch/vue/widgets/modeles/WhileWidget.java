@@ -19,7 +19,7 @@ import nxtim.instruction.InstructionWhile;
  * @since 1.0
  * @version 1.0
  */
-public class WhileWidget extends ModeleWidget implements Serializable{
+public class WhileWidget extends ModeleWidget {
 	private ChampTexte f;
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du While.

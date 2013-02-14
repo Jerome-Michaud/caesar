@@ -33,7 +33,7 @@ public class VisiteurNXC extends VisiteurC {
 	 *
 	 * @return l'instance de VisiteurNXC
 	 */
-	public synchronized static VisiteurNXC getInstance() {
+	public static synchronized VisiteurNXC getInstance() {
 		if (instance == null) {
 			instance = new VisiteurNXC();
 		}

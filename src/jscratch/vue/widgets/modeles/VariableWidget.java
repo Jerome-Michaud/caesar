@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
 
-import nxtim.instruction.InstructionTempsCourant;
 import nxtim.instruction.VariableModifiable;
 
 /**

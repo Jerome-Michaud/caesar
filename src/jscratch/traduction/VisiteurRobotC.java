@@ -28,7 +28,7 @@ public class VisiteurRobotC extends VisiteurC {
 		super();
 	}
 
-	public synchronized static VisiteurRobotC getInstance() {
+	public static synchronized VisiteurRobotC getInstance() {
 		if (instance == null) {
 			instance = new VisiteurRobotC();
 		}

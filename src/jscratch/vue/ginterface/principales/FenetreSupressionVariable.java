@@ -14,16 +14,11 @@ public final class FenetreSupressionVariable extends JFrame {
 
 	private JComboBox variables;
 	private JButton boutonValider;
-
-	/**
-	 * L'instance unique de <code>FenetreSuppressionVariable</code>.
-	 */
-	private static FenetreSupressionVariable instance = null;
 	
 	/**
-	 * Le constructeur privé de <code>FenetreSuppressionVariable</code>.
+	 * Le constructeur par défaut de <code>FenetreSuppressionVariable</code>.
 	 */
-	private FenetreSupressionVariable() {
+	public FenetreSupressionVariable() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(null);
 		this.setAlwaysOnTop(true);
@@ -71,27 +66,5 @@ public final class FenetreSupressionVariable extends JFrame {
 				dispose();
 			}
 		});
-	}
-	
-	/**
-	 * Permet de récupérer l'instance unique de <code>FenetreSuppressionVariable</code>.
-	 *
-	 * @return l'instance unique
-	 */
-	public static FenetreSupressionVariable getInstance() {
-		if (instance == null) {
-			instance = new FenetreSupressionVariable();
-		}
-		else {
-			instance.reset();
-		}
-		return instance;
-	}
-
-	/**
-	 * RAZ de la fenêtre.
-	 */
-	private void reset() {
-		this.setVisible(true);
 	}
 }

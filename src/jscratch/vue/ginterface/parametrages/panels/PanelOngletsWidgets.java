@@ -4,7 +4,6 @@ import de.javasoft.swing.JYTabbedPane;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JPanel;
 import jscratch.dictionnaires.DicoBoutonsCategories;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.helpers.ImagesHelper;

@@ -1,27 +1,28 @@
 package jscratch.vue.widgets.modeles;
 
-
-import nxtim.instruction.Condition;
-import nxtim.instruction.InstructionIf;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;
-
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.ListeDeroulante;
 import jscratch.vue.widgets.modeles.zones.Zone;
 
-public class MoteurMarcheWidget extends ModeleWidget{
+/**
+ * @since 1.0
+ * @version 1.0
+ */
+public class MoteurMarcheWidget extends ModeleWidget {
+
 	private ChampTexte f;
+	
 	public MoteurMarcheWidget(){
 		super();
 		int tX[] = {0, 5, 30, 35, 45, 50, 183, 188, 188, 183, 50, 45, 35, 30, 5, 0};

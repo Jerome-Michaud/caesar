@@ -39,11 +39,11 @@ public final class DicoWidgetsCategories {
 		this.dico = new HashMap<Categorie, HashMap<Widget, Boolean>>();
 		
 		this.dico.put(Categorie.STRUCTURES, new LinkedHashMap<Widget, Boolean>());
-		this.dico.put(Categorie.MOTEUR, new LinkedHashMap<Widget, Boolean>());
+		this.dico.put(Categorie.MOTEURS, new LinkedHashMap<Widget, Boolean>());
 		this.dico.put(Categorie.CAPTEURS, new LinkedHashMap<Widget, Boolean>());
 		this.dico.put(Categorie.TEMPS, new LinkedHashMap<Widget, Boolean>());
 		this.dico.put(Categorie.VARIABLES, new LinkedHashMap<Widget, Boolean>());
-		this.dico.put(Categorie.EXPRESSION, new LinkedHashMap<Widget, Boolean>());
+		this.dico.put(Categorie.EXPRESSIONS, new LinkedHashMap<Widget, Boolean>());
 	}
 	
 	/**
@@ -138,14 +138,14 @@ public final class DicoWidgetsCategories {
 	 * @param variable la variable à supprimer
 	 */
 	public void supprimerWidgetVariable(String variable) {
-		List<Widget> l = (List<Widget>)this.dico.get(Categorie.VARIABLES);
+		HashMap<Widget, Boolean> l = this.dico.get(Categorie.VARIABLES);
 		
 		for (int i = 0;i < l.size();i++) {
-			if (l.get(i).getModele() instanceof VariableWidget) {
-				if (variable.equals(((VariableWidget)l.get(i).getModele()).getNomVariable())) {
-					l.remove(l.get(i));
-					break;
-				}
+			Widget w = (Widget)l.keySet().toArray()[i];
+			
+			if (w.getModele() instanceof VariableWidget && variable.equals(((VariableWidget)w.getModele()).getNomVariable())) {
+				l.remove(w);
+				break;
 			}
 		}
 	}

@@ -13,7 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 import jscratch.vue.arborescence.actions.Action;
 import jscratch.vue.arborescence.actions.TypeAction;
-import jscratch.vue.arborescence.comparators.ComparateurWidgetZ;
+import jscratch.comparateurs.ComparateurWidgetZ;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.principales.panels.GlassPane;

@@ -1,16 +1,11 @@
 package jscratch.vue.widgets.modeles;
 
-
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
-
-import nxtim.instruction.Expression;
-import nxtim.instruction.ExpressionComplexe;
-import nxtim.instruction.InstructionDoWhile;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.Variable;
@@ -25,9 +20,13 @@ import nxtim.instruction.VariableModifiable;
  * @version 1.0
  */
 public class ExpressionArithmeticWidget extends ModeleWidget {
+	
 	private int largeur;
+	
 	private final int LARG_EXTREMITE;
+	
 	private ChampTexte f, l;
+	
 	/**
 	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
@@ -49,24 +48,19 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		l.setBounds(10, 3, LARG_CHAMP, 14);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		this.getLesZonesSaisies().add(l);
 
 		message.put(new Point(29, 15), op.toString());
 
 		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
 		FontMetrics metrics = new FontMetrics(font){};  
 		Rectangle2D bounds = metrics.getStringBounds(op.toString(), null);
-		this.getLesZonesSaisies().add(l);
-
+		
 		f = new ChampTexte(LARG_CHAMP);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
-
-		//f.setBounds(40, 3, 14, 14);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
 		this.getLesZonesSaisies().add(f);
-		/* int tabX[] = {0, 5, 62, 67, 67, 62,  5, 0};
-		int tabY[] = {5, 0, 0, 5, 15, 20,20, 15};
-		 */
 
 		this.largeur = LARG_CHAMP * 2 + 24 + (int) bounds.getWidth();
 		int tabX[] = {0, 5, this.LARG_EXTREMITE  + largeur, largeur+10, largeur+10, this.LARG_EXTREMITE  + largeur, 5, 0};
@@ -83,11 +77,8 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		initListeners();
 	}
 	
-
-	
 	@Override
 	public void applyChangeModele(){
-
 		Operation expArith = ((Operation) getElementProgramme());
 
 		VariableModifiable varMemGauche = (VariableModifiable)l.getContentWidget().getElementProgramme();
@@ -95,12 +86,9 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		
 		VariableModifiable varMemDroite = (VariableModifiable)f.getContentWidget().getElementProgramme();
 		expArith.setMembreGauche(varMemDroite);
-		
-
 	}
-	
-	
 
+	@Override
 	public void initListeners() { }
 
 	@Override
