@@ -77,7 +77,6 @@ public class Widget extends JComponent {
 				g2d.drawString(this.modele.getMessage().get(p), p.x, this.getHeight() - p.y);
 			}
 		}
-		//
 	}
 
 	/**

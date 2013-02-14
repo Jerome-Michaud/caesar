@@ -1,5 +1,6 @@
 package jscratch.vue.arborescence;
 
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -75,7 +76,7 @@ public class DragAndDropTools extends Observable {
 		if (!comp.isDraggable()) {
 			comp.setDraggable(true);
 			Widget compNouv;
-			
+
 			try {
 				compNouv = GUI.getPanelWidget().getFabrique().cloner(comp);
 				compNouv.setBounds(comp.getBounds());
@@ -97,29 +98,29 @@ public class DragAndDropTools extends Observable {
 
 				//supression des widgets dans l'arborescence
 				arbo.supprimerWidgets(composantsDrague);
-				
+
 				if ((comp != null) && (comp.parent() != null) && (!comp.parent().isRacine())) {
 					((Widget) comp.parent()).applyChangeModele();
 				}
-				
+
 				comp.defParent(null);
 			} catch (ComposantIntrouvableException ex) {
 				ErreurHelper.afficher(ex);
 			}
 		}
-		
+
 		for (Widget w : composantsDrague) {
 			passerSurAutrePanel(w, GUI.getGlassPane());
 		}
-		
+
 		Point p = GUI.getGlassPane().getMousePosition();
 		p.x -= ptClick.x;
 		p.y -= ptClick.y;
-		
+
 		dragGroupeWidget(composantsDrague, p);
-		
+
 		ArborescenceTools.getInstance().updateWidgets();
-		
+
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -132,7 +133,7 @@ public class DragAndDropTools extends Observable {
 	 * @param wi Le widget à passer sur un autre Panel
 	 * @param destination Le panel de destination du widget
 	 */
-	public void passerSurAutrePanel(Widget wi, JPanel destination) {
+	public void passerSurAutrePanel(Widget wi, Container destination) {
 		if (wi.isComplexe()) {
 			for (List<Widget> lw : ((WidgetCompose) wi).getMapZone().values()) {
 				for (Widget w : lw) {
@@ -175,11 +176,14 @@ public class DragAndDropTools extends Observable {
 			Point ptClick = comp.getPtClick();
 			Point p = MouseInfo.getPointerInfo().getLocation();
 			Rectangle recZoneUtil = new Rectangle(GUI.getZoneUtilisateur().getLocationOnScreen(), new Dimension(GUI.getZoneUtilisateur().getWidth(), GUI.getZoneUtilisateur().getHeight()));
-			Rectangle boundsGroup = groupeWidgetBounds(composantsDrague, 0);
+			Rectangle boundsGroup = groupeWidgetBounds(composantsDrague, 0,null);
+			if(boundsGroup == null){
+				boundsGroup = new Rectangle();
+			}
 			
 			Rectangle recWid = new Rectangle(new Point((int) (MouseInfo.getPointerInfo().getLocation().x - ptClick.getX()), (int) (MouseInfo.getPointerInfo().getLocation().y - ptClick.getY())), new Dimension((int) boundsGroup.getWidth(), (int) boundsGroup.getHeight()));
 			recZoneUtil.setBounds(recZoneUtil.getBounds().x + 4, recZoneUtil.getBounds().y + 20, recZoneUtil.getBounds().width - 12, recZoneUtil.getBounds().height - 20 - 9);
-			
+
 			if (!recZoneUtil.contains(recWid)) {
 				boolean noX = false;
 				if (recWid.getMinX() <= recZoneUtil.getMinX()) {
@@ -193,7 +197,7 @@ public class DragAndDropTools extends Observable {
 					p.y -= ptClick.y;
 					noX = true;
 				}
-				
+
 				if (recWid.getMinY() <= recZoneUtil.getMinY()) {
 					// En haut
 					p.y = (int) recZoneUtil.getMinY() + 4;
@@ -214,11 +218,11 @@ public class DragAndDropTools extends Observable {
 			p.x -= GUI.getFenetre().getLocation().getX();
 			p.y -= GUI.getFenetre().getLocation().getY();
 			dragGroupeWidget(composantsDrague, p);
-			
+
 			this.setChanged();
 			this.notifyObservers();
 			int decal = (int) (Widget.TAUX_TRANSFERT_PANEL * comp.getWidth());
-			int inter = (int) (boundsGroup.getMaxX() - GUI.getPanelCodeGraphique().getBounds().getMinX());
+			int inter = (int) (boundsGroup.getMaxX() - GUI.getPanelCodeGraphique().getScroll().getBounds().getMinX());
 			GlassPane g = GUI.getGlassPane();
 			if (inter < decal) {
 				Point ptDel = new Point(comp.getLocation());
@@ -228,7 +232,7 @@ public class DragAndDropTools extends Observable {
 				g.setDeleteIconPosition(null);
 			}
 			FusionTools.dessinerIndicateursFusion(comp);
-			
+
 		}
 	}
 
@@ -238,28 +242,28 @@ public class DragAndDropTools extends Observable {
 	 */
 	public void dropWidget() {
 		Widget comp = composantsDrague.get(0);
-		
+
 		Action a = FusionTools.checkSurvolWidgetV2(comp);
 		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
 		GlassPane g = GUI.getGlassPane();
 		Rectangle r = (Rectangle) comp.getBounds().clone();
-		
+
 		Point pt = comp.getLocationOnScreen();
-		
+
 		int decal = (int) (Widget.TAUX_TRANSFERT_PANEL * comp.getWidth());
-		int inter = (int) (r.getMaxX() - p.getBounds().getMinX());
+		int inter = (int) (r.getMaxX() - p.getScroll().getBounds().getMinX());
 		ArborescenceTools arbo = ArborescenceTools.getInstance();
 		boolean complexe = false;
 		Widget compSurvole = null;
 		try {
 			if (inter >= decal) {
 				p.add(comp);
-				
+
 				SwingUtilities.convertPointFromScreen(pt, p);
 				if (inter < comp.getWidth()) {
 					pt.x += (comp.getWidth() - inter) + 3;
 				}
-				
+
 				compSurvole = a.getComp();
 				if (a.getVal() == 3) {
 					Zone z = compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
@@ -270,30 +274,30 @@ public class DragAndDropTools extends Observable {
 							//Au dessus du compSurvole
 							arbo.ajouterWidgets(composantsDrague, compSurvole, false);
 							break;
-						
+
 						case 0:
 							//En dessous du compSurvole
 							arbo.ajouterWidgets(composantsDrague, compSurvole, true);
 							break;
-						
+
 						case -1:
 							//Aucun survol
 							arbo.ajouterWidgets(composantsDrague, compSurvole, true);
 							break;
-						
+
 						case 2:
 							//Survol d'une zone d'accroche
 							WidgetCompose wComp = (WidgetCompose) (a.getComp());
 							List<Widget> lst = wComp.getMapZone().get(a.getRect());
 							lst.addAll(composantsDrague);
 							break;
-						
+
 					}
-					
+
 					for (Widget w : composantsDrague) {
-						
+
 						passerSurAutrePanel(w, p);
-						
+
 						if (compSurvole == null) {
 							w.defParent((IWidget) p);//gestion du parent suivant element survole
 						} else {
@@ -306,7 +310,7 @@ public class DragAndDropTools extends Observable {
 							}
 						}
 					}
-					
+
 					if (compSurvole != null && compSurvole.isComplexe()) {
 						//((WidgetCompose) compSurvole).applyChangeModele();
 						if (a.getVal() == 2) {
@@ -329,38 +333,44 @@ public class DragAndDropTools extends Observable {
 			switch (a.getVal()) {
 				case 1:
 					//Au dessus du compSurvole
-					pt = groupeWidgetBounds(arbo.getListe(comp), composantsDrague.size()).getLocation();
+					Rectangle bnds = groupeWidgetBounds(arbo.getListe(comp), composantsDrague.size(),null);
+					if(bnds == null){
+						bnds = new Rectangle();
+					}
+					pt = bnds.getLocation();
 					for (Widget w : composantsDrague) {
 						pt.y -= (w.getHeight() - ModeleWidget.OFFSET);
 					}
 					break;
-				
+
 				case 0:
 					//En dessous du compSurvole
 					pt = arbo.getListe(comp).get(0).getLocation();
 					break;
-				
+
 			}
 			if (complexe) {
 				dragGroupeWidget(arbo.getSuivants((Widget) (comp.parent()), true), ((Widget) comp.parent()).getLocation());
 			} else {
-				
+
 				dragGroupeWidget(arbo.getListe(comp), pt);
 			}
 			composantsDrague.clear();
-			
+
 		} catch (ComposantIntrouvableException ex) {
 			ErreurHelper.afficher(ex);
 		}
 		arbo.updateWidgets();
+
+		updatePanelGraphiqueSize(arbo.getArborescence());
 		
 		this.setChanged();
 		this.notifyObservers();
-		
+
 		g.setPointLigneSurEcran(null);
 		g.setRectFusion(null);
 		g.setDeleteIconPosition(null);
-		
+
 		if (compSurvole != null) {
 			compSurvole.getModele().applyChangeModele();
 		}
@@ -393,19 +403,46 @@ public class DragAndDropTools extends Observable {
 	 * dimensions et positions
 	 * @param index L'index à partir duquel on veut commencer à calculer les
 	 * dimensions et positions du groupe
+	 * @param rect Le rectangle utilisé pendant les appels récursifs
 	 * @return Le Rectangle regroupant les positions et dimensions du goupe de
-	 * widgets passé en paramètre
+	 * widgets passé en paramètre ou null si la listede widgets est vide
 	 */
-	private static Rectangle groupeWidgetBounds(List<Widget> lst, int index) {
-		if (lst.isEmpty()) {
-			return new Rectangle();
-		} else {
-			Rectangle rect = lst.get(0).getBounds();
+	private static Rectangle groupeWidgetBounds(List<Widget> lst, int index,Rectangle rect) {
 			for (int i = index; i < lst.size(); i++) {
 				Widget w = lst.get(i);
-				rect = rect.union(w.getBounds());
+				if(w.isComplexe()){
+					WidgetCompose comp = (WidgetCompose)w;
+					for(List<Widget> l : comp.getMapZone().values()){
+						System.out.println("boucle");
+						rect = groupeWidgetBounds(l, 0, rect);
+					}
+				}
+				if (rect == null) {
+					rect = w.getBounds();
+				} else {
+					rect = rect.union(w.getBounds());
+				}
 			}
 			return rect;
+		}
+
+	private void updatePanelGraphiqueSize(List<List<Widget>> arborescence) {
+		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
+		Rectangle bounds = null;
+		for(List<Widget> l : arborescence){
+			if(!l.isEmpty()){
+				Rectangle boundsGroup = groupeWidgetBounds(l, 0, null);
+				if(bounds == null){
+					bounds = boundsGroup;
+				}else{
+					bounds = bounds.union(boundsGroup);
+				}
+			}
+		}
+		if(bounds != null){
+			p.setPreferredSize(new Dimension((int)(bounds.getX() + bounds.getWidth()),(int)(bounds.getY() + bounds.getHeight())));
+			System.out.println(p.getPreferredSize());
+			p.validate();
 		}
 	}
 }

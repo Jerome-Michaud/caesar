@@ -1,7 +1,6 @@
 package jscratch.vue.ginterface.principales.panels;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -37,7 +35,9 @@ public class PanelWidget extends JPanel implements Observer {
 	private JTextPane texte;
 	private JPanel panelDeWidget;
 	private JScrollPane scroll;
-		
+	private final int MARGE_X_WIDGET = 5;
+	private final int MARGE_Y_WIDGET = 5;
+
 	/**
 	 * @since 1.0
 	 */
@@ -54,24 +54,24 @@ public class PanelWidget extends JPanel implements Observer {
 		this.texte.setEditable(false);
 		this.texte.setFocusable(false);
 		this.texte.setOpaque(false);
-		this.add(this.texte,BorderLayout.NORTH);
-		
+		this.add(this.texte, BorderLayout.NORTH);
+
 		this.panelDeWidget = new JPanel();
 		this.panelDeWidget.setLayout(null);
 		this.scroll = new JScrollPane(panelDeWidget);
-		this.add(scroll,BorderLayout.CENTER);
-		
-		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 600));
-		
-		this.addMouseListener(new MouseAdapter() {
+		scroll.setBorder(null);
+		this.add(scroll, BorderLayout.CENTER);
 
+		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 600));
+
+		this.scroll.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (GUI.getPanelTypeWidget().getCurrentCategorie() == Categorie.VARIABLES && e.isPopupTrigger()) {
 					GUI.getPopupVariable().show(e.getComponent(), e.getX(), e.getY());
 				}
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (GUI.getPanelTypeWidget().getCurrentCategorie() == Categorie.VARIABLES && e.isPopupTrigger()) {
@@ -83,14 +83,14 @@ public class PanelWidget extends JPanel implements Observer {
 
 	/**
 	 * Permet de modifier le texte de la catégorie.
-	 * 
+	 *
 	 * @param texte le nouveau texte
 	 */
 	public void setText(final String texte) {
 		this.texte.setText(texte);
 		this.texte.setSize(this.texte.getPreferredSize());
 	}
-	
+
 	/**
 	 * @since 1.0
 	 *
@@ -108,7 +108,7 @@ public class PanelWidget extends JPanel implements Observer {
 	public FabriqueInstructions getFabrique() {
 		return this.fabrique;
 	}
-	
+
 	/**
 	 * Permet de modifier la liste des widgets à afficher sur X colonnes.
 	 *
@@ -120,20 +120,14 @@ public class PanelWidget extends JPanel implements Observer {
 		this.panelDeWidget.removeAll();
 		this.lesWidgets = DicoWidgetsCategories.getInstance().getWidgets(GUI.getPanelTypeWidget().getCurrentCategorie(), true);
 		placerWidgets(nbColonnes);
-		
-		Rectangle boundsGlobales = null;
-		
-		for(Component c :this.panelDeWidget.getComponents()){
-			if(boundsGlobales == null){
-				boundsGlobales = c.getBounds();
-			}else{
-				boundsGlobales = boundsGlobales.union(c.getBounds());
-			}
+
+		Rectangle boundsGlobales = new Rectangle();
+
+		for (Component c : this.panelDeWidget.getComponents()) {
+			boundsGlobales = boundsGlobales.union(c.getBounds());
 		}
-		if(boundsGlobales != null){
-			boundsGlobales.grow(10, 10);
-			this.panelDeWidget.setPreferredSize(boundsGlobales.getSize());
-		}
+		boundsGlobales.grow(MARGE_X_WIDGET, MARGE_Y_WIDGET);
+		this.panelDeWidget.setPreferredSize(boundsGlobales.getSize());
 		this.validate();
 		this.repaint();
 	}
@@ -189,26 +183,25 @@ public class PanelWidget extends JPanel implements Observer {
 	private void placerWidgets(final int colonnes) {
 		int i = 1;
 		int maxW = 0;
-		int x = 5;
-		System.out.println(this.texte.getPreferredSize());
-		int yDefaut = this.texte.getHeight();
+		int x = MARGE_X_WIDGET;
+		int yDefaut = MARGE_Y_WIDGET;
 		int y = yDefaut;
 
 		for (Widget w : this.lesWidgets) {
 			w.setDraggable(false);
-			
+
 			if (maxW < w.getWidth()) {
 				maxW = w.getWidth();
 			}
-			
-			if (this.lesWidgets.size() > 5 && i == this.lesWidgets.size()/colonnes + 1) {
+
+			if (this.lesWidgets.size() > 5 && i == this.lesWidgets.size() / colonnes + 1) {
 				x += maxW + 20;
 				y = yDefaut;
 			}
-			
+
 			w.setLocation(x, y);
 			y += w.getHeight() + 20;
-			
+
 			this.panelDeWidget.add(w);
 			i++;
 		}

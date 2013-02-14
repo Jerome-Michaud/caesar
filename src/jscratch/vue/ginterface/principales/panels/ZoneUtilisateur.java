@@ -1,6 +1,7 @@
 package jscratch.vue.ginterface.principales.panels;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import jscratch.helpers.PropertiesHelper;
@@ -22,6 +23,7 @@ public class ZoneUtilisateur extends JPanel {
 	 * Instance unique de <code>ZoneUtilisateur</code>.
 	 */
 	private static ZoneUtilisateur instance = new ZoneUtilisateur();
+	private JScrollPane scrollCodeGraphique;
 
 	/**
 	 * @since 1.0
@@ -29,10 +31,16 @@ public class ZoneUtilisateur extends JPanel {
 	private ZoneUtilisateur() {
 		this.setLayout(new BorderLayout());
 
+		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
+		
+		scrollCodeGraphique = new JScrollPane(p);
+		scrollCodeGraphique.setBorder(null);
+		p.setScrollPane(scrollCodeGraphique);
+		
 		if (Boolean.valueOf(PropertiesHelper.getInstance().get("user.interface.afficher.categories"))) {
 			this.add(PanelInstruction.getInstance(), BorderLayout.WEST);
 		}
-		this.add(PanelCodeGraphique.getInstance(), BorderLayout.CENTER);
+		this.add(scrollCodeGraphique, BorderLayout.CENTER);
 	}
 
 	/**
