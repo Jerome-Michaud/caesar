@@ -98,9 +98,6 @@ public class MapController {
 	 * @return vrai si le point est à l'intérieur de la map
 	 */
 	public boolean pointDeplacementRobot(Point2D point) {
-		System.out.println(point);
-		
-		System.out.println(map.getTailleX() + " " + map.getTailleY());
 		
 		if (point.getX() < 0 || point.getX() >= map.getTailleX() - 34 || point.getY() < 0 || point.getY() >= map.getTailleY() - 40)
 			return false;

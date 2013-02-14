@@ -37,7 +37,7 @@ public class WhileWidget extends ModeleWidget {
 		message.put(new Point(85, 17), "faire");
 
 		int widthChamp = 20;
-		f = new ChampTexte(widthChamp);
+		f = new ChampTexte(widthChamp, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.setBounds(60, 3, widthChamp, 20);
@@ -54,10 +54,10 @@ public class WhileWidget extends ModeleWidget {
 	@Override
 	public void applyChangeModele(){		
 		Widget contentWidget = f.getContentWidget();
+		InstructionWhile whileIns = ((InstructionWhile) getElementProgramme());
 		
 		// On met à jour la condition dans l'elementProgramme si elle existe
-		if (contentWidget != null) {
-			InstructionWhile whileIns = ((InstructionWhile) getElementProgramme());
+		if (contentWidget != null) {			
 			Condition cond = (Condition) contentWidget.getElementProgramme();
 			whileIns.setCondition(cond);
 		}

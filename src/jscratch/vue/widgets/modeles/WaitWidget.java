@@ -42,7 +42,7 @@ public class WaitWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		int widthChamp = 40;
-		f = new ChampTexte(widthChamp);
+		f = new ChampTexte(widthChamp, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.setBounds(65, 3, widthChamp, 20);
 		f.setValeur("0");

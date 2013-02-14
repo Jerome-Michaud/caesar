@@ -1,7 +1,9 @@
 package jscratch.vue.ginterface.principales.panels;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import jscratch.helpers.PropertiesHelper;
 import jscratch.vue.ginterface.principales.GUI;
 
@@ -22,15 +24,20 @@ public final class ZoneUtilisateur extends JPanel {
 	 * Instance unique de <code>ZoneUtilisateur</code>.
 	 */
 	private static ZoneUtilisateur instance = null;
+	private JScrollPane scrollCodeGraphique;
 
 	/**
 	 * @since 1.0
 	 */
 	private ZoneUtilisateur() {
 		this.setLayout(new BorderLayout());
-
+		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
+		
+		scrollCodeGraphique = new JScrollPane(p);
+		scrollCodeGraphique.setBorder(null);
+		p.setScrollPane(scrollCodeGraphique);		
 		this.reset();
-		this.add(GUI.getPanelCodeGraphique(), BorderLayout.CENTER);
+		this.add(scrollCodeGraphique, BorderLayout.CENTER);
 	}
 
 	/**
