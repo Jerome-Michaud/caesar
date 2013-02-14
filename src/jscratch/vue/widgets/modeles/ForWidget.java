@@ -80,11 +80,11 @@ public class ForWidget extends ModeleWidget {
         this.decalageX(130);
 
         //TODO : faire fonctionner mise à jour FOR
-		if (DicoVariables.getInstance().getLesvariables().length > 0) {
-            //setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
-            //setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
-            //setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
-        }
+		/*if (DicoVariables.getInstance().getLesvariables().length > 0) {
+            setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
+            setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
+            setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
+        }*/
         initListeners();
     }
     

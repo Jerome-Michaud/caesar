@@ -19,7 +19,7 @@ import jscratch.vue.ginterface.principales.GUI;
  * @since 1.0
  * @version 1.0
  */
-public class PanelCodeConsole extends JPanel implements Observer {
+public final class PanelCodeConsole extends JPanel implements Observer {
 
 	/**
 	 * @since 1.0

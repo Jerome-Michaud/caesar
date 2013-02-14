@@ -16,6 +16,10 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
+/**
+ * @since 1.0
+ * @version 1.0
+ */
 public class SauvegardeXMLTools implements SauvegardeTools {
 
 	/**
@@ -41,8 +45,8 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 	}
 
 	@Override
-	public void save(String path) {
-		serializeArborescence(path);
+	public File save(String path) {
+		return serializeArborescence(path);
 	}
 
 	@Override
@@ -61,7 +65,7 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 	 *
 	 * @param path Le chemin où sauvegarder le l'arborescence
 	 */
-	private void serializeArborescence(final String path) {
+	private File serializeArborescence(final String path) {
 		Document doc = SerialiseurXML.save();
 		
 		try {
@@ -73,9 +77,11 @@ public class SauvegardeXMLTools implements SauvegardeTools {
 			FileOutputStream fo = new FileOutputStream(fichier);
 			sortie.output(doc, fo);
 			fo.close();
+			return fichier;
 		} catch (IOException ex) {
 			ErreurHelper.afficher(ex, "La sauvegarde n'a pas pu être effectuée corectement");
 		}
+		return null;
 	}
 
 	/**

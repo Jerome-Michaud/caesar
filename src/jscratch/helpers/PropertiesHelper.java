@@ -13,24 +13,29 @@ import java.util.Properties;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jscratch.dictionnaires.DicoWidgetsCategories;
 
 /**
- *
+ * Permet de gérer facilement les fichiers properties.
+ * 
  * @since 1.0
  * @version 1.0
  */
-public class PropertiesHelper {
+public final class PropertiesHelper {
 
 	/**
 	 * Unique instance of <code>PropertiesHelper</code>.
 	 */
 	private static PropertiesHelper instance = null;
 
+	/**
+	 * Les fichier properties.
+	 */
 	private SortedProperties properties = null, propertiesDistant = null;
 	
 	/**
 	 * Private constructor of <code>PropertiesHelper</code>.
+	 * 
+	 * @since 1.0
 	 */
     private PropertiesHelper() {
 		try {
@@ -52,7 +57,14 @@ public class PropertiesHelper {
 		}
 	}
 	
-	public void reset(File fichier) {
+	/**
+	 * Permet de charger un autre properties.
+	 * 
+	 * @since 1.0
+	 * 
+	 * @param fichier le fichier à charger
+	 */
+	public void reset(final File fichier) {
 		if (fichier.exists()) {
 			try {
 				this.propertiesDistant = new SortedProperties();
@@ -66,6 +78,8 @@ public class PropertiesHelper {
 	/**
 	 * Accessor for <code>PropertiesHelper</code>.
 	 *
+	 * @since 1.0
+	 * 
 	 * @return unique instance of <code>PropertiesHelper</code>
 	 */
     public static PropertiesHelper getInstance() {
@@ -78,6 +92,8 @@ public class PropertiesHelper {
 	/**
 	 * Perrmet de connaître le nombre de clés dans le properties.
 	 * 
+	 * @since 1.0
+	 * 
 	 * @return la nombre de clé
 	 */
 	public int size() {
@@ -86,6 +102,8 @@ public class PropertiesHelper {
 	
 	/**
 	 * Récupère la valeur d'un propriété.
+	 * 
+	 * @since 1.0
 	 * 
 	 * @param cle la clé
 	 * @return la valeur de la propriété
@@ -100,6 +118,8 @@ public class PropertiesHelper {
 	
 	/**
 	 * Récupère la valeur d'un propriété. Si la clé n'est pas trouvé, elle est ajoutée si le deuxième paramètre est à <code>true</code>.
+	 * 
+	 * @since 1.0
 	 * 
 	 * @param cle la clé
 	 * @param ajout <code>true</code>, si la clé doit être ajoutée si elle n'est pas trouvée
@@ -120,6 +140,8 @@ public class PropertiesHelper {
 	/**
 	 * Change la valeur de la propriété.
 	 * 
+	 * @since 1.0
+	 * 
 	 * @param cle la clé de la propriété à changer
 	 * @param valeur la nouvelle valeur de cette propriété
 	 */
@@ -129,6 +151,8 @@ public class PropertiesHelper {
 	
 	/**
 	 * Sauvegarde les modifications apportées au fichier properties.
+	 * 
+	 * @since 1.0
 	 */
 	public void sauvegarder() {
 		try {
@@ -143,6 +167,11 @@ public class PropertiesHelper {
 		}
 	}
 	
+	/**
+	 * Classe supplémentaire qui permet d'avoir un properties avec les clés triées par ordre alphabétique.
+	 * 
+	 * @since 1.0
+	 */
 	private class SortedProperties extends Properties {
 		
 		@Override

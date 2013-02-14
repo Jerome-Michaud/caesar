@@ -27,7 +27,7 @@ import nxtim.instruction.Categorie;
  * @since 1.0
  * @version 1.0
  */
-public class PanelWidget extends JPanel implements Observer {
+public final class PanelWidget extends JPanel implements Observer {
 
 	private static PanelWidget instance = new PanelWidget();
 	private FabriqueInstructions fabrique;
@@ -39,6 +39,8 @@ public class PanelWidget extends JPanel implements Observer {
 	private final int MARGE_Y_WIDGET = 5;
 
 	/**
+	 * Constructeur privé de <code>PanelWidget</code>.
+	 * 
 	 * @since 1.0
 	 */
 	private PanelWidget() {
@@ -49,13 +51,11 @@ public class PanelWidget extends JPanel implements Observer {
 		this.setLayout(new BorderLayout());
 
 		this.texte = new JTextPane();
-		//this.texte.setBounds(10,20,Variables.X_MAX_INSTRUCTION - 20, 35);
 		this.texte.setSize(this.getPreferredSize());
 		this.texte.setEditable(false);
 		this.texte.setFocusable(false);
 		this.texte.setOpaque(false);
 		this.add(this.texte, BorderLayout.NORTH);
-
 		this.panelDeWidget = new JPanel();
 		this.panelDeWidget.setLayout(null);
 		this.scroll = new JScrollPane(panelDeWidget);
@@ -84,6 +84,8 @@ public class PanelWidget extends JPanel implements Observer {
 	/**
 	 * Permet de modifier le texte de la catégorie.
 	 *
+	 * @since 1.0
+	 * 
 	 * @param texte le nouveau texte
 	 */
 	public void setText(final String texte) {
@@ -207,6 +209,13 @@ public class PanelWidget extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * Permet de récupérer le panel où sont stockés les widgets.
+	 * 
+	 * @since 1.0
+	 * 
+	 * @return le panel
+	 */
 	public JPanel getPanelDeWidget() {
 		return panelDeWidget;
 	}

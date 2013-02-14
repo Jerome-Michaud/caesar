@@ -1,6 +1,7 @@
 package jscratch.dictionnaires;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import nxtim.instruction.Categorie;
@@ -11,23 +12,31 @@ import jscratch.vue.categories.boutons.BoutonCategorieExpression;
 import jscratch.vue.categories.boutons.BoutonCategorieMoteur;
 import jscratch.vue.categories.boutons.BoutonCategorieTemps;
 import jscratch.vue.categories.boutons.BoutonCategorieVariable;
-import jscratch.vue.widgets.Widget;
 
 /**
- *
- * @author Quentin GOSSELIN <quentin.gosselin@gmail.com>
+ * Permet de socker les boutons des catégories.
+ * 
+ * @since 1.0
+ * @version 1.0
  */
-public class DicoBoutonsCategories {
+public final class DicoBoutonsCategories {
 
+	/**
+	 * L'instance de <code>DicoBoutonsCategories</code>.
+	 */
 	private static DicoBoutonsCategories instance = null;
-	private List<Categorie> ordre;
+	/**
+	 * Le dico.
+	 */
 	private HashMap<Categorie, BoutonCategorie> dico;
 	
 	/**
 	 * Constructeur privé de <code>DicoCategories</code>.
+	 * 
+	 * @since 1.0
 	 */
 	private DicoBoutonsCategories() {
-		this.dico = new HashMap<Categorie, BoutonCategorie>();
+		this.dico = new LinkedHashMap<Categorie, BoutonCategorie>();
 		
 		this.dico.put(Categorie.STRUCTURES, new BoutonCategorieStructure());
 		this.dico.put(Categorie.MOTEUR, new BoutonCategorieMoteur());
@@ -35,18 +44,12 @@ public class DicoBoutonsCategories {
 		this.dico.put(Categorie.TEMPS, new BoutonCategorieTemps());
 		this.dico.put(Categorie.VARIABLES, new BoutonCategorieVariable());
 		this.dico.put(Categorie.EXPRESSION, new BoutonCategorieExpression());
-		
-		this.ordre = new LinkedList<Categorie>();
-		this.ordre.add(Categorie.STRUCTURES);
-		this.ordre.add(Categorie.MOTEUR);
-		this.ordre.add(Categorie.CAPTEURS);
-		this.ordre.add(Categorie.TEMPS);
-		this.ordre.add(Categorie.VARIABLES);
-		this.ordre.add(Categorie.EXPRESSION);
 	}
 	
 	/**
 	 * Permet d'avoir l'instance unique de <code>DicoBoutonsCategories</code>.
+	 * 
+	 * @since 1.0
 	 * 
 	 * @return l'instance unique de <code>DicoBoutonsCategories</code>
 	 */
@@ -58,20 +61,9 @@ public class DicoBoutonsCategories {
 	}
 	
 	/**
-	 * Permet de remettre tous les widget dans l'application en détruisant l'object <code>DicoBoutonsCategories</code> et en créant un nouveau.
-	 * 
-	 * @return la nouvelle instance de <code>DicoBoutonsCategories</code>
-	 */
-	public void reset() {
-		DicoWidgetsCategories.getInstance().reset();
-			
-		for (Categorie c : this.dico.keySet()) {
-			this.dico.get(c).ajouterWidgets();
-		}
-	}
-	
-	/**
 	 * Permet de récupérer le dictionnaire des boutons catégorie.
+	 * 
+	 * @since 1.0
 	 * 
 	 * @return  le dictionnaire des boutons
 	 */
@@ -82,14 +74,13 @@ public class DicoBoutonsCategories {
 	/**
 	 * Perme de récupérer les boutons dans l'ordre où ils doivent être ajoutés dans l'interface.
 	 * 
+	 * @since 1.0
+	 * 
 	 * @return la liste des boutons
 	 */
 	public List<BoutonCategorie> getBoutons() {
 		List<BoutonCategorie> l = new LinkedList<BoutonCategorie>();
-		
-		for (Categorie c : this.ordre) {
-			l.add(this.dico.get(c));
-		}
+		l.addAll(this.dico.values());
 		
 		return l;
 	}
@@ -97,12 +88,14 @@ public class DicoBoutonsCategories {
 	/**
 	 * Permet de récupérer la liste des catégories importantes, dans l'ordre d'ajout dans l'interface.
 	 * 
+	 * @since 1.0
+	 * 
 	 * @return la liste des categories (non vides est importantes)
 	 */
 	public List<Categorie> getCategories() {
 		List<Categorie> l = new LinkedList<Categorie>();
 		
-		for (Categorie c : this.ordre) {
+		for (Categorie c : this.dico.keySet()) {
 			if (!DicoWidgetsCategories.getInstance().getWidgets(c, false).isEmpty() && c != Categorie.EXPRESSION) {
 				l.add(c);
 			}

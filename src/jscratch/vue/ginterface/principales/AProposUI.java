@@ -23,7 +23,7 @@ import jscratch.helpers.ErreurHelper;
  * @since 1.0
  * @version 1.0
  */
-public class AProposUI extends JFrame {
+public final class AProposUI extends JFrame {
 
 	private JScrollPane textPane = null;
 	private JTextPane text = null;

@@ -3,7 +3,6 @@ package jscratch.vue.ginterface.principales.panels;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import jscratch.parametrages.Variables;
 
 /**
@@ -12,7 +11,7 @@ import jscratch.parametrages.Variables;
  * @since 1.0
  * @version 1.0
  */
-public class PanelInstruction extends JPanel {
+public final class PanelInstruction extends JPanel {
 
 	/**
 	 * @since 1.0

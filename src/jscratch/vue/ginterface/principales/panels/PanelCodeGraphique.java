@@ -18,7 +18,7 @@ import jscratch.vue.widgets.Widget;
  * @since 1.0
  * @version 1.0
  */
-public class PanelCodeGraphique extends JPanel implements IWidget, Observer {
+public final class PanelCodeGraphique extends JPanel implements IWidget, Observer {
 
 	/**
 	 * L'instance unique de PanelCodeGraphique.

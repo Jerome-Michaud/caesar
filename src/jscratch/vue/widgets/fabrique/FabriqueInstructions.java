@@ -186,9 +186,7 @@ public class FabriqueInstructions {
 	 */
 	public Widget cloner(final Widget comp) throws NonClonableException {
 		Widget w = null;
-		if (comp.getModele() instanceof InstructionWidget) {
-			//w = creerWidgetMoteurFwd();
-		} else if (comp.getModele() instanceof IfWidget) {
+		if (comp.getModele() instanceof IfWidget) {
 			w = creerWidgetIf();
 		} else if (comp.getModele() instanceof IfElseWidget) {
 			w = creerWidgetIfElse();

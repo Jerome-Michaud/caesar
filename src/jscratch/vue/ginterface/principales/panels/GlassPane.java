@@ -6,11 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import jscratch.helpers.ImagesHelper;
@@ -22,7 +19,7 @@ import jscratch.helpers.ImagesHelper;
  * @since 1.0
  * @version 1.0
  */
-public class GlassPane extends JPanel implements Observer {
+public final class GlassPane extends JPanel implements Observer {
 
 	/**
 	 * L'instance unique du GlassPane.

@@ -15,6 +15,8 @@ public class Scratch {
 	/**
 	 * Permet le lancement du programme
 	 *
+	 * @since 1.0
+	 * 
 	 * @param args les paramètres du programme.
 	 */
 	public static void main(String[] args) {
@@ -39,9 +41,11 @@ public class Scratch {
 			ErreurHelper.afficher(ex);
 		}
 		
+		// Interface de paramétrage
 		if (args.length > 0 && "param".equals(args[0])) {
 			ParametrageUI.getInstance();
 		}
+		// Interface utilisateur
 		else {
 			DicoBoutonsCategories.getInstance();
 			DicoWidgetsCategories.getInstance().nettoyer();

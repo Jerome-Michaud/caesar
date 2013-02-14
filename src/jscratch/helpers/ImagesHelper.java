@@ -5,16 +5,22 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class ImagesHelper {
+/**
+ * Permet de gérer les images.
+ * 
+ * @since 1.0
+ * @version 1.0
+ */
+public final class ImagesHelper {
 
 	/**
 	 * Permet de récupérer une image.
+	 * 
+	 * @since 1.0
 	 * 
 	 * @param name nom du fichier
 	 * @return l'image
@@ -22,8 +28,7 @@ public class ImagesHelper {
 	public static Image getImage(String name) {
 		try {
 			URL url = new File("ressources" + File.separator + "images" + File.separator + name).toURI().toURL();
-			//ImagesHelper.class.getResource(name);
-
+			
 			if (url != null) {
 				try {
 					return ImageIO.read(url);
@@ -39,6 +44,8 @@ public class ImagesHelper {
 
 	/**
 	 * Permet de récupérer une icône.
+	 * 
+	 * @since 1.0
 	 * 
 	 * @param name nom du fichier
 	 * @return l'icône
