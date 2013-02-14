@@ -1,8 +1,11 @@
 package jscratch.vue.ginterface.principales;
 
 import jscratch.vue.ginterface.principales.panels.GlassPane;
+import jscratch.vue.ginterface.principales.panels.OngletUtilisateur;
 import jscratch.vue.ginterface.principales.panels.ZoneUtilisateur;
 import jscratch.vue.ginterface.principales.panels.PanelCodeConsole;
+import jscratch.vue.sim.PanelSimulator;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
@@ -43,9 +46,10 @@ public class ApplicationUI extends JFrame {
 		this.setMinimumSize(new Dimension(((int) ecran.getWidth() * 2 / 3), ((int) ecran.getHeight() * 2 / 3)));
 
 		this.setJMenuBar(Menu.getInstance());
+		
 
 
-		this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, rootPaneCheckingEnabled, ZoneUtilisateur.getInstance(), PanelCodeConsole.getInstance());
+		this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, rootPaneCheckingEnabled, OngletUtilisateur.getInstance(), PanelCodeConsole.getInstance());
 		this.setContentPane(this.split);
 
 		this.addComponentListener(new ComponentAdapter() {
@@ -64,6 +68,8 @@ public class ApplicationUI extends JFrame {
 		this.split.setDividerLocation(0.75);
 		
 		this.setLocationRelativeTo(null);
+		
+		//PanelSimulator.getInstance().getSimulator().start();
 	}
 
 	/**
