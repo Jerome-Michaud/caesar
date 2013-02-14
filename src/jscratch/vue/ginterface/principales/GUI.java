@@ -14,7 +14,7 @@ import jscratch.vue.ginterface.principales.popups.PopupCodeNxc;
 /**
  * Facade pour la GUI.
  */
-public class GUI {
+public final class GUI {
 
 	/**
 	 * Le constructeur privé de <code>GUI</code>.

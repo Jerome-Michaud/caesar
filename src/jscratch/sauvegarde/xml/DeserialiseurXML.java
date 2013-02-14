@@ -18,15 +18,23 @@ import nxtim.instruction.VariableModifiable;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
+/**
+ * @since 1.0
+ * @version 1.0
+ */
 public class DeserialiseurXML {
 
 	/**
 	 * Default constructor of <code>ChargeurXML</code>.
+	 *
+	 * @since 1.0
 	 */
 	private DeserialiseurXML() { }
 	
 	/**
 	 * Permet de charger l'arborescence et le dictionnaire à partir d'un document XML.
+	 *
+	 * @since 1.0
 	 * 
 	 * @param docXml le document XML à parser
 	 * @return L'arborescence à injecter dans le programme
@@ -57,6 +65,16 @@ public class DeserialiseurXML {
 		return arbo;
 	}
 	
+	/**
+	 * Permet de désérialiser un widget.
+	 *
+	 * @since 1.0
+	 * 
+	 * @param widget le widget a désérialiser
+	 * @param parent le parent de ce widget
+	 * @return le widget désérialisé
+	 * @throws NonChargeableException lévéé si le widget ne peut pas être créé
+	 */
 	private static Widget deserializeWidget(Element widget, IWidget parent) throws NonChargeableException {
 		String classe = widget.getAttributeValue("classe");
 		String categorie = widget.getAttributeValue("categorie");

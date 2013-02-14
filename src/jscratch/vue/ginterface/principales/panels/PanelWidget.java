@@ -1,7 +1,6 @@
 package jscratch.vue.ginterface.principales.panels;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -29,7 +27,7 @@ import nxtim.instruction.Categorie;
  * @since 1.0
  * @version 1.0
  */
-public class PanelWidget extends JPanel implements Observer {
+public final class PanelWidget extends JPanel implements Observer {
 
 	private static PanelWidget instance = new PanelWidget();
 	private FabriqueInstructions fabrique;
@@ -39,6 +37,8 @@ public class PanelWidget extends JPanel implements Observer {
 	private JScrollPane scroll;
 		
 	/**
+	 * Constructeur privé de <code>PanelWidget</code>.
+	 * 
 	 * @since 1.0
 	 */
 	private PanelWidget() {
@@ -49,12 +49,11 @@ public class PanelWidget extends JPanel implements Observer {
 		this.setLayout(new BorderLayout());
 
 		this.texte = new JTextPane();
-		//this.texte.setBounds(10,20,Variables.X_MAX_INSTRUCTION - 20, 35);
 		this.texte.setSize(this.getPreferredSize());
 		this.texte.setEditable(false);
 		this.texte.setFocusable(false);
 		this.texte.setOpaque(false);
-		this.add(this.texte,BorderLayout.NORTH);
+		this.add(this.texte, BorderLayout.NORTH);
 		
 		this.panelDeWidget = new JPanel();
 		this.panelDeWidget.setLayout(null);
@@ -63,7 +62,7 @@ public class PanelWidget extends JPanel implements Observer {
 		
 		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 600));
 		
-		this.addMouseListener(new MouseAdapter() {
+		this.scroll.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -83,6 +82,8 @@ public class PanelWidget extends JPanel implements Observer {
 
 	/**
 	 * Permet de modifier le texte de la catégorie.
+	 *
+	 * @since 1.0
 	 * 
 	 * @param texte le nouveau texte
 	 */
@@ -190,7 +191,6 @@ public class PanelWidget extends JPanel implements Observer {
 		int i = 1;
 		int maxW = 0;
 		int x = 5;
-		System.out.println(this.texte.getPreferredSize());
 		int yDefaut = this.texte.getHeight();
 		int y = yDefaut;
 
@@ -214,6 +214,13 @@ public class PanelWidget extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * Permet de récupérer le panel où sont stockés les widgets.
+	 * 
+	 * @since 1.0
+	 * 
+	 * @return le panel
+	 */
 	public JPanel getPanelDeWidget() {
 		return panelDeWidget;
 	}

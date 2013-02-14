@@ -9,17 +9,13 @@ import java.io.File;
  * @since 1.0
  * @version 1.0
  */
-public class NxcFileFilter extends ApplicationFileFilter {
+public final class NxcFileFilter extends ApplicationFileFilter {
 
 	/**
-	 * La description des fichiers de type NXC à afficher dans
-	 * l'explorateur
+	 * Constructeur privé de <code>NxcFileFilter</code>
 	 */
-	private String descr;
-
 	public NxcFileFilter() {
-		super("nxc");
-		this.descr = "Fichier NXC";
+		super("nxc", "Fichier NXC");
 	}
 
 	/**
@@ -36,16 +32,5 @@ public class NxcFileFilter extends ApplicationFileFilter {
 		}
 		String nomFichier = pathname.getName().toLowerCase();
 		return nomFichier.endsWith(getExtension());
-	}
-
-	/**
-	 * Méthode redéfinissant la méthode getDescription de FileFilter afin
-	 * qu'elle retourne la description définie plus haut.
-	 *
-	 * @return La descrption définie dans le constructeur de la classe.
-	 */
-	@Override
-	public String getDescription() {
-		return this.descr;
 	}
 }

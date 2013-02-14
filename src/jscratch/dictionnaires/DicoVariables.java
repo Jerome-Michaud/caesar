@@ -9,12 +9,14 @@ import nxtim.instruction.Variable;
 
 /**
  * Définit le dictionnaire de variables.
+ * 
+ * @since 1.0
+ * @version 1.0
  */
 public final class DicoVariables {
 
 	/**
-	 * L'instance de
-	 * <code>DicoVars</code>.
+	 * L'instance de <code>DicoVars</code>.
 	 */
 	private static DicoVariables instance;
 	/**
@@ -23,16 +25,19 @@ public final class DicoVariables {
 	private HashMap<String, Variable> dictionnaire;
 
 	/**
-	 *
+	 * Constructeur privé de <code>DicoVariables</code>.
+	 * 
+	 * @since 1.0
 	 */
 	private DicoVariables() {
 		dictionnaire = new HashMap<String, Variable>();
 	}
 
 	/**
-	 * Récupère l'instance unique de
-	 * <code>DicoVars</code>.
+	 * Récupère l'instance unique de <code>DicoVars</code>.
 	 *
+	 * @since 1.0
+	 * 
 	 * @return l'instance de <code>DicoVars</code>
 	 */
 	public static synchronized DicoVariables getInstance() {
@@ -45,7 +50,9 @@ public final class DicoVariables {
 	/**
 	 * Ajouter la variable dans le dictionnaire.
 	 *
-	 * @param v
+	 * @since 1.0
+	 * 
+	 * @param v la variable à ajouter
 	 */
 	public void ajouter(final Variable v) {
 		if (!v.getNom().isEmpty() && !dictionnaire.containsKey(v.getNom())) {
@@ -56,6 +63,8 @@ public final class DicoVariables {
 	/**
 	 * Supprimer la variable portant le nom.
 	 *
+	 * @since 1.0
+	 * 
 	 * @param nom le nom de la variable
 	 */
 	public void supprimer(final String nom) {
@@ -65,6 +74,8 @@ public final class DicoVariables {
 	/**
 	 * Récupère toutes les variables du type voulu.
 	 *
+	 * @since 1.0
+	 * 
 	 * @param type le type de variable désiré
 	 * @return les variables du type désiré
 	 */
@@ -81,6 +92,8 @@ public final class DicoVariables {
 	/**
 	 * Récupère le dictionnaire.
 	 *
+	 * @since 1.0
+	 * 
 	 * @return le dictionnaire contenant toutes les variables avec leur nom
 	 */
 	public HashMap<String, Variable> getDictionnaire() {
@@ -90,6 +103,8 @@ public final class DicoVariables {
 	/**
 	 * Récupère toutes les variables du dictionnaire.
 	 *
+	 * @since 1.0
+	 * 
 	 * @return les variables du dictionnaire
 	 */
 	public Variable[] getLesvariables() {

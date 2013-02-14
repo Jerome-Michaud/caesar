@@ -53,7 +53,7 @@ public class SelecteurFichier extends JFileChooser {
 		setFileSelectionMode(JFileChooser.FILES_ONLY);
 	}
 
-	public void sauvegarde() {
+	public File sauvegarde() {
 		int retour = this.showSaveDialog(GUI.getFenetre());
 		if (retour == JFileChooser.APPROVE_OPTION) {
 			String path = getSelectedFile().getAbsolutePath();
@@ -71,9 +71,11 @@ public class SelecteurFichier extends JFileChooser {
 				}
 			}
 			if (ok) {
-				sauvegardes.get(filtreActif).save(path);
+				return sauvegardes.get(filtreActif).save(path);
 			}
 		}
+		
+		return null;
 	}
 
 	public void chargement() {

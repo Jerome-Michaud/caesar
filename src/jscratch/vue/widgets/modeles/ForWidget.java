@@ -14,13 +14,11 @@ import jscratch.parametrages.Variables;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionFor;
-import nxtim.instruction.InstructionTempsCourant;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
-import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant <code>Serializable</code> modélisant la forme d'un widget de type For.
@@ -81,11 +79,11 @@ public class ForWidget extends ModeleWidget {
         this.decalageX(130);
 
         //TODO : faire fonctionner mise à jour FOR
-		if (DicoVariables.getInstance().getLesvariables().length > 0) {
-            //setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
-            //setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
-            //setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
-        }
+		/*if (DicoVariables.getInstance().getLesvariables().length > 0) {
+            setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
+            setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
+            setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
+        }*/
         initListeners();
     }
     
