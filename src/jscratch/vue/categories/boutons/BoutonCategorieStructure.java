@@ -19,21 +19,25 @@ public class BoutonCategorieStructure extends BoutonCategorie {
 	 */
 	public BoutonCategorieStructure() {
 		super(new ModeleCategorie(Categorie.STRUCTURES));
-
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetTache());
-		
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetRepeat());
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetFor());
-		
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetWhile());
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetDoWhile());
-
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetIf());
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetIfElse());
 	}
 
 	@Override
 	public int getNbColonnes() {
 		return 1;
+	}
+
+	@Override
+	public void ajouterWidgets() {
+		DicoWidgetsCategories d = DicoWidgetsCategories.getInstance();
+		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetTache());
+		
+		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetRepeat());
+		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetFor());
+		
+		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetWhile());
+		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetDoWhile());
+
+		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetIf());
+		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetIfElse());
 	}
 }

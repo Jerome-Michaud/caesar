@@ -5,6 +5,7 @@ import java.io.File;
 
 import javax.swing.JFrame;
 
+import jscratch.interpreteur.Interpreteur;
 import jscratch.modeles.sim.Map;
 import jscratch.modeles.sim.MapFactory;
 import jscratch.modeles.sim.Robot;
@@ -28,6 +29,8 @@ public class Simulator {
 	private RobotRenderer robotRenderer;
 	private PanelInfosRobot infosRobot;
 	
+	private Interpreteur inter;
+	
 	public Simulator() {
 		
 		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/map1.xml"));
@@ -47,6 +50,17 @@ public class Simulator {
 		fenInfo.pack();
 		fenInfo.setVisible(true);
 		// Fin test Panel infos
+		
+		inter = new Interpreteur(robotController);
+		// TODO mettre le thread à part du constructeur
+		/*Thread t = new Thread(){
+			@Override
+			public void run(){
+				inter.launchInterpreteur();
+			}
+		};
+		t.start();*/
+		
 	}
 
 	/**

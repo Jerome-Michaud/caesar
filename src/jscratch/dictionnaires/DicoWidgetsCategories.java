@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import jscratch.helpers.PropertiesHelper;
 import nxtim.instruction.Categorie;
 import nxtim.instruction.Variable;
@@ -15,26 +16,26 @@ import jscratch.vue.widgets.modeles.VariableWidget;
 
 /**
  *
- * @author Quentin GOSSELIN <quentin.gosselin@gmail.com>
+ * @since 1.0
+ * @version 1.0
  */
 public class DicoWidgetsCategories {
 
 	private static DicoWidgetsCategories instance = null;
-	private HashMap<Categorie, List<Widget>> dico;
-	private boolean nettoye = false;
+	private HashMap<Categorie, HashMap<Widget, Boolean>> dico;
 	
 	/**
 	 * Constructeur privé de <code>DicoCategories</code>.
 	 */
 	private DicoWidgetsCategories() {
-		this.dico = new HashMap<Categorie, List<Widget>>();
+		this.dico = new HashMap<Categorie, HashMap<Widget, Boolean>>();
 		
-		this.dico.put(Categorie.STRUCTURES, new LinkedList<Widget>());
-		this.dico.put(Categorie.MOTEUR, new LinkedList<Widget>());
-		this.dico.put(Categorie.CAPTEURS, new LinkedList<Widget>());
-		this.dico.put(Categorie.TEMPS, new LinkedList<Widget>());
-		this.dico.put(Categorie.VARIABLES, new LinkedList<Widget>());
-		this.dico.put(Categorie.EXPRESSION, new LinkedList<Widget>());
+		this.dico.put(Categorie.STRUCTURES, new HashMap<Widget, Boolean>());
+		this.dico.put(Categorie.MOTEUR, new HashMap<Widget, Boolean>());
+		this.dico.put(Categorie.CAPTEURS, new HashMap<Widget, Boolean>());
+		this.dico.put(Categorie.TEMPS, new HashMap<Widget, Boolean>());
+		this.dico.put(Categorie.VARIABLES, new HashMap<Widget, Boolean>());
+		this.dico.put(Categorie.EXPRESSION, new HashMap<Widget, Boolean>());
 	}
 	
 	/**
@@ -53,14 +54,19 @@ public class DicoWidgetsCategories {
 	 * Permet de récupérer les widgets d'une catégorie.
 	 * 
 	 * @param categorie 
-	 * @param tri la liste renvoyée est une COPIE dans le cas ou le paramètre est à <code>true</code>, sinon, c'est l'originale.
 	 * @return  les widgets
 	 */
 	public List<Widget> getWidgets(final Categorie categorie, final boolean tri) {
-		if (!this.nettoye && tri) {
-			nettoyer();
+		List<Widget> l = new LinkedList<Widget>();
+		Set<Widget> s = this.dico.get(categorie).keySet();
+		
+		for (Widget w : s) {
+			if (!tri || this.dico.get(categorie).get(w)) {
+				l.add(w);
+			}
 		}
-		return this.dico.get(categorie);
+		
+		return l;
 	}
 
 	/**
@@ -70,7 +76,7 @@ public class DicoWidgetsCategories {
 	 * @param w le widget
 	 */
 	public void ajouterWidget(Categorie c, Widget w) {
-		this.dico.get(c).add(w);
+		this.dico.get(c).put(w, true);
 		w.getModele().setCategorie(c);
 		w.getModele().setCouleur(DicoCouleursCategories.getInstance().getCouleur(c));
 	}
@@ -130,14 +136,22 @@ public class DicoWidgetsCategories {
 	/**
 	 * Permet de nettoyer la liste des widgets en fonction des properties.
 	 */
-	private void nettoyer() {
-		Collection<List<Widget>> categories = this.dico.values();
-		for (List<Widget> l : categories) {
-			for (int i = 0;i < l.size();i++) {
-				if (!Boolean.valueOf(PropertiesHelper.getInstance().get("user.widget.afficher." + l.get(i).getType().toString()))) {
-					l.remove(l.get(i));
-				}
+	public void nettoyer() {
+		Collection<HashMap<Widget, Boolean>> categories = this.dico.values();
+		for (HashMap<Widget, Boolean> h : categories) {
+			for (Widget w : h.keySet()) {
+				Boolean b = Boolean.valueOf(PropertiesHelper.getInstance().get("user.widget.afficher." + w.getType().toString()));
+				h.put(w, b);
 			}
+		}
+	}
+
+	/**
+	 * Permet de supprimer tous les widgets présents dans toutes les catégories.
+	 */
+	public void reset() {
+		for (HashMap<Widget, Boolean> h : this.dico.values()) {
+			h.clear();
 		}
 	}
 }

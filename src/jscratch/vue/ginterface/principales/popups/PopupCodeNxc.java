@@ -4,7 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import jscratch.vue.ginterface.principales.SelecteurFichier;
+import jscratch.vue.ginterface.principales.selecteur.SelecteurFichier;
+import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
 
 /**
  *
@@ -29,7 +30,7 @@ public class PopupCodeNxc extends JPopupMenu {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new SelecteurFichier(true).sauvegarde();
+				new SelecteurFichier(TypeSelecteur.CODE).sauvegarde();
 			}
 		});
 		this.add(this.sauvegarder);

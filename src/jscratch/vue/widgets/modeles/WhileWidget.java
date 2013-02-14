@@ -7,11 +7,10 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 import jscratch.parametrages.Variables;
+import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Condition;
-import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionWhile;
-import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
@@ -53,13 +52,15 @@ public class WhileWidget extends ModeleWidget implements Serializable{
     }
     
 	@Override
-	public void applyChangeModele(){
-
-		InstructionWhile whileIns = ((InstructionWhile) getElementProgramme());
-
-		Condition  cond = (Condition)f.getContentWidget().getElementProgramme();
-		whileIns.setCondition(cond);
-	
+	public void applyChangeModele(){		
+		Widget contentWidget = f.getContentWidget();
+		
+		// On met à jour la condition dans l'elementProgramme si elle existe
+		if (contentWidget != null) {
+			InstructionWhile whileIns = ((InstructionWhile) getElementProgramme());
+			Condition cond = (Condition) contentWidget.getElementProgramme();
+			whileIns.setCondition(cond);
+		}
 	}
 	
 	@Override

@@ -19,12 +19,15 @@ public class BoutonCategorieTemps extends BoutonCategorie {
 	 */
 	public BoutonCategorieTemps() {
 		super(new ModeleCategorie(Categorie.TEMPS));
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.TEMPS, GUI.getPanelWidget().getFabrique().creerWidgetTempsCourant());
-
 	}
 
 	@Override
 	public int getNbColonnes() {
 		return 1;
+	}
+
+	@Override
+	public void ajouterWidgets() {
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.TEMPS, GUI.getPanelWidget().getFabrique().creerWidgetTempsCourant());
 	}
 }

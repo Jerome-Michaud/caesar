@@ -1,5 +1,6 @@
 package jscratch.vue.ginterface.principales;
 
+import jscratch.vue.ginterface.principales.selecteur.SelecteurFichier;
 import jscratch.vue.ginterface.principales.panels.PanelCodeGraphique;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import jscratch.helpers.ImagesHelper;
 import jscratch.vue.arborescence.ArborescenceTools;
+import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
 import jscratch.vue.widgets.Widget;
 
 /**
@@ -23,10 +25,9 @@ import jscratch.vue.widgets.Widget;
 public class Menu extends JMenuBar {
 
 	private JMenu fichier, exportation, aide;
-	private JMenuItem fichierNouveau, fichierOuvrir, fichierEnregistrer, fichierQuitter;
-	private JMenuItem exportationNXC, exportationRobotC;
+	private JMenuItem fichierNouveau, fichierOuvrir, fichierEnregistrer, fichierChargerProp, fichierQuitter;
+	private JMenuItem exportationNXC;
 	private JMenuItem aideAPropos;
-	private SelecteurFichier selecteur;
 	
 	/**
 	 * @since 1.0
@@ -57,22 +58,23 @@ public class Menu extends JMenuBar {
 		this.fichierOuvrir.setIcon(ImagesHelper.getIcon("folder_search.png"));
 		this.fichierEnregistrer = new JMenuItem("Enregistrer ...");
 		this.fichierEnregistrer.setIcon(ImagesHelper.getIcon("save.png"));
+		this.fichierChargerProp = new JMenuItem("Charger configuration ...");
+		this.fichierChargerProp.setIcon(ImagesHelper.getIcon("folder_search.png"));
 		this.fichierQuitter = new JMenuItem("Quitter");
 		this.fichierQuitter.setIcon(ImagesHelper.getIcon("remove.png"));
+		
 		this.fichier.add(fichierNouveau);
 		this.fichier.addSeparator();
 		this.fichier.add(fichierOuvrir);
 		this.fichier.add(fichierEnregistrer);
+		this.fichier.add(fichierChargerProp);
 		this.fichier.addSeparator();
 		this.fichier.add(fichierQuitter);
 
 		this.exportation = new JMenu("Exporter");
 		this.exportationNXC = new JMenuItem("En NXC");
 		this.exportationNXC.setIcon(ImagesHelper.getIcon("export_nxc.png"));
-		this.exportationRobotC = new JMenuItem("En RobotC");
-		this.exportationRobotC.setIcon(ImagesHelper.getIcon("export_robotc.png"));
 		this.exportation.add(exportationNXC);
-		//this.exportation.add(exportationRobotC);
 
 		this.aide = new JMenu("?");
 		this.aideAPropos = new JMenuItem("A propos");
@@ -86,12 +88,10 @@ public class Menu extends JMenuBar {
 		fichierNouveau.addActionListener(listener);
 		fichierOuvrir.addActionListener(listener);
 		fichierEnregistrer.addActionListener(listener);
+		fichierChargerProp.addActionListener(listener);
 		fichierQuitter.addActionListener(listener);
 		exportationNXC.addActionListener(listener);
-		exportationRobotC.addActionListener(listener);
 		aideAPropos.addActionListener(listener);
-
-		selecteur = new SelecteurFichier(false);
 	}
 
 	/**
@@ -106,17 +106,17 @@ public class Menu extends JMenuBar {
 			if (e.getSource() == fichierNouveau) {
 				nouveau();
 			} else if (e.getSource() == fichierOuvrir) {
-				selecteur.chargement();
+				new SelecteurFichier(TypeSelecteur.ARBORESCENCE).chargement();
 			} else if (e.getSource() == fichierEnregistrer) {
-				selecteur.sauvegarde();
+				new SelecteurFichier(TypeSelecteur.ARBORESCENCE).sauvegarde();
+			} else if (e.getSource() == fichierChargerProp) {
+				new SelecteurFichier(TypeSelecteur.PROPERTIES).chargement();
 			} else if (e.getSource() == fichierQuitter) {
 				System.exit(0);
 			} else if (e.getSource() == exportationNXC) {
-				new SelecteurFichier(true).sauvegarde();
-			} else if (e.getSource() == exportationRobotC) {
-				//TODO finir l'implémentation de la traduction RobotC
+				new SelecteurFichier(TypeSelecteur.CODE).sauvegarde();
 			} else if (e.getSource() == aideAPropos) {
-				AProposUI p = new AProposUI();
+				new AProposUI();
 			}
 		}
 	}

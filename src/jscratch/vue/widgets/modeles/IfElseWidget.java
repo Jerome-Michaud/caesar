@@ -6,10 +6,10 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 
 import jscratch.parametrages.Variables;
+import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionIfElse;
-import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Serializable modélisant la
@@ -54,13 +54,16 @@ public class IfElseWidget extends ModeleWidget implements Serializable {
 
 	@Override
 	public void applyChangeModele(){
-
-		InstructionIfElse ifElseIns = ((InstructionIfElse) getElementProgramme());
-
-		Condition cand = (Condition)f.getContentWidget().getElementProgramme();
-		ifElseIns.setCondition(cand);
-	
+		Widget contentWidget = f.getContentWidget();
+		
+		// On met à jour la condition dans l'elementProgramme si elle existe
+		if (contentWidget != null) {
+			InstructionIfElse ifElseIns = ((InstructionIfElse) getElementProgramme());
+			Condition cond = (Condition) contentWidget.getElementProgramme();
+			ifElseIns.setCondition(cond);
+		}
 	}
+	
     @Override
     public void decalageX(int x) {
     	int i;
