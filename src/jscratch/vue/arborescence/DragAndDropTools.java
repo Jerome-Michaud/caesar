@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Observable;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.exceptions.ComposantIntrouvableException;
 import jscratch.exceptions.NonClonableException;
 import jscratch.helpers.ErreurHelper;
@@ -79,13 +80,14 @@ public class DragAndDropTools extends Observable {
 			Widget compNouv;
 
 			try {
-				compNouv = GUI.getPanelWidget().getFabrique().cloner(comp);
-				compNouv.setBounds(comp.getBounds());
 				PanelWidget pw = GUI.getPanelWidget();
+				compNouv = pw.getFabrique().cloner(comp);
+				compNouv.setBounds(comp.getBounds());
 				pw.getPanelDeWidget().add(compNouv);
 				int ind = pw.getIndex(comp);
 				pw.supprimerWidget(comp);
 				pw.ajouterWidget(compNouv, ind);
+				DicoWidgetsCategories.getInstance().remplacerWidgetDansCategorie(GUI.getPanelTypeWidget().getCurrentCategorie(), comp, compNouv);
 			} catch (NonClonableException ex) {
 				ErreurHelper.afficher(ex);
 			}

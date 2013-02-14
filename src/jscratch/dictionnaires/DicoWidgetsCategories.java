@@ -28,7 +28,7 @@ public final class DicoWidgetsCategories {
 	/**
 	 * Le dico.
 	 */
-	private HashMap<Categorie, HashMap<Widget, Boolean>> dico;
+	private LinkedHashMap<Categorie, HashMap<Widget, Boolean>> dico;
 	
 	/**
 	 * Constructeur privé de <code>DicoCategories</code>.
@@ -36,7 +36,7 @@ public final class DicoWidgetsCategories {
 	 * @since 1.0
 	 */
 	private DicoWidgetsCategories() {
-		this.dico = new HashMap<Categorie, HashMap<Widget, Boolean>>();
+		this.dico = new LinkedHashMap<Categorie, HashMap<Widget, Boolean>>();
 		
 		this.dico.put(Categorie.STRUCTURES, new LinkedHashMap<Widget, Boolean>());
 		this.dico.put(Categorie.MOTEUR, new LinkedHashMap<Widget, Boolean>());
@@ -105,6 +105,21 @@ public final class DicoWidgetsCategories {
 	 */
 	public void supprimerWidget(Categorie c, Widget w) {
 		this.dico.get(c).remove(w);
+	}
+	
+	public void remplacerWidgetDansCategorie(Categorie c, Widget oldWidget,Widget newWidget){
+		HashMap<Widget,Boolean> oldMap = this.dico.get(c);
+		HashMap<Widget,Boolean> newMap = new LinkedHashMap<Widget, Boolean>();
+		for(Widget w : oldMap.keySet()){
+			boolean val = oldMap.get(w);
+			if(w.equals(oldWidget)){
+				newMap.put(newWidget, val);
+			}else{
+				newMap.put(w,val);
+			}
+		}
+		
+		dico.put(c, newMap);
 	}
 	
 	/**

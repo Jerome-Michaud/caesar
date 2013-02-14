@@ -7,9 +7,13 @@ import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
+import jscratch.vue.widgets.Widget;
 
 import nxtim.instruction.Condition;
 import nxtim.instruction.Operateur;
+import nxtim.instruction.Operation;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;
 
 /**
@@ -78,16 +82,22 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 	@Override
 	public void applyChangeModele(){
+		Condition expLog = ((Condition) getElementProgramme());
 
-		Condition expLogique = ((Condition) getElementProgramme());
-
-		VariableModifiable varMemGauche = (VariableModifiable)l.getContentWidget().getElementProgramme();
-		expLogique.setMembreGauche(varMemGauche);
-		
-		VariableModifiable varMemDroite = (VariableModifiable)f.getContentWidget().getElementProgramme();
-		expLogique.setMembreGauche(varMemDroite);
-		
-
+		Widget widgetG = l.getContentWidget();
+		if (widgetG != null) {
+			VariableModifiable varMemGauche = (VariableModifiable) widgetG.getElementProgramme();
+			expLog.setMembreGauche(varMemGauche);
+		} else {
+			expLog.setMembreGauche(new VariableConstante(TypeVariable.INT, l.getValeur()));
+		}
+		Widget widgetD = f.getContentWidget();
+		if (widgetD != null) {
+			VariableModifiable varMemDroite = (VariableModifiable) widgetD.getElementProgramme();
+			expLog.setMembreDroit(varMemDroite);
+		} else {
+			expLog.setMembreDroit(new VariableConstante(TypeVariable.INT, f.getValeur()));
+		}
 	}
 	@Override
 	public void decalageX(int x) {
