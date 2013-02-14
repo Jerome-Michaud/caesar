@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import jscratch.compilateur.CompilateurTools;
 import jscratch.helpers.ImagesHelper;
 import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
@@ -22,11 +23,11 @@ import jscratch.vue.widgets.Widget;
  * @since 1.0
  * @version 1.0
  */
-public class Menu extends JMenuBar {
+public final class Menu extends JMenuBar {
 
 	private JMenu fichier, exportation, aide;
 	private JMenuItem fichierNouveau, fichierOuvrir, fichierEnregistrer, fichierChargerProp, fichierQuitter;
-	private JMenuItem exportationNXC;
+	private JMenuItem exportationNXC, exportationRobot;
 	private JMenuItem aideAPropos;
 	
 	/**
@@ -59,7 +60,7 @@ public class Menu extends JMenuBar {
 		this.fichierEnregistrer = new JMenuItem("Enregistrer ...");
 		this.fichierEnregistrer.setIcon(ImagesHelper.getIcon("save.png"));
 		this.fichierChargerProp = new JMenuItem("Charger configuration ...");
-		this.fichierChargerProp.setIcon(ImagesHelper.getIcon("folder_search.png"));
+		this.fichierChargerProp.setIcon(ImagesHelper.getIcon("configuration.png"));
 		this.fichierQuitter = new JMenuItem("Quitter");
 		this.fichierQuitter.setIcon(ImagesHelper.getIcon("remove.png"));
 		
@@ -75,7 +76,10 @@ public class Menu extends JMenuBar {
 		this.exportationNXC = new JMenuItem("En NXC");
 		this.exportationNXC.setIcon(ImagesHelper.getIcon("export_nxc.png"));
 		this.exportation.add(exportationNXC);
-
+		this.exportationRobot = new JMenuItem("Vers le robot");
+		this.exportationRobot.setIcon(ImagesHelper.getIcon("robot.png"));
+		this.exportation.add(exportationRobot);
+		
 		this.aide = new JMenu("?");
 		this.aideAPropos = new JMenuItem("A propos");
 		this.aideAPropos.setIcon(ImagesHelper.getIcon("info.png"));
@@ -91,6 +95,7 @@ public class Menu extends JMenuBar {
 		fichierChargerProp.addActionListener(listener);
 		fichierQuitter.addActionListener(listener);
 		exportationNXC.addActionListener(listener);
+		exportationRobot.addActionListener(listener);
 		aideAPropos.addActionListener(listener);
 	}
 
@@ -115,6 +120,9 @@ public class Menu extends JMenuBar {
 				System.exit(0);
 			} else if (e.getSource() == exportationNXC) {
 				new SelecteurFichier(TypeSelecteur.CODE).sauvegarde();
+			} else if (e.getSource() == exportationRobot) {
+				// Exporter vers robot
+				CompilateurTools.getInstance().exporter();
 			} else if (e.getSource() == aideAPropos) {
 				new AProposUI();
 			}

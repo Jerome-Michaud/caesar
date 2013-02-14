@@ -8,10 +8,10 @@ import jscratch.sauvegarde.SauvegardeTools;
 import jscratch.vue.ginterface.principales.GUI;
 
 /**
- *
- * @author Quentin GOSSELIN <quentin.gosselin@gmail.com>
+ * @since 1.0
+ * @version 1.0
  */
-public class SauvegardeNxcTools implements SauvegardeTools {
+public final class SauvegardeNxcTools implements SauvegardeTools {
 
 	/**
 	 * L'instance unique de SauvegardeTxtTools
@@ -26,6 +26,8 @@ public class SauvegardeNxcTools implements SauvegardeTools {
 	/**
 	 * Le getter pour récupérer l'instance unique de SauvegardeTxtTools.
 	 *
+	 * @since 1.0
+	 *
 	 * @return l'instance unique de SauvegardeTxtTools
 	 */
 	public static SauvegardeNxcTools getInstance() {
@@ -39,7 +41,7 @@ public class SauvegardeNxcTools implements SauvegardeTools {
 	public void load(String path) { }
 
 	@Override
-	public void save(String path) {
+	public File save(String path) {
 		try {
 			File fichier = new File(path);
 			if (!fichier.exists()) {
@@ -48,8 +50,11 @@ public class SauvegardeNxcTools implements SauvegardeTools {
 			FileWriter fw = new FileWriter(fichier);
 			fw.append(GUI.getPanelCodeConsole().getText());
 			fw.close();
+			
+			return fichier;
 		} catch (IOException ex) {
 			ErreurHelper.afficher(ex);
 		}
+		return null;
 	}
  }

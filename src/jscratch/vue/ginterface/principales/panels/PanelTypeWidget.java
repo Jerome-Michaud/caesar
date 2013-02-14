@@ -17,7 +17,7 @@ import nxtim.instruction.Categorie;
  * @since 1.0
  * @version 1.0
  */
-public class PanelTypeWidget extends JPanel {
+public final class PanelTypeWidget extends JPanel {
 
 	/**
 	 * SINGLETON.

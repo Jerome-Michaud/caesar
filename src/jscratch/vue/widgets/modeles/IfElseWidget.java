@@ -37,7 +37,7 @@ public class IfElseWidget extends ModeleWidget implements Serializable {
 		
 
 		int widthCamp = 20;
-		f = new ChampTexte(widthCamp);
+		f = new ChampTexte(widthCamp, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.setBounds(55, 3, widthCamp, 20);

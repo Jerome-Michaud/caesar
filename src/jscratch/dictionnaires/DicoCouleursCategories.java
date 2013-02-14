@@ -5,16 +5,26 @@ import java.util.HashMap;
 import nxtim.instruction.Categorie;
 
 /**
- *
- * @author Quentin GOSSELIN <quentin.gosselin@gmail.com>
+ * Permet de stocker les couleurs des catégories.
+ * 
+ * @since 1.0
+ * @version 1.0
  */
-public class DicoCouleursCategories {
+public final class DicoCouleursCategories {
 
+	/**
+	 * L'instance de <code>DicoCouleursCategories</code>.
+	 */
 	private static DicoCouleursCategories instance = null;
+	/**
+	 * Le dico.
+	 */
 	private HashMap<Categorie, Color> dico;
 	
 	/**
 	 * Constructeur privé de <code>DicoCategories</code>.
+	 * 
+	 * @since 1.0
 	 */
 	private DicoCouleursCategories() {
 		this.dico = new HashMap<Categorie, Color>();
@@ -30,6 +40,8 @@ public class DicoCouleursCategories {
 	/**
 	 * Permet d'avoir l'instance unique de <code>DicoBoutonsCategories</code>.
 	 * 
+	 * @since 1.0
+	 * 
 	 * @return l'instance unique de <code>DicoBoutonsCategories</code>
 	 */
 	public static DicoCouleursCategories getInstance() {
@@ -41,6 +53,8 @@ public class DicoCouleursCategories {
 	
 	/**
 	 * Permet de récupérer la couleur d'une catégorie.
+	 * 
+	 * @since 1.0
 	 * 
 	 * @return  la couleur de la catégorie
 	 */

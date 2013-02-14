@@ -7,10 +7,13 @@ import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
+import jscratch.vue.widgets.Widget;
 
 import nxtim.instruction.Condition;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;
 
 /**
@@ -42,7 +45,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		this.LARG_EXTREMITE = 10;
 		final int LARG_CHAMP = 14;
 
-		l = new ChampTexte(LARG_CHAMP);
+		l = new ChampTexte(LARG_CHAMP, this);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		l.setBounds(this.LARG_EXTREMITE, 3, LARG_CHAMP, 14);
@@ -57,7 +60,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 		this.getLesZonesSaisies().add(l);
 
-		f = new ChampTexte(LARG_CHAMP);
+		f = new ChampTexte(LARG_CHAMP, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
@@ -79,16 +82,22 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 	@Override
 	public void applyChangeModele(){
+		Condition expLog = ((Condition) getElementProgramme());
 
-		Condition expLogique = ((Condition) getElementProgramme());
-
-		VariableModifiable varMemGauche = (VariableModifiable)l.getContentWidget().getElementProgramme();
-		expLogique.setMembreGauche(varMemGauche);
-		
-		VariableModifiable varMemDroite = (VariableModifiable)f.getContentWidget().getElementProgramme();
-		expLogique.setMembreGauche(varMemDroite);
-		
-
+		Widget widgetG = l.getContentWidget();
+		if (widgetG != null) {
+			VariableModifiable varMemGauche = (VariableModifiable) widgetG.getElementProgramme();
+			expLog.setMembreGauche(varMemGauche);
+		} else {
+			expLog.setMembreGauche(new VariableConstante(TypeVariable.INT, l.getValeur()));
+		}
+		Widget widgetD = f.getContentWidget();
+		if (widgetD != null) {
+			VariableModifiable varMemDroite = (VariableModifiable) widgetD.getElementProgramme();
+			expLog.setMembreDroit(varMemDroite);
+		} else {
+			expLog.setMembreDroit(new VariableConstante(TypeVariable.INT, f.getValeur()));
+		}
 	}
 	@Override
 	public void decalageX(int x) {

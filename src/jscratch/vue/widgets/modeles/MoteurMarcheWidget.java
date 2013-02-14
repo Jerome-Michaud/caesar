@@ -1,9 +1,9 @@
 package jscratch.vue.widgets.modeles;
 
-
 import nxtim.instruction.Condition;
-import nxtim.instruction.InstructionIf;
+import nxtim.instruction.Expression;
 import nxtim.instruction.InstructionMoteurMov;
+import nxtim.instruction.InstructionWhile;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
@@ -16,6 +16,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 
+import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.ListeDeroulante;
 import jscratch.vue.widgets.modeles.zones.Zone;
@@ -43,7 +44,7 @@ public class MoteurMarcheWidget extends ModeleWidget{
 		this.getLesZonesSaisies().add(l);
 
 		int widthChamp = 40;
-		f = new ChampTexte(widthChamp);
+		f = new ChampTexte(widthChamp, this);
 
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.setBounds(155, 3, widthChamp, 20);
@@ -59,13 +60,18 @@ public class MoteurMarcheWidget extends ModeleWidget{
 	}
 	@Override
 	public void applyChangeModele(){
-
+		Widget contentWidget = f.getContentWidget();
 		InstructionMoteurMov moteurMarcheIns = ((InstructionMoteurMov) getElementProgramme());
 
-		VariableModifiable var = (VariableModifiable)f.getContentWidget().getElementProgramme();
-		moteurMarcheIns.setExpression(var);
-	
+		// On met à jour la condition dans l'elementProgramme si elle existe
+		if (contentWidget != null) {
+			Expression exp = (Expression) contentWidget.getElementProgramme();
+			moteurMarcheIns.setExpression(exp);
+		} else {
+			moteurMarcheIns.setExpression(new VariableConstante(TypeVariable.INT, f.getValeur()));
+		}
 	}
+
 	@Override
 	public void decalageX(int a) {
 		int i;

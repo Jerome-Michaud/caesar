@@ -21,7 +21,7 @@ import jscratch.helpers.ImagesHelper;
  * @since 1.0
  * @version 1.0
  */
-public class ApplicationUI extends JFrame {
+public final class ApplicationUI extends JFrame {
 
 	/**
 	 * SINGLETON.

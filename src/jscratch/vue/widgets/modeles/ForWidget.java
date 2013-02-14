@@ -53,7 +53,7 @@ public class ForWidget extends ModeleWidget {
 
         //variable
 		int widthChamp = 35;
-        lv = new ChampTexte(widthChamp);
+        lv = new ChampTexte(widthChamp, this);
         lv.supprimerTexte();
 		lv.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
         lv.setBounds(55, 3, widthChamp, 20);
@@ -61,7 +61,7 @@ public class ForWidget extends ModeleWidget {
 
 		//valeur logique
 		widthChamp = 50;
-        ff = new ChampTexte(widthChamp);
+        ff = new ChampTexte(widthChamp, this);
         ff.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		ff.supprimerTexte();
         ff.setBounds(155, 3, widthChamp, 20);
@@ -69,7 +69,7 @@ public class ForWidget extends ModeleWidget {
 		
         //pas
 		widthChamp = 20;
-        fp = new ChampTexte(widthChamp);
+        fp = new ChampTexte(widthChamp, this);
         fp.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		fp.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		fp.supprimerTexte();
@@ -80,11 +80,11 @@ public class ForWidget extends ModeleWidget {
         this.decalageX(130);
 
         //TODO : faire fonctionner mise à jour FOR
-		if (DicoVariables.getInstance().getLesvariables().length > 0) {
-            //setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
-            //setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
-            //setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
-        }
+		/*if (DicoVariables.getInstance().getLesvariables().length > 0) {
+            setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
+            setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
+            setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
+        }*/
         initListeners();
     }
     

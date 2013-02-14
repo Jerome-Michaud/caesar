@@ -38,7 +38,7 @@ public class IfWidget extends ModeleWidget{
 		
 
 		int widthChamp = 20;
-		f = new ChampTexte(widthChamp);
+		f = new ChampTexte(widthChamp, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.setBounds(55, 3, widthChamp, 20);

@@ -13,7 +13,7 @@ import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 
-public class FenetreAjoutVariable extends JFrame {
+public final class FenetreAjoutVariable extends JFrame {
 
 	private JComboBox typeVariable;
 	private JTextField nomVariable;
