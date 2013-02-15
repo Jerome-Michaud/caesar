@@ -9,10 +9,10 @@ import jscratch.parametrages.Variables;
 import org.jdesktop.swingx.JXHeader;
 
 /**
- *
- * @author Quentin GOSSELIN <quentin.gosselin@gmail.com>
+ * @since 1.0
+ * @version 1.0
  */
-public class PanelCategories extends PanelParametrage {
+public final class PanelCategories extends PanelParametrage {
 
 	/**
 	 * Unique instance of <code>PanelCategories</code>.

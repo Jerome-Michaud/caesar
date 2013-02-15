@@ -3,7 +3,6 @@ package jscratch.vue.widgets.modeles;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.io.Serializable;
 
 import jscratch.parametrages.Variables;
 import nxtim.instruction.InstructionTache;
@@ -15,13 +14,12 @@ import nxtim.instruction.InstructionTache;
  * @since 1.0
  * @version 1.0
  */
-public class TacheWidget extends ModeleWidget implements Serializable {
+public class TacheWidget extends ModeleWidget {
 
     /**
      * Constructeur du modèle définissant les différents paramètres du Tâche
      */
     public TacheWidget() {
-
         int[] tX = {0, 5,/**/ /**/ 130, 135,/**/ 135, 130,/**/ 55, 50, 40, 35, /**/ 10, 5,/**/ 5, 10,/**/ 35, 40, 50, 55,/**/ 130, 135,/**/ 135, 130,/**/ 5, 0};
         int[] tY = {5, 0,/**/ /**/ 0, 5,/**/ 20, 25,/**/ 25, 30, 30, 25, /**/ 25, 30,/**/ 35, 40,/**/ 40, 45, 45, 40,/**/ 40, 45,/**/ 50, 55,/**/ 55, 50};
 

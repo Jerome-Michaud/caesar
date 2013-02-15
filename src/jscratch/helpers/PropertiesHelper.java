@@ -160,6 +160,10 @@ public final class PropertiesHelper {
 			if (!fichier.exists()) {
 				fichier.createNewFile();
 			}
+			
+			// Mise à jour du chemin du properties distant dans le properties local
+			this.properties.setProperty("user.chemin.properties.distant", PropertiesHelper.getInstance().get("user.chemin.properties.distant"));
+			
 			this.propertiesDistant.store(new OutputStreamWriter(new FileOutputStream(fichier), "UTF8"), "");
 			this.properties.store(new OutputStreamWriter(new FileOutputStream(new File("properties.properties")), "UTF8"), "");
 		} catch (IOException ex) {

@@ -18,16 +18,11 @@ public final class FenetreAjoutVariable extends JFrame {
 	private JComboBox typeVariable;
 	private JTextField nomVariable;
 	private JButton boutonValider, boutonAnnuler;
-
-	/**
-	 * L'instance unique de <code>FenetreAjoutVariable</code>.
-	 */
-	private static FenetreAjoutVariable instance = null;
 	
 	/**
-	 * Le constructeur privé de <code>FenetreAjoutVariable</code>.
+	 * Le constructeur par défaut de <code>FenetreAjoutVariable</code>.
 	 */
-	private FenetreAjoutVariable() {
+	public FenetreAjoutVariable() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLayout(null);
 		this.setAlwaysOnTop(true);
@@ -93,28 +88,5 @@ public final class FenetreAjoutVariable extends JFrame {
 				dispose();
 			}
 		});
-	}
-	
-	/**
-	 * Permet de récupérer l'instance unique de <code>FenetreAjoutVariable</code>.
-	 *
-	 * @return l'instance unique
-	 */
-	public static FenetreAjoutVariable getInstance() {
-		if (instance == null) {
-			instance = new FenetreAjoutVariable();
-		}
-		else {
-			instance.reset();
-		}
-		return instance;
-	}
-
-	/**
-	 * RAZ de la fenêtre.
-	 */
-	private void reset() {
-		this.nomVariable.setText("");
-		this.setVisible(true);
 	}
 }

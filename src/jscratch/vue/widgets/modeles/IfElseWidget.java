@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
-
 import jscratch.parametrages.Variables;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
@@ -18,8 +17,10 @@ import nxtim.instruction.InstructionIfElse;
  * @since 1.0
  * @version 1.0
  */
-public class IfElseWidget extends ModeleWidget implements Serializable {
+public class IfElseWidget extends ModeleWidget {
+	
 	private ChampTexte f;
+	
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du IfElse.
 	 */

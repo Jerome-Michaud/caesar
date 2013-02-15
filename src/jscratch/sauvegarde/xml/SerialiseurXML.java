@@ -12,7 +12,7 @@ import jscratch.vue.widgets.Widget;
  * @since 1.0
  * @version 1.0
  */
-public class SerialiseurXML {
+public final class SerialiseurXML {
 
 	/**
 	 * Default constructor of <code>SauveurXML</code>.

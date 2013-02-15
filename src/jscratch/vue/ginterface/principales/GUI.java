@@ -37,12 +37,12 @@ public final class GUI {
 		return new AProposUI();
 	}
 
-	public static void getFenetreAjoutVariable() {
-		FenetreAjoutVariable.getInstance();
+	public static FenetreAjoutVariable getFenetreAjoutVariable() {
+		return new FenetreAjoutVariable();
 	}
 
-	public static void getFenetreSupressionVariable() {
-		FenetreSupressionVariable.getInstance();
+	public static FenetreSupressionVariable getFenetreSupressionVariable() {
+		return new FenetreSupressionVariable();
 	}
 
 	public static GlassPane getGlassPane() {

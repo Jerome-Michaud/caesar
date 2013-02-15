@@ -1,5 +1,6 @@
 package jscratch.vue.sim;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
@@ -16,7 +17,7 @@ import jscratch.modeles.sim.Sensor;
  * @author Guillaume Delorme
  *
  */
-public class PanelInfosRobot extends JPanel {
+public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator {
 	private final float FREQ_UPDATE = 0.02f;
 	private float nextUpdate = FREQ_UPDATE;
 	
@@ -29,9 +30,9 @@ public class PanelInfosRobot extends JPanel {
 	private JLabel texteCapteurs;
 	
 	public PanelInfosRobot(Robot robot) {
-		this.robot = robot;
-		
+		this.robot = robot;		
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.setMinimumSize(new Dimension(160, 600));
 		
 		infosRobot = new JPanel();
 		infosRobot.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -75,5 +76,10 @@ public class PanelInfosRobot extends JPanel {
 			capteurs.append("</html>");
 			texteCapteurs.setText(capteurs.toString());
 		}		
+	}
+
+	@Override
+	public void update(ObservablePanelSimulator o) {
+		update(FREQ_UPDATE);
 	}
 }

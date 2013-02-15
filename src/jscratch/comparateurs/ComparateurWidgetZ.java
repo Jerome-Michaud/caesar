@@ -1,4 +1,4 @@
-package jscratch.vue.arborescence.comparators;
+package jscratch.comparateurs;
 
 import java.awt.Component;
 import java.util.Comparator;

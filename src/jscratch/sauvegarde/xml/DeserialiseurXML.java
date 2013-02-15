@@ -22,7 +22,7 @@ import org.jdom2.Element;
  * @since 1.0
  * @version 1.0
  */
-public class DeserialiseurXML {
+public final class DeserialiseurXML {
 
 	/**
 	 * Default constructor of <code>ChargeurXML</code>.

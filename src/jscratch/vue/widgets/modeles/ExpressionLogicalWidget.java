@@ -25,9 +25,13 @@ import nxtim.instruction.VariableModifiable;
  * @version 1.0
  */
 public class ExpressionLogicalWidget extends ModeleWidget {
+	
 	private int largeur;
+	
 	private final int LARG_EXTREMITE;
+	
 	private ChampTexte f, l;
+	
 	/**
 	 * Constructeur du modele definissant les differents parametres du ExpressionSum .
 	 */
@@ -50,22 +54,18 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		l.setBounds(this.LARG_EXTREMITE, 3, LARG_CHAMP, 14);
+		this.getLesZonesSaisies().add(l);
 
 		message.put(new Point(29, 15), op.toString());
-
 
 		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
 		FontMetrics metrics = new FontMetrics(font){};  
 		Rectangle2D bounds = metrics.getStringBounds(op.toString(), null);
 
-
-		this.getLesZonesSaisies().add(l);
-
 		f = new ChampTexte(LARG_CHAMP, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
-		//f.setBounds(40, expressionModifiable.getnom().length(), 14, 14);
 		this.getLesZonesSaisies().add(f);
 
 		this.largeur = LARG_CHAMP * 2 + 10 + (int) bounds.getWidth();
@@ -110,10 +110,10 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 			expLog.setMembreDroit(new VariableConstante(TypeVariable.INT, f.getValeur()));
 		}
 	}
+	
 	@Override
 	public void decalageX(int x) {
-		int i;
-		for (i = 2; i < this.getTabX().length-1; i++) {
+		for (int i = 2; i < this.getTabX().length-1; i++) {
 			this.getForme().xpoints[i] = this.getForme().xpoints[i] + x ;
 		}
 		this.setForme(this.getForme());

@@ -13,7 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 import jscratch.vue.arborescence.actions.Action;
 import jscratch.vue.arborescence.actions.TypeAction;
-import jscratch.vue.arborescence.comparators.ComparateurWidgetZ;
+import jscratch.comparateurs.ComparateurWidgetZ;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
@@ -27,7 +27,8 @@ import jscratch.vue.widgets.modeles.zones.Zone;
  * Classe regroupant différents outils destinés au calcul de la nécessité de
  * fusionner ou non un widget avec un autre.
  *
- * @author Bastien ANDRU - Quentin GOSSELIN
+ * @since 1.0
+ * @version 1.0
  */
 public class FusionTools {
 

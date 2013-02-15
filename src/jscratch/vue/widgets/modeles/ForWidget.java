@@ -9,7 +9,6 @@ import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-
 import jscratch.dictionnaires.DicoVariables;
 import jscratch.parametrages.Variables;
 import nxtim.instruction.Affectation;
@@ -30,7 +29,8 @@ import nxtim.instruction.VariableConstante;
 public class ForWidget extends ModeleWidget {
 
 	private ChampTexte lv, ff, fp;
-    /**
+    
+	/**
      * Constructeur du modele définissant les différents paramètres du For.
      */
     public ForWidget() {

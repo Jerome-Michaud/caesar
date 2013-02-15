@@ -3,8 +3,6 @@ package jscratch.vue.widgets.modeles;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.io.Serializable;
-
 import nxtim.instruction.Instruction;
 
 /**
@@ -14,7 +12,7 @@ import nxtim.instruction.Instruction;
  * @since 1.0
  * @version 1.0
  */
-public class InstructionWidget extends ModeleWidget implements Serializable{
+public class InstructionWidget extends ModeleWidget {
 	
 	/**
 	 * Constructeur du modele définissant les différents paramètres de

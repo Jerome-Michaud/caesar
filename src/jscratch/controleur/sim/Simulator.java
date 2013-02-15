@@ -2,6 +2,7 @@ package jscratch.controleur.sim;
 
 import java.awt.Graphics;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -10,7 +11,11 @@ import jscratch.modeles.sim.Map;
 import jscratch.modeles.sim.MapFactory;
 import jscratch.modeles.sim.Robot;
 import jscratch.vue.sim.MapRenderer;
+import jscratch.vue.sim.ObservableSimulator;
+import jscratch.vue.sim.ObserverPanelSimulator;
+import jscratch.vue.sim.ObserverSimulator;
 import jscratch.vue.sim.PanelInfosRobot;
+import jscratch.vue.sim.PanelSimulator;
 import jscratch.vue.sim.RobotRenderer;
 
 
@@ -20,7 +25,8 @@ import jscratch.vue.sim.RobotRenderer;
  * @author Guillaume Delorme
  *
  */
-public class Simulator {
+public class Simulator implements Runnable,ObservableSimulator{
+	
 	private Robot robot;
 	private Map map;
 	private MapController mapController;
@@ -28,11 +34,14 @@ public class Simulator {
 	private MapRenderer mapRenderer;
 	private RobotRenderer robotRenderer;
 	private PanelInfosRobot infosRobot;
-	
 	private Interpreteur inter;
+	private ArrayList<ObserverSimulator> listObserver;// Tableau d'observateurs.
+
 	
 	public Simulator() {
 		
+		this.listObserver = new ArrayList<ObserverSimulator>();
+
 		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/map1.xml"));
 		
 		mapController = new MapController(map);
@@ -42,25 +51,15 @@ public class Simulator {
 		
 		mapRenderer = new MapRenderer(map);
 		robotRenderer = new RobotRenderer(robot);
-		
-		// TEST Panel infos
-		JFrame fenInfo = new JFrame();
-		infosRobot = new PanelInfosRobot(robot);
-		fenInfo.add(infosRobot);
-		fenInfo.pack();
-		fenInfo.setVisible(true);
-		// Fin test Panel infos
-		
+				
 		inter = new Interpreteur(robotController);
-		// TODO mettre le thread à part du constructeur
-		/*Thread t = new Thread(){
-			@Override
-			public void run(){
-				inter.launchInterpreteur();
-			}
-		};
-		t.start();*/
-		
+	}
+	
+	/**
+	 * @return le robot
+	 */
+	public Robot getRobot() {
+		return robot;
 	}
 
 	/**
@@ -87,5 +86,65 @@ public class Simulator {
 	 */
 	public RobotController getRobotController() {
 		return robotController;
+	}
+	
+	public void start() {
+		new Thread(this).start();
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run() {
+
+		// Set up the graphics stuff, double-buffering.
+				
+		long delta = 0l;
+
+		// Boucle infinie du simulateur
+		while (true) {
+			long lastTime = System.nanoTime();
+
+			// Mise à jour du simulateur
+			this.update((float)(delta / 1000000000.0));
+			
+			// Rendu du simulateur
+			//this.render(g);
+
+			// Affichage du résultat du rendu dans le panel
+			
+			notifyObserver();
+			// Lock des fps
+			delta = System.nanoTime() - lastTime;
+			if (delta < 20000000L) {
+				try {
+					Thread.sleep((20000000L - delta) / 1000000L);
+				} catch (Exception e) {
+					// Interrupted exception
+				}
+			}
+		}
+	}
+
+	@Override
+	public void addObserver(ObserverSimulator o) {
+		 listObserver.add(o); 
+	}
+
+	@Override
+	public void deleteObserver(ObserverSimulator o) {
+		listObserver.remove(o); 
+	}
+
+	@Override
+	public void notifyObserver() {
+		for(ObserverSimulator o : listObserver){
+			o.update(this);
+		}
+	}
+
+	public Interpreteur getInterpreteur() {
+		return inter;
 	}
 }

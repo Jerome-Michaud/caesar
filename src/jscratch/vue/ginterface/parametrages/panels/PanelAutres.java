@@ -10,11 +10,10 @@ import jscratch.parametrages.Variables;
 import org.jdesktop.swingx.JXHeader;
 
 /**
- *
  * @since 1.0
  * @version 1.0
  */
-public class PanelAutres extends PanelParametrage {
+public final class PanelAutres extends PanelParametrage {
 
 	private static PanelAutres instance = null;
 	

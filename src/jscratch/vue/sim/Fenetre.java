@@ -35,12 +35,11 @@ public class Fenetre extends JFrame implements ActionListener{
 		setSize(850, 850);
 		
 		setLayout(new BorderLayout());
-		
-		panelSimulator = new PanelSimulator();
+		Simulator simulator = new Simulator();
+		panelSimulator = new PanelSimulator(simulator);
 		
 		add(panelSimulator,BorderLayout.CENTER);
-		
-		
+				
 		panelControl = new JPanel();
 		
 		panelControl.setLayout(new GridLayout(5,2));
@@ -82,7 +81,7 @@ public class Fenetre extends JFrame implements ActionListener{
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		panelSimulator.start();
+		//panelSimulator.start();
 	}
 
 	@Override
@@ -119,6 +118,10 @@ public class Fenetre extends JFrame implements ActionListener{
 		{
 			robotC.resetRobot();
 		}
+	}
+	
+	public static void main(String args[]){
+		new Fenetre();
 	}
 	
 }
