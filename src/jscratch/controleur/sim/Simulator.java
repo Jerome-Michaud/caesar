@@ -143,4 +143,8 @@ public class Simulator implements Runnable,ObservableSimulator{
 			o.update(this);
 		}
 	}
+
+	public Interpreteur getInterpreteur() {
+		return inter;
+	}
 }

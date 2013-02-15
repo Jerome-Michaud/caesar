@@ -61,4 +61,17 @@ public final class ImagesHelper {
 		}
 		return null;
 	}
+	
+	/**
+	 * Permet de redimensionner la taille d'une image
+	 * 
+	 * @param l'image à redimensionner
+	 * @param largeur
+	 * @param longueur
+	 * 
+	 * @return l'image redimensionné
+	 */
+	public static Image resizeImg(Image img,int width,int height){
+		return img.getScaledInstance( width, height,  java.awt.Image.SCALE_SMOOTH ); 
+	}
 }

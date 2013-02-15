@@ -1,29 +1,39 @@
 package jscratch.vue.ginterface.principales.panels;
 
 import java.awt.BorderLayout;
-import java.awt.LayoutManager;
-
+import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import com.sun.xml.internal.bind.unmarshaller.InfosetScanner;
-
 import jscratch.controleur.sim.Simulator;
+import jscratch.vue.sim.PanelController;
 import jscratch.vue.sim.PanelInfosRobot;
 import jscratch.vue.sim.PanelSimulator;
 
 public class ZoneSimulateur extends JPanel {
 	
 	private PanelSimulator panelSimulator;
+	private PanelController panelController;
 	private PanelInfosRobot infosRobot;
 	private JSplitPane split;
+	private JPanel panelSC;
+	private Simulator simulator;
 
 	public ZoneSimulateur() {
 		setLayout(new BorderLayout());
-		this.panelSimulator = new PanelSimulator();
 		
+		this.simulator = new Simulator();
+		this.panelSC = new JPanel();
+		this.panelSimulator = new PanelSimulator(simulator);
+		this.panelController = new PanelController(simulator);
 		this.infosRobot = new PanelInfosRobot(panelSimulator.getSimulator().getRobot());	
-		this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, infosRobot, panelSimulator);
+
+		this.panelSC.setLayout(new BorderLayout());	
+		this.panelSC.setMinimumSize(new Dimension(500, 600));
+		this.panelSC.add(panelController,BorderLayout.NORTH);
+		this.panelSC.add(panelSimulator,BorderLayout.CENTER);	
+				
+		this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, infosRobot, panelSC);
 		panelSimulator.addObserver(infosRobot);
 		
 		this.add(split);
