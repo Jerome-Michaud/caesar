@@ -8,7 +8,6 @@ import jscratch.helpers.PropertiesHelper;
 import jscratch.vue.widgets.Widget;
 
 /**
- *
  * @since 1.0
  * @version 1.0
  */
@@ -21,7 +20,7 @@ public class PanelWidgets extends PanelParametrage {
 	/**
 	 * Constructeur par défaut désactivé.
 	 */
-	private PanelWidgets() {}
+	private PanelWidgets() { }
 	
 	/**
 	 * Constructeur par défaut de <code>PanelWidgets</code>.

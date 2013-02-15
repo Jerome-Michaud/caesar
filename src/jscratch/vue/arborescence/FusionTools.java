@@ -27,7 +27,8 @@ import jscratch.vue.widgets.modeles.zones.Zone;
  * Classe regroupant différents outils destinés au calcul de la nécessité de
  * fusionner ou non un widget avec un autre.
  *
- * @author Bastien ANDRU - Quentin GOSSELIN
+ * @since 1.0
+ * @version 1.0
  */
 public class FusionTools {
 

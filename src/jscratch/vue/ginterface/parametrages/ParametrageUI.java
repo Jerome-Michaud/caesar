@@ -15,11 +15,12 @@ import jscratch.vue.ginterface.parametrages.panels.PanelInterfaces;
 import jscratch.vue.ginterface.parametrages.panels.PanelOngletsWidgets;
 
 /**
- *
+ * L'interface de paramétrage.
+ * 
  * @since 1.0
  * @version 1.0
  */
-public class ParametrageUI extends JFrame {
+public final class ParametrageUI extends JFrame {
 
 	/**
 	 * Unique instance of <code>TestParametrage</code>.

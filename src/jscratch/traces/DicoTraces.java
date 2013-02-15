@@ -10,7 +10,7 @@ import jscratch.helpers.PropertiesHelper;
  * @since 1.0
  * @version 1.0
  */
-public class DicoTraces {
+public final class DicoTraces {
 
 	/*
 	 * L'instance de <code>DicoTraces</code>.

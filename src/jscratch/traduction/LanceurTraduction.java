@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Observable;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import nxtim.instruction.Instruction;
-import jscratch.traduction.VisiteurNXC;
-import jscratch.traduction.VisiteurTraduction;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.widgets.Widget;
@@ -16,7 +14,7 @@ import jscratch.vue.widgets.modeles.ModeleWidget;
  * Cette classe s'occupe de lancer la traduction du programme construit avec les widgets.<br/>
  * Utilise le design pattern Singleton.
  */
-public class LanceurTraduction extends Observable {
+public final class LanceurTraduction extends Observable {
 
 	/**
 	 * Le visiteur qui doit être éxecuté.

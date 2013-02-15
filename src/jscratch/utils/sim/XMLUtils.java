@@ -17,10 +17,11 @@ import org.xml.sax.SAXException;
 
 /**
  * Classe qui fourni des méthodes qui simplifient la gestion des documents XML
- * @author Guillaume Delorme
- *
+ * 
+ * @since 1.0
+ * @version 1.0
  */
-public class XMLUtils {
+public final class XMLUtils {
 	
 	/**
 	 * Constructeur privé de <code>XMLUtils</code>.

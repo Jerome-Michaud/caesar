@@ -13,7 +13,7 @@ import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
  * @since 1.0
  * @version 1.0
  */
-public class CompilateurTools {
+public final class CompilateurTools {
 
 	/**
 	 * Unique instance of <code>CompilateurTools</code>.
