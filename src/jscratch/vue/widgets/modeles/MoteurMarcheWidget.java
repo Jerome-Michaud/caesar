@@ -47,6 +47,7 @@ public class MoteurMarcheWidget extends ModeleWidget{
 		f = new ChampTexte(widthChamp, this);
 
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(155, 3, widthChamp, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);

@@ -10,6 +10,7 @@ import java.awt.geom.Rectangle2D;
 import jscratch.vue.widgets.Widget;
 
 import nxtim.instruction.Condition;
+import nxtim.instruction.Expression;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.TypeVariable;
@@ -86,15 +87,25 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 		Widget widgetG = l.getContentWidget();
 		if (widgetG != null) {
-			VariableModifiable varMemGauche = (VariableModifiable) widgetG.getElementProgramme();
+			Expression varMemGauche = null;
+			if (widgetG.getType() == TypeModeleWidget.EXPRESSION_ARITHMETIQUE) {
+				varMemGauche = (Operation) widgetG.getElementProgramme();
+			} else if (widgetG.getType() == TypeModeleWidget.VARIABLE) {
+				varMemGauche = (VariableModifiable) widgetG.getElementProgramme();
+			}
 			expLog.setMembreGauche(varMemGauche);
 		} else {
 			expLog.setMembreGauche(new VariableConstante(TypeVariable.INT, l.getValeur()));
 		}
 		Widget widgetD = f.getContentWidget();
 		if (widgetD != null) {
-			VariableModifiable varMemDroite = (VariableModifiable) widgetD.getElementProgramme();
-			expLog.setMembreDroit(varMemDroite);
+			Expression varMemDroite = null;
+			if (widgetD.getType() == TypeModeleWidget.EXPRESSION_ARITHMETIQUE) {
+				varMemDroite = (Operation) widgetD.getElementProgramme();
+			} else if (widgetD.getType() == TypeModeleWidget.VARIABLE) {
+				varMemDroite = (VariableModifiable) widgetD.getElementProgramme();
+			}
+			expLog.setMembreGauche(varMemDroite);
 		} else {
 			expLog.setMembreDroit(new VariableConstante(TypeVariable.INT, f.getValeur()));
 		}
