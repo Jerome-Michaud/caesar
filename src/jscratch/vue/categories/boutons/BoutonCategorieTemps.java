@@ -28,6 +28,7 @@ public class BoutonCategorieTemps extends BoutonCategorie {
 
 	@Override
 	public void ajouterWidgets() {
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.TEMPS, GUI.getPanelWidget().getFabrique().creerWidgetWait());
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.TEMPS, GUI.getPanelWidget().getFabrique().creerWidgetTempsCourant());
 	}
 }

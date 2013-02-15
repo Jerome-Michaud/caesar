@@ -3,6 +3,7 @@ package jscratch.vue.widgets;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
