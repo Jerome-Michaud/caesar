@@ -11,10 +11,10 @@ import nxtim.instruction.Categorie;
 import org.jdesktop.swingx.JXHeader;
 
 /**
- *
- * @author Quentin GOSSELIN <quentin.gosselin@gmail.com>
+ * @since 1.0
+ * @version 1.0
  */
-public class PanelOngletsWidgets extends PanelParametrage {
+public final class PanelOngletsWidgets extends PanelParametrage {
 
 	/**
 	 * Unique instance of <code>PanelWidgets</code>.

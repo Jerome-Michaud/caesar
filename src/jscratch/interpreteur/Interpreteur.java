@@ -1,7 +1,21 @@
 package jscratch.interpreteur;
 
 import jscratch.controleur.sim.RobotController;
-import nxtim.instruction.*;
+import nxtim.instruction.Affectation;
+import nxtim.instruction.Condition;
+import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.InstructionDeclaration;
+import nxtim.instruction.InstructionFor;
+import nxtim.instruction.InstructionMoteurMov;
+import nxtim.instruction.InstructionMoteurOff;
+import nxtim.instruction.InstructionTache;
+import nxtim.instruction.InstructionWhile;
+import nxtim.instruction.Moteur;
+import nxtim.instruction.Operateur;
+import nxtim.instruction.Operation;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.VariableConstante;
+import nxtim.instruction.VariableModifiable;
 
 public class Interpreteur {
 
@@ -49,5 +63,4 @@ public class Interpreteur {
 		VisiteurInterpreteur inter = VisiteurInterpreteur.getInstance(robot);
 		tache.accepte(inter);
 	}
-
 }

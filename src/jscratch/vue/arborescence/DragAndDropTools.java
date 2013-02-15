@@ -8,7 +8,6 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.exceptions.ComposantIntrouvableException;
@@ -34,7 +33,7 @@ import jscratch.vue.widgets.modeles.zones.Zone;
  * @since 1.0
  * @version 1.0
  */
-public class DragAndDropTools extends Observable {
+public final class DragAndDropTools extends Observable {
 
 	/**
 	 * List de widgets contenant les widgets en cours de draggage.

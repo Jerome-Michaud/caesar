@@ -8,15 +8,15 @@ import jscratch.helpers.PropertiesHelper;
 import org.jdesktop.swingx.JXHeader;
 
 /**
- *
  * @since 1.0
  * @version 1.0
  */
-public class PanelTraces extends PanelParametrage {
+public final class PanelTraces extends PanelParametrage {
 
 	private static PanelTraces instance = null;
 	
 	private JYPropertyTable table;
+
 	/**
 	 * Default constructor of <code>PanelAutres</code>.
 	 */
@@ -37,8 +37,9 @@ public class PanelTraces extends PanelParametrage {
 		this.table.addSeparator();
 		this.table.addProperty("Utilisation du simulateur", Boolean.valueOf(p.get("user.trace.active.simulateur.boutons")));
 		this.table.addSeparator();
+		this.table.addProperty("Changement de configuration", Boolean.valueOf(p.get("user.trace.active.properties.changement")));
 		
-		this.add(new JXHeader("La partie 'trace' permet de configurer les traces", "Dans cette partie, vous pouvez définir quelles traces seront utilisées dans l'application", ImagesHelper.getIcon("remove.png")), BorderLayout.NORTH);
+		this.add(new JXHeader("La partie 'trace' permet de configurer les traces", "Dans cette partie, vous pouvez définir quelles traces seront utilisées dans l'application", ImagesHelper.getIcon("info.png")), BorderLayout.NORTH);
 		this.add(this.table, BorderLayout.CENTER);
 	}
 	
@@ -64,5 +65,7 @@ public class PanelTraces extends PanelParametrage {
 		p.set("user.trace.active.categorie.changement", modele.getPropertyValue(7).toString());
 		
 		p.set("user.trace.active.simulateur.boutons", modele.getPropertyValue(9).toString());
+		
+		p.set("user.trace.active.properties.changement", modele.getPropertyValue(11).toString());
 	}
 }

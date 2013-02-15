@@ -1,14 +1,14 @@
 package jscratch.modeles.sim;
 
 import java.awt.geom.Point2D;
-import java.util.*;
-
+import java.util.List;
 import jscratch.controleur.sim.MapController;
 
 /**
  * Capteur de détection de distance
- * @author Nicolas Detan
- * @author Guillaume Delorme
+ * 
+ * @since 1.0
+ * @version 1.0
  */
 public class UltraSonicSensor extends Sensor<Integer> {
 	
@@ -35,25 +35,13 @@ public class UltraSonicSensor extends Sensor<Integer> {
 
 	@Override
 	public void update() {
-		
-		/*
-		 * Mise à jour de la position du point Final - point permettant de former la droite du laser
-		 * 
-		 */
-		
+		// Mise à jour de la position du point Final - point permettant de former la droite du laser
 		double x1 = position.getX()+(distance)*Math.cos(orientation+robot.getOrientation());
 		double y1 = position.getY()+(distance)*Math.sin(orientation+robot.getOrientation());
 		
 		pointFinal.setLocation(x1, y1);
 		
-		/*
-		 * Tracage d'une droite entre la position du capteur et le point final 
-		 * On calcule la distance entre le capteur et le premier obstacle en parcourant les points de la droite
-		 * 
-		 * Reference : Wikipedia - Line Draw Algorithm
-		 */
-		double x;
-		double y;
+		double x, y;
 		
 		double dx = pointFinal.getX()-position.getX();
 		double dy = pointFinal.getY()-position.getY();
@@ -65,13 +53,16 @@ public class UltraSonicSensor extends Sensor<Integer> {
 		{
 			nbPoints++;
 			y = position.getY()+dy * (x-position.getX())/dx;
-			if (mapC.pointInObstacle(new Point2D.Double(x, y)) && distanceObs == -1)
+			if (mapC.pointInObstacle(new Point2D.Double(x, y)) && distanceObs == -1) {
 				distanceObs = nbPoints;
+			}
 		}
-		if (distanceObs == -1)
+		if (distanceObs == -1) {
 			value = 255;
-		else
+		}
+		else {
 			value = (distanceObs *255)/ nbPoints;
+		}
 	}
 
 	/**
