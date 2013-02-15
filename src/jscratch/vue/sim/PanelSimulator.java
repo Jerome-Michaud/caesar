@@ -23,10 +23,10 @@ public class PanelSimulator extends JPanel implements MouseWheelListener, MouseM
 	private ArrayList<ObserverPanelSimulator> listObserver;// Tableau d'observateurs.
 	private Simulator simulator;
 
-	public PanelSimulator() {
+	public PanelSimulator(Simulator simulator) {
 		super();	
 		this.screen = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
-		this.simulator = new Simulator();
+		this.simulator = simulator;
 		this.addMouseWheelListener(this);
 		this.addMouseMotionListener(this);
 		this.listObserver = new ArrayList<ObserverPanelSimulator>();
