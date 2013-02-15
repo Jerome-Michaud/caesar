@@ -59,8 +59,13 @@ public class WaitWidget extends ModeleWidget {
 
 		InstructionAttente attenteIns = ((InstructionAttente) getElementProgramme());
 
-		VariableModifiable var = (VariableModifiable)f.getContentWidget().getElementProgramme();
-		attenteIns.setExpression(var);
+		if (f.getContentWidget() != null) {
+			VariableModifiable var = (VariableModifiable)f.getContentWidget().getElementProgramme();
+			attenteIns.setExpression(var);
+		}
+		else {
+			attenteIns.setExpression(new VariableConstante(TypeVariable.INT, f.getValeur()));
+		}
 	
 	}
 	@Override

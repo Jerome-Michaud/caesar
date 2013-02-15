@@ -9,6 +9,8 @@ import nxtim.instruction.Expression;
 import nxtim.instruction.VariableModifiable;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
+import nxtim.instruction.TypeVariable;
+import nxtim.instruction.VariableConstante;
 
 /**
  *
@@ -16,7 +18,7 @@ import jscratch.vue.widgets.modeles.zones.ChampTexte;
  * @version 1.0
  */
 public class VariableSetValueWidget extends ModeleWidget {
-	private ChampTexte f,l;
+	private ChampTexte g,d;
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
 	 */
@@ -36,40 +38,47 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		int widthChamp = 35;
-		f = new ChampTexte(widthChamp, this);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
-		f.setBounds(55, 3, widthChamp, 20);
-		f.setValeur("0");	
-		this.getLesZonesSaisies().add(f);
+		g = new ChampTexte(widthChamp, this);
+		g.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		g.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		g.setBounds(55, 3, widthChamp, 20);
+		g.setValeur("0");
+		this.getLesZonesSaisies().add(g);
 
 		widthChamp = 40;
-		l = new ChampTexte(widthChamp, this);
-		l.supprimerTexte();
-		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		l.setBounds(128, 3, widthChamp, 20);
-		this.getLesZonesSaisies().add(l);
+		d = new ChampTexte(widthChamp, this);
+		d.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		d.setBounds(128, 3, widthChamp, 20);
+		d.supprimerTexte();
+		this.getLesZonesSaisies().add(d);
 		
-		System.out.println(l);
+		this.setElementProgramme(new Affectation(true));
 	}
 
 	@Override
-	public void applyChangeModele(){
-		Widget contentWidget = f.getContentWidget();
-		Widget contentWidgetVar = null;
-		if (l != null)
-			contentWidgetVar = l.getContentWidget();
-		Affectation setValueIns = ((Affectation) getElementProgramme());
+	public void applyChangeModele() {
+		if (g != null && d != null) {
+			Widget contentWidget = g.getContentWidget();
+			Widget contentWidgetVar = d.getContentWidget();
 
-		// On met à jour le contenu dans l'elementProgramme
-		if (contentWidget != null) {
-			Expression expComp = (Expression) contentWidget.getElementProgramme();
-			setValueIns.setMembreDroit(expComp);
-		}
-		if (contentWidgetVar != null) {
-			VariableModifiable var  = (VariableModifiable) contentWidgetVar.getElementProgramme();
-			setValueIns.setMembreGauche(var);
-			setValueIns.setIsInstruction(true);
+			Affectation setValueIns = ((Affectation) getElementProgramme());
+
+			// On met à jour le contenu dans l'elementProgramme
+			if (contentWidget != null) {
+				Expression expComp = (Expression) contentWidget.getElementProgramme();
+				setValueIns.setMembreDroit(expComp);
+			}
+			else {
+				setValueIns.setMembreDroit(new VariableConstante(TypeVariable.INT, g.getValeur()));
+			}
+			if (contentWidgetVar != null) {
+				VariableModifiable var  = (VariableModifiable) contentWidgetVar.getElementProgramme();
+				setValueIns.setMembreGauche(var);
+				setValueIns.setIsInstruction(true);
+			}
+			else {
+				setValueIns.setMembreGauche(new VariableConstante(TypeVariable.INT, d.getValeur()));
+			}
 		}
 	}
 	@Override

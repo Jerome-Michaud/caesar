@@ -11,6 +11,7 @@ import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.widgets.Widget;
+import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import jscratch.vue.widgets.modeles.VariableWidget;
 
 /**
@@ -158,7 +159,7 @@ public final class DicoWidgetsCategories {
 		for (int i = 0;i < l.size();i++) {
 			Widget w = (Widget)l.keySet().toArray()[i];
 			
-			if (w.getModele() instanceof VariableWidget && variable.equals(((VariableWidget)w.getModele()).getNomVariable())) {
+			if (w.getModele().getType() == TypeModeleWidget.VARIABLE && variable.equals(((VariableWidget)w.getModele()).getNomVariable())) {
 				l.remove(w);
 				break;
 			}

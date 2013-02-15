@@ -4,16 +4,17 @@ import jscratch.vue.ginterface.principales.panels.GlassPane;
 import jscratch.vue.ginterface.principales.panels.OngletUtilisateur;
 import jscratch.vue.ginterface.principales.panels.ZoneUtilisateur;
 import jscratch.vue.ginterface.principales.panels.PanelCodeConsole;
-import jscratch.vue.sim.PanelSimulator;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 
 import jscratch.helpers.ImagesHelper;
+import jscratch.helpers.PropertiesHelper;
 
 /**
  * Fenêtre principale de l'application.
@@ -37,7 +38,7 @@ public final class ApplicationUI extends JFrame {
 	private JSplitPane split;
 
 	private ApplicationUI() {
-		this.setTitle("JScratch");
+		this.setTitle("C.A.E.S.E.R");
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -47,9 +48,10 @@ public final class ApplicationUI extends JFrame {
 
 		this.setJMenuBar(Menu.getInstance());
 		
-
-
-		this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, rootPaneCheckingEnabled, OngletUtilisateur.getInstance(), PanelCodeConsole.getInstance());
+		this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, rootPaneCheckingEnabled, ZoneUtilisateur.getInstance(), PanelCodeConsole.getInstance());
+		
+		reset();
+		
 		this.setContentPane(this.split);
 
 		this.addComponentListener(new ComponentAdapter() {
@@ -58,6 +60,8 @@ public final class ApplicationUI extends JFrame {
 				split.setDividerLocation(0.75);
 			}
 		});
+		
+		
 
 		//Gestion du GlassPane
 		this.glassPane = GlassPane.getInstance();
@@ -79,5 +83,18 @@ public final class ApplicationUI extends JFrame {
 	 */
 	public static ApplicationUI getInstance() {
 		return instance;
+	}
+	
+	/**
+	 * Permet de mettre à jour l'interface suivant le properties.
+	 */
+	public void reset() {
+		JComponent composantAAjouter = ZoneUtilisateur.getInstance();
+		// Si le simulateur est activé, il est ajouté en plus
+		if (Boolean.valueOf(PropertiesHelper.getInstance().get("user.interface.afficher.simulateur"))) {
+			composantAAjouter = OngletUtilisateur.getInstance();
+		}
+		this.split.setLeftComponent(composantAAjouter);
+		this.split.setDividerLocation(0.75);
 	}
 }

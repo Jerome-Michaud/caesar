@@ -2,9 +2,14 @@ package jscratch.vue.ginterface.principales;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.util.Formatter;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import jscratch.dictionnaires.DicoVariables;
@@ -33,7 +38,7 @@ public final class FenetreAjoutVariable extends JFrame {
 		Box boxH2 = Box.createHorizontalBox();
 
 		this.typeVariable = new JComboBox(TypeVariable.values());
-		this.nomVariable = new JTextField(20);
+		this.nomVariable = new JFormattedTextField(new RegexFormatter("[A-z]+"));
 		this.boutonValider = new JButton("Valider");
 		this.boutonAnnuler = new JButton("Annuler");
 
@@ -61,7 +66,7 @@ public final class FenetreAjoutVariable extends JFrame {
 		this.setVisible(true);
 		this.nomVariable.requestFocus();
 		this.boutonValider.setDefaultCapable(true);
-
+		
 		boutonValider.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
