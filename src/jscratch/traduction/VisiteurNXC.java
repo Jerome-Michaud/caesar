@@ -53,6 +53,15 @@ public final class VisiteurNXC extends VisiteurC {
 				case C:
 					traduction += "OUT_C";
 					break;
+				case AB:
+					traduction += "OUT_AB";
+					break;
+				case AC:
+					traduction += "OUT_AC";
+					break;
+				case BC:
+					traduction += "OUT_BC";
+					break;
 				default:
 					break;
 			}
