@@ -20,7 +20,7 @@ import org.jdom2.output.XMLOutputter;
  * @since 1.0
  * @version 1.0
  */
-public class SauvegardeXMLTools implements SauvegardeTools {
+public final class SauvegardeXMLTools implements SauvegardeTools {
 
 	/**
 	 * L'instance unique de SauvegardeBinaireTools

@@ -4,12 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-
 import jscratch.controleur.sim.Simulator;
 import jscratch.vue.sim.PanelController;
 import jscratch.vue.sim.PanelInfosRobot;
 import jscratch.vue.sim.PanelSimulator;
 
+/**
+ * @since 1.0
+ * @version 1.0
+ */
 public class ZoneSimulateur extends JPanel {
 	
 	private PanelSimulator panelSimulator;
@@ -19,6 +22,9 @@ public class ZoneSimulateur extends JPanel {
 	private JPanel panelSC;
 	private Simulator simulator;
 
+	/**
+	 * Constructeur par défaut de <code>ZoneSimulateur</code>.
+	 */
 	public ZoneSimulateur() {
 		setLayout(new BorderLayout());
 		

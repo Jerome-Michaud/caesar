@@ -5,15 +5,13 @@ import de.javasoft.swing.table.PropertyTableModel;
 import java.awt.BorderLayout;
 import jscratch.helpers.ImagesHelper;
 import jscratch.helpers.PropertiesHelper;
-import jscratch.parametrages.Variables;
 import org.jdesktop.swingx.JXHeader;
 
 /**
- *
  * @since 1.0
  * @version 1.0
  */
-public class PanelInterfaces extends PanelParametrage {
+public final class PanelInterfaces extends PanelParametrage {
 
 	private static PanelInterfaces instance = null;
 	
@@ -30,6 +28,7 @@ public class PanelInterfaces extends PanelParametrage {
 		this.table = new JYPropertyTable();
 		
 		this.table.addProperty("Afficher le panel widgets",  Boolean.valueOf(p.get("user.interface.afficher.categories")));
+		this.table.addProperty("Afficher le simulateur",  Boolean.valueOf(p.get("user.interface.afficher.simulateur")));
 		
 		this.add(this.table);
 		
@@ -50,5 +49,6 @@ public class PanelInterfaces extends PanelParametrage {
 		PropertyTableModel modele = this.table.getModel();
 		
 		p.set("user.interface.afficher.categories", modele.getPropertyValue(0).toString());
+		p.set("user.interface.afficher.simulateur", modele.getPropertyValue(1).toString());
 	}
 }

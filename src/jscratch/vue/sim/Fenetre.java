@@ -35,8 +35,8 @@ public class Fenetre extends JFrame implements ActionListener{
 		setSize(850, 850);
 		
 		setLayout(new BorderLayout());
-		
-		panelSimulator = new PanelSimulator();
+		Simulator simulator = new Simulator();
+		panelSimulator = new PanelSimulator(simulator);
 		
 		add(panelSimulator,BorderLayout.CENTER);
 				

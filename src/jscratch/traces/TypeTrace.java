@@ -12,7 +12,9 @@ public enum TypeTrace {
 	
 	CATEGORIE_CHANGEMENT,
 	
-	SIMULATEUR_BOUTONS;
+	SIMULATEUR_BOUTONS, 
+	
+	PROPERTIES_CHARGEMENT;
 
 	@Override
 	public String toString() {
@@ -25,6 +27,8 @@ public enum TypeTrace {
 			case CATEGORIE_CHANGEMENT: return "CHANGEMENTCATEGORIE";
 				
 			case SIMULATEUR_BOUTONS: return "SIMULATEURBOUTONS";
+				
+			case PROPERTIES_CHARGEMENT: return "PROPERTIESCHANGEMENT";
 				
 			default: return "INCONNU";
 		}
@@ -40,6 +44,8 @@ public enum TypeTrace {
 			case CATEGORIE_CHANGEMENT: return "categorie.changement";
 				
 			case SIMULATEUR_BOUTONS: return "simulateur.boutons";
+				
+			case PROPERTIES_CHARGEMENT: return "properties.changement";
 				
 			default: return "inconnu";
 		}

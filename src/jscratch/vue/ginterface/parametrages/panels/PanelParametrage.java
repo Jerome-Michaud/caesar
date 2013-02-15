@@ -3,8 +3,7 @@ package jscratch.vue.ginterface.parametrages.panels;
 import javax.swing.JPanel;
 
 /**
- *
- * Définit un panel pour la fen^étre de paramètrage.
+ * Définit un panel pour la fenêtre de paramètrage.
  * 
  * @since 1.0
  * @version 1.0

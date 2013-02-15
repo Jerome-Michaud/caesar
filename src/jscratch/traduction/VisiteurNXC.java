@@ -18,9 +18,10 @@ import nxtim.instruction.VariableCapteur;
  * Traducteur d'instructions dans le langage NXC.
  * Cette classe implémente le design pattern Singleton.
  *
- * @author Adrien DUROY, Bastien AUBRY, Ivan MELNYCHENKO
+ * @since 1.0
+ * @version 1.0
  */
-public class VisiteurNXC extends VisiteurC {
+public final class VisiteurNXC extends VisiteurC {
 
 	private static VisiteurNXC instance;
 

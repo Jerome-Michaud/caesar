@@ -19,7 +19,7 @@ import jscratch.vue.widgets.Widget;
  * @since 1.0
  * @version 1.0
  */
-public class SauvegardeBinaireTools implements SauvegardeTools {
+public final class SauvegardeBinaireTools implements SauvegardeTools {
 
 	/**
 	 * L'instance unique de SauvegardeBinaireTools
