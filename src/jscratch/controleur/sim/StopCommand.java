@@ -2,9 +2,11 @@ package jscratch.controleur.sim;
 
 import jscratch.modeles.sim.MotorPort;
 
-	/**
-	 * Commande permettant d'arreter le robot
-	 */
+/**
+ * Commande permettant de faire stopper le robot
+ * @author Nicolas
+ *
+ */
 
 public class StopCommand extends Command {
 

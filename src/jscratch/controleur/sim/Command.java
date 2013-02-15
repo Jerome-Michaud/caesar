@@ -2,6 +2,11 @@ package jscratch.controleur.sim;
 
 import jscratch.modeles.sim.MotorPort;
 
+/**
+ * classe Commande permet de donner des instructions au robot
+ * @author Nicolas
+ *
+ */
 public abstract class Command {
 	
 	protected RobotController robot;

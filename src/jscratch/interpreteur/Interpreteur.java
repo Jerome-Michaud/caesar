@@ -17,6 +17,11 @@ import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;
 
+/**
+ * Classe recuperant les taches des widget et les parcoure
+ * @author Nicolas
+ *
+ */
 public class Interpreteur {
 
 	private RobotController robot;

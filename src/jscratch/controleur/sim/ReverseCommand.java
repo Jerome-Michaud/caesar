@@ -3,10 +3,11 @@ package jscratch.controleur.sim;
 import jscratch.modeles.sim.MotorPort;
 
 
-	/**
-	 * Commande permettant de faire reculer le robot
-	 */
-
+/**
+ * Commande permettant de faire reculer le robot
+ * @author Nicolas
+ *
+ */
 public class ReverseCommand extends Command {
 
 	public ReverseCommand(RobotController r,int v,MotorPort p) 

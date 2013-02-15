@@ -1,5 +1,10 @@
 package jscratch.vue.sim;
 
+/**
+ * Interface de la classe PanelSimulator à observer
+ * @author Nicolas
+ *
+ */
 public interface ObservablePanelSimulator {
 
 	public void addObserver(ObserverPanelSimulator o);
