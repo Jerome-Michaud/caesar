@@ -2,9 +2,11 @@ package jscratch.controleur.sim;
 
 import jscratch.modeles.sim.MotorPort;
 
-	/**
-	 * Commande permettant de faire avancer le robot
-	 */
+/**
+ * Commande permettant de faire avancer le robot
+ * @author Nicolas
+ *
+ */
 
 public class ForwardCommand extends Command {
 		
