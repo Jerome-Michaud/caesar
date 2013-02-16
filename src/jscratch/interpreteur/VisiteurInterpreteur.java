@@ -19,6 +19,7 @@ import nxtim.instruction.InstructionDoWhile;
 import nxtim.instruction.InstructionFor;
 import nxtim.instruction.InstructionIf;
 import nxtim.instruction.InstructionIfElse;
+import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
@@ -225,7 +226,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 	public void visiter(InstructionFor inst) {
 		ExpressionComplexe cond = inst.getCondition();
 		Affectation init = inst.getInitialisation();
-		Affectation iter = inst.getIteration();
+		InstructionIncrementation iter = inst.getIteration();
 		if (init != null) {
 			if (cond != null) {
 				if (iter != null) {
@@ -424,4 +425,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 		}
 		return motorPort;
 	}
+
+	@Override
+	public void visiter(InstructionIncrementation instructionIncrementation) { }
 }

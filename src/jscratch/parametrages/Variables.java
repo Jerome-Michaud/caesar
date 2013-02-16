@@ -2,6 +2,7 @@ package jscratch.parametrages;
 
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.io.File;
 import jscratch.helpers.PropertiesHelper;
 
 /**
@@ -76,7 +77,7 @@ public class Variables {
 	 *
 	 * @see properties
 	 */
-	public static final String CHEMIN_ACCES_NBC = PropertiesHelper.getInstance().get("user.chemin.compilateur");
+	public static final String CHEMIN_ACCES_NBC = PropertiesHelper.getInstance().get("user.chemin.compilateur").replace("\\", File.separator).replace("/", File.separator);
 	
 	/**
 	 * Affichage du nombre de widget dans les boutons catégorie.

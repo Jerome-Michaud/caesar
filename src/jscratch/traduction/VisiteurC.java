@@ -12,6 +12,7 @@ import nxtim.instruction.InstructionDoWhile;
 import nxtim.instruction.InstructionFor;
 import nxtim.instruction.InstructionIf;
 import nxtim.instruction.InstructionIfElse;
+import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
@@ -271,5 +272,22 @@ public class VisiteurC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionMoteurRotate instructionMoteurRotate) {
 		traduction += indent() + "/* Code C pour rotation d'un moteur inconnu ! */\n";
+	}
+
+	@Override
+	public void visiter(InstructionIncrementation instructionIncrementation) {
+		String op = "++";
+		if (!instructionIncrementation.isPositive()) {
+			op = "--";
+		}
+		
+		if (instructionIncrementation.isAvant()) {
+			traduction += op;
+		}
+		instructionIncrementation.getExpression().accepte(this);
+		
+		if (!instructionIncrementation.isAvant()) {
+			traduction += op;
+		}
 	}
 }

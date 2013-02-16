@@ -18,7 +18,7 @@ import jscratch.vue.widgets.modeles.ExpressionLogicalWidget;
 import jscratch.vue.widgets.modeles.ForWidget;
 import jscratch.vue.widgets.modeles.IfElseWidget;
 import jscratch.vue.widgets.modeles.IfWidget;
-import jscratch.vue.widgets.modeles.InstructionWidget;
+import jscratch.vue.widgets.modeles.IncrementationWidget;
 import jscratch.vue.widgets.modeles.MoteurMarcheWidget;
 import jscratch.vue.widgets.modeles.MoteurOffWidget;
 import jscratch.vue.widgets.modeles.RepeatWidget;
@@ -29,6 +29,7 @@ import jscratch.vue.widgets.modeles.VariableWidget;
 import jscratch.vue.widgets.modeles.VariableSetValueWidget;
 import jscratch.vue.widgets.modeles.WhileWidget;
 import nxtim.instruction.Categorie;
+import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.Variable;
 
 /**
@@ -176,6 +177,24 @@ public class FabriqueInstructions {
 	public Widget creerWidgetExpressionLogical(Operateur op) {
 		return new Widget(new ExpressionLogicalWidget(op));
 	}
+	
+	/**
+	 * Méthode permettant de créer un widget d'incrémentation positive.
+	 * 
+	 * @return un widget d'incrémentation positive
+	 */
+	public Widget creerWidgetIncPlus() {
+		return new Widget(new IncrementationWidget(Operateur.INC_PLUS));
+	}
+	
+	/**
+	 * Méthode permettant de créer un widget d'incrémentation négative.
+	 * 
+	 * @return un widget d'incrémentation négative
+	 */
+	public Widget creerWidgetIncMoins() {
+		return new Widget(new IncrementationWidget(Operateur.INC_MOINS));
+	}
 
 	/**
 	 * Méthode permettant de créér une copie d'un widget.
@@ -218,8 +237,15 @@ public class FabriqueInstructions {
 		} else if (comp.getModele() instanceof ExpressionLogicalWidget) {
 			Condition con = (Condition) comp.getModele().getElementProgramme();
 			w = creerWidgetExpressionLogical(con.getOperateur());
+		} else if (comp.getModele() instanceof IncrementationWidget) {
+			InstructionIncrementation ins = (InstructionIncrementation) comp.getModele().getElementProgramme();
+			if (ins.isPositive()) {
+				w = creerWidgetIncPlus();
+			}
+			else {
+				w = creerWidgetIncMoins();
+			}
 		}
-
 		if (w == null) {
 			throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
 		}

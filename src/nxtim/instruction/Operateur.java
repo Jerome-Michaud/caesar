@@ -9,6 +9,10 @@ import java.util.List;
 public enum Operateur {
 
 	/**
+	 * Les opérateurs uniaires.
+	 */
+	INC_PLUS, INC_MOINS,
+	/**
 	 * Les opérateurs binaire.
 	 */
 	ADDITION, SOUSTRACTION, MULTIPLICATION, DIVISION,
@@ -24,6 +28,10 @@ public enum Operateur {
 	@Override
 	public String toString() {
 		switch (this) {
+			case INC_PLUS:
+				return "++";
+			case INC_MOINS:
+				return "--";
 			case AFFECTATION:
 				return "=";
 			case ADDITION:
@@ -50,6 +58,23 @@ public enum Operateur {
 				return "<=";
 			default:
 				return null;
+		}
+	}
+
+	/**
+	 * Permet de savoir si un opérateur est arithmétique.
+	 *
+	 * @param o l'opérateur à tester
+	 * @return <code>true</code> si l'opérateur est arithmétique, sinon <code>false</code>.
+	 */
+	public static boolean isUnaire(final Operateur o) {
+		switch (o) {
+			case INC_PLUS:
+				return true;
+			case INC_MOINS:
+				return true;
+			default:
+				return false;
 		}
 	}
 

@@ -1,6 +1,6 @@
 package jscratch;
 
-import jscratch.traces.DicoTraces;
+import jscratch.dictionnaires.DicoTraces;
 import jscratch.traces.TypeTrace;
 
 /**

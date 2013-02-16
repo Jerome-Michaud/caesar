@@ -38,7 +38,7 @@ public final class ApplicationUI extends JFrame {
 	private JSplitPane split;
 
 	private ApplicationUI() {
-		this.setTitle("C.A.E.S.E.R");
+		this.setTitle("C.A.E.S.A.R");
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -72,8 +72,6 @@ public final class ApplicationUI extends JFrame {
 		this.split.setDividerLocation(0.75);
 		
 		this.setLocationRelativeTo(null);
-		
-		//PanelSimulator.getInstance().getSimulator().start();
 	}
 
 	/**

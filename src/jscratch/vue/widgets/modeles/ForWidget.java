@@ -13,12 +13,14 @@ import jscratch.dictionnaires.DicoVariables;
 import jscratch.parametrages.Variables;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
+import nxtim.instruction.Expression;
 import nxtim.instruction.InstructionFor;
+import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.Operateur;
-import nxtim.instruction.Operation;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
+import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant <code>Serializable</code> modélisant la forme d'un widget de type For.
@@ -70,43 +72,45 @@ public class ForWidget extends ModeleWidget {
         //pas
 		widthChamp = 20;
         fp = new ChampTexte(widthChamp, this);
-        fp.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		fp.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+        //fp.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		fp.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_INC);
 		fp.supprimerTexte();
         fp.setBounds(240, 3, widthChamp, 20);
-        fp.setValeur("1");
         this.getLesZonesSaisies().add(fp);
 
         this.decalageX(130);
 
-        //TODO : faire fonctionner mise à jour FOR
-		/*if (DicoVariables.getInstance().getLesvariables().length > 0) {
-            setCondition(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], Operateur.comparaisonA()[Integer.parseInt(lo.getValeur())], ff.getValeur());
-            setIteration(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fp.getValeur());
-            setInitialization(DicoVariables.getInstance().getLesvariables()[Integer.parseInt(lv.getValeur())], fd.getValeur());
-        }*/
         initListeners();
     }
     
     @Override
-	public void applyChangeModele(){		
-		Widget contentLv = lv.getContentWidget();		
-		Widget contentFf = ff.getContentWidget();
-		Widget contentFp = fp.getContentWidget();
+	public void applyChangeModele(){
+		Widget contentVariable = lv.getContentWidget();		
+		Widget contentCondition = ff.getContentWidget();
+		Widget contentPas = fp.getContentWidget();
 		InstructionFor forIns = (InstructionFor) getElementProgramme();
 		
 		// On met à jour l'elementProgramme si les éléments existent
-		if (contentLv != null) {
-			Affectation aff  = (Affectation) contentLv.getElementProgramme();
-			forIns.setInitialisation(aff);
-		}		
-		if (contentFf != null) {			
-			Condition cond  = (Condition) contentFf.getElementProgramme();
-			forIns.setCondition(cond);
-		}
-		if (contentFp != null) {
-			Affectation aff  = (Affectation) contentFp.getElementProgramme();
-			forIns.setIteration(aff);
+		if (contentVariable != null) {
+			VariableModifiable var = (VariableModifiable)contentVariable.getElementProgramme();
+		
+			Expression exp = new VariableConstante(TypeVariable.INT, var.getValeur());
+			Affectation affDeb = new Affectation(var, exp, false);
+			forIns.setInitialisation(affDeb);
+		
+			if (contentCondition != null) {			
+				Condition cond  = (Condition) contentCondition.getElementProgramme();
+				if (contentCondition.getModele().getLesZonesSaisies().get(0).getValeur().isEmpty()) {
+					cond.setMembreGauche(var);
+				}
+				forIns.setCondition(cond);
+			}
+			
+			if (contentPas != null) {
+				InstructionIncrementation affPas  = (InstructionIncrementation) contentPas.getElementProgramme();
+				affPas.setExpression(var);
+				forIns.setIteration(affPas);
+			}
 		}
 	}
 
@@ -144,10 +148,9 @@ public class ForWidget extends ModeleWidget {
                     String deb = ((Zone) getLesZonesSaisies().get(1)).getValeur();
                     Operateur o = Operateur.comparaisonA()[Integer.parseInt(((Zone) getLesZonesSaisies().get(2)).getValeur())];
                     String fin = ((Zone) getLesZonesSaisies().get(3)).getValeur();
-                    String pas = ((Zone) getLesZonesSaisies().get(4)).getValeur();
 
                     setCondition(v, o, fin);
-                    setIteration(v, pas);
+                    setIteration(v);
                     setInitialization(v, deb);
                 }
             });
@@ -186,11 +189,9 @@ public class ForWidget extends ModeleWidget {
      * @param v La variable concernée
      * @param pas La valeur du pas pour une itération
      */
-    public void setIteration(final Variable v, final String pas) {
-        Affectation aff = new Affectation(false);
-        aff.setMembreGauche(v);
-        Operation op = new Operation(Operateur.ADDITION, v, new VariableConstante(TypeVariable.INT, "", pas));
-        aff.setMembreDroit(op);
+    public void setIteration(final Variable v) {
+        InstructionIncrementation aff = (InstructionIncrementation)getElementProgramme();
+		aff.setExpression(v);
         ((InstructionFor) getElementProgramme()).setIteration(aff);
     }
 }

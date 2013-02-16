@@ -21,8 +21,10 @@ import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.arborescence.DragAndDropTools;
 import jscratch.vue.widgets.modeles.ExpressionArithmeticWidget;
 import jscratch.vue.widgets.modeles.ExpressionLogicalWidget;
+import jscratch.vue.widgets.modeles.IncrementationWidget;
 import jscratch.vue.widgets.modeles.VariableWidget;
 import nxtim.instruction.Condition;
+import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.Operation;
 
 /**
@@ -272,6 +274,10 @@ public class Widget extends JComponent {
 		// Si le widget est une expression logique, ajout de l'opérateur
 		if (ExpressionLogicalWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
 			widget.setAttribute("supplement", ((Condition)this.getModele().getElementProgramme()).getOperateur().toString());
+		}
+		
+		if (IncrementationWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
+			widget.setAttribute("supplement", ((InstructionIncrementation)this.getModele().getElementProgramme()).getOperateur().toString());
 		}
 		
 		// Si le widget est placé sur le PanelCodeGraphique, ajout des coordonnées. Sinon, les oordonnées seront recalculées automatiquement.

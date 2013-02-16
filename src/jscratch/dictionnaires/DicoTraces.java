@@ -1,8 +1,10 @@
-package jscratch.traces;
+package jscratch.dictionnaires;
 
 import java.util.LinkedList;
 import java.util.List;
 import jscratch.helpers.PropertiesHelper;
+import jscratch.traces.Trace;
+import jscratch.traces.TypeTrace;
 
 /**
  * Le dictionnaire qui stockera toutes les traces.
