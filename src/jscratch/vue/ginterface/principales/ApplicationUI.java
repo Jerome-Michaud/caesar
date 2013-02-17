@@ -6,7 +6,6 @@ import jscratch.vue.ginterface.principales.panels.ZoneUtilisateur;
 import jscratch.vue.ginterface.principales.panels.PanelCodeConsole;
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import javax.swing.JComponent;
@@ -34,7 +33,6 @@ public final class ApplicationUI extends JFrame {
 	 * @see Vue.Interface.GlassPane
 	 */
 	private GlassPane glassPane;
-	private Dimension ecran;
 	private JSplitPane split;
 
 	private ApplicationUI() {
@@ -42,9 +40,8 @@ public final class ApplicationUI extends JFrame {
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-
-		ecran = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setMinimumSize(new Dimension(((int) ecran.getWidth() * 2 / 3), ((int) ecran.getHeight() * 2 / 3)));
+		this.setMinimumSize(new Dimension(800, 500));
+		this.setExtendedState(MAXIMIZED_BOTH);
 
 		this.setJMenuBar(Menu.getInstance());
 		
