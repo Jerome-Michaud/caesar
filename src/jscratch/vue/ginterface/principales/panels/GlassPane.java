@@ -67,7 +67,7 @@ public final class GlassPane extends JPanel implements Observer {
 		this.pointLigne = null;
 		this.rectFusion = null;
 		this.longueurLigne = 0;
-		this.deleteImage = ImagesHelper.getImage("remove.png");
+		this.deleteImage = ImagesHelper.getImage("cross-circle-big.png");
 		this.setDeleteIconPosition(null);
 		this.setLayout(null);
 		this.setOpaque(false);
