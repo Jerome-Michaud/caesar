@@ -9,9 +9,9 @@ import java.util.List;
 public enum Operateur {
 
 	/**
-	 * Les opérateurs uniaires.
+	 * Les opérateurs d'incrémentation.
 	 */
-	INC_PLUS, INC_MOINS,
+	INCREMENTATION_PLUS, INCREMENTATION_MOINS,
 	/**
 	 * Les opérateurs binaire.
 	 */
@@ -28,9 +28,9 @@ public enum Operateur {
 	@Override
 	public String toString() {
 		switch (this) {
-			case INC_PLUS:
+			case INCREMENTATION_PLUS:
 				return "++";
-			case INC_MOINS:
+			case INCREMENTATION_MOINS:
 				return "--";
 			case AFFECTATION:
 				return "=";
@@ -67,11 +67,11 @@ public enum Operateur {
 	 * @param o l'opérateur à tester
 	 * @return <code>true</code> si l'opérateur est arithmétique, sinon <code>false</code>.
 	 */
-	public static boolean isUnaire(final Operateur o) {
+	public static boolean isIncrementation(final Operateur o) {
 		switch (o) {
-			case INC_PLUS:
+			case INCREMENTATION_PLUS:
 				return true;
-			case INC_MOINS:
+			case INCREMENTATION_MOINS:
 				return true;
 			default:
 				return false;
@@ -106,12 +106,27 @@ public enum Operateur {
 	 * @return <code>true</code> si l'opérateur est logique, sinon <code>false</code>
 	 */
 	public static boolean isLogique(final Operateur o) {
-		if (!Operateur.isArithmetique(o) && o != AFFECTATION) {
+		if (!Operateur.isArithmetique(o) && !Operateur.isIncrementation(o) && o != AFFECTATION) {
 			return true;
 		}
 		return false;
 	}
 
+	/**
+	 * Donne la liste des opérateurs logiques sous forme d'une liste.
+	 *
+	 * @return la liste des opérateurs logiques.
+	 */
+	public static List<Operateur> incrementations() {
+		List<Operateur> ops = new LinkedList<Operateur>();
+		for (Operateur o : values()) {
+			if (isIncrementation(o)) {
+				ops.add(o);
+			}
+		}
+		return ops;
+	}
+	
 	/**
 	 * Donne la liste des opérateurs logiques sous forme d'une liste.
 	 *

@@ -94,10 +94,10 @@ public class InstructionIncrementation implements Instruction {
 
 	public Object getOperateur() {
 		if (positive) {
-			return Operateur.INC_PLUS;
+			return Operateur.INCREMENTATION_PLUS;
 		}
 		else {
-			return Operateur.INC_MOINS;
+			return Operateur.INCREMENTATION_MOINS;
 		}
 	}
 }

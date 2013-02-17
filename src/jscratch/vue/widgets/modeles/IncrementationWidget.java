@@ -22,13 +22,13 @@ public class IncrementationWidget extends ModeleWidget {
 	/**
 	 * Default constructor of <code>IncrementationPlusWidget</code>.
 	 */
-	public IncrementationWidget(Operateur op) {
+	public IncrementationWidget(Operateur op, final boolean isAvant) {
 		InstructionIncrementation ins;
-		if (op == Operateur.INC_PLUS){
-			ins = new InstructionIncrementation((Variable) null, true);
+		if (op == Operateur.INCREMENTATION_PLUS){
+			ins = new InstructionIncrementation(null, true, isAvant);
 		}
 		else {
-			ins = new InstructionIncrementation((Variable) null, false);
+			ins = new InstructionIncrementation(null, false, isAvant);
 		}
 		this.setElementProgramme(ins);
 		this.attachableBas = false;
