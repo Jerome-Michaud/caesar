@@ -57,13 +57,15 @@ public final class ApplicationUI extends JFrame {
 
 		add(creerDocking());
 
+		DockingManager.setMinimized(zoneCodeConsole, true);
+		DockingManager.setTabReorderByDraggingEnabled(false);
+		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent evt) {
 				DockingManager.unregisterDockable("zoneCodeGraphique-SimpleDocking");
 				DockingManager.unregisterDockable("zoneSimulateur-SimpleDocking");
 				DockingManager.unregisterDockable("zoneCodeConsole-SimpleDocking");
-				DockingManager.unregisterDockable("zoneWidgets-SimpleDocking");
 			}
 		});
 
@@ -90,8 +92,8 @@ public final class ApplicationUI extends JFrame {
 		viewport = new JYDockingPort();
 		viewport.dock(zoneCodeGraphique);
 		
-		zoneCodeGraphique.dock(zoneCodeConsole, DockingManager.EAST_REGION, .75f);
-		zoneCodeGraphique.dock(zoneSimulateur, DockingManager.CENTER_REGION, .75f);
+		zoneCodeGraphique.dock(zoneCodeConsole, DockingManager.EAST_REGION, .10f);
+		zoneCodeGraphique.dock(zoneSimulateur, DockingManager.CENTER_REGION, 1f);
 
 		zoneCodeGraphique.getDockingPort().setTabPlacement(SwingConstants.BOTTOM);
 		zoneCodeGraphique.getDockingPort().setSelectedTabIndex(0);
@@ -110,7 +112,9 @@ public final class ApplicationUI extends JFrame {
 	 */
 	private JYDockingView creerZoneEdition() {
 		JYDockingView view = new JYDockingView("zoneCodeGraphique-SimpleDocking", "Edition", "Edition");
-		view.setTerritoryBlocked(DockingManager.CENTER_REGION, true);
+		view.setIcon(ImagesHelper.getIcon("code_18.png"));
+		view.setDockbarIcon(ImagesHelper.getIcon("code_18.png"));
+		//view.setTerritoryBlocked(DockingManager.CENTER_REGION, true);
 		view.setContentPane(GUI.getZoneUtilisateur());
 
 		return view;
@@ -125,7 +129,10 @@ public final class ApplicationUI extends JFrame {
 	 */
 	private JYDockingView creerZoneSimulation() {
 		JYDockingView view = new JYDockingView("zoneSimulateur-SimpleDocking", "Simulation", "Simulation");
-		view.setTerritoryBlocked(DockingManager.CENTER_REGION, true);
+		view.addAction(new DefaultMinimizeAction(view, DockingManager.LEFT));
+		view.setIcon(ImagesHelper.getIcon("robot_18.png"));
+		view.setDockbarIcon(ImagesHelper.getIcon("robot_18.png"));
+		//view.setTerritoryBlocked(DockingManager.CENTER_REGION, true);
 		view.setContentPane(GUI.creerZoneSimulateur());
 
 		return view;
@@ -138,8 +145,10 @@ public final class ApplicationUI extends JFrame {
 	 */
 	private JYDockingView creerZoneCodeConsole() {
 		JYDockingView view = new JYDockingView("zoneCodeConsole-SimpleDocking", "Code console", "Code console");
-		view.addAction(new DefaultMinimizeAction(view));
-		view.setTerritoryBlocked(DockingManager.EAST_REGION, true);
+		view.addAction(new DefaultMinimizeAction(view, DockingManager.RIGHT));
+		view.setIcon(ImagesHelper.getIcon("cmd_18.png"));
+		view.setDockbarIcon(ImagesHelper.getIcon("cmd_18.png"));
+		//view.setTerritoryBlocked(DockingManager.EAST_REGION, true);
 		view.setContentPane(GUI.getPanelCodeConsole());
 
 		return view;
