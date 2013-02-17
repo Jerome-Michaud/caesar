@@ -54,15 +54,15 @@ public final class Menu extends JMenuBar {
 	private Menu() {
 		this.fichier = new JMenu("Fichier");
 		this.fichierNouveau = new JMenuItem("Nouveau");
-		this.fichierNouveau.setIcon(ImagesHelper.getIcon("page_blank.png"));
+		this.fichierNouveau.setIcon(ImagesHelper.getIcon("document.png"));
 		this.fichierOuvrir = new JMenuItem("Ouvrir ...");
-		this.fichierOuvrir.setIcon(ImagesHelper.getIcon("folder_search.png"));
+		this.fichierOuvrir.setIcon(ImagesHelper.getIcon("folder-horizontal-open.png"));
 		this.fichierEnregistrer = new JMenuItem("Enregistrer ...");
-		this.fichierEnregistrer.setIcon(ImagesHelper.getIcon("save.png"));
+		this.fichierEnregistrer.setIcon(ImagesHelper.getIcon("disk-black.png"));
 		this.fichierChargerProp = new JMenuItem("Charger configuration ...");
-		this.fichierChargerProp.setIcon(ImagesHelper.getIcon("configuration.png"));
+		this.fichierChargerProp.setIcon(ImagesHelper.getIcon("gear.png"));
 		this.fichierQuitter = new JMenuItem("Quitter");
-		this.fichierQuitter.setIcon(ImagesHelper.getIcon("remove.png"));
+		this.fichierQuitter.setIcon(ImagesHelper.getIcon("cross-circle.png"));
 		
 		this.fichier.add(fichierNouveau);
 		this.fichier.addSeparator();
@@ -74,7 +74,7 @@ public final class Menu extends JMenuBar {
 
 		this.exportation = new JMenu("Exporter");
 		this.exportationNXC = new JMenuItem("En NXC");
-		this.exportationNXC.setIcon(ImagesHelper.getIcon("export_nxc.png"));
+		this.exportationNXC.setIcon(ImagesHelper.getIcon("document-code.png"));
 		this.exportation.add(exportationNXC);
 		this.exportationRobot = new JMenuItem("Vers le robot");
 		this.exportationRobot.setIcon(ImagesHelper.getIcon("robot.png"));
@@ -82,7 +82,7 @@ public final class Menu extends JMenuBar {
 		
 		this.aide = new JMenu("?");
 		this.aideAPropos = new JMenuItem("A propos");
-		this.aideAPropos.setIcon(ImagesHelper.getIcon("info.png"));
+		this.aideAPropos.setIcon(ImagesHelper.getIcon("information-italic.png"));
 		this.aide.add(aideAPropos);
 
 		this.add(fichier);

@@ -44,14 +44,19 @@ public class PanelController extends JPanel implements ActionListener{
 		Image newimg = ImagesHelper.resizeImg(img, 15, 15);
 		icon = new ImageIcon( newimg );
 		
+		ImageIcon iconPlay = (ImageIcon) ImagesHelper.getIcon("control.png");
+		ImageIcon iconPause = (ImageIcon) ImagesHelper.getIcon("control-pause.png");
+		ImageIcon iconStop = (ImageIcon) ImagesHelper.getIcon("control-stop-square.png");		
+		ImageIcon iconDebug = (ImageIcon) ImagesHelper.getIcon("bug.png");
+		
 		buttonBar = new ButtonBar();
 		
-	    b1 = createButton("Exécuter",icon, true, false);	    
-	    b2 = createButton("Pause",icon, false, false);
-	    b3 = createButton("Stop",icon, false, false);
+	    b1 = createButton("Exécuter", iconPlay, true, false);	    
+	    b2 = createButton("Pause", iconPause, false, false);
+	    b3 = createButton("Stop", iconStop, false, false);
 	    
 	    b4 = new SimpleDropDownButton("Debug");
-	    b4.setIcon(icon);
+	    b4.setIcon(iconDebug);
 	    
 	    JPopupMenu popupMenu = b4.getPopupMenu(); 
 	    
