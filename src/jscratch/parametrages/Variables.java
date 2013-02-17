@@ -39,10 +39,9 @@ public class Variables {
 	public static final Rectangle ZONE_ACCROCHE_DOWHILE = new Rectangle(5, 16, 130, 15);
 	
 	// Gestion des couleurs des catégories
-	private static final int QUANTITE_COULEUR = 141;
-	public static final Color GRIS_INACTIF = Color.LIGHT_GRAY;
-	public static final Color GRIS_ACTIF = Color.DARK_GRAY;
-	public static final Color GRIS_SURVOLE = new Color(QUANTITE_COULEUR, QUANTITE_COULEUR, QUANTITE_COULEUR);
+	public static final Color GRIS_INACTIF = new Color(90, 111, 116);
+	public static final Color GRIS_ACTIF = new Color(55, 69, 72);
+	public static final Color GRIS_SURVOLE = new Color(147, 167, 172);
 	
 	/**
 	 * Taille en Y de la marge pour la fusion de deux widgets.

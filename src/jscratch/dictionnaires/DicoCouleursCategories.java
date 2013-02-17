@@ -29,12 +29,12 @@ public final class DicoCouleursCategories {
 	private DicoCouleursCategories() {
 		this.dico = new HashMap<Categorie, Color>();
 		
-		this.dico.put(Categorie.STRUCTURES, new Color(230, 126, 77));
-		this.dico.put(Categorie.MOTEURS, new Color(133, 205, 68));
-		this.dico.put(Categorie.EXPRESSIONS, new Color(204, 51, 0));
-		this.dico.put(Categorie.CAPTEURS, new Color(102, 51, 204));
-		this.dico.put(Categorie.TEMPS, new Color(0, 179, 214));
-		this.dico.put(Categorie.VARIABLES, new Color(212, 82, 144));
+		this.dico.put(Categorie.STRUCTURES, new Color(245, 112, 30));
+		this.dico.put(Categorie.MOTEURS,  new Color(136, 193, 0));
+		this.dico.put(Categorie.EXPRESSIONS, new Color(229, 64, 40));
+		this.dico.put(Categorie.CAPTEURS, new Color(148, 61, 138));
+		this.dico.put(Categorie.TEMPS, new Color(0, 161, 203));
+		this.dico.put(Categorie.VARIABLES, new Color(233, 78, 119));
 	}
 	
 	/**

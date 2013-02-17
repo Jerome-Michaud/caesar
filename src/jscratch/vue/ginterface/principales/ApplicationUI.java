@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
 
 import java.awt.Dimension;
+import javax.swing.JSplitPane;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -48,9 +49,9 @@ public final class ApplicationUI extends JFrame {
 		this.setTitle("C.A.E.S.A.R");
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		ecran = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setMinimumSize(new Dimension(((int) ecran.getWidth() * 2 / 3), ((int) ecran.getHeight() * 2 / 3)));
+
+		this.setMinimumSize(new Dimension(800, 500));
+		this.setExtendedState(MAXIMIZED_BOTH);
 
 		this.setJMenuBar(Menu.getInstance());
 
