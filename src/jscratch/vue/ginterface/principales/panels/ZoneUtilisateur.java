@@ -30,7 +30,7 @@ public final class ZoneUtilisateur extends JPanel {
 	 */
 	private ZoneUtilisateur() {
 		this.setLayout(new BorderLayout());
-		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
+		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
 		
 		scrollCodeGraphique = new JScrollPane(p);
 		scrollCodeGraphique.setBorder(null);

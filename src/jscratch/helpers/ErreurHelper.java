@@ -1,7 +1,7 @@
 package jscratch.helpers;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import de.javasoft.swing.DetailsDialog;
+import jscratch.vue.ginterface.principales.GUI;
 
 /**
  * Définit l'action à faire lors d'une erreur.<br/>
@@ -28,8 +28,7 @@ public final class ErreurHelper {
 	 * @param e l'exception à gérer
 	 */
 	public static void afficher(final Exception e) {
-		//JOptionPane.showMessageDialog(Fenetre.getInstance(), e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-		e.printStackTrace();
+		DetailsDialog.showDialog(GUI.getFenetre(), null, "Une erreur de type '" + e.getClass().getSimpleName() + "' est survenue", e);
 		System.exit(1);
 	}
 
@@ -42,9 +41,7 @@ public final class ErreurHelper {
 	 * @param message le message à logguer
 	 */
 	public static void afficher(final Exception e, final String message) {
-		//JOptionPane.showMessageDialog(Fenetre.getInstance(), e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-		Logger.getLogger(ErreurHelper.class.getName()).log(Level.SEVERE, message);
-		e.printStackTrace();
+		DetailsDialog.showDialog(GUI.getFenetre(), null, message, e);
 		System.exit(1);
 	}
 }

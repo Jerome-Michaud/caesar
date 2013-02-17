@@ -57,7 +57,6 @@ public final class SauvegardePropertiesTools implements SauvegardeTools {
 		}
 		
 		// Mise à jour de l'interface
-		GUI.getFenetre().reset();
 		GUI.getZoneUtilisateur().reset();
 	}
 

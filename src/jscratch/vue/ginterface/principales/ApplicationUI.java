@@ -1,20 +1,22 @@
 package jscratch.vue.ginterface.principales;
 
+import de.javasoft.swing.JYDockingPort;
+import de.javasoft.swing.JYDockingView;
+import de.javasoft.swing.jydocking.DockingManager;
+import de.javasoft.swing.plaf.jydocking.DefaultMinimizeAction;
+import java.awt.BorderLayout;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
-import jscratch.vue.ginterface.principales.panels.OngletUtilisateur;
-import jscratch.vue.ginterface.principales.panels.ZoneUtilisateur;
-import jscratch.vue.ginterface.principales.panels.PanelCodeConsole;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import javax.swing.JComponent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
-import javax.swing.JSplitPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import jscratch.helpers.ImagesHelper;
-import jscratch.helpers.PropertiesHelper;
 
 /**
  * Fenêtre principale de l'application.
@@ -35,33 +37,34 @@ public final class ApplicationUI extends JFrame {
 	 */
 	private GlassPane glassPane;
 	private Dimension ecran;
-	private JSplitPane split;
+	
+	private JYDockingPort viewport;
+	private JYDockingView zoneCodeGraphique, zoneCodeConsole, zoneSimulateur;
 
+	/**
+	 * Constructeur privé de <code>ApplictionUI</code>.
+	 */
 	private ApplicationUI() {
 		this.setTitle("C.A.E.S.A.R");
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
+		
 		ecran = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setMinimumSize(new Dimension(((int) ecran.getWidth() * 2 / 3), ((int) ecran.getHeight() * 2 / 3)));
 
 		this.setJMenuBar(Menu.getInstance());
-		
-		this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, rootPaneCheckingEnabled, ZoneUtilisateur.getInstance(), PanelCodeConsole.getInstance());
-		
-		reset();
-		
-		this.setContentPane(this.split);
 
-		this.addComponentListener(new ComponentAdapter() {
+		add(creerDocking());
+
+		addWindowListener(new WindowAdapter() {
 			@Override
-			public void componentResized(ComponentEvent e) {
-				split.setDividerLocation(0.75);
+			public void windowClosed(WindowEvent evt) {
+				DockingManager.unregisterDockable("zoneCodeGraphique-SimpleDocking");
+				DockingManager.unregisterDockable("zoneSimulateur-SimpleDocking");
+				DockingManager.unregisterDockable("zoneCodeConsole-SimpleDocking");
+				DockingManager.unregisterDockable("zoneWidgets-SimpleDocking");
 			}
 		});
-		
-		
 
 		//Gestion du GlassPane
 		this.glassPane = GlassPane.getInstance();
@@ -69,9 +72,76 @@ public final class ApplicationUI extends JFrame {
 		this.glassPane.setVisible(true);
 
 		this.setVisible(true);
-		this.split.setDividerLocation(0.75);
-		
+
 		this.setLocationRelativeTo(null);
+	}
+
+	/**
+	 * Permet de créer la zone de <code>Docking</code>.
+	 * 
+	 * @since 1.0
+	 */
+	private JPanel creerDocking() {
+		zoneCodeGraphique = creerZoneEdition();
+		zoneCodeConsole = creerZoneCodeConsole();
+		zoneSimulateur = creerZoneSimulation();
+		
+		viewport = new JYDockingPort();
+		viewport.dock(zoneCodeGraphique);
+		
+		zoneCodeGraphique.dock(zoneCodeConsole, DockingManager.EAST_REGION, .75f);
+		zoneCodeGraphique.dock(zoneSimulateur, DockingManager.CENTER_REGION, .75f);
+
+		zoneCodeGraphique.getDockingPort().setTabPlacement(SwingConstants.BOTTOM);
+		zoneCodeGraphique.getDockingPort().setSelectedTabIndex(0);
+		
+		JPanel p = new JPanel(new BorderLayout(0, 0));
+		p.setBorder(new EmptyBorder(5, 5, 5, 5));
+		p.add(viewport, BorderLayout.CENTER);
+
+		return p;
+	}
+
+	/**
+	 * Permet de créer la zone <code>Edition</code>.
+	 * 
+	 * @since 1.0
+	 */
+	private JYDockingView creerZoneEdition() {
+		JYDockingView view = new JYDockingView("zoneCodeGraphique-SimpleDocking", "Edition", "Edition");
+		view.setTerritoryBlocked(DockingManager.CENTER_REGION, true);
+		view.setContentPane(GUI.getZoneUtilisateur());
+
+		return view;
+	}
+
+	/**
+	 * Permet de créer la zone <code>Simulation</code>.
+	 * 
+	 * @since 1.0
+	 * 
+	 * @return la zone de simulation
+	 */
+	private JYDockingView creerZoneSimulation() {
+		JYDockingView view = new JYDockingView("zoneSimulateur-SimpleDocking", "Simulation", "Simulation");
+		view.setTerritoryBlocked(DockingManager.CENTER_REGION, true);
+		view.setContentPane(GUI.creerZoneSimulateur());
+
+		return view;
+	}
+	
+	/**
+	 * Permet de créer la vue <code>CodeConsole</code>.
+	 * 
+	 * @since 1.0
+	 */
+	private JYDockingView creerZoneCodeConsole() {
+		JYDockingView view = new JYDockingView("zoneCodeConsole-SimpleDocking", "Code console", "Code console");
+		view.addAction(new DefaultMinimizeAction(view));
+		view.setTerritoryBlocked(DockingManager.EAST_REGION, true);
+		view.setContentPane(GUI.getPanelCodeConsole());
+
+		return view;
 	}
 
 	/**
@@ -81,18 +151,5 @@ public final class ApplicationUI extends JFrame {
 	 */
 	public static ApplicationUI getInstance() {
 		return instance;
-	}
-	
-	/**
-	 * Permet de mettre à jour l'interface suivant le properties.
-	 */
-	public void reset() {
-		JComponent composantAAjouter = ZoneUtilisateur.getInstance();
-		// Si le simulateur est activé, il est ajouté en plus
-		if (Boolean.valueOf(PropertiesHelper.getInstance().get("user.interface.afficher.simulateur"))) {
-			composantAAjouter = OngletUtilisateur.getInstance();
-		}
-		this.split.setLeftComponent(composantAAjouter);
-		this.split.setDividerLocation(0.75);
 	}
 }

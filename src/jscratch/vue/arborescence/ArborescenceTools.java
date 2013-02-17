@@ -1,7 +1,6 @@
 package jscratch.vue.arborescence;
 
 import java.awt.Rectangle;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,6 @@ import jscratch.vue.ginterface.principales.panels.PanelCodeGraphique;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.WidgetCompose;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
-import jscratch.vue.widgets.modeles.VariableWidget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.Zone;
 
