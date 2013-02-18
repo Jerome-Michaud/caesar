@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import jscratch.vue.widgets.YComparableRectangle;
 import nxtim.instruction.IElementProgramme;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Categorie;
@@ -105,7 +104,7 @@ public abstract class ModeleWidget implements Serializable {
 	/**
      * Liste des zones où pourront être imbriqués d'autres widgets.
      */
-    protected List<YComparableRectangle> zonesAccroches;
+    protected List<Rectangle> zonesAccroches;
     
 	/**
      * Élément du programme de traduction.
@@ -131,7 +130,7 @@ public abstract class ModeleWidget implements Serializable {
         this.attachableHaut = true;
         this.attachableInterne = false;
         this.imbricable = true;
-        this.zonesAccroches = new LinkedList<YComparableRectangle>();
+        this.zonesAccroches = new LinkedList<Rectangle>();
         this.lesZonesSaisies = new LinkedList<Zone>();
         this.message = new HashMap<Point, String>();
     }
@@ -220,7 +219,7 @@ public abstract class ModeleWidget implements Serializable {
      *
      * @return La liste de zones d'accroche du widget.
      */
-    public List<YComparableRectangle> getZonesAccroches() {
+    public List<Rectangle> getZonesAccroches() {
         return zonesAccroches;
     }
 

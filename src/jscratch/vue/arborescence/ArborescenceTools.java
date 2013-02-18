@@ -12,7 +12,6 @@ import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.principales.panels.PanelCodeGraphique;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.WidgetCompose;
-import jscratch.vue.widgets.YComparableRectangle;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.Zone;
@@ -326,8 +325,8 @@ public final class ArborescenceTools {
 		if (widget.isComplexe()) {
 			WidgetCompose widgetComp = (WidgetCompose) widget;
 			
-			Map<YComparableRectangle, List<Widget>> mapWidgets = widgetComp.getMapZone();
-			for (YComparableRectangle r : mapWidgets.keySet()) {
+			Map<Rectangle, List<Widget>> mapWidgets = widgetComp.getMapZone();
+			for (Rectangle r : mapWidgets.keySet()) {
 				for (Widget w : mapWidgets.get(r)) {
 					supprimerVariable(w, nom);
 				}
