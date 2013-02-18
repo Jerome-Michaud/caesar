@@ -167,7 +167,7 @@ public class Robot{
 		return largeur;
 	}
 
-	public double getOrientation() {
+	public double getOrientation() {		
 		return orientation;
 	}
 
@@ -187,6 +187,13 @@ public class Robot{
 
 	public void setOrientation(double orientation) {
 		this.orientation = orientation;
+		
+		if (this.orientation > 2 * Math.PI) {
+			this.orientation -= 2 * Math.PI;
+		}
+		else if (this.orientation < 0) {
+			this.orientation += 2 * Math.PI;
+		}
 	}
 
 	public double getRayon() {
