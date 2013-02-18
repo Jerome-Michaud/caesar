@@ -41,6 +41,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		g = new ChampTexte(widthChamp, this);
 		g.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		g.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
+		g.ajouterTypeWidgetAccepte(TypeModeleWidget.CAPTEUR);
 		g.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		g.setBounds(55, 3, widthChamp, 20);
 		g.setValeur("0");

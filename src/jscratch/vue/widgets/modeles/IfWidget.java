@@ -55,12 +55,14 @@ public class IfWidget extends ModeleWidget {
 	@Override
 	public void applyChangeModele(){		
 		Widget contentWidget = f.getContentWidget();
+		InstructionIf ifIns = ((InstructionIf) getElementProgramme());
 		
 		// On met à jour la condition dans l'elementProgramme si elle existe
-		if (contentWidget != null) {
-			InstructionIf ifIns = ((InstructionIf) getElementProgramme());
+		if (contentWidget != null) {			
 			Condition cond = (Condition) contentWidget.getElementProgramme();
 			ifIns.setCondition(cond);
+		} else {
+			ifIns.setCondition(null);
 		}
 	}
 	

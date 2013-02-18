@@ -5,7 +5,11 @@ public enum TypeModeleWidget {
 	/**
 	 * Les différents types de widget.
 	 */
-	INSTRUCTION, IF, WHILE, NEGATION, TACHE, DOWHILE, IFELSE, MOTEURMARCHE, TEMPSCOURANT, MOTEUROFF, REPEAT, FOR, WAIT, VARIABLE, SETVALUEVARIABLE, EXPRESSION_LOGIQUE, EXPRESSION_ARITHMETIQUE, EXPRESSION_INC;
+	INSTRUCTION, IF, WHILE, NEGATION, TACHE, DOWHILE, IFELSE, MOTEURMARCHE, TEMPSCOURANT, MOTEUROFF, REPEAT, FOR, WAIT, VARIABLE, SETVALUEVARIABLE, EXPRESSION_LOGIQUE, EXPRESSION_ARITHMETIQUE, EXPRESSION_INC,
+	/**
+	 * Type "Capteur".
+	 */
+	CAPTEUR;
 
 	@Override
 	public String toString() {
@@ -46,6 +50,8 @@ public enum TypeModeleWidget {
 			return "ExpressionIncrementation";
 		case TEMPSCOURANT:
 			return "TempsCourant";
+		case CAPTEUR:
+			return "Capteur";
 		default:
 			return null;
 		}

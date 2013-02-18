@@ -20,6 +20,7 @@ import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.InstructionWhile;
 import nxtim.instruction.TempsCourant;
+import nxtim.instruction.ValeurCapteur;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableCapteur;
 
@@ -284,5 +285,10 @@ public class VisiteurC extends VisiteurTraduction {
 		if (!instructionIncrementation.isAvant()) {
 			traduction += op;
 		}
+	}
+
+	@Override
+	public void visiter(ValeurCapteur valCapteur) {
+		traduction += "/* Code C pour obtenir la valeur d'un capteur inconnu ! */\n";
 	}
 }

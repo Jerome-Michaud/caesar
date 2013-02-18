@@ -65,7 +65,7 @@ public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator,Ob
 				"gauche (C) = " + robot.getMotor(MotorPort.OUT_C).getPower() + "; droit (B) = " + robot.getMotor(MotorPort.OUT_B).getPower() + "<br /><br />" +
 				"<strong>Rotations moteurs :</strong> <br />" +
 				"gauche (C) = " + robot.getMotor(MotorPort.OUT_C).getRotationCount() + "; droit (B) = " + robot.getMotor(MotorPort.OUT_B).getRotationCount() + "<br /> <br />" +
-				"<strong>Orientation :</strong> " + (int) Math.toDegrees(robot.getOrientation()) + "<br /> <br />" +
+				"<strong>Orientation :</strong> " + (int) Math.toDegrees(robot.getOrientation()) + "°<br /> <br />" +
 				"<strong>Position :</strong> x = " + (int) robot.getPointCentral().getX() + "; y = " + (int) robot.getPointCentral().getY() + "<br /></html>");
 		
 			

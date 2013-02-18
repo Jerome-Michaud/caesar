@@ -1,7 +1,10 @@
 package jscratch.vue.categories.boutons;
 
+import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.vue.categories.ModeleCategorie;
+import jscratch.vue.ginterface.principales.GUI;
 import nxtim.instruction.Categorie;
+import nxtim.instruction.Operateur;
 
 /**
  * Classe permettant l'instanciation du bouton catégorie "Entrée/Sortie".
@@ -26,6 +29,6 @@ public class BoutonCategorieCapteur extends BoutonCategorie {
 
 	@Override
 	public void ajouterWidgets() {
-		
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.CAPTEURS, GUI.getPanelWidget().getFabrique().creerWidgetCapteur());
 	}
 }
