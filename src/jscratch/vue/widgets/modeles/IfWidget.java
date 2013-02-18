@@ -86,7 +86,4 @@ public class IfWidget extends ModeleWidget {
         this.setForme(this.getForme());
         this.setTailleY();
     }
-    
-	@Override
-	public void initListeners() { }
 }

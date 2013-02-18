@@ -118,9 +118,6 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 	}
 
 	@Override
-	public void initListeners() { }
-
-	@Override
 	public void decalageX(int x) {
 		int i;
 		for (i = 2; i < this.getTabX().length - 2; i++) {

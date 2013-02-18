@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 import jscratch.parametrages.Variables;
 import jscratch.vue.widgets.Widget;
+import jscratch.vue.widgets.YComparableRectangle;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionDoWhile;
@@ -87,7 +88,4 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		boundsChTexte.translate(0, b);
 		f.setBounds(boundsChTexte);
 	}
-
-	@Override
-	public void initListeners() { }
 }

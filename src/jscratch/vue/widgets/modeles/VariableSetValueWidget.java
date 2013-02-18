@@ -91,9 +91,6 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setTailleY();
 	}
 
-	@Override
-	public void initListeners() { }
-
 	/**
 	 * Permet de récupérer le nom de la variable.
 	 * 

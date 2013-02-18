@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import jscratch.vue.widgets.YComparableRectangle;
 import nxtim.instruction.IElementProgramme;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Categorie;
@@ -104,7 +105,7 @@ public abstract class ModeleWidget implements Serializable {
 	/**
      * Liste des zones où pourront être imbriqués d'autres widgets.
      */
-    protected List<Rectangle> zonesAccroches;
+    protected List<YComparableRectangle> zonesAccroches;
     
 	/**
      * Élément du programme de traduction.
@@ -130,15 +131,15 @@ public abstract class ModeleWidget implements Serializable {
         this.attachableHaut = true;
         this.attachableInterne = false;
         this.imbricable = true;
-        this.zonesAccroches = new LinkedList<Rectangle>();
+        this.zonesAccroches = new LinkedList<YComparableRectangle>();
         this.lesZonesSaisies = new LinkedList<Zone>();
         this.message = new HashMap<Point, String>();
     }
 
     /**
-     * Méthode abstraite permettant d'initialiser les listeners du modèle.
+     * Méthode permettant d'initialiser les listeners du modèle. Par défaut cette methode ne fait rien
      */
-    public abstract void initListeners();
+    public void initListeners() { }
 
     /**
      * Méthode permettant de récupérer l'élement de programme du modèle.
@@ -219,7 +220,7 @@ public abstract class ModeleWidget implements Serializable {
      *
      * @return La liste de zones d'accroche du widget.
      */
-    public List<Rectangle> getZonesAccroches() {
+    public List<YComparableRectangle> getZonesAccroches() {
         return zonesAccroches;
     }
 
