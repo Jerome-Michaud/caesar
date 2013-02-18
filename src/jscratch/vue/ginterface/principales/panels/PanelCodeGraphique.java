@@ -1,16 +1,11 @@
 package jscratch.vue.ginterface.principales.panels;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.widgets.IWidget;
-import jscratch.vue.widgets.Widget;
 
 /**
  * Zone de travail où placer les widgets qui seront ensuite traduits.
@@ -29,7 +24,6 @@ public final class PanelCodeGraphique extends JPanel implements IWidget, Observe
 	private PanelCodeGraphique() {
 		this.setMinimumSize(new Dimension(400, 600));
 		this.setLayout(null);
-		this.setBorder(BorderFactory.createTitledBorder("Code graphique"));
 	}
 
 	/**

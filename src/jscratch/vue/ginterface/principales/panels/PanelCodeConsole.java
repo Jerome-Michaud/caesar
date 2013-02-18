@@ -36,8 +36,7 @@ public final class PanelCodeConsole extends JPanel implements Observer {
 		this.textarea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));
 		this.setLayout(new BorderLayout());
 		this.setMinimumSize(new Dimension(100, 600));
-		this.setBorder(BorderFactory.createTitledBorder("Code NXC"));
-
+		
 		this.add(textarea, BorderLayout.CENTER);
 		
 		this.textarea.addMouseListener(new MouseAdapter() {
@@ -45,7 +44,7 @@ public final class PanelCodeConsole extends JPanel implements Observer {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (!textarea.getText().isEmpty() && e.isPopupTrigger()) {
-					GUI.getPopupCodeNxc().show(e.getComponent(), e.getX(), e.getY());
+					GUI.creerPopupCodeNxc().show(e.getComponent(), e.getX(), e.getY());
 				}
 			}
 		});

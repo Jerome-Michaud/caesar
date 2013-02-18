@@ -139,4 +139,11 @@ public interface VisiteurElementProg {
 	 * @param instructionMoteurRotate l'instruction à visiter
 	 */
 	public void visiter(InstructionMoteurRotate instructionMoteurRotate);
+	
+	/**
+	 * Visite une instruction d'incrémentation.
+	 * 
+	 * @param instructionIncrementation l'instruction à visier
+	 */
+	public void visiter(InstructionIncrementation instructionIncrementation);
 }

@@ -1,7 +1,6 @@
 package jscratch.vue.ginterface.principales.panels;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import jscratch.helpers.PropertiesHelper;
@@ -31,7 +30,7 @@ public final class ZoneUtilisateur extends JPanel {
 	 */
 	private ZoneUtilisateur() {
 		this.setLayout(new BorderLayout());
-		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
+		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
 		
 		scrollCodeGraphique = new JScrollPane(p);
 		scrollCodeGraphique.setBorder(null);

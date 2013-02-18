@@ -80,7 +80,7 @@ public abstract class BoutonCategorie extends JComponent {
 	public BoutonCategorie(final ModeleCategorie modele) {
 		this.font = new Font("TimesRoman", Font.PLAIN, TAILLE);
 		this.modele = modele;
-		this.fond = Color.LIGHT_GRAY;
+		this.fond = Variables.GRIS_INACTIF;
 		this.setFont(this.font);
 		this.setFocusable(true);
 		this.setOpaque(false);

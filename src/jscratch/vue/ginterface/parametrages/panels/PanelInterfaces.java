@@ -28,11 +28,10 @@ public final class PanelInterfaces extends PanelParametrage {
 		this.table = new JYPropertyTable();
 		
 		this.table.addProperty("Afficher le panel widgets",  Boolean.valueOf(p.get("user.interface.afficher.categories")));
-		this.table.addProperty("Afficher le simulateur",  Boolean.valueOf(p.get("user.interface.afficher.simulateur")));
 		
 		this.add(this.table);
 		
-		this.add(new JXHeader("Gestion de l'interface", "Cette partie permet de configurer l'interface de l'applicationtain", ImagesHelper.getIcon("info.png")), BorderLayout.NORTH);
+		this.add(new JXHeader("Gestion de l'interface", "Cette partie permet de configurer l'interface de l'application", ImagesHelper.getIcon("info.png")), BorderLayout.NORTH);
 		this.add(this.table, BorderLayout.CENTER);
 	}
 	
@@ -49,6 +48,5 @@ public final class PanelInterfaces extends PanelParametrage {
 		PropertyTableModel modele = this.table.getModel();
 		
 		p.set("user.interface.afficher.categories", modele.getPropertyValue(0).toString());
-		p.set("user.interface.afficher.simulateur", modele.getPropertyValue(1).toString());
 	}
 }

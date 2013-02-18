@@ -2,6 +2,7 @@ package jscratch.parametrages;
 
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.io.File;
 import jscratch.helpers.PropertiesHelper;
 import jscratch.vue.widgets.YComparableRectangle;
 
@@ -39,10 +40,9 @@ public class Variables {
 	public static final YComparableRectangle ZONE_ACCROCHE_DOWHILE = new YComparableRectangle(5, 16, 130, 15);
 	
 	// Gestion des couleurs des catégories
-	private static final int QUANTITE_COULEUR = 141;
-	public static final Color GRIS_INACTIF = Color.LIGHT_GRAY;
-	public static final Color GRIS_ACTIF = Color.DARK_GRAY;
-	public static final Color GRIS_SURVOLE = new Color(QUANTITE_COULEUR, QUANTITE_COULEUR, QUANTITE_COULEUR);
+	public static final Color GRIS_INACTIF = new Color(90, 111, 116);
+	public static final Color GRIS_ACTIF = new Color(55, 69, 72);
+	public static final Color GRIS_SURVOLE = new Color(147, 167, 172);
 	
 	/**
 	 * Taille en Y de la marge pour la fusion de deux widgets.
@@ -77,7 +77,7 @@ public class Variables {
 	 *
 	 * @see properties
 	 */
-	public static final String CHEMIN_ACCES_NBC = PropertiesHelper.getInstance().get("user.chemin.compilateur");
+	public static final String CHEMIN_ACCES_NBC = PropertiesHelper.getInstance().get("user.chemin.compilateur").replace("\\", File.separator).replace("/", File.separator);
 	
 	/**
 	 * Affichage du nombre de widget dans les boutons catégorie.

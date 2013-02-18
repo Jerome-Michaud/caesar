@@ -30,7 +30,7 @@ public class PopupAjoutVariable extends JPopupMenu {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GUI.getFenetreAjoutVariable();
+				GUI.creerFenetreAjoutVariable();
 			}
 		});
 		this.add(this.ajouter);
@@ -41,7 +41,7 @@ public class PopupAjoutVariable extends JPopupMenu {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					GUI.getFenetreSupressionVariable();
+					GUI.creerFenetreSupressionVariable();
 				}
 			});
 			

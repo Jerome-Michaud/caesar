@@ -1,8 +1,6 @@
 package jscratch.vue.sim;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -12,11 +10,16 @@ import javax.swing.*;
 
 import de.javasoft.swing.ButtonBar;
 import de.javasoft.swing.SimpleDropDownButton;
-
-import javax.swing.AbstractButton;
-
 import jscratch.controleur.sim.Simulator;
 import jscratch.helpers.ImagesHelper;
+import jscratch.interpreteur.LanceurInterpreteur;
+
+/**
+ * Panel permettant de controller l'execution du simulateur
+ * @author Nicolas
+ *
+ */
+
 public class PanelController extends JPanel implements ActionListener{
 
 	private ImageIcon icon;
@@ -30,6 +33,7 @@ public class PanelController extends JPanel implements ActionListener{
 	private JMenuItem m3;
 	private boolean pause = false;
 	private Simulator simulator;
+	private LanceurInterpreteur lanceurInter;
 	
 	public PanelController(Simulator simulator) {
 		
@@ -40,14 +44,19 @@ public class PanelController extends JPanel implements ActionListener{
 		Image newimg = ImagesHelper.resizeImg(img, 15, 15);
 		icon = new ImageIcon( newimg );
 		
+		ImageIcon iconPlay = (ImageIcon) ImagesHelper.getIcon("control.png");
+		ImageIcon iconPause = (ImageIcon) ImagesHelper.getIcon("control-pause.png");
+		ImageIcon iconStop = (ImageIcon) ImagesHelper.getIcon("control-stop-square.png");		
+		ImageIcon iconDebug = (ImageIcon) ImagesHelper.getIcon("bug.png");
+		
 		buttonBar = new ButtonBar();
 		
-	    b1 = createButton("Exécuter",icon, true, false);	    
-	    b2 = createButton("Pause",icon, false, false);
-	    b3 = createButton("Stop",icon, false, false);
+	    b1 = createButton("Exécuter", iconPlay, true, false);	    
+	    b2 = createButton("Pause", iconPause, false, false);
+	    b3 = createButton("Stop", iconStop, false, false);
 	    
 	    b4 = new SimpleDropDownButton("Debug");
-	    b4.setIcon(icon);
+	    b4.setIcon(iconDebug);
 	    
 	    JPopupMenu popupMenu = b4.getPopupMenu(); 
 	    
@@ -72,6 +81,14 @@ public class PanelController extends JPanel implements ActionListener{
 	    m3.addActionListener(this);
 	}
 	
+	/**
+	 * methode permettant de créer un bouton pour la buttonBar
+	 * @param text
+	 * @param icon
+	 * @param enabled
+	 * @param toggleButton
+	 * @return
+	 */
 	private AbstractButton createButton(String text,ImageIcon icon, boolean enabled, boolean toggleButton)
 	  {
 	    AbstractButton b = null;
@@ -103,23 +120,30 @@ public class PanelController extends JPanel implements ActionListener{
 	    b.setIcon(icon);
 	    return b;
 	  }
-
+	
+	/**
+	 * gestion des actions sur les boutons
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Stub de la méthode généré automatiquement
+
 		if(e.getSource() == b1){
 			b2.setEnabled(true);
 			b3.setEnabled(true);
 			b1.setEnabled(false);
+			lanceurInter = new LanceurInterpreteur(simulator.getInterpreteur());
+			lanceurInter.start();
 		}
 		else if(e.getSource() == b2){
 			if(!pause){
 				pause=true;
 				b2.setText("Relance");
+				lanceurInter.waitThread();
 			}
 			else{
 				pause=false;
 				b2.setText("Pause");
+				lanceurInter.notifyThread();
 			}
 		}
 		else if(e.getSource() == b3){
@@ -127,9 +151,10 @@ public class PanelController extends JPanel implements ActionListener{
 			b3.setEnabled(false);
 			b1.setEnabled(true);
 			pause=false;
+			lanceurInter.stopThread();
 		}
 		else if(e.getSource() == m1){
-			simulator.getInterpreteur();
+
 		}
 		else if(e.getSource() == m2){
 					

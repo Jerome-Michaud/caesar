@@ -17,6 +17,11 @@ import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;
 
+/**
+ * Classe recuperant les taches des widget et les parcoure
+ * @author Nicolas
+ *
+ */
 public class Interpreteur {
 
 	private RobotController robot;
@@ -45,7 +50,8 @@ public class Interpreteur {
 		
 		InstructionFor instFor = new InstructionFor(new Affectation(varA,new VariableConstante(TypeVariable.INT,"0") , false),
 													new Condition(Operateur.INFERIEUR,varA,new VariableConstante(TypeVariable.INT,"", "6")),
-													new Affectation(varA, new Operation(Operateur.ADDITION, varA, new VariableConstante(TypeVariable.INT, "1")), false));
+													//new Affectation(varA, new Operation(Operateur.ADDITION, varA, new VariableConstante(TypeVariable.INT, "1")), false));
+													null);
 		
 		instFor.inserer(0, new InstructionMoteurMov(Moteur.B, new VariableConstante(TypeVariable.INT, "", "10")));
 		

@@ -34,6 +34,7 @@ public class ChampTexte extends JPanel implements Zone {
 	private JTextField textField;
 	private List<TypeModeleWidget> typesWidgetsAcceptes;
 	private int minimumWidth;
+	private ModeleWidget widgetParent;
 	/*
 	 * Etat à ETAT_SAISIE (0) quand on affiche uniquement le champ texte
 	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus
@@ -51,6 +52,7 @@ public class ChampTexte extends JPanel implements Zone {
 		this.widgetContenu = null;
 		this.add(textField, BorderLayout.CENTER);
 		this.etat = ETAT_SAISIE;
+		this.widgetParent = widgetParent;
 
 		this.addContainerListener(new ContainerAdapter() {
 			@Override
@@ -152,6 +154,10 @@ public class ChampTexte extends JPanel implements Zone {
 	public boolean isContentWidget() {
 		return etat == 1;
 
+	}	
+
+	public ModeleWidget getWidgetParent() {
+		return widgetParent;
 	}
 
 	/**
@@ -181,6 +187,7 @@ public class ChampTexte extends JPanel implements Zone {
 		//Appel à la méthode de redimensionnement en X, avec si nécessaire appel recursif pour le redimensionnement des parents
 		decaleWidgetParents(this, decal);
 		this.widgetContenu = w;
+		widgetParent.applyChangeModele();
 	}
 
 	/**

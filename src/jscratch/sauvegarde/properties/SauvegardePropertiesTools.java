@@ -47,7 +47,7 @@ public final class SauvegardePropertiesTools implements SauvegardeTools {
 	@Override
 	public void load(String path) {
 		PropertiesHelper.getInstance().reset(new File(path));
-				
+		
 		// Suppression des widgets
 		DicoWidgetsCategories.getInstance().nettoyer();
 		

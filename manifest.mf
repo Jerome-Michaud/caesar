@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-SplashScreen-Image: ressources/splash.gif
+SplashScreen-Image: ressources/CAESAR.png
 X-COMMENT: Main-Class will be added automatically by build
 

@@ -8,6 +8,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import jscratch.dictionnaires.DicoVariables;
 import jscratch.dictionnaires.DicoWidgetsCategories;
+import jscratch.traduction.LanceurTraduction;
+import jscratch.vue.arborescence.ArborescenceTools;
 import nxtim.instruction.Variable;
 
 public final class FenetreSupressionVariable extends JFrame {
@@ -47,7 +49,6 @@ public final class FenetreSupressionVariable extends JFrame {
 		this.setVisible(true);
 
 		this.variables.requestFocus();
-		this.boutonValider.setDefaultCapable(true);
 		
 		boutonValider.addActionListener(new ActionListener() {
 			@ Override
@@ -59,12 +60,21 @@ public final class FenetreSupressionVariable extends JFrame {
 				
 				// Suppression de la vaiable dans le dictionnaire
 				DicoVariables.getInstance().supprimer(variable);
+				
+				// Suppression des widgets variable dans l'arborescence
+				ArborescenceTools.getInstance().supprimerVariable(variable);
+				
+				// On relance la traduction
+				LanceurTraduction.getInstance().lancerTraduction();
 
 				// Mise à jour du panel widget
-				GUI.getPanelWidget().setLesWidgets(1);
+				GUI.getPanelWidget().setLesWidgets(1);				
 				
 				dispose();
 			}
 		});
+		
+		this.getRootPane().setDefaultButton(this.boutonValider);
+		this.boutonValider.setDefaultCapable(true);
 	}
 }

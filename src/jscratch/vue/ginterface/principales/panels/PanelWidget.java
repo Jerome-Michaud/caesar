@@ -68,14 +68,14 @@ public final class PanelWidget extends JPanel implements Observer {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (GUI.getPanelTypeWidget().getCurrentCategorie() == Categorie.VARIABLES && e.isPopupTrigger()) {
-					GUI.getPopupVariable().show(e.getComponent(), e.getX(), e.getY());
+					GUI.creerPopupVariable().show(e.getComponent(), e.getX(), e.getY());
 				}
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (GUI.getPanelTypeWidget().getCurrentCategorie() == Categorie.VARIABLES && e.isPopupTrigger()) {
-					GUI.getPopupVariable().show(e.getComponent(), e.getX(), e.getY());
+					GUI.creerPopupVariable().show(e.getComponent(), e.getX(), e.getY());
 				}
 			}
 		});

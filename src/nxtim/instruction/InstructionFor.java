@@ -15,7 +15,7 @@ public class InstructionFor extends InstructionConditionelle {
 	/**
 	 * La valeur d'itération.
 	 */
-	private Affectation iteration;
+	private InstructionIncrementation iteration;
 
 	/**
 	 * Crée une boucle For non initialisée.<br/>
@@ -33,12 +33,11 @@ public class InstructionFor extends InstructionConditionelle {
 	 * @param condition la condition d'arrêt
 	 * @param iteration le traitement de fin de tour de boucle
 	 */
-	public InstructionFor(final Affectation initialisation, final Condition condition, final Affectation iteration) {
+	public InstructionFor(final Affectation initialisation, final Condition condition, final InstructionIncrementation iteration) {
 		super(condition);
 		this.initialisation = initialisation;
 		this.iteration = iteration;
 		initialisation.setIsInstruction(false);
-		iteration.setIsInstruction(false);
 	}
 
 	/**
@@ -64,7 +63,7 @@ public class InstructionFor extends InstructionConditionelle {
 	 *
 	 * @return l'affectation effectuant l'itération
 	 */
-	public Affectation getIteration() {
+	public InstructionIncrementation getIteration() {
 		return iteration;
 	}
 
@@ -73,7 +72,7 @@ public class InstructionFor extends InstructionConditionelle {
 	 *
 	 * @param iteration la nouvelle itération
 	 */
-	public void setIteration(final Affectation iteration) {
+	public void setIteration(final InstructionIncrementation iteration) {
 		this.iteration = iteration;
 	}
 

@@ -11,6 +11,12 @@ import jscratch.vue.sim.PanelSimulator;
 
 import de.javasoft.swing.JYTabbedPane;
 
+/**
+ * Gestion des onglets dans l'affichage
+ * association de la zone d'edition/utilisateur et la zone du simulateur
+ * @author Nicolas
+ *
+ */
 public class OngletUtilisateur extends JPanel {
 
 	private static OngletUtilisateur instance = null;

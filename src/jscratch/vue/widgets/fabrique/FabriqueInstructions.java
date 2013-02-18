@@ -18,17 +18,19 @@ import jscratch.vue.widgets.modeles.ExpressionLogicalWidget;
 import jscratch.vue.widgets.modeles.ForWidget;
 import jscratch.vue.widgets.modeles.IfElseWidget;
 import jscratch.vue.widgets.modeles.IfWidget;
-import jscratch.vue.widgets.modeles.InstructionWidget;
+import jscratch.vue.widgets.modeles.IncrementationWidget;
 import jscratch.vue.widgets.modeles.MoteurMarcheWidget;
 import jscratch.vue.widgets.modeles.MoteurOffWidget;
 import jscratch.vue.widgets.modeles.RepeatWidget;
 import jscratch.vue.widgets.modeles.TacheWidget;
 import jscratch.vue.widgets.modeles.TempsCourantWidget;
+import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import jscratch.vue.widgets.modeles.WaitWidget;
 import jscratch.vue.widgets.modeles.VariableWidget;
 import jscratch.vue.widgets.modeles.VariableSetValueWidget;
 import jscratch.vue.widgets.modeles.WhileWidget;
 import nxtim.instruction.Categorie;
+import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.Variable;
 
 /**
@@ -176,6 +178,28 @@ public class FabriqueInstructions {
 	public Widget creerWidgetExpressionLogical(Operateur op) {
 		return new Widget(new ExpressionLogicalWidget(op));
 	}
+	
+	/**
+	 * Méthode permettant de créer un widget d'incrémentation (var++ ou var--).
+	 * 
+	 * @param op l'opérateur
+	 * @return un widget d'incrémentation
+	 */
+	public Widget creerWidgetIncrementation(Operateur op) {
+		return new Widget(new IncrementationWidget(op, false));
+	}
+	
+	/**
+	 * Méthode permettant de créer un widget d'incrémentation.
+	 * 
+	 * @param op l'opérateur
+	 * @param isAvant <code>true</code> si l'operateur est avant
+	 * @return un widget d'incrémentation
+	 * @deprecated les widget d'incrementation avant ne sont pas gérés dans les sauvegardes
+	 */
+	public Widget creerWidgetIncrementation(Operateur op, final boolean isAvant) {
+		return new Widget(new IncrementationWidget(op, isAvant));
+	}
 
 	/**
 	 * Méthode permettant de créér une copie d'un widget.
@@ -186,42 +210,67 @@ public class FabriqueInstructions {
 	 */
 	public Widget cloner(final Widget comp) throws NonClonableException {
 		Widget w = null;
-		if (comp.getModele() instanceof IfWidget) {
-			w = creerWidgetIf();
-		} else if (comp.getModele() instanceof IfElseWidget) {
-			w = creerWidgetIfElse();
-		} else if (comp.getModele() instanceof TacheWidget) {
-			w = creerWidgetTache();
-		} else if (comp.getModele() instanceof WhileWidget) {
-			w = creerWidgetWhile();
-		} else if (comp.getModele() instanceof DoWhileWidget) {
-			w = creerWidgetDoWhile();
-		} else if (comp.getModele() instanceof MoteurMarcheWidget) {
-			w = creerWidgetMoteurMarche();
-		} else if (comp.getModele() instanceof MoteurOffWidget) {
-			w = creerWidgetMoteurOff();
-		} else if (comp.getModele() instanceof WaitWidget) {
-			w = creerWidgetWait();
-		} else if (comp.getModele() instanceof VariableWidget) {
-			w = creerWidgetVariable((VariableModifiable) comp.getModele().getElementProgramme());
-		} else if (comp.getModele() instanceof VariableSetValueWidget) {
-			w = creerWidgetVariableSetValue();
-		} else if (comp.getModele() instanceof TempsCourantWidget) {
-			w = creerWidgetTempsCourant();
-		} else if (comp.getModele() instanceof RepeatWidget) {
-			w = creerWidgetRepeat();
-		} else if (comp.getModele() instanceof ForWidget) {
-			w = creerWidgetFor();
-		} else if (comp.getModele() instanceof ExpressionArithmeticWidget) {
-			Operation op = (Operation) comp.getModele().getElementProgramme();
-			w = creerWidgetExpressionArithmetic(op.getOperateur());
-		} else if (comp.getModele() instanceof ExpressionLogicalWidget) {
-			Condition con = (Condition) comp.getModele().getElementProgramme();
-			w = creerWidgetExpressionLogical(con.getOperateur());
-		}
-
-		if (w == null) {
-			throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
+		TypeModeleWidget type = comp.getModele().getType();
+		
+		switch(type) {
+			case IF:
+				w = creerWidgetIf();
+				break;
+			case IFELSE:
+				w = creerWidgetIfElse();
+				break;
+			case TACHE:
+				w = creerWidgetTache();
+				break;
+			case WHILE:
+				w = creerWidgetWhile();
+				break;
+			case DOWHILE:
+				w = creerWidgetDoWhile();
+				break;
+			case MOTEURMARCHE:
+				w = creerWidgetMoteurMarche();
+				break;
+			case MOTEUROFF:
+				w = creerWidgetMoteurOff();
+				break;
+			case WAIT:
+				w = creerWidgetWait();
+				break;
+			case VARIABLE:
+				w = creerWidgetVariable((VariableModifiable) comp.getModele().getElementProgramme());
+				break;
+			case SETVALUEVARIABLE:
+				w = creerWidgetVariableSetValue();
+				break;
+			case TEMPSCOURANT:
+				w = creerWidgetTempsCourant();
+				break;
+			case REPEAT:
+				w = creerWidgetRepeat();
+				break;
+			case FOR:
+				w = creerWidgetFor();
+				break;
+			case EXPRESSION_ARITHMETIQUE:
+				Operation op = (Operation) comp.getModele().getElementProgramme();
+				w = creerWidgetExpressionArithmetic(op.getOperateur());
+				break;
+			case EXPRESSION_LOGIQUE:
+				Condition con = (Condition) comp.getModele().getElementProgramme();
+				w = creerWidgetExpressionLogical(con.getOperateur());
+				break;
+			case EXPRESSION_INC:
+				InstructionIncrementation ins = (InstructionIncrementation) comp.getModele().getElementProgramme();
+				if (ins.isPositive()) {
+					w = creerWidgetIncrementation(Operateur.INCREMENTATION_PLUS);
+				}
+				else {
+					w = creerWidgetIncrementation(Operateur.INCREMENTATION_MOINS);
+				}
+				break;
+			default:
+				throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
 		}
 		
 		w.getModele().setCouleur(comp.getModele().getCouleur());
@@ -289,10 +338,15 @@ public class FabriqueInstructions {
 					break;
 				}
 			}
-		}
-
-		// Le composant n'est pas dans le if précédent, il doit être ajouté
-		if (w == null) {
+		} else if ("IncrementationWidget".equals(nomClasse)) {
+			List<Operateur> opes = Operateur.incrementations();
+			for (Operateur o : opes) {
+				if (o.toString().equals(supplement)) {
+					w = creerWidgetIncrementation(o);
+					break;
+				}
+			}
+		} else {
 			throw new NonChargeableException("Impossible de charger le widget " + nomClasse);
 		}
 

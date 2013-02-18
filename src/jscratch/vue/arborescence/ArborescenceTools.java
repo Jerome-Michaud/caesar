@@ -1,13 +1,20 @@
 package jscratch.vue.arborescence;
 
+import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import nxtim.instruction.VariableModifiable;
 import jscratch.traduction.LanceurTraduction;
 import jscratch.exceptions.ComposantIntrouvableException;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.principales.panels.PanelCodeGraphique;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.WidgetCompose;
+import jscratch.vue.widgets.modeles.TypeModeleWidget;
+import jscratch.vue.widgets.modeles.zones.ChampTexte;
+import jscratch.vue.widgets.modeles.zones.Zone;
 
 /**
  * Classe implémentant le design pattern Singleton permettant de gérer
@@ -272,4 +279,58 @@ public final class ArborescenceTools {
 			}
 		}
 	}
+
+	/**
+	 * Suppression des widgets d'une variable dans l'arborescence
+	 * @param nom le nom de la variable
+	 */
+	public void supprimerVariable(String nom) {
+		// on supprime les variables de tous les widgets de la liste
+		for (List<Widget> listesWidget : arborescence) {
+			for (Widget widget : listesWidget) {
+				supprimerVariable(widget, nom);
+			}			
+		}
+	}
+	
+	/**
+	 * Supprimer les widgets d'une variable contenu dans le widget en parametre
+	 * @param widget le widget que l'on doit verifier
+	 * @param nom le nom de la variable a supprimer
+	 */
+	public void supprimerVariable(Widget widget, String nom) {
+		// on parcours les zones de saisies
+		for (Zone zone : widget.getModele().getLesZonesSaisies()) {
+			if (zone instanceof ChampTexte) {
+				ChampTexte champ = (ChampTexte) zone;
+				Widget widgetCtn = champ.getWidgetContenu();
+				
+				if (widgetCtn != null) {
+					// Si c'est un widget variable, on verifie si c'est la variable qu'on doit supprimer
+					if (widgetCtn.getType() == TypeModeleWidget.VARIABLE) {
+						VariableModifiable var = (VariableModifiable) widgetCtn.getElementProgramme();
+						
+						// suppression de la variable
+						if (var.getNom().equals(nom)) {
+							champ.setWidgetContenu(null);
+						}
+					} else {
+						supprimerVariable(widgetCtn, nom);
+					}
+				}				
+			}
+		}
+		
+		// on parcours les widgets imbriques pour les widgets composes
+		if (widget.isComplexe()) {
+			WidgetCompose widgetComp = (WidgetCompose) widget;
+			
+			Map<Rectangle, List<Widget>> mapWidgets = widgetComp.getMapZone();
+			for (Rectangle r : mapWidgets.keySet()) {
+				for (Widget w : mapWidgets.get(r)) {
+					supprimerVariable(w, nom);
+				}
+			}
+		}		
+	}		
 }
