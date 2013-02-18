@@ -242,11 +242,11 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 					ex.accepte(this);
 				}
 		
-				Double d = pile.pop();
+				double d = pile.pop();
 		
 				System.out.println("Creation de la commande Attente : (" + d + ")");
 				try {
-					Thread.sleep((long) (d * 1000));
+					Thread.sleep((long) d);
 				} catch (InterruptedException e) {
 					System.out.println("WARNING : interpreteur reveillé - sleep interrompu - Erreur temporelle possible");
 				}
