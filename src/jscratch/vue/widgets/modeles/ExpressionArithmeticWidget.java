@@ -50,6 +50,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		l = new ChampTexte(LARG_CHAMP, this);
 		l.setBounds(10, 3, LARG_CHAMP, 14);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		this.getLesZonesSaisies().add(l);
 
@@ -62,6 +63,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 		f = new ChampTexte(LARG_CHAMP, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
 		this.getLesZonesSaisies().add(f);
@@ -84,33 +86,18 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 	@Override
 	public void applyChangeModele() {
 		Operation expArith = ((Operation) getElementProgramme());
-
-		/**VariableModifiable varMemGauche = (VariableModifiable)l.getContentWidget().getElementProgramme();
-		expArith.setMembreGauche(varMemGauche);
-		
-		VariableModifiable varMemDroite = (VariableModifiable)f.getContentWidget().getElementProgramme();
-		expArith.setMembreGauche(varMemDroite);*/
 		
 		Widget widgetG = l.getContentWidget();
 		if (widgetG != null) {
-			Expression varMemGauche = null;
-			if (widgetG.getType() == TypeModeleWidget.EXPRESSION_ARITHMETIQUE) {
-				varMemGauche = (Operation) widgetG.getElementProgramme();
-			} else if (widgetG.getType() == TypeModeleWidget.VARIABLE) {
-				varMemGauche = (VariableModifiable) widgetG.getElementProgramme();
-			}
+			Expression varMemGauche = (Expression) widgetG.getElementProgramme();
 			expArith.setMembreGauche(varMemGauche);
 		} else {
 			expArith.setMembreGauche(new VariableConstante(TypeVariable.INT, l.getValeur()));
 		}
+		
 		Widget widgetD = f.getContentWidget();
 		if (widgetD != null) {
-			Expression varMemDroite = null;
-			if (widgetD.getType() == TypeModeleWidget.EXPRESSION_ARITHMETIQUE) {
-				varMemDroite = (Operation) widgetD.getElementProgramme();
-			} else if (widgetD.getType() == TypeModeleWidget.VARIABLE) {
-				varMemDroite = (VariableModifiable) widgetD.getElementProgramme();
-			}
+			Expression varMemDroite = (Expression) widgetD.getElementProgramme();
 			expArith.setMembreDroit(varMemDroite);
 		} else {
 			expArith.setMembreDroit(new VariableConstante(TypeVariable.INT, f.getValeur()));

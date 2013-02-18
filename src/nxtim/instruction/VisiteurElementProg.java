@@ -61,7 +61,7 @@ public interface VisiteurElementProg {
 	 *
 	 * @param inst l'instruction à visiter
 	 */
-	public void visiter(InstructionTempsCourant inst);
+	public void visiter(TempsCourant exp);
 
 	/**
 	 * Visite une instruction d'attente.

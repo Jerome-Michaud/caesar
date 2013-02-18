@@ -1,30 +1,52 @@
 package jscratch.vue.widgets.modeles;
 
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
-import nxtim.instruction.InstructionTempsCourant;
-import nxtim.instruction.VariableModifiable;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
+import nxtim.instruction.Affectation;
+import nxtim.instruction.TempsCourant;
+import nxtim.instruction.VariableModifiable;
 
 /**
  * @since 1.0
  * @version 1.0
  */
 public class TempsCourantWidget extends ModeleWidget {
+	private int largeur;
 	
-	private ChampTexte f;
+	private final int LARG_EXTREMITE;
 	/**
 	 * Constructeur du modèle TempsCourantWidget.
 	 */
 	public TempsCourantWidget(){
 		super();
 		
-		this.setElementProgramme(new InstructionTempsCourant());
-		int tX[] = {0, 5, 30, 35, 45, 50, 170, 175, 175, 170, 50, 45, 35, 30, 5, 0};
-		int tY[] = {5, 0, 0,  5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
+		attachableInterne = true;
+		attachableHaut = false;
+		attachableBas = false;
+		imbricable = false;
+		
+		message.put(new Point(5, 17), "Temps Courant");
+		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
+		FontMetrics metrics = new FontMetrics(font) {};
+		String l = "";
+		for (String s : message.values()) {
+			l += s;
+		}
+		Rectangle2D bounds = metrics.getStringBounds(l, null);
+		
+		this.LARG_EXTREMITE = 5;
+		this.largeur = (int) bounds.getWidth();
+				
+		this.setElementProgramme(new TempsCourant());
+		int tX[] = {0, 5, this.LARG_EXTREMITE + largeur, largeur + 10, largeur + 10, this.LARG_EXTREMITE + largeur, 5, 0};
+		int tY[] = {5, 0, 0, 5, 15, 20, 20, 15};
 
 		this.setTabX(tX);
 		this.setTabY(tY);
@@ -33,47 +55,5 @@ public class TempsCourantWidget extends ModeleWidget {
 		this.setType(TypeModeleWidget.TEMPSCOURANT);
 
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
-
-		int widthChamp = 20;
-		f = new ChampTexte(widthChamp, this);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-		f.setBounds(150, 3, widthChamp, 20);
-		f.supprimerTexte();
-		this.getLesZonesSaisies().add(f);
-		
-		message.put(new Point(5, 17), "Affecter Temps Courant à");
-
-		initListeners();
-		//this.decalageX(20);
 	}
-
-	
-	@Override
-	public void applyChangeModele(){
-
-		InstructionTempsCourant tempCour = ((InstructionTempsCourant) getElementProgramme());
-
-		if(f.isContentWidget()){
-	
-			VariableModifiable var = (VariableModifiable)f.getContentWidget().getElementProgramme();
-			tempCour.setVariable(var);
-		}else{
-			tempCour.setVariable(null);
-		}
-
-	}
-
-	@Override
-	public void initListeners() {
-		
-		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
-		
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				applyChangeModele();
-			}
-		});
-	}
-
-
 }
