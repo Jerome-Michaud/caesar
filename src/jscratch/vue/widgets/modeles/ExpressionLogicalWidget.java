@@ -119,6 +119,4 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-
-	public void initListeners() { }
 }

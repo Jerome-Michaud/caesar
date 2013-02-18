@@ -50,6 +50,10 @@ public class IfElseWidget extends ModeleWidget {
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_ELSE);
 		
+		if(this.getType() == TypeModeleWidget.IFELSE){
+			System.out.println(this.zonesAccroches);
+		}
+		
 		this.decalageX(-20);
 	}
 
@@ -100,7 +104,4 @@ public class IfElseWidget extends ModeleWidget {
  	        this.setTailleY();
          }       
     }
-    
-	@Override
-	public void initListeners() {}
 }

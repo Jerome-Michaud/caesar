@@ -69,9 +69,6 @@ public class VariableWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-	
-	@Override
-	public void initListeners() { }
 
 	/**
 	 * Retourne le nom de la variable qui lui est rattaché.

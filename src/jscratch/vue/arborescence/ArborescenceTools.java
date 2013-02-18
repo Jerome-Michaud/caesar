@@ -245,7 +245,6 @@ public final class ArborescenceTools {
 		PanelCodeGraphique pc = GUI.getPanelCodeGraphique();
 		for (List<Widget> listeWidget : this.arborescence) {
 			for (Widget w : listeWidget) {
-				//pc.setComponentZOrder(w, 0);
 				pc.setComponentZOrder(w, pc.getComponentCount() - 1);
 				if (w.isComplexe()) {
 					updateWidgets((WidgetCompose) w);
@@ -264,7 +263,7 @@ public final class ArborescenceTools {
 	 */
 	public void updateWidgets(WidgetCompose w) {
 		PanelCodeGraphique pc = GUI.getPanelCodeGraphique();
-		for (List<Widget> lw : ((WidgetCompose) w).getMapZone().values()) {
+		for (List<Widget> lw : w.getMapZone().values()) {
 			for (Widget wid : lw) {
 				pc.setComponentZOrder(wid, pc.getComponentZOrder(w) - 1);
 				if (wid.isComplexe()) {
