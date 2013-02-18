@@ -6,13 +6,13 @@ import java.io.File;
  * @since 1.0
  * @version 1.0
  */
-public final class PropertiesFileFilter extends ApplicationFileFilter {
+public final class CaesarFileFilter extends ApplicationFileFilter {
 
 	/**
-	 * Constructeur par défaut de <code>PropertiesFileFilter</code>.
+	 * Constructeur par défaut de <code>CaesarFileFilter</code>.
 	 */
-	public PropertiesFileFilter() {
-		super("properties", "Fichier properties");
+	public CaesarFileFilter() {
+		super("csr", "Fichier C.A.E.S.A.R.");
 	}
 
 	@Override

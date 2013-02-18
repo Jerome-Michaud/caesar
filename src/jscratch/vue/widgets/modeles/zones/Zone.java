@@ -5,7 +5,8 @@ import org.jdom2.Element;
 /**
  * Interface définissant la structure d'une zone d'un widget.
  *
- * @author Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public interface Zone {
 	

@@ -29,6 +29,8 @@ public abstract class ApplicationFileFilter extends FileFilter {
 	/**
 	 * récupère l'extension du fichier généré ou accepté.
 	 *
+	 * @since 1.0
+	 * 
 	 * @return l'extension du fichier généré ou accepté
 	 */
 	public String getExtension() {

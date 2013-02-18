@@ -6,7 +6,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import jscratch.sauvegarde.filtres.ApplicationFileFilter;
-import jscratch.sauvegarde.filtres.JScratchFileFilter;
+import jscratch.sauvegarde.filtres.CaesarFileFilter;
 import jscratch.sauvegarde.SauvegardeTools;
 import jscratch.sauvegarde.filtres.XmlFileFilter;
 import jscratch.sauvegarde.binaire.SauvegardeBinaireTools;
@@ -14,7 +14,8 @@ import jscratch.sauvegarde.filtres.NxcFileFilter;
 import jscratch.sauvegarde.filtres.PropertiesFileFilter;
 import jscratch.sauvegarde.nxc.SauvegardeNxcTools;
 import jscratch.sauvegarde.properties.SauvegardePropertiesTools;
-import jscratch.sauvegarde.xml.SauvegardeXMLTools;
+import jscratch.sauvegarde.xml.arborescence.SauvegardeArborescenceXMLTools;
+import jscratch.sauvegarde.xml.traces.SauvegardeTracesXMLTools;
 import jscratch.vue.ginterface.principales.GUI;
 
 /**
@@ -24,8 +25,9 @@ import jscratch.vue.ginterface.principales.GUI;
 public class SelecteurFichier extends JFileChooser {
 
 	private HashMap<ApplicationFileFilter, SauvegardeTools> sauvegardes;
-	private XmlFileFilter xml = new XmlFileFilter();
-	private JScratchFileFilter jsc = new JScratchFileFilter();
+	private XmlFileFilter xmlArborescence = new XmlFileFilter();
+	private XmlFileFilter xmlTraces = new XmlFileFilter();
+	private CaesarFileFilter jsc = new CaesarFileFilter();
 	private NxcFileFilter nxc = new NxcFileFilter();
 	private PropertiesFileFilter pro = new PropertiesFileFilter();
 
@@ -35,20 +37,26 @@ public class SelecteurFichier extends JFileChooser {
 	 */
 	public SelecteurFichier(final TypeSelecteur type) {
 		sauvegardes = new HashMap<ApplicationFileFilter, SauvegardeTools>();
-		sauvegardes.put(xml, SauvegardeXMLTools.getInstance());
+		sauvegardes.put(xmlArborescence, SauvegardeArborescenceXMLTools.getInstance());
 		sauvegardes.put(nxc, SauvegardeNxcTools.getInstance());
 		sauvegardes.put(jsc, SauvegardeBinaireTools.getInstance());
 		sauvegardes.put(pro, SauvegardePropertiesTools.getInstance());
+		sauvegardes.put(xmlTraces, SauvegardeTracesXMLTools.getInstance());
 
-		if (TypeSelecteur.ARBORESCENCE == type) {
-			setFileFilter(xml);
-			addChoosableFileFilter(jsc);
-		}
-		else if (TypeSelecteur.CODE == type) {
-			setFileFilter(nxc);
-		}
-		else if (TypeSelecteur.PROPERTIES == type) {
-			setFileFilter(pro);
+		switch(type) {
+			case ARBORESCENCE:
+				setFileFilter(xmlArborescence);
+				addChoosableFileFilter(jsc);
+				break;
+			case CODE:
+				setFileFilter(nxc);
+				break;
+			case PROPERTIES:
+				setFileFilter(pro);
+				break;
+			case TRACES:
+				setFileFilter(xmlTraces);
+				break;
 		}
 		setFileSelectionMode(JFileChooser.FILES_ONLY);
 	}
