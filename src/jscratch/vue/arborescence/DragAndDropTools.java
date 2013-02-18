@@ -22,7 +22,6 @@ import jscratch.vue.ginterface.principales.panels.PanelWidget;
 import jscratch.vue.widgets.IWidget;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.WidgetCompose;
-import jscratch.vue.widgets.YComparableRectangle;
 import jscratch.vue.widgets.modeles.ModeleWidget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.Zone;

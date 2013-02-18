@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 import jscratch.parametrages.Variables;
 import jscratch.vue.widgets.Widget;
-import jscratch.vue.widgets.YComparableRectangle;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionDoWhile;

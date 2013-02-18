@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import jscratch.comparateurs.ComparateurRectangleY;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import jscratch.parametrages.Variables;
 import jscratch.exceptions.ComposantIntrouvableException;
@@ -26,7 +27,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	/**
 	 * HashMap stockant les zones d'accroches du composant complexe et les widgets qui y sont insérés.
 	 */
-	private LinkedHashMap<YComparableRectangle, List<Widget>> mapZone;
+	private LinkedHashMap<Rectangle, List<Widget>> mapZone;
 
 	/**
 	 * Méthode redéfinie en phase de test afin laisser apparaître les zones d'accroches.
@@ -49,8 +50,8 @@ public class WidgetCompose extends Widget implements IWidget {
 	 */
 	public WidgetCompose(final ModeleWidget comp) {
 		super(comp);
-		this.mapZone = new LinkedHashMap<YComparableRectangle, List<Widget>>();
-		for (YComparableRectangle r : comp.getZonesAccroches()) {
+		this.mapZone = new LinkedHashMap<Rectangle, List<Widget>>();
+		for (Rectangle r : comp.getZonesAccroches()) {
 			this.mapZone.put(r, new LinkedList<Widget>());
 		}
 	}
@@ -62,7 +63,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	 * @param widget le widget à supprimer de la zone
 	 * @return un booléen attestant de la suppression ou non du widget au sein de la HashMap.
 	 */
-	public boolean supprimerWidget(final YComparableRectangle cle, final Widget widget) {
+	public boolean supprimerWidget(final Rectangle cle, final Widget widget) {
 		return this.mapZone.get(cle).remove(widget);
 	}
 
@@ -71,7 +72,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	 *
 	 * @return la HashMap représentant les zones d'accroches du composant
 	 */
-	public HashMap<YComparableRectangle, List<Widget>> getMapZone() {
+	public HashMap<Rectangle, List<Widget>> getMapZone() {
 		return this.mapZone;
 	}
 
@@ -120,9 +121,9 @@ public class WidgetCompose extends Widget implements IWidget {
 	 * Méthode permettant de recalculer les positions et dimensions de chaque zones d'accroches du composant complexe.
 	 */
 	public void notifyChange() {
-		HashMap<YComparableRectangle, YComparableRectangle> mapRect = new HashMap<YComparableRectangle, YComparableRectangle>();
-		HashMap<YComparableRectangle, Integer> mapDecal = new HashMap<YComparableRectangle, Integer>();
-		for (YComparableRectangle r : mapZone.keySet()) {
+		HashMap<Rectangle, Rectangle> mapRect = new HashMap<Rectangle, Rectangle>();
+		HashMap<Rectangle, Integer> mapDecal = new HashMap<Rectangle, Integer>();
+		for (Rectangle r : mapZone.keySet()) {
 			int decalY = 0;
 			Rectangle maxBounds = null;
 
@@ -155,7 +156,7 @@ public class WidgetCompose extends Widget implements IWidget {
 			decaleZonesEnDessousDe(r.y, diff, mapDecal);
 			this.getModele().decalerComposantsSuivantsY(r.y, diff);
 
-			YComparableRectangle bnds = new YComparableRectangle(r);
+			Rectangle bnds = new Rectangle(r);
 			bnds.height = maxBounds.height;
 			//On stocke les nouvelles bounds des zone ou il y a des changements
 			mapRect.put(r, bnds);
@@ -164,24 +165,24 @@ public class WidgetCompose extends Widget implements IWidget {
 
 		//Une fois sorti de la boucle ...
 		// ...On decale les nouvelles bounds qu'on a stocké plus haut si il y a besoin
-		for (YComparableRectangle r : mapDecal.keySet()) {
+		for (Rectangle r : mapDecal.keySet()) {
 			if (mapRect.get(r) != null) {
-				YComparableRectangle rectDecal = new YComparableRectangle(mapRect.get(r));
+				Rectangle rectDecal = new Rectangle(mapRect.get(r));
 				rectDecal.y += mapDecal.get(r);
 				mapRect.put(r, rectDecal);
 			}
 		}
 		// Et enfin on finit par attribuer a chaque zone ses nouvelles bounds
-		for (YComparableRectangle r : mapRect.keySet()) {
+		for (Rectangle r : mapRect.keySet()) {
 			this.mapZone.put(mapRect.get(r), this.mapZone.remove(r));
 		}
 
 		//Remise dans l'ordre de la Hashmap des zones d'accroche
 		if (mapZone.keySet().size() > 1) {
-			LinkedList<YComparableRectangle> collRect = new LinkedList<YComparableRectangle>(mapZone.keySet());
-			Collections.sort(collRect);
-			LinkedHashMap<YComparableRectangle, List<Widget>> newMap = new LinkedHashMap<YComparableRectangle, List<Widget>>();
-			for (YComparableRectangle rect : collRect) {
+			LinkedList<Rectangle> collRect = new LinkedList<Rectangle>(mapZone.keySet());
+			Collections.sort(collRect, new ComparateurRectangleY());
+			LinkedHashMap<Rectangle, List<Widget>> newMap = new LinkedHashMap<Rectangle, List<Widget>>();
+			for (Rectangle rect : collRect) {
 				newMap.put(rect, mapZone.get(rect));
 			}
 			this.mapZone = newMap;
@@ -195,8 +196,8 @@ public class WidgetCompose extends Widget implements IWidget {
 	 * @param diff la valeur de laquelle il faut décaler chaque zone d'accroche en dessous de y
 	 * @param map la Hashmap dans laquelle il faut rechercher les zones à décaler
 	 */
-	private void decaleZonesEnDessousDe(int y, int diff, HashMap<YComparableRectangle, Integer> map) {
-		for (YComparableRectangle r : this.mapZone.keySet()) {
+	private void decaleZonesEnDessousDe(int y, int diff, HashMap<Rectangle, Integer> map) {
+		for (Rectangle r : this.mapZone.keySet()) {
 			if (r.y > y) {
 				map.put(r, diff);
 			}
@@ -241,7 +242,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	 */
 	private List<Widget> recupeAllWidgetCorps(int i) {
 		// Récupérer la clé du corps
-		Set<YComparableRectangle> keys = this.mapZone.keySet();
+		Set<Rectangle> keys = this.mapZone.keySet();
 		// Récupérer les widgets du contenue
 		Object[] rects = keys.toArray();
 		List<Widget> widgets = this.mapZone.get(rects[i]);
