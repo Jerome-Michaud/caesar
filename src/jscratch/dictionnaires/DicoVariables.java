@@ -133,7 +133,7 @@ public final class DicoVariables {
 	 * 
 	 * @return les variables du dictionnaire
 	 */
-	public Variable[] getLesvariables() {
+	public Variable[] getLesVariables() {
 		return (Variable[]) dictionnaire.values().toArray(new Variable[0]);
 	}
 	
