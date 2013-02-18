@@ -354,12 +354,13 @@ public final class DragAndDropTools extends Observable {
 
 			}
 			dragGroupeWidget(arbo.getListe(comp), pt);
+			arbo.updateWidgets();
+			//notifyChangesToWidgets(composantsDrague);
 			composantsDrague.clear();
 
 		} catch (ComposantIntrouvableException ex) {
 			ErreurHelper.afficher(ex);
 		}
-		arbo.updateWidgets();
 
 		updatePanelGraphiqueSize(arbo.getArborescence());
 
@@ -440,6 +441,14 @@ public final class DragAndDropTools extends Observable {
 		if (bounds != null) {
 			p.setPreferredSize(new Dimension((int) (bounds.getX() + bounds.getWidth()), (int) (bounds.getY() + bounds.getHeight())));
 			p.getScroll().validate();
+		}
+	}
+
+	private void notifyChangesToWidgets(List<Widget> composantsDrague) {
+		for (Widget w : composantsDrague) {
+			if (w.isComplexe()) {
+				((WidgetCompose) w).notifyChange();
+			}
 		}
 	}
 }

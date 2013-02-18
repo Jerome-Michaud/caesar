@@ -81,10 +81,5 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		}
 		this.setForme(this.getForme());
 		this.setTailleY();
-		
-		// Déplacement du champ texte
-		Rectangle boundsChTexte = f.getBounds();
-		boundsChTexte.translate(0, b);
-		f.setBounds(boundsChTexte);
 	}
 }

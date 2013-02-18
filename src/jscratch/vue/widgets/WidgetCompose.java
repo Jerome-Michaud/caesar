@@ -34,13 +34,13 @@ public class WidgetCompose extends Widget implements IWidget {
 	 *
 	 * @param g l'objet <code>Graphics</code> de l'appel
 	 */
-	@Override
+	/*@Override
 	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
 		for(Rectangle r : mapZone.keySet()){
 			g.drawRect((int)r.getX(),(int) r.getY(), (int)r.getWidth(),(int)r.getHeight());
 		}
-	}
+	}*/
 
 	/**
 	 * Constructeur du Widget Compose faisant appel au constructeur de sa classe mère (
