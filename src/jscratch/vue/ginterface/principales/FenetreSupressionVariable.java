@@ -49,7 +49,6 @@ public final class FenetreSupressionVariable extends JFrame {
 		this.setVisible(true);
 
 		this.variables.requestFocus();
-		this.boutonValider.setDefaultCapable(true);
 		
 		boutonValider.addActionListener(new ActionListener() {
 			@ Override
@@ -74,5 +73,8 @@ public final class FenetreSupressionVariable extends JFrame {
 				dispose();
 			}
 		});
+		
+		this.getRootPane().setDefaultButton(this.boutonValider);
+		this.boutonValider.setDefaultCapable(true);
 	}
 }

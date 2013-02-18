@@ -314,7 +314,6 @@ public final class ArborescenceTools {
 						// suppression de la variable
 						if (var.getNom().equals(nom)) {
 							champ.setWidgetContenu(null);
-							widget.applyChangeModele();
 						}
 					} else {
 						supprimerVariable(widgetCtn, nom);
