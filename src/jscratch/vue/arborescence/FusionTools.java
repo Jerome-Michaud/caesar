@@ -80,15 +80,10 @@ public class FusionTools {
 					// Ajout du widget au dessus ou en dessus de l'unique composant survolé
 					act = checkBords(compRecup, comp, rectComp, isAttachable);
 				} else {
-					// Ajout en dessous du premier composant
-					if (!compRecup.isComplexe()) {
-						act = new Action((Widget) compRecup, TypeAction.DESSOUS);
-					} else {
-						for (Component c : composants) {
-							act = checkBords((Widget) c, comp, rectComp, isAttachable);
-							if (act != null) {
-								break;
-							}
+					for (Component c : composants) {
+						act = checkBords((Widget) c, comp, rectComp, isAttachable);
+						if (act != null) {
+							break;
 						}
 					}
 				}
@@ -177,21 +172,21 @@ public class FusionTools {
 
 		if (act != null) {
 			Widget compRecup = act.getComp();
-			switch (act.getVal()) {
-				case 1:
+			switch (act.getTypeAction()) {
+				case DESSUS:
 					//Appliquer l'action au dessus du comp
 					g.setRectFusion(null);
 					g.setPointLigneSurEcran(new Point((int) compRecup.getLocationOnScreen().getX(), (int) compRecup.getLocationOnScreen().getY() - GlassPane.EPAISSEUR_LIGNE + 1));
 					g.setLongueurLigne(compRecup.getWidth());
 					break;
-				case 0:
+				case DESSOUS:
 					//Appliquer l'action au dessous du comp
 					g.setRectFusion(null);
 					g.setPointLigneSurEcran(new Point((int) compRecup.getLocationOnScreen().getX(), (int) compRecup.getLocationOnScreen().getY() + compRecup.getHeight() + 3));
 					g.setLongueurLigne(compRecup.getWidth());
 					break;
 
-				case 2:
+				case ACCROCHE:
 					g.setRectFusion(null);
 					Rectangle r = act.getRect();
 					Rectangle cpy = new Rectangle(r.x, r.y, r.width, r.height);
@@ -200,12 +195,12 @@ public class FusionTools {
 					g.setLongueurLigne(r.width);
 					break;
 
-				case 3:
+				case INTERNE:
 					g.setPointLigneSurEcran(null);
 					g.setRectFusion(SwingUtilities.convertRectangle(compRecup, ((ChampTexte) (compRecup.getModele().getLesZonesSaisies().get(act.getZoneIndex()))).getBounds(), GUI.getGlassPane()));
 					break;
 
-				case -1:
+				case RIEN:
 					//Pas d'action à appliquer
 					g.setPointLigneSurEcran(null);
 					g.setRectFusion(null);
@@ -216,20 +211,22 @@ public class FusionTools {
 
 	private static Action checkFusionZone(Widget compRecup, Rectangle rectComp, TypeModeleWidget type, JComponent ref, Action a) {
 		Point p = GUI.getGlassPane().getLocationOnScreen();
-		Rectangle rectComp2 = new Rectangle(rectComp.x,rectComp.y,rectComp.width,rectComp.height);
+		Rectangle rectComp2 = new Rectangle(rectComp.x, rectComp.y, rectComp.width, rectComp.height);
 		rectComp2.translate(0 - p.x, 0 - p.y);
 		Rectangle bnds = SwingUtilities.convertRectangle(GUI.getGlassPane(), rectComp2, ref);
 		List< Zone> lstZones = compRecup.getModele().getLesZonesSaisies();
 		for (Zone zone : lstZones) {
 			if (zone instanceof ChampTexte) {
 				ChampTexte champ = (ChampTexte) zone;
-				if ((champ.getBounds().intersects(bnds) && champ.accepteTypeWidget(type))) {
-					if (champ.getEtat() != ChampTexte.ETAT_CONTIENT_WIDGET) {
+				if ((champ.getBounds().intersects(bnds))) {
+					if (champ.getEtat() != ChampTexte.ETAT_CONTIENT_WIDGET && champ.accepteTypeWidget(type)) {
 						a = new Action(compRecup, TypeAction.INTERNE);
 						a.setZoneIndex(lstZones.indexOf(zone));
 						break;
 					} else {
-						a = checkFusionZone(champ.getWidgetContenu(), rectComp, type, champ, a);
+						if (champ.getWidgetContenu() != null) {
+							a = checkFusionZone(champ.getWidgetContenu(), rectComp, type, champ, a);
+						}
 					}
 				}
 			}
