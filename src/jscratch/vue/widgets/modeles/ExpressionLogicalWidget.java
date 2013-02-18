@@ -105,7 +105,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 			} else if (widgetD.getType() == TypeModeleWidget.VARIABLE) {
 				varMemDroite = (VariableModifiable) widgetD.getElementProgramme();
 			}
-			expLog.setMembreGauche(varMemDroite);
+			expLog.setMembreDroit(varMemDroite);
 		} else {
 			expLog.setMembreDroit(new VariableConstante(TypeVariable.INT, f.getValeur()));
 		}
