@@ -119,7 +119,6 @@ public class WidgetCompose extends Widget implements IWidget {
 	public void notifyChange() {
 		HashMap<YComparableRectangle, YComparableRectangle> mapRect = new HashMap<YComparableRectangle, YComparableRectangle>();
 		HashMap<YComparableRectangle, Integer> mapDecal = new HashMap<YComparableRectangle, Integer>();
-		System.out.println("---");
 		for (YComparableRectangle r : mapZone.keySet()) {
 			int decalY = 0;
 			Rectangle maxBounds = null;
@@ -149,13 +148,8 @@ public class WidgetCompose extends Widget implements IWidget {
 			int diff = maxBounds.height - r.height;
 
 			//On stocke le décalage qu'on voudra appliquer sur les zones d'accroche du composant
-			if (diff < 0 - ModeleWidget.OFFSET) {
-				this.getModele().decalageY(-Math.abs(diff), r);
-				decaleZonesEnDessousDe(r.y, diff, mapDecal);
-			} else if (diff > 0 - ModeleWidget.OFFSET) {
-				this.getModele().decalageY(diff, r);
-				decaleZonesEnDessousDe(r.y, diff, mapDecal);
-			}
+			this.getModele().decalageY(diff, r);
+			decaleZonesEnDessousDe(r.y, diff, mapDecal);
 
 			YComparableRectangle bnds = new YComparableRectangle(r);
 			bnds.height = maxBounds.height;
@@ -177,13 +171,13 @@ public class WidgetCompose extends Widget implements IWidget {
 		for (YComparableRectangle r : mapRect.keySet()) {
 			this.mapZone.put(mapRect.get(r), this.mapZone.remove(r));
 		}
-		
+
 		//Remise dans l'ordre de la Hashmap des zones d'accroche
-		if(mapZone.keySet().size() > 1){
+		if (mapZone.keySet().size() > 1) {
 			LinkedList<YComparableRectangle> collRect = new LinkedList<YComparableRectangle>(mapZone.keySet());
 			Collections.sort(collRect);
 			LinkedHashMap<YComparableRectangle, List<Widget>> newMap = new LinkedHashMap<YComparableRectangle, List<Widget>>();
-			for(YComparableRectangle rect : collRect){
+			for (YComparableRectangle rect : collRect) {
 				newMap.put(rect, mapZone.get(rect));
 			}
 			this.mapZone = newMap;
