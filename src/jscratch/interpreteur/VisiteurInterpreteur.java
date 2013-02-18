@@ -549,7 +549,21 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 	}
 
 	@Override
-	public void visiter(InstructionIncrementation instructionIncrementation) { }
+	public void visiter(InstructionIncrementation inst) {
+		Variable var = (Variable) inst.getExpression();
+		
+		double d = Double.parseDouble(var.getValeur());
+		
+		if(inst.isPositive()){
+			d++;
+		}
+		else{
+			d--;
+		}
+		
+		var.setValeur(""+d);
+		
+	}
 	
 	private synchronized void testWait(){
 		if(wait){

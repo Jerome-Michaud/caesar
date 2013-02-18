@@ -31,7 +31,6 @@ public class LanceurInterpreteur extends Thread {
 			catch (InterruptedException e) {
 				System.out.println("Thread de l'interpreteur interrompu");
 			}
-			System.out.println("test");
 			inter.launchInterpreteur();
 			this.stopThread();
 		}

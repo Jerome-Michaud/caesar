@@ -92,9 +92,13 @@ public class Interpreteur {
 			}
 			visiteur.setRun(true);
 		//	tache.accepte(visiteur);
+			
+			
+			
 			for(Instruction l : trouveTaches()){
 				l.accepte(visiteur);
 			}
+			run = false;
 		}
 
 	}
