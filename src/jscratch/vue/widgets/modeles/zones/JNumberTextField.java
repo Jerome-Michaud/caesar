@@ -38,7 +38,7 @@ public class JNumberTextField extends JTextField {
 		setMaxLength(maxLen);
 		setFormat(format);
 
-		numberFieldFilter = new JNumberFieldFilter();
+		numberFieldFilter = new JNumberFieldFilter(this);
 		super.setDocument(numberFieldFilter);
 	}
 
@@ -150,14 +150,16 @@ public class JNumberTextField extends JTextField {
 
 	class JNumberFieldFilter extends PlainDocument {
 
-		public JNumberFieldFilter() {
+		private JNumberTextField appelant;
+		public JNumberFieldFilter(JNumberTextField appelant) {
 			super();
+			this.appelant = appelant;
 		}
 
 		@Override
 		public void remove(int offs, int len) throws BadLocationException {
 			super.remove(offs, len);
-			if(getText().isEmpty()){
+			if(appelant.getText().isEmpty()){
 				setText("0");
 			}
 		}
