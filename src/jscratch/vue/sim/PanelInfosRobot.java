@@ -17,7 +17,7 @@ import jscratch.modeles.sim.Sensor;
  * @author Guillaume Delorme
  *
  */
-public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator {
+public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator,ObserverSimulator {
 	private final float FREQ_UPDATE = 0.02f;
 	private float nextUpdate = FREQ_UPDATE;
 	
@@ -65,7 +65,7 @@ public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator {
 				"gauche (C) = " + robot.getMotor(MotorPort.OUT_C).getPower() + "; droit (B) = " + robot.getMotor(MotorPort.OUT_B).getPower() + "<br /><br />" +
 				"<strong>Rotations moteurs :</strong> <br />" +
 				"gauche (C) = " + robot.getMotor(MotorPort.OUT_C).getRotationCount() + "; droit (B) = " + robot.getMotor(MotorPort.OUT_B).getRotationCount() + "<br /> <br />" +
-				"<strong>Orientation :</strong> " + (int) Math.toDegrees(robot.getOrientation()) + "<br /> <br />" +
+				"<strong>Orientation :</strong> " + (int) Math.toDegrees(robot.getOrientation()) + "°<br /> <br />" +
 				"<strong>Position :</strong> x = " + (int) robot.getPointCentral().getX() + "; y = " + (int) robot.getPointCentral().getY() + "<br /></html>");
 		
 			
@@ -82,6 +82,11 @@ public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator {
 	 */
 	@Override
 	public void update(ObservablePanelSimulator o) {
+		update(FREQ_UPDATE);
+	}
+
+	@Override
+	public void update(ObservableSimulator o) {
 		update(FREQ_UPDATE);
 	}
 }

@@ -29,6 +29,7 @@ public final class ErreurHelper {
 	 */
 	public static void afficher(final Exception e) {
 		DetailsDialog.showDialog(GUI.getFenetre(), null, "Une erreur de type '" + e.getClass().getSimpleName() + "' est survenue", e);
+		e.printStackTrace();
 		System.exit(1);
 	}
 

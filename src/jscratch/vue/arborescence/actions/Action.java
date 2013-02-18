@@ -113,6 +113,17 @@ public class Action {
 	}
 
 	/**
+	 * Récupération du type de l'action
+	 *
+	 * @return Le type d'action associée au survol : <ul> <li>DESSOUS : survol par le
+	 * dessous</li> <li>DESSUS : survol d'un widget par le dessus</li> <li>ACCROCHE : survol
+	 * d'une zone d'accroche</li> <li>INTERNE : survol d'une zone d'accroche</li> <li>RIEN : pas de survol</li> <ul>
+	 */
+	public TypeAction getTypeAction() {
+		return val;
+	}
+
+	/**
 	 * Recupère l'indice ou trouver le composant à fusionner dans un champ texte
 	 *
 	 * @return l'indice au sein de la liste de zones

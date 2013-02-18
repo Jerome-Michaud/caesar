@@ -1,0 +1,19 @@
+<map>
+	<image>./ressources/simulateur/maps/map1.png</image>
+	
+	<obstacles>	
+		<rectangle x="100" y="100" width="50" height="100" color="BLACK" />
+		<rectangle x="150" y="100" width="50" height="100" color="BLUE" />
+		<rectangle x="200" y="100" width="50" height="100" color="CYAN" />
+		<rectangle x="250" y="100" width="50" height="100" color="DARK_GRAY" />
+		<rectangle x="300" y="100" width="50" height="100" color="GRAY" />
+		<rectangle x="350" y="100" width="50" height="100" color="GREEN" />
+		<rectangle x="400" y="100" width="50" height="100" color="LIGHT_GRAY" />
+		<rectangle x="450" y="100" width="50" height="100" color="MAGENTA" />
+		<rectangle x="500" y="100" width="50" height="100" color="ORANGE" />
+		<rectangle x="550" y="100" width="50" height="100" color="PINK" />
+		<rectangle x="600" y="100" width="50" height="100" color="RED" />
+		<rectangle x="650" y="100" width="50" height="100" color="WHITE" />
+		<rectangle x="700" y="100" width="50" height="100" color="YELLOW" />
+	</obstacles>	
+</map>

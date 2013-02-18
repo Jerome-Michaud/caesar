@@ -32,7 +32,8 @@ public class ZoneSimulateur extends JPanel {
 		this.panelSC = new JPanel();
 		this.panelSimulator = new PanelSimulator(simulator);
 		this.panelController = new PanelController(simulator);
-		this.infosRobot = new PanelInfosRobot(panelSimulator.getSimulator().getRobot());	
+		this.infosRobot = new PanelInfosRobot(panelSimulator.getSimulator().getRobot());
+		this.simulator.addObserver(this.infosRobot);
 
 		this.panelSC.setLayout(new BorderLayout());	
 		this.panelSC.setMinimumSize(new Dimension(500, 600));
