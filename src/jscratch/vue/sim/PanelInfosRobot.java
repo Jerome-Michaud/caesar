@@ -17,7 +17,7 @@ import jscratch.modeles.sim.Sensor;
  * @author Guillaume Delorme
  *
  */
-public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator {
+public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator,ObserverSimulator {
 	private final float FREQ_UPDATE = 0.02f;
 	private float nextUpdate = FREQ_UPDATE;
 	
@@ -82,6 +82,11 @@ public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator {
 	 */
 	@Override
 	public void update(ObservablePanelSimulator o) {
+		update(FREQ_UPDATE);
+	}
+
+	@Override
+	public void update(ObservableSimulator o) {
 		update(FREQ_UPDATE);
 	}
 }
