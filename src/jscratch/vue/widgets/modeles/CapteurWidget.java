@@ -39,7 +39,7 @@ public class CapteurWidget extends ModeleWidget {
 		message.put(new Point(5, (int) sizesText.getHeight() + 1), label);
 		
 		
-		ListeDeroulante<CapteurSlot> l = new ListeDeroulante<CapteurSlot>(CapteurSlot.values());
+		ListeDeroulante<CapteurSlot> l = new ListeDeroulante<CapteurSlot>(CapteurSlot.values(), this);
 		l.setBounds((int) sizesText.getWidth() + 10, 0, 60, 20);
 		this.getLesZonesSaisies().add(l);
 		
