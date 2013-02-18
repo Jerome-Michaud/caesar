@@ -23,6 +23,7 @@ import nxtim.instruction.VariableConstante;
 public class MoteurMarcheWidget extends ModeleWidget {
 
 	private ChampTexte f;
+	private ListeDeroulante<Moteur> l;
 	
 	public MoteurMarcheWidget(){
 		super();
@@ -40,7 +41,7 @@ public class MoteurMarcheWidget extends ModeleWidget {
 		this.setElementProgramme(new InstructionMoteurMov());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
-		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
+		l = new ListeDeroulante<Moteur>(Moteur.values(), this);
 		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 
@@ -60,11 +61,13 @@ public class MoteurMarcheWidget extends ModeleWidget {
 
 		initListeners();
 	}
+	
 	@Override
 	public void applyChangeModele(){
 		Widget contentWidget = f.getContentWidget();
 		InstructionMoteurMov moteurMarcheIns = ((InstructionMoteurMov) getElementProgramme());
-
+		setInstructionMoteur(l.getValeur());
+		
 		// On met à jour la condition dans l'elementProgramme si elle existe
 		if (contentWidget != null) {
 			Expression exp = (Expression) contentWidget.getElementProgramme();
