@@ -26,7 +26,7 @@ public final class FenetreSupressionVariable extends JFrame {
 		this.setAlwaysOnTop(true);
 		this.setResizable(false);
 		
-		variables = new JComboBox(DicoVariables.getInstance().getLesvariables());
+		variables = new JComboBox(DicoVariables.getInstance().getLesVariables());
 		boutonValider = new JButton("Valider");
 
 		Box boxV = Box.createVerticalBox();
@@ -49,7 +49,6 @@ public final class FenetreSupressionVariable extends JFrame {
 		this.setVisible(true);
 
 		this.variables.requestFocus();
-		this.boutonValider.setDefaultCapable(true);
 		
 		boutonValider.addActionListener(new ActionListener() {
 			@ Override
@@ -74,5 +73,8 @@ public final class FenetreSupressionVariable extends JFrame {
 				dispose();
 			}
 		});
+		
+		this.getRootPane().setDefaultButton(this.boutonValider);
+		this.boutonValider.setDefaultCapable(true);
 	}
 }

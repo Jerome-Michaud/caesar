@@ -34,6 +34,7 @@ public class ChampTexte extends JPanel implements Zone {
 	private JTextField textField;
 	private List<TypeModeleWidget> typesWidgetsAcceptes;
 	private int minimumWidth;
+	private ModeleWidget widgetParent;
 	/*
 	 * Etat à ETAT_SAISIE (0) quand on affiche uniquement le champ texte
 	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus
@@ -51,6 +52,7 @@ public class ChampTexte extends JPanel implements Zone {
 		this.widgetContenu = null;
 		this.add(textField, BorderLayout.CENTER);
 		this.etat = ETAT_SAISIE;
+		this.widgetParent = widgetParent;
 
 		this.addContainerListener(new ContainerAdapter() {
 			@Override
@@ -152,6 +154,10 @@ public class ChampTexte extends JPanel implements Zone {
 	public boolean isContentWidget() {
 		return etat == 1;
 
+	}	
+
+	public ModeleWidget getWidgetParent() {
+		return widgetParent;
 	}
 
 	/**
@@ -181,6 +187,7 @@ public class ChampTexte extends JPanel implements Zone {
 		//Appel à la méthode de redimensionnement en X, avec si nécessaire appel recursif pour le redimensionnement des parents
 		decaleWidgetParents(this, decal);
 		this.widgetContenu = w;
+		widgetParent.applyChangeModele();
 	}
 
 	/**
@@ -216,7 +223,7 @@ public class ChampTexte extends JPanel implements Zone {
 			//... alors on entame les procédures de redimensionnement
 			parent.getModele().decalageX(decal);
 			parent.setForme(false);
-			parent.getModele().decalerComposantsSuivants(positionX, decal);
+			parent.getModele().decalerComposantsSuivantsX(positionX, decal);
 			//Dans le cas on l'on trvaille sur un ChampTexte, des actions supplémentaires sont nécessaires
 			if (champ) {
 				//On agrandit les bounds du composant en lui même
@@ -271,8 +278,18 @@ public class ChampTexte extends JPanel implements Zone {
 	}
 
 	@Override
+	public int getPositionY() {
+		return this.getY();
+	}
+
+	@Override
 	public void setPositionX(int posX) {
 		this.setLocation(posX, this.getY());
+	}
+
+	@Override
+	public void setPositionY(int posY) {
+		this.setLocation(this.getX(),posY);
 	}
 
 	private void calculateNewBounds(JComponent comp) {

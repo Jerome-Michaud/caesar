@@ -331,7 +331,7 @@ public class FabriqueInstructions {
 				}
 			}
 		} else if ("VariableWidget".equals(nomClasse)) {
-			Variable[] vars = DicoVariables.getInstance().getLesvariables();
+			Variable[] vars = DicoVariables.getInstance().getLesVariables();
 			for (Variable v : vars) {
 				if (v.getNom().equals(supplement)) {
 					w = creerWidgetVariable((VariableModifiable)v);

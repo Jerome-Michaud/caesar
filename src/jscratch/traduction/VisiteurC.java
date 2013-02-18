@@ -18,8 +18,8 @@ import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
-import nxtim.instruction.InstructionTempsCourant;
 import nxtim.instruction.InstructionWhile;
+import nxtim.instruction.TempsCourant;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableCapteur;
 
@@ -144,13 +144,8 @@ public class VisiteurC extends VisiteurTraduction {
 	}
 
 	@Override
-	public void visiter(InstructionTempsCourant inst) {
-		traduction += indent();
-		if (inst.getVariable() != null) {
-			inst.getVariable().accepte(this);
-			traduction += " = ";
-		}
-		traduction += "clock();\n";
+	public void visiter(TempsCourant exp) {
+		traduction += "clock()";
 	}
 
 	@Override

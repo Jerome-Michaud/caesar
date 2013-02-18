@@ -54,6 +54,8 @@ public final class ParametrageUI extends JFrame {
 		tab.insertTab("Autres", null, PanelAutres.getInstance(), null, 3);
 		tab.insertTab("Traces", null, PanelTraces.getInstance(), null, 4);
 		
+		tab.setTabReorderByDraggingEnabled(false);
+		
 		this.sauvegarder = new JButton("Sauvegarder");
 		this.sauvegarder.addActionListener(new ActionListener() {
 

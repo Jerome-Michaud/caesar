@@ -40,6 +40,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		int widthChamp = 35;
 		g = new ChampTexte(widthChamp, this);
 		g.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		g.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
 		g.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		g.setBounds(55, 3, widthChamp, 20);
 		g.setValeur("0");
@@ -90,9 +91,6 @@ public class VariableSetValueWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleY();
 	}
-
-	@Override
-	public void initListeners() { }
 
 	/**
 	 * Permet de récupérer le nom de la variable.

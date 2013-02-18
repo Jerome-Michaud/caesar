@@ -25,7 +25,7 @@ import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
-import nxtim.instruction.InstructionTempsCourant;
+import nxtim.instruction.TempsCourant;
 import nxtim.instruction.InstructionWhile;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.Operateur;
@@ -228,7 +228,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 	}
 
 	@Override
-	public void visiter(InstructionTempsCourant inst) { }
+	public void visiter(TempsCourant inst) { }
 
 	@Override
 	public void visiter(InstructionAttente inst) {

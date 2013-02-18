@@ -2,10 +2,6 @@ package jscratch.vue.ginterface.principales;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.util.Formatter;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -65,7 +61,6 @@ public final class FenetreAjoutVariable extends JFrame {
 		this.setLocationRelativeTo(GUI.getPanelWidget());
 		this.setVisible(true);
 		this.nomVariable.requestFocus();
-		this.boutonValider.setDefaultCapable(true);
 		
 		boutonValider.addActionListener(new ActionListener() {
 			@Override
@@ -93,5 +88,8 @@ public final class FenetreAjoutVariable extends JFrame {
 				dispose();
 			}
 		});
+		
+		this.getRootPane().setDefaultButton(this.boutonValider);
+		boutonValider.setDefaultCapable(true);
 	}
 }

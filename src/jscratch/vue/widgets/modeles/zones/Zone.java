@@ -25,7 +25,11 @@ public interface Zone {
 	
 	public int getPositionX();
 	
+	public int getPositionY();
+	
 	public void setPositionX(int posX);
+	
+	public void setPositionY(int posY);
 	/**
 	 * Dit si la zone est utilisée par un widget ou pas ou si c'est impossible.
 	 *

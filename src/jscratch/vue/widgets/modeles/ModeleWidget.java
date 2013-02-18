@@ -136,9 +136,9 @@ public abstract class ModeleWidget implements Serializable {
     }
 
     /**
-     * Méthode abstraite permettant d'initialiser les listeners du modèle.
+     * Méthode permettant d'initialiser les listeners du modèle. Par défaut cette methode ne fait rien
      */
-    public abstract void initListeners();
+    public void initListeners() { }
 
     /**
      * Méthode permettant de récupérer l'élement de programme du modèle.
@@ -478,7 +478,7 @@ public abstract class ModeleWidget implements Serializable {
      */
     public void decalageY(int x,Rectangle r){}
 
-	public void decalerComposantsSuivants(int positionX, int decalage){
+	public void decalerComposantsSuivantsX(int positionX, int decalage){
 		for(Zone z : this.lesZonesSaisies){
 			int zonePosX = z.getPositionX();
 			if(zonePosX > positionX){
@@ -493,6 +493,32 @@ public abstract class ModeleWidget implements Serializable {
 			if(messPosX > positionX){
 				Point pt2 = new Point();
 				pt2.setLocation(messPosX + decalage,pt.getY());
+				mapTemp.put(pt2, message.get(pt));
+				i.remove();
+			}
+		}
+		i = mapTemp.keySet().iterator();
+		while(i.hasNext()){
+			Point pt = i.next();
+			message.put(pt, mapTemp.get(pt));
+		}
+	}
+
+	public void decalerComposantsSuivantsY(int positionY, int decalage){
+		for(Zone z : this.lesZonesSaisies){
+			int zonePosY = z.getPositionY();
+			if(zonePosY > positionY){
+				z.setPositionX(zonePosY + decalage);
+			}
+		}
+		Iterator<Point> i = message.keySet().iterator();
+		HashMap<Point,String> mapTemp = new LinkedHashMap<Point, String>();
+		while(i.hasNext()){
+			Point pt = i.next();
+			int messPosY = (int) pt.getY();
+			if(messPosY > positionY){
+				Point pt2 = new Point();
+				pt2.setLocation(pt.getX(),messPosY + decalage);
 				mapTemp.put(pt2, message.get(pt));
 				i.remove();
 			}

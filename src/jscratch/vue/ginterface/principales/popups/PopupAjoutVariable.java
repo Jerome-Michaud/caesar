@@ -35,7 +35,7 @@ public class PopupAjoutVariable extends JPopupMenu {
 		});
 		this.add(this.ajouter);
 		
-		if (!DicoVariables.getInstance().getDictionnaire().isEmpty()) {
+		if (!DicoVariables.getInstance().isEmpty()) {
 			this.supprimer = new JMenuItem("Supprimer une variable");
 			this.supprimer.addActionListener(new ActionListener() {
 

@@ -63,8 +63,5 @@ public class TacheWidget extends ModeleWidget {
         }
         this.setForme(this.getForme());
         this.setTailleY();
-    }
-    
-    @Override
-    public void initListeners() { }
+	}
 }

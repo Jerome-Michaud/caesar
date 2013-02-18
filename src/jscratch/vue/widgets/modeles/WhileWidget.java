@@ -85,10 +85,4 @@ public class WhileWidget extends ModeleWidget {
         this.setForme(this.getForme());
         this.setTailleY();
     }
-    
-    /**
-     * Méthode d'initialisation des listeners.
-     */
-    @Override
-	public void initListeners() {}
 }

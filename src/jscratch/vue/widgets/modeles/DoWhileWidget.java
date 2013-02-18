@@ -87,7 +87,4 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		boundsChTexte.translate(0, b);
 		f.setBounds(boundsChTexte);
 	}
-
-	@Override
-	public void initListeners() { }
 }
