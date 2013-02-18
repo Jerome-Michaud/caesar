@@ -1,17 +1,25 @@
 package jscratch.vue.ginterface.principales;
 
+import de.javasoft.swing.AboutDialog;
+import java.awt.Component;
 import jscratch.vue.ginterface.principales.selecteur.SelecteurFichier;
 import jscratch.vue.ginterface.principales.panels.PanelCodeGraphique;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import jscratch.compilateur.CompilateurTools;
+import jscratch.helpers.ErreurHelper;
 import jscratch.helpers.ImagesHelper;
 import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
@@ -33,7 +41,7 @@ public final class Menu extends JMenuBar {
 	/**
 	 * @since 1.0
 	 */
-	private static final Menu instance = new Menu();
+	private static Menu instance = null;
 	/**
 	 * @see Vue.Interface.Menu.ListenerMenu
 	 */
@@ -45,6 +53,9 @@ public final class Menu extends JMenuBar {
 	 * @return L'instance unique de Menu
 	 */
 	public static Menu getInstance() {
+		if (instance == null) {
+			instance = new Menu();
+		}
 		return instance;
 	}
 
@@ -124,7 +135,15 @@ public final class Menu extends JMenuBar {
 				// Exporter vers robot
 				CompilateurTools.getInstance().exporter();
 			} else if (e.getSource() == aideAPropos) {
-				new AProposUI();
+				try {
+					AboutDialog ad = new AboutDialog(GUI.getFenetre(), false, null, false);
+					ad.setTitle("A propos");
+					ad.setDescription("<html><b>Vous trouverez ici plus d'information sur l'application</b><p>Cliquez sur les onglets suivants pour avoir les informations sur l'application et le système.</p></html>");
+					ad.setAboutText(this.getClass().getClassLoader().getResource("jscratch" + File.separator + "APropos.html"));
+					ad.showDialog();
+				} catch (IOException ex) {
+					ErreurHelper.afficher(ex);
+				}
 			}
 		}
 	}

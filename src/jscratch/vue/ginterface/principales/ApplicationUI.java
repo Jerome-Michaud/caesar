@@ -3,13 +3,16 @@ package jscratch.vue.ginterface.principales;
 import de.javasoft.swing.JYDockingPort;
 import de.javasoft.swing.JYDockingView;
 import de.javasoft.swing.jydocking.DockingManager;
+import de.javasoft.swing.jydocking.IDockable;
+import de.javasoft.swing.jydocking.IDockableAcceptor;
+import de.javasoft.swing.jydocking.IDockingConstants;
+import de.javasoft.swing.plaf.jydocking.DefaultFloatAction;
+import de.javasoft.swing.plaf.jydocking.DefaultMaximizeAction;
 import de.javasoft.swing.plaf.jydocking.DefaultMinimizeAction;
 import java.awt.BorderLayout;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
 
 import java.awt.Dimension;
-import javax.swing.JSplitPane;
-import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -32,14 +35,23 @@ public final class ApplicationUI extends JFrame {
 	 *
 	 * @since 1.0
 	 */
-	private static final ApplicationUI instance = new ApplicationUI();
+	private static ApplicationUI instance = null;
+	
 	/**
+	 * Le <code>GlassPane</code>.
+	 * 
 	 * @see Vue.Interface.GlassPane
 	 */
 	private GlassPane glassPane;
-	private Dimension ecran;
 	
+	/**
+	 * Le <code>DockingPort</code>.
+	 */
 	private JYDockingPort viewport;
+	
+	/**
+	 * Les différents <code>DockingView</code>.
+	 */
 	private JYDockingView zoneCodeGraphique, zoneCodeConsole, zoneSimulateur;
 
 	/**
@@ -57,7 +69,6 @@ public final class ApplicationUI extends JFrame {
 
 		add(creerDocking());
 
-		DockingManager.setMinimized(zoneCodeConsole, true);
 		DockingManager.setTabReorderByDraggingEnabled(false);
 		
 		addWindowListener(new WindowAdapter() {
@@ -90,10 +101,10 @@ public final class ApplicationUI extends JFrame {
 		zoneSimulateur = creerZoneSimulation();
 		
 		viewport = new JYDockingPort();
-		viewport.dock(zoneCodeGraphique);
+		viewport.dock(zoneCodeGraphique, IDockingConstants.CENTER_REGION);
 		
-		zoneCodeGraphique.dock(zoneCodeConsole, DockingManager.EAST_REGION, .10f);
-		zoneCodeGraphique.dock(zoneSimulateur, DockingManager.CENTER_REGION, 1f);
+		zoneCodeGraphique.dock(zoneCodeConsole, IDockingConstants.EAST_REGION, 3f);
+		zoneCodeGraphique.dock(zoneSimulateur, IDockingConstants.CENTER_REGION, .7f);
 
 		zoneCodeGraphique.getDockingPort().setTabPlacement(SwingConstants.BOTTOM);
 		zoneCodeGraphique.getDockingPort().setSelectedTabIndex(0);
@@ -112,11 +123,11 @@ public final class ApplicationUI extends JFrame {
 	 */
 	private JYDockingView creerZoneEdition() {
 		JYDockingView view = new JYDockingView("zoneCodeGraphique-SimpleDocking", "Edition", "Edition");
-		view.setIcon(ImagesHelper.getIcon("code_18.png"));
-		view.setDockbarIcon(ImagesHelper.getIcon("code_18.png"));
-		//view.setTerritoryBlocked(DockingManager.CENTER_REGION, true);
+		view.addAction(new DefaultMaximizeAction(view));
+		view.setIcon(ImagesHelper.getIcon("document-code-graph.png"));
+		view.setDockbarIcon(ImagesHelper.getIcon("document-code-graph.png"));
 		view.setContentPane(GUI.getZoneUtilisateur());
-
+		view.setDraggingEnabled(false);
 		return view;
 	}
 
@@ -129,12 +140,12 @@ public final class ApplicationUI extends JFrame {
 	 */
 	private JYDockingView creerZoneSimulation() {
 		JYDockingView view = new JYDockingView("zoneSimulateur-SimpleDocking", "Simulation", "Simulation");
-		view.addAction(new DefaultMinimizeAction(view, DockingManager.LEFT));
-		view.setIcon(ImagesHelper.getIcon("robot_18.png"));
-		view.setDockbarIcon(ImagesHelper.getIcon("robot_18.png"));
-		//view.setTerritoryBlocked(DockingManager.CENTER_REGION, true);
+		view.addAction(new DefaultMaximizeAction(view));
+		view.addAction(new DefaultFloatAction(view));
+		view.setIcon(ImagesHelper.getIcon("robot.png"));
+		view.setDockbarIcon(ImagesHelper.getIcon("robot.png"));
 		view.setContentPane(GUI.creerZoneSimulateur());
-
+		view.setDraggingEnabled(false);
 		return view;
 	}
 	
@@ -145,12 +156,10 @@ public final class ApplicationUI extends JFrame {
 	 */
 	private JYDockingView creerZoneCodeConsole() {
 		JYDockingView view = new JYDockingView("zoneCodeConsole-SimpleDocking", "Code console", "Code console");
-		view.addAction(new DefaultMinimizeAction(view, DockingManager.RIGHT));
-		view.setIcon(ImagesHelper.getIcon("cmd_18.png"));
-		view.setDockbarIcon(ImagesHelper.getIcon("cmd_18.png"));
-		//view.setTerritoryBlocked(DockingManager.EAST_REGION, true);
+		view.setIcon(ImagesHelper.getIcon("document-code.png"));
+		view.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));
 		view.setContentPane(GUI.getPanelCodeConsole());
-
+		view.setDraggingEnabled(false);
 		return view;
 	}
 
@@ -160,6 +169,9 @@ public final class ApplicationUI extends JFrame {
 	 * @return L'instance unique de Fenetre.
 	 */
 	public static ApplicationUI getInstance() {
+		if (instance == null) {
+			instance = new ApplicationUI();
+		}
 		return instance;
 	}
 }
