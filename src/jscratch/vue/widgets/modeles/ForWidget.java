@@ -144,7 +144,7 @@ public class ForWidget extends ModeleWidget {
             ((JComponent) z).addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(final FocusEvent arg0) {
-                    Variable v = DicoVariables.getInstance().getLesvariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
+                    Variable v = DicoVariables.getInstance().getLesVariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
                     String deb = ((Zone) getLesZonesSaisies().get(1)).getValeur();
                     Operateur o = Operateur.comparaisonA()[Integer.parseInt(((Zone) getLesZonesSaisies().get(2)).getValeur())];
                     String fin = ((Zone) getLesZonesSaisies().get(3)).getValeur();

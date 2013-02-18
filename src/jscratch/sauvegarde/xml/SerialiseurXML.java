@@ -33,7 +33,7 @@ public final class SerialiseurXML {
 
 		// Sauvegarde du dictionnaire
 		Element dictionnaire = new Element("dictionnaire");
-		for (Variable v : DicoVariables.getInstance().getLesvariables()) {
+		for (Variable v : DicoVariables.getInstance().getLesVariables()) {
 			Element variable = new Element("variable");
 			variable.setAttribute("nom", v.getNom());	
 			variable.setAttribute("type", v.getType().toString());
