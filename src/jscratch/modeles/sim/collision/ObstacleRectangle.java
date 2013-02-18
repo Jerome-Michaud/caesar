@@ -20,13 +20,7 @@ public class ObstacleRectangle extends ObstacleShape {
 				Integer.parseInt(element.getAttribute("width")), 
 				Integer.parseInt(element.getAttribute("height")));
 		
-		Color c = Color.getColor(element.getAttribute("color"));
-				
-		if (c != null) {
-			color = c;
-		} else {
-			color = Color.BLACK;
-		}
+		color = CouleurObstacle.fromString(element.getAttribute("color")).getCouleur();
 	}
 	
 	public ObstacleRectangle(int x, int y, int width, int height, Color color) {
