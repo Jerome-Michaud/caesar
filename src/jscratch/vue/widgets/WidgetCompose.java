@@ -36,6 +36,9 @@ public class WidgetCompose extends Widget implements IWidget {
 	@Override
 	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
+		for(YComparableRectangle r : mapZone.keySet()){
+			g.drawRect((int)r.getX(),(int) r.getY(), (int)r.getWidth(),(int)r.getHeight());
+		}
 	}
 
 	/**
@@ -150,6 +153,7 @@ public class WidgetCompose extends Widget implements IWidget {
 			//On stocke le décalage qu'on voudra appliquer sur les zones d'accroche du composant
 			this.getModele().decalageY(diff, r);
 			decaleZonesEnDessousDe(r.y, diff, mapDecal);
+			this.getModele().decalerComposantsSuivantsY(r.y, diff);
 
 			YComparableRectangle bnds = new YComparableRectangle(r);
 			bnds.height = maxBounds.height;
