@@ -13,7 +13,6 @@ import nxtim.instruction.Operation;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
-import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
@@ -51,6 +50,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		l.setBounds(10, 3, LARG_CHAMP, 14);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.CAPTEUR);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		this.getLesZonesSaisies().add(l);
 
@@ -64,6 +64,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 		f = new ChampTexte(LARG_CHAMP, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.CAPTEUR);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
 		this.getLesZonesSaisies().add(f);

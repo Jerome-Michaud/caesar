@@ -12,10 +12,8 @@ import jscratch.vue.widgets.Widget;
 import nxtim.instruction.Condition;
 import nxtim.instruction.Expression;
 import nxtim.instruction.Operateur;
-import nxtim.instruction.Operation;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
-import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
@@ -53,6 +51,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		l = new ChampTexte(LARG_CHAMP, this);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.CAPTEUR);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		l.setBounds(this.LARG_EXTREMITE, 3, LARG_CHAMP, 14);
 		this.getLesZonesSaisies().add(l);
@@ -66,6 +65,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		f = new ChampTexte(LARG_CHAMP, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.CAPTEUR);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
 		this.getLesZonesSaisies().add(f);

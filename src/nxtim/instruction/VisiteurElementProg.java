@@ -143,7 +143,14 @@ public interface VisiteurElementProg {
 	/**
 	 * Visite une instruction d'incrémentation.
 	 * 
-	 * @param instructionIncrementation l'instruction à visier
+	 * @param instructionIncrementation l'instruction à visiter
 	 */
 	public void visiter(InstructionIncrementation instructionIncrementation);
+	
+	/**
+	 * Visite une expression de récupération de la valeur d'un capteur.
+	 * 
+	 * @param valCapteur l'expression à visiter
+	 */
+	public void visiter(ValeurCapteur valCapteur);
 }
