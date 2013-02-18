@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.io.File;
 import jscratch.helpers.PropertiesHelper;
-import jscratch.vue.widgets.YComparableRectangle;
 
 /**
  * Classe regroupant différentes variables utilisées par le programme
@@ -35,9 +34,9 @@ public class Variables {
 	/**
 	 * Rectangles pour la zone d'accroche des Widgets Compose
 	 */
-	public static final YComparableRectangle ZONE_ACCROCHE_PAR_DEFAULT = new YComparableRectangle(5, 26, 130, 15);
-	public static final YComparableRectangle ZONE_ACCROCHE_ELSE = new YComparableRectangle(5, 56, 130, 15);
-	public static final YComparableRectangle ZONE_ACCROCHE_DOWHILE = new YComparableRectangle(5, 16, 130, 15);
+	public static final Rectangle ZONE_ACCROCHE_PAR_DEFAULT = new Rectangle(5, 26, 130, 15);
+	public static final Rectangle ZONE_ACCROCHE_ELSE = new Rectangle(5, 56, 130, 15);
+	public static final Rectangle ZONE_ACCROCHE_DOWHILE = new Rectangle(5, 16, 130, 15);
 	
 	// Gestion des couleurs des catégories
 	public static final Color GRIS_INACTIF = new Color(90, 111, 116);
