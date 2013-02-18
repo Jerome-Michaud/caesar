@@ -113,15 +113,6 @@ public final class GUI {
 	}
 
 	/**
-	 * Permet de créer une nouvelle fenetre a propos.
-	 * 
-	 * @return la nouvelle fenetre a propos
-	 */
-	public static AProposUI creerAPropos() {
-		return new AProposUI();
-	}
-
-	/**
 	 * Permet de créer une nouvelle <code>FenetreAjoutVariable</code>.
 	 * 
 	 * @return la nouvelle fenetre
