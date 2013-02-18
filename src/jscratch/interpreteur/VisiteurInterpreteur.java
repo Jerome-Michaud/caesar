@@ -25,10 +25,11 @@ import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
-import nxtim.instruction.InstructionTempsCourant;
+import nxtim.instruction.TempsCourant;
 import nxtim.instruction.InstructionWhile;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.Operateur;
+import nxtim.instruction.ValeurCapteur;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableCapteur;
 import nxtim.instruction.VariableModifiable;
@@ -170,7 +171,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 	}
 
 	@Override
-	public void visiter(InstructionTempsCourant inst) { }
+	public void visiter(TempsCourant inst) { }
 
 	@Override
 	public void visiter(InstructionAttente inst) {
@@ -428,4 +429,9 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 
 	@Override
 	public void visiter(InstructionIncrementation instructionIncrementation) { }
+
+	@Override
+	public void visiter(ValeurCapteur valCapteur) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 }

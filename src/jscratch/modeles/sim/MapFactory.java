@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import jscratch.modeles.sim.collision.CouleurObstacle;
 import jscratch.modeles.sim.collision.ObstacleEllipse;
 import jscratch.modeles.sim.collision.ObstaclePolygon;
 import jscratch.modeles.sim.collision.ObstacleRectangle;
@@ -63,7 +64,7 @@ public class MapFactory {
 				if (e.getNodeName().equals("polygon"))				
 					listeObstacle.add(new ObstaclePolygon(e));
 			}
-		}
+		}			
 
 		return new Map(image, listeObstacle);
 	}

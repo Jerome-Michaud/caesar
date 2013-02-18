@@ -9,7 +9,7 @@ import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
 import nxtim.instruction.InstructionTache;
-import nxtim.instruction.InstructionTempsCourant;
+import nxtim.instruction.TempsCourant;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableCapteur;
@@ -112,13 +112,8 @@ public class VisiteurRobotC extends VisiteurC {
 	}
 
 	@Override
-	public void visiter(InstructionTempsCourant inst) {
-		traduction += indent();
-		if (inst.getVariable() != null) {
-			inst.getVariable().accepte(this);
-			traduction += " = ";
-		}
-		traduction += "CurrentTick();\n";
+	public void visiter(TempsCourant inst) {
+		traduction += "CurrentTick()";
 	}
 
 	@Override
