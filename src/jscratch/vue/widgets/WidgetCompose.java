@@ -37,7 +37,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	@Override
 	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
-		for(YComparableRectangle r : mapZone.keySet()){
+		for(Rectangle r : mapZone.keySet()){
 			g.drawRect((int)r.getX(),(int) r.getY(), (int)r.getWidth(),(int)r.getHeight());
 		}
 	}
