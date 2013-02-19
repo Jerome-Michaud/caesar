@@ -133,9 +133,7 @@ public class PanelController extends JPanel implements ActionListener{
 			b2.setEnabled(true);
 			b3.setEnabled(true);
 			b1.setEnabled(false);
-			lanceurInter = new LanceurInterpreteur(simulator);
-			lanceurInter.start();
-			simulator.start();
+			this.startThread();
 		}
 		else if(e.getSource() == b2){
 			if(!pause){
@@ -154,11 +152,7 @@ public class PanelController extends JPanel implements ActionListener{
 			b3.setEnabled(false);
 			b1.setEnabled(true);
 			pause=false;
-			lanceurInter.stopThread();
-			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_A));
-			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_B));
-			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_C));
-			simulator.getRobotController().clearListCommands();
+			this.stopThread();
 		}
 		else if(e.getSource() == m1){
 
@@ -169,6 +163,24 @@ public class PanelController extends JPanel implements ActionListener{
 		else if(e.getSource() == m3){
 			
 		}
+	}
+	
+	private void startThread(){
+		lanceurInter = new LanceurInterpreteur(simulator);
+		lanceurInter.start();
+		simulator.start();
+		simulator.setRun(true);
+		simulator.getRobotController().resetStartTime();
+	}
+	
+	private void stopThread(){
+		lanceurInter.stopThread();
+		simulator.setRun(false);
+		simulator.setWait(false);
+		simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_A));
+		simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_B));
+		simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_C));
+		simulator.getRobotController().clearListCommands();
 	}
 
 }

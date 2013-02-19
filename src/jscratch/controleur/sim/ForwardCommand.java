@@ -20,7 +20,6 @@ public class ForwardCommand extends Command {
 	public void execute() {
 		// TODO Stub de la méthode généré automatiquement
 		robot.onFwd(port, vitesse);
-
 	}
 
 }

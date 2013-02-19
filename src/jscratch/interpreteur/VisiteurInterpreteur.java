@@ -3,37 +3,13 @@ package jscratch.interpreteur;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
+
 import jscratch.controleur.sim.ForwardCommand;
 import jscratch.controleur.sim.RobotController;
+import jscratch.controleur.sim.Simulator;
 import jscratch.controleur.sim.StopCommand;
 import jscratch.modeles.sim.MotorPort;
-import nxtim.instruction.Affectation;
-import nxtim.instruction.Expression;
-import nxtim.instruction.ExpressionComplexe;
-import nxtim.instruction.Instruction;
-import nxtim.instruction.InstructionAttente;
-import nxtim.instruction.InstructionDeclaration;
-import nxtim.instruction.InstructionDeclarationAffectation;
-import nxtim.instruction.InstructionDeclarationCapteur;
-import nxtim.instruction.InstructionDoWhile;
-import nxtim.instruction.InstructionFor;
-import nxtim.instruction.InstructionIf;
-import nxtim.instruction.InstructionIfElse;
-import nxtim.instruction.InstructionIncrementation;
-import nxtim.instruction.InstructionMoteurMov;
-import nxtim.instruction.InstructionMoteurOff;
-import nxtim.instruction.InstructionMoteurRotate;
-import nxtim.instruction.InstructionRepeat;
-import nxtim.instruction.InstructionTache;
-import nxtim.instruction.TempsCourant;
-import nxtim.instruction.InstructionWhile;
-import nxtim.instruction.Moteur;
-import nxtim.instruction.Operateur;
-import nxtim.instruction.ValeurCapteur;
-import nxtim.instruction.Variable;
-import nxtim.instruction.VariableCapteur;
-import nxtim.instruction.VariableModifiable;
-import nxtim.instruction.VisiteurElementProg;
+import nxtim.instruction.*;
 
 /**
  * @since 1.0
@@ -49,21 +25,23 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 	private Deque<Double> pile;
 	
 	private RobotController robot;
+	private Simulator simulator;
 	private boolean wait = false;
 	private boolean run = true;
 
-	private VisiteurInterpreteur(RobotController robot) {
+	private VisiteurInterpreteur(Simulator simulator) {
 		this.pile = new ArrayDeque<Double>();
-		this.robot = robot;
+		this.robot = simulator.getRobotController();
+		this.simulator = simulator;
 	}
 
 	/**
 	 *
 	 * @return instance de VisiteurInterpreteur
 	 */
-	public synchronized static VisiteurInterpreteur getInstance(RobotController robot) {
+	public synchronized static VisiteurInterpreteur getInstance(Simulator simulator) {
 		if (instance == null) {
-			instance = new VisiteurInterpreteur(robot);
+			instance = new VisiteurInterpreteur(simulator);
 		}
 		return instance;
 	}
@@ -81,7 +59,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -102,7 +80,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -126,7 +104,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -154,7 +132,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -184,7 +162,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -208,7 +186,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -224,12 +202,19 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
 	@Override
-	public void visiter(TempsCourant inst) { }
+	public void visiter(TempsCourant inst) { 
+		try{
+			pile.push(robot.getCurrentTime());
+		}
+		catch(Exception e){
+			//System.out.println("Exception");
+		}
+	}
 
 	@Override
 	public void visiter(InstructionAttente inst) {
@@ -253,7 +238,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -275,10 +260,11 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 				double i = pile.pop();
 				System.out.println("Creation de la commande Forward : (" + i + " , " + moteur.toString() + ")");
 				robot.addCommand(new ForwardCommand(robot, (int) i, moteurToMotorPort(moteur)));
+				
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -294,10 +280,11 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 				Moteur moteur = inst.getMoteur();
 				System.out.println("Creation de la commande Off : (" + moteur.toString() + ")");
 				robot.addCommand(new StopCommand(robot, 0, moteurToMotorPort(moteur)));
+				
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -337,7 +324,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -365,7 +352,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -387,7 +374,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -416,7 +403,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -518,7 +505,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 			}
 		}
 		catch(Exception e){
-			System.out.println("Exception");
+			//System.out.println("Exception");
 		}
 	}
 
@@ -551,26 +538,31 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 
 	@Override
 	public void visiter(InstructionIncrementation inst) {
-		Variable var = (Variable) inst.getExpression();
-		
-		double d = Double.parseDouble(var.getValeur());
-		
-		if(inst.isPositive()){
-			d++;
+		try{
+			Variable var = (Variable) inst.getExpression();
+			
+			double d = Double.parseDouble(var.getValeur());
+			
+			if(inst.isPositive()){
+				d++;
+			}
+			else{
+				d--;
+			}
+			
+			var.setValeur(""+d);
 		}
-		else{
-			d--;
-		}
-		
-		var.setValeur(""+d);
-		
+		catch(Exception e){
+			//System.out.println("Exception");
+		}		
 	}
 	
 	private synchronized void testWait(){
 		if(wait){
 			try {
 				this.wait();
-			} catch (InterruptedException e) {
+			}
+			catch (InterruptedException e) {
 				// TODO Bloc catch généré automatiquement
 				e.printStackTrace();
 			}
