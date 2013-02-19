@@ -78,36 +78,25 @@ public class PanelSimulator extends JPanel implements MouseWheelListener, MouseM
        // g.drawRect(50, 50, 50, 50);
 	}
 
-	/**
-	 * ajoute un observateur sur le simulateur
-	 * 
-	 * @param ObserverPanelSimulator
-	 */
+	
 	@Override
 	public void addObserver(ObserverPanelSimulator o) {
 		 listObserver.add(o); 
 	}
-	/**
-	 * supprimer un observateur du simulateur
-	 * 
-	 * @param ObserverPanelSimulator
-	 */
+	
 	@Override
 	public void deleteObserver(ObserverPanelSimulator o) {
 		listObserver.remove(o); 
 	}
-	/**
-	 * met à jour les observateurs
-	 */
+	
 	@Override
 	public void notifyObserver() {
 		for(ObserverPanelSimulator o : listObserver){
 			o.update(this);
 		}
 	}
-	/**
-	 * rafraichi l'affichage du panelSimulator
-	 */
+	
+	
 	@Override
 	public void update(ObservableSimulator o) {
 		repaint();

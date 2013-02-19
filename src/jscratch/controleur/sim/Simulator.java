@@ -126,27 +126,17 @@ public class Simulator implements Runnable,ObservableSimulator{
 			}
 		}
 	}
-	/**
-	 * ajoute un observateur sur le simulateur
-	 * 
-	 * @param ObserverSimulator
-	 */
+	
 	@Override
 	public void addObserver(ObserverSimulator o) {
 		 listObserver.add(o); 
 	}
-	/**
-	 * supprimer un observateur du simulateur
-	 * 
-	 * @param ObserverSimulator
-	 */
+	
 	@Override
 	public void deleteObserver(ObserverSimulator o) {
 		listObserver.remove(o); 
 	}
-	/**
-	 * met à jour les observateurs
-	 */
+	
 	@Override
 	public void notifyObserver() {
 		for(ObserverSimulator o : listObserver){
