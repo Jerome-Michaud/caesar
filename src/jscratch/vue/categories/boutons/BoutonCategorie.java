@@ -15,11 +15,13 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
 import jscratch.helpers.FontHelper;
+import jscratch.dictionnaires.DicoTraces;
 import jscratch.helpers.PropertiesHelper;
 import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.parametrages.Variables;
+import jscratch.traces.fabriques.FabriqueTrace;
 
 /**
  * Classe permettant de définir les différents comportements des boutons catégories.
@@ -103,6 +105,11 @@ public abstract class BoutonCategorie extends JComponent {
 			@Override
 			public void mouseReleased(final MouseEvent e) {
 				super.mouseReleased(e);
+				
+				DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceChangementCategorie(
+						GUI.getPanelTypeWidget().getCurrentCategorie(),
+						((BoutonCategorie) e.getSource()).getCategorie()));
+				
 				sourisRelachee();
 			}
 

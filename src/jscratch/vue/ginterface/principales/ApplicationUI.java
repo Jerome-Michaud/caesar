@@ -82,7 +82,7 @@ public final class ApplicationUI extends JFrame {
 				DockingManager.unregisterDockable("zoneSimulateur-SimpleDocking");
 				DockingManager.unregisterDockable("zoneCodeConsole-SimpleDocking");
 				
-				quitter();
+				//quitter();
 			}
 		});
 
@@ -185,7 +185,7 @@ public final class ApplicationUI extends JFrame {
 	 * Permet d'éxécuter les actions avant de fermer l'application.
 	 */
 	public void quitter() {
-		//new SelecteurFichier(TypeSelecteur.TRACES).sauvegarde();
+		new SelecteurFichier(TypeSelecteur.TRACES).sauvegarde();
 		System.exit(0);
 	}
 }
