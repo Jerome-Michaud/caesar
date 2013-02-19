@@ -1,6 +1,7 @@
 package jscratch.vue.ginterface.principales;
 
 import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaRootPaneUI;
 import de.javasoft.swing.JYDockingPort;
 import de.javasoft.swing.JYDockingView;
 import de.javasoft.swing.jydocking.DockingManager;
@@ -11,7 +12,6 @@ import java.awt.BorderLayout;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -60,15 +60,13 @@ public final class ApplicationUI extends JFrame {
 		this.setTitle("C.A.E.S.A.R");
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				
+		if (this.getRootPane().getUI() instanceof SyntheticaRootPaneUI) {
+			((SyntheticaRootPaneUI) this.getRootPane().getUI()).setMaximizedBounds(this);
+		}		
 		
-		String os = System.getProperty("os.name").toLowerCase();
-		if (os.contains("windows")) {
-			Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
-			this.setMinimumSize(new Dimension(((int) ecran.getWidth() * 2 / 3), ((int) ecran.getHeight() * 2 / 3)));
-		} else {
-			this.setMinimumSize(new Dimension(800, 500));
-			this.setExtendedState(MAXIMIZED_BOTH);
-		}
+		this.setMinimumSize(new Dimension(800, 500));
+		this.setExtendedState(MAXIMIZED_BOTH);
 
 		this.setJMenuBar(Menu.getInstance());
 
