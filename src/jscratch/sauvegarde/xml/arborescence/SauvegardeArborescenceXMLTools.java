@@ -1,13 +1,15 @@
-package jscratch.sauvegarde.xml;
+package jscratch.sauvegarde.xml.arborescence;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import jscratch.dictionnaires.DicoTraces;
 import jscratch.helpers.ErreurHelper;
 import jscratch.sauvegarde.SauvegardeTools;
 import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.exceptions.NonChargeableException;
+import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.widgets.Widget;
 import org.jdom2.Document;
@@ -20,26 +22,26 @@ import org.jdom2.output.XMLOutputter;
  * @since 1.0
  * @version 1.0
  */
-public final class SauvegardeXMLTools implements SauvegardeTools {
+public final class SauvegardeArborescenceXMLTools implements SauvegardeTools {
 
 	/**
 	 * L'instance unique de SauvegardeBinaireTools
 	 */
-	private static SauvegardeXMLTools instance = null;
+	private static SauvegardeArborescenceXMLTools instance = null;
 
 	/**
 	 * Le constructeur privé pour éviter la déclaration externe.
 	 */
-	private SauvegardeXMLTools() { }
+	private SauvegardeArborescenceXMLTools() { }
 
 	/**
 	 * Le getter pour récupérer l'instance unique de SauvegardeBinaireTools.
 	 *
 	 * @return l'instance unique de SauvegardeBBinaireTools
 	 */
-	public static SauvegardeXMLTools getInstance() {
+	public static SauvegardeArborescenceXMLTools getInstance() {
 		if (instance == null) {
-			instance = new SauvegardeXMLTools();
+			instance = new SauvegardeArborescenceXMLTools();
 		}
 		return instance;
 	}
@@ -66,7 +68,7 @@ public final class SauvegardeXMLTools implements SauvegardeTools {
 	 * @param path Le chemin où sauvegarder le l'arborescence
 	 */
 	private File serializeArborescence(final String path) {
-		Document doc = SerialiseurXML.save();
+		Document doc = SerialiseurArborescenceXML.save();
 		
 		try {
 			File fichier = new File(path);
@@ -77,6 +79,9 @@ public final class SauvegardeXMLTools implements SauvegardeTools {
 			FileOutputStream fo = new FileOutputStream(fichier);
 			sortie.output(doc, fo);
 			fo.close();
+			
+			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceSauvegarde(fichier));
+			
 			return fichier;
 		} catch (IOException ex) {
 			ErreurHelper.afficher(ex, "La sauvegarde n'a pas pu être effectuée corectement");
@@ -95,8 +100,11 @@ public final class SauvegardeXMLTools implements SauvegardeTools {
 			if (fichier.exists()) {
 				try {
 					SAXBuilder sxb = new SAXBuilder();
-					List<List<Widget>> l = DeserialiseurXML.load(sxb.build(fichier));
+					List<List<Widget>> l = DeserialiseurArborescenceXML.load(sxb.build(fichier));
 					ArborescenceTools.getInstance().initArborescence(l, false);
+					
+					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceChargement(fichier));
+					
 				} catch (JDOMException ex) {
 					ErreurHelper.afficher(ex, "Le fichier fournit n'est pas correct");
 				}

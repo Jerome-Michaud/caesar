@@ -177,51 +177,15 @@ public final class DragAndDropTools extends Observable {
 	public void dragWidget(Widget comp) {
 		if (comp.isDraggable()) {
 			Point ptClick = comp.getPtClick();
-			Point p = MouseInfo.getPointerInfo().getLocation();
-			Rectangle recZoneUtil = new Rectangle(GUI.getZoneUtilisateur().getLocationOnScreen(), new Dimension(GUI.getZoneUtilisateur().getWidth(), GUI.getZoneUtilisateur().getHeight()));
 			Rectangle boundsGroup = groupeWidgetBounds(composantsDrague, 0, null);
 			if (boundsGroup == null) {
 				boundsGroup = new Rectangle();
 			}
-
-			Rectangle recWid = new Rectangle(new Point((int) (MouseInfo.getPointerInfo().getLocation().x - ptClick.getX()), (int) (MouseInfo.getPointerInfo().getLocation().y - ptClick.getY())), new Dimension((int) boundsGroup.getWidth(), (int) boundsGroup.getHeight()));
-			recZoneUtil.setBounds(recZoneUtil.getBounds().x + 4, recZoneUtil.getBounds().y + 20, recZoneUtil.getBounds().width - 12, recZoneUtil.getBounds().height - 20 - 9);
-
-			if (!recZoneUtil.contains(recWid)) {
-				boolean noX = false;
-				if (recWid.getMinX() <= recZoneUtil.getMinX()) {
-					// A gauche
-					p.x = (int) recZoneUtil.getMinX() + 4;
-					p.y -= ptClick.y;
-					noX = true;
-				} else if (recWid.getMaxX() > recZoneUtil.getMaxX()) {
-					// A droite
-					p.x = (int) recZoneUtil.getMaxX() - recWid.width - 4;
-					p.y -= ptClick.y;
-					noX = true;
-				}
-
-				if (recWid.getMinY() <= recZoneUtil.getMinY()) {
-					// En haut
-					p.y = (int) recZoneUtil.getMinY() + 4;
-					if (!noX) {
-						p.x -= ptClick.x;
-					}
-				} else if (recWid.getMaxY() >= recZoneUtil.getMaxY()) {
-					// En bas
-					p.y = (int) recZoneUtil.getMaxY() - recWid.height - 4;
-					if (!noX) {
-						p.x -= ptClick.x;
-					}
-				}
-			} else {
-				p.x -= ptClick.x + 4;
-				p.y -= ptClick.y + 4;
-			}
-			p.x -= GUI.getFenetre().getLocation().getX();
-			p.y -= GUI.getFenetre().getLocation().getY();
+			Point p = GUI.getGlassPane().getMousePosition();
+			p.x -= ptClick.getX();
+			p.y -= ptClick.getY();
 			dragGroupeWidget(composantsDrague, p);
-
+			
 			this.setChanged();
 			this.notifyObservers();
 			int decal = (int) (Widget.TAUX_TRANSFERT_PANEL * comp.getWidth());
@@ -353,14 +317,17 @@ public final class DragAndDropTools extends Observable {
 					break;
 
 			}
-			dragGroupeWidget(arbo.getListe(comp), pt);
-			arbo.updateWidgets();
-			//notifyChangesToWidgets(composantsDrague);
+			if (complexe) {
+				dragGroupeWidget(arbo.getSuivants((Widget) (comp.parent()), true), ((Widget) comp.parent()).getLocation());
+			} else {
+				dragGroupeWidget(arbo.getListe(comp), pt);
+			}
 			composantsDrague.clear();
 
 		} catch (ComposantIntrouvableException ex) {
 			ErreurHelper.afficher(ex);
 		}
+		arbo.updateWidgets();
 
 		updatePanelGraphiqueSize(arbo.getArborescence());
 
@@ -441,14 +408,6 @@ public final class DragAndDropTools extends Observable {
 		if (bounds != null) {
 			p.setPreferredSize(new Dimension((int) (bounds.getX() + bounds.getWidth()), (int) (bounds.getY() + bounds.getHeight())));
 			p.getScroll().validate();
-		}
-	}
-
-	private void notifyChangesToWidgets(List<Widget> composantsDrague) {
-		for (Widget w : composantsDrague) {
-			if (w.isComplexe()) {
-				((WidgetCompose) w).notifyChange();
-			}
 		}
 	}
 }

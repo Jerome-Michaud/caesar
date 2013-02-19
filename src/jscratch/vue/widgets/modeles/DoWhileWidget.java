@@ -36,7 +36,6 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 
 		int widthChamp = 20;
 		f = new ChampTexte(widthChamp, this);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.setBounds(95, 33, widthChamp, 20);
 		f.setValeur("0");

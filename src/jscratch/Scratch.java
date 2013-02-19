@@ -1,6 +1,8 @@
 package jscratch;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import jscratch.dictionnaires.DicoBoutonsCategories;
@@ -8,7 +10,6 @@ import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.helpers.ErreurHelper;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.parametrages.ParametrageUI;
-import jscratch.vue.sim.Fenetre;
 
 public class Scratch {
 
@@ -32,6 +33,15 @@ public class Scratch {
 			UIManager.put("SyntheticaAddons.license.key", "664973DE-55A50F80-8176ABB3-2BAFF4B7-5F2EEDB2");
 			
 			try {
+				// ajout de l'anti-aliasing sur le texte
+				System.setProperty("swing.aatext", "true");
+				
+				// On met les bordures système pour les fenêtres
+				if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+					SyntheticaLookAndFeel.setWindowsDecorated(false);
+				}				
+				
+				// Changement du look and feel
 				UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
 			} catch (UnsupportedLookAndFeelException ex) {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -51,7 +61,6 @@ public class Scratch {
 			DicoWidgetsCategories.getInstance().nettoyer();
 		
 			GUI.getFenetre();
-			//new Fenetre();
 		}
 	}
 }

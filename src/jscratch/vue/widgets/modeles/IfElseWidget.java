@@ -39,7 +39,6 @@ public class IfElseWidget extends ModeleWidget {
 
 		int widthCamp = 20;
 		f = new ChampTexte(widthCamp, this);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.setBounds(55, 3, widthCamp, 20);
 		f.supprimerTexte();
@@ -49,10 +48,6 @@ public class IfElseWidget extends ModeleWidget {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_ELSE);
-		
-		if(this.getType() == TypeModeleWidget.IFELSE){
-			System.out.println(this.zonesAccroches);
-		}
 		
 		this.decalageX(-20);
 	}

@@ -8,6 +8,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
+
+import jscratch.helpers.FontHelper;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.TempsCourant;
@@ -33,7 +35,7 @@ public class TempsCourantWidget extends ModeleWidget {
 		imbricable = false;
 		
 		message.put(new Point(5, 17), "Temps Courant");
-		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
+		Font font = FontHelper.getWidgetFont();
 		FontMetrics metrics = new FontMetrics(font) {};
 		String l = "";
 		for (String s : message.values()) {

@@ -46,11 +46,11 @@ public final class DicoTraces {
 	 * 
 	 * @param type le type de la trace
 	 */
-	public void ajouterTrace(TypeTrace type) {
+	public void ajouterTrace(final Trace trace) {
 		boolean traces = Boolean.parseBoolean(PropertiesHelper.getInstance().get("user.trace.active"));
-		boolean tracesType = Boolean.parseBoolean(PropertiesHelper.getInstance().get("user.trace.active." + type.toProperties()));
+		boolean tracesType = Boolean.parseBoolean(PropertiesHelper.getInstance().get("user.trace.active." + trace.getType().toProperties()));
 		if (traces && tracesType) {
-			dico.add(new Trace(type));
+			dico.add(trace);
 		}
 	}
 	

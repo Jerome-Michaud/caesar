@@ -33,9 +33,9 @@ public class Simulator implements Runnable,ObservableSimulator{
 	private RobotController robotController;
 	private MapRenderer mapRenderer;
 	private RobotRenderer robotRenderer;
-	private PanelInfosRobot infosRobot;
 	private ArrayList<ObserverSimulator> listObserver;// Tableau d'observateurs.
-
+	private boolean run = true;
+	private boolean wait = false;
 	
 	public Simulator() {
 		
@@ -64,8 +64,11 @@ public class Simulator implements Runnable,ObservableSimulator{
 	 * @param deltaTime
 	 */
 	public void update(float deltaTime) {
-		robotController.update(deltaTime);
-		//infosRobot.update(deltaTime);
+		if(run){
+			if(!wait){
+				robotController.update(deltaTime);
+			}
+		}
 	}
 
 	/**
@@ -149,5 +152,19 @@ public class Simulator implements Runnable,ObservableSimulator{
 		for(ObserverSimulator o : listObserver){
 			o.update(this);
 		}
+	}
+	/**
+	 * met en attente le simulator
+	 * @param b
+	 */
+	public synchronized void setWait(boolean b){
+		this.wait = b;
+	}
+	/**
+	 * arrete le simulateur
+	 * @param b
+	 */
+	public synchronized void setRun(boolean b){
+		this.run = b;
 	}
 }

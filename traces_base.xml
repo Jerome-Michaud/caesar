@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<traces login="m2132" date="15/02/2013">
+	<trace type="CATEGORIE_CHANGEMENT" heure="15:30:15">
+		<avant>Structures</avant>
+		<apres>Variables</apres>
+	</trace>
+	
+	<trace type="SIMULATEUR_BOUTONS" heure="15:30:15" action="start/pause/stop" />
+	
+	<trace type="ENVOIE_SUR_ROBOT" heure="15:30:15" nomFichier=" " format="nxc/robotc" />
+	<trace type="SAUVEGARDE" heure="15:30:15" nomFichier=" " format="xscr/jscratch" />
+	<trace type="CHARGEMENT" heure="15:30:15" nomFichier=" " format="xscr/jscratch"/>
+	<trace type="PROPERTIES_CHARGEMENT" heure="15:30:15" nomFichier=" " format="properties" />
+	
+	<trace type="WIDGET_SUPPRESSION" heure="15:30:15">
+		<widget>...</widget>
+	</trace>
+	
+	<!-- Manque emplacement et position -->
+	<trace type="WIDGET_DEPLACEMENT" heure="15:30:15">
+		<widget>...</widget>
+		<ancienParent emplacement="integre_a/integre_dans/non_integre" position="au_dessus/au_dessous">
+			<widget>...</widget>
+		</ancienParent>
+		<nouveauParent emplacement="integre_a/integre_dans/non_integre" position="au_dessus/au_dessous">
+			<widget>...</widget>
+		</nouveauParent>
+	</trace>
+	
+	<!-- Manque emplacement et position -->
+	<trace type="WIDGET_AJOUT" heure="15:30:15">
+		<widget>...</widget>
+		<nouveauParent emplacement="integre_a/integre_dans/non_integre" position="au_dessus/au_dessous">
+			<widget>...</widget>
+		</nouveauParent>
+	</trace>
+
+	<!-- Manque id-->
+	<trace type="WIDGET_MODIFICATION" heure="15:30:15">
+		<widget>...</widget>
+		<avant id="" isWidget="false">0</avant>
+		<apres id="" isWidget="true">
+			<widget>..</widget>
+		</apres>
+	</trace>
+</traces>

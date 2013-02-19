@@ -5,6 +5,8 @@ import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
+
+import jscratch.helpers.FontHelper;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Expression;
@@ -56,7 +58,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 		message.put(new Point(29, 15), op.toString());
 
-		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
+		Font font = FontHelper.getWidgetFont();
 		FontMetrics metrics = new FontMetrics(font) {
 		};
 		Rectangle2D bounds = metrics.getStringBounds(op.toString(), null);

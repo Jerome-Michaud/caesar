@@ -3,6 +3,7 @@ package jscratch.controleur.sim;
 import java.awt.geom.Point2D;
 import java.util.*;
 
+import jscratch.interpreteur.VisiteurInterpreteur;
 import jscratch.modeles.sim.MotorPort;
 import jscratch.modeles.sim.Robot;
 
@@ -18,7 +19,8 @@ public class RobotController {
 	private Robot robot;
 	private int index;
 	private MapController mapController;
-
+	private double startTime = 0;
+	
 	/**
 	 * constructeur
 	 */
@@ -181,5 +183,25 @@ public class RobotController {
 	public void clearListCommands() {
 		listCommand.clear();
 		index = 0;
+	}
+
+	public void getSimulator() {
+		// TODO Stub de la méthode généré automatiquement
+		
+	}
+	/**
+	 * retourne le temps d'execution
+	 * @return currentTime
+	 */
+	public double getCurrentTime() {
+		return (double)(System.nanoTime() - startTime) / 1000000000.0;
+
+	}
+	/**
+	 * reset le temps de depart du simulator
+	 * @param currentTicks
+	 */
+	public void resetStartTime() {
+		startTime = System.nanoTime();    
 	}
 }

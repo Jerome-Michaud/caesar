@@ -1,4 +1,4 @@
-package jscratch.sauvegarde.xml;
+package jscratch.sauvegarde.xml.arborescence;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,14 +22,14 @@ import org.jdom2.Element;
  * @since 1.0
  * @version 1.0
  */
-public final class DeserialiseurXML {
+public final class DeserialiseurArborescenceXML {
 
 	/**
 	 * Default constructor of <code>ChargeurXML</code>.
 	 *
 	 * @since 1.0
 	 */
-	private DeserialiseurXML() { }
+	private DeserialiseurArborescenceXML() { }
 	
 	/**
 	 * Permet de charger l'arborescence et le dictionnaire à partir d'un document XML.
