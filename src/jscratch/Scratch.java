@@ -37,7 +37,9 @@ public class Scratch {
 				System.setProperty("swing.aatext", "true");
 				
 				// On met les bordures système pour les fenêtres
-				SyntheticaLookAndFeel.setWindowsDecorated(false);
+				if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+					SyntheticaLookAndFeel.setWindowsDecorated(false);
+				}				
 				
 				// Changement du look and feel
 				UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
