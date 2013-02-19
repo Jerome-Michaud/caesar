@@ -1,5 +1,6 @@
 package jscratch.traces;
 
+import nxtim.instruction.Categorie;
 import org.jdom2.Element;
 
 /**
@@ -11,12 +12,12 @@ public class TraceCategorieChangement extends Trace {
 	/**
 	 * Les attributs de la trace.
 	 */
-	private String ancienne, nouvelle;
+	private Categorie ancienne, nouvelle;
 	
 	/**
 	 * Constructeur par défaut de <code>TraceChangementCategorie</code>.
 	 */
-	public TraceCategorieChangement(final String ancienne, final String nouvelle) {
+	public TraceCategorieChangement(final Categorie ancienne, final Categorie nouvelle) {
 		super(TypeTrace.CATEGORIE_CHANGEMENT);
 		this.ancienne = ancienne;
 		this.nouvelle = nouvelle;
@@ -26,12 +27,14 @@ public class TraceCategorieChangement extends Trace {
 	public Element toXml() {
 		Element thisXml = super.toXml();
 		
-		Element avant = new Element(AVANT);
-		avant.setText(this.ancienne);
-		thisXml.addContent(avant);
+		if (this.ancienne != null) {
+			Element avant = new Element(AVANT);
+			avant.setText(this.ancienne.toString());
+			thisXml.addContent(avant);
+		}
 		
 		Element apres = new Element(APRES);
-		apres.setText(this.nouvelle);
+		apres.setText(this.nouvelle.toString());
 		thisXml.addContent(apres);
 		
 		return thisXml;

@@ -3,8 +3,10 @@ package jscratch.sauvegarde.nxc;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import jscratch.dictionnaires.DicoTraces;
 import jscratch.helpers.ErreurHelper;
 import jscratch.sauvegarde.SauvegardeTools;
+import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.vue.ginterface.principales.GUI;
 
 /**
@@ -50,6 +52,8 @@ public final class SauvegardeNxcTools implements SauvegardeTools {
 			FileWriter fw = new FileWriter(fichier);
 			fw.append(GUI.getPanelCodeConsole().getText());
 			fw.close();
+			
+			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceSauvegarde(fichier));
 			
 			return fichier;
 		} catch (IOException ex) {

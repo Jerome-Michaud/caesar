@@ -23,7 +23,7 @@ public class TraceFichier extends Trace {
 	public TraceFichier(final TypeTrace type, final File fichier) throws IncompatibleTypeForTrace {
 		super(type);
 		
-		if (type.isTraceFichier()) {
+		if (!type.isTraceFichier()) {
 			throw new IncompatibleTypeForTrace("Le type choisi pour cet objet n'est pas compatible (FICHIER_SAUVEGARDE ou FICHIER_CHARGEMENT ou ROBOT_ENVOI)");
 		}
 		

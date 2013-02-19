@@ -14,6 +14,7 @@ import jscratch.traces.TraceWidgetSuppression;
 import jscratch.traces.TypeTrace;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.Zone;
+import nxtim.instruction.Categorie;
 
 /**
  * @since 1.0
@@ -35,7 +36,7 @@ public class FabriqueTrace {
 	 * @param nouvelle la nouvelle catégorie
 	 * @return la trace
 	 */
-	public Trace creerTraceChangementCategorie(final String ancienne, final String nouvelle) {
+	public static Trace creerTraceChangementCategorie(final Categorie ancienne, final Categorie nouvelle) {
 		return new TraceCategorieChangement(ancienne, nouvelle);
 	}
 	
@@ -47,7 +48,7 @@ public class FabriqueTrace {
 	 * @param action l'action
 	 * @return la trace
 	 */
-	public Trace creerTraceBoutonsSimulateur(final String action) {
+	public static Trace creerTraceBoutonsSimulateur(final String action) {
 		return new TraceSimulateurBoutons(action);
 	}
 	
@@ -60,7 +61,7 @@ public class FabriqueTrace {
 	 * @param fichier le fichier
 	 * @return la trace
 	 */
-	private Trace creerTraceFichier(final TypeTrace type, final File fichier) {
+	private static Trace creerTraceFichier(final TypeTrace type, final File fichier) {
 		try {
 			return new TraceFichier(type, fichier);
 		} catch (IncompatibleTypeForTrace ex) {
@@ -77,7 +78,7 @@ public class FabriqueTrace {
 	 * @param fichier le fichier
 	 * @return la trace
 	 */
-	public Trace creerTraceEnvoiRobot(final File fichier) {
+	public static Trace creerTraceEnvoiRobot(final File fichier) {
 		return creerTraceFichier(TypeTrace.ROBOT_ENVOI, fichier);
 	}
 	
@@ -89,7 +90,7 @@ public class FabriqueTrace {
 	 * @param fichier le fichier
 	 * @return la trace
 	 */
-	public Trace creerTraceSauvegarde(final File fichier) {
+	public static Trace creerTraceSauvegarde(final File fichier) {
 		return creerTraceFichier(TypeTrace.FICHIER_SAUVEGARDE, fichier);
 	}
 	
@@ -101,7 +102,7 @@ public class FabriqueTrace {
 	 * @param fichier le fichier
 	 * @return la trace
 	 */
-	public Trace creerTraceChargement(final File fichier) {
+	public static Trace creerTraceChargement(final File fichier) {
 		return creerTraceFichier(TypeTrace.FICHIER_CHARGEMENT, fichier);
 	}
 	
@@ -113,7 +114,7 @@ public class FabriqueTrace {
 	 * @param fichier le fichier
 	 * @return la trace
 	 */
-	public Trace creerTraceChargementProperties(final File fichier) {
+	public static Trace creerTraceChargementProperties(final File fichier) {
 		return creerTraceFichier(TypeTrace.PROPERTIES_CHARGEMENT, fichier);
 	}
  
@@ -126,7 +127,7 @@ public class FabriqueTrace {
 	 * @param parent le parent
 	 * @return la trace
 	 */
-	public Trace creerTraceWidgetAjout(final Widget widget, final Widget parent) {
+	public static Trace creerTraceWidgetAjout(final Widget widget, final Widget parent) {
 		return new TraceWidgetAjout(widget, parent);
 	}
 	
@@ -138,7 +139,7 @@ public class FabriqueTrace {
 	 * @param widget le widget
 	 * @return la trace
 	 */
-	public Trace creerTraceWidgetSuppression(final Widget widget) {
+	public static Trace creerTraceWidgetSuppression(final Widget widget) {
 		return new TraceWidgetSuppression(widget);
 	}
 	
@@ -153,7 +154,7 @@ public class FabriqueTrace {
 	 * @param valeurApres la valeur (apres)
 	 * @return la trace
 	 */
-	public Trace creerTraceWidgetModification(final Widget widget, final Zone zone, final Widget widgetContenu, final String valeurApres) {
+	public static Trace creerTraceWidgetModification(final Widget widget, final Zone zone, final Widget widgetContenu, final String valeurApres) {
 		return new TraceWidgetModification(widget, zone, widgetContenu, valeurApres);
 	}
 	
@@ -168,7 +169,7 @@ public class FabriqueTrace {
 	 * @param widgetContenu le widget (apres)
 	 * @return la trace
 	 */
-	public Trace creerTraceWidgetModification(final Widget widget, final Zone zone, final String valeurAvant, final Widget widgetContenu) {
+	public static Trace creerTraceWidgetModification(final Widget widget, final Zone zone, final String valeurAvant, final Widget widgetContenu) {
 		return new TraceWidgetModification(widget, zone, valeurAvant, widgetContenu);
 	}
 	
@@ -183,11 +184,21 @@ public class FabriqueTrace {
 	 * @param valeurApres la valeur (apres)
 	 * @return la trace
 	 */
-	public Trace creerTraceWidgetModification(final Widget widget, final Zone zone, final String valeurAvant, final String valeurApres) {
+	public static Trace creerTraceWidgetModification(final Widget widget, final Zone zone, final String valeurAvant, final String valeurApres) {
 		return new TraceWidgetModification(widget, zone, valeurAvant, valeurApres);
 	}
 	
-	public Trace creerTraceWidgetDeplacement(final Widget widget, final Widget parentAvant, final Widget parentApres) {
+	/**
+	 * Permet de créer une trace pour <code>WIDGET_MODIFICATION</code>.
+	 * 
+	 * @since 1.0
+	 * 
+	 * @param widget le widget
+	 * @param parentAvant le parent (avant)
+	 * @param parentApres le parent (apres)
+	 * @return la trace
+	 */
+	public static Trace creerTraceWidgetDeplacement(final Widget widget, final Widget parentAvant, final Widget parentApres) {
 		return new TraceWidgetDeplacement(widget, parentAvant, parentApres);
 	}
 }
