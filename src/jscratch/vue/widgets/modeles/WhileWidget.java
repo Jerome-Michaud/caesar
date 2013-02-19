@@ -38,7 +38,6 @@ public class WhileWidget extends ModeleWidget {
 
 		int widthChamp = 20;
 		f = new ChampTexte(widthChamp, this);
-		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.setBounds(60, 3, widthChamp, 20);
 		f.setValeur("0");

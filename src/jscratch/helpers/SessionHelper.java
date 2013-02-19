@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public final class SessionHelper {
 
-	private static DateFormat formatJour = new SimpleDateFormat("dd/MM/YYYY");
+	private static DateFormat formatJour = new SimpleDateFormat("dd/MM/yyyy");
 	private static DateFormat formatHeure = new SimpleDateFormat("HH:mm:ss");
 	/**
 	 * Constructeur privé de <code>SessionHelper</code>.
