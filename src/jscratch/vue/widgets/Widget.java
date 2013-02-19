@@ -1,5 +1,6 @@
 package jscratch.vue.widgets;
 
+import jscratch.helpers.FontHelper;
 import jscratch.vue.widgets.modeles.ModeleWidget;
 import jscratch.vue.widgets.modeles.zones.Zone;
 import java.awt.BasicStroke;
@@ -9,6 +10,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
@@ -72,6 +74,9 @@ public class Widget extends JComponent {
 		g2d.setColor(Color.BLACK);
 		g2d.drawPolygon(this.modele.getForme());
 		g2d.setColor(Color.WHITE);
+		g2d.setRenderingHint(
+		        RenderingHints.KEY_TEXT_ANTIALIASING,
+		        RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		for (Point p : this.modele.getMessage().keySet()) {
 			if (this.modele.isConditionHaute()) {
 				g2d.drawString(this.modele.getMessage().get(p), p.x, p.y);
@@ -87,7 +92,7 @@ public class Widget extends JComponent {
 	 * @param modele le modèle de structure à appliquer au Widget
 	 */
 	public Widget(final ModeleWidget modele) {
-		this.font = new Font("TimesRoman", Font.PLAIN, 12);
+		this.font = FontHelper.getWidgetFont();
 		this.modele = modele;
 		this.setFont(this.font);
 		this.setFocusable(true);

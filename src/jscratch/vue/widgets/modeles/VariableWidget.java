@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
 
+import jscratch.helpers.FontHelper;
+
 import nxtim.instruction.VariableModifiable;
 
 /**
@@ -45,7 +47,7 @@ public class VariableWidget extends ModeleWidget {
         this.attachableInterne = true;
         
 
-		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
+		Font font = FontHelper.getWidgetFont();
 		FontMetrics metrics = new FontMetrics(font){};  
 		Rectangle2D bounds = metrics.getStringBounds(variableModifiable.getNom(), null);  
 	

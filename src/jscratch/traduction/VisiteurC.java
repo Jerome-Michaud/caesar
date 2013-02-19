@@ -19,6 +19,7 @@ import nxtim.instruction.InstructionMoteurRotate;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.InstructionWhile;
+import nxtim.instruction.RotationMoteur;
 import nxtim.instruction.TempsCourant;
 import nxtim.instruction.ValeurCapteur;
 import nxtim.instruction.Variable;
@@ -290,5 +291,10 @@ public class VisiteurC extends VisiteurTraduction {
 	@Override
 	public void visiter(ValeurCapteur valCapteur) {
 		traduction += "/* Code C pour obtenir la valeur d'un capteur inconnu ! */\n";
+	}
+
+	@Override
+	public void visiter(RotationMoteur rotMoteur) {
+		traduction += "/* Code C pour obtenir le nombre de rotations d'un moteur inconnu ! */\n";
 	}
 }
