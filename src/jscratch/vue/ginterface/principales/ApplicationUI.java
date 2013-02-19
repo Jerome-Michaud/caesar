@@ -20,6 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import jscratch.helpers.ImagesHelper;
+import jscratch.vue.ginterface.principales.selecteur.SelecteurFichier;
+import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
 
 /**
  * Fenêtre principale de l'application.
