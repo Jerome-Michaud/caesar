@@ -7,11 +7,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 
 import javax.swing.SwingUtilities;
+
+import jscratch.helpers.FontHelper;
 import jscratch.helpers.PropertiesHelper;
 import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
@@ -47,10 +50,6 @@ public abstract class BoutonCategorie extends JComponent {
 	 * <code>true</code> si activé.
 	 */
 	private boolean active = false;
-	/**
-	 * La taille de la police.
-	 */
-	private static final int TAILLE = 12;
 
 	@Override
 	public void paintComponent(final Graphics g) {
@@ -64,8 +63,10 @@ public abstract class BoutonCategorie extends JComponent {
 		g2d.drawPolygon(this.modele.getFormeCouleur());
 		g2d.drawPolygon(this.modele.getFormeTexte());
 
-
 		// Ecritures
+		g2d.setRenderingHint(
+		        RenderingHints.KEY_TEXT_ANTIALIASING,
+		        RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.setColor(Color.WHITE);
 		g2d.setFont(this.font);
 		g2d.drawString(this.modele.getMessage(Variables.AFFICHAGE_NOMBRE_WIDGET), 15, 17);
@@ -78,7 +79,7 @@ public abstract class BoutonCategorie extends JComponent {
 	 * @param modele le modèle du bouton
 	 */
 	public BoutonCategorie(final ModeleCategorie modele) {
-		this.font = new Font("TimesRoman", Font.PLAIN, TAILLE);
+		this.font = FontHelper.getWidgetFont();
 		this.modele = modele;
 		this.fond = Variables.GRIS_INACTIF;
 		this.setFont(this.font);
@@ -178,12 +179,12 @@ public abstract class BoutonCategorie extends JComponent {
 
 		if (!active) {
 			for (BoutonCategorie b : GUI.getPanelTypeWidget().getLesCategories()) {
-				b.font = new Font("TimesRoman", Font.PLAIN, TAILLE);
+				b.font = FontHelper.getWidgetFont();
 				b.fond = Variables.GRIS_INACTIF;
 				b.active = false;
 				b.repaint();
 			}
-			this.font = new Font("TimesRoman", Font.BOLD, TAILLE);
+			font = FontHelper.getWidgetFontBold();
 			this.active = true;
 			this.fond = Variables.GRIS_ACTIF;
 

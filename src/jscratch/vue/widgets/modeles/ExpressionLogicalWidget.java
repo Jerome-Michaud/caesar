@@ -1,5 +1,6 @@
 package jscratch.vue.widgets.modeles;
 
+import jscratch.helpers.FontHelper;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 
 import java.awt.Font;
@@ -58,7 +59,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 		message.put(new Point(29, 15), op.toString());
 
-		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
+		Font font = FontHelper.getWidgetFont();
 		FontMetrics metrics = new FontMetrics(font){};  
 		Rectangle2D bounds = metrics.getStringBounds(op.toString(), null);
 

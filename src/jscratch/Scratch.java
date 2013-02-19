@@ -33,7 +33,13 @@ public class Scratch {
 			UIManager.put("SyntheticaAddons.license.key", "664973DE-55A50F80-8176ABB3-2BAFF4B7-5F2EEDB2");
 			
 			try {
+				// ajout de l'anti-aliasing sur le texte
+				System.setProperty("swing.aatext", "true");
+				
+				// On met les bordures système pour les fenêtres
 				SyntheticaLookAndFeel.setWindowsDecorated(false);
+				
+				// Changement du look and feel
 				UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
 			} catch (UnsupportedLookAndFeelException ex) {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
