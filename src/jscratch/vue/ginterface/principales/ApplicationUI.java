@@ -96,6 +96,10 @@ public final class ApplicationUI extends JFrame {
 		this.setLocationRelativeTo(null);
 	}
 
+	public JYDockingPort getViewport() {
+		return viewport;
+	}
+
 	/**
 	 * Permet de créer la zone de <code>Docking</code>.
 	 *

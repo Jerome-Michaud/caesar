@@ -153,4 +153,11 @@ public interface VisiteurElementProg {
 	 * @param valCapteur l'expression à visiter
 	 */
 	public void visiter(ValeurCapteur valCapteur);
+	
+	/**
+	 * Visite une expression de récupération du nombre de rotations d'un moteur.
+	 * 
+	 * @param rotMoteur l'expression à visiter.
+	 */
+	public void visiter(RotationMoteur rotMoteur);
 }

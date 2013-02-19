@@ -9,7 +9,34 @@ import jscratch.controleur.sim.RobotController;
 import jscratch.controleur.sim.Simulator;
 import jscratch.controleur.sim.StopCommand;
 import jscratch.modeles.sim.MotorPort;
-import nxtim.instruction.*;
+import nxtim.instruction.Affectation;
+import nxtim.instruction.Expression;
+import nxtim.instruction.ExpressionComplexe;
+import nxtim.instruction.Instruction;
+import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.InstructionDeclaration;
+import nxtim.instruction.InstructionDeclarationAffectation;
+import nxtim.instruction.InstructionDeclarationCapteur;
+import nxtim.instruction.InstructionDoWhile;
+import nxtim.instruction.InstructionFor;
+import nxtim.instruction.InstructionIf;
+import nxtim.instruction.InstructionIfElse;
+import nxtim.instruction.InstructionIncrementation;
+import nxtim.instruction.InstructionMoteurMov;
+import nxtim.instruction.InstructionMoteurOff;
+import nxtim.instruction.InstructionMoteurRotate;
+import nxtim.instruction.InstructionRepeat;
+import nxtim.instruction.InstructionTache;
+import nxtim.instruction.TempsCourant;
+import nxtim.instruction.InstructionWhile;
+import nxtim.instruction.Moteur;
+import nxtim.instruction.Operateur;
+import nxtim.instruction.RotationMoteur;
+import nxtim.instruction.ValeurCapteur;
+import nxtim.instruction.Variable;
+import nxtim.instruction.VariableCapteur;
+import nxtim.instruction.VariableModifiable;
+import nxtim.instruction.VisiteurElementProg;
 
 /**
  * @since 1.0
@@ -579,6 +606,11 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 
 	@Override
 	public void visiter(ValeurCapteur valCapteur) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void visiter(RotationMoteur rotMoteur) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }

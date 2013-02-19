@@ -21,6 +21,7 @@ import jscratch.vue.widgets.modeles.IfElseWidget;
 import jscratch.vue.widgets.modeles.IfWidget;
 import jscratch.vue.widgets.modeles.IncrementationWidget;
 import jscratch.vue.widgets.modeles.MoteurMarcheWidget;
+import jscratch.vue.widgets.modeles.MoteurNombreRotation;
 import jscratch.vue.widgets.modeles.MoteurOffWidget;
 import jscratch.vue.widgets.modeles.RepeatWidget;
 import jscratch.vue.widgets.modeles.TacheWidget;
@@ -58,6 +59,15 @@ public class FabriqueInstructions {
 	 */
 	public Widget creerWidgetMoteurOff() {
 		return new Widget(new MoteurOffWidget());
+	}
+	
+	/**
+	 * Méthode permettant de créer un widget de type "Nombre de rotation".
+	 *
+	 * @return un widget de type "Nombre de rotation"
+	 */
+	public Widget creerWidgetMoteurNombreRotation() {
+		return new Widget(new MoteurNombreRotation());
 	}
 
 	/**
@@ -238,6 +248,9 @@ public class FabriqueInstructions {
 			case MOTEURMARCHE:
 				w = creerWidgetMoteurMarche();
 				break;
+			case MOTEURNOMBREROTATION:
+				w = creerWidgetMoteurNombreRotation();
+				break;
 			case MOTEUROFF:
 				w = creerWidgetMoteurOff();
 				break;
@@ -310,13 +323,15 @@ public class FabriqueInstructions {
 			w = creerWidgetWhile();
 		} else if ("DoWhileWidget".equals(nomClasse)) {
 			w = creerWidgetDoWhile();
-		} else if ("MoteurMarcheWidget".equals(nomClasse)) {
+		} else if (TypeModeleWidget.MOTEURMARCHE.toString().equals(nomClasse)) {
 			w = creerWidgetMoteurMarche();
-		} else if ("MoteurOffWidget".equals(nomClasse)) {
+		} else if (TypeModeleWidget.MOTEURNOMBREROTATION.toString().equals(nomClasse)) {
+			w = creerWidgetMoteurNombreRotation();
+		} else if (TypeModeleWidget.MOTEUROFF.toString().equals(nomClasse)) {
 			w = creerWidgetMoteurOff();
-		} else if ("WaitWidget".equals(nomClasse)) {
+		} else if (TypeModeleWidget.WAIT.toString().equals(nomClasse)) {
 			w = creerWidgetWait();
-		} else if ("VariableSetValueWidget".equals(nomClasse)) {
+		} else if (TypeModeleWidget.SETVALUEVARIABLE.toString().equals(nomClasse)) {
 			w = creerWidgetVariableSetValue();
 		} else if ("TempsCourantWidget".equals(nomClasse)) {
 			w = creerWidgetTempsCourant();
