@@ -11,6 +11,8 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
+import jscratch.helpers.FontHelper;
 import jscratch.vue.ginterface.principales.GUI;
 
 /**
@@ -33,7 +35,7 @@ public final class PanelCodeConsole extends JPanel implements Observer {
 	private PanelCodeConsole() {
 		this.textarea = new JTextArea();
 		this.textarea.setEditable(false);
-		this.textarea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 11));
+		this.textarea.setFont(FontHelper.getCodeFont());
 		this.setLayout(new BorderLayout());
 		this.setMinimumSize(new Dimension(100, 600));
 		
