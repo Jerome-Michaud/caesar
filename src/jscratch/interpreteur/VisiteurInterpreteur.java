@@ -29,6 +29,7 @@ import nxtim.instruction.TempsCourant;
 import nxtim.instruction.InstructionWhile;
 import nxtim.instruction.Moteur;
 import nxtim.instruction.Operateur;
+import nxtim.instruction.RotationMoteur;
 import nxtim.instruction.ValeurCapteur;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableCapteur;
@@ -587,6 +588,11 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 
 	@Override
 	public void visiter(ValeurCapteur valCapteur) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void visiter(RotationMoteur rotMoteur) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }
