@@ -1,5 +1,6 @@
 package jscratch.vue.ginterface.principales;
 
+import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
 import de.javasoft.swing.JYDockingPort;
 import de.javasoft.swing.JYDockingView;
 import de.javasoft.swing.jydocking.DockingManager;
@@ -52,23 +53,23 @@ public final class ApplicationUI extends JFrame {
 	private JYDockingView zoneCodeGraphique, zoneCodeConsole, zoneSimulateur;
 
 	/**
-	 * Constructeur privé de <code>ApplictionUI</code>.
+	 * Constructeur privé de <code>ApplicationUI</code>.
 	 */
 	private ApplicationUI() {
+		SyntheticaLookAndFeel.setWindowsDecorated(false);
 		this.setTitle("C.A.E.S.A.R");
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setMinimumSize(new Dimension(((int) ecran.getWidth() * 2 / 3), ((int) ecran.getHeight() * 2 / 3)));
-
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.contains("windows")) {
-			this.setPreferredSize(new Dimension(((int) ecran.getWidth() * 4 / 5), ((int) ecran.getHeight() * 4 / 5)));
-			
+			Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+			this.setMinimumSize(new Dimension(((int) ecran.getWidth() * 2 / 3), ((int) ecran.getHeight() * 2 / 3)));
 		} else {
-			this.setExtendedState(MAXIMIZED_BOTH);
+			this.setMinimumSize(new Dimension(800, 500));
 		}
+		
+		this.setExtendedState(MAXIMIZED_BOTH);
 
 		this.setJMenuBar(Menu.getInstance());
 
@@ -94,7 +95,7 @@ public final class ApplicationUI extends JFrame {
 		this.glassPane.setVisible(true);
 
 		this.setVisible(true);
-
+		
 		this.setLocationRelativeTo(null);
 	}
 
