@@ -31,11 +31,7 @@ public class Scratch {
 			UIManager.put("SyntheticaAddons.license.info", li2);
 			UIManager.put("SyntheticaAddons.license.key", "664973DE-55A50F80-8176ABB3-2BAFF4B7-5F2EEDB2");
 			
-			try {
-				String os = System.getProperty("os.name").toLowerCase();
-				if (os.contains("windows")) {
-					UIManager.put("Synthetica.window.decoration", false);
-				}				
+			try {			
 				UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
 			} catch (UnsupportedLookAndFeelException ex) {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

@@ -67,9 +67,8 @@ public final class ApplicationUI extends JFrame {
 			this.setMinimumSize(new Dimension(((int) ecran.getWidth() * 2 / 3), ((int) ecran.getHeight() * 2 / 3)));
 		} else {
 			this.setMinimumSize(new Dimension(800, 500));
+			this.setExtendedState(MAXIMIZED_BOTH);
 		}
-		
-		this.setExtendedState(MAXIMIZED_BOTH);
 
 		this.setJMenuBar(Menu.getInstance());
 
