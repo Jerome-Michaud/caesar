@@ -7,8 +7,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.List;
+import jscratch.dictionnaires.DicoTraces;
 import jscratch.helpers.ErreurHelper;
 import jscratch.sauvegarde.SauvegardeTools;
+import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.widgets.Widget;
@@ -65,13 +67,16 @@ public final class SauvegardeBinaireTools implements SauvegardeTools {
 	 */
 	private File serializeArborescence(final String path) {
 		try {
-			FileOutputStream fichier = new FileOutputStream(path);
-			ObjectOutputStream oos = new ObjectOutputStream(fichier);
+			File fichier = new File(path);
+			
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichier));
 			oos.writeObject(ArborescenceTools.getInstance().getArborescence());
 			oos.flush();
 			oos.close();
 			
-			return new File(path);
+			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceSauvegarde(fichier));
+			
+			return fichier;
 		} catch (Exception e) {
 			ErreurHelper.afficher(e);
 		}

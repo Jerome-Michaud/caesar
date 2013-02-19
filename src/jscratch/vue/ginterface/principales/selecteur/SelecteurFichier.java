@@ -5,6 +5,7 @@ import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import jscratch.dictionnaires.DicoTraces;
 import jscratch.sauvegarde.filtres.ApplicationFileFilter;
 import jscratch.sauvegarde.filtres.CaesarFileFilter;
 import jscratch.sauvegarde.SauvegardeTools;
@@ -16,6 +17,7 @@ import jscratch.sauvegarde.nxc.SauvegardeNxcTools;
 import jscratch.sauvegarde.properties.SauvegardePropertiesTools;
 import jscratch.sauvegarde.xml.arborescence.SauvegardeArborescenceXMLTools;
 import jscratch.sauvegarde.xml.traces.SauvegardeTracesXMLTools;
+import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.vue.ginterface.principales.GUI;
 
 /**

@@ -5,3 +5,5 @@ src/.project
 /build/
 /.sonar/
 /dist/
+traces.xml
+save*.xml

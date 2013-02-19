@@ -2,9 +2,11 @@ package jscratch.sauvegarde.properties;
 
 import java.io.File;
 import jscratch.dictionnaires.DicoBoutonsCategories;
+import jscratch.dictionnaires.DicoTraces;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.helpers.PropertiesHelper;
 import jscratch.sauvegarde.SauvegardeTools;
+import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.vue.categories.boutons.BoutonCategorie;
 import jscratch.vue.ginterface.principales.GUI;
 
@@ -46,7 +48,11 @@ public final class SauvegardePropertiesTools implements SauvegardeTools {
 
 	@Override
 	public void load(String path) {
-		PropertiesHelper.getInstance().reset(new File(path));
+		File fichier = new File(path);
+		
+		DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceChargementProperties(fichier));
+		
+		PropertiesHelper.getInstance().reset(fichier);
 		
 		// Suppression des widgets
 		DicoWidgetsCategories.getInstance().nettoyer();
