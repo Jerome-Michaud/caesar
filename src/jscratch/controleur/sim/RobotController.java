@@ -51,7 +51,7 @@ public class RobotController {
 	/**
 	 * permet d'exécuter la commande à la generation actuelle
 	 */
-	public synchronized void executeCommands()
+	public void executeCommands()
 	{
 		Command c = listCommand.get(index-1);
 		c.execute();
@@ -174,5 +174,12 @@ public class RobotController {
 			robot.updateListePoints();
 			robot.updateSensor();
 		}
+	}
+	/**
+	 * vide la liste de commande du robot
+	 */
+	public void clearListCommands() {
+		listCommand.clear();
+		index = 0;
 	}
 }

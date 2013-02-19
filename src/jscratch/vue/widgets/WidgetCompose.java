@@ -1,5 +1,6 @@
 package jscratch.vue.widgets;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Collections;
@@ -131,7 +132,6 @@ public class WidgetCompose extends Widget implements IWidget {
 			for (Widget w : mapZone.get(r)) {
 
 				w.setLocation((int) (this.getLocation().getX() + r.getX()), (int) (this.getLocation().getY() + r.getY() + decalY));
-				//Widget parent = (Widget)w.parent();
 				if (w.isComplexe()) {
 					((WidgetCompose) w).notifyChange();
 				}
@@ -142,6 +142,9 @@ public class WidgetCompose extends Widget implements IWidget {
 					maxBounds = maxBounds.union(w.getBounds());
 					decalY += w.getBounds().height - ModeleWidget.OFFSET;
 				}
+				
+				// Correction du décalage de 1px pour que les widgets soient bien positionnés les uns par rapport aux autres
+				decalY -= 1;
 			}
 
 			if (maxBounds == null) {

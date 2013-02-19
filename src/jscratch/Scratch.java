@@ -8,7 +8,6 @@ import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.helpers.ErreurHelper;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.parametrages.ParametrageUI;
-import jscratch.vue.sim.Fenetre;
 
 public class Scratch {
 
@@ -51,7 +50,6 @@ public class Scratch {
 			DicoWidgetsCategories.getInstance().nettoyer();
 		
 			GUI.getFenetre();
-			//new Fenetre();
 		}
 	}
 }

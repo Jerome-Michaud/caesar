@@ -18,9 +18,9 @@ import nxtim.instruction.InstructionDoWhile;
  * @version 1.0
  */
 public class DoWhileWidget extends ModeleWidget implements Serializable {
-	
+
 	private ChampTexte f;
-	
+
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du DoWhile.
 	 */
@@ -33,7 +33,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		this.setType(TypeModeleWidget.DOWHILE);
 
 		message.put(new Point(5, 13), "Faire tant que");
-		
+
 		int widthChamp = 20;
 		f = new ChampTexte(widthChamp, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
@@ -47,16 +47,20 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_DOWHILE);
 	}
-	
+
 	@Override
 	public void applyChangeModele(){		
 		Widget contentWidget = f.getContentWidget();
-		
-		// On met à jour la condition dans l'elementProgramme si elle existe
-		if (contentWidget != null) {
-			InstructionDoWhile doWhileIns = ((InstructionDoWhile) getElementProgramme());
-			Condition cond = (Condition) contentWidget.getElementProgramme();
-			doWhileIns.setCondition(cond);
+		InstructionDoWhile doWhileIns = ((InstructionDoWhile) getElementProgramme());
+
+		if (doWhileIns != null) {
+			// On met à jour la condition dans l'elementProgramme si elle existe
+			if (contentWidget != null) {			
+				Condition cond = (Condition) contentWidget.getElementProgramme();
+				doWhileIns.setCondition(cond);
+			} else {
+				doWhileIns.setCondition(null);
+			}
 		}
 	}
 
@@ -81,5 +85,10 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		}
 		this.setForme(this.getForme());
 		this.setTailleY();
+
+		// Déplacement du champ texte
+		Rectangle boundsChTexte = f.getBounds();
+		boundsChTexte.translate(0, b);
+		f.setBounds(boundsChTexte);
 	}
 }

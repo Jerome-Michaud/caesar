@@ -34,9 +34,9 @@ public class Variables {
 	/**
 	 * Rectangles pour la zone d'accroche des Widgets Compose
 	 */
-	public static final Rectangle ZONE_ACCROCHE_PAR_DEFAULT = new Rectangle(5, 26, 130, 15);
-	public static final Rectangle ZONE_ACCROCHE_ELSE = new Rectangle(5, 56, 130, 15);
-	public static final Rectangle ZONE_ACCROCHE_DOWHILE = new Rectangle(5, 16, 130, 15);
+	public static final Rectangle ZONE_ACCROCHE_PAR_DEFAULT = new Rectangle(5, 25, 130, 16);
+	public static final Rectangle ZONE_ACCROCHE_ELSE = new Rectangle(5, 55, 130, 16);
+	public static final Rectangle ZONE_ACCROCHE_DOWHILE = new Rectangle(5, 15, 130, 16);
 	
 	// Gestion des couleurs des catégories
 	public static final Color GRIS_INACTIF = new Color(90, 111, 116);
