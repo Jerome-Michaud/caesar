@@ -1,5 +1,6 @@
 package jscratch.vue.sim;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -9,7 +10,10 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
 import jscratch.controleur.sim.Simulator;
+import jscratch.modeles.sim.Map;
+import jscratch.modeles.sim.collision.CouleurObstacle;
 
 
 /**
@@ -22,10 +26,12 @@ public class PanelSimulator extends JPanel implements MouseWheelListener, MouseM
 	private BufferedImage screen;
 	private ArrayList<ObserverPanelSimulator> listObserver;// Tableau d'observateurs.
 	private Simulator simulator;
+	private Map map;
 
 	public PanelSimulator(Simulator simulator) {
-		super();	
-		this.screen = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
+		super();
+		this.map = simulator.getMap();
+		this.screen = new BufferedImage(map.getTailleX(), map.getTailleY(), BufferedImage.TYPE_INT_RGB);
 		this.simulator = simulator;
 		this.addMouseWheelListener(this);
 		this.addMouseMotionListener(this);
@@ -33,6 +39,7 @@ public class PanelSimulator extends JPanel implements MouseWheelListener, MouseM
 		setDoubleBuffered(true);
 		this.validate();
 		simulator.addObserver(this);
+		this.setBackground(CouleurObstacle.DARK_GRAY.getCouleur());
 	}
 	
 	/**
@@ -43,6 +50,7 @@ public class PanelSimulator extends JPanel implements MouseWheelListener, MouseM
 	public Simulator getSimulator(){
 		return simulator;
 	}
+	
 	/**
 	 * permet de modifier l'angle du robot avec la souris
 	 */
@@ -52,12 +60,15 @@ public class PanelSimulator extends JPanel implements MouseWheelListener, MouseM
 		repaint();
 		notifyObserver();
 	}
+	
 	/**
 	 * permet de deplacer le robot avec la souris
 	 */
 	@Override
 	public void mouseDragged(MouseEvent event) {
-		simulator.getRobotController().deplacerRobot(event.getX(), event.getY());
+		Dimension d = this.getSize();
+		simulator.getRobotController().deplacerRobot(event.getX() - (int) ((d.getWidth() - map.getTailleX()) / 2),
+				event.getY() - (int) ((d.getHeight() - map.getTailleY()) / 2));
 		repaint();
 		notifyObserver();
 	}
@@ -70,14 +81,17 @@ public class PanelSimulator extends JPanel implements MouseWheelListener, MouseM
 	 */
 	@Override
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		
 		Graphics gScreen = screen.getGraphics();
 		simulator.render(gScreen);		
 		
-		g.drawImage(screen, 0, 0, 800, 600, null);		
-       // g.drawRect(50, 50, 50, 50);
+		Dimension d = this.getSize();
+		this.setPreferredSize(new Dimension(map.getTailleX(), map.getTailleY()));
+		
+		g.drawImage(screen, (int) ((d.getWidth() - map.getTailleX()) / 2), (int) ((d.getHeight() - map.getTailleY()) / 2),
+				map.getTailleX(), map.getTailleY(), null);
 	}
-
 	
 	@Override
 	public void addObserver(ObserverPanelSimulator o) {
@@ -94,8 +108,7 @@ public class PanelSimulator extends JPanel implements MouseWheelListener, MouseM
 		for(ObserverPanelSimulator o : listObserver){
 			o.update(this);
 		}
-	}
-	
+	}	
 	
 	@Override
 	public void update(ObservableSimulator o) {

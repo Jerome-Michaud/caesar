@@ -1,9 +1,9 @@
 package jscratch.modeles.sim;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+import jscratch.modeles.sim.collision.CouleurObstacle;
 import jscratch.modeles.sim.collision.ObstacleRectangle;
 import jscratch.modeles.sim.collision.ObstacleShape;
 
@@ -33,13 +33,13 @@ public class Map {
 		tailleY = imageMap.getHeight();
 
 		// bord haut
-		obstacles.add(new ObstacleRectangle(-tailleLimite, -tailleLimite, tailleX + tailleLimite * 2, tailleLimite, Color.BLACK));
+		obstacles.add(new ObstacleRectangle(-tailleLimite, -tailleLimite, tailleX + tailleLimite * 2, tailleLimite, CouleurObstacle.BLACK.getCouleur()));
 		// bord gauche
-		obstacles.add(new ObstacleRectangle(-tailleLimite, -tailleLimite, tailleLimite, tailleLimite * 2 + tailleY, Color.BLACK));
+		obstacles.add(new ObstacleRectangle(-tailleLimite, -tailleLimite, tailleLimite, tailleLimite * 2 + tailleY, CouleurObstacle.BLACK.getCouleur()));
 		// bord droite
-		obstacles.add(new ObstacleRectangle(tailleX, -tailleLimite, tailleLimite, tailleLimite * 2 + tailleY, Color.BLACK));	
+		obstacles.add(new ObstacleRectangle(tailleX, -tailleLimite, tailleLimite, tailleLimite * 2 + tailleY, CouleurObstacle.BLACK.getCouleur()));	
 		// bord bas
-		obstacles.add(new ObstacleRectangle(-tailleLimite, tailleY, tailleLimite * 2 + tailleX, tailleLimite, Color.BLACK));
+		obstacles.add(new ObstacleRectangle(-tailleLimite, tailleY, tailleLimite * 2 + tailleX, tailleLimite, CouleurObstacle.BLACK.getCouleur()));
 
 	}
 

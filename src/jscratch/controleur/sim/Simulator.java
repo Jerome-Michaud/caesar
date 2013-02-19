@@ -4,18 +4,12 @@ import java.awt.Graphics;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
-import jscratch.interpreteur.Interpreteur;
 import jscratch.modeles.sim.Map;
 import jscratch.modeles.sim.MapFactory;
 import jscratch.modeles.sim.Robot;
 import jscratch.vue.sim.MapRenderer;
 import jscratch.vue.sim.ObservableSimulator;
-import jscratch.vue.sim.ObserverPanelSimulator;
 import jscratch.vue.sim.ObserverSimulator;
-import jscratch.vue.sim.PanelInfosRobot;
-import jscratch.vue.sim.PanelSimulator;
 import jscratch.vue.sim.RobotRenderer;
 
 
@@ -25,7 +19,7 @@ import jscratch.vue.sim.RobotRenderer;
  * @author Guillaume Delorme
  *
  */
-public class Simulator implements Runnable,ObservableSimulator{
+public class Simulator implements Runnable, ObservableSimulator {
 	
 	private Robot robot;
 	private Map map;
@@ -41,7 +35,7 @@ public class Simulator implements Runnable,ObservableSimulator{
 		
 		this.listObserver = new ArrayList<ObserverSimulator>();
 
-		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/map1.xml"));
+		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/CAESAR.xml"));
 		
 		mapController = new MapController(map);
 		
@@ -57,6 +51,14 @@ public class Simulator implements Runnable,ObservableSimulator{
 	 */
 	public Robot getRobot() {
 		return robot;
+	}
+	
+	public Map getMap() {
+		return map;
+	}
+
+	public RobotRenderer getRobotRenderer() {
+		return robotRenderer;
 	}
 
 	/**
