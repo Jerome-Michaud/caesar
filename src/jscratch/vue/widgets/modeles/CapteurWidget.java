@@ -36,15 +36,15 @@ public class CapteurWidget extends ModeleWidget {
 		FontMetrics metrics = new FontMetrics(font) {};
 		Rectangle2D sizesText = metrics.getStringBounds(label, null);
 		
-		message.put(new Point(5, (int) sizesText.getHeight() + 1), label);
+		message.put(new Point(5, 15), label);
 		
 		
 		ListeDeroulante<CapteurSlot> l = new ListeDeroulante<CapteurSlot>(CapteurSlot.values(), this);
-		l.setBounds((int) sizesText.getWidth() + 10, 0, 60, 20);
+		l.setBounds((int) sizesText.getWidth() + 10, 3, 45, 15);
 		this.getLesZonesSaisies().add(l);
 		
 		LARG_EXTREMITE = 5;
-		largeur = (int) sizesText.getWidth() + 10 + l.getWidth();
+		largeur = (int) sizesText.getWidth() + LARG_EXTREMITE + l.getWidth();
 		int tX[] = {0, 5, this.LARG_EXTREMITE + largeur, largeur + 10, largeur + 10, this.LARG_EXTREMITE + largeur, 5, 0};
 		int tY[] = {5, 0, 0, 5, 15, 20, 20, 15};
 		this.setTabX(tX);

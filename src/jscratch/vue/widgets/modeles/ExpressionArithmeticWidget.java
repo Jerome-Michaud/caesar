@@ -80,8 +80,6 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 
 		this.setTailleX();
 		this.setTailleY();
-
-		initListeners();
 	}
 	
 	@Override
