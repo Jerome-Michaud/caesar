@@ -34,7 +34,6 @@ public class Simulator implements Runnable,ObservableSimulator{
 	private MapRenderer mapRenderer;
 	private RobotRenderer robotRenderer;
 	private PanelInfosRobot infosRobot;
-	private Interpreteur inter;
 	private ArrayList<ObserverSimulator> listObserver;// Tableau d'observateurs.
 
 	
@@ -51,8 +50,6 @@ public class Simulator implements Runnable,ObservableSimulator{
 		
 		mapRenderer = new MapRenderer(map);
 		robotRenderer = new RobotRenderer(robot);
-				
-		inter = new Interpreteur(robotController);
 	}
 	
 	/**
@@ -68,7 +65,7 @@ public class Simulator implements Runnable,ObservableSimulator{
 	 */
 	public void update(float deltaTime) {
 		robotController.update(deltaTime);
-		infosRobot.update(deltaTime);
+		//infosRobot.update(deltaTime);
 	}
 
 	/**
@@ -152,12 +149,5 @@ public class Simulator implements Runnable,ObservableSimulator{
 		for(ObserverSimulator o : listObserver){
 			o.update(this);
 		}
-	}
-	/**
-	 * retourne l'interpreteur du simulator
-	 * @return interpreteur
-	 */
-	public Interpreteur getInterpreteur() {
-		return inter;
 	}
 }

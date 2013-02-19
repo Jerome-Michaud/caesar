@@ -12,10 +12,8 @@ import jscratch.vue.widgets.Widget;
 import nxtim.instruction.Condition;
 import nxtim.instruction.Expression;
 import nxtim.instruction.Operateur;
-import nxtim.instruction.Operation;
 import nxtim.instruction.TypeVariable;
 import nxtim.instruction.VariableConstante;
-import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe heritant de ModeleWidget et implementant Seriliazable modelisant la
@@ -52,6 +50,8 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 		l = new ChampTexte(LARG_CHAMP, this);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.CAPTEUR);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		l.setBounds(this.LARG_EXTREMITE, 3, LARG_CHAMP, 14);
 		this.getLesZonesSaisies().add(l);
@@ -64,6 +64,8 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 		f = new ChampTexte(LARG_CHAMP, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.CAPTEUR);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
 		this.getLesZonesSaisies().add(f);
@@ -87,24 +89,14 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 
 		Widget widgetG = l.getContentWidget();
 		if (widgetG != null) {
-			Expression varMemGauche = null;
-			if (widgetG.getType() == TypeModeleWidget.EXPRESSION_ARITHMETIQUE) {
-				varMemGauche = (Operation) widgetG.getElementProgramme();
-			} else if (widgetG.getType() == TypeModeleWidget.VARIABLE) {
-				varMemGauche = (VariableModifiable) widgetG.getElementProgramme();
-			}
+			Expression varMemGauche = (Expression) widgetG.getElementProgramme();
 			expLog.setMembreGauche(varMemGauche);
 		} else {
 			expLog.setMembreGauche(new VariableConstante(TypeVariable.INT, l.getValeur()));
 		}
 		Widget widgetD = f.getContentWidget();
 		if (widgetD != null) {
-			Expression varMemDroite = null;
-			if (widgetD.getType() == TypeModeleWidget.EXPRESSION_ARITHMETIQUE) {
-				varMemDroite = (Operation) widgetD.getElementProgramme();
-			} else if (widgetD.getType() == TypeModeleWidget.VARIABLE) {
-				varMemDroite = (VariableModifiable) widgetD.getElementProgramme();
-			}
+			Expression varMemDroite = (Expression) widgetD.getElementProgramme();
 			expLog.setMembreDroit(varMemDroite);
 		} else {
 			expLog.setMembreDroit(new VariableConstante(TypeVariable.INT, f.getValeur()));
@@ -119,6 +111,4 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		this.setForme(this.getForme());
 		this.setTailleX();
 	}
-
-	public void initListeners() { }
 }

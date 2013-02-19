@@ -1,8 +1,13 @@
 package jscratch.vue.widgets.modeles.zones;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 import javax.swing.JComboBox;
+
+import jscratch.traduction.LanceurTraduction;
+import jscratch.vue.widgets.modeles.ModeleWidget;
+
 import org.jdom2.Element;
 
 /**
@@ -14,34 +19,21 @@ import org.jdom2.Element;
 public class ListeDeroulante<T> extends JComboBox implements Zone {
 
 	/**
-	 * La liste regroupant les items de la liste déroulante
-	 */
-	private List<T> lesItems;
-
-	/**
-	 * Constructeur du composant faisant appel au constructeur équivalent de la
-	 * classe mère et initialisant la liste d'items.
-	 */
-	public ListeDeroulante() {
-		this.lesItems = new LinkedList<T>();
-	}
-
-	/**
 	 * Constructeur du composant faisant appel au constructeur équivalent de la classe mère.
 	 *
 	 * @param a un tableau représentant les items qui seront présents dans la liste déroulante
 	 */
-	public ListeDeroulante(T[] a) {
+	public ListeDeroulante(T[] a, final ModeleWidget widgetParent) {
 		super(a);
-	}
-
-	/**
-	 * Modifie la liste d'items du composant.
-	 *
-	 * @param l La nouvelle liste d'items
-	 */
-	public void setLesItems(List<T> l) {
-		this.lesItems = l;
+		
+		// Détection des changements pour la mise à jour de la traduction
+		this.addItemListener(new ItemListener() {			
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				widgetParent.applyChangeModele();
+				LanceurTraduction.getInstance().lancerTraduction();
+			}
+		});
 	}
 
 	/**
@@ -85,5 +77,15 @@ public class ListeDeroulante<T> extends JComboBox implements Zone {
 	@Override
 	public void setPositionX(int posX) {
 		this.setLocation(posX, this.getY());
+	}
+
+	@Override
+	public int getPositionY() {
+		return this.getY();
+	}
+
+	@Override
+	public void setPositionY(int posY) {
+		this.setLocation(this.getX(),posY);
 	}
 }

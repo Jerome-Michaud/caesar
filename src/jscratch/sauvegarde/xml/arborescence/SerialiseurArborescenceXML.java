@@ -1,4 +1,4 @@
-package jscratch.sauvegarde.xml;
+package jscratch.sauvegarde.xml.arborescence;
 
 import java.util.List;
 import jscratch.dictionnaires.DicoVariables;
@@ -12,14 +12,14 @@ import jscratch.vue.widgets.Widget;
  * @since 1.0
  * @version 1.0
  */
-public final class SerialiseurXML {
+public final class SerialiseurArborescenceXML {
 
 	/**
 	 * Default constructor of <code>SauveurXML</code>.
 	 *
 	 * @since 1.0
 	 */
-	private SerialiseurXML() { }
+	private SerialiseurArborescenceXML() { }
 	
 	/**
 	 * Permet de sauvegarder l'arborescence et le dictionnaire au format XML.
@@ -33,7 +33,7 @@ public final class SerialiseurXML {
 
 		// Sauvegarde du dictionnaire
 		Element dictionnaire = new Element("dictionnaire");
-		for (Variable v : DicoVariables.getInstance().getLesvariables()) {
+		for (Variable v : DicoVariables.getInstance().getLesVariables()) {
 			Element variable = new Element("variable");
 			variable.setAttribute("nom", v.getNom());	
 			variable.setAttribute("type", v.getType().toString());

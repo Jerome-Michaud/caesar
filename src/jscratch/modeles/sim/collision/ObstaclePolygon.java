@@ -29,13 +29,7 @@ public class ObstaclePolygon extends ObstacleShape {
 		
 		shape = polygon;
 				
-		Color c = Color.getColor(element.getAttribute("color"));
-				
-		if (c != null) {
-			color = c;
-		} else {
-			color = Color.BLACK;
-		}
+		color = CouleurObstacle.fromString(element.getAttribute("color")).getCouleur();
 	}
 	
 	public ObstaclePolygon(List<Point> points, Color color) {

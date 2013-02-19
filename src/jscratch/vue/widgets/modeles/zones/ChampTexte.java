@@ -223,7 +223,7 @@ public class ChampTexte extends JPanel implements Zone {
 			//... alors on entame les procédures de redimensionnement
 			parent.getModele().decalageX(decal);
 			parent.setForme(false);
-			parent.getModele().decalerComposantsSuivants(positionX, decal);
+			parent.getModele().decalerComposantsSuivantsX(positionX, decal);
 			//Dans le cas on l'on trvaille sur un ChampTexte, des actions supplémentaires sont nécessaires
 			if (champ) {
 				//On agrandit les bounds du composant en lui même
@@ -278,8 +278,18 @@ public class ChampTexte extends JPanel implements Zone {
 	}
 
 	@Override
+	public int getPositionY() {
+		return this.getY();
+	}
+
+	@Override
 	public void setPositionX(int posX) {
 		this.setLocation(posX, this.getY());
+	}
+
+	@Override
+	public void setPositionY(int posY) {
+		this.setLocation(this.getX(),posY);
 	}
 
 	private void calculateNewBounds(JComponent comp) {

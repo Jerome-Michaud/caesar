@@ -7,6 +7,7 @@ import jscratch.exceptions.NonChargeableException;
 import jscratch.exceptions.NonClonableException;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.WidgetCompose;
+import jscratch.vue.widgets.modeles.CapteurWidget;
 import nxtim.instruction.Condition;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
@@ -172,9 +173,6 @@ public class FabriqueInstructions {
 	 *
 	 * @return un widget complexe de type "expression logique"
 	 */
-	/*public Widget creerWidgetExpressionLogical(Operateur op, ExpressionModifiable expressionModifiable) {
-	 return new WidgetCompose(new ExpressionLogicalWidget(op, expressionModifiable));
-	 }*/
 	public Widget creerWidgetExpressionLogical(Operateur op) {
 		return new Widget(new ExpressionLogicalWidget(op));
 	}
@@ -187,6 +185,15 @@ public class FabriqueInstructions {
 	 */
 	public Widget creerWidgetIncrementation(Operateur op) {
 		return new Widget(new IncrementationWidget(op, false));
+	}
+	
+	/**
+	 * Crée un widget de récupération de la valeur d'un capteur.
+	 * 
+	 * @return un widget de type "Capteur"
+	 */
+	public Widget creerWidgetCapteur() {
+		return new Widget(new CapteurWidget());
 	}
 	
 	/**
@@ -269,6 +276,9 @@ public class FabriqueInstructions {
 					w = creerWidgetIncrementation(Operateur.INCREMENTATION_MOINS);
 				}
 				break;
+			case CAPTEUR:
+				w = creerWidgetCapteur();
+				break;
 			default:
 				throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
 		}
@@ -331,7 +341,7 @@ public class FabriqueInstructions {
 				}
 			}
 		} else if ("VariableWidget".equals(nomClasse)) {
-			Variable[] vars = DicoVariables.getInstance().getLesvariables();
+			Variable[] vars = DicoVariables.getInstance().getLesVariables();
 			for (Variable v : vars) {
 				if (v.getNom().equals(supplement)) {
 					w = creerWidgetVariable((VariableModifiable)v);
@@ -346,6 +356,8 @@ public class FabriqueInstructions {
 					break;
 				}
 			}
+		} else if("CapteurWidget".equals(nomClasse)) {
+			w = creerWidgetCapteur();
 		} else {
 			throw new NonChargeableException("Impossible de charger le widget " + nomClasse);
 		}

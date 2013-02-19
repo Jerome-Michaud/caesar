@@ -8,6 +8,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 import java.awt.Rectangle;
+
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.Moteur;
 
@@ -19,6 +20,7 @@ import nxtim.instruction.Moteur;
  * @version 1.0
  */
 public class MoteurOffWidget extends ModeleWidget {
+	private ListeDeroulante<Moteur> l;
 	
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du MoteurOff.
@@ -39,7 +41,7 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.setElementProgramme(new InstructionMoteurOff());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
-		ListeDeroulante<Moteur> l = new ListeDeroulante<Moteur>(Moteur.values());
+		l = new ListeDeroulante<Moteur>(Moteur.values(), this);
 		l.setBounds(55, 3, 35, 20);
 		this.getLesZonesSaisies().add(l);
 		
@@ -48,6 +50,11 @@ public class MoteurOffWidget extends ModeleWidget {
 		this.decalageX(-10);
 		
 		initListeners();
+	}
+	
+	@Override
+	public void applyChangeModele(){
+		setInstructionMoteur(l.getValeur());
 	}
 	
 	@Override

@@ -1,18 +1,17 @@
 package jscratch.vue.ginterface.principales;
 
+import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaRootPaneUI;
 import de.javasoft.swing.JYDockingPort;
 import de.javasoft.swing.JYDockingView;
 import de.javasoft.swing.jydocking.DockingManager;
 import de.javasoft.swing.jydocking.IDockingConstants;
 import de.javasoft.swing.plaf.jydocking.DefaultFloatAction;
 import de.javasoft.swing.plaf.jydocking.DefaultMaximizeAction;
-import de.javasoft.swing.plaf.jydocking.DefaultMinimizeAction;
 import java.awt.BorderLayout;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
 
 import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -21,6 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import jscratch.helpers.ImagesHelper;
+import jscratch.vue.ginterface.principales.selecteur.SelecteurFichier;
+import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
 
 /**
  * Fenêtre principale de l'application.
@@ -37,42 +38,35 @@ public final class ApplicationUI extends JFrame {
 	 */
 	private static ApplicationUI instance = null;
 	/**
-	 * Le
-	 * <code>GlassPane</code>.
+	 * Le <code>GlassPane</code>.
 	 *
 	 * @see Vue.Interface.GlassPane
 	 */
 	private GlassPane glassPane;
 	/**
-	 * Le
-	 * <code>DockingPort</code>.
+	 * Le <code>DockingPort</code>.
 	 */
 	private JYDockingPort viewport;
 	/**
-	 * Les différents
-	 * <code>DockingView</code>.
+	 * Les différents <code>DockingView</code>.
 	 */
 	private JYDockingView zoneCodeGraphique, zoneCodeConsole, zoneSimulateur;
 
 	/**
-	 * Constructeur privé de
-	 * <code>ApplictionUI</code>.
+	 * Constructeur privé de <code>ApplicationUI</code>.
 	 */
 	private ApplicationUI() {
+		SyntheticaLookAndFeel.setWindowsDecorated(false);
 		this.setTitle("C.A.E.S.A.R");
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				
+		if (this.getRootPane().getUI() instanceof SyntheticaRootPaneUI) {
+			((SyntheticaRootPaneUI) this.getRootPane().getUI()).setMaximizedBounds(this);
+		}		
 		
-		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setMinimumSize(new Dimension(((int) ecran.getWidth() * 2 / 3), ((int) ecran.getHeight() * 2 / 3)));
-
-		String os = System.getProperty("os.name").toLowerCase();
-		if (os.contains("windows")) {
-			this.setPreferredSize(new Dimension(((int) ecran.getWidth() * 4 / 5), ((int) ecran.getHeight() * 4 / 5)));
-			
-		} else {
-			this.setExtendedState(MAXIMIZED_BOTH);
-		}
+		this.setMinimumSize(new Dimension(800, 500));
+		this.setExtendedState(MAXIMIZED_BOTH);
 
 		this.setJMenuBar(Menu.getInstance());
 
@@ -80,12 +74,15 @@ public final class ApplicationUI extends JFrame {
 
 		DockingManager.setTabReorderByDraggingEnabled(false);
 
-		addWindowListener(new WindowAdapter() {
+		this.addWindowListener(new WindowAdapter() {
+
 			@Override
-			public void windowClosed(WindowEvent evt) {
+			public void windowClosing(WindowEvent e) {
 				DockingManager.unregisterDockable("zoneCodeGraphique-SimpleDocking");
 				DockingManager.unregisterDockable("zoneSimulateur-SimpleDocking");
 				DockingManager.unregisterDockable("zoneCodeConsole-SimpleDocking");
+				
+				quitter();
 			}
 		});
 
@@ -95,13 +92,12 @@ public final class ApplicationUI extends JFrame {
 		this.glassPane.setVisible(true);
 
 		this.setVisible(true);
-
+		
 		this.setLocationRelativeTo(null);
 	}
 
 	/**
-	 * Permet de créer la zone de
-	 * <code>Docking</code>.
+	 * Permet de créer la zone de <code>Docking</code>.
 	 *
 	 * @since 1.0
 	 */
@@ -127,8 +123,7 @@ public final class ApplicationUI extends JFrame {
 	}
 
 	/**
-	 * Permet de créer la zone
-	 * <code>Edition</code>.
+	 * Permet de créer la zone <code>Edition</code>.
 	 *
 	 * @since 1.0
 	 */
@@ -143,8 +138,7 @@ public final class ApplicationUI extends JFrame {
 	}
 
 	/**
-	 * Permet de créer la zone
-	 * <code>Simulation</code>.
+	 * Permet de créer la zone <code>Simulation</code>.
 	 *
 	 * @since 1.0
 	 *
@@ -162,8 +156,7 @@ public final class ApplicationUI extends JFrame {
 	}
 
 	/**
-	 * Permet de créer la vue
-	 * <code>CodeConsole</code>.
+	 * Permet de créer la vue <code>CodeConsole</code>.
 	 *
 	 * @since 1.0
 	 */
@@ -186,5 +179,13 @@ public final class ApplicationUI extends JFrame {
 			instance = new ApplicationUI();
 		}
 		return instance;
+	}
+	
+	/**
+	 * Permet d'éxécuter les actions avant de fermer l'application.
+	 */
+	public void quitter() {
+		//new SelecteurFichier(TypeSelecteur.TRACES).sauvegarde();
+		System.exit(0);
 	}
 }

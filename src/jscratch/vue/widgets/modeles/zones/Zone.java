@@ -5,7 +5,8 @@ import org.jdom2.Element;
 /**
  * Interface définissant la structure d'une zone d'un widget.
  *
- * @author Vincent Besnard - Quentin Gosselin
+ * @since 1.0
+ * @version 1.0
  */
 public interface Zone {
 	
@@ -25,7 +26,11 @@ public interface Zone {
 	
 	public int getPositionX();
 	
+	public int getPositionY();
+	
 	public void setPositionX(int posX);
+	
+	public void setPositionY(int posY);
 	/**
 	 * Dit si la zone est utilisée par un widget ou pas ou si c'est impossible.
 	 *

@@ -26,7 +26,7 @@ public final class FenetreSupressionVariable extends JFrame {
 		this.setAlwaysOnTop(true);
 		this.setResizable(false);
 		
-		variables = new JComboBox(DicoVariables.getInstance().getLesvariables());
+		variables = new JComboBox(DicoVariables.getInstance().getLesVariables());
 		boutonValider = new JButton("Valider");
 
 		Box boxV = Box.createVerticalBox();

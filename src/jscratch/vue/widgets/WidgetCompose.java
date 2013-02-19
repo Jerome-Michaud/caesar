@@ -1,12 +1,15 @@
 package jscratch.vue.widgets;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import jscratch.comparateurs.ComparateurRectangleY;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import jscratch.parametrages.Variables;
 import jscratch.exceptions.ComposantIntrouvableException;
@@ -25,17 +28,20 @@ public class WidgetCompose extends Widget implements IWidget {
 	/**
 	 * HashMap stockant les zones d'accroches du composant complexe et les widgets qui y sont insérés.
 	 */
-	private HashMap<Rectangle, List<Widget>> mapZone;
+	private LinkedHashMap<Rectangle, List<Widget>> mapZone;
 
 	/**
 	 * Méthode redéfinie en phase de test afin laisser apparaître les zones d'accroches.
 	 *
 	 * @param g l'objet <code>Graphics</code> de l'appel
 	 */
-	@Override
+	/*@Override
 	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
-	}
+		for(Rectangle r : mapZone.keySet()){
+			g.drawRect((int)r.getX(),(int) r.getY(), (int)r.getWidth(),(int)r.getHeight());
+		}
+	}*/
 
 	/**
 	 * Constructeur du Widget Compose faisant appel au constructeur de sa classe mère (
@@ -45,7 +51,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	 */
 	public WidgetCompose(final ModeleWidget comp) {
 		super(comp);
-		this.mapZone = new HashMap<Rectangle, List<Widget>>();
+		this.mapZone = new LinkedHashMap<Rectangle, List<Widget>>();
 		for (Rectangle r : comp.getZonesAccroches()) {
 			this.mapZone.put(r, new LinkedList<Widget>());
 		}
@@ -118,19 +124,16 @@ public class WidgetCompose extends Widget implements IWidget {
 	public void notifyChange() {
 		HashMap<Rectangle, Rectangle> mapRect = new HashMap<Rectangle, Rectangle>();
 		HashMap<Rectangle, Integer> mapDecal = new HashMap<Rectangle, Integer>();
-
 		for (Rectangle r : mapZone.keySet()) {
 			int decalY = 0;
 			Rectangle maxBounds = null;
 
 			//Redimensionnement les zones d'accroches
 			for (Widget w : mapZone.get(r)) {
-				//Widget parent = (Widget)w.parent();
+				w.setLocation((int) (this.getLocation().getX() + r.getX()), (int) (this.getLocation().getY() + r.getY() + decalY));
 				if (w.isComplexe()) {
 					((WidgetCompose) w).notifyChange();
 				}
-
-				w.setLocation((int) (this.getLocation().getX() + r.getX()), (int) (this.getLocation().getY() + r.getY() + decalY));
 				if (maxBounds == null) {
 					maxBounds = new Rectangle(w.getBounds());
 					decalY += w.getBounds().height - ModeleWidget.OFFSET;
@@ -138,6 +141,9 @@ public class WidgetCompose extends Widget implements IWidget {
 					maxBounds = maxBounds.union(w.getBounds());
 					decalY += w.getBounds().height - ModeleWidget.OFFSET;
 				}
+				
+				// Correction du décalage de 1px pour que les widgets soient bien positionnés les uns par rapport aux autres
+				decalY -= 1;
 			}
 
 			if (maxBounds == null) {
@@ -148,13 +154,9 @@ public class WidgetCompose extends Widget implements IWidget {
 			int diff = maxBounds.height - r.height;
 
 			//On stocke le décalage qu'on voudra appliquer sur les zones d'accroche du composant
-			if (diff < 0 - ModeleWidget.OFFSET) {
-				this.getModele().decalageY(-Math.abs(diff), r);
-				decaleZonesEnDessousDe(r.y, diff, mapDecal);
-			} else if (diff > 0 - ModeleWidget.OFFSET) {
-				this.getModele().decalageY(diff, r);
-				decaleZonesEnDessousDe(r.y, diff, mapDecal);
-			}
+			this.getModele().decalageY(diff, r);
+			decaleZonesEnDessousDe(r.y, diff, mapDecal);
+			this.getModele().decalerComposantsSuivantsY(r.y, diff);
 
 			Rectangle bnds = new Rectangle(r);
 			bnds.height = maxBounds.height;
@@ -172,10 +174,20 @@ public class WidgetCompose extends Widget implements IWidget {
 				mapRect.put(r, rectDecal);
 			}
 		}
-
 		// Et enfin on finit par attribuer a chaque zone ses nouvelles bounds
 		for (Rectangle r : mapRect.keySet()) {
 			this.mapZone.put(mapRect.get(r), this.mapZone.remove(r));
+		}
+
+		//Remise dans l'ordre de la Hashmap des zones d'accroche
+		if (mapZone.keySet().size() > 1) {
+			LinkedList<Rectangle> collRect = new LinkedList<Rectangle>(mapZone.keySet());
+			Collections.sort(collRect, new ComparateurRectangleY());
+			LinkedHashMap<Rectangle, List<Widget>> newMap = new LinkedHashMap<Rectangle, List<Widget>>();
+			for (Rectangle rect : collRect) {
+				newMap.put(rect, mapZone.get(rect));
+			}
+			this.mapZone = newMap;
 		}
 	}
 
@@ -197,11 +209,11 @@ public class WidgetCompose extends Widget implements IWidget {
 	@Override
 	public void applyChangeModele() {
 		this.getModele().applyChangeModele();
-		// Testé le type du modele widget courant
+		// Tester le type du modele widget courant
 		if (this.getModele().getType() == TypeModeleWidget.IFELSE) {
 			// Cas du if...else
 			InstructionIfElse structInst = (InstructionIfElse) this.getModele().getElementProgramme();
-			// Récupéré clé mapZone du if et du else clé du if <=> rectangle supérieur clé du else <=> rectangle inféreur
+			// Récupérer clé mapZone du if et du else clé du if <=> rectangle supérieur clé du else <=> rectangle inféreur
 			// Suppression des instructions du if et du else dans l'arbre des instruction
 			// Récupérer les instructions des widgets du if les ajouté à l'arbre des instructions
 			List<Widget> widgets = recupeAllWidgetCorps(1);
@@ -260,7 +272,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	public Element toXml() {
 		Element widget = super.toXml();
 		widget.setName("widgetcompose");
-		
+
 		// Gestion des widgets internes
 		int i = 0;
 		for (Rectangle zone : this.mapZone.keySet()) {

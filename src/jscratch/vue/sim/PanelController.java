@@ -11,8 +11,10 @@ import javax.swing.*;
 import de.javasoft.swing.ButtonBar;
 import de.javasoft.swing.SimpleDropDownButton;
 import jscratch.controleur.sim.Simulator;
+import jscratch.controleur.sim.StopCommand;
 import jscratch.helpers.ImagesHelper;
 import jscratch.interpreteur.LanceurInterpreteur;
+import jscratch.modeles.sim.MotorPort;
 
 /**
  * Panel permettant de controller l'execution du simulateur
@@ -131,8 +133,9 @@ public class PanelController extends JPanel implements ActionListener{
 			b2.setEnabled(true);
 			b3.setEnabled(true);
 			b1.setEnabled(false);
-			lanceurInter = new LanceurInterpreteur(simulator.getInterpreteur());
+			lanceurInter = new LanceurInterpreteur(simulator);
 			lanceurInter.start();
+			simulator.start();
 		}
 		else if(e.getSource() == b2){
 			if(!pause){
@@ -152,6 +155,10 @@ public class PanelController extends JPanel implements ActionListener{
 			b1.setEnabled(true);
 			pause=false;
 			lanceurInter.stopThread();
+			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_A));
+			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_B));
+			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_C));
+			simulator.getRobotController().clearListCommands();
 		}
 		else if(e.getSource() == m1){
 

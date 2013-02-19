@@ -28,6 +28,6 @@ public class InstructionMoteurOff extends InstructionMoteurCmd {
 
 	@Override
 	public String toString() {
-		return "moteurOn(" + getMoteur() + ")";
+		return "Off(" + getMoteur() + ")";
 	}
 }

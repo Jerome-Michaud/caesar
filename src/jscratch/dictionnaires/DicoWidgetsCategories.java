@@ -131,7 +131,7 @@ public final class DicoWidgetsCategories {
 	 * @param var la variable à ajouter
 	 */
 	public void updateWidgetsVariables() {
-		Variable[] vars = DicoVariables.getInstance().getLesvariables();
+		Variable[] vars = DicoVariables.getInstance().getLesVariables();
 		this.dico.get(Categorie.VARIABLES).clear();
 		ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetVariableSetValue());
 		

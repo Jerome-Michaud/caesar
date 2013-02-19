@@ -56,12 +56,14 @@ public class IfElseWidget extends ModeleWidget {
 	@Override
 	public void applyChangeModele(){
 		Widget contentWidget = f.getContentWidget();
+		InstructionIfElse ifElseIns = ((InstructionIfElse) getElementProgramme());
 		
 		// On met à jour la condition dans l'elementProgramme si elle existe
-		if (contentWidget != null) {
-			InstructionIfElse ifElseIns = ((InstructionIfElse) getElementProgramme());
+		if (contentWidget != null) {			
 			Condition cond = (Condition) contentWidget.getElementProgramme();
 			ifElseIns.setCondition(cond);
+		} else {
+			ifElseIns.setCondition(null);
 		}
 	}
 	
@@ -100,7 +102,4 @@ public class IfElseWidget extends ModeleWidget {
  	        this.setTailleY();
          }       
     }
-    
-	@Override
-	public void initListeners() {}
 }
