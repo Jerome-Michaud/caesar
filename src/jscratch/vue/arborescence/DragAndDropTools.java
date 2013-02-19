@@ -353,14 +353,17 @@ public final class DragAndDropTools extends Observable {
 					break;
 
 			}
-			dragGroupeWidget(arbo.getListe(comp), pt);
-			arbo.updateWidgets();
-			//notifyChangesToWidgets(composantsDrague);
+			if (complexe) {
+				dragGroupeWidget(arbo.getSuivants((Widget) (comp.parent()), true), ((Widget) comp.parent()).getLocation());
+			} else {
+				dragGroupeWidget(arbo.getListe(comp), pt);
+			}
 			composantsDrague.clear();
 
 		} catch (ComposantIntrouvableException ex) {
 			ErreurHelper.afficher(ex);
 		}
+		arbo.updateWidgets();
 
 		updatePanelGraphiqueSize(arbo.getArborescence());
 
