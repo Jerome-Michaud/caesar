@@ -188,6 +188,23 @@ public class WidgetCompose extends Widget implements IWidget {
 			this.mapZone = newMap;
 		}
 	}
+	
+	public void updatePositionWidgets(){
+		for (Rectangle r : mapZone.keySet()) {
+			int decalY = 0;
+			Rectangle maxBounds = null;
+
+			//Redimensionnement les zones d'accroches
+			for (Widget w : mapZone.get(r)) {
+
+				w.setLocation((int) (this.getLocation().getX() + r.getX()), (int) (this.getLocation().getY() + r.getY() + decalY));
+				//Widget parent = (Widget)w.parent();
+				if (w.isComplexe()) {
+					((WidgetCompose) w).notifyChange();
+				}
+			}
+		}
+	}
 
 	/**
 	 * Méthode permettant de décaler toutes les zones d'accroches situées en dessous d'un certaine zone d'accroche.

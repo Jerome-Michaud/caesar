@@ -508,7 +508,6 @@ public abstract class ModeleWidget implements Serializable {
 		for(Zone z : this.lesZonesSaisies){
 			int zonePosY = z.getPositionY();
 			if(zonePosY > positionY){
-			System.out.println("zone : "+zonePosY);
 				z.setPositionY(zonePosY + decalage);
 			}
 		}
@@ -519,7 +518,6 @@ public abstract class ModeleWidget implements Serializable {
 			int messPosY = (int) pt.getY();
 			if(messPosY > positionY){
 				Point pt2 = new Point();
-				System.out.println(" mess : "+messPosY + decalage);
 				pt2.setLocation(pt.getX(),messPosY + decalage);
 				mapTemp.put(pt2, message.get(pt));
 				i.remove();
