@@ -5,6 +5,8 @@ import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
+
+import jscratch.helpers.FontHelper;
 import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Variable;
@@ -42,7 +44,7 @@ public class IncrementationWidget extends ModeleWidget {
 
 		message.put(new Point(LARG_EXTREMITE, 15), op.toString());
 
-		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
+		Font font = FontHelper.getWidgetFont();
 		FontMetrics metrics = new FontMetrics(font) {
 		};
 		Rectangle2D bounds = metrics.getStringBounds(op.toString(), null);

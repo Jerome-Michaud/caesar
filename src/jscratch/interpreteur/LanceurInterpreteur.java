@@ -12,10 +12,12 @@ public class LanceurInterpreteur extends Thread {
 	private Interpreteur inter;
 	protected volatile boolean stop = true;
 	private boolean wait = false;
+	private Simulator simulator;
 	
 	public LanceurInterpreteur(Simulator simulator) {
 		super();
-		this.inter = new Interpreteur(simulator.getRobotController());
+		this.simulator = simulator;
+		this.inter = new Interpreteur(simulator);
 	}
 	
 	public void run() {		
@@ -54,6 +56,7 @@ public class LanceurInterpreteur extends Thread {
 		this.wait = !wait;
 		inter.setWait(true);
 		inter.getVisiteur().setWait(true);
+		simulator.setWait(true);
 	}
 	/**
 	 * permet de relancer l'interpreteur
@@ -62,6 +65,7 @@ public class LanceurInterpreteur extends Thread {
 			this.wait = false;
 			inter.setWait(false);
 			inter.getVisiteur().setWait(false);
+			simulator.setWait(false);
 			this.notify();
 			synchronized (inter) {
 				inter.notify();

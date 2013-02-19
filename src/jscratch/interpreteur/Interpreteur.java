@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jscratch.controleur.sim.RobotController;
+import jscratch.controleur.sim.Simulator;
 import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.ModeleWidget;
@@ -37,9 +38,9 @@ public class Interpreteur {
 	private boolean wait = false;
 	private VisiteurInterpreteur visiteur;
 	
-	public Interpreteur(RobotController robot) {
+	public Interpreteur(Simulator simulator) {
 		this.robot = robot;
-		this.visiteur = VisiteurInterpreteur.getInstance(robot);
+		this.visiteur = VisiteurInterpreteur.getInstance(simulator);
 	}
 	
 	public void launchInterpreteur(){
@@ -98,7 +99,7 @@ public class Interpreteur {
 			for(Instruction l : trouveTaches()){
 				l.accepte(visiteur);
 			}
-			run = false;
+			this.run = false;
 		}
 
 	}

@@ -5,6 +5,8 @@ import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
+
+import jscratch.helpers.FontHelper;
 import nxtim.instruction.TempsCourant;
 
 /**
@@ -27,7 +29,7 @@ public class TempsCourantWidget extends ModeleWidget {
 		imbricable = false;
 		
 		message.put(new Point(5, 15), "Temps Courant");
-		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
+		Font font = FontHelper.getWidgetFont();
 		FontMetrics metrics = new FontMetrics(font) {};
 		String l = "";
 		for (String s : message.values()) {

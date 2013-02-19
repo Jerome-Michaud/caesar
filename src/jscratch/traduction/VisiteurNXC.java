@@ -11,6 +11,7 @@ import nxtim.instruction.InstructionMoteurRotate;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.Moteur;
+import nxtim.instruction.RotationMoteur;
 import nxtim.instruction.TempsCourant;
 import nxtim.instruction.ValeurCapteur;
 import nxtim.instruction.VariableCapteur;
@@ -195,6 +196,13 @@ public final class VisiteurNXC extends VisiteurC {
 	public void visiter(ValeurCapteur valCapteur) {
 		traduction += "GetSensorValue(";
 		ajouterNomCapteur(valCapteur.getSlot());
+		traduction += ")";
+	}
+	
+	@Override
+	public void visiter(RotationMoteur rotMoteur) {
+		traduction += "GetRotateMotor(";
+		ajouterNomMoteur(rotMoteur.getMoteur());
 		traduction += ")";
 	}
 }

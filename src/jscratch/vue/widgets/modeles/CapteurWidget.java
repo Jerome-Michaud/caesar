@@ -8,6 +8,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
+
+import jscratch.helpers.FontHelper;
 import jscratch.vue.widgets.modeles.zones.ListeDeroulante;
 import jscratch.vue.widgets.modeles.zones.Zone;
 import nxtim.instruction.CapteurSlot;
@@ -32,7 +34,7 @@ public class CapteurWidget extends ModeleWidget {
 		imbricable = false;
 		
 		final String label = "Capteur";
-		Font font = new Font("TimesRoman ", Font.PLAIN, 12);
+		Font font = FontHelper.getWidgetFont();
 		FontMetrics metrics = new FontMetrics(font) {};
 		Rectangle2D sizesText = metrics.getStringBounds(label, null);
 		

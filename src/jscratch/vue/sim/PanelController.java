@@ -128,13 +128,12 @@ public class PanelController extends JPanel {
 	}
 	
 	/**
-	 * Classe poiur la gestion des appuis sur les boutons.
+	 * Classe pour la gestion des appuis sur les boutons.
 	 * 
 	 * @since 1.0
 	 * @version 1.0
 	 */
 	private class Listener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceBoutonsSimulateur(((JButton)e.getSource()).getText()));
@@ -143,9 +142,7 @@ public class PanelController extends JPanel {
 				bPause.setEnabled(true);
 				bStop.setEnabled(true);
 				bExec.setEnabled(false);
-				lanceurInter = new LanceurInterpreteur(simulator);
-				lanceurInter.start();
-				simulator.start();
+				this.startThread();
 			} else if (e.getSource() == bPause) {
 				if (!pause) {
 					pause = true;
@@ -161,11 +158,7 @@ public class PanelController extends JPanel {
 				bStop.setEnabled(false);
 				bExec.setEnabled(true);
 				pause = false;
-				lanceurInter.stopThread();
-				simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_A));
-				simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_B));
-				simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_C));
-				simulator.getRobotController().clearListCommands();
+				this.stopThread();
 			} else if (e.getSource() == m1) {
 
 			} else if (e.getSource() == m2) {
@@ -173,6 +166,24 @@ public class PanelController extends JPanel {
 			} else if (e.getSource() == m3) {
 
 			}
+		}
+
+		private void startThread(){
+			lanceurInter = new LanceurInterpreteur(simulator);
+			lanceurInter.start();
+			simulator.start();
+			simulator.setRun(true);
+			simulator.getRobotController().resetStartTime();
+		}
+		
+		private void stopThread(){
+			lanceurInter.stopThread();
+			simulator.setRun(false);
+			simulator.setWait(false);
+			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_A));
+			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_B));
+			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_C));
+			simulator.getRobotController().clearListCommands();
 		}
 	}
 }
