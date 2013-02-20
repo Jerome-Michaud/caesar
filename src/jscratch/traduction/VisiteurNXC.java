@@ -117,7 +117,7 @@ public final class VisiteurNXC extends VisiteurC {
 					traduction += "TOUCH";
 					break;
 				case ULTRASONIC:
-					traduction += "SONIC";
+					traduction += "ULTRASONIC";
 				default:
 					break;
 			}
@@ -256,16 +256,28 @@ public final class VisiteurNXC extends VisiteurC {
 		traduction += indent();
 		traduction += "DefineSensors(";
 		Capteur capt = confCapt.getCapteurAuSlot(CapteurSlot.A);
-		ajouterNomCapteur(capt);
+		if(capt != null)
+			ajouterNomCapteur(capt);
+		else
+			traduction += "NONE";
 		traduction += ", ";
 		capt = confCapt.getCapteurAuSlot(CapteurSlot.B);
-		ajouterNomCapteur(capt);
+		if(capt != null)
+			ajouterNomCapteur(capt);
+		else
+			traduction += "NONE";
 		traduction += ", ";
 		capt = confCapt.getCapteurAuSlot(CapteurSlot.C);
-		ajouterNomCapteur(capt);
+		if(capt != null)
+			ajouterNomCapteur(capt);
+		else
+			traduction += "NONE";
 		traduction += ", ";
 		capt = confCapt.getCapteurAuSlot(CapteurSlot.D);
-		ajouterNomCapteur(capt);
+		if(capt != null)
+			ajouterNomCapteur(capt);
+		else
+			traduction += "NONE";
 		traduction += ");\n";
 	}
 }
