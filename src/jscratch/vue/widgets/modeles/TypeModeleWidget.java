@@ -5,7 +5,7 @@ public enum TypeModeleWidget {
 	/**
 	 * Les différents types de widget.
 	 */
-	INSTRUCTION, IF, WHILE, NEGATION, TACHE, DOWHILE, IFELSE, MOTEURMARCHE, MOTEURNOMBREROTATION, TEMPSCOURANT, MOTEUROFF, REPEAT, FOR, WAIT, VARIABLE, SETVALUEVARIABLE, EXPRESSION_LOGIQUE, EXPRESSION_ARITHMETIQUE, EXPRESSION_INC,
+	INSTRUCTION, IF, WHILE, NEGATION, TACHE, DOWHILE, IFELSE, MOTEURMARCHE, MOTEURNOMBREROTATION, MOTEURRAZ, TEMPSCOURANT, MOTEUROFF, REPEAT, FOR, WAIT, VARIABLE, DECLARERVARIABLE, SETVALUEVARIABLE, EXPRESSION_LOGIQUE, EXPRESSION_ARITHMETIQUE, EXPRESSION_INC,
 	/**
 	 * Type "Capteur".
 	 */
@@ -32,6 +32,8 @@ public enum TypeModeleWidget {
 			return "MoteurMarche";
 		case MOTEURNOMBREROTATION:
 			return "MoteurNombreRotation";
+		case MOTEURRAZ:
+			return "MoteurRAZ";
 		case MOTEUROFF:
 			return "MoteurArret";
 		case REPEAT:
@@ -44,6 +46,8 @@ public enum TypeModeleWidget {
 			return "Variable";
 		case SETVALUEVARIABLE:
 			return "AffecterA";
+		case DECLARERVARIABLE:
+			return "DeclarerVariable";
 		case EXPRESSION_LOGIQUE:
 			return "ExpressionLogique";  
 		case EXPRESSION_ARITHMETIQUE:

@@ -32,7 +32,7 @@ public final class CompilateurHelper {
 			String os = System.getProperty("os.name").toLowerCase();
 			String cmd;
 			if (os.contains("windows")) {
-				cmd = "cmd.exe /c start " + Variables.CHEMIN_ACCES_NBC + " -r -usb " + fichier.getAbsolutePath() + " & pause";
+				cmd = "cmd.exe /c start " + Variables.CHEMIN_ACCES_NBC + " -r -usb " + fichier.getAbsolutePath() + "\npause";
 			}
 			else {
 				cmd = "./" + Variables.CHEMIN_ACCES_NBC + " -r -usb " + fichier.getAbsolutePath();

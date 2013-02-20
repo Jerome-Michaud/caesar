@@ -200,6 +200,7 @@ public class ChampTexte extends JPanel implements Zone {
 			this.setComponent(textField);
 			Widget wc = this.getWidgetContenu();
 			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget)this.getParent(), this, wc, this.textField.getText()));
+		widgetParent.applyChangeModele();
 		} else {
 			this.etat = ETAT_CONTIENT_WIDGET;
 			this.textField.setSize(this.getSize());
@@ -210,7 +211,6 @@ public class ChampTexte extends JPanel implements Zone {
 		//Appel à la méthode de redimensionnement en X, avec si nécessaire appel recursif pour le redimensionnement des parents
 		decaleWidgetParents(this, decal);
 		this.widgetContenu = w;
-		widgetParent.applyChangeModele();
 	}
 
 	/**

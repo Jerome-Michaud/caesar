@@ -166,5 +166,5 @@ public interface VisiteurElementProg {
 	 * 
 	 * @param razMoteur l'instruction à visiter.
 	 */
-	public void visiter(InstructionRAZRotaMoteur razMoteur);
+	public void visiter(InstructionRAZRotationMoteur razMoteur);
 }

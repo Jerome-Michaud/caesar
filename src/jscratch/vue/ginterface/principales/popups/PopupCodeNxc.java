@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import jscratch.traduction.LanceurTraduction;
 import jscratch.vue.ginterface.principales.selecteur.SelecteurFichier;
 import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
 
@@ -17,7 +18,7 @@ public class PopupCodeNxc extends JPopupMenu {
 	/**
 	 * Les différents éléments du menu.
 	 */
-	private JMenuItem sauvegarder;
+	private JMenuItem sauvegarder, resetTraducteur;
 	
 	/**
 	 * Le constructeur par défaut de <code>PopupCodeNxc</code>.
@@ -34,5 +35,15 @@ public class PopupCodeNxc extends JPopupMenu {
 			}
 		});
 		this.add(this.sauvegarder);
+		
+		this.resetTraducteur = new JMenuItem("Redémarrer le traducteur");
+		this.resetTraducteur.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				LanceurTraduction.reset();
+			}
+		});
+		this.add(resetTraducteur);
 	}
 }

@@ -16,7 +16,7 @@ import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
-import nxtim.instruction.InstructionRAZRotaMoteur;
+import nxtim.instruction.InstructionRAZRotationMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.InstructionWhile;
@@ -282,8 +282,9 @@ public class VisiteurC extends VisiteurTraduction {
 		if (instructionIncrementation.isAvant()) {
 			traduction += op;
 		}
-		instructionIncrementation.getExpression().accepte(this);
-		
+		if (instructionIncrementation.getVariable() != null) {
+			instructionIncrementation.getVariable().accepte(this);
+		}
 		if (!instructionIncrementation.isAvant()) {
 			traduction += op;
 		}
@@ -300,7 +301,7 @@ public class VisiteurC extends VisiteurTraduction {
 	}
 
 	@Override
-	public void visiter(InstructionRAZRotaMoteur razMoteur) {
+	public void visiter(InstructionRAZRotationMoteur razMoteur) {
 		traduction += "/* Code C pour RAZ du nombre de rotations d'un moteur inconnu ! */\n";
 	}
 }
