@@ -43,6 +43,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		g.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
 		g.ajouterTypeWidgetAccepte(TypeModeleWidget.CAPTEUR);
 		g.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		g.ajouterTypeWidgetAccepte(TypeModeleWidget.MOTEURNOMBREROTATION);
 		g.setBounds(55, 3, widthChamp, 20);
 		g.setValeur("0");
 		this.getLesZonesSaisies().add(g);

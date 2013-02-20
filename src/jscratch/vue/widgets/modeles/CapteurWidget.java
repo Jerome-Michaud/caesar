@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 
@@ -59,10 +61,10 @@ public class CapteurWidget extends ModeleWidget {
 	
 	@Override
 	public void initListeners() {
-		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
+		((ListeDeroulante) this.getLesZonesSaisies().get(0)).addItemListener(new ItemListener() {
 
 			@Override
-			public void focusLost(FocusEvent arg0) {
+			public void itemStateChanged(ItemEvent e) {
 				setSlot(((Zone) getLesZonesSaisies().get(0)).getValeur());
 			}
 		});
