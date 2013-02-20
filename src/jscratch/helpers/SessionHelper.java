@@ -49,6 +49,6 @@ public final class SessionHelper {
 	 * @return l'heure au format HH:mm:ss
 	 */
 	public static String formatHeure(final Date date) {
-		return formatHeure.format(new Date());
+		return formatHeure.format(date);
 	}
  }

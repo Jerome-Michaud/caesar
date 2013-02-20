@@ -7,5 +7,8 @@ package jscratch.vue.sim;
  */
 public interface ObserverPanelSimulator {
 
+	/**
+	 * rafraichi l'affichage du panelInfosRobot
+	 */
 	public void update(ObservablePanelSimulator o);
 }

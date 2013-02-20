@@ -77,9 +77,7 @@ public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator,Ob
 			texteCapteurs.setText(capteurs.toString());
 		}		
 	}
-	/**
-	 * rafraichi l'affichage du panelInfosRobot
-	 */
+	
 	@Override
 	public void update(ObservablePanelSimulator o) {
 		update(FREQ_UPDATE);

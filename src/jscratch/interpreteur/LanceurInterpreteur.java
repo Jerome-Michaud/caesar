@@ -1,6 +1,7 @@
 package jscratch.interpreteur;
 
 import jscratch.controleur.sim.Simulator;
+import jscratch.vue.sim.ObserverInterpreteur;
 
 /**
  * Classe lancant un thread contenant l'interpreteur
@@ -77,5 +78,9 @@ public class LanceurInterpreteur extends Thread {
 	
 	public boolean getStop(){
 		return stop;
+	}
+	
+	public synchronized void addObserverInterpreteur(ObserverInterpreteur o){
+		inter.addObserver(o);
 	}
 }
