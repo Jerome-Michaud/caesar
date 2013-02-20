@@ -35,8 +35,6 @@ public class Scratch {
 			try {
 				// ajout de l'anti-aliasing sur le texte
 				System.setProperty("swing.aatext", "true");
-				
-				SyntheticaLookAndFeel.setWindowsDecorated(false);
 				// Changement du look and feel
 				UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
 			} catch (UnsupportedLookAndFeelException ex) {

@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -70,9 +71,12 @@ public final class ApplicationUI extends JFrame {
 		}
 
 		this.setMinimumSize(new Dimension(800, 500));
-		this.setSize(1200, 800);
 		if (!System.getProperty("os.name").toLowerCase().contains("windows")) {
 			this.setExtendedState(MAXIMIZED_BOTH);
+		}else{
+			
+		Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setSize((int)(tailleEcran.getWidth() * 0.7),(int)(tailleEcran.getHeight() * 0.7));
 		}
 
 		this.setJMenuBar(Menu.getInstance());
