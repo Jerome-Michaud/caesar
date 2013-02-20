@@ -134,7 +134,7 @@ public final class DragAndDropTools extends Observable {
 
 		arbo.updateWidgets();
 
-		updatePanelGraphiqueSize(arbo.getArborescence());
+		GUI.getPanelCodeGraphique().updateSize(arbo.getArborescence());
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -379,7 +379,7 @@ public final class DragAndDropTools extends Observable {
 		}
 		arbo.updateWidgets();
 
-		updatePanelGraphiqueSize(arbo.getArborescence());
+		p.updateSize(arbo.getArborescence());
 
 		this.setChanged();
 		this.notifyObservers();
@@ -443,7 +443,7 @@ public final class DragAndDropTools extends Observable {
 	 * @return Le Rectangle regroupant les positions et dimensions du goupe de
 	 * widgets passé en paramètre ou null si la listede widgets est vide
 	 */
-	private static Rectangle groupeWidgetBounds(List<Widget> lst, int index, Rectangle rect) {
+	public static Rectangle groupeWidgetBounds(List<Widget> lst, int index, Rectangle rect) {
 		for (int i = index; i < lst.size(); i++) {
 			Widget w = lst.get(i);
 			if (w.isComplexe()) {
@@ -459,24 +459,5 @@ public final class DragAndDropTools extends Observable {
 			}
 		}
 		return rect;
-	}
-
-	private void updatePanelGraphiqueSize(List<List<Widget>> arborescence) {
-		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
-		Rectangle bounds = null;
-		for (List<Widget> l : arborescence) {
-			if (!l.isEmpty()) {
-				Rectangle boundsGroup = groupeWidgetBounds(l, 0, null);
-				if (bounds == null) {
-					bounds = boundsGroup;
-				} else {
-					bounds = bounds.union(boundsGroup);
-				}
-			}
-		}
-		if (bounds != null) {
-			p.setPreferredSize(new Dimension((int) (bounds.getX() + bounds.getWidth()), (int) (bounds.getY() + bounds.getHeight())));
-			p.getScroll().validate();
-		}
 	}
 }

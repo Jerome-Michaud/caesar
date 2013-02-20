@@ -4,15 +4,18 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.geom.Rectangle2D;
 import jscratch.vue.widgets.modeles.zones.ListeDeroulante;
 import nxtim.instruction.Moteur;
+import nxtim.instruction.RotationMoteur;
 
 /**
  * @since 1.0
  * @version 1.0
  */
-public class MoteurNombreRotation extends ModeleWidget {
+public class MoteurNombreRotationWidget extends ModeleWidget {
 	private ListeDeroulante<Moteur> l;
 	
 	private int largeur;
@@ -20,11 +23,10 @@ public class MoteurNombreRotation extends ModeleWidget {
 	private final int LARG_EXTREMITE;
 	
 	/**
-	 * Constructeur par défaut <code>MoteurNombreRotation</code>.
+	 * Constructeur par défaut <code>MoteurNombreRotationWidget</code>.
 	 */
-	public MoteurNombreRotation() {
-		// TODO : faire element programme
-		this.setElementProgramme(null);
+	public MoteurNombreRotationWidget() {
+		this.setElementProgramme(new RotationMoteur());
 		this.attachableBas = false;
 		this.attachableHaut = false;
 		this.imbricable = false;
@@ -59,5 +61,20 @@ public class MoteurNombreRotation extends ModeleWidget {
 
 		this.setTailleX();
 		this.setTailleY();
+		
+		initListeners();
+	}
+
+	@Override
+	public void initListeners() {
+		super.initListeners();
+		
+		((ListeDeroulante)this.getLesZonesSaisies().get(0)).addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				((RotationMoteur)getElementProgramme()).setMoteur((Moteur)((ListeDeroulante)e.getSource()).getSelectedItem());
+			}
+		});
 	}
 }

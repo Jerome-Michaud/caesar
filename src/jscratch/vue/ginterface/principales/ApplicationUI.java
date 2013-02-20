@@ -20,8 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import jscratch.helpers.ImagesHelper;
-import jscratch.vue.ginterface.principales.selecteur.SelecteurFichier;
-import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
+import jscratch.helpers.SessionHelper;
 
 /**
  * Fenêtre principale de l'application.
@@ -87,8 +86,8 @@ public final class ApplicationUI extends JFrame {
 				DockingManager.unregisterDockable("zoneCodeGraphique-SimpleDocking");
 				DockingManager.unregisterDockable("zoneSimulateur-SimpleDocking");
 				DockingManager.unregisterDockable("zoneCodeConsole-SimpleDocking");
-
-				//quitter();
+				
+				SessionHelper.quitter();
 			}
 		});
 
@@ -193,13 +192,5 @@ public final class ApplicationUI extends JFrame {
 			instance = new ApplicationUI();
 		}
 		return instance;
-	}
-
-	/**
-	 * Permet d'éxécuter les actions avant de fermer l'application.
-	 */
-	public void quitter() {
-		new SelecteurFichier(TypeSelecteur.TRACES).sauvegarde();
-		System.exit(0);
 	}
 }
