@@ -3,6 +3,9 @@ package jscratch.helpers;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import jscratch.vue.ginterface.principales.GUI;
+import jscratch.vue.ginterface.principales.selecteur.SelecteurFichier;
+import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
 
 /**
  * @since 1.0
@@ -50,5 +53,16 @@ public final class SessionHelper {
 	 */
 	public static String formatHeure(final Date date) {
 		return formatHeure.format(date);
+	}
+	
+	/**
+	 * Permet d'éxécuter les actions avant de fermer l'application.
+	 */
+	public static void quitter() {
+		if (Boolean.parseBoolean(PropertiesHelper.getInstance().get("user.trace.active"))) {
+			new SelecteurFichier(TypeSelecteur.TRACES).sauvegarde();
+		}
+		
+		System.exit(0);
 	}
  }

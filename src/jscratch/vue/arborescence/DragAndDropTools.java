@@ -9,20 +9,25 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.SwingUtilities;
+
+import nxtim.instruction.Categorie;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.exceptions.ComposantIntrouvableException;
 import jscratch.exceptions.NonClonableException;
 import jscratch.helpers.ErreurHelper;
 import jscratch.traduction.LanceurTraduction;
 import jscratch.vue.arborescence.actions.Action;
+import jscratch.vue.categories.boutons.BoutonCategorie;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
 import jscratch.vue.ginterface.principales.panels.PanelCodeGraphique;
+import jscratch.vue.ginterface.principales.panels.PanelTypeWidget;
 import jscratch.vue.ginterface.principales.panels.PanelWidget;
 import jscratch.vue.widgets.IWidget;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.WidgetCompose;
 import jscratch.vue.widgets.modeles.ModeleWidget;
+import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.Zone;
 
@@ -77,21 +82,28 @@ public final class DragAndDropTools extends Observable {
 		if (!comp.isDraggable()) {
 			comp.setDraggable(true);
 			Widget compNouv;
-
-			try {
-				PanelWidget pw = GUI.getPanelWidget();
-				compNouv = pw.getFabrique().cloner(comp);
-				compNouv.setBounds(comp.getBounds());
-				pw.getPanelDeWidget().add(compNouv);
-				int ind = pw.getIndex(comp);
-				pw.supprimerWidget(comp);
-				pw.ajouterWidget(compNouv, ind);
-				DicoWidgetsCategories.getInstance().remplacerWidgetDansCategorie(GUI.getPanelTypeWidget().getCurrentCategorie(), comp, compNouv);
-			} catch (NonClonableException ex) {
-				ErreurHelper.afficher(ex);
+			
+			// Si c'est la tache main, on supprime le widget du panel
+			if (comp.getType() == TypeModeleWidget.TACHE) {
+				PanelTypeWidget.getInstance().supprimerTachePrincipale();
+			}
+			else { // sinon on remplace par un nouveau widget
+				try {
+					PanelWidget pw = GUI.getPanelWidget();
+					compNouv = pw.getFabrique().cloner(comp);
+					compNouv.setBounds(comp.getBounds());
+					pw.getPanelDeWidget().add(compNouv);
+					int ind = pw.getIndex(comp);
+					pw.supprimerWidget(comp);
+					pw.ajouterWidget(compNouv, ind);
+					DicoWidgetsCategories.getInstance().remplacerWidgetDansCategorie(GUI.getPanelTypeWidget().getCurrentCategorie(), comp, compNouv);
+				} catch (NonClonableException ex) {
+					ErreurHelper.afficher(ex);
+				}
 			}
 			composantsDrague = new LinkedList<Widget>();
 			composantsDrague.add(comp);
+			
 		} else {
 			try {
 				//recuperation et detachement des widgets dragués
@@ -122,7 +134,7 @@ public final class DragAndDropTools extends Observable {
 
 		arbo.updateWidgets();
 
-		updatePanelGraphiqueSize(arbo.getArborescence());
+		GUI.getPanelCodeGraphique().updateSize(arbo.getArborescence());
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -367,7 +379,7 @@ public final class DragAndDropTools extends Observable {
 		}
 		arbo.updateWidgets();
 
-		updatePanelGraphiqueSize(arbo.getArborescence());
+		p.updateSize(arbo.getArborescence());
 
 		this.setChanged();
 		this.notifyObservers();
@@ -379,6 +391,17 @@ public final class DragAndDropTools extends Observable {
 		if (compSurvole != null) {
 			compSurvole.getModele().applyChangeModele();
 		}
+		
+		// Suppression de la tache principale de la liste des widgets
+		if (comp.getType() == TypeModeleWidget.TACHE) {
+			for (BoutonCategorie bc : PanelTypeWidget.getInstance().getLesCategories()) {
+				if (bc.getCategorie() == Categorie.STRUCTURES) {
+					GUI.getPanelWidget().setLesWidgets(bc.getNbColonnes());
+					break;
+				}
+			}
+		}		
+		
 		LanceurTraduction.getInstance().lancerTraduction();
 	}
 
@@ -389,7 +412,7 @@ public final class DragAndDropTools extends Observable {
 	 *
 	 * @param comp le widget à supprimer
 	 */
-	private void deleteWidgetsFromGlassPane(Widget comp) {
+	private void deleteWidgetsFromGlassPane(Widget comp) {		
 		if (comp.isComplexe()) {
 			for (List<Widget> lw : ((WidgetCompose) comp).getMapZone().values()) {
 				for (Widget w : lw) {
@@ -397,6 +420,12 @@ public final class DragAndDropTools extends Observable {
 				}
 			}
 		}
+		
+		if (comp.getType() == TypeModeleWidget.TACHE) {
+			((WidgetCompose) comp).clean();
+			PanelTypeWidget.getInstance().ajouterTachePrincipale();			
+		}
+		
 		GUI.getGlassPane().remove(comp);
 	}
 
@@ -412,7 +441,7 @@ public final class DragAndDropTools extends Observable {
 	 * @return Le Rectangle regroupant les positions et dimensions du goupe de
 	 * widgets passé en paramètre ou null si la listede widgets est vide
 	 */
-	private static Rectangle groupeWidgetBounds(List<Widget> lst, int index, Rectangle rect) {
+	public static Rectangle groupeWidgetBounds(List<Widget> lst, int index, Rectangle rect) {
 		for (int i = index; i < lst.size(); i++) {
 			Widget w = lst.get(i);
 			if (w.isComplexe()) {
@@ -428,24 +457,5 @@ public final class DragAndDropTools extends Observable {
 			}
 		}
 		return rect;
-	}
-
-	private void updatePanelGraphiqueSize(List<List<Widget>> arborescence) {
-		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
-		Rectangle bounds = null;
-		for (List<Widget> l : arborescence) {
-			if (!l.isEmpty()) {
-				Rectangle boundsGroup = groupeWidgetBounds(l, 0, null);
-				if (bounds == null) {
-					bounds = boundsGroup;
-				} else {
-					bounds = bounds.union(boundsGroup);
-				}
-			}
-		}
-		if (bounds != null) {
-			p.setPreferredSize(new Dimension((int) (bounds.getX() + bounds.getWidth()), (int) (bounds.getY() + bounds.getHeight())));
-			p.getScroll().validate();
-		}
 	}
 }

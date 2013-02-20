@@ -14,9 +14,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import jscratch.compilateur.CompilateurTools;
+import jscratch.helpers.CompilateurHelper;
 import jscratch.helpers.ErreurHelper;
 import jscratch.helpers.ImagesHelper;
+import jscratch.helpers.SessionHelper;
 import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
 import jscratch.vue.widgets.Widget;
@@ -133,13 +134,13 @@ public final class Menu extends JMenuBar {
 				new SelecteurFichier(TypeSelecteur.PROPERTIES).chargement();
 			}
 			else if (e.getSource() == fichierQuitter) {
-				GUI.getFenetre().quitter();
+				SessionHelper.quitter();
 			}
 			else if (e.getSource() == exportationNXC) {
 				new SelecteurFichier(TypeSelecteur.CODE).sauvegarde();
 			}
 			else if (e.getSource() == exportationRobot) {
-				CompilateurTools.getInstance().exporter();
+				CompilateurHelper.exporter();
 			}
 			else if (e.getSource() == traces) {
 				new SelecteurFichier(TypeSelecteur.TRACES).sauvegarde();

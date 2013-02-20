@@ -67,6 +67,11 @@ public abstract class Trace {
 	public String getHeure() {
 		return this.heure;
 	}
+
+	@Override
+	public String toString() {
+		return this.heure + " : " + this.getType();
+	}
 	
 	/**
 	 * Permet d'avoir comment le widget doit se sérialiser.

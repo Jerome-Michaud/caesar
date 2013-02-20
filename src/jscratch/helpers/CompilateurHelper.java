@@ -1,4 +1,4 @@
-package jscratch.compilateur;
+package jscratch.helpers;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,32 +13,8 @@ import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
  * @since 1.0
  * @version 1.0
  */
-public final class CompilateurTools {
+public final class CompilateurHelper {
 
-	/**
-	 * Unique instance of <code>CompilateurTools</code>.
-	 */
-	private static CompilateurTools instance = null;
-
-	/**
-	 * Private constructor of <code>CompilateurTools</code>.
-	 */
-    private CompilateurTools() { }
-
-	/**
-	 * Accessor for <code>CompilateurTools</code>.
-	 *
-	 * @since 1.0
-	 * 
-	 * @return unique instance of <code>CompilateurTools</code>
-	 */
-    public static CompilateurTools getInstance() {
-        if (instance == null) {
-			instance = new CompilateurTools();
-		}
-		return instance;
-    }
-	
 	/**
 	 * Permet de compiler un fichier nxc.
 	 * 
@@ -46,7 +22,7 @@ public final class CompilateurTools {
 	 * 
 	 * @param path l'url du fichier à compiler
 	 */
-	public void exporter(final String path) {
+	public static void exporter(final String path) {
 		try {
 			File fichier = new File(path);
 			if (!fichier.exists()) {
@@ -73,10 +49,10 @@ public final class CompilateurTools {
 	 * 
 	 * @since 1.0
 	 */
-	public void exporter() {
+	public static void exporter() {
 		File fichier = new SelecteurFichier(TypeSelecteur.CODE).sauvegarde();
 		if (fichier != null) {
-			this.exporter(fichier.getAbsolutePath());
+			exporter(fichier.getAbsolutePath());
 		}
 	}
  }
