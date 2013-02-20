@@ -54,6 +54,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.CAPTEUR);
 		l.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		l.ajouterTypeWidgetAccepte(TypeModeleWidget.MOTEURNOMBREROTATION);
 		l.setBounds(this.LARG_EXTREMITE, 3, LARG_CHAMP, 14);
 		this.getLesZonesSaisies().add(l);
 
@@ -68,6 +69,7 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.TEMPSCOURANT);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.CAPTEUR);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_ARITHMETIQUE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.MOTEURNOMBREROTATION);
 		f.setBounds(29 + (int) bounds.getWidth() + 5, 3, LARG_CHAMP, 14);
 		this.getLesZonesSaisies().add(f);
 

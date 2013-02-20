@@ -21,7 +21,7 @@ import jscratch.vue.widgets.modeles.IfElseWidget;
 import jscratch.vue.widgets.modeles.IfWidget;
 import jscratch.vue.widgets.modeles.IncrementationWidget;
 import jscratch.vue.widgets.modeles.MoteurMarcheWidget;
-import jscratch.vue.widgets.modeles.MoteurNombreRotation;
+import jscratch.vue.widgets.modeles.MoteurNombreRotationWidget;
 import jscratch.vue.widgets.modeles.MoteurOffWidget;
 import jscratch.vue.widgets.modeles.RepeatWidget;
 import jscratch.vue.widgets.modeles.TacheWidget;
@@ -67,7 +67,7 @@ public class FabriqueInstructions {
 	 * @return un widget de type "Nombre de rotation"
 	 */
 	public Widget creerWidgetMoteurNombreRotation() {
-		return new Widget(new MoteurNombreRotation());
+		return new Widget(new MoteurNombreRotationWidget());
 	}
 
 	/**
@@ -323,15 +323,15 @@ public class FabriqueInstructions {
 			w = creerWidgetWhile();
 		} else if ("DoWhileWidget".equals(nomClasse)) {
 			w = creerWidgetDoWhile();
-		} else if (TypeModeleWidget.MOTEURMARCHE.toString().equals(nomClasse)) {
+		} else if ("MoteurMarcheWidget".equals(nomClasse)) {
 			w = creerWidgetMoteurMarche();
-		} else if (TypeModeleWidget.MOTEURNOMBREROTATION.toString().equals(nomClasse)) {
+		} else if ("MoteurNombreRotationWidget".equals(nomClasse)) {
 			w = creerWidgetMoteurNombreRotation();
-		} else if (TypeModeleWidget.MOTEUROFF.toString().equals(nomClasse)) {
+		} else if ("MoteurOffWidget".equals(nomClasse)) {
 			w = creerWidgetMoteurOff();
-		} else if (TypeModeleWidget.WAIT.toString().equals(nomClasse)) {
+		} else if ("WaitWidget".equals(nomClasse)) {
 			w = creerWidgetWait();
-		} else if (TypeModeleWidget.SETVALUEVARIABLE.toString().equals(nomClasse)) {
+		} else if ("VariableSetValueWidget".equals(nomClasse)) {
 			w = creerWidgetVariableSetValue();
 		} else if ("TempsCourantWidget".equals(nomClasse)) {
 			w = creerWidgetTempsCourant();
