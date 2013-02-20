@@ -18,6 +18,7 @@ import jscratch.sauvegarde.properties.SauvegardePropertiesTools;
 import jscratch.sauvegarde.xml.arborescence.SauvegardeArborescenceXMLTools;
 import jscratch.sauvegarde.xml.traces.SauvegardeTracesXMLTools;
 import jscratch.traces.fabriques.FabriqueTrace;
+import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.ginterface.principales.GUI;
 
 /**
@@ -93,6 +94,7 @@ public class SelecteurFichier extends JFileChooser {
 		if (retour == JFileChooser.APPROVE_OPTION) {
 			String path = getSelectedFile().getAbsolutePath();
 			sauvegardes.get((ApplicationFileFilter) this.getFileFilter()).load(path);
+			GUI.getPanelCodeGraphique().updateSize(ArborescenceTools.getInstance().getArborescence());
 		}
 	}
 }

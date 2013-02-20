@@ -156,14 +156,6 @@ public class JNumberTextField extends JTextField {
 			this.appelant = appelant;
 		}
 
-		@Override
-		public void remove(int offs, int len) throws BadLocationException {
-			super.remove(offs, len);
-			if(appelant.getText().isEmpty()){
-				setText("0");
-			}
-		}
-
 		public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
 			String text = getText(0, offset) + str + getText(offset, (getLength() - offset));
 
