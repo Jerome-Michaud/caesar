@@ -1,11 +1,15 @@
 package jscratch.interpreteur;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import jscratch.controleur.sim.RobotController;
 import jscratch.controleur.sim.Simulator;
 import jscratch.vue.arborescence.ArborescenceTools;
+import jscratch.vue.sim.ObservableInterpreteur;
+import jscratch.vue.sim.ObserverInterpreteur;
+import jscratch.vue.sim.ObserverPanelSimulator;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.ModeleWidget;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
@@ -31,16 +35,16 @@ import nxtim.instruction.VariableModifiable;
  * @author Nicolas
  *
  */
-public class Interpreteur {
+public class Interpreteur implements ObservableInterpreteur{
 
-	private RobotController robot;
 	private boolean run = true;
 	private boolean wait = false;
 	private VisiteurInterpreteur visiteur;
+	private ArrayList<ObserverInterpreteur> listObserver;// Tableau d'observateurs.
 	
 	public Interpreteur(Simulator simulator) {
-		this.robot = robot;
 		this.visiteur = VisiteurInterpreteur.getInstance(simulator);
+		this.listObserver = new ArrayList<ObserverInterpreteur>();
 	}
 	
 	public void launchInterpreteur(){
@@ -100,6 +104,7 @@ public class Interpreteur {
 				l.accepte(visiteur);
 			}
 			this.run = false;
+			this.notifyObserver();
 		}
 
 	}
@@ -135,6 +140,23 @@ public class Interpreteur {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void addObserver(ObserverInterpreteur o) {
+		 listObserver.add(o); 
+	}
+	
+	@Override
+	public void deleteObserver(ObserverInterpreteur o) {
+		listObserver.remove(o); 
+	}
+	
+	@Override
+	public void notifyObserver() {
+		for(ObserverInterpreteur o : listObserver){
+			o.update(this);
+		}
 	}
 	
 	

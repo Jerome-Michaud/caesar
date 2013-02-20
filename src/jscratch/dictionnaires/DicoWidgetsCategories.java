@@ -191,4 +191,22 @@ public final class DicoWidgetsCategories {
 			categorie.put(w, b);
 		}
 	}
+	
+	/**
+	 * Permet de cacher un widget dans la catégorie
+	 * @param c la catégorie
+	 * @param w le widget
+	 */
+	public void cacherWidget(Categorie c, Widget w) {
+		this.dico.get(c).put(w, false);	
+	}
+	
+	/**
+	 * Permet d'afficher un widget dans la catégorie
+	 * @param c la catégorie
+	 * @param w le widget
+	 */
+	public void afficherWidget(Categorie c, Widget w) {
+		this.dico.get(c).put(w, true);
+	}
 }

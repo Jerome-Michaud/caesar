@@ -1,6 +1,7 @@
 package jscratch.vue.ginterface.principales.panels;
 
 import jscratch.vue.categories.boutons.BoutonCategorie;
+import jscratch.vue.categories.boutons.BoutonCategorieStructure;
 
 import java.awt.Dimension;
 import java.util.LinkedList;
@@ -86,5 +87,31 @@ public final class PanelTypeWidget extends JPanel {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Supression de la tache principale
+	 */
+	public void supprimerTachePrincipale() {
+		for (BoutonCategorie bc : lesCategories) {
+			if (bc.getCategorie() == Categorie.STRUCTURES) {
+				((BoutonCategorieStructure) bc).supprimerTachePrincipale();				
+				
+				break;
+			}
+		}		
+	}
+	
+	/**
+	 * Ajout de la tache principale
+	 */
+	public void ajouterTachePrincipale() {
+		for (BoutonCategorie bc : lesCategories) {
+			if (bc.getCategorie() == Categorie.STRUCTURES) {
+				((BoutonCategorieStructure) bc).ajouterTachePrincipale();
+				
+				break;
+			}
+		}
 	}
 }

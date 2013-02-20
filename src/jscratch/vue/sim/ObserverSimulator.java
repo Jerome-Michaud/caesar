@@ -7,5 +7,8 @@ package jscratch.vue.sim;
  */
 public interface ObserverSimulator {
 
+	/**
+	 * rafraichi l'affichage du panelSimulator
+	 */
 	public void update(ObservableSimulator o);
 }

@@ -287,4 +287,13 @@ public class WidgetCompose extends Widget implements IWidget {
 		}
 		return widget;
 	}
+	    
+    /**
+     * Supprime tous les widgets contenus
+     */
+    public void clean() {
+    	for (List<Widget> l : mapZone.values()) {
+    		l.clear();
+    	}
+    }
 }
