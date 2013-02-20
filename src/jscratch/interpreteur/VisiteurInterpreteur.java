@@ -14,6 +14,7 @@ import nxtim.instruction.Expression;
 import nxtim.instruction.ExpressionComplexe;
 import nxtim.instruction.Instruction;
 import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.InstructionConfigCapteurs;
 import nxtim.instruction.InstructionDeclaration;
 import nxtim.instruction.InstructionDeclarationAffectation;
 import nxtim.instruction.InstructionDeclarationCapteur;
@@ -618,6 +619,11 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 	@Override
 	public void visiter(InstructionRAZRotationMoteur razMoteur) {
 		// TODO exécution razRotateMotor
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void visiter(InstructionConfigCapteurs confCapt) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }

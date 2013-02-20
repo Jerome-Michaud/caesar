@@ -5,6 +5,7 @@ import nxtim.instruction.Expression;
 import nxtim.instruction.ExpressionComplexe;
 import nxtim.instruction.Instruction;
 import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.InstructionConfigCapteurs;
 import nxtim.instruction.InstructionDeclaration;
 import nxtim.instruction.InstructionDeclarationAffectation;
 import nxtim.instruction.InstructionDeclarationCapteur;
@@ -303,5 +304,10 @@ public class VisiteurC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionRAZRotationMoteur razMoteur) {
 		traduction += "/* Code C pour RAZ du nombre de rotations d'un moteur inconnu ! */\n";
+	}
+
+	@Override
+	public void visiter(InstructionConfigCapteurs confCapt) {
+		traduction += indent() + "/* Code C pour la configuration des capteurs inconnu ! */\n";
 	}
 }
