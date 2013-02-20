@@ -4,6 +4,8 @@ import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
 import jscratch.vue.ginterface.principales.GUI;
+import jscratch.vue.widgets.Widget;
+import jscratch.vue.widgets.modeles.TypeModeleWidget;
 
 /**
  * Classe permettant l'instanciation du bouton catégorie "Contôles".
@@ -12,7 +14,7 @@ import jscratch.vue.ginterface.principales.GUI;
  * @version 1.0
  */
 public class BoutonCategorieStructure extends BoutonCategorie {
-
+	
 	/**
 	 * Définit le bouton catégorie
 	 * <code>Contrôle</code>.
@@ -29,6 +31,7 @@ public class BoutonCategorieStructure extends BoutonCategorie {
 	@Override
 	public void ajouterWidgets() {
 		DicoWidgetsCategories d = DicoWidgetsCategories.getInstance();
+		
 		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetTache());
 		
 		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetRepeat());
@@ -39,5 +42,29 @@ public class BoutonCategorieStructure extends BoutonCategorie {
 
 		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetIf());
 		d.ajouterWidget(Categorie.STRUCTURES, GUI.getPanelWidget().getFabrique().creerWidgetIfElse());
+	}
+	
+	/**
+	 * Supression de la tache principale
+	 */
+	public void supprimerTachePrincipale() {
+		DicoWidgetsCategories d = DicoWidgetsCategories.getInstance();
+		for (Widget w : d.getWidgets(Categorie.STRUCTURES, false)) {
+			if (w.getType() == TypeModeleWidget.TACHE) {
+				d.cacherWidget(Categorie.STRUCTURES, w);
+			}
+		}
+	}
+	
+	/**
+	 * Ajout de la tache principale
+	 */
+	public void ajouterTachePrincipale() {
+		DicoWidgetsCategories d = DicoWidgetsCategories.getInstance();
+		for (Widget w : d.getWidgets(Categorie.STRUCTURES, false)) {
+			if (w.getType() == TypeModeleWidget.TACHE) {
+				d.afficherWidget(Categorie.STRUCTURES, w);
+			}
+		}
 	}
 }
