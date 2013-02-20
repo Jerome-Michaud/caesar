@@ -16,6 +16,7 @@ import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
+import nxtim.instruction.InstructionRAZRotaMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.InstructionWhile;
@@ -296,5 +297,10 @@ public class VisiteurC extends VisiteurTraduction {
 	@Override
 	public void visiter(RotationMoteur rotMoteur) {
 		traduction += "/* Code C pour obtenir le nombre de rotations d'un moteur inconnu ! */\n";
+	}
+
+	@Override
+	public void visiter(InstructionRAZRotaMoteur razMoteur) {
+		traduction += "/* Code C pour RAZ du nombre de rotations d'un moteur inconnu ! */\n";
 	}
 }
