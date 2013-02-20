@@ -8,6 +8,7 @@ import nxtim.instruction.InstructionDeclarationCapteur;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
+import nxtim.instruction.InstructionRAZRotaMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.Moteur;
@@ -204,5 +205,13 @@ public final class VisiteurNXC extends VisiteurC {
 		traduction += "GetRotateMotor(";
 		ajouterNomMoteur(rotMoteur.getMoteur());
 		traduction += ")";
+	}
+	
+	@Override
+	public void visiter(InstructionRAZRotaMoteur razMoteur) {
+		traduction += indent();
+		traduction += "RAZRotateMotor(";
+		ajouterNomMoteur(razMoteur.getMoteur());
+		traduction += ");\n";
 	}
 }

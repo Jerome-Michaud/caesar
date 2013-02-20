@@ -160,4 +160,11 @@ public interface VisiteurElementProg {
 	 * @param rotMoteur l'expression à visiter.
 	 */
 	public void visiter(RotationMoteur rotMoteur);
+	
+	/**
+	 * Visite une instruction de remise à zéro d'un compteur de rotations d'un moteur.
+	 * 
+	 * @param razMoteur l'instruction à visiter.
+	 */
+	public void visiter(InstructionRAZRotaMoteur razMoteur);
 }

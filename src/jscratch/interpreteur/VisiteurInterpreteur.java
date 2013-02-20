@@ -25,6 +25,7 @@ import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
+import nxtim.instruction.InstructionRAZRotaMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.TempsCourant;
@@ -611,6 +612,12 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 
 	@Override
 	public void visiter(RotationMoteur rotMoteur) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public void visiter(InstructionRAZRotaMoteur razMoteur) {
+		// TODO exécution razRotateMotor
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }
