@@ -238,7 +238,7 @@ public final class VisiteurNXC extends VisiteurC {
 	
 	@Override
 	public void visiter(RotationMoteur rotMoteur) {
-		traduction += "GetRotateMotor(";
+		traduction += "MotorRotationCount(";
 		ajouterNomMoteur(rotMoteur.getMoteur());
 		traduction += ")";
 	}
@@ -246,7 +246,7 @@ public final class VisiteurNXC extends VisiteurC {
 	@Override
 	public void visiter(InstructionRAZRotationMoteur razMoteur) {
 		traduction += indent();
-		traduction += "RAZRotateMotor(";
+		traduction += "ResetMotorRotationCount(";
 		ajouterNomMoteur(razMoteur.getMoteur());
 		traduction += ");\n";
 	}
@@ -254,7 +254,7 @@ public final class VisiteurNXC extends VisiteurC {
 	@Override
 	public void visiter(InstructionConfigCapteurs confCapt) {
 		traduction += indent();
-		traduction += "ConfigSensor(";
+		traduction += "DefineSensors(";
 		Capteur capt = confCapt.getCapteurAuSlot(CapteurSlot.A);
 		ajouterNomCapteur(capt);
 		traduction += ", ";
