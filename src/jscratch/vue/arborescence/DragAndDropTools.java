@@ -412,13 +412,7 @@ public final class DragAndDropTools extends Observable {
 	 *
 	 * @param comp le widget à supprimer
 	 */
-	private void deleteWidgetsFromGlassPane(Widget comp) {
-		
-		if (comp.getType() == TypeModeleWidget.TACHE) {
-			PanelTypeWidget.getInstance().ajouterTachePrincipale();
-		}
-		
-		
+	private void deleteWidgetsFromGlassPane(Widget comp) {		
 		if (comp.isComplexe()) {
 			for (List<Widget> lw : ((WidgetCompose) comp).getMapZone().values()) {
 				for (Widget w : lw) {
@@ -426,6 +420,12 @@ public final class DragAndDropTools extends Observable {
 				}
 			}
 		}
+		
+		if (comp.getType() == TypeModeleWidget.TACHE) {
+			((WidgetCompose) comp).clean();
+			PanelTypeWidget.getInstance().ajouterTachePrincipale();			
+		}
+		
 		GUI.getGlassPane().remove(comp);
 	}
 
