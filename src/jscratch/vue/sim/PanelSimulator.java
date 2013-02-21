@@ -3,6 +3,7 @@ package jscratch.vue.sim;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -21,7 +22,7 @@ import jscratch.modeles.sim.collision.CouleurObstacle;
  * @author Guillaume Delorme
  *
  */
-public class PanelSimulator extends JPanel implements MouseWheelListener, MouseMotionListener,ObservablePanelSimulator,ObserverSimulator{
+public class PanelSimulator extends JPanel implements MouseWheelListener, MouseMotionListener, MouseListener, ObservablePanelSimulator, ObserverSimulator {
 	
 	private BufferedImage screen;
 	private ArrayList<ObserverPanelSimulator> listObserver;// Tableau d'observateurs.
@@ -35,6 +36,7 @@ public class PanelSimulator extends JPanel implements MouseWheelListener, MouseM
 		this.simulator = simulator;
 		this.addMouseWheelListener(this);
 		this.addMouseMotionListener(this);
+		this.addMouseListener(this);
 		this.listObserver = new ArrayList<ObserverPanelSimulator>();
 		setDoubleBuffered(true);
 		this.validate();
@@ -114,4 +116,18 @@ public class PanelSimulator extends JPanel implements MouseWheelListener, MouseM
 	public void update(ObservableSimulator o) {
 		repaint();
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		mouseDragged(e);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+	@Override
+	public void mouseExited(MouseEvent e) {}
+	@Override
+	public void mousePressed(MouseEvent e) {}
+	@Override
+	public void mouseReleased(MouseEvent e) {}
 }

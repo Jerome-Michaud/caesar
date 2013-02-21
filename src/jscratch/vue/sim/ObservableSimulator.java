@@ -24,5 +24,24 @@ public interface ObservableSimulator {
 	/**
 	 * met à jour les observateurs
 	 */
-	public void notifyObserver();
+	public void notifyObserverSimulator();
+	
+	/**
+	 * ajoute un observateur sur le simulateur
+	 * 
+	 * @param ObserverSimulator
+	 */
+	public void addObserver(ObserverPanelController o);
+	
+	/**
+	 * supprimer un observateur du simulateur
+	 * 
+	 * @param ObserverSimulator
+	 */
+	public void deleteObserver(ObserverPanelController o);
+	
+	/**
+	 * met à jour les observateurs
+	 */
+	public void notifyObserverPanelController();
 }

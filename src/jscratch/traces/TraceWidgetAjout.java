@@ -13,6 +13,7 @@ public class TraceWidgetAjout extends Trace {
 	 * Les widgets importants.
 	 */
 	private Widget widget, parent;
+	private int  positionParRapportParent;
 	
 	/**
 	 * Constructeur par défaut de <code>TraceDeplacementWidget</code>.
@@ -24,10 +25,11 @@ public class TraceWidgetAjout extends Trace {
 	 * @param parentApres le parent après déplacement
 	 * @param isAjout <code>true</code> si le widget est ajouté depuis le panel instruction, <code>false</code> sinon
 	 */
-	public TraceWidgetAjout(final Widget widget, final Widget parentApres) {
+	public TraceWidgetAjout(final Widget widget, final Widget parentApres, final int positionParRapportParent) {
 		super(TypeTrace.WIDGET_AJOUT);
 		this.widget = widget;
 		this.parent = parentApres;
+		this.positionParRapportParent=positionParRapportParent;
 	}
 
 	@Override
@@ -40,8 +42,7 @@ public class TraceWidgetAjout extends Trace {
 		//ajout du nouveau parent
 		if (this.parent != null) {
 			Element nouveau = new Element(PARENTNOUVEAU);
-			nouveau.setAttribute(EMPLACEMENT, "");
-			nouveau.setAttribute(POSITION, "");
+			nouveau.setAttribute(POSITIONPARENT, String.valueOf(positionParRapportParent));
 			nouveau.addContent(this.parent.toXml());
 			thisXml.addContent(nouveau);
 		}

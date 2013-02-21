@@ -98,7 +98,7 @@ public abstract class Variable implements Expression {
 	 */
 	private void castValeur() {
 		/* Si la valeur n'est pas vide */
-		if(!valeur.isEmpty()) {
+		if(valeur != null && !valeur.isEmpty()) {
 			switch(type) {
 				case INT:
 				case LONG:
