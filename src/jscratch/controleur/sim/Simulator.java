@@ -6,9 +6,13 @@ import java.util.ArrayList;
 
 import jscratch.modeles.sim.Map;
 import jscratch.modeles.sim.MapFactory;
+import jscratch.modeles.sim.MotorPort;
 import jscratch.modeles.sim.Robot;
 import jscratch.vue.sim.MapRenderer;
+import jscratch.vue.sim.ObservableInterpreteur;
 import jscratch.vue.sim.ObservableSimulator;
+import jscratch.vue.sim.ObserverInterpreteur;
+import jscratch.vue.sim.ObserverPanelController;
 import jscratch.vue.sim.ObserverSimulator;
 import jscratch.vue.sim.RobotRenderer;
 
@@ -19,7 +23,7 @@ import jscratch.vue.sim.RobotRenderer;
  * @author Guillaume Delorme
  *
  */
-public class Simulator implements Runnable, ObservableSimulator {
+public class Simulator implements Runnable, ObservableSimulator,ObserverInterpreteur {
 	
 	private Robot robot;
 	private Map map;
@@ -28,12 +32,14 @@ public class Simulator implements Runnable, ObservableSimulator {
 	private MapRenderer mapRenderer;
 	private RobotRenderer robotRenderer;
 	private ArrayList<ObserverSimulator> listObserver;// Tableau d'observateurs.
-	private boolean run = true;
-	private boolean wait = false;
+	private ArrayList<ObserverPanelController> listPanelController;// Tableau d'observateurs.
+	private boolean run;
+	private boolean wait;
 	
 	public Simulator() {
 		
 		this.listObserver = new ArrayList<ObserverSimulator>();
+		this.listPanelController = new ArrayList<ObserverPanelController>();
 
 		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/CAESAR.xml"));
 		
@@ -44,6 +50,9 @@ public class Simulator implements Runnable, ObservableSimulator {
 		
 		mapRenderer = new MapRenderer(map);
 		robotRenderer = new RobotRenderer(robot);
+		
+		this.run = true;
+		this.wait = false;
 	}
 	
 	/**
@@ -66,11 +75,7 @@ public class Simulator implements Runnable, ObservableSimulator {
 	 * @param deltaTime
 	 */
 	public void update(float deltaTime) {
-		if(run){
-			if(!wait){
-				robotController.update(deltaTime);
-			}
-		}
+		robotController.update(deltaTime);
 	}
 
 	/**
@@ -99,13 +104,16 @@ public class Simulator implements Runnable, ObservableSimulator {
 	 */
 	@Override
 	public void run() {
-
 		// Set up the graphics stuff, double-buffering.
-				
+		System.out.println("Demarrage du simulateur");
+		System.out.println("Simulateur = "+Thread.currentThread().getName());		
 		long delta = 0l;
+		this.run = true;
+		this.robotController.resetStartTime();
 
 		// Boucle infinie du simulateur
-		while (true) {
+		while (run) {
+			this.testWait();
 			long lastTime = System.nanoTime();
 
 			// Mise à jour du simulateur
@@ -116,7 +124,7 @@ public class Simulator implements Runnable, ObservableSimulator {
 
 			// Affichage du résultat du rendu dans le panel
 			
-			notifyObserver();
+			notifyObserverSimulator();
 			// Lock des fps
 			delta = System.nanoTime() - lastTime;
 			if (delta < 20000000L) {
@@ -127,11 +135,14 @@ public class Simulator implements Runnable, ObservableSimulator {
 				}
 			}
 		}
+		this.notifyObserverPanelController();
+		System.out.println("Arret du simulateur");
+		System.out.println("Simulateur = "+Thread.currentThread().getName());
 	}
 	
 	@Override
 	public void addObserver(ObserverSimulator o) {
-		 listObserver.add(o); 
+		 listObserver.add(o);
 	}
 	
 	@Override
@@ -140,23 +151,86 @@ public class Simulator implements Runnable, ObservableSimulator {
 	}
 	
 	@Override
-	public void notifyObserver() {
+	public void notifyObserverSimulator() {
 		for(ObserverSimulator o : listObserver){
 			o.update(this);
 		}
 	}
-	/**
-	 * met en attente le simulator
-	 * @param b
-	 */
-	public synchronized void setWait(boolean b){
-		this.wait = b;
+	
+	private synchronized void testWait() {
+		if(wait){
+			try {
+				System.out.println("Met en attente le simulateur");
+				System.out.println("Simulateur = "+Thread.currentThread().getName());
+					this.wait();
+			} catch (InterruptedException e) {
+				// TODO Bloc catch généré automatiquement
+				e.printStackTrace();
+			}
+		}
 	}
 	/**
-	 * arrete le simulateur
-	 * @param b
+	 * met le simulator en pause
 	 */
-	public synchronized void setRun(boolean b){
-		this.run = b;
+	public synchronized void waitThread() {
+		this.wait = true;
+	}
+
+	public synchronized void notifyThread() {
+		this.notify();
+		System.out.println("Redemarre le simulateur");
+		System.out.println("Simulateur = "+Thread.currentThread().getName());
+		this.wait = false;
+	}
+	
+	/**
+	 * arrete le simulator
+	 */
+	public synchronized void stopThread() {
+		this.notify();
+		this.run= false;
+		this.wait = false;
+		this.robotController.addCommand(new StopCommand(this.robotController, 0, MotorPort.OUT_A));
+		this.robotController.executeCommands();
+		this.robotController.addCommand(new StopCommand(this.robotController, 0, MotorPort.OUT_B));
+		this.robotController.executeCommands();
+		this.robotController.addCommand(new StopCommand(this.robotController, 0, MotorPort.OUT_C));
+		this.robotController.executeCommands();
+		this.robotController.clearListCommands();
+	}
+
+	@Override
+	public void update(String type,int vitesse,MotorPort port) {
+		if(type.equals("Forward")){
+			robotController.addCommand(new ForwardCommand(robotController, vitesse, port));
+			robotController.executeCommands();
+		}
+		else if(type.equals("Stop")){
+			robotController.addCommand(new StopCommand(robotController, vitesse, port));
+			robotController.executeCommands();
+		}
+		else if(type.equals("End")){
+			this.stopThread();
+		}
+	}
+
+	@Override
+	public void update(ObservableInterpreteur o) {}
+
+	@Override
+	public void addObserver(ObserverPanelController o) {
+		listPanelController.add(o);
+	}
+
+	@Override
+	public void deleteObserver(ObserverPanelController o) {
+		listPanelController.remove(o);
+	}
+
+	@Override
+	public void notifyObserverPanelController() {
+		for(ObserverPanelController o : listPanelController){
+			o.update(this);
+		}
 	}
 }

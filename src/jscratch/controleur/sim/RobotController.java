@@ -3,7 +3,7 @@ package jscratch.controleur.sim;
 import java.awt.geom.Point2D;
 import java.util.*;
 
-import jscratch.interpreteur.VisiteurInterpreteur;
+import jscratch.interpreteur.Interpreteur;
 import jscratch.modeles.sim.MotorPort;
 import jscratch.modeles.sim.Robot;
 
@@ -37,7 +37,7 @@ public class RobotController {
 	 * @param deltaTime
 	 */
 
-	public synchronized void update(float deltaTime)	{		
+	public synchronized void update(float deltaTime)	{
 		/* Déplacement du robot */
 		double vgauche = (double) robot.getMotor(MotorPort.OUT_C).getPower() * deltaTime * 2;
 		double vdroite = (double) robot.getMotor(MotorPort.OUT_B).getPower() * deltaTime * 2;
@@ -55,7 +55,10 @@ public class RobotController {
 	 */
 	public void executeCommands()
 	{
-		Command c = listCommand.get(index-1);
+		Command c;
+		synchronized (this) {
+			c = listCommand.get(index-1);
+		}
 		c.execute();
 	}
 
@@ -65,11 +68,11 @@ public class RobotController {
 	 * @param c Command representant la commande à ajouter
 	 */
 
-	public void addCommand(Command c)
+	public synchronized void addCommand(Command c)
 	{
 		listCommand.add(c);
 		index++;
-		executeCommands();
+		
 	}
 
 	/**
@@ -77,7 +80,7 @@ public class RobotController {
 	 * 
 	 */
 
-	public void removeCommand()
+	public synchronized void removeCommand()
 	{
 		listCommand.remove(index);
 		index--;
