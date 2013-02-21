@@ -10,14 +10,10 @@ import javax.swing.*;
 
 import de.javasoft.swing.ButtonBar;
 import de.javasoft.swing.SimpleDropDownButton;
-import jscratch.controleur.sim.Command;
 import jscratch.controleur.sim.Simulator;
-import jscratch.controleur.sim.StopCommand;
 import jscratch.dictionnaires.DicoTraces;
 import jscratch.helpers.ImagesHelper;
-import jscratch.interpreteur.DeprecatedInterpreteur;
 import jscratch.interpreteur.GestionSimulation;
-import jscratch.modeles.sim.MotorPort;
 import jscratch.traces.fabriques.FabriqueTrace;
 
 /**

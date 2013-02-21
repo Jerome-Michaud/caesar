@@ -9,7 +9,6 @@ import java.awt.geom.Rectangle2D;
 import jscratch.helpers.FontHelper;
 import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.Operateur;
-import nxtim.instruction.Variable;
 
 /**
  * @since 1.0

@@ -3,7 +3,6 @@ package jscratch.controleur.sim;
 import java.awt.geom.Point2D;
 import java.util.*;
 
-import jscratch.interpreteur.Interpreteur;
 import jscratch.modeles.sim.MotorPort;
 import jscratch.modeles.sim.Robot;
 

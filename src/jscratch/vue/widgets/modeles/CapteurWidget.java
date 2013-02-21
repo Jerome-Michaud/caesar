@@ -71,7 +71,6 @@ public class CapteurWidget extends ModeleWidget {
 	}
 	
 	private void setSlot(String nameSlot) {
-		System.out.println("setSlot " + nameSlot);
 		((ValeurCapteur) getElementProgramme()).setSlot(CapteurSlot.values()[Integer.parseInt(nameSlot)]);
 	}
 }

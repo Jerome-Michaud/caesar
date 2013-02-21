@@ -6,7 +6,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import jscratch.controleur.sim.Simulator;
-import jscratch.vue.sim.ObserverInterpreteur;
 
 public class GestionSimulation{
 	

@@ -127,8 +127,8 @@ public class FabriqueTrace {
 	 * @param parent le parent
 	 * @return la trace
 	 */
-	public static Trace creerTraceWidgetAjout(final Widget widget, final Widget parent) {
-		return new TraceWidgetAjout(widget, parent);
+	public static Trace creerTraceWidgetAjout(final Widget widget, final Widget parent, final int positionParRapportParent) {
+		return new TraceWidgetAjout(widget, parent, positionParRapportParent);
 	}
 	
 	/**
@@ -198,7 +198,7 @@ public class FabriqueTrace {
 	 * @param parentApres le parent (apres)
 	 * @return la trace
 	 */
-	public static Trace creerTraceWidgetDeplacement(final Widget widget, final Widget parentAvant, final Widget parentApres) {
-		return new TraceWidgetDeplacement(widget, parentAvant, parentApres);
+	public static Trace creerTraceWidgetDeplacement(final Widget widget, final Widget parentAvant, final Widget parentApres, final int emplacement, final int position) {
+		return new TraceWidgetDeplacement(widget, parentAvant, parentApres, emplacement, position);
 	}
 }

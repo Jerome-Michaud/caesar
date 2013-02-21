@@ -1,14 +1,16 @@
 package jscratch.traduction;
 
+import nxtim.instruction.Capteur;
 import nxtim.instruction.CapteurSlot;
 import nxtim.instruction.Expression;
 import nxtim.instruction.Instruction;
 import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.InstructionConfigCapteurs;
 import nxtim.instruction.InstructionDeclarationCapteur;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
-import nxtim.instruction.InstructionRAZRotaMoteur;
+import nxtim.instruction.InstructionRAZRotationMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.Moteur;
@@ -71,20 +73,57 @@ public final class VisiteurNXC extends VisiteurC {
 		}
 	}
 
-	private void ajouterNomCapteur(CapteurSlot c) {
-		switch (c) {
-			case A:
-				traduction += "IN_1";
-				break;
-			case B:
-				traduction += "IN_2";
-				break;
-			case C:
-				traduction += "IN_3";
-				break;
-			case D:
-				traduction += "IN_4";
-				break;
+	/**
+	 * Ajoute le nom d'un slot de capteur dans la traduction.
+	 * 
+	 * @param c le slot. Si <code>null</code> rien n'est ajouté à la traduction.
+	 */
+	private void ajouterNomCapteurSlot(CapteurSlot c) {
+		if(c != null) {
+			switch (c) {
+				case A:
+					traduction += "IN_1";
+					break;
+				case B:
+					traduction += "IN_2";
+					break;
+				case C:
+					traduction += "IN_3";
+					break;
+				case D:
+					traduction += "IN_4";
+					break;
+				default:
+					break;
+			}
+		}
+	}
+	
+	/**
+	 * Ajoute le nom d'un capteur dans la traduction.
+	 * 
+	 * @param c le capteur. Si <code>null</code> rien n'est ajouté à la traduction.
+	 */
+	private void ajouterNomCapteur(Capteur c) {
+		if(c != null) {
+			switch(c) {
+				case COLOR:
+					traduction += "COLOR";
+					break;
+				case LIGHT:
+					traduction += "LIGHT";
+					break;
+				case TOUCH:
+					traduction += "TOUCH";
+					break;
+				case ULTRASONIC:
+					traduction += "SONIC";
+				case NONE:
+					traduction += "NONE";
+					break;
+				default:
+					break;
+			}
 		}
 	}
 
@@ -177,14 +216,14 @@ public final class VisiteurNXC extends VisiteurC {
 			default:
 				break;
 		}
-		ajouterNomCapteur(instructionDeclarationCapteur.getCapteurSlot());
+		ajouterNomCapteurSlot(instructionDeclarationCapteur.getCapteurSlot());
 		traduction += ");\n";
 	}
 
 	@Override
 	public void visiter(VariableCapteur variableCapteur) {
 		traduction += "Sensor(";
-		ajouterNomCapteur(variableCapteur.getCapteurSlot());
+		ajouterNomCapteurSlot(variableCapteur.getCapteurSlot());
 		traduction += ")";
 	}
 
@@ -196,22 +235,52 @@ public final class VisiteurNXC extends VisiteurC {
 	@Override
 	public void visiter(ValeurCapteur valCapteur) {
 		traduction += "GetSensorValue(";
-		ajouterNomCapteur(valCapteur.getSlot());
+		ajouterNomCapteurSlot(valCapteur.getSlot());
 		traduction += ")";
 	}
 	
 	@Override
 	public void visiter(RotationMoteur rotMoteur) {
-		traduction += "GetRotateMotor(";
+		traduction += "MotorRotationCount(";
 		ajouterNomMoteur(rotMoteur.getMoteur());
 		traduction += ")";
 	}
 	
 	@Override
-	public void visiter(InstructionRAZRotaMoteur razMoteur) {
+	public void visiter(InstructionRAZRotationMoteur razMoteur) {
 		traduction += indent();
-		traduction += "RAZRotateMotor(";
+		traduction += "ResetMotorRotationCount(";
 		ajouterNomMoteur(razMoteur.getMoteur());
+		traduction += ");\n";
+	}
+	
+	@Override
+	public void visiter(InstructionConfigCapteurs confCapt) {
+		traduction += indent();
+		traduction += "DefineSensors(";
+		Capteur capt = confCapt.getCapteurAuSlot(CapteurSlot.A);
+		if(capt != null)
+			ajouterNomCapteur(capt);
+		else
+			traduction += "NONE";
+		traduction += ", ";
+		capt = confCapt.getCapteurAuSlot(CapteurSlot.B);
+		if(capt != null)
+			ajouterNomCapteur(capt);
+		else
+			traduction += "NONE";
+		traduction += ", ";
+		capt = confCapt.getCapteurAuSlot(CapteurSlot.C);
+		if(capt != null)
+			ajouterNomCapteur(capt);
+		else
+			traduction += "NONE";
+		traduction += ", ";
+		capt = confCapt.getCapteurAuSlot(CapteurSlot.D);
+		if(capt != null)
+			ajouterNomCapteur(capt);
+		else
+			traduction += "NONE";
 		traduction += ");\n";
 	}
 }

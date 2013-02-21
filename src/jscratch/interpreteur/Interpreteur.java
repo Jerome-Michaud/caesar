@@ -23,6 +23,7 @@ import nxtim.instruction.Expression;
 import nxtim.instruction.ExpressionComplexe;
 import nxtim.instruction.Instruction;
 import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.InstructionConfigCapteurs;
 import nxtim.instruction.InstructionDeclaration;
 import nxtim.instruction.InstructionDeclarationAffectation;
 import nxtim.instruction.InstructionDeclarationCapteur;
@@ -34,7 +35,7 @@ import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
-import nxtim.instruction.InstructionRAZRotaMoteur;
+import nxtim.instruction.InstructionRAZRotationMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.TempsCourant;
@@ -609,7 +610,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	@Override
 	public void visiter(InstructionIncrementation inst) {
 		try{
-			Variable var = (Variable) inst.getExpression();
+			Variable var = inst.getVariable();
 			
 			double d = Double.parseDouble(var.getValeur());
 			
@@ -652,7 +653,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	}
 
 	@Override
-	public void visiter(InstructionRAZRotaMoteur razMoteur) {
+	public void visiter(InstructionRAZRotationMoteur razMoteur) {
 		// TODO exécution razRotateMotor
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
@@ -697,5 +698,11 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		this.notify();
 		this.run = false;
 		this.stop = true;
+	}
+
+	@Override
+	public void visiter(InstructionConfigCapteurs confCapt) {
+		// TODO Stub de la méthode généré automatiquement
+		
 	}
 }
