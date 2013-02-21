@@ -29,6 +29,7 @@ public class BoutonCategorieCapteur extends BoutonCategorie {
 
 	@Override
 	public void ajouterWidgets() {
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.CAPTEURS, GUI.getPanelWidget().getFabrique().creerWidgetConfigurationCapteur());
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.CAPTEURS, GUI.getPanelWidget().getFabrique().creerWidgetCapteur());
 	}
 }

@@ -9,7 +9,7 @@ public enum TypeModeleWidget {
 	/**
 	 * Type "Capteur".
 	 */
-	CAPTEUR;
+	CAPTEUR, CAPTEURCONFIG;
 
 	@Override
 	public String toString() {
@@ -58,6 +58,8 @@ public enum TypeModeleWidget {
 			return "TempsCourant";
 		case CAPTEUR:
 			return "Capteur";
+		case CAPTEURCONFIG:
+			return "ConfigurationCapteurs";
 		default:
 			return null;
 		}
