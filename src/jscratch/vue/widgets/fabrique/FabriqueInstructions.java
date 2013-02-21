@@ -8,6 +8,7 @@ import jscratch.exceptions.NonClonableException;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.WidgetCompose;
 import jscratch.vue.widgets.modeles.CapteurWidget;
+import jscratch.vue.widgets.modeles.DeclarationVariableWidget;
 import nxtim.instruction.Condition;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
@@ -23,6 +24,7 @@ import jscratch.vue.widgets.modeles.IncrementationWidget;
 import jscratch.vue.widgets.modeles.MoteurMarcheWidget;
 import jscratch.vue.widgets.modeles.MoteurNombreRotationWidget;
 import jscratch.vue.widgets.modeles.MoteurOffWidget;
+import jscratch.vue.widgets.modeles.MoteurRAZWidget;
 import jscratch.vue.widgets.modeles.RepeatWidget;
 import jscratch.vue.widgets.modeles.TacheWidget;
 import jscratch.vue.widgets.modeles.TempsCourantWidget;
@@ -68,6 +70,15 @@ public class FabriqueInstructions {
 	 */
 	public Widget creerWidgetMoteurNombreRotation() {
 		return new Widget(new MoteurNombreRotationWidget());
+	}
+	
+	/**
+	 * Méthode permettant de créer un widget de type "Moteur RAZ".
+	 *
+	 * @return un widget de type "Nombre de rotation"
+	 */
+	public Widget creerWidgetMoteurRAZ() {
+		return new Widget(new MoteurRAZWidget());
 	}
 
 	/**
@@ -149,6 +160,17 @@ public class FabriqueInstructions {
 	 */
 	public Widget creerWidgetVariableSetValue() {
 		return new Widget(new VariableSetValueWidget());
+	}
+
+	/**
+	 * Permet de créer un widget de type déclaration de variable.
+	 * 
+	 * @since 1.0
+	 * 
+	 * @return le widget
+	 */
+	public Widget creerWidgetDeclarerVariable() {
+		return new Widget(new DeclarationVariableWidget());
 	}
 
 	/**
@@ -251,6 +273,9 @@ public class FabriqueInstructions {
 			case MOTEURNOMBREROTATION:
 				w = creerWidgetMoteurNombreRotation();
 				break;
+			case MOTEURRAZ:
+				w = creerWidgetMoteurRAZ();
+				break;
 			case MOTEUROFF:
 				w = creerWidgetMoteurOff();
 				break;
@@ -262,6 +287,9 @@ public class FabriqueInstructions {
 				break;
 			case SETVALUEVARIABLE:
 				w = creerWidgetVariableSetValue();
+				break;
+			case DECLARERVARIABLE:
+				w = creerWidgetDeclarerVariable();
 				break;
 			case TEMPSCOURANT:
 				w = creerWidgetTempsCourant();
@@ -371,6 +399,10 @@ public class FabriqueInstructions {
 					break;
 				}
 			}
+		} else if("DeclarationVariableWidget".equals(nomClasse)) {
+			w = creerWidgetDeclarerVariable();
+		} else if("MoteurRAZWidget".equals(nomClasse)) {
+			w = creerWidgetMoteurRAZ();
 		} else if("CapteurWidget".equals(nomClasse)) {
 			w = creerWidgetCapteur();
 		} else {

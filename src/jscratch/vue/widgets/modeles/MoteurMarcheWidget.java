@@ -5,6 +5,8 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.JComponent;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
@@ -101,16 +103,16 @@ public class MoteurMarcheWidget extends ModeleWidget {
 
 	@Override
 	public void initListeners() {
-		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
+		l.addItemListener(new ItemListener() {
 			@Override
-			public void focusLost(FocusEvent arg0) {
-				setInstructionMoteur(((Zone) getLesZonesSaisies().get(0)).getValeur());
+			public void itemStateChanged(ItemEvent e) {
+				setInstructionMoteur(l.getValeur());
 			}
 		});
-		((JComponent) this.getLesZonesSaisies().get(1)).addFocusListener(new FocusAdapter() {
+		f.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				setInstructionValeur(((Zone) getLesZonesSaisies().get(1)).getValeur());
+				setInstructionValeur(f.getValeur());
 			}
 		});
 	}

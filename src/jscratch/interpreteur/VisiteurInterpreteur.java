@@ -26,7 +26,7 @@ import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
-import nxtim.instruction.InstructionRAZRotaMoteur;
+import nxtim.instruction.InstructionRAZRotationMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.TempsCourant;
@@ -568,7 +568,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 	@Override
 	public void visiter(InstructionIncrementation inst) {
 		try{
-			Variable var = (Variable) inst.getExpression();
+			Variable var = (Variable) inst.getVariable();
 			
 			double d = Double.parseDouble(var.getValeur());
 			
@@ -617,7 +617,7 @@ public final class VisiteurInterpreteur implements VisiteurElementProg {
 	}
 
 	@Override
-	public void visiter(InstructionRAZRotaMoteur razMoteur) {
+	public void visiter(InstructionRAZRotationMoteur razMoteur) {
 		// TODO exécution razRotateMotor
 		throw new UnsupportedOperationException("Not supported yet.");
 	}

@@ -46,71 +46,49 @@ public class ForWidget extends ModeleWidget {
         this.setType(TypeModeleWidget.FOR);
 
         message.put(new Point(5, 17), "Pour");
-        message.put(new Point(94, 17), "condition :");
-        message.put(new Point(210, 17), "pas :");
+        message.put(new Point(105, 17), "pas :");
 
         this.setElementProgramme(new InstructionFor());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
         this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
 
         //variable
-		int widthChamp = 35;
-        lv = new ChampTexte(widthChamp, this);
-        lv.supprimerTexte();
-		lv.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
-        lv.setBounds(55, 3, widthChamp, 20);
-        this.getLesZonesSaisies().add(lv);
-
-		//valeur logique
-		widthChamp = 50;
+		int widthChamp = 40;
         ff = new ChampTexte(widthChamp, this);
         ff.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		ff.supprimerTexte();
-        ff.setBounds(155, 3, widthChamp, 20);
+        ff.setBounds(60, 3, widthChamp, 20);
         this.getLesZonesSaisies().add(ff);
 		
         //pas
 		widthChamp = 20;
         fp = new ChampTexte(widthChamp, this);
-        //fp.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		fp.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_INC);
 		fp.supprimerTexte();
-        fp.setBounds(240, 3, widthChamp, 20);
+        fp.setBounds(138, 3, widthChamp, 20);
         this.getLesZonesSaisies().add(fp);
 
-        this.decalageX(130);
-
-        initListeners();
+        this.decalageX(30);
     }
     
     @Override
 	public void applyChangeModele(){
-		Widget contentVariable = lv.getContentWidget();		
+		Variable var = null;
 		Widget contentCondition = ff.getContentWidget();
 		Widget contentPas = fp.getContentWidget();
 		InstructionFor forIns = (InstructionFor) getElementProgramme();
 		
 		// On met à jour l'elementProgramme si les éléments existent
-		if (contentVariable != null) {
-			VariableModifiable var = (VariableModifiable)contentVariable.getElementProgramme();
-		
-			Expression exp = new VariableConstante(TypeVariable.INT, var.getValeur());
-			Affectation affDeb = new Affectation(var, exp, false);
-			forIns.setInitialisation(affDeb);
-		
-			if (contentCondition != null) {			
-				Condition cond  = (Condition) contentCondition.getElementProgramme();
-				if (contentCondition.getModele().getLesZonesSaisies().get(0).getValeur().isEmpty()) {
-					cond.setMembreGauche(var);
-				}
-				forIns.setCondition(cond);
-			}
+		if (contentCondition != null) {			
+			Condition cond  = (Condition) contentCondition.getElementProgramme();
+			var = (Variable)cond.getMembreGauche();
+			forIns.setCondition(cond);
+		}
 			
-			if (contentPas != null) {
-				InstructionIncrementation affPas  = (InstructionIncrementation) contentPas.getElementProgramme();
-				affPas.setExpression(var);
-				forIns.setIteration(affPas);
-			}
+		if (contentPas != null && var != null) {
+			InstructionIncrementation affPas  = (InstructionIncrementation) contentPas.getElementProgramme();
+			affPas.setVariable(var);
+			forIns.setIteration(affPas);
 		}
 	}
 
@@ -191,7 +169,7 @@ public class ForWidget extends ModeleWidget {
      */
     public void setIteration(final Variable v) {
         InstructionIncrementation aff = (InstructionIncrementation)getElementProgramme();
-		aff.setExpression(v);
+		aff.setVariable(v);
         ((InstructionFor) getElementProgramme()).setIteration(aff);
     }
 }

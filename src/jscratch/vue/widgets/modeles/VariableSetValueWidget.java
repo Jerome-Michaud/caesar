@@ -84,6 +84,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 			}
 		}
 	}
+	
 	@Override
 	public void decalageY(int b, Rectangle r) {
 		int i;
