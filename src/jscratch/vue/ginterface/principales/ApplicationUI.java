@@ -7,6 +7,7 @@ import de.javasoft.swing.jydocking.DockingManager;
 import de.javasoft.swing.jydocking.IDockingConstants;
 import de.javasoft.swing.plaf.jydocking.DefaultFloatAction;
 import de.javasoft.swing.plaf.jydocking.DefaultMaximizeAction;
+import de.javasoft.swing.plaf.jydocking.DefaultMinimizeAction;
 import java.awt.BorderLayout;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
 
@@ -49,12 +50,12 @@ public final class ApplicationUI extends JFrame {
 	 * Le
 	 * <code>DockingPort</code>.
 	 */
-	private JYDockingPort viewport;
+	private JYDockingPort viewport,viewCodeCompil;
 	/**
 	 * Les différents
 	 * <code>DockingView</code>.
 	 */
-	private JYDockingView zoneCodeGraphique, zoneCodeConsole, zoneSimulateur;
+	private JYDockingView zoneCodeGraphique, zoneCodeConsole, zoneSimulateur,zoneCompilateur;
 
 	/**
 	 * Constructeur privé de
@@ -119,11 +120,14 @@ public final class ApplicationUI extends JFrame {
 		zoneCodeGraphique = creerZoneEdition();
 		zoneCodeConsole = creerZoneCodeConsole();
 		zoneSimulateur = creerZoneSimulation();
+		zoneCompilateur = creerZoneCompilateur();
 		viewport = new JYDockingPort();
 		viewport.dock(zoneCodeGraphique, IDockingConstants.CENTER_REGION);
 
 		zoneCodeGraphique.dock(zoneCodeConsole, IDockingConstants.EAST_REGION, .8f);
 		zoneCodeGraphique.dock(zoneSimulateur, IDockingConstants.CENTER_REGION, .7f);
+		
+		zoneCodeConsole.dock(zoneCompilateur, IDockingConstants.SOUTH_REGION, .7f);
 
 		zoneCodeGraphique.getDockingPort().setTabPlacement(SwingConstants.BOTTOM);
 		zoneCodeGraphique.getDockingPort().setSelectedTabIndex(0);
@@ -162,19 +166,7 @@ public final class ApplicationUI extends JFrame {
 	private JYDockingView creerZoneSimulation() {
 		JYDockingView view = new JYDockingView("zoneSimulateur-SimpleDocking", "Simulation", "Simulation");
 		view.addAction(new DefaultMaximizeAction(view));
-		DefaultFloatAction act = new DefaultFloatAction(view);
-		for(int i = 0; i < act.getKeys().length;i++){
-			
-		System.out.println(act.getKeys()[i]);
-		}
-		act.addPropertyChangeListener(new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				System.out.println("1");
-			}
-		});
-		view.addAction(act);
+		view.addAction(new DefaultFloatAction(view));
 		view.setIcon(ImagesHelper.getIcon("robot.png"));
 		view.setDockbarIcon(ImagesHelper.getIcon("robot.png"));
 		view.setContentPane(GUI.creerZoneSimulateur());
@@ -194,6 +186,22 @@ public final class ApplicationUI extends JFrame {
 		view.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));
 		view.setContentPane(GUI.getPanelCodeConsole());
 		view.setDraggingEnabled(false);
+		return view;
+	}
+
+	/**
+	 * Permet de créer la zone simulateur
+	 * <code>CodeConsole</code>.
+	 *
+	 * @since 1.0
+	 */
+	private JYDockingView creerZoneCompilateur() {
+		JYDockingView view = new JYDockingView("zoneCompilateur-SimpleDocking", "Compilateur", "Compilateur");
+		view.addAction(new DefaultMinimizeAction(view));
+		view.setIcon(ImagesHelper.getIcon("terminal.png"));
+		view.setDockbarIcon(ImagesHelper.getIcon("terminal.png"));
+		view.setContentPane(GUI.getPanelCompilateur());
+		view.setDraggingEnabled(true);
 		return view;
 	}
 
