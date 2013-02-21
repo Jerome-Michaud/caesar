@@ -5,6 +5,8 @@ import java.awt.FontMetrics;
 import java.awt.Rectangle;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,6 +18,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
+import jscratch.dictionnaires.DicoTraces;
+import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.traduction.LanceurTraduction;
 import jscratch.vue.widgets.modeles.ModeleWidget;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
@@ -35,6 +39,7 @@ public class ChampTexte extends JPanel implements Zone {
 	private List<TypeModeleWidget> typesWidgetsAcceptes;
 	private int minimumWidth;
 	private ModeleWidget widgetParent;
+	private String valTempTextField;
 	/*
 	 * Etat à ETAT_SAISIE (0) quand on affiche uniquement le champ texte
 	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus
@@ -60,7 +65,23 @@ public class ChampTexte extends JPanel implements Zone {
 				composantSupp(e);
 			}
 		});
+		textField.addFocusListener(new FocusListener() {
 
+			@Override
+			public void focusGained(FocusEvent e) {
+				valTempTextField = ((JTextField)e.getSource()).getText();
+
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				// Le Widget parent du champtexte manque!
+				DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget)widgetContenu, (Zone)((JTextField)e.getSource()).getParent(), valTempTextField, textField.getText()));
+				valTempTextField = ((JTextField)e.getSource()).getText();
+	
+			}
+		});
+
+		
 		textField.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
@@ -98,10 +119,10 @@ public class ChampTexte extends JPanel implements Zone {
 	private void updateTextFieldWidth(DocumentEvent e) {
 		try {			
 			int width = Math.max(this.minimumWidth,(int) new FontMetrics(textField.getFont()) {} .getStringBounds(e.getDocument().getText(0, e.getDocument().getLength()), null).getWidth()+10);
-			
+
 			Rectangle bnds = this.getBounds();
 			bnds.width = width;
-			
+
 			decaleWidgetParents(this, width - this.getWidth());
 			textField.setSize(width, textField.getHeight());
 			this.setBounds(bnds);
@@ -175,13 +196,18 @@ public class ChampTexte extends JPanel implements Zone {
 	public void setWidgetContenu(Widget w) {
 		this.removeAll();
 		int oldW = this.getWidth();
+		Widget wc = this.getWidgetContenu();
+		
 		if (w == null) {
 			this.etat = ETAT_SAISIE;
 			this.setComponent(textField);
+			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget) this.getParent(), this, wc, this.getValeur()));
 		} else {
 			this.etat = ETAT_CONTIENT_WIDGET;
 			this.textField.setSize(this.getSize());
 			this.setComponent(w);
+			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget) this.getParent(), this, this.getValeur(),wc));
+
 		}
 		int decal = this.getWidth() - oldW;
 		//Appel à la méthode de redimensionnement en X, avec si nécessaire appel recursif pour le redimensionnement des parents

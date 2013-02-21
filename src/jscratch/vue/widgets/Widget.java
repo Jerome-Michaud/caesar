@@ -146,6 +146,7 @@ public class Widget extends JComponent {
 			@Override
 			public void mouseReleased(final MouseEvent e) {
 				DragAndDropTools.getInstance().dropWidget();
+			
 			}
 		});
 
