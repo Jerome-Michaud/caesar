@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 
@@ -38,15 +40,15 @@ public class CapteurWidget extends ModeleWidget {
 		FontMetrics metrics = new FontMetrics(font) {};
 		Rectangle2D sizesText = metrics.getStringBounds(label, null);
 		
-		message.put(new Point(5, (int) sizesText.getHeight() + 1), label);
+		message.put(new Point(5, 15), label);
 		
 		
 		ListeDeroulante<CapteurSlot> l = new ListeDeroulante<CapteurSlot>(CapteurSlot.values(), this);
-		l.setBounds((int) sizesText.getWidth() + 10, 0, 60, 20);
+		l.setBounds((int) sizesText.getWidth() + 10, 3, 45, 15);
 		this.getLesZonesSaisies().add(l);
 		
 		LARG_EXTREMITE = 5;
-		largeur = (int) sizesText.getWidth() + 10 + l.getWidth();
+		largeur = (int) sizesText.getWidth() + LARG_EXTREMITE + l.getWidth();
 		int tX[] = {0, 5, this.LARG_EXTREMITE + largeur, largeur + 10, largeur + 10, this.LARG_EXTREMITE + largeur, 5, 0};
 		int tY[] = {5, 0, 0, 5, 15, 20, 20, 15};
 		this.setTabX(tX);
@@ -59,17 +61,16 @@ public class CapteurWidget extends ModeleWidget {
 	
 	@Override
 	public void initListeners() {
-		((JComponent) this.getLesZonesSaisies().get(0)).addFocusListener(new FocusAdapter() {
+		((ListeDeroulante) this.getLesZonesSaisies().get(0)).addItemListener(new ItemListener() {
 
 			@Override
-			public void focusLost(FocusEvent arg0) {
+			public void itemStateChanged(ItemEvent e) {
 				setSlot(((Zone) getLesZonesSaisies().get(0)).getValeur());
 			}
 		});
 	}
 	
 	private void setSlot(String nameSlot) {
-		System.out.println("setSlot " + nameSlot);
 		((ValeurCapteur) getElementProgramme()).setSlot(CapteurSlot.values()[Integer.parseInt(nameSlot)]);
 	}
 }

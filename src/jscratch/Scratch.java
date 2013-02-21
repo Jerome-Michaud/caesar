@@ -36,11 +36,7 @@ public class Scratch {
 				// ajout de l'anti-aliasing sur le texte
 				System.setProperty("swing.aatext", "true");
 				
-				// On met les bordures système pour les fenêtres
-				if (System.getProperty("os.name").toLowerCase().contains("linux")) {
-					SyntheticaLookAndFeel.setWindowsDecorated(false);
-				}				
-				
+				SyntheticaLookAndFeel.setWindowsDecorated(false);
 				// Changement du look and feel
 				UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
 			} catch (UnsupportedLookAndFeelException ex) {

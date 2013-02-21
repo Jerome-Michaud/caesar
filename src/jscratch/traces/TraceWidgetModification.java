@@ -116,8 +116,14 @@ public class TraceWidgetModification extends Trace {
 		if(this.widget!=null)
 			thisXml.addContent(this.widget.toXml());
 		
-		if(this.zone != null)
+
+		if (this.widget != null) {
+			thisXml.addContent(this.widget.toXml());
+		}
+		
+		if (this.zone != null) {
 			thisXml.addContent(this.zone.toXml());
+		}
 		
 		thisXml.addContent(creerSousElement(AVANT, this.typeModification.isWidgetAvant()));
 		thisXml.addContent(creerSousElement(APRES, this.typeModification.isWidgetApres()));

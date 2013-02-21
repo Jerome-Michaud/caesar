@@ -203,7 +203,7 @@ public class FusionTools {
 				case RIEN:
 					//Pas d'action à appliquer
 					g.setPointLigneSurEcran(null);
-					g.setRectFusion(null);
+					//g.setRectFusion(null);
 					break;
 			}
 		}

@@ -28,5 +28,6 @@ public class BoutonCategorieVariable extends BoutonCategorie {
 	@Override
 	public void ajouterWidgets() {
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetVariableSetValue());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetDeclarerVariable());
 	}
 }

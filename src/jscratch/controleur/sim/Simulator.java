@@ -4,18 +4,12 @@ import java.awt.Graphics;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
-import jscratch.interpreteur.Interpreteur;
 import jscratch.modeles.sim.Map;
 import jscratch.modeles.sim.MapFactory;
 import jscratch.modeles.sim.Robot;
 import jscratch.vue.sim.MapRenderer;
 import jscratch.vue.sim.ObservableSimulator;
-import jscratch.vue.sim.ObserverPanelSimulator;
 import jscratch.vue.sim.ObserverSimulator;
-import jscratch.vue.sim.PanelInfosRobot;
-import jscratch.vue.sim.PanelSimulator;
 import jscratch.vue.sim.RobotRenderer;
 
 
@@ -25,7 +19,7 @@ import jscratch.vue.sim.RobotRenderer;
  * @author Guillaume Delorme
  *
  */
-public class Simulator implements Runnable,ObservableSimulator{
+public class Simulator implements Runnable, ObservableSimulator {
 	
 	private Robot robot;
 	private Map map;
@@ -33,15 +27,15 @@ public class Simulator implements Runnable,ObservableSimulator{
 	private RobotController robotController;
 	private MapRenderer mapRenderer;
 	private RobotRenderer robotRenderer;
-	private PanelInfosRobot infosRobot;
 	private ArrayList<ObserverSimulator> listObserver;// Tableau d'observateurs.
-
+	private boolean run = true;
+	private boolean wait = false;
 	
 	public Simulator() {
 		
 		this.listObserver = new ArrayList<ObserverSimulator>();
 
-		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/map1.xml"));
+		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/CAESAR.xml"));
 		
 		mapController = new MapController(map);
 		
@@ -58,14 +52,25 @@ public class Simulator implements Runnable,ObservableSimulator{
 	public Robot getRobot() {
 		return robot;
 	}
+	
+	public Map getMap() {
+		return map;
+	}
+
+	public RobotRenderer getRobotRenderer() {
+		return robotRenderer;
+	}
 
 	/**
 	 * Mise à jour du simulateur
 	 * @param deltaTime
 	 */
 	public void update(float deltaTime) {
-		robotController.update(deltaTime);
-		//infosRobot.update(deltaTime);
+		if(run){
+			if(!wait){
+				robotController.update(deltaTime);
+			}
+		}
 	}
 
 	/**
@@ -123,31 +128,35 @@ public class Simulator implements Runnable,ObservableSimulator{
 			}
 		}
 	}
-	/**
-	 * ajoute un observateur sur le simulateur
-	 * 
-	 * @param ObserverSimulator
-	 */
+	
 	@Override
 	public void addObserver(ObserverSimulator o) {
 		 listObserver.add(o); 
 	}
-	/**
-	 * supprimer un observateur du simulateur
-	 * 
-	 * @param ObserverSimulator
-	 */
+	
 	@Override
 	public void deleteObserver(ObserverSimulator o) {
 		listObserver.remove(o); 
 	}
-	/**
-	 * met à jour les observateurs
-	 */
+	
 	@Override
 	public void notifyObserver() {
 		for(ObserverSimulator o : listObserver){
 			o.update(this);
 		}
+	}
+	/**
+	 * met en attente le simulator
+	 * @param b
+	 */
+	public synchronized void setWait(boolean b){
+		this.wait = b;
+	}
+	/**
+	 * arrete le simulateur
+	 * @param b
+	 */
+	public synchronized void setRun(boolean b){
+		this.run = b;
 	}
 }

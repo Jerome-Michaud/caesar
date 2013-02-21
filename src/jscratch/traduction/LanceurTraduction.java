@@ -45,6 +45,18 @@ public final class LanceurTraduction extends Observable {
 		}
 		return instance;
 	}
+	
+	/**
+	 * Permet de redémarrer le lanceur traduction.
+	 * 
+	 * @since 1.0
+	 * 
+	 * @return le nouveau lanceur
+	 */
+	public static synchronized LanceurTraduction reset() {
+		instance = null;
+		return getInstance();
+	}
 
 	/**
 	 * Permet de lancer la traduction.

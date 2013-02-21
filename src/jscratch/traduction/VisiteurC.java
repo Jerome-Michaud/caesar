@@ -5,6 +5,7 @@ import nxtim.instruction.Expression;
 import nxtim.instruction.ExpressionComplexe;
 import nxtim.instruction.Instruction;
 import nxtim.instruction.InstructionAttente;
+import nxtim.instruction.InstructionConfigCapteurs;
 import nxtim.instruction.InstructionDeclaration;
 import nxtim.instruction.InstructionDeclarationAffectation;
 import nxtim.instruction.InstructionDeclarationCapteur;
@@ -16,9 +17,11 @@ import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.InstructionMoteurOff;
 import nxtim.instruction.InstructionMoteurRotate;
+import nxtim.instruction.InstructionRAZRotationMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.InstructionWhile;
+import nxtim.instruction.RotationMoteur;
 import nxtim.instruction.TempsCourant;
 import nxtim.instruction.ValeurCapteur;
 import nxtim.instruction.Variable;
@@ -280,8 +283,9 @@ public class VisiteurC extends VisiteurTraduction {
 		if (instructionIncrementation.isAvant()) {
 			traduction += op;
 		}
-		instructionIncrementation.getExpression().accepte(this);
-		
+		if (instructionIncrementation.getVariable() != null) {
+			instructionIncrementation.getVariable().accepte(this);
+		}
 		if (!instructionIncrementation.isAvant()) {
 			traduction += op;
 		}
@@ -290,5 +294,20 @@ public class VisiteurC extends VisiteurTraduction {
 	@Override
 	public void visiter(ValeurCapteur valCapteur) {
 		traduction += "/* Code C pour obtenir la valeur d'un capteur inconnu ! */\n";
+	}
+
+	@Override
+	public void visiter(RotationMoteur rotMoteur) {
+		traduction += "/* Code C pour obtenir le nombre de rotations d'un moteur inconnu ! */\n";
+	}
+
+	@Override
+	public void visiter(InstructionRAZRotationMoteur razMoteur) {
+		traduction += "/* Code C pour RAZ du nombre de rotations d'un moteur inconnu ! */\n";
+	}
+
+	@Override
+	public void visiter(InstructionConfigCapteurs confCapt) {
+		traduction += indent() + "/* Code C pour la configuration des capteurs inconnu ! */\n";
 	}
 }

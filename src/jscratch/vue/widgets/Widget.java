@@ -50,6 +50,10 @@ public class Widget extends JComponent {
 	 */
 	private boolean draggable = false;
 	/**
+	 * Valeur booléenne permettant de savoir si un widget est en train d'être dragué ou non
+	 */
+	private boolean dragging = false;
+	/**
 	 * Modèle du widget.
 	 */
 	private ModeleWidget modele;
@@ -75,8 +79,8 @@ public class Widget extends JComponent {
 		g2d.drawPolygon(this.modele.getForme());
 		g2d.setColor(Color.WHITE);
 		g2d.setRenderingHint(
-		        RenderingHints.KEY_TEXT_ANTIALIASING,
-		        RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+				RenderingHints.KEY_TEXT_ANTIALIASING,
+				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		for (Point p : this.modele.getMessage().keySet()) {
 			if (this.modele.isConditionHaute()) {
 				g2d.drawString(this.modele.getMessage().get(p), p.x, p.y);
@@ -140,20 +144,29 @@ public class Widget extends JComponent {
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(final MouseEvent e) {
-				DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					DragAndDropTools.getInstance().clickWidget((Widget) e.getComponent(), e.getPoint());
+					setDragging(true);
+				}
 			}
 
 			@Override
 			public void mouseReleased(final MouseEvent e) {
-				DragAndDropTools.getInstance().dropWidget();
-			
+
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					DragAndDropTools.getInstance().dropWidget();
+					setDragging(false);
+				}
 			}
 		});
 
 		this.addMouseMotionListener(new MouseAdapter() {
 			@Override
 			public void mouseDragged(final MouseEvent e) {
-				DragAndDropTools.getInstance().dragWidget((Widget) e.getComponent());
+				if (isDragging()) {
+					DragAndDropTools.getInstance().dragWidget((Widget) e.getComponent());
+				}
+
 			}
 		});
 	}
@@ -183,6 +196,25 @@ public class Widget extends JComponent {
 	 */
 	public void setDraggable(final boolean draggable) {
 		this.draggable = draggable;
+	}
+
+	/**
+	 * Définie si un composant est en train dragué.
+	 *
+	 * @param draggable la valeur définissant si le composant est dragué ou non
+	 */
+	public void setDragging(boolean dragging) {
+		this.dragging = dragging;
+	}
+
+	
+	/**
+	 * Permet de savoir si le widget est dragué.
+	 *
+	 * @return <code>true</code> si le composant est dragué, sinon <code>false</code>
+	 */
+	public boolean isDragging() {
+		return dragging;
 	}
 
 	/**
@@ -257,7 +289,8 @@ public class Widget extends JComponent {
 	/**
 	 * Met à jour l'arborescence des instructions.
 	 */
-	public void applyChangeModele() {}
+	public void applyChangeModele() {
+	}
 
 	/**
 	 * Permet d'avoir comment le widget doit se sérialiser.
@@ -266,26 +299,26 @@ public class Widget extends JComponent {
 		Element widget = new Element("widget");
 		widget.setAttribute(new Attribute("classe", this.modele.getClass().getSimpleName()));
 		widget.setAttribute("categorie", this.modele.getCategorie().toString());
-		
+
 		// Si le widget est une variable, ajout du nom de la variable
 		if (VariableWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
-			widget.setAttribute("supplement", ((VariableWidget)this.getModele()).getNomVariable());
+			widget.setAttribute("supplement", ((VariableWidget) this.getModele()).getNomVariable());
 		}
-		
+
 		// Si le widget est une expression arithmtique, ajout de l'operateur
 		if (ExpressionArithmeticWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
-			widget.setAttribute("supplement", ((Operation)this.getModele().getElementProgramme()).getOperateur().toString());
+			widget.setAttribute("supplement", ((Operation) this.getModele().getElementProgramme()).getOperateur().toString());
 		}
-		
+
 		// Si le widget est une expression logique, ajout de l'opérateur
 		if (ExpressionLogicalWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
-			widget.setAttribute("supplement", ((Condition)this.getModele().getElementProgramme()).getOperateur().toString());
+			widget.setAttribute("supplement", ((Condition) this.getModele().getElementProgramme()).getOperateur().toString());
 		}
-		
+
 		if (IncrementationWidget.class.getSimpleName().equals(this.modele.getClass().getSimpleName())) {
-			widget.setAttribute("supplement", ((InstructionIncrementation)this.getModele().getElementProgramme()).getOperateur().toString());
+			widget.setAttribute("supplement", ((InstructionIncrementation) this.getModele().getElementProgramme()).getOperateur().toString());
 		}
-		
+
 		// Si le widget est placé sur le PanelCodeGraphique, ajout des coordonnées. Sinon, les oordonnées seront recalculées automatiquement.
 		if (this.parent == GUI.getPanelCodeGraphique()) {
 			Element coordonnees = new Element("coordonnees");
@@ -293,7 +326,7 @@ public class Widget extends JComponent {
 			coordonnees.setAttribute(new Attribute("y", String.valueOf(this.getLocation().y)));
 			widget.addContent(coordonnees);
 		}
-		
+
 		// Gestion des zones du widget (valeurs, variables, ...)
 		if (this.modele.getLesZonesSaisies().size() > 0) {
 			Element attribut = new Element("attributs");
@@ -307,7 +340,7 @@ public class Widget extends JComponent {
 			}
 			widget.addContent(attribut);
 		}
-		
+
 		return widget;
 	}
 }

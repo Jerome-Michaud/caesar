@@ -41,5 +41,7 @@ public class BoutonCategorieMoteur extends BoutonCategorie {
 	public void ajouterWidgets() {
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEURS, GUI.getPanelWidget().getFabrique().creerWidgetMoteurMarche());
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEURS, GUI.getPanelWidget().getFabrique().creerWidgetMoteurOff());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEURS, GUI.getPanelWidget().getFabrique().creerWidgetMoteurRAZ());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.MOTEURS, GUI.getPanelWidget().getFabrique().creerWidgetMoteurNombreRotation());
 	}
 }

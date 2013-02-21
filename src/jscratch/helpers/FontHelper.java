@@ -1,6 +1,8 @@
 package jscratch.helpers;
 
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.geom.Rectangle2D;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -57,5 +59,10 @@ public class FontHelper {
 		}
 
 		return font;
+	}
+
+	public static int getLongueur(String texte) {
+		FontMetrics metrics = new FontMetrics(getWidgetFont()) { };
+		return (int)metrics.getStringBounds(texte, null).getWidth();
 	}
 }

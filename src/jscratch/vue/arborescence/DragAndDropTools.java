@@ -11,6 +11,8 @@ import java.util.Observable;
 import javax.swing.SwingUtilities;
 
 import jscratch.dictionnaires.DicoTraces;
+
+import nxtim.instruction.Categorie;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.exceptions.ComposantIntrouvableException;
 import jscratch.exceptions.NonClonableException;
@@ -18,9 +20,11 @@ import jscratch.helpers.ErreurHelper;
 import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.traduction.LanceurTraduction;
 import jscratch.vue.arborescence.actions.Action;
+import jscratch.vue.categories.boutons.BoutonCategorie;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
 import jscratch.vue.ginterface.principales.panels.PanelCodeGraphique;
+import jscratch.vue.ginterface.principales.panels.PanelTypeWidget;
 import jscratch.vue.ginterface.principales.panels.PanelWidget;
 import jscratch.vue.widgets.IWidget;
 import jscratch.vue.widgets.Widget;
@@ -87,23 +91,28 @@ public final class DragAndDropTools extends Observable {
 		if (!comp.isDraggable()) {
 			comp.setDraggable(true);
 			Widget compNouv;
-			try {
-
-				PanelWidget pw = GUI.getPanelWidget();
-				compNouv = pw.getFabrique().cloner(comp);
-				compNouv.setBounds(comp.getBounds());
-				pw.getPanelDeWidget().add(compNouv);
-				int ind = pw.getIndex(comp);
-				pw.supprimerWidget(comp);
-				pw.ajouterWidget(compNouv, ind);
-				DicoWidgetsCategories.getInstance().remplacerWidgetDansCategorie(GUI.getPanelTypeWidget().getCurrentCategorie(), comp, compNouv);
-
-			} catch (NonClonableException ex) {
-				ErreurHelper.afficher(ex);
+			
+			// Si c'est la tache main, on supprime le widget du panel
+			if (comp.getType() == TypeModeleWidget.TACHE) {
+				PanelTypeWidget.getInstance().supprimerTachePrincipale();
+			}
+			else { // sinon on remplace par un nouveau widget
+				try {
+					PanelWidget pw = GUI.getPanelWidget();
+					compNouv = pw.getFabrique().cloner(comp);
+					compNouv.setBounds(comp.getBounds());
+					pw.getPanelDeWidget().add(compNouv);
+					int ind = pw.getIndex(comp);
+					pw.supprimerWidget(comp);
+					pw.ajouterWidget(compNouv, ind);
+					DicoWidgetsCategories.getInstance().remplacerWidgetDansCategorie(GUI.getPanelTypeWidget().getCurrentCategorie(), comp, compNouv);
+				} catch (NonClonableException ex) {
+					ErreurHelper.afficher(ex);
+				}
 			}
 			composantsDrague = new LinkedList<Widget>();
 			composantsDrague.add(comp);
-
+			
 		} else {
 			try {
 				//recuperation et detachement des widgets dragués
@@ -135,7 +144,7 @@ public final class DragAndDropTools extends Observable {
 
 		arbo.updateWidgets();
 
-		updatePanelGraphiqueSize(arbo.getArborescence());
+		GUI.getPanelCodeGraphique().updateSize(arbo.getArborescence());
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -190,15 +199,52 @@ public final class DragAndDropTools extends Observable {
 	public void dragWidget(Widget comp) {
 		if (comp.isDraggable()) {
 			Point ptClick = comp.getPtClick();
+			Point p = MouseInfo.getPointerInfo().getLocation();
+			Point diff = new Point((int)(GUI.getZoneUtilisateur().getLocationOnScreen().getX() - GUI.getFenetre().getViewport().getLocationOnScreen().getX() + 5),(int)(GUI.getZoneUtilisateur().getLocationOnScreen().getY() - GUI.getFenetre().getViewport().getLocationOnScreen().getY() + 5));
+			Rectangle recZoneUtil = new Rectangle((int)(GUI.getZoneUtilisateur().getLocationOnScreen().getX() - diff.getX()), (int)(GUI.getZoneUtilisateur().getLocationOnScreen().getY() - diff.getY()), GUI.getZoneUtilisateur().getWidth(), GUI.getZoneUtilisateur().getHeight());
 			Rectangle boundsGroup = groupeWidgetBounds(composantsDrague, 0, null);
 			if (boundsGroup == null) {
 				boundsGroup = new Rectangle();
 			}
-			Point p = GUI.getGlassPane().getMousePosition();
-			p.x -= ptClick.getX();
-			p.y -= ptClick.getY();
+
+			Rectangle recWid = new Rectangle(new Point((int) (MouseInfo.getPointerInfo().getLocation().x - ptClick.getX() - diff.getX()), (int) (MouseInfo.getPointerInfo().getLocation().y - ptClick.getY()- diff.getY())), new Dimension((int) boundsGroup.getWidth(), (int) boundsGroup.getHeight()));
+			recZoneUtil.setBounds(recZoneUtil.getBounds().x, recZoneUtil.getBounds().y, recZoneUtil.getBounds().width, recZoneUtil.getBounds().height);
+
+			if (!recZoneUtil.contains(recWid)) {
+				boolean noX = false;
+				if (recWid.getMinX() <= recZoneUtil.getMinX()) {
+					// A gauche
+					p.x = (int) recZoneUtil.getMinX();
+					p.y -= ptClick.y + diff.getY();
+					noX = true;
+				} else if (recWid.getMaxX() > recZoneUtil.getMaxX()) {
+					// A droite
+					p.x = (int) recZoneUtil.getMaxX() - recWid.width;
+					p.y -= ptClick.y + diff.getY();
+					noX = true;
+				}
+
+				if (recWid.getMinY()<= recZoneUtil.getMinY()) {
+					// En haut
+					p.y = (int) recZoneUtil.getMinY();
+					if (!noX) {
+						p.x -= ptClick.x + diff.getX();
+					}
+				} else if (recWid.getMaxY() >= recZoneUtil.getMaxY()) {
+					// En bas
+					p.y = (int) recZoneUtil.getMaxY() - recWid.height;
+					if (!noX) {
+						p.x -= ptClick.x + diff.getX();
+					}
+				}
+			} else {
+				p.x -= ptClick.x + diff.getX();
+				p.y -= ptClick.y + diff.getY();
+			}
+			p.x -= GUI.getFenetre().getLocation().getX();
+			p.y -= GUI.getFenetre().getLocation().getY();
 			dragGroupeWidget(composantsDrague, p);
-			
+
 			this.setChanged();
 			this.notifyObservers();
 			int decal = (int) (Widget.TAUX_TRANSFERT_PANEL * comp.getWidth());
@@ -243,7 +289,8 @@ public final class DragAndDropTools extends Observable {
 
 				SwingUtilities.convertPointFromScreen(pt, p);
 				if (inter < comp.getWidth()) {
-					pt.x += (comp.getWidth() - inter) + 3;
+					pt.x += (comp.getWidth() - inter) + (GUI.getZoneUtilisateur().getLocationOnScreen().getX() - GUI.getFenetre().getViewport().getLocationOnScreen().getX() + 5);
+			
 				}
 				compSurvole = a.getComp();
 
@@ -373,7 +420,9 @@ public final class DragAndDropTools extends Observable {
 			ErreurHelper.afficher(ex);
 		}
 		arbo.updateWidgets();
-		updatePanelGraphiqueSize(arbo.getArborescence());
+
+
+		p.updateSize(arbo.getArborescence());
 
 		this.setChanged();
 		this.notifyObservers();
@@ -385,7 +434,19 @@ public final class DragAndDropTools extends Observable {
 		if (compSurvole != null) {
 			compSurvole.getModele().applyChangeModele();
 		}
-
+		
+		// Suppression de la tache principale de la liste des widgets
+		if (comp.getType() == TypeModeleWidget.TACHE && 
+				GUI.getPanelTypeWidget().getCurrentCategorie() == Categorie.STRUCTURES) {
+			for (BoutonCategorie bc : PanelTypeWidget.getInstance().getLesCategories()) {
+				if (bc.getCategorie() == Categorie.STRUCTURES) {
+					
+					GUI.getPanelWidget().setLesWidgets(bc.getNbColonnes());
+					break;
+				}
+			}
+		}		
+		
 		LanceurTraduction.getInstance().lancerTraduction();
 
 	}
@@ -397,7 +458,7 @@ public final class DragAndDropTools extends Observable {
 	 *
 	 * @param comp le widget à supprimer
 	 */
-	private void deleteWidgetsFromGlassPane(Widget comp) {
+	private void deleteWidgetsFromGlassPane(Widget comp) {		
 		if (comp.isComplexe()) {
 			for (List<Widget> lw : ((WidgetCompose) comp).getMapZone().values()) {
 				for (Widget w : lw) {
@@ -405,6 +466,12 @@ public final class DragAndDropTools extends Observable {
 				}
 			}
 		}
+		
+		if (comp.getType() == TypeModeleWidget.TACHE) {
+			((WidgetCompose) comp).clean();
+			PanelTypeWidget.getInstance().ajouterTachePrincipale();			
+		}
+		
 		GUI.getGlassPane().remove(comp);
 		DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetSuppression(comp));
 	}
@@ -421,7 +488,7 @@ public final class DragAndDropTools extends Observable {
 	 * @return Le Rectangle regroupant les positions et dimensions du goupe de
 	 * widgets passé en paramètre ou null si la listede widgets est vide
 	 */
-	private static Rectangle groupeWidgetBounds(List<Widget> lst, int index, Rectangle rect) {
+	public static Rectangle groupeWidgetBounds(List<Widget> lst, int index, Rectangle rect) {
 		for (int i = index; i < lst.size(); i++) {
 			Widget w = lst.get(i);
 			if (w.isComplexe()) {
@@ -437,24 +504,5 @@ public final class DragAndDropTools extends Observable {
 			}
 		}
 		return rect;
-	}
-
-	private void updatePanelGraphiqueSize(List<List<Widget>> arborescence) {
-		PanelCodeGraphique p = PanelCodeGraphique.getInstance();
-		Rectangle bounds = null;
-		for (List<Widget> l : arborescence) {
-			if (!l.isEmpty()) {
-				Rectangle boundsGroup = groupeWidgetBounds(l, 0, null);
-				if (bounds == null) {
-					bounds = boundsGroup;
-				} else {
-					bounds = bounds.union(boundsGroup);
-				}
-			}
-		}
-		if (bounds != null) {
-			p.setPreferredSize(new Dimension((int) (bounds.getX() + bounds.getWidth()), (int) (bounds.getY() + bounds.getHeight())));
-			p.getScroll().validate();
-		}
 	}
 }

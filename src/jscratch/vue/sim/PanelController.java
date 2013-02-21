@@ -128,44 +128,25 @@ public class PanelController extends JPanel {
 	}
 	
 	/**
-	 * Classe poiur la gestion des appuis sur les boutons.
+	 * Classe pour la gestion des appuis sur les boutons.
 	 * 
 	 * @since 1.0
 	 * @version 1.0
 	 */
-	private class Listener implements ActionListener {
-
+	private class Listener implements ActionListener,ObserverInterpreteur {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceBoutonsSimulateur(((JButton)e.getSource()).getText()));
 		
 			if (e.getSource() == bExec) {
-				bPause.setEnabled(true);
-				bStop.setEnabled(true);
-				bExec.setEnabled(false);
-				lanceurInter = new LanceurInterpreteur(simulator);
-				lanceurInter.start();
-				simulator.start();
+				start();
+				this.startThread();
 			} else if (e.getSource() == bPause) {
-				if (!pause) {
-					pause = true;
-					bPause.setText("Relance");
-					lanceurInter.waitThread();
-				} else {
-					pause = false;
-					bPause.setText("Pause");
-					lanceurInter.notifyThread();
-				}
+				pause();
+				pauseThread();
 			} else if (e.getSource() == bStop) {
-				bPause.setEnabled(false);
-				bStop.setEnabled(false);
-				bExec.setEnabled(true);
-				pause = false;
-				lanceurInter.stopThread();
-				simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_A));
-				simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_B));
-				simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_C));
-				simulator.getRobotController().clearListCommands();
+				stop();
+				this.stopThread();
 			} else if (e.getSource() == m1) {
 
 			} else if (e.getSource() == m2) {
@@ -173,6 +154,77 @@ public class PanelController extends JPanel {
 			} else if (e.getSource() == m3) {
 
 			}
+		}
+		/**
+		 * gerer le debut de la simulation
+		 */
+		private void startThread(){
+			lanceurInter = new LanceurInterpreteur(simulator);
+			lanceurInter.addObserverInterpreteur(this);
+			lanceurInter.start();
+			simulator.start();
+			simulator.setRun(true);
+			simulator.getRobotController().resetStartTime();
+		}
+		
+		/**
+		 * gere la pause de la simulation
+		 */
+		private void pauseThread(){
+			if (!pause) {
+				lanceurInter.waitThread();
+			} else {
+				lanceurInter.notifyThread();
+			}
+		}
+		
+		/**
+		 * gere la fin de la simulation
+		 */
+		private void stopThread(){
+			lanceurInter.stopThread();
+			simulator.setRun(false);
+			simulator.setWait(false);
+			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_A));
+			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_B));
+			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_C));
+			simulator.getRobotController().clearListCommands();
+		}
+		/**
+		 * gere l'etat des boutons lors du debut de la simulation
+		 */
+		private void start(){
+			bPause.setEnabled(true);
+			bStop.setEnabled(true);
+			bExec.setEnabled(false);
+		}
+		
+		/**
+		 * gere l'etat des boutons lors du debut de la simulation
+		 */
+		private void pause(){
+			if (!pause) {
+				pause = true;
+				bPause.setText("Relance");
+			} else {
+				pause = false;
+				bPause.setText("Pause");
+			}
+		}
+		
+		/**
+		 * gere l'etat des boutons lors du debut de la simulation
+		 */
+		private void stop(){
+			bPause.setEnabled(false);
+			bStop.setEnabled(false);
+			bExec.setEnabled(true);
+			pause = false;
+		}
+		@Override
+		public void update(ObservableInterpreteur o) {
+			this.stop();
+			this.stopThread();
 		}
 	}
 }

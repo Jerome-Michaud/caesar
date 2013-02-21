@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
+import jscratch.dictionnaires.DicoTraces;
+import jscratch.traces.fabriques.FabriqueTrace;
 
 import jscratch.dictionnaires.DicoTraces;
 import jscratch.traces.fabriques.FabriqueTrace;
@@ -45,6 +47,8 @@ public class ChampTexte extends JPanel implements Zone {
 	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus
 	 */
 	int etat;
+	
+	private String valTempTexte;
 
 	/**
 	 * Constructeur faisant appel au constructeur équivalent de la classe mère.
@@ -202,18 +206,19 @@ public class ChampTexte extends JPanel implements Zone {
 			this.etat = ETAT_SAISIE;
 			this.setComponent(textField);
 			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget) this.getParent(), this, wc, this.getValeur()));
+
 		} else {
 			this.etat = ETAT_CONTIENT_WIDGET;
 			this.textField.setSize(this.getSize());
 			this.setComponent(w);
 			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget) this.getParent(), this, this.getValeur(),wc));
 
+
 		}
 		int decal = this.getWidth() - oldW;
 		//Appel à la méthode de redimensionnement en X, avec si nécessaire appel recursif pour le redimensionnement des parents
 		decaleWidgetParents(this, decal);
 		this.widgetContenu = w;
-		widgetParent.applyChangeModele();
 	}
 
 	/**

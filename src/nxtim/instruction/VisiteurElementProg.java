@@ -153,4 +153,25 @@ public interface VisiteurElementProg {
 	 * @param valCapteur l'expression à visiter
 	 */
 	public void visiter(ValeurCapteur valCapteur);
+	
+	/**
+	 * Visite une expression de récupération du nombre de rotations d'un moteur.
+	 * 
+	 * @param rotMoteur l'expression à visiter.
+	 */
+	public void visiter(RotationMoteur rotMoteur);
+	
+	/**
+	 * Visite une instruction de remise à zéro d'un compteur de rotations d'un moteur.
+	 * 
+	 * @param razMoteur l'instruction à visiter.
+	 */
+	public void visiter(InstructionRAZRotationMoteur razMoteur);
+	
+	/**
+	 * Visite une instruction de configuration des capteurs.
+	 * 
+	 * @param confCapt l'instruction à visiter.
+	 */
+	public void visiter(InstructionConfigCapteurs confCapt);
 }

@@ -10,7 +10,7 @@ public class InstructionIncrementation implements Instruction {
 	/**
 	 * L'expression à incrementer.
 	 */
-	private Expression expression;
+	private Variable variable;
 	
 	/**
 	 * <code>true</code> si l'incrémentation est avant (++x).
@@ -28,8 +28,8 @@ public class InstructionIncrementation implements Instruction {
 	 * @param expression l'expression
 	 * @param positive <code>true</code> si l'incrémentation est positive, <code>false</code> sinon
 	 */
-	public InstructionIncrementation(final Expression expression, final boolean positive) {
-		this.expression = expression;
+	public InstructionIncrementation(final Variable expression, final boolean positive) {
+		this.variable = expression;
 		this.positive = positive;
 		this.avant = false;
 	}
@@ -41,27 +41,27 @@ public class InstructionIncrementation implements Instruction {
 	 * @param positive <code>true</code> si l'incrémentation est positive, <code>false</code> sinon
 	 * @param avant true si l'incrémentation est avant (++x), false sinon (x++)
 	 */
-	public InstructionIncrementation(final Expression expression, final boolean positive, final boolean avant) {
+	public InstructionIncrementation(final Variable expression, final boolean positive, final boolean avant) {
 		this(expression, positive);
 		this.avant = avant;
 	}
 
 	/**
-	 * Permet de modifier l'expression.
+	 * Permet de modifier la variable.
 	 * 
-	 * @param la nouvelle expression
+	 * @param variable la nouvelle variable
 	 */
-	public void setExpression(Expression expression) {
-		this.expression = expression;
+	public void setVariable(final Variable variable) {
+		this.variable = variable;
 	}
 	
 	/**
 	 * Permet de récupérer l'expression.
 	 * 
-	 * @return l'expression
+	 * @return la variable
 	 */
-	public Expression getExpression() {
-		return this.expression;
+	public Variable getVariable() {
+		return this.variable;
 	}
 
 	/**

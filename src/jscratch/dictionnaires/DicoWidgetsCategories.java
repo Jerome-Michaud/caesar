@@ -134,6 +134,7 @@ public final class DicoWidgetsCategories {
 		Variable[] vars = DicoVariables.getInstance().getLesVariables();
 		this.dico.get(Categorie.VARIABLES).clear();
 		ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetVariableSetValue());
+		ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetDeclarerVariable());
 		
 		// Permet d'afficher ou non le widget de valeur
 		nettoyer(Categorie.VARIABLES);
@@ -190,5 +191,23 @@ public final class DicoWidgetsCategories {
 			Boolean b = Boolean.valueOf(PropertiesHelper.getInstance().get("user.widget.afficher." + w.getType().toString()));
 			categorie.put(w, b);
 		}
+	}
+	
+	/**
+	 * Permet de cacher un widget dans la catégorie
+	 * @param c la catégorie
+	 * @param w le widget
+	 */
+	public void cacherWidget(Categorie c, Widget w) {
+		this.dico.get(c).put(w, false);	
+	}
+	
+	/**
+	 * Permet d'afficher un widget dans la catégorie
+	 * @param c la catégorie
+	 * @param w le widget
+	 */
+	public void afficherWidget(Categorie c, Widget w) {
+		this.dico.get(c).put(w, true);
 	}
 }
