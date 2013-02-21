@@ -1,6 +1,5 @@
 package jscratch.vue.ginterface.principales;
 
-import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaRootPaneUI;
 import de.javasoft.swing.JYDockingPort;
 import de.javasoft.swing.JYDockingView;
@@ -15,6 +14,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -60,10 +61,10 @@ public final class ApplicationUI extends JFrame {
 	 * <code>ApplicationUI</code>.
 	 */
 	private ApplicationUI() {
-		SyntheticaLookAndFeel.setWindowsDecorated(false);
 		this.setTitle("C.A.E.S.A.R");
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
 
 		if (this.getRootPane().getUI() instanceof SyntheticaRootPaneUI) {
 			((SyntheticaRootPaneUI) this.getRootPane().getUI()).setMaximizedBounds(this);
@@ -72,15 +73,14 @@ public final class ApplicationUI extends JFrame {
 		this.setMinimumSize(new Dimension(800, 500));
 		if (!System.getProperty("os.name").toLowerCase().contains("windows")) {
 			this.setExtendedState(MAXIMIZED_BOTH);
-		}else{
-			
-		Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setSize((int)(tailleEcran.getWidth() * 0.7),(int)(tailleEcran.getHeight() * 0.7));
+		} else {
+			Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
+			this.setSize((int) (tailleEcran.getWidth() * 0.7), (int) (tailleEcran.getHeight() * 0.7));
 		}
 
 		this.setJMenuBar(Menu.getInstance());
 
-		add(creerDocking());
+		add(creerDocking(),BorderLayout.CENTER);
 
 		DockingManager.setTabReorderByDraggingEnabled(false);
 
@@ -90,7 +90,7 @@ public final class ApplicationUI extends JFrame {
 				DockingManager.unregisterDockable("zoneCodeGraphique-SimpleDocking");
 				DockingManager.unregisterDockable("zoneSimulateur-SimpleDocking");
 				DockingManager.unregisterDockable("zoneCodeConsole-SimpleDocking");
-				
+
 				SessionHelper.quitter();
 			}
 		});
@@ -105,8 +105,8 @@ public final class ApplicationUI extends JFrame {
 		this.setLocationRelativeTo(null);
 	}
 
-	public JYDockingPort getViewport() {
-		return viewport;
+	public JYDockingView getViewport() {
+		return zoneCodeGraphique;
 	}
 
 	/**
@@ -119,7 +119,6 @@ public final class ApplicationUI extends JFrame {
 		zoneCodeGraphique = creerZoneEdition();
 		zoneCodeConsole = creerZoneCodeConsole();
 		zoneSimulateur = creerZoneSimulation();
-
 		viewport = new JYDockingPort();
 		viewport.dock(zoneCodeGraphique, IDockingConstants.CENTER_REGION);
 
@@ -132,7 +131,7 @@ public final class ApplicationUI extends JFrame {
 		JPanel p = new JPanel(new BorderLayout(0, 0));
 		p.setBorder(new EmptyBorder(5, 5, 5, 5));
 		p.add(viewport, BorderLayout.CENTER);
-
+		
 		return p;
 	}
 
@@ -163,7 +162,19 @@ public final class ApplicationUI extends JFrame {
 	private JYDockingView creerZoneSimulation() {
 		JYDockingView view = new JYDockingView("zoneSimulateur-SimpleDocking", "Simulation", "Simulation");
 		view.addAction(new DefaultMaximizeAction(view));
-		view.addAction(new DefaultFloatAction(view));
+		DefaultFloatAction act = new DefaultFloatAction(view);
+		for(int i = 0; i < act.getKeys().length;i++){
+			
+		System.out.println(act.getKeys()[i]);
+		}
+		act.addPropertyChangeListener(new PropertyChangeListener() {
+
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				System.out.println("1");
+			}
+		});
+		view.addAction(act);
 		view.setIcon(ImagesHelper.getIcon("robot.png"));
 		view.setDockbarIcon(ImagesHelper.getIcon("robot.png"));
 		view.setContentPane(GUI.creerZoneSimulateur());

@@ -19,6 +19,7 @@ import nxtim.instruction.InstructionStructure;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
 import jscratch.vue.widgets.modeles.ModeleWidget;
+import sun.nio.cs.ext.GB18030;
 
 /**
  * Classe héritant de Widget et implémentant IWidget permettant de représenter un Widget de type Complexe.
@@ -35,13 +36,14 @@ public class WidgetCompose extends Widget implements IWidget {
 	 *
 	 * @param g l'objet <code>Graphics</code> de l'appel
 	 */
-	/*@Override
+	@Override
 	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
+		g.setColor(Color.red);
 		for(Rectangle r : mapZone.keySet()){
 			g.drawRect((int)r.getX(),(int) r.getY(), (int)r.getWidth(),(int)r.getHeight());
 		}
-	}*/
+	}
 
 	/**
 	 * Constructeur du Widget Compose faisant appel au constructeur de sa classe mère (
@@ -202,6 +204,9 @@ public class WidgetCompose extends Widget implements IWidget {
 		for (Rectangle r : this.mapZone.keySet()) {
 			if (r.y > y) {
 				map.put(r, diff);
+				for(Widget w : mapZone.get(r)){
+					w.setLocation(w.getX(), w.getY()+diff);
+				}
 			}
 		}
 	}
