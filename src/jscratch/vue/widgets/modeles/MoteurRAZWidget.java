@@ -34,7 +34,7 @@ public class MoteurRAZWidget extends ModeleWidget {
 		this.setType(TypeModeleWidget.MOTEURRAZ);
 		message.put(new Point(5, 17), "RAZ Moteur");
 
-		this.setElementProgramme(new InstructionRAZRotationMoteur());
+		this.setElementProgramme(new InstructionRAZRotationMoteur(Moteur.A));
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
 		l = new ListeDeroulante<Moteur>(Moteur.values(), this);
@@ -55,11 +55,6 @@ public class MoteurRAZWidget extends ModeleWidget {
 		});
 	}	
 	
-	@Override
-	public void applyChangeModele(){
-		
-	}
-
 	@Override
 	public void decalageX(int a) {
 		int i;

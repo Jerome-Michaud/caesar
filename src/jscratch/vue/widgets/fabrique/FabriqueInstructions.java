@@ -8,6 +8,7 @@ import jscratch.exceptions.NonClonableException;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.WidgetCompose;
 import jscratch.vue.widgets.modeles.CapteurWidget;
+import jscratch.vue.widgets.modeles.ConfigurationCapteursWidget;
 import jscratch.vue.widgets.modeles.DeclarationVariableWidget;
 import nxtim.instruction.Condition;
 import nxtim.instruction.Operateur;
@@ -229,6 +230,15 @@ public class FabriqueInstructions {
 	}
 	
 	/**
+	 * Crée un widget de configuration des capteurs.
+	 * 
+	 * @return un widget de type "Capteur"
+	 */
+	public Widget creerWidgetConfigurationCapteur() {
+		return new Widget(new ConfigurationCapteursWidget());
+	}
+	
+	/**
 	 * Méthode permettant de créer un widget d'incrémentation.
 	 * 
 	 * @param op l'opérateur
@@ -320,6 +330,9 @@ public class FabriqueInstructions {
 			case CAPTEUR:
 				w = creerWidgetCapteur();
 				break;
+			case CAPTEURCONFIG:
+				w = creerWidgetConfigurationCapteur();
+				break;
 			default:
 				throw new NonClonableException("Ajouter le type de widget \"" + comp.getType() + "\"dans la méthode clone");
 		}
@@ -403,6 +416,8 @@ public class FabriqueInstructions {
 			w = creerWidgetDeclarerVariable();
 		} else if("MoteurRAZWidget".equals(nomClasse)) {
 			w = creerWidgetMoteurRAZ();
+		} else if ("ConfigurationCapteursWidget".equals(nomClasse)) {
+			w = creerWidgetConfigurationCapteur();
 		} else if("CapteurWidget".equals(nomClasse)) {
 			w = creerWidgetCapteur();
 		} else {

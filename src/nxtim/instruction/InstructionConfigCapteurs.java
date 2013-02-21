@@ -57,6 +57,6 @@ public class InstructionConfigCapteurs implements Instruction {
 
 	@Override
 	public void accepte(VisiteurElementProg visiteur) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		visiteur.visiter(this);
 	}
 }

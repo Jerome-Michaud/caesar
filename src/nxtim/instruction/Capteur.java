@@ -6,6 +6,10 @@ package nxtim.instruction;
 public enum Capteur {
 
 	/**
+	 * Aucun capteur.
+	 */
+	NONE,
+	/**
 	 * Capteur de collision.
 	 */
 	TOUCH,
@@ -25,14 +29,16 @@ public enum Capteur {
 	@Override
 	public String toString() {
 		switch (this) {
+			case NONE:
+				return "NONE";
 			case TOUCH:
-				return "Capteur touch";
+				return "TOUCH";
 			case COLOR:
-				return "Capteur color";
+				return "COLOR";
 			case ULTRASONIC:
-				return "Capteur ultrasonic";
+				return "SONIC";
 			case LIGHT:
-				return "Capteur light";
+				return "LIGHT";
 			default:
 				return null;
 		}

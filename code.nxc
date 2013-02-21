@@ -1,8 +1,7 @@
 task main(){
-    int i;
-    i = 1;
-    for(; (i < 10); i++) {
-        OnFwd(OUT_BC, (10 * i));
-        Wait(100);
+    repeat(10){
+        OnFwd(OUT_BC, 100);
+        Wait(250);
     }
+    Off(OUT_BC);
 }

@@ -118,6 +118,9 @@ public final class VisiteurNXC extends VisiteurC {
 					break;
 				case ULTRASONIC:
 					traduction += "SONIC";
+				case NONE:
+					traduction += "NONE";
+					break;
 				default:
 					break;
 			}
