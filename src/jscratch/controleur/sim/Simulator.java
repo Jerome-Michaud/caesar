@@ -74,8 +74,8 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 	 * Mise à jour du simulateur
 	 * @param deltaTime
 	 */
-	public void update(float deltaTime) {
-		robotController.update(deltaTime);
+	public void update() {
+		robotController.update();
 	}
 
 	/**
@@ -107,35 +107,63 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 		// Set up the graphics stuff, double-buffering.
 		System.out.println("Demarrage du simulateur");
 		System.out.println("Simulateur = "+Thread.currentThread().getName());		
-		long delta = 0l;
-		this.run = true;
+				
+		// Conversion du temps en secondes
+        double nextTime = (double)System.nanoTime() / 1000000000.0;
+        double maxTimeDiff = 0.5;
+        int skippedFrames = 1;
+        int maxSkippedFrames = 5;
+        double currTime;
+        int sleepTime;        
+        this.run = true;
 		this.robotController.resetStartTime();
-
-		// Boucle infinie du simulateur
-		while (run) {
-			this.testWait();
-			long lastTime = System.nanoTime();
-
-			// Mise à jour du simulateur
-			this.update((float)(delta / 1000000000.0));
-			
-			// Rendu du simulateur
-			//this.render(g);
-
-			// Affichage du résultat du rendu dans le panel
-			
-			notifyObserverSimulator();
-			// Lock des fps
-			delta = System.nanoTime() - lastTime;
-			if (delta < 20000000L) {
-				try {
-					Thread.sleep((20000000L - delta) / 1000000L);
-				} catch (Exception e) {
-					// Interrupted exception
-				}
-			}
-		}
-		this.notifyObserverPanelController();
+        
+        // Delta entre chaque mise à jour (1 / 30 -> 30 fps) 
+        double delta = 1 / 30;
+        
+        while(run)
+        {
+            // Conversion du temps en secondes
+            currTime = (double)System.nanoTime() / 1000000000.0;
+            if((currTime - nextTime) > maxTimeDiff) nextTime = currTime;
+            if(currTime >= nextTime)
+            {
+                // Temps pour la prochaine mise à jour
+                nextTime += delta;
+                
+                // Mise à jour du simulateur 
+                this.update();
+                
+                if((currTime < nextTime) || (skippedFrames > maxSkippedFrames))
+                {
+                	// Affichage
+                	notifyObserverSimulator();
+                    skippedFrames = 1;
+                }
+                else
+                {
+                    skippedFrames++;
+                }
+            }
+            else
+            {
+                // Calcul du temps à attendre
+                sleepTime = (int)(1000.0 * (nextTime - currTime));
+                
+                if(sleepTime > 0)
+                {
+                    // Attente en attendant la prochaine mise à jour
+                    try
+                    {
+                        Thread.sleep(sleepTime);
+                    }
+                    catch(InterruptedException e) {}
+                }
+            }
+        }
+        
+        this.notifyObserverPanelController();
+		
 		System.out.println("Arret du simulateur");
 		System.out.println("Simulateur = "+Thread.currentThread().getName());
 	}

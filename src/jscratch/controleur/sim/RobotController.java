@@ -36,10 +36,11 @@ public class RobotController {
 	 * @param deltaTime
 	 */
 
-	public synchronized void update(float deltaTime)	{
+	public synchronized void update()	{
 		/* Déplacement du robot */
-		double vgauche = (double) robot.getMotor(MotorPort.OUT_C).getPower() * deltaTime * 2;
-		double vdroite = (double) robot.getMotor(MotorPort.OUT_B).getPower() * deltaTime * 2;
+		int coef = 70000;
+		double vgauche = (double) robot.getMotor(MotorPort.OUT_C).getPower() / coef;
+		double vdroite = (double) robot.getMotor(MotorPort.OUT_B).getPower() / coef;
 		double v = robot.getRayonRoues() * (vgauche + vdroite) / 2; // Vitesse d'avancement
 		double w = robot.getRayonRoues() * (vdroite - vgauche) / robot.getEcartEntreRoues(); // Vitesse de rotation
 
