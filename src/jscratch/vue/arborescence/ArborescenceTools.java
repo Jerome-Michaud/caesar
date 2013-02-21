@@ -130,12 +130,16 @@ public final class ArborescenceTools {
 	 * introuvable dans l'arborescence
 	 */
 	public boolean ajouterWidgets(final List<Widget> l, final Widget comp, final boolean insererApres) throws ComposantIntrouvableException {
+
 		//cas de non survol
 		if (comp == null) {
+
 			List<Widget> lst = new LinkedList<Widget>();
 			lst.addAll(l);
 			return arborescence.add(lst);
 		} else {
+
+
 			int index = getIndex(comp);
 
 			if (insererApres) {
@@ -253,6 +257,7 @@ public final class ArborescenceTools {
 		for (List<Widget> listeWidget : this.arborescence) {
 			for (Widget w : listeWidget) {
 				pc.setComponentZOrder(w, pc.getComponentCount() - 1);
+				//System.out.println("MAJ");
 				if (w.isComplexe()) {
 					updateWidgets((WidgetCompose) w);
 					((WidgetCompose) w).notifyChange();

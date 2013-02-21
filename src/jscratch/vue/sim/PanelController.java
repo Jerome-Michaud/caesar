@@ -11,11 +11,9 @@ import javax.swing.*;
 import de.javasoft.swing.ButtonBar;
 import de.javasoft.swing.SimpleDropDownButton;
 import jscratch.controleur.sim.Simulator;
-import jscratch.controleur.sim.StopCommand;
 import jscratch.dictionnaires.DicoTraces;
 import jscratch.helpers.ImagesHelper;
-import jscratch.interpreteur.LanceurInterpreteur;
-import jscratch.modeles.sim.MotorPort;
+import jscratch.interpreteur.GestionSimulation;
 import jscratch.traces.fabriques.FabriqueTrace;
 
 /**
@@ -36,7 +34,7 @@ public class PanelController extends JPanel {
 	private JMenuItem m3;
 	private boolean pause = false;
 	private Simulator simulator;
-	private LanceurInterpreteur lanceurInter;
+	private GestionSimulation simulation;
 
 	/**
 	 * Constructeur par défaut de <code>PanelController</code>.
@@ -59,6 +57,9 @@ public class PanelController extends JPanel {
 		bExec = createButton("Exécuter", iconPlay, true, false);
 		bPause = createButton("Pause", iconPause, false, false);
 		bStop = createButton("Stop", iconStop, false, false);
+		bExec.setActionCommand("ExécutionSimulator");
+		bPause.setActionCommand("PauseSimulator");
+		bStop.setActionCommand("StopSimulator");
 
 		bDebug = new SimpleDropDownButton("Debug");
 		bDebug.setIcon(iconDebug);
@@ -133,63 +134,34 @@ public class PanelController extends JPanel {
 	 * @since 1.0
 	 * @version 1.0
 	 */
-	private class Listener implements ActionListener,ObserverInterpreteur {
+	private class Listener implements ActionListener,ObserverPanelController {
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceBoutonsSimulateur(((JButton)e.getSource()).getText()));
 		
-			if (e.getSource() == bExec) {
-				start();
+			if (e.getActionCommand() == "ExécutionSimulator") {
+				simulation = new GestionSimulation(simulator);
+				bExec.addActionListener(simulation.getListener());
+				bPause.addActionListener(simulation.getListener());
+				bStop.addActionListener(simulation.getListener());
+				this.start();
 				this.startThread();
-			} else if (e.getSource() == bPause) {
-				pause();
-				pauseThread();
-			} else if (e.getSource() == bStop) {
-				stop();
-				this.stopThread();
-			} else if (e.getSource() == m1) {
-
-			} else if (e.getSource() == m2) {
-
-			} else if (e.getSource() == m3) {
-
+			} 
+			else if (e.getActionCommand() == "PauseSimulator") {
+				this.pause();
+			}
+			else if (e.getActionCommand() == "StopSimulator") {
+				this.stop();
 			}
 		}
 		/**
 		 * gerer le debut de la simulation
 		 */
 		private void startThread(){
-			lanceurInter = new LanceurInterpreteur(simulator);
-			lanceurInter.addObserverInterpreteur(this);
-			lanceurInter.start();
-			simulator.start();
-			simulator.setRun(true);
-			simulator.getRobotController().resetStartTime();
+			simulator.addObserver(this);
+			simulation.startThread();
 		}
 		
-		/**
-		 * gere la pause de la simulation
-		 */
-		private void pauseThread(){
-			if (!pause) {
-				lanceurInter.waitThread();
-			} else {
-				lanceurInter.notifyThread();
-			}
-		}
-		
-		/**
-		 * gere la fin de la simulation
-		 */
-		private void stopThread(){
-			lanceurInter.stopThread();
-			simulator.setRun(false);
-			simulator.setWait(false);
-			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_A));
-			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_B));
-			simulator.getRobotController().addCommand(new StopCommand(simulator.getRobotController(), 0, MotorPort.OUT_C));
-			simulator.getRobotController().clearListCommands();
-		}
 		/**
 		 * gere l'etat des boutons lors du debut de la simulation
 		 */
@@ -220,11 +192,12 @@ public class PanelController extends JPanel {
 			bStop.setEnabled(false);
 			bExec.setEnabled(true);
 			pause = false;
+			bPause.setText("Pause");
 		}
+	
 		@Override
-		public void update(ObservableInterpreteur o) {
+		public void update(ObservableSimulator o) {
 			this.stop();
-			this.stopThread();
 		}
 	}
 }

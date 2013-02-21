@@ -98,7 +98,7 @@ public class TraceWidgetModification extends Trace {
 		element.setAttribute(ISWIDGET, String.valueOf(isWidget));
 		if (isWidget) {
 			element.setAttribute(ID, "");
-			element.addContent(this.widgetContenu.toXml());
+			element.addContent(this.widgetContenu.toXml()); 	
 		}
 		else if (AVANT.equals(titre)) {
 			element.setText(this.valeurAvant);
@@ -113,7 +113,10 @@ public class TraceWidgetModification extends Trace {
 	@Override
 	public Element toXml() {
 		Element thisXml =  super.toXml();
+		if(this.widget!=null)
+			thisXml.addContent(this.widget.toXml());
 		
+
 		if (this.widget != null) {
 			thisXml.addContent(this.widget.toXml());
 		}

@@ -23,8 +23,7 @@ public abstract class Trace {
 	protected final String ACTION = "action";
 	protected final String PARENTANCIEN = "ancienParent";
 	protected final String PARENTNOUVEAU = "nouveauParent";
-	protected final String EMPLACEMENT = "emplacement";
-	protected final String POSITION = "position";
+	protected final String POSITIONPARENT = "positionParRapportParent";
 	protected final String ID = "id";
 	
 	
