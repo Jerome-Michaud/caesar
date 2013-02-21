@@ -66,9 +66,11 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	private boolean stop = false;
 	private boolean wait = false;
 	private boolean run = true;
-	private double timeSleep = 0;
-	private double timeInterrupt = 0;
-	private double timeWait = 0;
+	private double timeSleep;
+	private double timeInterrupt;
+	private double timeWait;
+	private boolean sleep;
+	private boolean sleepwait;
 
 	public Interpreteur(Simulator simulator) {
 		this.pile = new ArrayDeque<Double>();
@@ -76,6 +78,11 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		this.simulator = simulator;
 		this.listObserver = new ArrayList<ObserverInterpreteur>();
 		this.listObserver.add(simulator);
+		this.timeSleep = 0;
+		this.timeInterrupt = 0;
+		this.timeWait = 0;
+		this.sleep = false;
+		this.sleepwait = false;
 	}
 	
 	public void run() {
@@ -117,6 +124,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				// TODO Stub de la méthode généré automatiquement
 				Variable var = inst.getMembre();
 				if (var != null) {
@@ -134,6 +142,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				Variable var = inst.getMembre();
 				if (var != null) {
 					//TODO mettre la variable dans la table des variables
@@ -155,6 +164,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				// TODO Enlevés les warning	
 				ExpressionComplexe cond = inst.getCondition();
 				if (cond != null) {
@@ -179,6 +189,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				// TODO Enlevés les warning	
 				ExpressionComplexe cond = inst.getCondition();
 				if (cond != null) {
@@ -211,6 +222,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				// TODO Enlevés les warning	
 				ExpressionComplexe cond = inst.getCondition();
 		
@@ -237,6 +249,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				// TODO Enlevés les warning
 				ExpressionComplexe cond = inst.getCondition();
 				if (cond != null) {
@@ -261,6 +274,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				List<Instruction> list = inst.getEnfants();
 				for (Instruction i : list) {
 					i.accepte(this);
@@ -275,7 +289,11 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	@Override
 	public void visiter(TempsCourant inst) { 
 		try{
-			pile.push(robot.getCurrentTime());
+			if(run){
+				this.testWait();
+				this.sleepThread();
+				pile.push(robot.getCurrentTime());
+			}
 		}
 		catch(Exception e){
 			//System.out.println("Exception");
@@ -287,6 +305,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				// TODO Enlevés les warning
 				Expression ex = inst.getExpression();
 				if (ex != null) {
@@ -299,9 +318,11 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				try {
 					timeSleep = System.nanoTime();
 					System.out.println("Interpreteur = "+Thread.currentThread().getName());
-					Thread.sleep((long) d);
+					synchronized (this) {
+						sleep = true;
+						this.wait((long) d);	
+					}
 				} catch (InterruptedException e) {
-					timeInterrupt = System.nanoTime();
 					System.out.println("WARNING : interpreteur reveillé - sleep interrompu - Erreur temporelle possible");
 				}
 			}
@@ -320,6 +341,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				Expression ex = inst.getExpression();
 				if (ex != null) {
 					ex.accepte(this);
@@ -347,6 +369,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				Moteur moteur = inst.getMoteur();
 				System.out.println("Creation de la commande Off : (" + moteur.toString() + ")");
 				this.notifyObserver("Stop", 0, moteurToMotorPort(moteur));
@@ -368,6 +391,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				ExpressionComplexe cond = inst.getCondition();
 				Affectation init = inst.getInitialisation();
 				InstructionIncrementation iter = inst.getIteration();
@@ -408,6 +432,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				Expression exp = inst.getExpression();
 				double cpt = 0;
 				if (exp != null) {
@@ -435,6 +460,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				// TODO CHangé la sortie d'erreur
 				if (!"".equals(var.getValeur())) {
 					pile.push(Double.parseDouble(var.getValeur()));
@@ -454,6 +480,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				Expression md = affec.getMembreDroit();
 				VariableModifiable mg = (VariableModifiable) affec.getMembreGauche();
 		
@@ -483,6 +510,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		try{
 			if(run){
 				this.testWait();
+				this.sleepThread();
 				Operateur opt = expr.getOperateur();
 				double d = 0;
 				double g = 0;
@@ -610,18 +638,22 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	@Override
 	public void visiter(InstructionIncrementation inst) {
 		try{
-			Variable var = inst.getVariable();
-			
-			double d = Double.parseDouble(var.getValeur());
-			
-			if(inst.isPositive()){
-				d++;
+			if(run){
+				this.testWait();
+				this.sleepThread();
+				Variable var = inst.getVariable();
+				
+				double d = Double.parseDouble(var.getValeur());
+				
+				if(inst.isPositive()){
+					d++;
+				}
+				else{
+					d--;
+				}
+				
+				var.setValeur(""+d);
 			}
-			else{
-				d--;
-			}
-			
-			var.setValeur(""+d);
 		}
 		catch(Exception e){
 			//System.out.println("Exception");
@@ -680,11 +712,16 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		for(ObserverInterpreteur o : listObserver){
 			o.update(type,vitesse,port);
 		}		
-		
 	}
 
 	public synchronized void waitThread() {
+		this.notify();
 		this.wait = true;
+		timeInterrupt = System.nanoTime();
+		if(sleep){
+			sleepwait = true;
+			sleep = false;
+		}
 	}
 	
 	public synchronized void notifyThread() {
@@ -693,11 +730,29 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		System.out.println("Interpreteur = "+Thread.currentThread().getName());
 		this.wait = false;
 	}
+	
+	public synchronized void sleepThread(){
+		if(sleepwait){
+			double time = timeWait - ((timeInterrupt/1000000000.0-timeSleep/1000000000.0)*1000);
+			System.out.println("Thread endormi en cours - Temps = "+time);
+			try {
+				timeWait = time;
+				timeSleep = System.nanoTime();
+				sleepwait = false;
+				this.wait((long) time);
+			} catch (InterruptedException e) {
+				// TODO Bloc catch généré automatiquement
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public synchronized void stopThread() {
 		this.notify();
 		this.run = false;
 		this.stop = true;
+		this.sleep = false;
+		this.sleepwait = false;
 	}
 
 	@Override
