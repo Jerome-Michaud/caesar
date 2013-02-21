@@ -22,7 +22,7 @@ public class ConfigurationCapteursWidget extends ModeleWidget {
 	 */
 	public ConfigurationCapteursWidget() {
 		super();
-		int tX[] = {0, 5, 30, 35, 45, 50, 320, 325, 325, 320, 50, 45, 35, 30, 5, 0};
+		int tX[] = {0, 5, 30, 35, 45, 50, 380, 385, 385, 380, 50, 45, 35, 30, 5, 0};
 		int tY[] = {5, 0, 0, 5, 5, 0, 0, 5, 20, 25, 25, 30, 30, 25, 25, 20};
 
 		this.setTabX(tX);
@@ -41,21 +41,21 @@ public class ConfigurationCapteursWidget extends ModeleWidget {
 		this.setElementProgramme(ins);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 
-		int widthChamp = 55;
+		int widthChamp = 70;
 		l1 = new ListeDeroulante<Capteur>(Capteur.values(), this);
 		l1.setBounds(85, 3, widthChamp, 20);
 		this.getLesZonesSaisies().add(l1);
 		
 		l2 = new ListeDeroulante<Capteur>(Capteur.values(), this);
-		l2.setBounds(145, 3, widthChamp, 20);
+		l2.setBounds(160, 3, widthChamp, 20);
 		this.getLesZonesSaisies().add(l2);
 		
 		l3 = new ListeDeroulante<Capteur>(Capteur.values(), this);
-		l3.setBounds(205, 3, widthChamp, 20);
+		l3.setBounds(235, 3, widthChamp, 20);
 		this.getLesZonesSaisies().add(l3);
 		
 		l4 = new ListeDeroulante<Capteur>(Capteur.values(), this);
-		l4.setBounds(265, 3, widthChamp, 20);
+		l4.setBounds(310, 3, widthChamp, 20);
 		this.getLesZonesSaisies().add(l4);
 		
 		initListeners();

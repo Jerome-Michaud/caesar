@@ -30,15 +30,15 @@ public enum Capteur {
 	public String toString() {
 		switch (this) {
 			case NONE:
-				return "NONE";
+				return "RIEN";
 			case TOUCH:
-				return "TOUCH";
+				return "CONTACT";
 			case COLOR:
-				return "COLOR";
+				return "COULEUR";
 			case ULTRASONIC:
-				return "SONIC";
+				return "DISTANCE";
 			case LIGHT:
-				return "LIGHT";
+				return "LUMIERE";
 			default:
 				return null;
 		}
