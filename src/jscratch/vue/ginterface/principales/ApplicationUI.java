@@ -15,10 +15,9 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -91,7 +90,7 @@ public final class ApplicationUI extends JFrame {
 				DockingManager.unregisterDockable("zoneCodeGraphique-SimpleDocking");
 				DockingManager.unregisterDockable("zoneSimulateur-SimpleDocking");
 				DockingManager.unregisterDockable("zoneCodeConsole-SimpleDocking");
-
+				DockingManager.unregisterDockable("zoneCompilateur-SimpleDocking");
 				SessionHelper.quitter();
 			}
 		});
@@ -181,10 +180,10 @@ public final class ApplicationUI extends JFrame {
 	 * @since 1.0
 	 */
 	private JYDockingView creerZoneCodeConsole() {
-		JYDockingView view = new JYDockingView("zoneCodeConsole-SimpleDocking", "Code console", "Code console");
+		JYDockingView view = new JYDockingView("zoneCodeConsole-SimpleDocking", "Code", "Code");
 		view.setIcon(ImagesHelper.getIcon("document-code.png"));
 		view.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));
-		view.setContentPane(GUI.getPanelCodeConsole());
+		view.setContentPane(new JScrollPane(GUI.getPanelCodeConsole()));
 		view.setDraggingEnabled(false);
 		return view;
 	}

@@ -52,6 +52,7 @@ public class PanelCompilateur extends JPanel {
 			}
 		};
 		docInfos = panneauInfos.getStyledDocument();
+		panneauInfos.setEditable(false);
 		ligneCompil = new SimpleAttributeSet();
 		StyleConstants.setForeground(ligneCompil, Color.RED);
 		StyleConstants.setBold(ligneCompil, true);
