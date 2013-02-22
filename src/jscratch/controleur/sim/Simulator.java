@@ -123,6 +123,7 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
         
         while(run)
         {
+        	this.testWait();
             // Conversion du temps en secondes
             currTime = (double)System.nanoTime() / 1000000000.0;
             if((currTime - nextTime) > maxTimeDiff) nextTime = currTime;
