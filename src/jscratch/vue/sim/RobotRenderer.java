@@ -28,11 +28,15 @@ public class RobotRenderer implements Renderer {
 	 */
 	private Robot robot;
 	private BufferedImage robotImage;
+	private boolean capteurs;
+	private boolean collisions;
 		
 	public RobotRenderer(Robot robot) {
 		super();
 		
 		this.robot = robot;
+		this.capteurs = false;
+		this.collisions = false;
 		
 		try {
 			robotImage = ImageIO.read(new File("./ressources/simulateur/images/robot.png"));
@@ -57,41 +61,77 @@ public class RobotRenderer implements Renderer {
 		af.rotate(robot.getOrientation(), robot.getLargeur() / 2, robot.getLongueur() / 2);
 		
 		((Graphics2D) g).drawImage(robotImage, af, null);
-		
-		g.drawRect((int)robot.getPointCentral().getX(),(int)robot.getPointCentral().getY(), 1, 1);
-		Point2D[] p = robot.getListePoints();
-		for(int i=0; i<32; i++)
-		{
-			switch (i) {
-			case 0:
-				g.setColor(Color.BLUE);
-				break;
-			case 8:
-				g.setColor(Color.RED);
-				break;
-			case 16:
-				g.setColor(Color.GREEN);
-				break;
-			case 24:
-				g.setColor(Color.ORANGE);
-				break;
-			default:
-				g.setColor(Color.BLACK);
-				break;
-			}
-			
-			g.drawRect((int)p[i].getX(),(int)p[i].getY(), 1, 1);
-		}
-		g.setColor(Color.MAGENTA);
-		for(Sensor<? extends Object> s : robot.getSensors())
-		{
-			g.drawRect((int)s.getPosition().getX(),(int)s.getPosition().getY(),1,1);
-			
-			if(s instanceof UltraSonicSensor)
+		if(collisions){
+			g.drawRect((int)robot.getPointCentral().getX(),(int)robot.getPointCentral().getY(), 1, 1);
+			Point2D[] p = robot.getListePoints();
+			for(int i=0; i<32; i++)
 			{
-				g.drawRect((int)((UltraSonicSensor) s).getPointFinal().getX(),(int)((UltraSonicSensor) s).getPointFinal().getY(), 1, 1);
+				switch (i) {
+				case 0:
+					g.setColor(Color.BLUE);
+					break;
+				case 8:
+					g.setColor(Color.RED);
+					break;
+				case 16:
+					g.setColor(Color.GREEN);
+					break;
+				case 24:
+					g.setColor(Color.ORANGE);
+					break;
+				default:
+					g.setColor(Color.BLACK);
+					break;
+				}
+				
+				g.drawRect((int)p[i].getX(),(int)p[i].getY(), 1, 1);
 			}
 		}
+		
+		if(capteurs){
+			g.setColor(Color.MAGENTA);
+			for(Sensor<? extends Object> s : robot.getSensors())
+			{
+				g.drawRect((int)s.getPosition().getX(),(int)s.getPosition().getY(),1,1);
+				
+				if(s instanceof UltraSonicSensor)
+				{
+					g.drawRect((int)((UltraSonicSensor) s).getPointFinal().getX(),(int)((UltraSonicSensor) s).getPointFinal().getY(), 1, 1);
+				}
+			}
+		}
+	}
+
+	/**
+	 * retourne le boolean sur l'affichage des capteurs
+	 * @return capteurs
+	 */
+	public boolean getCapteurs() {
+		return capteurs;
+	}
+	
+	/**
+	 * modifie la valeur du boolean capteurs
+	 * 
+	 */
+	public void setCapteurs(boolean b) {
+		capteurs = b;
+	}
+	
+	/**
+	 * retourne le boolean sur l'affichage des collisions
+	 * @return capteurs
+	 */
+	public boolean getCollisions() {
+		return collisions;
+	}
+	
+	/**
+	 * modifie la valeur du boolean collisions
+	 * 
+	 */
+	public void setCollisions(boolean b) {
+		collisions = b;
 	}
 	
 }
