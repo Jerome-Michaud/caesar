@@ -17,12 +17,11 @@ import jscratch.vue.sim.ObserverPanelController;
 import jscratch.vue.sim.ObserverSimulator;
 import jscratch.vue.sim.RobotRenderer;
 
-
-
 /**
- * Classe qui gère le simulateur
- * @author Guillaume Delorme
- *
+ * Classe qui gère le simulateur.
+ * 
+ * @since 1.0
+ * @version 1.0
  */
 public class Simulator implements Runnable, ObservableSimulator,ObserverInterpreteur {
 	
@@ -124,6 +123,7 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
         
         while(run)
         {
+			this.testWait();
             // Conversion du temps en secondes
             currTime = (double)System.nanoTime() / 1000000000.0;
             if((currTime - nextTime) > maxTimeDiff) {
@@ -160,7 +160,9 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
                     {
                         Thread.sleep(sleepTime);
                     }
-                    catch(InterruptedException e) {}
+                    catch(InterruptedException e) {
+						ErreurHelper.afficherSansSortie(e);
+					}
                 }
             }
         }
@@ -195,7 +197,7 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 				System.out.println("Simulateur = "+Thread.currentThread().getName());
 					this.wait();
 			} catch (InterruptedException e) {
-				ErreurHelper.afficher(e);
+				ErreurHelper.afficherSansSortie(e);
 			}
 		}
 	}

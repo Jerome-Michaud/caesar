@@ -133,7 +133,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -154,7 +154,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -178,7 +178,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -206,7 +206,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -236,7 +236,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -261,7 +261,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -278,7 +278,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -292,7 +292,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -323,7 +323,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -350,7 +350,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -372,7 +372,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -414,7 +414,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -443,7 +443,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -465,7 +465,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -493,7 +493,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -592,7 +592,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -644,7 +644,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}		
 	}
 	
@@ -657,7 +657,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch (InterruptedException e) {
-			ErreurHelper.afficher(e);
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -721,7 +721,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				sleepwait = false;
 				this.wait((long) time);
 			} catch (InterruptedException e) {
-				ErreurHelper.afficher(e);
+				ErreurHelper.afficherSansSortie(e);
 			}
 		}
 	}
