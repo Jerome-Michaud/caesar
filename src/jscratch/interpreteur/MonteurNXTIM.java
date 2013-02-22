@@ -54,8 +54,9 @@ public class MonteurNXTIM implements MonteurProgramme{
 	public void declaration(String type, String var){
 		TypeVariable typeVar = typeConvert(type);
 		VariableModifiable vm = null;
-		if(!isInteger(var,10))
+		if(!isInteger(var,10)) {
 			vm = new VariableModifiable(typeVar,var,null);
+		}
 		DicoVariables.getInstanceInterpreteur().ajouter(vm);
 		InstructionDeclaration inst = new InstructionDeclaration();
 		inst.setMembre(vm);
@@ -83,14 +84,14 @@ public class MonteurNXTIM implements MonteurProgramme{
 		IElementProgramme ie = p.depile();
 		IElementProgramme ie2 = p.depile();
 		/* Si correct, stockage du résultat */
-		if(ie instanceof Expression && ie2 instanceof VariableModifiable)
+		if(ie instanceof Expression && ie2 instanceof VariableModifiable) {
 			p.empile(new Affectation((VariableModifiable) ie2, (Expression) ie, true));
+		}
 
 	}
 
 	@Override
 	public void tache(String nom,int nbIns){
-
 		ArrayList<IElementProgramme> lIE= new ArrayList<IElementProgramme>() ;
 		/* Récupération des éléments du corps */
 		for(int i = 1; i<= nbIns ; i++)
@@ -99,8 +100,9 @@ public class MonteurNXTIM implements MonteurProgramme{
 		/* Création du modèle NXTIM correspondant */
 		InstructionTache iTache = new InstructionTache(nom);
 		Iterator<IElementProgramme> i = lIE.iterator();
-		while(i.hasNext())
+		while(i.hasNext()) {
 			iTache.insererFin((Instruction) i.next());
+		}
 		/* Stockage du résulat */
 		p.empile(iTache);
 	}
@@ -109,8 +111,9 @@ public class MonteurNXTIM implements MonteurProgramme{
 	public void condition(String nom){
 		/* Récupération des deux membres de la condition */
 		ArrayList<IElementProgramme> lEL = new ArrayList<IElementProgramme>();
-		for(int i = 1; i<= 2; i++)
+		for(int i = 1; i<= 2; i++) {
 			lEL.add(p.depile());
+		}
 		Collections.reverse(lEL);
 		/* Création du modèle NXTIM correspondant */
 		Condition cond = new Condition(convOperateur(nom), (Expression)lEL.get(0), (Expression)lEL.get(1));
@@ -122,15 +125,17 @@ public class MonteurNXTIM implements MonteurProgramme{
 	public void bwhile(int nbArg){
 		ArrayList<IElementProgramme> lEL = new ArrayList<IElementProgramme>();
 		/* Récupération des éléments du corps */
-		for(int i = 1; i<= nbArg; i++)
+		for(int i = 1; i<= nbArg; i++) {
 			lEL.add(p.depile());
+		}
 		/* Récupération de la condition */
 		Condition cond = (Condition) p.depile();
 		/* Construction du modèle NXTIM correspondant */
 		Collections.reverse(lEL);
 		InstructionWhile insWhile = new InstructionWhile(cond);
-		for(IElementProgramme ie : lEL)
+		for(IElementProgramme ie : lEL) {
 			insWhile.insererFin((Instruction)ie);
+		}
 		/* Stocker le résultat */
 		p.empile(insWhile);
 	}
@@ -139,15 +144,17 @@ public class MonteurNXTIM implements MonteurProgramme{
 	public void si(int nbArg){
 		/* Récupération des éléments du corps */
 		ArrayList<IElementProgramme> lEL = new ArrayList<IElementProgramme>();
-		for(int i = 1; i<= nbArg; i++)
+		for(int i = 1; i<= nbArg; i++) {
 			lEL.add(p.depile());
+		}
 		/* Récupération de la condition */
 		Condition cond = (Condition) p.depile();
 		/* Construction du modèle NXTIM correspondant */
 		Collections.reverse(lEL);
 		InstructionIf insIf = new InstructionIf(cond);
-		for(IElementProgramme ie : lEL)
+		for(IElementProgramme ie : lEL) {
 			insIf.insererFin((Instruction)ie);
+		}
 		/* Stockage du résultat */
 		p.empile(insIf);
 	}
@@ -158,21 +165,25 @@ public class MonteurNXTIM implements MonteurProgramme{
 		ArrayList<IElementProgramme> lELIf = new ArrayList<IElementProgramme>();
 		ArrayList<IElementProgramme> lELElse = new ArrayList<IElementProgramme>();
 		/* Récupération des membres du else */
-		for(int i = 1; i<= nbArg2; i++)
+		for(int i = 1; i<= nbArg2; i++) {
 			lELIf.add(p.depile());
+		}
 		Collections.reverse(lELIf);
 		/* Récupération des membres du if */
-		for(int i = 1; i<= nbArg1; i++)
+		for(int i = 1; i<= nbArg1; i++) {
 			lELElse.add(p.depile());
+		}
 		Collections.reverse(lELElse);
 		/* Récupération de la condition */
 		Condition cond = (Condition) p.depile();
 		/* Création du modèle NXTIM correspondant */
 		InstructionIfElse insIfElse = new InstructionIfElse(cond);
-		for(IElementProgramme ie : lELIf)
+		for(IElementProgramme ie : lELIf) {
 			insIfElse.insererFinElse((Instruction)ie);
-		for(IElementProgramme ie : lELElse)
+		}
+		for(IElementProgramme ie : lELElse) {
 			insIfElse.insererFinIf((Instruction)ie);
+		}
 		/* Stokage du résultat */
 		p.empile(insIfElse);
 
@@ -215,8 +226,9 @@ public class MonteurNXTIM implements MonteurProgramme{
 		Moteur moteur = null;
 		ArrayList<IElementProgramme> lEL = new ArrayList<IElementProgramme>();
 		/* Récupération des arguments */
-		for(int i = 1; i<= nbArg; i++)
+		for(int i = 1; i<= nbArg; i++) {
 			lEL.add(p.depile());
+		}
 		Collections.reverse(lEL);
 		/* Construction du modèle NXTIM correspondant */
 		if(nom.equals("OnFwd")){
@@ -238,12 +250,15 @@ public class MonteurNXTIM implements MonteurProgramme{
 	}
 
 	private Moteur chercheMoteur(String iElementProgramme){
-		if(iElementProgramme.equals("OUT_A"))
+		if(iElementProgramme.equals("OUT_A")) {
 			return Moteur.A;
-		else if(iElementProgramme.equals("OUT_B"))
+		}
+		else if(iElementProgramme.equals("OUT_B")) {
 			return Moteur.B;
-		else
+		}
+		else {
 			return Moteur.C;
+		}
 	}
 	
 	@Override
@@ -261,56 +276,77 @@ public class MonteurNXTIM implements MonteurProgramme{
 
 	private Operateur convOperateur(String nom){
 
-		if(nom.equals("+"))
+		if(nom.equals("+")) {
 			return Operateur.ADDITION;
-		else if (nom.equals("-"))
+		}
+		else if (nom.equals("-")) {
 			return Operateur.SOUSTRACTION;
-		else if (nom.equals("*"))
+		}
+		else if (nom.equals("*")) {
 			return Operateur.MULTIPLICATION;
-		else if (nom.equals("/"))
+		}
+		else if (nom.equals("/")) {
 			return Operateur.DIVISION;
-		else if (nom.equals("<="))
+		}
+		else if (nom.equals("<=")) {
 			return Operateur.INFEGAL;
-		else if (nom.equals(">="))
+		}
+		else if (nom.equals(">=")) {
 			return Operateur.SUPEGAL;
-		else if (nom.equals(">"))
+		}
+		else if (nom.equals(">")) {
 			return Operateur.SUPERIEUR;
-		else if (nom.equals("<"))
+		}
+		else if (nom.equals("<")) {
 			return Operateur.INFERIEUR;
-		else if (nom.equals("OU"))
+		}
+		else if (nom.equals("OU")) {
 			return Operateur.OU;
-		else if (nom.equals("ET"))
+		}
+		else if (nom.equals("ET")) {
 			return Operateur.ET;
+		}
 		return Operateur.EGALITE;
 	}
 
 	private TypeVariable typeConvert(String type){
-
-		if(type.equals("int"))
+		if(type.equals("int")) {
 			return TypeVariable.INT;
-		else if(type.equals("float"))
+		}
+		else if(type.equals("float")) {
 			return TypeVariable.FLOAT;
-		else if(type.equals("boolean"))
+		}
+		else if(type.equals("boolean")) {
 			return TypeVariable.BOOL;
-		else if(type.equals("short"))
+		}
+		else if(type.equals("short")) {
 			return TypeVariable.SHORT;
-		else if(type.equals("long"))
+		}
+		else if(type.equals("long")) {
 			return TypeVariable.LONG;
-		else if(type.equals("list"))
+		}
+		else if(type.equals("list")) {
 			return TypeVariable.LIST;
-		else
-			return TypeVariable.STRING;
+		}
+		return TypeVariable.STRING;
 	}
 
 	public static boolean isInteger(String s, int radix) {
-
-		if(s.isEmpty()) return false;
+		if(s.isEmpty()) {
+			return false;
+		}
 		for(int i = 0; i < s.length(); i++) {
 			if(i == 0 && s.charAt(i) == '-') {
-				if(s.length() == 1) return false;
-				else continue;
+				if(s.length() == 1) {
+					return false;
+				}
+				else {
+					continue;
+				}
 			}
-			if(Character.digit(s.charAt(i),radix) < 0) return false;
+			if(Character.digit(s.charAt(i),radix) < 0) {
+				return false;
+			}
 		}
 		return true;
 	}

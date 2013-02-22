@@ -1,15 +1,18 @@
 package jscratch.vue.sim;
 
 import java.awt.FlowLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.*;
-
 import de.javasoft.swing.ButtonBar;
 import de.javasoft.swing.SimpleDropDownButton;
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JToggleButton;
 import jscratch.controleur.sim.Simulator;
 import jscratch.dictionnaires.DicoTraces;
 import jscratch.helpers.ImagesHelper;
@@ -67,11 +70,11 @@ public class PanelController extends JPanel {
 		JPopupMenu popupMenu = bDebug.getPopupMenu();
 
 		m1 = new JMenuItem("Afficher les points des capteurs");
-		m2 = new JMenuItem("MenuItem 2");
-		m3 = new JMenuItem("MenuItem 3");
+		m2 = new JMenuItem("Afficher les points des collisions");
+		m1.setActionCommand("PointsCapteurs");
+		m2.setActionCommand("PointsCollisions");
 		popupMenu.add(m1);
 		popupMenu.add(m2);
-		popupMenu.add(m3);
 
 		buttonBar.add(bExec);
 		buttonBar.add(bPause);
@@ -86,7 +89,6 @@ public class PanelController extends JPanel {
 		bStop.addActionListener(listener);
 		m1.addActionListener(listener);
 		m2.addActionListener(listener);
-		m3.addActionListener(listener);
 	}
 
 	/**
@@ -138,8 +140,9 @@ public class PanelController extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceBoutonsSimulateur(((JButton)e.getSource()).getText()));
 		
-			if (e.getActionCommand() == "ExécutionSimulator") {
+			if ("ExécutionSimulator".equals(e.getActionCommand())) {
 				simulation = new GestionSimulation(simulator);
 				bExec.addActionListener(simulation.getListener());
 				bPause.addActionListener(simulation.getListener());
@@ -147,13 +150,20 @@ public class PanelController extends JPanel {
 				this.start();
 				this.startThread();
 			} 
-			else if (e.getActionCommand() == "PauseSimulator") {
+			else if ("PauseSimulator".equals(e.getActionCommand())) {
 				this.pause();
 			}
-			else if (e.getActionCommand() == "StopSimulator") {
+			else if ("StopSimulator".equals(e.getActionCommand())) {
 				this.stop();
 			}
+			else if (e.getActionCommand() == "PointsCapteurs") {
+				simulator.getRobotRenderer().setCapteurs(!simulator.getRobotRenderer().getCapteurs());
+			}
+			else if (e.getActionCommand() == "PointsCollisions") {
+				simulator.getRobotRenderer().setCollisions(!simulator.getRobotRenderer().getCollisions());
+			}
 		}
+		
 		/**
 		 * gerer le debut de la simulation
 		 */

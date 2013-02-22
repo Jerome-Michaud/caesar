@@ -234,14 +234,18 @@ public class ExplorerASTNXC {
 	
 	/* Convertie le nom d'un type de l'arbre généré par le parser en un nom plus lisible */
 	private String convertTypeVar(String typeFromAST) {
-		if(typeFromAST.equals("T_S16") || typeFromAST.equals("T_U16"))
+		if(typeFromAST.equals("T_S16") || typeFromAST.equals("T_U16")) {
 			return "int";
-		if(typeFromAST.equals("T_S32") || typeFromAST.equals("T_U32"))
+		}
+		else if(typeFromAST.equals("T_S32") || typeFromAST.equals("T_U32")) {
 			return "long";
-		if(typeFromAST.equals("T_FLOAT"))
+		}
+		else if(typeFromAST.equals("T_FLOAT")) {
 			return "float";
-		if(typeFromAST.equals("T_STRING"))
+		}
+		else if(typeFromAST.equals("T_STRING")) {
 			return "string";
+		}
 		return "";
 	}
 }

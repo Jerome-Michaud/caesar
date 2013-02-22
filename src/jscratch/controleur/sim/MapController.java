@@ -2,7 +2,6 @@ package jscratch.controleur.sim;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
-import java.util.List;
 import jscratch.modeles.sim.ColorValue;
 import jscratch.modeles.sim.Map;
 import jscratch.modeles.sim.Robot;
@@ -31,9 +30,9 @@ public class MapController {
 	}
 
 	/**
-	 *
-	 * @param robot
-	 * @return
+	 * Teste si il est possible de déplacer le robot à une position donnée
+	 * @param robot le robot sur la position à tester
+	 * @return true si la position est possible
 	 */
 	public boolean positionPossible(Robot robot) {
 		for (ObstacleShape obs : map.getObstacles()) {
@@ -72,16 +71,6 @@ public class MapController {
 	public ColorValue getColorValue(Point2D point) {
 		Color color = new Color(map.getImageMap().getRGB((int) point.getX(), (int) point.getY()));
 		return ColorValue.getSimilarColor(color);
-	}
-
-	/**
-	 * Récupérer la distance entre un obstacle et le robot
-	 *
-	 * @param point le point dans la map
-	 * @return la couleur la plus proche dans ColorValue
-	 */
-	public Integer getDistanceSonic(List<Point2D> listPoint) {
-		return null;
 	}
 
 	/**

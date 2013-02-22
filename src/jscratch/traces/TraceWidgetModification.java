@@ -113,9 +113,9 @@ public class TraceWidgetModification extends Trace {
 	@Override
 	public Element toXml() {
 		Element thisXml =  super.toXml();
-		if(this.widget!=null)
+		if(this.widget!=null) {
 			thisXml.addContent(this.widget.toXml());
-		
+		}
 
 		if (this.widget != null) {
 			thisXml.addContent(this.widget.toXml());

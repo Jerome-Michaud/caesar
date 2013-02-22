@@ -126,7 +126,7 @@ public class Robot{
 	public List<Point2D> getPoints() {
 		
 		List<Point2D> points = new ArrayList<Point2D>();	
-		for(Point2D p : listPoints)
+		for (Point2D p : listPoints)
 		{
 			points.add(p);
 		}
@@ -137,9 +137,9 @@ public class Robot{
 	
 	public Motor getMotor(MotorPort port) {
 		for (Motor m : motors) 
-			if (m.getPort() == port)
+			if (m.getPort() == port) {
 				return m;
-				
+			}
 		return null;
 	}
 		

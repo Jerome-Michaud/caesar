@@ -1,8 +1,6 @@
 package jscratch.helpers;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jscratch.helpers.ErreurHelper;
 import jscratch.parametrages.Variables;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.principales.selecteur.SelecteurFichier;
@@ -44,7 +41,6 @@ public final class CompilateurHelper {
 			String os = System.getProperty("os.name").toLowerCase();
 			List<String> cmd = new LinkedList<String>();
 			if (os.contains("windows")) {
-				//cmd = "cmd.exe /c " + Variables.CHEMIN_ACCES_NBC + " -r -usb " + fichier.getAbsolutePath();
 				cmd.add(Variables.CHEMIN_ACCES_NBC);
 				if (exec) {
 					cmd.add("-r");
@@ -53,9 +49,10 @@ public final class CompilateurHelper {
 				}
 				cmd.add("-usb");
 				cmd.add(fichier.getAbsolutePath());
-			} else {
-				//cmd = "./" + Variables.CHEMIN_ACCES_NBC + " -r -usb " + fichier.getAbsolutePath();
 			}
+			/*else {
+				//cmd = "./" + Variables.CHEMIN_ACCES_NBC + " -r -usb " + fichier.getAbsolutePath();
+			}*/
 			//cmd = "C:\\Users\\Bastien\\Documents\\NetBeansProjects\\jScratchPlusPlus\\compilateur\\nbc.exe -r -usb C:\\Users\\Bastien\\Desktop\\test.nxc";
 			//Runtime.getRuntime().exec(cmd);
 			GUI.getPanelCompilateur().ecrireDateEtHeure();
@@ -68,7 +65,7 @@ public final class CompilateurHelper {
 			try {
 				p.waitFor();
 			} catch (InterruptedException ex) {
-				Logger.getLogger(CompilateurHelper.class.getName()).log(Level.SEVERE, null, ex);
+				ErreurHelper.afficher(ex);
 			}
 		} catch (IOException ex) {
 			ErreurHelper.afficher(ex);
@@ -103,13 +100,13 @@ public final class CompilateurHelper {
 		@Override
 		public void run() {
 			BufferedReader br = getBufferedReader(inputStream);
-			String ligne = "";
+			String ligne;
 			try {
 				while ((ligne = br.readLine()) != null) {
 					GUI.getPanelCompilateur().ecrireNouvelleLigneInfo(ligne);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				ErreurHelper.afficher(e);
 			}
 		}
 	}

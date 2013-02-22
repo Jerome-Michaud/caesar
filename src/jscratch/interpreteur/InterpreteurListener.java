@@ -3,11 +3,6 @@ package jscratch.interpreteur;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
-import jscratch.dictionnaires.DicoTraces;
-import jscratch.traces.fabriques.FabriqueTrace;
-
 /**
  * Classe pour la gestion des appuis sur les boutons pour l'Interpreteur.
  * 
@@ -26,13 +21,10 @@ public class InterpreteurListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceBoutonsSimulateur(((JButton)e.getSource()).getText()));
-	
-		if (e.getActionCommand() == "PauseSimulator") {
+		if ("PauseSimulator".equals(e.getActionCommand())) {
 			this.waitNotifyThread();
 		}
-		else if (e.getActionCommand() == "StopSimulator") {
-			System.out.println("Stop");
+		else if ("StopSimulator".equals(e.getActionCommand())) {
 			this.stopThread();
 		}
 	}
@@ -43,11 +35,9 @@ public class InterpreteurListener implements ActionListener {
 	private void waitNotifyThread(){
 		if (!waitnotify) {
 			this.waitnotify = true;
-			System.out.println("Wait");
 			simulation.waitThread();
 		} else {
 			simulation.notifyThread();
-			System.out.println("ReStart");
 			this.waitnotify = false;
 			
 		}
