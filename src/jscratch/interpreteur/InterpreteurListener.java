@@ -26,12 +26,10 @@ public class InterpreteurListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceBoutonsSimulateur(((JButton)e.getSource()).getText()));
-	
-		if (e.getActionCommand() == "PauseSimulator") {
+		if ("PauseSimulator".equals(e.getActionCommand())) {
 			this.waitNotifyThread();
 		}
-		else if (e.getActionCommand() == "StopSimulator") {
+		else if ("StopSimulator".equals(e.getActionCommand())) {
 			System.out.println("Stop");
 			this.stopThread();
 		}

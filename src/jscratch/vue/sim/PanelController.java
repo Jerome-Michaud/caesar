@@ -138,8 +138,9 @@ public class PanelController extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceBoutonsSimulateur(((JButton)e.getSource()).getText()));
 		
-			if (e.getActionCommand() == "ExécutionSimulator") {
+			if ("ExécutionSimulator".equals(e.getActionCommand())) {
 				simulation = new GestionSimulation(simulator);
 				bExec.addActionListener(simulation.getListener());
 				bPause.addActionListener(simulation.getListener());
@@ -147,13 +148,14 @@ public class PanelController extends JPanel {
 				this.start();
 				this.startThread();
 			} 
-			else if (e.getActionCommand() == "PauseSimulator") {
+			else if ("PauseSimulator".equals(e.getActionCommand())) {
 				this.pause();
 			}
-			else if (e.getActionCommand() == "StopSimulator") {
+			else if ("StopSimulator".equals(e.getActionCommand())) {
 				this.stop();
 			}
 		}
+		
 		/**
 		 * gerer le debut de la simulation
 		 */
