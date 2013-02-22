@@ -1,4 +1,4 @@
 REM Passer en paramètre, le fichier nxc
-.\nbc.exe -r -usb %1
+.\nbc.exe -r -usb program.nxc
 PAUSE
 EXIT

@@ -1,6 +1,5 @@
 package jscratch.vue.ginterface.principales;
 
-import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaRootPaneUI;
 import de.javasoft.swing.JYDockingPort;
 import de.javasoft.swing.JYDockingView;
@@ -8,12 +7,16 @@ import de.javasoft.swing.jydocking.DockingManager;
 import de.javasoft.swing.jydocking.IDockingConstants;
 import de.javasoft.swing.plaf.jydocking.DefaultFloatAction;
 import de.javasoft.swing.plaf.jydocking.DefaultMaximizeAction;
+import de.javasoft.swing.plaf.jydocking.DefaultMinimizeAction;
 import java.awt.BorderLayout;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -47,36 +50,38 @@ public final class ApplicationUI extends JFrame {
 	 * Le
 	 * <code>DockingPort</code>.
 	 */
-	private JYDockingPort viewport;
+	private JYDockingPort viewport,viewCodeCompil;
 	/**
 	 * Les différents
 	 * <code>DockingView</code>.
 	 */
-	private JYDockingView zoneCodeGraphique, zoneCodeConsole, zoneSimulateur;
+	private JYDockingView zoneCodeGraphique, zoneCodeConsole, zoneSimulateur,zoneCompilateur;
 
 	/**
 	 * Constructeur privé de
 	 * <code>ApplicationUI</code>.
 	 */
 	private ApplicationUI() {
-		SyntheticaLookAndFeel.setWindowsDecorated(false);
 		this.setTitle("C.A.E.S.A.R");
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
 
 		if (this.getRootPane().getUI() instanceof SyntheticaRootPaneUI) {
 			((SyntheticaRootPaneUI) this.getRootPane().getUI()).setMaximizedBounds(this);
 		}
 
 		this.setMinimumSize(new Dimension(800, 500));
-		this.setSize(1200, 800);
 		if (!System.getProperty("os.name").toLowerCase().contains("windows")) {
 			this.setExtendedState(MAXIMIZED_BOTH);
+		} else {
+			Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
+			this.setSize((int) (tailleEcran.getWidth() * 0.7), (int) (tailleEcran.getHeight() * 0.7));
 		}
 
 		this.setJMenuBar(Menu.getInstance());
 
-		add(creerDocking());
+		add(creerDocking(),BorderLayout.CENTER);
 
 		DockingManager.setTabReorderByDraggingEnabled(false);
 
@@ -86,7 +91,7 @@ public final class ApplicationUI extends JFrame {
 				DockingManager.unregisterDockable("zoneCodeGraphique-SimpleDocking");
 				DockingManager.unregisterDockable("zoneSimulateur-SimpleDocking");
 				DockingManager.unregisterDockable("zoneCodeConsole-SimpleDocking");
-				
+
 				SessionHelper.quitter();
 			}
 		});
@@ -101,8 +106,8 @@ public final class ApplicationUI extends JFrame {
 		this.setLocationRelativeTo(null);
 	}
 
-	public JYDockingPort getViewport() {
-		return viewport;
+	public JYDockingView getViewport() {
+		return zoneCodeGraphique;
 	}
 
 	/**
@@ -115,12 +120,14 @@ public final class ApplicationUI extends JFrame {
 		zoneCodeGraphique = creerZoneEdition();
 		zoneCodeConsole = creerZoneCodeConsole();
 		zoneSimulateur = creerZoneSimulation();
-
+		zoneCompilateur = creerZoneCompilateur();
 		viewport = new JYDockingPort();
 		viewport.dock(zoneCodeGraphique, IDockingConstants.CENTER_REGION);
 
 		zoneCodeGraphique.dock(zoneCodeConsole, IDockingConstants.EAST_REGION, .8f);
 		zoneCodeGraphique.dock(zoneSimulateur, IDockingConstants.CENTER_REGION, .7f);
+		
+		zoneCodeConsole.dock(zoneCompilateur, IDockingConstants.SOUTH_REGION, .7f);
 
 		zoneCodeGraphique.getDockingPort().setTabPlacement(SwingConstants.BOTTOM);
 		zoneCodeGraphique.getDockingPort().setSelectedTabIndex(0);
@@ -128,7 +135,7 @@ public final class ApplicationUI extends JFrame {
 		JPanel p = new JPanel(new BorderLayout(0, 0));
 		p.setBorder(new EmptyBorder(5, 5, 5, 5));
 		p.add(viewport, BorderLayout.CENTER);
-
+		
 		return p;
 	}
 
@@ -179,6 +186,22 @@ public final class ApplicationUI extends JFrame {
 		view.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));
 		view.setContentPane(GUI.getPanelCodeConsole());
 		view.setDraggingEnabled(false);
+		return view;
+	}
+
+	/**
+	 * Permet de créer la zone simulateur
+	 * <code>CodeConsole</code>.
+	 *
+	 * @since 1.0
+	 */
+	private JYDockingView creerZoneCompilateur() {
+		JYDockingView view = new JYDockingView("zoneCompilateur-SimpleDocking", "Compilateur", "Compilateur");
+		view.addAction(new DefaultMinimizeAction(view));
+		view.setIcon(ImagesHelper.getIcon("terminal.png"));
+		view.setDockbarIcon(ImagesHelper.getIcon("terminal.png"));
+		view.setContentPane(GUI.getPanelCompilateur());
+		view.setDraggingEnabled(true);
 		return view;
 	}
 

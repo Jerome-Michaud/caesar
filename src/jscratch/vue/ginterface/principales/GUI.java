@@ -9,6 +9,7 @@ import jscratch.vue.ginterface.principales.panels.PanelCodeGraphique;
 import jscratch.vue.ginterface.principales.panels.PanelWidget;
 import jscratch.vue.ginterface.principales.panels.PanelInstruction;
 import javax.swing.JPopupMenu;
+import jscratch.vue.ginterface.principales.panels.PanelCompilateur;
 import jscratch.vue.ginterface.principales.panels.ZoneSimulateur;
 import jscratch.vue.ginterface.principales.popups.PopupCodeNxc;
 
@@ -47,6 +48,15 @@ public final class GUI {
 	 */
 	public static PanelCodeConsole getPanelCodeConsole() {
 		return PanelCodeConsole.getInstance();
+	}
+
+	/**
+	 * Permet de récupérer la <code>PanelCompilateur</code>.
+	 * 
+	 * @return le panel compilateur
+	 */
+	public static PanelCompilateur getPanelCompilateur() {
+		return PanelCompilateur.getInstance();
 	}
 
 	/**

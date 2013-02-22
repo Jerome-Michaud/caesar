@@ -11,6 +11,7 @@ import jscratch.controleur.sim.ForwardCommand;
 import jscratch.controleur.sim.RobotController;
 import jscratch.controleur.sim.Simulator;
 import jscratch.controleur.sim.StopCommand;
+import jscratch.helpers.ErreurHelper;
 import jscratch.modeles.sim.MotorPort;
 import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.sim.ObservableInterpreteur;
@@ -125,7 +126,6 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				// TODO Stub de la méthode généré automatiquement
 				Variable var = inst.getMembre();
 				if (var != null) {
 					//TODO mettre la variable dans la table des variables
@@ -133,7 +133,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -145,7 +145,6 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				this.sleepThread();
 				Variable var = inst.getMembre();
 				if (var != null) {
-					//TODO mettre la variable dans la table des variables
 					Expression exp = inst.getMembreDroit();
 					if (exp != null) {
 						exp.accepte(this);
@@ -155,7 +154,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -165,7 +164,6 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				// TODO Enlevés les warning	
 				ExpressionComplexe cond = inst.getCondition();
 				if (cond != null) {
 					cond.accepte(this);
@@ -180,7 +178,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -190,7 +188,6 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				// TODO Enlevés les warning	
 				ExpressionComplexe cond = inst.getCondition();
 				if (cond != null) {
 					cond.accepte(this);
@@ -209,7 +206,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -223,7 +220,6 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				// TODO Enlevés les warning	
 				ExpressionComplexe cond = inst.getCondition();
 		
 				if (cond != null) {
@@ -240,7 +236,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -265,7 +261,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -282,7 +278,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -296,7 +292,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -306,7 +302,6 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				// TODO Enlevés les warning
 				Expression ex = inst.getExpression();
 				if (ex != null) {
 					ex.accepte(this);
@@ -328,7 +323,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -346,7 +341,6 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				if (ex != null) {
 					ex.accepte(this);
 				}
-		
 				Moteur moteur = inst.getMoteur();
 				double i = pile.pop();
 				System.out.println("Creation de la commande Forward : (" + i + " , " + moteur.toString() + ")");
@@ -356,7 +350,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -378,13 +372,14 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
 	/**
 	 * execute un For
-	 *
+	 * 
+	 * @param inst 
 	 */
 	@Override
 	public void visiter(InstructionFor inst) {
@@ -419,7 +414,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -448,7 +443,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -461,7 +456,6 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				// TODO CHangé la sortie d'erreur
 				if (!"".equals(var.getValeur())) {
 					pile.push(Double.parseDouble(var.getValeur()));
 				} else {
@@ -471,7 +465,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -489,8 +483,6 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				if (md != null) {
 					md.accepte(this);
 					d = pile.pop();
-				} else {
-					//TODO Emettre une erreur
 				}
 				if (mg != null) {
 					mg.setValeur("" + d);
@@ -501,7 +493,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -521,15 +513,11 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 					mda.accepte(this);
 					d = pile.pop();
 		
-				} else {
-					//TODO Emettre une erreur
 				}
 		
 				if (mdg != null) {
 					mdg.accepte(this);
 					g = pile.pop();
-				} else {
-					//TODO Emettre une erreur
 				}
 		
 				switch (opt) {
@@ -604,7 +592,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
@@ -652,11 +640,11 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 					d--;
 				}
 				
-				var.setValeur(""+d);
+				var.setValeur(String.valueOf(d));
 			}
 		}
 		catch(Exception e){
-			//System.out.println("Exception");
+			ErreurHelper.afficherSansSortie(e);
 		}		
 	}
 	
@@ -669,26 +657,18 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch (InterruptedException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
+			ErreurHelper.afficherSansSortie(e);
 		}
 	}
 
 	@Override
-	public void visiter(ValeurCapteur valCapteur) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+	public void visiter(ValeurCapteur valCapteur) { }
 
 	@Override
-	public void visiter(RotationMoteur rotMoteur) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+	public void visiter(RotationMoteur rotMoteur) { }
 
 	@Override
-	public void visiter(InstructionRAZRotationMoteur razMoteur) {
-		// TODO exécution razRotateMotor
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
+	public void visiter(InstructionRAZRotationMoteur razMoteur) { }
 	
 	@Override
 	public void addObserver(ObserverInterpreteur o) {
@@ -741,8 +721,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				sleepwait = false;
 				this.wait((long) time);
 			} catch (InterruptedException e) {
-				// TODO Bloc catch généré automatiquement
-				e.printStackTrace();
+				ErreurHelper.afficherSansSortie(e);
 			}
 		}
 	}
@@ -756,8 +735,5 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	}
 
 	@Override
-	public void visiter(InstructionConfigCapteurs confCapt) {
-		// TODO Stub de la méthode généré automatiquement
-		
-	}
+	public void visiter(InstructionConfigCapteurs confCapt) { }
 }

@@ -1,7 +1,7 @@
 package jscratch.traces.fabriques;
 
 import java.io.File;
-import jscratch.exceptions.IncompatibleTypeForTrace;
+import jscratch.exceptions.IncompatibleTypeForTraceException;
 import jscratch.helpers.ErreurHelper;
 import jscratch.traces.Trace;
 import jscratch.traces.TraceCategorieChangement;
@@ -64,7 +64,7 @@ public class FabriqueTrace {
 	private static Trace creerTraceFichier(final TypeTrace type, final File fichier) {
 		try {
 			return new TraceFichier(type, fichier);
-		} catch (IncompatibleTypeForTrace ex) {
+		} catch (IncompatibleTypeForTraceException ex) {
 			ErreurHelper.afficher(ex);
 		}
 		return null;

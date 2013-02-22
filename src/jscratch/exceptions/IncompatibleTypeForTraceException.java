@@ -4,12 +4,12 @@ package jscratch.exceptions;
  * @since 1.0
  * @version 1.0
  */
-public class IncompatibleTypeForTrace extends Exception {
+public class IncompatibleTypeForTraceException extends Exception {
 
 	/**
 	 * Constructeur par défaut de <code>IncompatibleTypeForTrace</code>.
 	 */
-	public IncompatibleTypeForTrace() {
+	public IncompatibleTypeForTraceException() {
 		super();
 	}
 	
@@ -18,7 +18,7 @@ public class IncompatibleTypeForTrace extends Exception {
 	 * 
 	 * @param msg le message
 	 */
-	public IncompatibleTypeForTrace(final String msg) {
+	public IncompatibleTypeForTraceException(final String msg) {
 		super(msg);
 	}
 }

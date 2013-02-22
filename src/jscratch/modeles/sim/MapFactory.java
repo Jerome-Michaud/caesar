@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import jscratch.helpers.ErreurHelper;
 
 import jscratch.modeles.sim.collision.CouleurObstacle;
 import jscratch.modeles.sim.collision.ObstacleEllipse;
@@ -15,8 +16,6 @@ import jscratch.modeles.sim.collision.ObstacleShape;
 import jscratch.utils.sim.XMLUtils;
 
 import org.w3c.dom.Element;
-
-
 
 /**
  * Factory pour la création des maps
@@ -32,23 +31,21 @@ public class MapFactory {
 	 */
 	public static Map createMapFromXML(File xmlFile) {				
 		// Lecture du fichier XML
-		Element racine;
+		Element racine = null;
 		try {
 			racine = XMLUtils.getDocumentRoot(xmlFile);
 		} catch (Exception e) {
-			System.err.println("Erreur lors du chargement du fichier XML de la map : " + e.getMessage());
-			return null;
+			ErreurHelper.afficher(e);
 		}
 
 		// Chargement de l'image
 		Element imageElement = XMLUtils.getChild(racine, "image");
 
-		BufferedImage image;
+		BufferedImage image = null;
 		try {
 			image = ImageIO.read(new File(XMLUtils.getValue(imageElement)));
 		} catch (Exception e) {
-			System.err.println("Erreur lors du chargement de l'image de la map : " + e.getMessage());
-			return null;
+			ErreurHelper.afficher(e);
 		}
 
 		// Création de la liste d'obstacle
@@ -57,15 +54,17 @@ public class MapFactory {
 		
 		if (obstacles != null) {
 			for (Element e : XMLUtils.getChildren(obstacles)) {
-				if (e.getNodeName().equals("rectangle"))				
+				if (e.getNodeName().equals("rectangle")) {			
 					listeObstacle.add(new ObstacleRectangle(e));
-				if (e.getNodeName().equals("ellipse"))				
+				}
+				else if (e.getNodeName().equals("ellipse")) {
 					listeObstacle.add(new ObstacleEllipse(e));
-				if (e.getNodeName().equals("polygon"))				
+				}
+				else if (e.getNodeName().equals("polygon")) {
 					listeObstacle.add(new ObstaclePolygon(e));
+				}
 			}
 		}			
-
 		return new Map(image, listeObstacle);
 	}
 }

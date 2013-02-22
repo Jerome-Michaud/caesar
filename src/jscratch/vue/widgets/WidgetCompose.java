@@ -38,6 +38,7 @@ public class WidgetCompose extends Widget implements IWidget {
 	/*@Override
 	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
+		g.setColor(Color.red);
 		for(Rectangle r : mapZone.keySet()){
 			g.drawRect((int)r.getX(),(int) r.getY(), (int)r.getWidth(),(int)r.getHeight());
 		}
@@ -202,6 +203,9 @@ public class WidgetCompose extends Widget implements IWidget {
 		for (Rectangle r : this.mapZone.keySet()) {
 			if (r.y > y) {
 				map.put(r, diff);
+				for(Widget w : mapZone.get(r)){
+					w.setLocation(w.getX(), w.getY()+diff);
+				}
 			}
 		}
 	}

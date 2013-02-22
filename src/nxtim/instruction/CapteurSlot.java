@@ -14,13 +14,13 @@ public enum CapteurSlot {
 	public String toString() {
 		switch (this) {
 			case A:
-				return "Slot A";
+				return "Port 1";
 			case B:
-				return "Slot B";
+				return "Port 2";
 			case C:
-				return "Slot C";
+				return "Port 3";
 			case D:
-				return "Slot D";
+				return "Port 4";
 			default:
 				return null;
 		}

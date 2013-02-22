@@ -2,6 +2,7 @@ package jscratch;
 
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -17,7 +18,7 @@ public class Scratch {
 	 * Permet le lancement du programme
 	 *
 	 * @since 1.0
-	 * 
+	 *
 	 * @param args les paramètres du programme.
 	 */
 	public static void main(String[] args) {
@@ -31,13 +32,13 @@ public class Scratch {
 			String[] li2 = {"Licensee=Bastien Andru", "LicenseRegistrationNumber=NCBA130131", "Product=SyntheticaAddons", "LicenseType=Non Commercial", "ExpireDate=--.--.----", "MaxVersion=1.999.999"};
 			UIManager.put("SyntheticaAddons.license.info", li2);
 			UIManager.put("SyntheticaAddons.license.key", "664973DE-55A50F80-8176ABB3-2BAFF4B7-5F2EEDB2");
-			
+
 			try {
 				// ajout de l'anti-aliasing sur le texte
 				System.setProperty("swing.aatext", "true");
-				
-				SyntheticaLookAndFeel.setWindowsDecorated(false);
 				// Changement du look and feel
+				SyntheticaLookAndFeel.setWindowsDecorated(false);
+				UIManager.put("Synthetica.window.decoration", false);
 				UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
 			} catch (UnsupportedLookAndFeelException ex) {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -46,16 +47,15 @@ public class Scratch {
 		} catch (Exception ex) {
 			ErreurHelper.afficher(ex);
 		}
-		
+
 		// Interface de paramétrage
 		if (args.length > 0 && "param".equals(args[0])) {
 			ParametrageUI.getInstance();
-		}
-		// Interface utilisateur
+		} // Interface utilisateur
 		else {
 			DicoBoutonsCategories.getInstance();
 			DicoWidgetsCategories.getInstance().nettoyer();
-		
+
 			GUI.getFenetre();
 		}
 	}

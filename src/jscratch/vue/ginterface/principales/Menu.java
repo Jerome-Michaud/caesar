@@ -140,7 +140,7 @@ public final class Menu extends JMenuBar {
 				new SelecteurFichier(TypeSelecteur.CODE).sauvegarde();
 			}
 			else if (e.getSource() == exportationRobot) {
-				CompilateurHelper.exporter();
+				CompilateurHelper.exporter(false);
 			}
 			else if (e.getSource() == traces) {
 				new SelecteurFichier(TypeSelecteur.TRACES).sauvegarde();

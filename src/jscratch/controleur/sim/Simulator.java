@@ -3,6 +3,7 @@ package jscratch.controleur.sim;
 import java.awt.Graphics;
 import java.io.File;
 import java.util.ArrayList;
+import jscratch.helpers.ErreurHelper;
 
 import jscratch.modeles.sim.Map;
 import jscratch.modeles.sim.MapFactory;
@@ -16,12 +17,11 @@ import jscratch.vue.sim.ObserverPanelController;
 import jscratch.vue.sim.ObserverSimulator;
 import jscratch.vue.sim.RobotRenderer;
 
-
-
 /**
- * Classe qui gère le simulateur
- * @author Guillaume Delorme
- *
+ * Classe qui gère le simulateur.
+ * 
+ * @since 1.0
+ * @version 1.0
  */
 public class Simulator implements Runnable, ObservableSimulator,ObserverInterpreteur {
 	
@@ -126,7 +126,9 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
         	this.testWait();
             // Conversion du temps en secondes
             currTime = (double)System.nanoTime() / 1000000000.0;
-            if((currTime - nextTime) > maxTimeDiff) nextTime = currTime;
+            if((currTime - nextTime) > maxTimeDiff) {
+				nextTime = currTime;
+			}
             if(currTime >= nextTime)
             {
                 // Temps pour la prochaine mise à jour
@@ -158,7 +160,9 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
                     {
                         Thread.sleep(sleepTime);
                     }
-                    catch(InterruptedException e) {}
+                    catch(InterruptedException e) {
+						ErreurHelper.afficherSansSortie(e);
+					}
                 }
             }
         }
@@ -193,8 +197,7 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 				System.out.println("Simulateur = "+Thread.currentThread().getName());
 					this.wait();
 			} catch (InterruptedException e) {
-				// TODO Bloc catch généré automatiquement
-				e.printStackTrace();
+				ErreurHelper.afficherSansSortie(e);
 			}
 		}
 	}

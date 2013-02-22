@@ -21,6 +21,18 @@ public final class ErreurHelper {
 	private ErreurHelper() { }
 
 	/**
+	 * Définit l"action à réaliser quand une erreur non bloquante est rencontrée.
+	 *
+	 * @since 1.0
+	 * 
+	 * @param e l'exception à gérer
+	 */
+	public static void afficherSansSortie(final Exception e) {
+		DetailsDialog.showDialog(GUI.getFenetre(), null, "Une erreur de type '" + e.getClass().getSimpleName() + "' est survenue", e);
+		//e.printStackTrace();
+	}
+	
+	/**
 	 * Définit l"action à réaliser quand une erreur est rencontrée.
 	 *
 	 * @since 1.0
