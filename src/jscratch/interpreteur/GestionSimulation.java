@@ -36,16 +36,16 @@ public class GestionSimulation{
 	 * permet de demarrer le controlleur de la simulation
 	 */
     public void startThread(){
-    	System.out.println("Demarre le controlleur");
-		System.out.println("Controlleur = "+Thread.currentThread().getName());
+    	/*System.out.println("Demarre le controlleur");
+		System.out.println("Controlleur = "+Thread.currentThread().getName());*/
     	executeRunnables(service, runnables);
     }
     /**
 	 * arrete le controller de la simulation
 	 */
 	public void stopThread() {
-		System.out.println("Arret du controller de la simulation");
-		System.out.println("Controlleur = "+Thread.currentThread().getName());
+		/*System.out.println("Arret du controller de la simulation");
+		System.out.println("Controlleur = "+Thread.currentThread().getName());*/
 		interpreteur.stopThread();
 		simulator.stopThread();
 	}
@@ -54,8 +54,8 @@ public class GestionSimulation{
 	 * met la simulation en pause
 	 */
 	public synchronized void waitThread() {
-		System.out.println("Met en attente le controlleur");
-		System.out.println("Controlleur = "+Thread.currentThread().getName());
+		/*System.out.println("Met en attente le controlleur");
+		System.out.println("Controlleur = "+Thread.currentThread().getName());*/
 		interpreteur.waitThread();
 		simulator.waitThread();
 	}
@@ -64,8 +64,8 @@ public class GestionSimulation{
 	 * redemarre la simulation
 	 */
 	public synchronized void notifyThread() {
-		System.out.println("Redemarre le controlleur");
-		System.out.println("Controlleur = "+Thread.currentThread().getName());
+		/*System.out.println("Redemarre le controlleur");
+		System.out.println("Controlleur = "+Thread.currentThread().getName());*/
 		interpreteur.notifyThread();
 		simulator.notifyThread();
 	}

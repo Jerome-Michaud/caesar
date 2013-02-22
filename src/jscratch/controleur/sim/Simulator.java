@@ -105,8 +105,8 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 	@Override
 	public void run() {
 		// Set up the graphics stuff, double-buffering.
-		System.out.println("Demarrage du simulateur");
-		System.out.println("Simulateur = "+Thread.currentThread().getName());		
+	/*	System.out.println("Demarrage du simulateur");
+		System.out.println("Simulateur = "+Thread.currentThread().getName());		*/
 				
 		// Conversion du temps en secondes
         double nextTime = (double)System.nanoTime() / 1000000000.0;
@@ -169,8 +169,8 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
         
         this.notifyObserverPanelController();
 		
-		System.out.println("Arret du simulateur");
-		System.out.println("Simulateur = "+Thread.currentThread().getName());
+	/*	System.out.println("Arret du simulateur");
+		System.out.println("Simulateur = "+Thread.currentThread().getName());*/
 	}
 	
 	@Override
@@ -193,8 +193,8 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 	private synchronized void testWait() {
 		if(wait){
 			try {
-				System.out.println("Met en attente le simulateur");
-				System.out.println("Simulateur = "+Thread.currentThread().getName());
+			/*	System.out.println("Met en attente le simulateur");
+				System.out.println("Simulateur = "+Thread.currentThread().getName());*/
 					this.wait();
 			} catch (InterruptedException e) {
 				ErreurHelper.afficherSansSortie(e);
@@ -210,8 +210,8 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 
 	public synchronized void notifyThread() {
 		this.notify();
-		System.out.println("Redemarre le simulateur");
-		System.out.println("Simulateur = "+Thread.currentThread().getName());
+		/*System.out.println("Redemarre le simulateur");
+		System.out.println("Simulateur = "+Thread.currentThread().getName());*/
 		this.wait = false;
 	}
 	

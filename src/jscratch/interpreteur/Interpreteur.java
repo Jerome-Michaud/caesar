@@ -87,16 +87,16 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	}
 	
 	public void run() {
-		System.out.println("Demarrage de l'interpreteur");
-		System.out.println("Interpreteur = "+Thread.currentThread().getName());
+		/*System.out.println("Demarrage de l'interpreteur");
+		System.out.println("Interpreteur = "+Thread.currentThread().getName());*/
 		while(!stop){
 			for(Instruction l : trouveTaches()){
 				l.accepte(this);
 			}
 			stop=true;
 		}
-		System.out.println("Arret de l'interpreteur");
-		System.out.println("Interpreteur = "+Thread.currentThread().getName());
+	/*	System.out.println("Arret de l'interpreteur");
+		System.out.println("Interpreteur = "+Thread.currentThread().getName());*/
 		this.notifyObserver("End", 0, null);
 	}
 	
@@ -133,7 +133,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -154,7 +156,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -178,7 +182,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -206,7 +212,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -236,7 +244,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -261,7 +271,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -278,7 +290,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -292,7 +306,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -309,10 +325,10 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		
 				double d = pile.pop();
 				timeWait = d;
-				System.out.println("Creation de la commande Attente : (" + d + ")");
+				//System.out.println("Creation de la commande Attente : (" + d + ")");
 				try {
 					timeSleep = System.nanoTime();
-					System.out.println("Interpreteur = "+Thread.currentThread().getName());
+					//System.out.println("Interpreteur = "+Thread.currentThread().getName());
 					synchronized (this) {
 						sleep = true;
 						this.wait((long) d);	
@@ -323,7 +339,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -343,14 +361,16 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				}
 				Moteur moteur = inst.getMoteur();
 				double i = pile.pop();
-				System.out.println("Creation de la commande Forward : (" + i + " , " + moteur.toString() + ")");
+				//System.out.println("Creation de la commande Forward : (" + i + " , " + moteur.toString() + ")");
 				this.notifyObserver("Forward", (int) i, moteurToMotorPort(moteur));
-				System.out.println("Interpreteur = "+Thread.currentThread().getName());
+				//System.out.println("Interpreteur = "+Thread.currentThread().getName());
 				
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -365,14 +385,16 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				this.testWait();
 				this.sleepThread();
 				Moteur moteur = inst.getMoteur();
-				System.out.println("Creation de la commande Off : (" + moteur.toString() + ")");
+				//System.out.println("Creation de la commande Off : (" + moteur.toString() + ")");
 				this.notifyObserver("Stop", 0, moteurToMotorPort(moteur));
-				System.out.println("Interpreteur = "+Thread.currentThread().getName());
+				//System.out.println("Interpreteur = "+Thread.currentThread().getName());
 				
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -414,7 +436,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -443,7 +467,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -465,7 +491,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -493,7 +521,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -592,7 +622,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -644,20 +676,24 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			}
 		}
 		catch(Exception e){
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}		
 	}
 	
 	private synchronized void testWait(){
 		try {
 			if(wait){
-				System.out.println("Met en attente l'interpreteur");
-				System.out.println("interpreteur = "+Thread.currentThread().getName());
+			/*	System.out.println("Met en attente l'interpreteur");
+				System.out.println("interpreteur = "+Thread.currentThread().getName());*/
 				this.wait();
 			}
 		}
 		catch (InterruptedException e) {
-			ErreurHelper.afficherSansSortie(e);
+			if(run){
+				ErreurHelper.afficherSansSortie(e);
+			}
 		}
 	}
 
@@ -706,22 +742,24 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	
 	public synchronized void notifyThread() {
 		this.notify();
-		System.out.println("redemarre l'interpreteur");
-		System.out.println("Interpreteur = "+Thread.currentThread().getName());
+	/*	System.out.println("redemarre l'interpreteur");
+		System.out.println("Interpreteur = "+Thread.currentThread().getName());*/
 		this.wait = false;
 	}
 	
 	public synchronized void sleepThread(){
 		if(sleepwait){
 			double time = timeWait - ((timeInterrupt/1000000000.0-timeSleep/1000000000.0)*1000);
-			System.out.println("Thread endormi en cours - Temps = "+time);
+		//	System.out.println("Thread endormi en cours - Temps = "+time);
 			try {
 				timeWait = time;
 				timeSleep = System.nanoTime();
 				sleepwait = false;
 				this.wait((long) time);
 			} catch (InterruptedException e) {
-				ErreurHelper.afficherSansSortie(e);
+				if(run){
+					ErreurHelper.afficherSansSortie(e);
+				}
 			}
 		}
 	}
