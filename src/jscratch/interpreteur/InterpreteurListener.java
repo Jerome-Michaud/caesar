@@ -41,11 +41,9 @@ public class InterpreteurListener implements ActionListener {
 	private void waitNotifyThread(){
 		if (!waitnotify) {
 			this.waitnotify = true;
-			System.out.println("Wait");
 			simulation.waitThread();
 		} else {
 			simulation.notifyThread();
-			System.out.println("ReStart");
 			this.waitnotify = false;
 			
 		}
