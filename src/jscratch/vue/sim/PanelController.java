@@ -67,11 +67,11 @@ public class PanelController extends JPanel {
 		JPopupMenu popupMenu = bDebug.getPopupMenu();
 
 		m1 = new JMenuItem("Afficher les points des capteurs");
-		m2 = new JMenuItem("MenuItem 2");
-		m3 = new JMenuItem("MenuItem 3");
+		m2 = new JMenuItem("Afficher les points des collisions");
+		m1.setActionCommand("PointsCapteurs");
+		m2.setActionCommand("PointsCollisions");
 		popupMenu.add(m1);
 		popupMenu.add(m2);
-		popupMenu.add(m3);
 
 		buttonBar.add(bExec);
 		buttonBar.add(bPause);
@@ -86,7 +86,6 @@ public class PanelController extends JPanel {
 		bStop.addActionListener(listener);
 		m1.addActionListener(listener);
 		m2.addActionListener(listener);
-		m3.addActionListener(listener);
 	}
 
 	/**
@@ -152,6 +151,12 @@ public class PanelController extends JPanel {
 			}
 			else if (e.getActionCommand() == "StopSimulator") {
 				this.stop();
+			}
+			else if (e.getActionCommand() == "PointsCapteurs") {
+				simulator.getRobotRenderer().setCapteurs(!simulator.getRobotRenderer().getCapteurs());
+			}
+			else if (e.getActionCommand() == "PointsCollisions") {
+				simulator.getRobotRenderer().setCollisions(!simulator.getRobotRenderer().getCollisions());
 			}
 		}
 		/**
