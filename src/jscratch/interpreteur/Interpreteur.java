@@ -6,11 +6,9 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-import jscratch.controleur.sim.Command;
-import jscratch.controleur.sim.ForwardCommand;
 import jscratch.controleur.sim.RobotController;
 import jscratch.controleur.sim.Simulator;
-import jscratch.controleur.sim.StopCommand;
+import jscratch.exceptions.InstructionNonGereeException;
 import jscratch.helpers.ErreurHelper;
 import jscratch.modeles.sim.MotorPort;
 import jscratch.vue.arborescence.ArborescenceTools;
@@ -86,17 +84,14 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		this.sleepwait = false;
 	}
 	
+	@Override
 	public void run() {
-		/*System.out.println("Demarrage de l'interpreteur");
-		System.out.println("Interpreteur = "+Thread.currentThread().getName());*/
 		while(!stop){
 			for(Instruction l : trouveTaches()){
 				l.accepte(this);
 			}
 			stop=true;
 		}
-	/*	System.out.println("Arret de l'interpreteur");
-		System.out.println("Interpreteur = "+Thread.currentThread().getName());*/
 		this.notifyObserver("End", 0, null);
 	}
 	
@@ -127,14 +122,14 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				this.testWait();
 				this.sleepThread();
 				Variable var = inst.getMembre();
-				if (var != null) {
+				/*if (var != null) {
 					//TODO mettre la variable dans la table des variables
-				}
+				}*/
 			}
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -157,7 +152,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -176,14 +171,12 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 							is.accepte(this);
 						}
 					}
-				} else {
-					System.out.println("WARNING : If sans condition ignoré");
 				}
 			}
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -206,14 +199,12 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 							is.accepte(this);
 						}
 					}
-				} else {
-					System.out.println("WARNING : IfElse sans condition ignoré");
 				}
 			}
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -238,14 +229,12 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 						}
 						cond.accepte(this);
 					}
-				} else {
-					System.out.println("WARNING : While sans condition ignoré");
 				}
 			}
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -256,7 +245,6 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				// TODO Enlevés les warning
 				ExpressionComplexe cond = inst.getCondition();
 				if (cond != null) {
 					do {
@@ -265,14 +253,12 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 						}
 						cond.accepte(this);
 					} while (pile.pop() == 1);
-				} else {
-					System.out.println("WARNING : DoWhile sans condition ignoré");
 				}
 			}
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -291,7 +277,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -307,7 +293,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -325,10 +311,8 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		
 				double d = pile.pop();
 				timeWait = d;
-				//System.out.println("Creation de la commande Attente : (" + d + ")");
 				try {
 					timeSleep = System.nanoTime();
-					//System.out.println("Interpreteur = "+Thread.currentThread().getName());
 					synchronized (this) {
 						sleep = true;
 						this.wait((long) d);	
@@ -340,7 +324,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -361,15 +345,12 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				}
 				Moteur moteur = inst.getMoteur();
 				double i = pile.pop();
-				//System.out.println("Creation de la commande Forward : (" + i + " , " + moteur.toString() + ")");
 				this.notifyObserver("Forward", (int) i, moteurToMotorPort(moteur));
-				//System.out.println("Interpreteur = "+Thread.currentThread().getName());
-				
 			}
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -385,15 +366,12 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				this.testWait();
 				this.sleepThread();
 				Moteur moteur = inst.getMoteur();
-				//System.out.println("Creation de la commande Off : (" + moteur.toString() + ")");
 				this.notifyObserver("Stop", 0, moteurToMotorPort(moteur));
-				//System.out.println("Interpreteur = "+Thread.currentThread().getName());
-				
 			}
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -424,20 +402,14 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 								iter.accepte(this);
 								cond.accepte(this);
 							}
-						} else {
-							System.out.println("WARNING : For sans iteration ignoré");
 						}
-					} else {
-						System.out.println("WARNING : For sans condition ignoré");
 					}
-				} else {
-					System.out.println("WARNING : For sans initialisation ignoré");
 				}
 			}
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -468,7 +440,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -486,13 +458,12 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 					pile.push(Double.parseDouble(var.getValeur()));
 				} else {
 					pile.push((double) 0);
-					System.out.println("WARNING : Variable vide");
 				}
 			}
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -522,7 +493,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -623,7 +594,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -677,7 +648,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 		}
 		catch(Exception e){
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}		
 	}
@@ -685,14 +656,12 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	private synchronized void testWait(){
 		try {
 			if(wait){
-			/*	System.out.println("Met en attente l'interpreteur");
-				System.out.println("interpreteur = "+Thread.currentThread().getName());*/
 				this.wait();
 			}
 		}
 		catch (InterruptedException e) {
 			if(run){
-				ErreurHelper.afficherSansSortie(e);
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
 		}
 	}
@@ -742,15 +711,12 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	
 	public synchronized void notifyThread() {
 		this.notify();
-	/*	System.out.println("redemarre l'interpreteur");
-		System.out.println("Interpreteur = "+Thread.currentThread().getName());*/
 		this.wait = false;
 	}
 	
 	public synchronized void sleepThread(){
 		if(sleepwait){
 			double time = timeWait - ((timeInterrupt/1000000000.0-timeSleep/1000000000.0)*1000);
-		//	System.out.println("Thread endormi en cours - Temps = "+time);
 			try {
 				timeWait = time;
 				timeSleep = System.nanoTime();
@@ -758,7 +724,7 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 				this.wait((long) time);
 			} catch (InterruptedException e) {
 				if(run){
-					ErreurHelper.afficherSansSortie(e);
+					ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 				}
 			}
 		}

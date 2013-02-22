@@ -1,15 +1,18 @@
 package jscratch.vue.sim;
 
 import java.awt.FlowLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.*;
-
 import de.javasoft.swing.ButtonBar;
 import de.javasoft.swing.SimpleDropDownButton;
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JToggleButton;
 import jscratch.controleur.sim.Simulator;
 import jscratch.dictionnaires.DicoTraces;
 import jscratch.helpers.ImagesHelper;
