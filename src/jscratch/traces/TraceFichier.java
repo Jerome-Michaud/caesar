@@ -2,7 +2,7 @@ package jscratch.traces;
 
 import java.io.File;
 import java.io.IOException;
-import jscratch.exceptions.IncompatibleTypeForTrace;
+import jscratch.exceptions.IncompatibleTypeForTraceException;
 import jscratch.helpers.ErreurHelper;
 import org.jdom2.Element;
 
@@ -20,11 +20,11 @@ public class TraceFichier extends Trace {
 	/**
 	 * Default constructor of <code>TraceSauvegarde</code>.
 	 */
-	public TraceFichier(final TypeTrace type, final File fichier) throws IncompatibleTypeForTrace {
+	public TraceFichier(final TypeTrace type, final File fichier) throws IncompatibleTypeForTraceException {
 		super(type);
 		
 		if (!type.isTraceFichier()) {
-			throw new IncompatibleTypeForTrace("Le type choisi pour cet objet n'est pas compatible (FICHIER_SAUVEGARDE ou FICHIER_CHARGEMENT ou ROBOT_ENVOI)");
+			throw new IncompatibleTypeForTraceException("Le type choisi pour cet objet n'est pas compatible (FICHIER_SAUVEGARDE ou FICHIER_CHARGEMENT ou ROBOT_ENVOI)");
 		}
 		
 		this.fichier = fichier;

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import jscratch.helpers.ImagesHelper;
 import jscratch.helpers.PropertiesHelper;
 import jscratch.vue.ginterface.parametrages.panels.PanelAutres;
@@ -68,6 +69,8 @@ public final class ParametrageUI extends JFrame {
 				PanelTraces.getInstance().update();
 				
 				PropertiesHelper.getInstance().sauvegarder();
+				
+				JOptionPane.showMessageDialog(instance, "La sauvegarde a correctement été réalisée", "Sauvegarde terminée", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		
