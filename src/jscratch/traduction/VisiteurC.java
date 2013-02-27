@@ -21,6 +21,7 @@ import nxtim.instruction.InstructionRAZRotationMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.InstructionWhile;
+import nxtim.instruction.Operateur;
 import nxtim.instruction.RotationMoteur;
 import nxtim.instruction.TempsCourant;
 import nxtim.instruction.ValeurCapteur;
@@ -276,7 +277,7 @@ public class VisiteurC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionIncrementation instructionIncrementation) {
 		String op = "++";
-		if (!instructionIncrementation.isPositive()) {
+		if (instructionIncrementation.getOperateur() == Operateur.INCREMENTATION_MOINS) {
 			op = "--";
 		}
 		
@@ -288,6 +289,9 @@ public class VisiteurC extends VisiteurTraduction {
 		}
 		if (!instructionIncrementation.isAvant()) {
 			traduction += op;
+		}
+		if(instructionIncrementation.isInstruction()) {
+			traduction += ";\n";
 		}
 	}
 

@@ -13,7 +13,6 @@ import jscratch.dictionnaires.DicoVariables;
 import jscratch.parametrages.Variables;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
-import nxtim.instruction.Expression;
 import nxtim.instruction.InstructionFor;
 import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.Operateur;
@@ -73,7 +72,7 @@ public class ForWidget extends ModeleWidget {
     
     @Override
 	public void applyChangeModele(){
-		Variable var = null;
+		VariableModifiable var = null;
 		Widget contentCondition = ff.getContentWidget();
 		Widget contentPas = fp.getContentWidget();
 		InstructionFor forIns = (InstructionFor) getElementProgramme();
@@ -81,7 +80,7 @@ public class ForWidget extends ModeleWidget {
 		// On met à jour l'elementProgramme si les éléments existent
 		if (contentCondition != null) {			
 			Condition cond  = (Condition) contentCondition.getElementProgramme();
-			var = (Variable)cond.getMembreGauche();
+			var = (VariableModifiable)cond.getMembreGauche();
 			forIns.setCondition(cond);
 		}
 			
@@ -122,7 +121,7 @@ public class ForWidget extends ModeleWidget {
             ((JComponent) z).addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(final FocusEvent arg0) {
-                    Variable v = DicoVariables.getInstance().getLesVariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
+                    VariableModifiable v = (VariableModifiable) DicoVariables.getInstance().getLesVariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
                     String deb = ((Zone) getLesZonesSaisies().get(1)).getValeur();
                     Operateur o = Operateur.comparaisonA()[Integer.parseInt(((Zone) getLesZonesSaisies().get(2)).getValeur())];
                     String fin = ((Zone) getLesZonesSaisies().get(3)).getValeur();
@@ -167,7 +166,7 @@ public class ForWidget extends ModeleWidget {
      * @param v La variable concernée
      * @param pas La valeur du pas pour une itération
      */
-    public void setIteration(final Variable v) {
+    public void setIteration(final VariableModifiable v) {
         InstructionIncrementation aff = (InstructionIncrementation)getElementProgramme();
 		aff.setVariable(v);
         ((InstructionFor) getElementProgramme()).setIteration(aff);
