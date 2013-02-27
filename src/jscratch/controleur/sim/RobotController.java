@@ -38,7 +38,7 @@ public class RobotController {
 
 	public synchronized void update()	{
 		/* Déplacement du robot */
-		int coef = 70000;
+		int coef = 140000;
 		double vgauche = (double) robot.getMotor(MotorPort.OUT_C).getPower() / coef;
 		double vdroite = (double) robot.getMotor(MotorPort.OUT_B).getPower() / coef;
 		double v = robot.getRayonRoues() * (vgauche + vdroite) / 2; // Vitesse d'avancement

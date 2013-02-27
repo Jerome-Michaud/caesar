@@ -135,6 +135,8 @@ public final class DragAndDropTools extends Observable {
 		for (Widget w : composantsDrague) {
 			passerSurAutrePanel(w, GUI.getGlassPane());
 		}
+		
+		GUI.getGlassPane().setVisible(true);
 
 		Point p = GUI.getGlassPane().getMousePosition();
 		p.x -= ptClick.x;
