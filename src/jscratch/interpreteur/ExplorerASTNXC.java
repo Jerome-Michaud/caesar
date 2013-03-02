@@ -40,7 +40,13 @@ public class ExplorerASTNXC {
 				traitementDeclaration(tree, nbChild);
 				break;
 			case NXCParser.WHILE:
-				traitementWhile(tree);
+				if(tree.getChildCount() > 0) {
+					/* n'est pas un do while */
+					traitementWhile(tree);
+				}
+				break;
+			case NXCParser.DO:
+				traitementDoWhile(tree);
 				break;
 			case NXCParser.IF:
 				if(nbChild == 2) {//if seul
@@ -108,9 +114,10 @@ public class ExplorerASTNXC {
 					case NXCParser.STATEMENTS:
 						System.out.println(nbChild + " instructions");
 						break;
+					case NXCParser.INITIALIZER:
+						break;
 					default:
 						System.out.println(tree.getText() + " : " + tree.getType());
-					case NXCParser.INITIALIZER:
 						break;
 				}
                 break;
@@ -193,6 +200,20 @@ public class ExplorerASTNXC {
 		}
 		System.out.println("while (" + nbInsts + ")");
 		monteur.bwhile(nbInsts);
+	}
+	
+	/* Gère l'exploration d'un do-while */
+	private void traitementDoWhile(Tree tree) {
+		//tree.getChild(0) = while
+		//condition
+		exploration(tree.getChild(1));
+		//STATEMENTS
+		int nbInst = tree.getChild(2).getChildCount();
+		for(int i = 0; i < nbInst; i++) {
+			exploration(tree.getChild(2).getChild(i));
+		}
+		System.out.println("dowhile (" + nbInst + ")");
+		monteur.bdoWhile(nbInst);
 	}
 	
 	/* Gère l'exploration d'un if seul */

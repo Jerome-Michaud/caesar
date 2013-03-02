@@ -11,6 +11,7 @@ import nxtim.instruction.IElementProgramme;
 import nxtim.instruction.Instruction;
 import nxtim.instruction.InstructionAttente;
 import nxtim.instruction.InstructionDeclaration;
+import nxtim.instruction.InstructionDoWhile;
 import nxtim.instruction.InstructionIf;
 import nxtim.instruction.InstructionIfElse;
 import nxtim.instruction.InstructionMoteurMov;
@@ -138,6 +139,25 @@ public class MonteurNXTIM implements MonteurProgramme{
 		}
 		/* Stocker le résultat */
 		p.empile(insWhile);
+	}
+	
+	@Override
+	public void bdoWhile(int nbInst) {
+		ArrayList<IElementProgramme> instrucs = new ArrayList<IElementProgramme>();
+		/* Récupération des éléments du corps */
+		for(int i = 0; i < nbInst; i++) {
+			instrucs.add(p.depile());
+		}
+		/* Récupération de la condition */
+		Condition cond = (Condition) p.depile();
+		/* Construction du modèle NXTIM correspondant */
+		Collections.reverse(instrucs);
+		InstructionDoWhile inst = new InstructionDoWhile(cond);
+		for(IElementProgramme ie : instrucs) {
+			inst.insererFin((Instruction) ie);
+		}
+		/* Stocker le résultat */
+		p.empile(inst);
 	}
 
 	@Override
