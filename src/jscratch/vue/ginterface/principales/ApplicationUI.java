@@ -1,5 +1,6 @@
 package jscratch.vue.ginterface.principales;
 
+import coloration.EditorUI;
 import de.javasoft.plaf.synthetica.SyntheticaRootPaneUI;
 import de.javasoft.swing.JYDockingPort;
 import de.javasoft.swing.JYDockingView;
@@ -22,7 +23,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import jscratch.helpers.ImagesHelper;
+import jscratch.helpers.LangueHelper;
 import jscratch.helpers.SessionHelper;
+import jscratch.parametrages.langue.VariableLangue;
 
 /**
  * Fenêtre principale de l'application.
@@ -49,12 +52,12 @@ public final class ApplicationUI extends JFrame {
 	 * Le
 	 * <code>DockingPort</code>.
 	 */
-	private JYDockingPort viewport,viewCodeCompil;
+	private JYDockingPort viewport;
 	/**
 	 * Les différents
 	 * <code>DockingView</code>.
 	 */
-	private JYDockingView zoneCodeGraphique, zoneCodeConsole, zoneSimulateur,zoneCompilateur;
+	private JYDockingView zoneCodeGraphique, zoneCodeNXC, zoneCodeConsole, zoneSimulateur,zoneCompilateur;
 
 	/**
 	 * Constructeur privé de
@@ -82,12 +85,14 @@ public final class ApplicationUI extends JFrame {
 
 		add(creerDocking(),BorderLayout.CENTER);
 
+		DockingManager.setMinimized(zoneCompilateur, true, DockingManager.RIGHT);
 		DockingManager.setTabReorderByDraggingEnabled(false);
 
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				DockingManager.unregisterDockable("zoneCodeGraphique-SimpleDocking");
+				DockingManager.unregisterDockable("zoneCodeNXC-SimpleDocking");
 				DockingManager.unregisterDockable("zoneSimulateur-SimpleDocking");
 				DockingManager.unregisterDockable("zoneCodeConsole-SimpleDocking");
 				DockingManager.unregisterDockable("zoneCompilateur-SimpleDocking");
@@ -116,7 +121,8 @@ public final class ApplicationUI extends JFrame {
 	 * @since 1.0
 	 */
 	private JPanel creerDocking() {
-		zoneCodeGraphique = creerZoneEdition();
+		zoneCodeGraphique = creerZoneEditionGraphique();
+		zoneCodeNXC = creerZoneEditionCode();
 		zoneCodeConsole = creerZoneCodeConsole();
 		zoneSimulateur = creerZoneSimulation();
 		zoneCompilateur = creerZoneCompilateur();
@@ -124,7 +130,9 @@ public final class ApplicationUI extends JFrame {
 		viewport.dock(zoneCodeGraphique, IDockingConstants.CENTER_REGION);
 
 		zoneCodeGraphique.dock(zoneCodeConsole, IDockingConstants.EAST_REGION, .8f);
-		zoneCodeGraphique.dock(zoneSimulateur, IDockingConstants.CENTER_REGION, .7f);
+		
+		zoneCodeGraphique.dock(zoneCodeNXC, IDockingConstants.CENTER_REGION, 1f);
+		zoneCodeGraphique.dock(zoneSimulateur, IDockingConstants.CENTER_REGION, 1f);
 		
 		zoneCodeConsole.dock(zoneCompilateur, IDockingConstants.SOUTH_REGION, .7f);
 
@@ -144,12 +152,29 @@ public final class ApplicationUI extends JFrame {
 	 *
 	 * @since 1.0
 	 */
-	private JYDockingView creerZoneEdition() {
-		JYDockingView view = new JYDockingView("zoneCodeGraphique-SimpleDocking", "Edition", "Edition");
+	private JYDockingView creerZoneEditionGraphique() {
+		String titre = LangueHelper.getInstance().get(VariableLangue.DOCK_ED_GRAPH);
+		JYDockingView view = new JYDockingView("zoneCodeGraphique-SimpleDocking", titre, titre);
 		view.addAction(new DefaultMaximizeAction(view));
 		view.setIcon(ImagesHelper.getIcon("document-code-graph.png"));
 		view.setDockbarIcon(ImagesHelper.getIcon("document-code-graph.png"));
 		view.setContentPane(GUI.getZoneUtilisateur());
+		view.setDraggingEnabled(false);
+		return view;
+	}
+
+	/**
+	 * Permet de créer la zone <code>Edition code</code>.
+	 *
+	 * @since 1.0
+	 */
+	private JYDockingView creerZoneEditionCode() {
+		String titre = LangueHelper.getInstance().get(VariableLangue.DOCK_ED_CODE);
+		JYDockingView view = new JYDockingView("zoneCodeNXC-SimpleDocking", titre, titre);
+		view.addAction(new DefaultMaximizeAction(view));
+		view.setIcon(ImagesHelper.getIcon("document-code.png"));
+		view.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));
+		view.setContentPane(new EditorUI());
 		view.setDraggingEnabled(false);
 		return view;
 	}
@@ -163,7 +188,8 @@ public final class ApplicationUI extends JFrame {
 	 * @return la zone de simulation
 	 */
 	private JYDockingView creerZoneSimulation() {
-		JYDockingView view = new JYDockingView("zoneSimulateur-SimpleDocking", "Simulation", "Simulation");
+		String titre = LangueHelper.getInstance().get(VariableLangue.DOCK_SIM);
+		JYDockingView view = new JYDockingView("zoneSimulateur-SimpleDocking", titre, titre);
 		view.addAction(new DefaultMaximizeAction(view));
 		view.addAction(new DefaultFloatAction(view));
 		view.setIcon(ImagesHelper.getIcon("robot.png"));
@@ -180,7 +206,8 @@ public final class ApplicationUI extends JFrame {
 	 * @since 1.0
 	 */
 	private JYDockingView creerZoneCodeConsole() {
-		JYDockingView view = new JYDockingView("zoneCodeConsole-SimpleDocking", "Code", "Code");
+		String titre = LangueHelper.getInstance().get(VariableLangue.DOCK_CODE);
+		JYDockingView view = new JYDockingView("zoneCodeConsole-SimpleDocking", titre, titre);
 		view.setIcon(ImagesHelper.getIcon("document-code.png"));
 		view.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));
 		view.setContentPane(new JScrollPane(GUI.getPanelCodeConsole()));
@@ -195,7 +222,8 @@ public final class ApplicationUI extends JFrame {
 	 * @since 1.0
 	 */
 	private JYDockingView creerZoneCompilateur() {
-		JYDockingView view = new JYDockingView("zoneCompilateur-SimpleDocking", "Compilateur", "Compilateur");
+		String titre = LangueHelper.getInstance().get(VariableLangue.DOCK_COMP);
+		JYDockingView view = new JYDockingView("zoneCompilateur-SimpleDocking", titre, titre);
 		view.addAction(new DefaultMinimizeAction(view));
 		view.setIcon(ImagesHelper.getIcon("terminal.png"));
 		view.setDockbarIcon(ImagesHelper.getIcon("terminal.png"));
