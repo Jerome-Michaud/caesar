@@ -1,5 +1,6 @@
-package coloration;
+package editeurNXC.utils;
 
+import editeurNXC.parser.NXCDefs;
 import java.io.IOException;
 import javax.swing.text.Segment;
 import org.fife.ui.rsyntaxtextarea.AbstractJFlexCTokenMaker;

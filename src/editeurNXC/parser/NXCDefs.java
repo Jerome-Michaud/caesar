@@ -1,5 +1,10 @@
-package coloration;
+package editeurNXC.parser;
 
+import editeurNXC.langage.SStructure;
+import editeurNXC.langage.SInteger;
+import editeurNXC.langage.SString;
+import editeurNXC.langage.STypeSize;
+import editeurNXC.langage.SArray;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -1,5 +1,8 @@
-package coloration;
+package editeurNXC.ui;
 
+import editeurNXC.utils.MyKeyAdapter;
+import editeurNXC.utils.ButtonTabComponent;
+import editeurNXC.parser.NXCDefs;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -84,7 +87,7 @@ public class EditorUI  extends JTabbedPane {
 	public EditorUI() {
 		//permet de reconnaitre les mots cles
 		AbstractTokenMakerFactory atmf = (AbstractTokenMakerFactory) TokenMakerFactory.getDefaultInstance();
-		atmf.putMapping("NXC", "coloration.NXCTokenMaker");
+		atmf.putMapping("NXC", "coloration.utils.NXCTokenMaker");
 		
 		this.setPreferredSize(new Dimension(400, 300));
 		this.filesToTabs = new HashMap<File, RTextScrollPane>();

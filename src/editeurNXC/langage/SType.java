@@ -1,4 +1,4 @@
-package coloration;
+package editeurNXC.langage;
 
 /**
  *

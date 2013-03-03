@@ -1,9 +1,11 @@
-package coloration;
+package editeurNXC.utils;
 
-import coloration.SInteger;
-import coloration.SNumeric;
-import coloration.SType;
-import coloration.STypeSize;
+import editeurNXC.langage.SFloat;
+import editeurNXC.langage.SMutex;
+import editeurNXC.langage.SInteger;
+import editeurNXC.langage.SNumeric;
+import editeurNXC.langage.SType;
+import editeurNXC.langage.STypeSize;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;

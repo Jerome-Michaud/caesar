@@ -1,4 +1,4 @@
-package coloration;
+package editeurNXC.langage;
 
 import java.util.concurrent.locks.ReentrantLock;
 

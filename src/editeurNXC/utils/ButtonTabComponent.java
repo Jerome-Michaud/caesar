@@ -1,5 +1,6 @@
-package coloration;
+package editeurNXC.utils;
 
+import editeurNXC.ui.EditorUI;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;

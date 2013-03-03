@@ -1,5 +1,6 @@
-package coloration;
+package editeurNXC.utils;
 
+import editeurNXC.ui.EditorUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import org.fife.ui.rtextarea.RTextScrollPane;

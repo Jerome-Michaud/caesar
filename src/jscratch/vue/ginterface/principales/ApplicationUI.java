@@ -1,6 +1,6 @@
 package jscratch.vue.ginterface.principales;
 
-import coloration.EditorUI;
+import editeurNXC.ui.EditorUI;
 import de.javasoft.plaf.synthetica.SyntheticaRootPaneUI;
 import de.javasoft.swing.JYDockingPort;
 import de.javasoft.swing.JYDockingView;
