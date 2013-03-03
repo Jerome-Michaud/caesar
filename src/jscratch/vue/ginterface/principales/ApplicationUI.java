@@ -14,13 +14,19 @@ import jscratch.vue.ginterface.principales.panels.GlassPane;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 import jscratch.helpers.ImagesHelper;
 import jscratch.helpers.LangueHelper;
@@ -68,11 +74,11 @@ public final class ApplicationUI extends JFrame {
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
-
+		
 		if (this.getRootPane().getUI() instanceof SyntheticaRootPaneUI) {
 			((SyntheticaRootPaneUI) this.getRootPane().getUI()).setMaximizedBounds(this);
 		}
-
+		
 		this.setMinimumSize(new Dimension(800, 500));
 		if (!System.getProperty("os.name").toLowerCase().contains("windows")) {
 			this.setExtendedState(MAXIMIZED_BOTH);
@@ -80,14 +86,14 @@ public final class ApplicationUI extends JFrame {
 			Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
 			this.setSize((int) (tailleEcran.getWidth() * 0.7), (int) (tailleEcran.getHeight() * 0.7));
 		}
-
+		
 		this.setJMenuBar(Menu.getInstance());
 
 		add(creerDocking(),BorderLayout.CENTER);
 
 		DockingManager.setMinimized(zoneCompilateur, true, DockingManager.RIGHT);
 		DockingManager.setTabReorderByDraggingEnabled(false);
-
+		
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -104,12 +110,12 @@ public final class ApplicationUI extends JFrame {
 		this.glassPane = GlassPane.getInstance();
 		this.setGlassPane(this.glassPane);
 		this.glassPane.setVisible(true);
-
+		
 		this.setVisible(true);
-
+		
 		this.setLocationRelativeTo(null);
 	}
-
+	
 	public JYDockingView getViewport() {
 		return zoneCodeGraphique;
 	}
@@ -128,17 +134,17 @@ public final class ApplicationUI extends JFrame {
 		zoneCompilateur = creerZoneCompilateur();
 		viewport = new JYDockingPort();
 		viewport.dock(zoneCodeGraphique, IDockingConstants.CENTER_REGION);
-
+		
 		zoneCodeGraphique.dock(zoneCodeConsole, IDockingConstants.EAST_REGION, .8f);
 		
 		zoneCodeGraphique.dock(zoneCodeNXC, IDockingConstants.CENTER_REGION, 1f);
 		zoneCodeGraphique.dock(zoneSimulateur, IDockingConstants.CENTER_REGION, 1f);
 		
 		zoneCodeConsole.dock(zoneCompilateur, IDockingConstants.SOUTH_REGION, .7f);
-
+		
 		zoneCodeGraphique.getDockingPort().setTabPlacement(SwingConstants.BOTTOM);
 		zoneCodeGraphique.getDockingPort().setSelectedTabIndex(0);
-
+		
 		JPanel p = new JPanel(new BorderLayout(0, 0));
 		p.setBorder(new EmptyBorder(5, 5, 5, 5));
 		p.add(viewport, BorderLayout.CENTER);
@@ -196,6 +202,29 @@ public final class ApplicationUI extends JFrame {
 		view.setDockbarIcon(ImagesHelper.getIcon("robot.png"));
 		view.setContentPane(GUI.creerZoneSimulateur());
 		view.setDraggingEnabled(false);
+		view.addAncestorListener(new AncestorListener() {
+			@Override
+			public void ancestorAdded(AncestorEvent event) {
+				if ((SwingUtilities.windowForComponent(event.getComponent())) instanceof JDialog) {
+					((JDialog) (SwingUtilities.windowForComponent(event.getComponent()))).addComponentListener(new ComponentAdapter() {
+
+						@Override
+						public void componentHidden(ComponentEvent e) {
+							zoneCodeGraphique.dock(zoneSimulateur, IDockingConstants.CENTER_REGION, .7f);
+						}
+					
+					});
+				}
+			}
+			
+			@Override
+			public void ancestorRemoved(AncestorEvent event) {
+			}
+			
+			@Override
+			public void ancestorMoved(AncestorEvent event) {
+			}
+		});
 		return view;
 	}
 

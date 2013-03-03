@@ -20,6 +20,13 @@ public interface MonteurProgramme {
 	public void bwhile(int nbInst);
 	
 	/**
+	 * Ajoute une boucle do-while au programme.
+	 * 
+	 * @param nbInst le nombre d'instruction dans le corps de la boucle.
+	 */
+	public void bdoWhile(int nbInst);
+	
+	/**
 	 * Ajoute une condition au programme.
 	 * 
 	 * @param op l'opérateur conditionnel.
