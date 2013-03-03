@@ -55,7 +55,7 @@ public final class ApplicationUI extends JFrame {
 	 * Le
 	 * <code>DockingPort</code>.
 	 */
-	private JYDockingPort viewport, viewCodeCompil;
+	private JYDockingPort viewport;
 	/**
 	 * Les différents
 	 * <code>DockingView</code>.
