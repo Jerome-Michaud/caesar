@@ -6,7 +6,7 @@ import java.awt.BorderLayout;
 import java.io.File;
 import jscratch.helpers.ImagesHelper;
 import jscratch.helpers.PropertiesHelper;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import org.jdesktop.swingx.JXHeader;
 
 /**
@@ -29,7 +29,7 @@ public final class PanelAutres extends PanelParametrage {
 		
 		this.table = new JYPropertyTable();
 		
-		this.table.addProperty("Chemin vers le compilateur",  new File(Variables.CHEMIN_ACCES_NBC));
+		this.table.addProperty("Chemin vers le compilateur",  new File(VariableProperties.CHEMIN_ACCES_NBC));
 		this.table.addProperty("Emplacement du fichier properties",  p.get("user.chemin.properties.distant"));
 		
 		this.add(this.table);

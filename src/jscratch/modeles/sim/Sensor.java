@@ -79,5 +79,4 @@ public abstract class Sensor<T> {
 	 * met à jour le sensor
 	 */
 	public abstract void update();	
-	
 }

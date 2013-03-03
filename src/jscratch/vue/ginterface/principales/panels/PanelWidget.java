@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import jscratch.dictionnaires.DicoWidgetsCategories;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.widgets.fabrique.FabriqueInstructions;
 import jscratch.vue.widgets.Widget;
@@ -62,7 +62,7 @@ public final class PanelWidget extends JPanel implements Observer {
 		scroll.setBorder(null);
 		this.add(scroll, BorderLayout.CENTER);
 
-		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 600));
+		this.setMinimumSize(new Dimension(VariableProperties.X_MAX_INSTRUCTION, 600));
 
 		this.scroll.addMouseListener(new MouseAdapter() {
 			@Override

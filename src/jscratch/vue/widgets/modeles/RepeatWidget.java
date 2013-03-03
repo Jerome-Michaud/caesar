@@ -9,7 +9,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 import java.awt.Rectangle;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Expression;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.TypeVariable;
@@ -38,7 +38,7 @@ public class RepeatWidget extends ModeleWidget {
 		
 		this.setElementProgramme(new InstructionRepeat());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
-		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
+		this.zonesAccroches.add(VariableProperties.ZONE_ACCROCHE_PAR_DEFAULT);
 
 
 		int widthChamp = 20;

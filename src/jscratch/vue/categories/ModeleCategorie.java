@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Polygon;
 import jscratch.dictionnaires.DicoCouleursCategories;
 import jscratch.dictionnaires.DicoWidgetsCategories;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Categorie;
 
 /**
@@ -34,18 +34,18 @@ public class ModeleCategorie {
 	/**
 	 * Coordonnées Y du polygone coloré.
 	 */
-	private int tabYIcone[] = {5, 0, 0, Variables.TAILLE_CATEGORIE_Y, Variables.TAILLE_CATEGORIE_Y,
-		Variables.TAILLE_CATEGORIE_Y - 5};
+	private int tabYIcone[] = {5, 0, 0, VariableProperties.TAILLE_CATEGORIE_Y, VariableProperties.TAILLE_CATEGORIE_Y,
+		VariableProperties.TAILLE_CATEGORIE_Y - 5};
 	/**
 	 * Coordonnées X du polygone gris.
 	 */
-	private int tabX[] = {10, Variables.TAILLE_CATEGORIE_X - 5, Variables.TAILLE_CATEGORIE_X,
-		Variables.TAILLE_CATEGORIE_X, Variables.TAILLE_CATEGORIE_X - 5, 10};
+	private int tabX[] = {10, VariableProperties.TAILLE_CATEGORIE_X - 5, VariableProperties.TAILLE_CATEGORIE_X,
+		VariableProperties.TAILLE_CATEGORIE_X, VariableProperties.TAILLE_CATEGORIE_X - 5, 10};
 	/**
 	 * Coordonnées Y du polygone gris.
 	 */
-	private int tabY[] = {0, 0, 5, Variables.TAILLE_CATEGORIE_Y - 5, Variables.TAILLE_CATEGORIE_Y,
-		Variables.TAILLE_CATEGORIE_Y};
+	private int tabY[] = {0, 0, 5, VariableProperties.TAILLE_CATEGORIE_Y - 5, VariableProperties.TAILLE_CATEGORIE_Y,
+		VariableProperties.TAILLE_CATEGORIE_Y};
 	/**
 	 * La couleur de la catégorie.
 	 */

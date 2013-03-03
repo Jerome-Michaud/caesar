@@ -1,7 +1,0 @@
-task main(){
-    repeat(0){
-        OnFwd(OUT_BC, 50);
-        Wait(500);
-        Off(OUT_BC);
-    }
-}

@@ -3,7 +3,7 @@ package jscratch.vue.ginterface.principales.panels;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 
 /**
  * Cette zone correspond à la zone où l'utilisateur peut choisir ses widgets.<br />
@@ -21,8 +21,8 @@ public final class PanelInstruction extends JPanel {
 	private PanelInstruction() {
 		this.setLayout(new BorderLayout());
 
-		this.setMinimumSize(new Dimension(Variables.X_MAX_INSTRUCTION, 800));
-		this.setPreferredSize(new Dimension(Variables.X_MAX_INSTRUCTION, 800));
+		this.setMinimumSize(new Dimension(VariableProperties.X_MAX_INSTRUCTION, 800));
+		this.setPreferredSize(new Dimension(VariableProperties.X_MAX_INSTRUCTION, 800));
 
 		this.add(PanelTypeWidget.getInstance(), BorderLayout.NORTH);
 		this.add(PanelWidget.getInstance(), BorderLayout.CENTER);

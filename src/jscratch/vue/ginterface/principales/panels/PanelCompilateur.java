@@ -20,7 +20,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import jscratch.helpers.CompilateurHelper;
 import jscratch.helpers.ImagesHelper;
+import jscratch.helpers.LangueHelper;
 import jscratch.helpers.SessionHelper;
+import jscratch.parametrages.langue.VariableLangue;
 
 /**
  *
@@ -61,7 +63,7 @@ public class PanelCompilateur extends JPanel {
 		this.add(new JScrollPane(panneauInfos),BorderLayout.CENTER);
 		
 		this.panelTools = new JPanel(new BorderLayout());
-		this.boutComp = new JButton("Compiler",ImagesHelper.getIcon("compile.png"));
+		this.boutComp = new JButton(LangueHelper.getInstance().get(VariableLangue.COMPIL_COMPIL), ImagesHelper.getIcon("compile.png"));
 		
 		boutComp.addActionListener(new ActionListener() {
 
@@ -71,7 +73,7 @@ public class PanelCompilateur extends JPanel {
 			}
 		});
 		
-		this.checkRun = new JCheckBox("Exécuter");
+		this.checkRun = new JCheckBox(LangueHelper.getInstance().get(VariableLangue.COMPIL_EXEC));
 		panelTools.add(boutComp,BorderLayout.EAST);
 		panelTools.add(checkRun,BorderLayout.WEST);
 				

@@ -9,6 +9,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import jscratch.dictionnaires.DicoBoutonsCategories;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.helpers.ErreurHelper;
+import jscratch.helpers.LangueHelper;
+import jscratch.parametrages.langue.VariableLangue;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.parametrages.ParametrageUI;
 

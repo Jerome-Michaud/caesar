@@ -1,5 +1,8 @@
 package nxtim.instruction;
 
+import jscratch.helpers.LangueHelper;
+import jscratch.parametrages.langue.VariableLangue;
+
 /**
  * Cette énumération correspond aux différents capteurs.
  */
@@ -30,15 +33,15 @@ public enum Capteur {
 	public String toString() {
 		switch (this) {
 			case NONE:
-				return "RIEN";
+				return LangueHelper.getInstance().get(VariableLangue.CAPT_NONE).toUpperCase();
 			case TOUCH:
-				return "CONTACT";
+				return LangueHelper.getInstance().get(VariableLangue.CAPT_TOUCH).toUpperCase();
 			case COLOR:
-				return "COULEUR";
+				return LangueHelper.getInstance().get(VariableLangue.CAPT_COLOR).toUpperCase();
 			case ULTRASONIC:
-				return "DISTANCE";
+				return LangueHelper.getInstance().get(VariableLangue.CAPT_ULTRASONIC).toUpperCase();
 			case LIGHT:
-				return "LUMIERE";
+				return LangueHelper.getInstance().get(VariableLangue.CAPT_LIGHT).toUpperCase();
 			default:
 				return null;
 		}

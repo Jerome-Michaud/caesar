@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.Serializable;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Condition;
@@ -46,8 +46,8 @@ public class IfElseWidget extends ModeleWidget {
 
 		this.setElementProgramme(new InstructionIfElse());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
-		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
-		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_ELSE);
+		this.zonesAccroches.add(VariableProperties.ZONE_ACCROCHE_PAR_DEFAULT);
+		this.zonesAccroches.add(VariableProperties.ZONE_ACCROCHE_ELSE);
 		
 		this.decalageX(-20);
 	}
@@ -84,7 +84,7 @@ public class IfElseWidget extends ModeleWidget {
 	
     @Override
     public void decalageY(int x,Rectangle r) {
-    	 if(r.getY()==Variables.ZONE_ACCROCHE_PAR_DEFAULT.getY()){
+    	 if(r.getY()==VariableProperties.ZONE_ACCROCHE_PAR_DEFAULT.getY()){
     		int i;
 	        for (i = 16; i < tabY.length; i++) {
 	            this.getForme().ypoints[i] = this.getForme().ypoints[i] + x;

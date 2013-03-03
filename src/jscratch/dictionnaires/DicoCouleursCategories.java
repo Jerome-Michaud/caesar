@@ -2,6 +2,7 @@ package jscratch.dictionnaires;
 
 import java.awt.Color;
 import java.util.HashMap;
+import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Categorie;
 
 /**
@@ -29,12 +30,12 @@ public final class DicoCouleursCategories {
 	private DicoCouleursCategories() {
 		this.dico = new HashMap<Categorie, Color>();
 		
-		this.dico.put(Categorie.STRUCTURES, new Color(245, 112, 30));
-		this.dico.put(Categorie.MOTEURS,  new Color(136, 193, 0));
-		this.dico.put(Categorie.EXPRESSIONS, new Color(229, 64, 40));
-		this.dico.put(Categorie.CAPTEURS, new Color(148, 61, 138));
-		this.dico.put(Categorie.TEMPS, new Color(0, 161, 203));
-		this.dico.put(Categorie.VARIABLES, new Color(233, 78, 119));
+		this.dico.put(Categorie.STRUCTURES, VariableProperties.COULEUR_STRUCTURES);
+		this.dico.put(Categorie.MOTEURS,  VariableProperties.COULEUR_MOTEURS);
+		this.dico.put(Categorie.EXPRESSIONS, VariableProperties.COULEUR_EXPRESSIONS);
+		this.dico.put(Categorie.CAPTEURS, VariableProperties.COULEUR_CAPTEURS);
+		this.dico.put(Categorie.TEMPS, VariableProperties.COULEUR_TEMPS);
+		this.dico.put(Categorie.VARIABLES, VariableProperties.COULEUR_VARIABLES);
 	}
 	
 	/**

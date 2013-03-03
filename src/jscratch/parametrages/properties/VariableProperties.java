@@ -1,4 +1,4 @@
-package jscratch.parametrages;
+package jscratch.parametrages.properties;
 
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -11,7 +11,7 @@ import jscratch.helpers.PropertiesHelper;
  * @since 1.0
  * @version 1.0
  */
-public class Variables {
+public final class VariableProperties {
 
 	/**
 	 * Taille en X des boutons des catégories.
@@ -84,4 +84,16 @@ public class Variables {
 	 * @see properties
 	 */
 	public static final boolean AFFICHAGE_NOMBRE_WIDGET = Boolean.valueOf(PropertiesHelper.getInstance().get("user.categorie.afficher.nombrewidget"));
+	
+	/**
+	 * Couleur des categories.
+	 * 
+	 * @see properties
+	 */
+	public static final Color COULEUR_STRUCTURES = new Color(Integer.parseInt(PropertiesHelper.getInstance().get("user.couleur.Structures"))),
+								COULEUR_MOTEURS = new Color(Integer.parseInt(PropertiesHelper.getInstance().get("user.couleur.Moteurs"))),
+								COULEUR_EXPRESSIONS = new Color(Integer.parseInt(PropertiesHelper.getInstance().get("user.couleur.Expressions"))),
+								COULEUR_CAPTEURS = new Color(Integer.parseInt(PropertiesHelper.getInstance().get("user.couleur.Capteurs"))),
+								COULEUR_TEMPS = new Color(Integer.parseInt(PropertiesHelper.getInstance().get("user.couleur.Temps"))),
+								COULEUR_VARIABLES = new Color(Integer.parseInt(PropertiesHelper.getInstance().get("user.couleur.Variables")));
 }

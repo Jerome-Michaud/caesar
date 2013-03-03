@@ -1,0 +1,64 @@
+#Partie supplémentaire
+direction.left=gauche
+direction.right=droite
+word.widgets=widgets
+
+#Partie menu
+menu.file=Fichier
+menu.file.new=Nouveau
+menu.file.load.algorithm=Ouvrir ...
+menu.file.save=Enregistrer ...
+menu.file.load.properties=Charger configuration ...
+menu.file.quit=Quitter
+menu.export=Exporter
+menu.export.nxc=En NXC
+menu.export.robot=Exporter vers le robot
+menu.trace=Traces
+menu.trace.export=Exporter ...
+menu.more=?
+menu.more.help=A propos
+
+
+#Partie docking
+interface.dock.edition.graphic=Edition graphique
+interface.dock.edition.code=Edition NXC
+interface.dock.simulation=Simulation
+interface.dock.code=Code
+interface.dock.compiler=Compilateur
+
+
+#Partie simulateur
+interface.simulator.buttons.execute=Exécuter
+interface.simulator.buttons.pause=Pause
+interface.simulator.buttons.stop=Stop
+interface.simulator.buttons.debug=Débogage
+interface.simulator.buttons.debug.sensors=Afficher les points des capteurs
+interface.simulator.buttons.debug.collisions=Afficher les points des collisions
+
+interface.simulator.robot=Robot
+interface.simulator.robot.speed=Vitesse des moteurs
+interface.simulator.robot.rotations=Rotations de moteurs
+interface.simulator.robot.orientation=Orientation
+interface.simulator.robot.position=Position
+interface.simulator.sensors=Capteurs
+
+#Partie compilateur
+interface.compiler.execute=Executer
+interface.compiler.compile=Compiler
+
+#Partie capteurs
+sensors.none=Rien
+sensors.touch=Contact
+sensors.color=Couleur
+sensors.ultrasonic=Distance
+sensors.light=Lumière
+
+
+#Partie catégories
+categories=Catégories
+categories.structs=Structures
+categories.engines=Moteurs
+categories.sensors=Capteurs
+categories.times=Temps
+categories.variables=Variables
+categories.expressions=Expressions

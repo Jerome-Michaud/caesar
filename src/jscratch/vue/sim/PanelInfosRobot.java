@@ -7,10 +7,12 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import jscratch.helpers.LangueHelper;
 
 import jscratch.modeles.sim.MotorPort;
 import jscratch.modeles.sim.Robot;
 import jscratch.modeles.sim.Sensor;
+import jscratch.parametrages.langue.VariableLangue;
 
 /**
  * Panel qui permet d'afficher les informations du robot pendant la simulation
@@ -36,14 +38,14 @@ public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator,Ob
 		
 		infosRobot = new JPanel();
 		infosRobot.setLayout(new FlowLayout(FlowLayout.LEFT));
-		infosRobot.setBorder(BorderFactory.createTitledBorder("Robot"));
+		infosRobot.setBorder(BorderFactory.createTitledBorder(LangueHelper.getInstance().get(VariableLangue.SIM_PAN_ROB)));
 		texteRobot = new JLabel("");
 		infosRobot.add(texteRobot);
 		add(infosRobot);
 		
 		infosCapteurs = new JPanel();
 		infosCapteurs.setLayout(new FlowLayout(FlowLayout.LEFT));
-		infosCapteurs.setBorder(BorderFactory.createTitledBorder("Capteurs"));
+		infosCapteurs.setBorder(BorderFactory.createTitledBorder(LangueHelper.getInstance().get(VariableLangue.SIM_PAN_CAPT)));
 		texteCapteurs = new JLabel("");
 		infosCapteurs.add(texteCapteurs);
 		add(infosCapteurs);
@@ -56,22 +58,24 @@ public class PanelInfosRobot extends JPanel implements ObserverPanelSimulator,Ob
 	 * @param deltaTime 
 	 */
 	public void update(float deltaTime) {
+		LangueHelper l = LangueHelper.getInstance();
 		nextUpdate += deltaTime;
 		
 		if (nextUpdate >= FREQ_UPDATE) {
 			nextUpdate -= FREQ_UPDATE;
 			
-			texteRobot.setText("<html><strong>Vitesses moteurs :</strong> <br />" +
-				"gauche (C) = " + robot.getMotor(MotorPort.OUT_C).getPower() + "; droit (B) = " + robot.getMotor(MotorPort.OUT_B).getPower() + "<br /><br />" +
-				"<strong>Rotations moteurs :</strong> <br />" +
-				"gauche (C) = " + robot.getMotor(MotorPort.OUT_C).getRotationCount() + "; droit (B) = " + robot.getMotor(MotorPort.OUT_B).getRotationCount() + "<br /> <br />" +
-				"<strong>Orientation :</strong> " + (int) Math.toDegrees(robot.getOrientation()) + "°<br /> <br />" +
-				"<strong>Position :</strong> x = " + (int) robot.getPointCentral().getX() + "; y = " + (int) robot.getPointCentral().getY() + "<br /></html>");
+			texteRobot.setText("<html><strong>" + l.get(VariableLangue.SIM_PAN_ROB_VITESSE) + " :</strong> <br />" +
+				l.get(VariableLangue.SUP_GAUCHE) + " (C) = " + robot.getMotor(MotorPort.OUT_C).getPower() + "; " + l.get(VariableLangue.SUP_DROITE) + " (B) = " + robot.getMotor(MotorPort.OUT_B).getPower() + "<br /><br />" +
+				"<strong>" + l.get(VariableLangue.SIM_PAN_ROB_ROTATION) + " :</strong> <br />" +
+				l.get(VariableLangue.SUP_GAUCHE) + " (C) = " + robot.getMotor(MotorPort.OUT_C).getRotationCount() + "; " + l.get(VariableLangue.SUP_DROITE) + " (B) = " + robot.getMotor(MotorPort.OUT_B).getRotationCount() + "<br /> <br />" +
+				"<strong>" + l.get(VariableLangue.SIM_PAN_ROB_ORIENTATION) + " :</strong> " + (int) Math.toDegrees(robot.getOrientation()) + "°<br /> <br />" +
+				"<strong>" + l.get(VariableLangue.SIM_PAN_ROB_POSITION) + " :</strong> x = " + (int) robot.getPointCentral().getX() + "; y = " + (int) robot.getPointCentral().getY() + "<br /></html>");
 		
 			
-			StringBuffer capteurs = new StringBuffer("<html>");
+			StringBuilder capteurs = new StringBuilder("<html>");
 			for (Sensor<? extends Object> s : robot.getSensors()) {
-				capteurs.append(s.toString() + "<br />");
+				capteurs.append(s.toString());
+				capteurs.append("<br />");
 			}
 			capteurs.append("</html>");
 			texteCapteurs.setText(capteurs.toString());

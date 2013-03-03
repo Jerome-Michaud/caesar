@@ -1,6 +1,7 @@
 package jscratch.modeles.sim;
 
 import jscratch.controleur.sim.MapController;
+import nxtim.instruction.Capteur;
 
 /**
  * Capteur de détection des couleurs 
@@ -15,15 +16,13 @@ public class ColorSensor extends Sensor<ColorValue> {
 		update();
 	}
 
-	/* (non-Javadoc)
-	 * @see model.Sensor#update()
-	 */
+	@Override
 	public void update() {
 		value = mapC.getColorValue(position);
 	}
 
 	@Override
 	public String toString() {
-		return "<strong>Couleur (" + port + ") :</strong> " + value;
+		return "<strong>" + Capteur.COLOR.toString() + " (" + port + ") :</strong> " + value;
 	}
 }

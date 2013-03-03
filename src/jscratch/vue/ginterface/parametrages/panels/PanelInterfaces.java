@@ -3,8 +3,10 @@ package jscratch.vue.ginterface.parametrages.panels;
 import de.javasoft.swing.JYPropertyTable;
 import de.javasoft.swing.table.PropertyTableModel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import jscratch.helpers.ImagesHelper;
 import jscratch.helpers.PropertiesHelper;
+import nxtim.instruction.Categorie;
 import org.jdesktop.swingx.JXHeader;
 
 /**
@@ -28,6 +30,11 @@ public final class PanelInterfaces extends PanelParametrage {
 		this.table = new JYPropertyTable();
 		
 		this.table.addProperty("Afficher le panel widgets",  Boolean.valueOf(p.get("user.interface.afficher.categories")));
+		this.table.addSeparator();
+		
+		for (Categorie c : Categorie.values()) {
+			this.table.addProperty(c.toString(), new Color(Integer.parseInt(p.get("user.couleur." + c.toString()))));
+		}
 		
 		this.add(this.table);
 		
@@ -48,5 +55,9 @@ public final class PanelInterfaces extends PanelParametrage {
 		PropertyTableModel modele = this.table.getModel();
 		
 		p.set("user.interface.afficher.categories", modele.getPropertyValue(0).toString());
+		
+		for (int i = 2;i < 8;i++) {
+			p.set("user.couleur." + modele.getPropertyKey(i), String.valueOf(((Color)modele.getPropertyValue(i)).getRGB()));
+		}
 	}
 }

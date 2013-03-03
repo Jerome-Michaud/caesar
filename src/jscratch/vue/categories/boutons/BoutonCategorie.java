@@ -20,7 +20,7 @@ import jscratch.helpers.PropertiesHelper;
 import jscratch.vue.categories.ModeleCategorie;
 import nxtim.instruction.Categorie;
 import jscratch.vue.ginterface.principales.GUI;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import jscratch.traces.fabriques.FabriqueTrace;
 
 /**
@@ -71,7 +71,7 @@ public abstract class BoutonCategorie extends JComponent {
 		        RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.setColor(Color.WHITE);
 		g2d.setFont(this.font);
-		g2d.drawString(this.modele.getMessage(Variables.AFFICHAGE_NOMBRE_WIDGET), 15, 17);
+		g2d.drawString(this.modele.getMessage(VariableProperties.AFFICHAGE_NOMBRE_WIDGET), 15, 17);
 		super.paintComponent(g);
 	}
 
@@ -83,7 +83,7 @@ public abstract class BoutonCategorie extends JComponent {
 	public BoutonCategorie(final ModeleCategorie modele) {
 		this.font = FontHelper.getWidgetFont();
 		this.modele = modele;
-		this.fond = Variables.GRIS_INACTIF;
+		this.fond = VariableProperties.GRIS_INACTIF;
 		this.setFont(this.font);
 		this.setFocusable(true);
 		this.setOpaque(false);
@@ -155,7 +155,7 @@ public abstract class BoutonCategorie extends JComponent {
 	 */
 	private void sourisEntree() {
 		if (!active) {
-			this.fond = Variables.GRIS_SURVOLE;
+			this.fond = VariableProperties.GRIS_SURVOLE;
 			this.repaint();
 		}
 	}
@@ -167,7 +167,7 @@ public abstract class BoutonCategorie extends JComponent {
 	 */
 	private void sourisSortie() {
 		if (!active) {
-			this.fond = Variables.GRIS_INACTIF;
+			this.fond = VariableProperties.GRIS_INACTIF;
 		}
 
 		this.repaint();
@@ -187,17 +187,17 @@ public abstract class BoutonCategorie extends JComponent {
 		if (!active) {
 			for (BoutonCategorie b : GUI.getPanelTypeWidget().getLesCategories()) {
 				b.font = FontHelper.getWidgetFont();
-				b.fond = Variables.GRIS_INACTIF;
+				b.fond = VariableProperties.GRIS_INACTIF;
 				b.active = false;
 				b.repaint();
 			}
 			font = FontHelper.getWidgetFontBold();
 			this.active = true;
-			this.fond = Variables.GRIS_ACTIF;
+			this.fond = VariableProperties.GRIS_ACTIF;
 
 
 		}
-		String text = PropertiesHelper.getInstance().get("user.categorie.message." + GUI.getPanelTypeWidget().getCurrentCategorie().toString().toLowerCase());
+		String text = PropertiesHelper.getInstance().get("user.categorie.message." + GUI.getPanelTypeWidget().getCurrentCategorie().toProperties().toLowerCase());
 		GUI.getPanelWidget().setText(text);
 		GUI.getPanelWidget().setLesWidgets(getNbColonnes());
 	}

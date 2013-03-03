@@ -1,6 +1,6 @@
 package jscratch.vue.arborescence;
 
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -43,7 +43,7 @@ public class FusionTools {
 	 * au traitement du survol.
 	 */
 	public static Action checkSurvolWidgetV2(Widget comp) {
-		int margeAimant = Variables.MARGE_AIMENT;
+		int margeAimant = VariableProperties.MARGE_AIMENT;
 		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
 
 		Point coorComp = comp.getLocationOnScreen();
@@ -107,7 +107,7 @@ public class FusionTools {
 	 */
 	private static Action checkBords(Widget compRecup, Widget compDrague, Rectangle rectComp, boolean compAtt) {
 		Action act = null;
-		int margeAimant = Variables.MARGE_AIMENT;
+		int margeAimant = VariableProperties.MARGE_AIMENT;
 
 		Point pt = compRecup.getLocationOnScreen();
 
@@ -191,7 +191,7 @@ public class FusionTools {
 					Rectangle r = act.getRect();
 					Rectangle cpy = new Rectangle(r.x, r.y, r.width, r.height);
 					cpy.translate(act.getTranslate().x, act.getTranslate().y);
-					g.setPointLigneSurEcran(new Point((int) cpy.x, (int) cpy.getY() + Variables.LINE_STROKE_VALUE + 2));
+					g.setPointLigneSurEcran(new Point((int) cpy.x, (int) cpy.getY() + VariableProperties.LINE_STROKE_VALUE + 2));
 					g.setLongueurLigne(r.width);
 					break;
 

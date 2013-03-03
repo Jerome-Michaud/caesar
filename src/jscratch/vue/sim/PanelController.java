@@ -16,7 +16,9 @@ import javax.swing.JToggleButton;
 import jscratch.controleur.sim.Simulator;
 import jscratch.dictionnaires.DicoTraces;
 import jscratch.helpers.ImagesHelper;
+import jscratch.helpers.LangueHelper;
 import jscratch.interpreteur.GestionSimulation;
+import jscratch.parametrages.langue.VariableLangue;
 import jscratch.traces.fabriques.FabriqueTrace;
 
 /**
@@ -34,7 +36,6 @@ public class PanelController extends JPanel {
 	private SimpleDropDownButton bDebug;
 	private JMenuItem m1;
 	private JMenuItem m2;
-	private JMenuItem m3;
 	private boolean pause = false;
 	private Simulator simulator;
 	private GestionSimulation simulation;
@@ -57,20 +58,20 @@ public class PanelController extends JPanel {
 
 		buttonBar = new ButtonBar();
 
-		bExec = createButton("Exécuter", iconPlay, true, false);
-		bPause = createButton("Pause", iconPause, false, false);
-		bStop = createButton("Stop", iconStop, false, false);
+		bExec = createButton(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_EXEC), iconPlay, true, false);
+		bPause = createButton(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_PAUSE), iconPause, false, false);
+		bStop = createButton(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_STOP), iconStop, false, false);
 		bExec.setActionCommand("ExécutionSimulator");
 		bPause.setActionCommand("PauseSimulator");
 		bStop.setActionCommand("StopSimulator");
 
-		bDebug = new SimpleDropDownButton("Debug");
+		bDebug = new SimpleDropDownButton(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_DEB));
 		bDebug.setIcon(iconDebug);
 
 		JPopupMenu popupMenu = bDebug.getPopupMenu();
 
-		m1 = new JMenuItem("Afficher les points des capteurs");
-		m2 = new JMenuItem("Afficher les points des collisions");
+		m1 = new JMenuItem(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_DEB_SEN));
+		m2 = new JMenuItem(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_DEB_COL));
 		m1.setActionCommand("PointsCapteurs");
 		m2.setActionCommand("PointsCollisions");
 		popupMenu.add(m1);

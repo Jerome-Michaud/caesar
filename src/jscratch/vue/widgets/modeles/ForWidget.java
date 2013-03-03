@@ -10,7 +10,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
 import jscratch.dictionnaires.DicoVariables;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionFor;
@@ -49,7 +49,7 @@ public class ForWidget extends ModeleWidget {
 
         this.setElementProgramme(new InstructionFor());
         this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
-        this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
+        this.zonesAccroches.add(VariableProperties.ZONE_ACCROCHE_PAR_DEFAULT);
 
         //variable
 		int widthChamp = 40;
@@ -72,7 +72,6 @@ public class ForWidget extends ModeleWidget {
     
     @Override
 	public void applyChangeModele(){
-		VariableModifiable var = null;
 		Widget contentCondition = ff.getContentWidget();
 		Widget contentPas = fp.getContentWidget();
 		InstructionFor forIns = (InstructionFor) getElementProgramme();
@@ -80,13 +79,11 @@ public class ForWidget extends ModeleWidget {
 		// On met à jour l'elementProgramme si les éléments existent
 		if (contentCondition != null) {			
 			Condition cond  = (Condition) contentCondition.getElementProgramme();
-			var = (VariableModifiable)cond.getMembreGauche();
 			forIns.setCondition(cond);
 		}
 			
-		if (contentPas != null && var != null) {
+		if (contentPas != null) {
 			InstructionIncrementation affPas  = (InstructionIncrementation) contentPas.getElementProgramme();
-			affPas.setVariable(var);
 			forIns.setIteration(affPas);
 		}
 	}

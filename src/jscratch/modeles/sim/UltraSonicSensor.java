@@ -3,6 +3,7 @@ package jscratch.modeles.sim;
 import java.awt.geom.Point2D;
 import java.util.List;
 import jscratch.controleur.sim.MapController;
+import nxtim.instruction.Capteur;
 
 /**
  * Capteur de détection de distance
@@ -101,6 +102,6 @@ public class UltraSonicSensor extends Sensor<Integer> {
 
 	@Override
 	public String toString() {
-		return "<strong>UltraSonic (" + port + ") :</strong> " + value;
+		return "<strong>" + Capteur.ULTRASONIC.toString() + " (" + port + ") :</strong> " + value;
 	}
 }

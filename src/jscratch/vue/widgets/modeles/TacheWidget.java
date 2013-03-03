@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.InstructionTache;
 
 /**
@@ -35,7 +35,7 @@ public class TacheWidget extends ModeleWidget {
         this.attachableHaut = false;
         this.imbricable = false;
 
-        this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
+        this.zonesAccroches.add(VariableProperties.ZONE_ACCROCHE_PAR_DEFAULT);
 		
 		this.decalageX(-30);
     }

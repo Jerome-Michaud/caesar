@@ -1,0 +1,66 @@
+#Partie supplémentaire
+direction.left=left
+direction.right=right
+word.widgets=widgets
+
+#Partie menu
+menu.file=File
+menu.file.new=New
+menu.file.load.algorithm=Open ...
+menu.file.save=Save ...
+menu.file.load.properties=Load configuration ...
+menu.file.quit=Quit
+menu.export=Export
+menu.export.nxc=NXC
+menu.export.robot=Export to robot
+menu.trace=Traces
+menu.trace.export=Export ...
+menu.more=?
+menu.more.help=About
+
+
+#Partie docking
+interface.dock.edition.graphic=Graphic editor
+interface.dock.edition.code=NXC editor
+interface.dock.simulation=Simulator
+interface.dock.code=Code
+interface.dock.compiler=Compiler
+
+
+#Partie simulateur
+interface.simulator.buttons.execute=Execute
+interface.simulator.buttons.pause=Pause
+interface.simulator.buttons.stop=Stop
+interface.simulator.buttons.debug=Debug
+interface.simulator.buttons.debug.sensors=Show sensors
+interface.simulator.buttons.debug.collisions=Show collisions
+
+interface.simulator.robot=Robot
+interface.simulator.robot.speed=Speed
+interface.simulator.robot.rotations=Rotations
+interface.simulator.robot.orientation=Orientation
+interface.simulator.robot.position=Position
+interface.simulator.sensors=Sensors
+
+
+#Partie compilateur
+interface.compiler.execute=Execute
+interface.compiler.compile=Compile
+
+
+#Partie capteurs
+sensors.none=None
+sensors.touch=Touch
+sensors.color=Color
+sensors.ultrasonic=Ultrasonic
+sensors.light=Light
+
+
+#Partie catégories
+categories=Categories
+categories.structs=Structures
+categories.engines=Engines
+categories.sensors=Sensors
+categories.times=Times
+categories.variables=Variables
+categories.expressions=Expressions

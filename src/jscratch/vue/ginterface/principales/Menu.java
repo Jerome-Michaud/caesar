@@ -17,7 +17,9 @@ import javax.swing.JOptionPane;
 import jscratch.helpers.CompilateurHelper;
 import jscratch.helpers.ErreurHelper;
 import jscratch.helpers.ImagesHelper;
+import jscratch.helpers.LangueHelper;
 import jscratch.helpers.SessionHelper;
+import jscratch.parametrages.langue.VariableLangue;
 import jscratch.vue.arborescence.ArborescenceTools;
 import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
 import jscratch.vue.widgets.Widget;
@@ -61,14 +63,14 @@ public final class Menu extends JMenuBar {
 	 * Constructeur privé de <code>Menu</code>.
 	 */
 	private Menu() {
+		LangueHelper l = LangueHelper.getInstance();
 		// FIchier
-		this.fichier = new JMenu("Fichier");
-		this.fichierNouveau = new JMenuItem("Nouveau", ImagesHelper.getIcon("document.png"));
-		this.fichierOuvrir = new JMenuItem("Ouvrir ...", ImagesHelper.getIcon("folder-horizontal-open.png"));
-		this.fichierEnregistrer = new JMenuItem("Enregistrer ...", ImagesHelper.getIcon("disk-black.png"));
-		this.fichierChargerProp = new JMenuItem("Charger configuration ...", ImagesHelper.getIcon("gear.png"));
-		this.fichierQuitter = new JMenuItem("Quitter", ImagesHelper.getIcon("cross-circle.png"));
-		
+		this.fichier = new JMenu(l.get(VariableLangue.FIC));
+		this.fichierNouveau = new JMenuItem(l.get(VariableLangue.FIC_NEW), ImagesHelper.getIcon("document.png"));
+		this.fichierOuvrir = new JMenuItem(l.get(VariableLangue.FIC_LOAD_ALGORITHME), ImagesHelper.getIcon("folder-horizontal-open.png"));
+		this.fichierEnregistrer = new JMenuItem(l.get(VariableLangue.FIC_SAVE), ImagesHelper.getIcon("disk-black.png"));
+		this.fichierChargerProp = new JMenuItem(l.get(VariableLangue.FIC_LOAD_PROPERTIES), ImagesHelper.getIcon("gear.png"));
+		this.fichierQuitter = new JMenuItem(l.get(VariableLangue.FIC_QUIT), ImagesHelper.getIcon("cross-circle.png"));
 		this.fichier.add(fichierNouveau);
 		this.fichier.addSeparator();
 		this.fichier.add(fichierOuvrir);
@@ -78,23 +80,20 @@ public final class Menu extends JMenuBar {
 		this.fichier.add(fichierQuitter);
 
 		// Exportation
-		this.exportation = new JMenu("Exporter");
-		this.exportationNXC = new JMenuItem("En NXC", ImagesHelper.getIcon("document-code.png"));
-		this.exportationRobot = new JMenuItem("Vers le robot", ImagesHelper.getIcon("robot.png"));
-		
+		this.exportation = new JMenu(l.get(VariableLangue.EXP));
+		this.exportationNXC = new JMenuItem(l.get(VariableLangue.EXP_NXC), ImagesHelper.getIcon("document-code.png"));
+		this.exportationRobot = new JMenuItem(l.get(VariableLangue.EXP_ROBOT), ImagesHelper.getIcon("robot.png"));
 		this.exportation.add(exportationNXC);
 		this.exportation.add(exportationRobot);
 		
 		// Traces
-		this.traces = new JMenu("Traces");
-		this.tracesExporter = new JMenuItem("Exporter ...", ImagesHelper.getIcon("document-traces.png"));
-		
+		this.traces = new JMenu(l.get(VariableLangue.TRA));
+		this.tracesExporter = new JMenuItem(l.get(VariableLangue.TRA_EXPORT), ImagesHelper.getIcon("document-traces.png"));
 		this.traces.add(tracesExporter);
 		
 		// Aide
-		this.aide = new JMenu("?");
-		this.aideAPropos = new JMenuItem("A propos");
-		this.aideAPropos.setIcon(ImagesHelper.getIcon("information-italic.png"));
+		this.aide = new JMenu(l.get(VariableLangue.MOR));
+		this.aideAPropos = new JMenuItem(l.get(VariableLangue.MOR_HELP), ImagesHelper.getIcon("information-italic.png"));
 		this.aide.add(aideAPropos);
 
 		this.add(fichier);

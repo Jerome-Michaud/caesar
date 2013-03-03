@@ -5,7 +5,7 @@ import de.javasoft.swing.table.PropertyTableModel;
 import java.awt.BorderLayout;
 import jscratch.helpers.ImagesHelper;
 import jscratch.helpers.PropertiesHelper;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import org.jdesktop.swingx.JXHeader;
 
 /**
@@ -30,7 +30,7 @@ public final class PanelCategories extends PanelParametrage {
 		this.setLayout(new BorderLayout());
 		this.table = new JYPropertyTable();
 		
-		this.table.addProperty("Afficher le nombre de widget dans les catégories", Variables.AFFICHAGE_NOMBRE_WIDGET);
+		this.table.addProperty("Afficher le nombre de widget dans les catégories", VariableProperties.AFFICHAGE_NOMBRE_WIDGET);
 		this.table.addSeparator();
 		this.table.addProperty("Texte structures", p.get("user.categorie.message.structures"));
 		this.table.addProperty("Texte moteur", p.get("user.categorie.message.moteurs"));

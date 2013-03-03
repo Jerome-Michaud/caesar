@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import jscratch.dictionnaires.DicoBoutonsCategories;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Categorie;
 
 /**
@@ -50,9 +50,9 @@ public final class PanelTypeWidget extends JPanel {
 		} while (i < this.lesCategories.size());
 
 		int nb = this.lesCategories.size() / 2 + this.lesCategories.size() % 2;
-		nb = 30 + nb * (Variables.TAILLE_CATEGORIE_Y + 10);
+		nb = 30 + nb * (VariableProperties.TAILLE_CATEGORIE_Y + 10);
 
-		this.setPreferredSize(new Dimension(Variables.X_MAX_INSTRUCTION, nb));
+		this.setPreferredSize(new Dimension(VariableProperties.X_MAX_INSTRUCTION, nb));
 	}
 
 	/**

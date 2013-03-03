@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 import jscratch.comparateurs.ComparateurRectangleY;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import jscratch.exceptions.ComposantIntrouvableException;
 import nxtim.instruction.Instruction;
 import nxtim.instruction.InstructionIfElse;
@@ -151,7 +151,7 @@ public class WidgetCompose extends Widget implements IWidget {
 				maxBounds = new Rectangle();
 			}
 			maxBounds.height -= ModeleWidget.OFFSET;
-			maxBounds.height = Math.max(maxBounds.height, Variables.ECART_PAR_DEFAULT);
+			maxBounds.height = Math.max(maxBounds.height, VariableProperties.ECART_PAR_DEFAULT);
 			int diff = maxBounds.height - r.height;
 
 			//On stocke le décalage qu'on voudra appliquer sur les zones d'accroche du composant

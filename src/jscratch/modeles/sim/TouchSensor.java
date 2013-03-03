@@ -1,6 +1,7 @@
 package jscratch.modeles.sim;
 
 import jscratch.controleur.sim.MapController;
+import nxtim.instruction.Capteur;
 
 /**
  * Capteur de détection de collision
@@ -15,15 +16,13 @@ public class TouchSensor extends Sensor<Boolean> {
 		update();
 	}
 
-	/* (non-Javadoc)
-	 * @see model.Sensor#update()
-	 */
+	@Override
 	public void update() {
 		value = mapC.pointInObstacle(position);
 	}
 
 	@Override
 	public String toString() {
-		return "<strong>Touch (" + port + ") :</strong> " + value;
+		return "<strong>" + Capteur.TOUCH.toString() + " (" + port + ") :</strong> " + value;
 	}
 }

@@ -7,3 +7,4 @@ src/.project
 /dist/
 traces.xml
 save*.xml
+*.properties

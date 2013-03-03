@@ -3,6 +3,7 @@ package jscratch.modeles.sim;
 import java.awt.Color;
 
 import jscratch.controleur.sim.MapController;
+import nxtim.instruction.Capteur;
 
 
 /**
@@ -44,6 +45,6 @@ public class LightSensor extends Sensor<Integer> {
 
 	@Override
 	public String toString() {
-		return "<strong>Light (" + port + ") :</strong> " + value;
+		return "<strong>" + Capteur.LIGHT.toString() + " (" + port + ") :</strong> " + value;
 	}
 }

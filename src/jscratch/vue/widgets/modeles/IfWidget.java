@@ -3,7 +3,7 @@ package jscratch.vue.widgets.modeles;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Condition;
@@ -46,7 +46,7 @@ public class IfWidget extends ModeleWidget {
 
 		this.setElementProgramme(new InstructionIf());
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
-		this.zonesAccroches.add(Variables.ZONE_ACCROCHE_PAR_DEFAULT);
+		this.zonesAccroches.add(VariableProperties.ZONE_ACCROCHE_PAR_DEFAULT);
 
 		this.decalageX(-20);
 	}

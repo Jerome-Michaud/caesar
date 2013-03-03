@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jscratch.parametrages.Variables;
+import jscratch.parametrages.properties.VariableProperties;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.principales.selecteur.SelecteurFichier;
 import jscratch.vue.ginterface.principales.selecteur.TypeSelecteur;
@@ -41,7 +41,7 @@ public final class CompilateurHelper {
 			String os = System.getProperty("os.name").toLowerCase();
 			List<String> cmd = new LinkedList<String>();
 			if (os.contains("windows")) {
-				cmd.add(Variables.CHEMIN_ACCES_NBC);
+				cmd.add(VariableProperties.CHEMIN_ACCES_NBC);
 				if (exec) {
 					cmd.add("-r");
 				}else{
