@@ -237,7 +237,6 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 	public void update(String type, int vitesse, List<MotorPort> ports) {
 		if(type.equals("Forward")){
 			for (MotorPort mp : ports) {
-				System.out.println(ports);
 				robotController.addCommand(new ForwardCommand(robotController, vitesse, mp));
 			}
 			robotController.executeCommands();

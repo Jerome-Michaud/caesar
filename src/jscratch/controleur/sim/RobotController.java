@@ -51,15 +51,17 @@ public class RobotController {
 	}	
 
 	/**
-	 * permet d'exécuter la commande à la generation actuelle
+	 * Permet d'exécuter les commandes
 	 */
-	public void executeCommands()
+	public synchronized void executeCommands()
 	{
 		Command c;
-		synchronized (this) {
-			c = listCommand.get(index-1);
+		while (index < listCommand.size()) {
+			c = listCommand.get(index);
+			
+			c.execute();
+			index++;
 		}
-		c.execute();
 	}
 
 	/**
@@ -67,24 +69,9 @@ public class RobotController {
 	 * 
 	 * @param c Command representant la commande à ajouter
 	 */
-
 	public synchronized void addCommand(Command c)
 	{
 		listCommand.add(c);
-		index++;
-		
-	}
-
-	/**
-	 * permet de supprimer une commande
-	 * 
-	 */
-
-	public synchronized void removeCommand()
-	{
-		listCommand.remove(index);
-		index--;
-
 	}
 
 	/**
@@ -93,7 +80,6 @@ public class RobotController {
 	 * @param vitesse int
 	 * @param port MotorPort
 	 */
-
 	public void onFwd(MotorPort port,int vitesse)
 	{
 		robot.getMotor(port).setPower(vitesse);		
@@ -106,7 +92,6 @@ public class RobotController {
 	 * @param port MotorPort
 	 * 
 	 */
-
 	public void onRev(MotorPort port,int vitesse)
 	{
 		robot.getMotor(port).setPower(-vitesse);		
@@ -117,7 +102,6 @@ public class RobotController {
 	 * 
 	 * @param port MotorPort
 	 */
-
 	public void off(MotorPort port)
 	{
 		robot.getMotor(port).setPower(0);
