@@ -52,7 +52,7 @@ import nxtim.instruction.VisiteurElementProg;
  * @since 1.0
  * @version 1.0
  */
-public final class Interpreteur implements Runnable,ObservableInterpreteur,VisiteurElementProg {
+public final class Interpreteur implements Runnable, ObservableInterpreteur, VisiteurElementProg {
 
 	/**
 	 * Pile de double sauvegardant les valeurs des Instructions
@@ -60,8 +60,11 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	private Deque<Double> pile;
 	
 	private RobotController robot;
-	private Simulator simulator;
-	private ArrayList<ObserverInterpreteur> listObserver;// Tableau d'observateurs.
+	private Simulator simulator;	
+	/**
+	 * Tableau d'observateurs
+	 */
+	private List<ObserverInterpreteur> listObserver;
 	private boolean stop = false;
 	private boolean wait = false;
 	private boolean run = true;
@@ -608,22 +611,41 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	@Override
 	public void visiter(InstructionMoteurRotate arg0) { }
 
-	private MotorPort moteurToMotorPort(Moteur moteur) {
-		MotorPort motorPort = null;
+	/**
+	 * Convertion d'un moteur nxtim en une liste de ports des moteurs
+	 * @param moteur La valeur moteur nxtim
+	 * @return la liste des ports des moteurs
+	 */
+	private List<MotorPort> moteurToMotorPort(Moteur moteur) {
+		List<MotorPort> ports = new LinkedList<MotorPort>();
+		
 		switch (moteur) {
 			case A:
-				motorPort = MotorPort.OUT_A;
+				ports.add(MotorPort.OUT_A);
 				break;
 			case B:
-				motorPort = MotorPort.OUT_B;
+				ports.add(MotorPort.OUT_B);
 				break;
 			case C:
-				motorPort = MotorPort.OUT_C;
+				ports.add(MotorPort.OUT_C);
+				break;
+			case AB:
+				ports.add(MotorPort.OUT_A);
+				ports.add(MotorPort.OUT_B);
+				break;
+			case AC:
+				ports.add(MotorPort.OUT_A);
+				ports.add(MotorPort.OUT_C);
+				break;
+			case BC:
+				ports.add(MotorPort.OUT_B);
+				ports.add(MotorPort.OUT_C);
 				break;
 			default:
 				break;
 		}
-		return motorPort;
+		
+		return ports;
 	}
 
 	@Override
@@ -693,9 +715,9 @@ public final class Interpreteur implements Runnable,ObservableInterpreteur,Visit
 	}
 
 	@Override
-	public void notifyObserver(String type, int vitesse, MotorPort port) {
+	public void notifyObserver(String type, int vitesse, List<MotorPort> ports) {
 		for(ObserverInterpreteur o : listObserver){
-			o.update(type,vitesse,port);
+			o.update(type,vitesse,ports);
 		}		
 	}
 

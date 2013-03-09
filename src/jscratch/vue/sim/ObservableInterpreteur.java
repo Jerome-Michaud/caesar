@@ -1,6 +1,7 @@
 package jscratch.vue.sim;
 
-import jscratch.controleur.sim.Command;
+import java.util.List;
+
 import jscratch.modeles.sim.MotorPort;
 
 /**
@@ -32,5 +33,5 @@ public interface ObservableInterpreteur {
 	/**
 	 * met à jour les observateurs avec une commande
 	 */
-	public void notifyObserver(String type,int vitesse, MotorPort port);
+	public void notifyObserver(String type, int vitesse, List<MotorPort> port);
 }

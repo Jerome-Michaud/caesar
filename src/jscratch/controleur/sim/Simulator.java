@@ -3,6 +3,8 @@ package jscratch.controleur.sim;
 import java.awt.Graphics;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+
 import jscratch.helpers.ErreurHelper;
 
 import jscratch.modeles.sim.Map;
@@ -232,13 +234,18 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 	}
 
 	@Override
-	public void update(String type,int vitesse,MotorPort port) {
+	public void update(String type, int vitesse, List<MotorPort> ports) {
 		if(type.equals("Forward")){
-			robotController.addCommand(new ForwardCommand(robotController, vitesse, port));
+			for (MotorPort mp : ports) {
+				System.out.println(ports);
+				robotController.addCommand(new ForwardCommand(robotController, vitesse, mp));
+			}
 			robotController.executeCommands();
 		}
 		else if(type.equals("Stop")){
-			robotController.addCommand(new StopCommand(robotController, vitesse, port));
+			for (MotorPort mp : ports) {
+				robotController.addCommand(new StopCommand(robotController, vitesse, mp));
+			}
 			robotController.executeCommands();
 		}
 		else if(type.equals("End")){
