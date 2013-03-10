@@ -392,7 +392,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 				this.sleepThread();
 				ExpressionComplexe cond = inst.getCondition();
 				Affectation init = inst.getInitialisation();
-				InstructionIncrementation iter = inst.getIteration();
+				Expression iter = inst.getIteration();
 				if (init != null) {
 					if (cond != null) {
 						if (iter != null) {

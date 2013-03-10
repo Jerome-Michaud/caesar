@@ -13,9 +13,9 @@ public class InstructionFor extends InstructionConditionelle {
 	 */
 	private Affectation initialisation;
 	/**
-	 * La valeur d'itération.
+	 * Expression à chaque itération.
 	 */
-	private InstructionIncrementation iteration;
+	private Expression iteration;
 
 	/**
 	 * Crée une boucle For non initialisée.<br/>
@@ -36,9 +36,24 @@ public class InstructionFor extends InstructionConditionelle {
 	public InstructionFor(final Affectation initialisation, final Condition condition, final InstructionIncrementation iteration) {
 		super(condition);
 		this.initialisation = initialisation;
+		iteration.setIsInstruction(false);
 		this.iteration = iteration;
 		this.initialisation.setIsInstruction(false);
-		this.iteration.setIsInstruction(false);
+	}
+	
+	/**
+	 * Crée une boucle For.
+	 *
+	 * @param initialisation l'initialisation
+	 * @param condition la condition d'arrêt
+	 * @param iteration le traitement de fin de tour de boucle
+	 */
+	public InstructionFor(final Affectation initialisation, final Condition condition, final Affectation iteration) {
+		super(condition);
+		this.initialisation = initialisation;
+		iteration.setIsInstruction(false);
+		this.iteration = iteration;
+		this.initialisation.setIsInstruction(false);
 	}
 
 	/**
@@ -63,20 +78,30 @@ public class InstructionFor extends InstructionConditionelle {
 	/**
 	 * Accède à l'itération de la boucle.
 	 *
-	 * @return l'affectation effectuant l'itération
+	 * @return l'expression effectué à chaque itération
 	 */
-	public InstructionIncrementation getIteration() {
+	public Expression getIteration() {
 		return iteration;
 	}
 
 	/**
 	 * Modifie l'itération de la boucle.
 	 *
-	 * @param iteration la nouvelle itération
+	 * @param iteration la nouvelle expression d'itération
 	 */
 	public void setIteration(final InstructionIncrementation iteration) {
+		iteration.setIsInstruction(false);
 		this.iteration = iteration;
-		this.iteration.setIsInstruction(false);
+	}
+	
+	/**
+	 * Modifie l'itération de la boucle.
+	 *
+	 * @param iteration la nouvelle expression d'itération
+	 */
+	public void setIteration(final Affectation iteration) {
+		iteration.setIsInstruction(false);
+		this.iteration = iteration;
 	}
 
 	@Override

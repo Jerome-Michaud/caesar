@@ -172,7 +172,7 @@ public class VisiteurC extends VisiteurTraduction {
 	public void visiter(InstructionFor instructionFor) {
 		traduction += indent();
 		traduction += "for(";
-		Instruction ini = instructionFor.getInitialisation();
+		Expression ini = instructionFor.getInitialisation();
 		if (ini != null) {
 			ini.accepte(this);
 		}
@@ -182,7 +182,7 @@ public class VisiteurC extends VisiteurTraduction {
 			cond.accepte(this);
 		}
 		traduction += "; ";
-		Instruction iter = instructionFor.getIteration();
+		Expression iter = instructionFor.getIteration();
 		if (iter != null) {
 			iter.accepte(this);
 		}
