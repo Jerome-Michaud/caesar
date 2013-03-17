@@ -37,8 +37,12 @@ public class InstructionFor extends InstructionConditionelle {
 		super(condition);
 		this.initialisation = initialisation;
 		this.iteration = iteration;
-		this.initialisation.setIsInstruction(false);
-		this.iteration.setIsInstruction(false);
+		if(initialisation != null) {
+			this.initialisation.setIsInstruction(false);
+		}
+		if(iteration != null) {
+			this.iteration.setIsInstruction(false);
+		}
 	}
 
 	/**
@@ -57,7 +61,8 @@ public class InstructionFor extends InstructionConditionelle {
 	 */
 	public void setInitialisation(final Affectation intialisation) {
 		this.initialisation = intialisation;
-		this.initialisation.setIsInstruction(false);
+		if(initialisation != null)
+			this.initialisation.setIsInstruction(false);
 	}
 
 	/**
@@ -76,7 +81,8 @@ public class InstructionFor extends InstructionConditionelle {
 	 */
 	public void setIteration(final InstructionIncrementation iteration) {
 		this.iteration = iteration;
-		this.iteration.setIsInstruction(false);
+		if(iteration != null)
+			this.iteration.setIsInstruction(false);
 	}
 
 	@Override

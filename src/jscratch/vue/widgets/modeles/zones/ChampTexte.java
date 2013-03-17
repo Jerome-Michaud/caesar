@@ -219,6 +219,8 @@ public class ChampTexte extends JPanel implements Zone {
 		//Appel à la méthode de redimensionnement en X, avec si nécessaire appel recursif pour le redimensionnement des parents
 		decaleWidgetParents(this, decal);
 		this.widgetContenu = w;
+		widgetParent.applyChangeModele();
+		LanceurTraduction.getInstance().lancerTraduction();
 	}
 
 	/**

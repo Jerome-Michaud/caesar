@@ -50,6 +50,9 @@ public class DeclarationVariableWidget extends ModeleWidget {
 			if (contentWidget != null) {
 				((InstructionDeclaration)getElementProgramme()).setMembre((Variable)contentWidget.getElementProgramme());
 			}
+			else {
+				((InstructionDeclaration)getElementProgramme()).setMembre(null);
+			}
 		}
 	}
 	

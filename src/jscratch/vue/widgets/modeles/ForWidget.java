@@ -86,6 +86,9 @@ public class ForWidget extends ModeleWidget {
 			InstructionIncrementation affPas  = (InstructionIncrementation) contentPas.getElementProgramme();
 			forIns.setIteration(affPas);
 		}
+		else {
+			forIns.setIteration(null);
+		}
 	}
 
     @Override
