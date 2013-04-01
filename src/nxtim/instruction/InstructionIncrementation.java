@@ -142,4 +142,14 @@ public class InstructionIncrementation implements Instruction, Expression {
 	public void setIsInstruction(boolean b) {
 		instruction = b;
 	}
+
+	@Override
+	public TypeElement getType() {
+		return variable.getType();
+	}
+
+	@Override
+	public boolean isBooleenne() {
+		return false;
+	}
 }

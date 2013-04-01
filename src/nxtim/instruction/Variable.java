@@ -61,6 +61,7 @@ public abstract class Variable implements Expression {
 	 *
 	 * @return le type de la variable
 	 */
+	@Override
 	public TypeElement getType() {
 		return type;
 	}
@@ -135,5 +136,10 @@ public abstract class Variable implements Expression {
 	@Override
 	public Categorie getCategorie() {
 		return Categorie.VARIABLES;
+	}
+	
+	@Override
+	public boolean isBooleenne() {
+		return type == TypeElement.BOOL?true:false;
 	}
 }

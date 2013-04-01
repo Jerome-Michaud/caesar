@@ -64,4 +64,19 @@ public class Affectation extends ExpressionComplexe implements Instruction {
 	public void setIsInstruction(final boolean b) {
 		this.isInstruction = b;
 	}
+
+	@Override
+	public TypeElement getType() {
+		VariableModifiable v = (VariableModifiable) getMembreGauche();
+		if(v == null)
+			return null;
+		return v.getType();
+	}
+
+	@Override
+	public boolean isBooleenne() {
+		if(getType() == TypeElement.BOOL)
+			return true;
+		return false;
+	}
 }

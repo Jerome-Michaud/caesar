@@ -43,4 +43,14 @@ public class Condition extends ExpressionComplexe {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public TypeElement getType() {
+		return TypeElement.BOOL;
+	}
+
+	@Override
+	public boolean isBooleenne() {
+		return true;
+	}
 }
