@@ -16,7 +16,7 @@ import nxtim.instruction.Condition;
 import nxtim.instruction.InstructionFor;
 import nxtim.instruction.InstructionIncrementation;
 import nxtim.instruction.Operateur;
-import nxtim.instruction.TypeVariable;
+import nxtim.instruction.TypeElement;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;
@@ -140,7 +140,7 @@ public class ForWidget extends ModeleWidget {
      * @param fin La valeur e la condition d'arrêt
      */
     public void setCondition(final Variable v, final Operateur o, final String fin) {
-        Condition cond = new Condition(o, v, new VariableConstante(TypeVariable.INT, "", fin));
+        Condition cond = new Condition(o, v, new VariableConstante(TypeElement.INT, "", fin));
         ((InstructionFor) getElementProgramme()).setCondition(cond);
     }
 
@@ -153,7 +153,7 @@ public class ForWidget extends ModeleWidget {
     public void setInitialization(final Variable v, final String deb) {
         Affectation aff = new Affectation(false);
         aff.setMembreGauche(v);
-        aff.setMembreDroit(new VariableConstante(TypeVariable.INT, "", deb));
+        aff.setMembreDroit(new VariableConstante(TypeElement.INT, "", deb));
         ((InstructionFor) getElementProgramme()).setInitialisation(aff);
     }
 

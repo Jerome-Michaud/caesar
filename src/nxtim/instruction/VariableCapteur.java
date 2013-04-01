@@ -14,7 +14,7 @@ public class VariableCapteur extends VariableConstante {
 	 * Crée une variable constante pour le capteur du slot A.
 	 */
 	public VariableCapteur() {
-		super(TypeVariable.INT, "", CapteurSlot.A.toString());
+		super(TypeElement.INT, "", CapteurSlot.A.toString());
 		capteurSlot = CapteurSlot.A;
 	}
 
@@ -24,7 +24,7 @@ public class VariableCapteur extends VariableConstante {
 	 * @param capteurSlot le slot du capteur.
 	 */
 	public VariableCapteur(final CapteurSlot capteurSlot) {
-		super(TypeVariable.INT, "", CapteurSlot.A.toString());
+		super(TypeElement.INT, "", CapteurSlot.A.toString());
 		this.capteurSlot = capteurSlot;
 	}
 

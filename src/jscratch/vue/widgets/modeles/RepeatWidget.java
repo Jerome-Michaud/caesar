@@ -12,7 +12,7 @@ import java.awt.Rectangle;
 import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Expression;
 import nxtim.instruction.InstructionRepeat;
-import nxtim.instruction.TypeVariable;
+import nxtim.instruction.TypeElement;
 import nxtim.instruction.VariableConstante;
 
 /**
@@ -68,7 +68,7 @@ public class RepeatWidget extends ModeleWidget {
 			Expression exp = (Expression) contentWidget.getElementProgramme();
 			repeatIns.setExpression(exp);
 		} else {
-			repeatIns.setExpression(new VariableConstante(TypeVariable.INT, f.getValeur()));
+			repeatIns.setExpression(new VariableConstante(TypeElement.INT, f.getValeur()));
 		}
 	}
 
@@ -112,6 +112,6 @@ public class RepeatWidget extends ModeleWidget {
 	 * @param nom La valeur de l'instruction moteur
 	 */
 	private void setInstructionValeur(String nom) {
-		((InstructionRepeat) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
+		((InstructionRepeat) getElementProgramme()).setExpression(new VariableConstante(TypeElement.INT, "", nom));
 	}
 }

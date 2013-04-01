@@ -12,7 +12,7 @@ import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Expression;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
-import nxtim.instruction.TypeVariable;
+import nxtim.instruction.TypeElement;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
 
@@ -95,7 +95,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 			Expression varMemGauche = (Expression) widgetG.getElementProgramme();
 			expArith.setMembreGauche(varMemGauche);
 		} else {
-			expArith.setMembreGauche(new VariableConstante(TypeVariable.INT, l.getValeur()));
+			expArith.setMembreGauche(new VariableConstante(TypeElement.INT, l.getValeur()));
 		}
 		
 		Widget widgetD = f.getContentWidget();
@@ -103,7 +103,7 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 			Expression varMemDroite = (Expression) widgetD.getElementProgramme();
 			expArith.setMembreDroit(varMemDroite);
 		} else {
-			expArith.setMembreDroit(new VariableConstante(TypeVariable.INT, f.getValeur()));
+			expArith.setMembreDroit(new VariableConstante(TypeElement.INT, f.getValeur()));
 		}
 	}
 

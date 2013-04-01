@@ -13,7 +13,7 @@ import jscratch.vue.widgets.modeles.zones.ListeDeroulante;
 import nxtim.instruction.Expression;
 import nxtim.instruction.InstructionMoteurMov;
 import nxtim.instruction.Moteur;
-import nxtim.instruction.TypeVariable;
+import nxtim.instruction.TypeElement;
 import nxtim.instruction.VariableConstante;
 
 /**
@@ -75,7 +75,7 @@ public class MoteurMarcheWidget extends ModeleWidget {
 			Expression exp = (Expression) contentWidget.getElementProgramme();
 			moteurMarcheIns.setExpression(exp);
 		} else {
-			moteurMarcheIns.setExpression(new VariableConstante(TypeVariable.INT, f.getValeur()));
+			moteurMarcheIns.setExpression(new VariableConstante(TypeElement.INT, f.getValeur()));
 		}
 	}
 
@@ -131,6 +131,6 @@ public class MoteurMarcheWidget extends ModeleWidget {
 	 */
 	private void setInstructionValeur(String nom) {
 		((InstructionMoteurMov) getElementProgramme()).setReverse(false);
-		((InstructionMoteurMov) getElementProgramme()).setExpression(new VariableConstante(TypeVariable.INT, "", nom));
+		((InstructionMoteurMov) getElementProgramme()).setExpression(new VariableConstante(TypeElement.INT, "", nom));
 	}
 }

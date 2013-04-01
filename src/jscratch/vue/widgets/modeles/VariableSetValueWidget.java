@@ -9,7 +9,7 @@ import nxtim.instruction.Expression;
 import nxtim.instruction.VariableModifiable;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
-import nxtim.instruction.TypeVariable;
+import nxtim.instruction.TypeElement;
 import nxtim.instruction.VariableConstante;
 
 /**
@@ -72,7 +72,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 				setValueIns.setMembreDroit(expComp);
 			}
 			else {
-				setValueIns.setMembreDroit(new VariableConstante(TypeVariable.INT, g.getValeur()));
+				setValueIns.setMembreDroit(new VariableConstante(TypeElement.INT, g.getValeur()));
 			}
 			if (contentWidgetVar != null) {
 				VariableModifiable var  = (VariableModifiable) contentWidgetVar.getElementProgramme();
@@ -80,7 +80,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 				setValueIns.setIsInstruction(true);
 			}
 			else {
-				setValueIns.setMembreGauche(new VariableConstante(TypeVariable.INT, d.getValeur()));
+				setValueIns.setMembreGauche(new VariableConstante(TypeElement.INT, d.getValeur()));
 			}
 		}
 	}

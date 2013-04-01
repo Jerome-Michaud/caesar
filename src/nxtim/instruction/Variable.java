@@ -8,7 +8,7 @@ public abstract class Variable implements Expression {
 	/**
 	 * Le type de la variable.
 	 */
-	private TypeVariable type;
+	private TypeElement type;
 	/**
 	 * Le nom de la variable.
 	 */
@@ -26,7 +26,7 @@ public abstract class Variable implements Expression {
 	 * @param type le type de la variable
 	 * @param nom le nom de la variable
 	 */
-	public Variable(final TypeVariable type, final String nom) {
+	public Variable(final TypeElement type, final String nom) {
 		this(type, nom, "");
 	}
 
@@ -37,7 +37,7 @@ public abstract class Variable implements Expression {
 	 * @param nom le nom de la variable
 	 * @param valeur la valeur initiale de la variable. Si la variable est de type INT ou DOUBLE, seule la partie entière est conservée.
 	 */
-	public Variable(final TypeVariable type, final String nom, final String valeur) {
+	public Variable(final TypeElement type, final String nom, final String valeur) {
 		this.type = type;
 		this.nom = nom;
 		this.valeur = valeur;
@@ -61,7 +61,7 @@ public abstract class Variable implements Expression {
 	 *
 	 * @return le type de la variable
 	 */
-	public TypeVariable getType() {
+	public TypeElement getType() {
 		return type;
 	}
 
@@ -70,7 +70,7 @@ public abstract class Variable implements Expression {
 	 *
 	 * @param type le nouveau type
 	 */
-	public void setType(final TypeVariable type) {
+	public void setType(final TypeElement type) {
 		this.type = type;
 	}
 
