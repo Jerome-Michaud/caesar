@@ -11,12 +11,10 @@ package nxtim.instruction;
 public interface Expression extends IElementProgramme {
 
 	/**
-	 * Donne la catégorie de l'instruction.
+	 * Donne la catégorie de l'expression.
 	 *
 	 * @return la catégorie
 	 */
-	Categorie getCategorie();
-
 	@Override
-	void accepte(VisiteurElementProg v);
+	public Categorie getCategorie();
 }

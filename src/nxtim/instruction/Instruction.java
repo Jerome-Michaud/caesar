@@ -11,5 +11,6 @@ public interface Instruction extends IElementProgramme {
 	 *
 	 * @return la catégorie
 	 */
-	Categorie getCategorie();
+	@Override
+	public Categorie getCategorie();
 }
