@@ -37,6 +37,7 @@ import nxtim.instruction.InstructionMoteurRotate;
 import nxtim.instruction.InstructionRAZRotationMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
+import nxtim.instruction.NonLogique;
 import nxtim.instruction.TempsCourant;
 import nxtim.instruction.InstructionWhile;
 import nxtim.instruction.Moteur;
@@ -603,13 +604,17 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 	}
 
 	@Override
-	public void visiter(InstructionDeclarationCapteur arg0) { }
+	public void visiter(InstructionDeclarationCapteur arg0) {
+		// TODO interprétation
+	}
 
 	@Override
 	public void visiter(VariableCapteur arg0) { }
 
 	@Override
-	public void visiter(InstructionMoteurRotate arg0) { }
+	public void visiter(InstructionMoteurRotate arg0) {
+		// TODO interprétation
+	}
 
 	/**
 	 * Convertion d'un moteur nxtim en une liste de ports des moteurs
@@ -674,6 +679,19 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 			}
 		}		
 	}
+
+	@Override
+	public void visiter(NonLogique nonLog) {
+		Expression cond = nonLog.getCondition();
+		assert cond != null;// interpréteur supposer recevoir un code correct.
+		
+		cond.accepte(this);
+		double d = pile.pop();
+		if(d == (double) 0)
+			pile.push((double) 1);
+		else
+			pile.push((double) 0);
+	}
 	
 	private synchronized void testWait(){
 		try {
@@ -689,13 +707,22 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 	}
 
 	@Override
-	public void visiter(ValeurCapteur valCapteur) { }
+	public void visiter(ValeurCapteur valCapteur) {	}
 
 	@Override
-	public void visiter(RotationMoteur rotMoteur) { }
+	public void visiter(RotationMoteur rotMoteur) {
+		// TODO interprétation
+	}
 
 	@Override
-	public void visiter(InstructionRAZRotationMoteur razMoteur) { }
+	public void visiter(InstructionRAZRotationMoteur razMoteur) {
+		// TODO interprétation
+	}
+	
+	@Override
+	public void visiter(InstructionConfigCapteurs confCapt) {
+		// TODO interprétation
+	}
 	
 	@Override
 	public void addObserver(ObserverInterpreteur o) {
@@ -759,7 +786,4 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 		this.sleep = false;
 		this.sleepwait = false;
 	}
-
-	@Override
-	public void visiter(InstructionConfigCapteurs confCapt) { }
 }

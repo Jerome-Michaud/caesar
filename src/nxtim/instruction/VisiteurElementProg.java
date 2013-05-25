@@ -118,6 +118,13 @@ public interface VisiteurElementProg {
 	 * @param expr l'expression à visiter
 	 */
 	public void visiter(ExpressionComplexe expr);
+	
+	/**
+	 * Visite une expression logique de négation.
+	 * 
+	 * @param nonLog l'expression à visiter.
+	 */
+	public void visiter(NonLogique nonLog);
 
 	/**
 	 * Visite une declaration de capteur.

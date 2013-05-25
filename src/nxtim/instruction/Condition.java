@@ -1,7 +1,7 @@
 package nxtim.instruction;
 
 /**
- * Expression logique.
+ * Expression logique binaire.
  */
 public class Condition extends ExpressionComplexe {
 

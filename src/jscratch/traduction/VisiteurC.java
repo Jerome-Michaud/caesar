@@ -21,6 +21,7 @@ import nxtim.instruction.InstructionRAZRotationMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.InstructionWhile;
+import nxtim.instruction.NonLogique;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.RotationMoteur;
 import nxtim.instruction.TempsCourant;
@@ -313,5 +314,14 @@ public class VisiteurC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionConfigCapteurs confCapt) {
 		traduction += indent() + "/* Code C pour la configuration des capteurs inconnu ! */\n";
+	}
+
+	@Override
+	public void visiter(NonLogique nonLog) {
+		traduction += "!(";
+		if(nonLog.getCondition() != null) {
+			nonLog.getCondition().accepte(this);
+		}
+		traduction += ")";
 	}
 }
