@@ -58,7 +58,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 				Condition cond = (Condition) contentWidget.getElementProgramme();
 				doWhileIns.setCondition(cond);
 			} else {
-				doWhileIns.setCondition(null);
+				doWhileIns.rmCondition();
 			}
 		}
 	}

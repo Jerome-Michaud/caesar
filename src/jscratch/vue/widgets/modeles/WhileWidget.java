@@ -61,7 +61,7 @@ public class WhileWidget extends ModeleWidget {
 				Condition cond = (Condition) contentWidget.getElementProgramme();
 				whileIns.setCondition(cond);
 			} else {
-				whileIns.setCondition(null);
+				whileIns.rmCondition();
 			}
 		}		
 	}

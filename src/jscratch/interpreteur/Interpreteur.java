@@ -167,7 +167,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				ExpressionComplexe cond = inst.getCondition();
+				Expression cond = inst.getCondition();
 				if (cond != null) {
 					cond.accepte(this);
 					if (pile.pop() == 1) {
@@ -191,7 +191,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				ExpressionComplexe cond = inst.getCondition();
+				Expression cond = inst.getCondition();
 				if (cond != null) {
 					cond.accepte(this);
 					if (pile.pop() == 1) {
@@ -223,7 +223,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				ExpressionComplexe cond = inst.getCondition();
+				Expression cond = inst.getCondition();
 		
 				if (cond != null) {
 					cond.accepte(this);
@@ -249,7 +249,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				ExpressionComplexe cond = inst.getCondition();
+				Expression cond = inst.getCondition();
 				if (cond != null) {
 					do {
 						for (Instruction is : inst.getEnfants()) {
@@ -391,7 +391,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 			if(run){
 				this.testWait();
 				this.sleepThread();
-				ExpressionComplexe cond = inst.getCondition();
+				Expression cond = inst.getCondition();
 				Affectation init = inst.getInitialisation();
 				Expression iter = inst.getIteration();
 				if (init != null) {

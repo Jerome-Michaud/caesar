@@ -62,7 +62,7 @@ public class VisiteurC extends VisiteurTraduction {
 	public void visiter(InstructionIf instructionIf) {
 		traduction += indent();
 		traduction += "if(";
-		ExpressionComplexe cond = instructionIf.getCondition();
+		Expression cond = instructionIf.getCondition();
 		if (cond != null) {
 			cond.accepte(this);
 		}
@@ -102,7 +102,7 @@ public class VisiteurC extends VisiteurTraduction {
 		traduction += indent();
 
 		traduction += "while(";
-		ExpressionComplexe cond = inst.getCondition();
+		Expression cond = inst.getCondition();
 		if (cond != null) {
 			cond.accepte(this);
 		}
@@ -130,7 +130,7 @@ public class VisiteurC extends VisiteurTraduction {
 		nivIndent--;
 
 		traduction += indent() + "} while(";
-		ExpressionComplexe cond = inst.getCondition();
+		Expression cond = inst.getCondition();
 		if (cond != null) {
 			cond.accepte(this);
 		}
@@ -178,7 +178,7 @@ public class VisiteurC extends VisiteurTraduction {
 			ini.accepte(this);
 		}
 		traduction += "; ";
-		ExpressionComplexe cond = instructionFor.getCondition();
+		Expression cond = instructionFor.getCondition();
 		if (cond != null) {
 			cond.accepte(this);
 		}
@@ -318,10 +318,9 @@ public class VisiteurC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(NonLogique nonLog) {
-		traduction += "!(";
+		traduction += "!";
 		if(nonLog.getCondition() != null) {
 			nonLog.getCondition().accepte(this);
 		}
-		traduction += ")";
 	}
 }
