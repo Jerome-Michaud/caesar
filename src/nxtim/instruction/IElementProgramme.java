@@ -1,7 +1,7 @@
 package nxtim.instruction;
 
 /**
- * Un élément de programme est un concept abstrait regroupant instruction et expression.
+ * Un élément de programme est un concept abstrait regroupant instructions, expression et fonctions.
  */
 public interface IElementProgramme extends java.io.Serializable {
 
@@ -11,4 +11,11 @@ public interface IElementProgramme extends java.io.Serializable {
 	 * @param visiteur l'objet souhaitant parcourir l'élément.
 	 */
 	void accepte(VisiteurElementProg visiteur);
+	
+	/**
+	 * Donne la catégorie de l'élément.
+	 * 
+	 * @return la catégorie.
+	 */
+	public Categorie getCategorie();
 }

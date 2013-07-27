@@ -24,4 +24,16 @@ public class TempsCourant implements Expression {
 	public void accepte(VisiteurElementProg visiteur) {
 		visiteur.visiter(this);
 	}
+
+
+	@Override
+	public TypeElement getType() {
+		return TypeElement.INT;
+	}
+
+
+	@Override
+	public boolean isBooleenne() {
+		return false;
+	}
 }

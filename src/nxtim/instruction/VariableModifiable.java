@@ -10,7 +10,7 @@ public class VariableModifiable extends Variable {
 	 * @param type le type de la variable
 	 * @param nom le nom de la variable
 	 */
-	public VariableModifiable(final TypeVariable type, final String nom) {
+	public VariableModifiable(final TypeElement type, final String nom) {
 		super(type, nom);
 	}
 	
@@ -21,7 +21,7 @@ public class VariableModifiable extends Variable {
 	 * @param nom le nom de la variable
 	 * @param valeur la valeur initiale de la variable.
 	 */
-	public VariableModifiable(final TypeVariable type, final String nom, final String valeur) {
+	public VariableModifiable(final TypeElement type, final String nom, final String valeur) {
 		super(type, nom, valeur);
 	}
 

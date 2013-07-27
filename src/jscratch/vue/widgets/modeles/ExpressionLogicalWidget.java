@@ -13,7 +13,7 @@ import jscratch.vue.widgets.Widget;
 import nxtim.instruction.Condition;
 import nxtim.instruction.Expression;
 import nxtim.instruction.Operateur;
-import nxtim.instruction.TypeVariable;
+import nxtim.instruction.TypeElement;
 import nxtim.instruction.VariableConstante;
 
 /**
@@ -95,14 +95,14 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 			Expression varMemGauche = (Expression) widgetG.getElementProgramme();
 			expLog.setMembreGauche(varMemGauche);
 		} else {
-			expLog.setMembreGauche(new VariableConstante(TypeVariable.INT, l.getValeur()));
+			expLog.setMembreGauche(new VariableConstante(TypeElement.INT, l.getValeur()));
 		}
 		Widget widgetD = f.getContentWidget();
 		if (widgetD != null) {
 			Expression varMemDroite = (Expression) widgetD.getElementProgramme();
 			expLog.setMembreDroit(varMemDroite);
 		} else {
-			expLog.setMembreDroit(new VariableConstante(TypeVariable.INT, f.getValeur()));
+			expLog.setMembreDroit(new VariableConstante(TypeElement.INT, f.getValeur()));
 		}
 	}
 	

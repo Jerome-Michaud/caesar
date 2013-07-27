@@ -3,7 +3,7 @@ package nxtim.instruction;
 /**
  * Cette énumération donne la liste des différents types possibles pour les variables.
  */
-public enum TypeVariable {
+public enum TypeElement {
 
 	/**
 	 * Tous les types de variable.
@@ -40,7 +40,7 @@ public enum TypeVariable {
 	 * @param type le type de la variable au format <code>String</code>
 	 * @return l'objet <code>TypeVariable</code> en fonction du paramètre
 	 */
-	public static TypeVariable fromString(final String type) {
+	public static TypeElement fromString(final String type) {
 		if ("int".equals(type)) {
 			return INT;
 		} else if ("short".equals(type)) {

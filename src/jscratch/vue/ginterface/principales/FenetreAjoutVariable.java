@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import jscratch.dictionnaires.DicoVariables;
 import jscratch.dictionnaires.DicoWidgetsCategories;
-import nxtim.instruction.TypeVariable;
+import nxtim.instruction.TypeElement;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
 
@@ -33,7 +33,7 @@ public final class FenetreAjoutVariable extends JFrame {
 		Box boxH1 = Box.createHorizontalBox();
 		Box boxH2 = Box.createHorizontalBox();
 
-		this.typeVariable = new JComboBox(TypeVariable.values());
+		this.typeVariable = new JComboBox(TypeElement.values());
 		this.nomVariable = new JFormattedTextField(new RegexFormatter("[A-z]+"));
 		this.boutonValider = new JButton("Valider");
 		this.boutonAnnuler = new JButton("Annuler");
@@ -66,7 +66,7 @@ public final class FenetreAjoutVariable extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				if (!nomVariable.getText().isEmpty()) {
-					Variable var = new VariableModifiable((TypeVariable) typeVariable.getSelectedItem(), nomVariable.getText(), "0");
+					Variable var = new VariableModifiable((TypeElement) typeVariable.getSelectedItem(), nomVariable.getText(), "0");
 					
 					// Ajout dans le dictionnaire
 					DicoVariables.getInstance().ajouter(var);

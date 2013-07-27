@@ -11,7 +11,7 @@ public class InstructionWhile extends InstructionConditionelle {
 	 * <code>null</code>.
 	 */
 	public InstructionWhile() {
-		super(null);
+		super();
 	}
 
 	/**

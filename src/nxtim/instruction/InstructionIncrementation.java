@@ -1,5 +1,7 @@
 package nxtim.instruction;
 
+import nxtim.exception.NXTIMBadTypeElementException;
+
 /**
  * Cette instruction définit une incrémentation ou une décrémentation
  * 
@@ -58,6 +60,9 @@ public class InstructionIncrementation implements Instruction, Expression {
 	 * @param isInstruction <code>true</code> si l'incrémentation doit être vu comme une instruction, <code>false</code> si elle doit être vu comme une expression.
 	 */
 	public InstructionIncrementation(final VariableModifiable var, final boolean positive, final boolean avant, final boolean isInstruction) {
+		if(var != null && var.isBooleenne()) {
+			throw new NXTIMBadTypeElementException(TypeElement.BOOL, "Incrémentation d'une variable booléenne !");
+		}
 		this.variable = var;
 		this.positive = positive;
 		this.avant = avant;
@@ -70,6 +75,9 @@ public class InstructionIncrementation implements Instruction, Expression {
 	 * @param variable la nouvelle variable
 	 */
 	public void setVariable(final VariableModifiable variable) {
+		if(variable != null && variable.isBooleenne()) {
+			throw new NXTIMBadTypeElementException(TypeElement.BOOL, "Incrémentation d'une variable booléenne !");
+		}
 		this.variable = variable;
 	}
 	
@@ -141,5 +149,15 @@ public class InstructionIncrementation implements Instruction, Expression {
 	 */
 	public void setIsInstruction(boolean b) {
 		instruction = b;
+	}
+
+	@Override
+	public TypeElement getType() {
+		return variable.getType();
+	}
+
+	@Override
+	public boolean isBooleenne() {
+		return false;
 	}
 }

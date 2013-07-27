@@ -12,7 +12,7 @@ public class VariableConstante extends Variable {
 	 * @param nom le nom de la variable. Si vide la variable représente une valeur.
 	 * @param valeur la valeur initiale de la variable
 	 */
-	public VariableConstante(final TypeVariable type, final String nom, final String valeur) {
+	public VariableConstante(final TypeElement type, final String nom, final String valeur) {
 		super(type, nom, valeur);
 	}
 	
@@ -22,7 +22,7 @@ public class VariableConstante extends Variable {
 	 * @param type le type de la valeur
 	 * @param valeur la valeur
 	 */
-	public VariableConstante(final TypeVariable type, final String valeur) {
+	public VariableConstante(final TypeElement type, final String valeur) {
 		super(type, "", valeur);
 	}
 

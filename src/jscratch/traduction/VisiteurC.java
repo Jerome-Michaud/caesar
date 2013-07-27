@@ -21,6 +21,7 @@ import nxtim.instruction.InstructionRAZRotationMoteur;
 import nxtim.instruction.InstructionRepeat;
 import nxtim.instruction.InstructionTache;
 import nxtim.instruction.InstructionWhile;
+import nxtim.instruction.NonLogique;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.RotationMoteur;
 import nxtim.instruction.TempsCourant;
@@ -61,7 +62,7 @@ public class VisiteurC extends VisiteurTraduction {
 	public void visiter(InstructionIf instructionIf) {
 		traduction += indent();
 		traduction += "if(";
-		ExpressionComplexe cond = instructionIf.getCondition();
+		Expression cond = instructionIf.getCondition();
 		if (cond != null) {
 			cond.accepte(this);
 		}
@@ -101,7 +102,7 @@ public class VisiteurC extends VisiteurTraduction {
 		traduction += indent();
 
 		traduction += "while(";
-		ExpressionComplexe cond = inst.getCondition();
+		Expression cond = inst.getCondition();
 		if (cond != null) {
 			cond.accepte(this);
 		}
@@ -129,7 +130,7 @@ public class VisiteurC extends VisiteurTraduction {
 		nivIndent--;
 
 		traduction += indent() + "} while(";
-		ExpressionComplexe cond = inst.getCondition();
+		Expression cond = inst.getCondition();
 		if (cond != null) {
 			cond.accepte(this);
 		}
@@ -172,17 +173,17 @@ public class VisiteurC extends VisiteurTraduction {
 	public void visiter(InstructionFor instructionFor) {
 		traduction += indent();
 		traduction += "for(";
-		Instruction ini = instructionFor.getInitialisation();
+		Expression ini = instructionFor.getInitialisation();
 		if (ini != null) {
 			ini.accepte(this);
 		}
 		traduction += "; ";
-		ExpressionComplexe cond = instructionFor.getCondition();
+		Expression cond = instructionFor.getCondition();
 		if (cond != null) {
 			cond.accepte(this);
 		}
 		traduction += "; ";
-		Instruction iter = instructionFor.getIteration();
+		Expression iter = instructionFor.getIteration();
 		if (iter != null) {
 			iter.accepte(this);
 		}
@@ -313,5 +314,13 @@ public class VisiteurC extends VisiteurTraduction {
 	@Override
 	public void visiter(InstructionConfigCapteurs confCapt) {
 		traduction += indent() + "/* Code C pour la configuration des capteurs inconnu ! */\n";
+	}
+
+	@Override
+	public void visiter(NonLogique nonLog) {
+		traduction += "!";
+		if(nonLog.getCondition() != null) {
+			nonLog.getCondition().accepte(this);
+		}
 	}
 }

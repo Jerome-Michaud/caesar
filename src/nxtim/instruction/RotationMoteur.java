@@ -51,5 +51,15 @@ public class RotationMoteur implements Expression {
 	public void accepte(VisiteurElementProg v) {
 		v.visiter(this);
 	}
+
+	@Override
+	public TypeElement getType() {
+		return TypeElement.INT;
+	}
+
+	@Override
+	public boolean isBooleenne() {
+		return false;
+	}
 	
 }

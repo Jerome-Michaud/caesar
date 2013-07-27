@@ -18,7 +18,8 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * <code>null</code>.
 	 */
 	public InstructionIfElse() {
-		this(null);
+		super();
+		membreIf = new InstructionIf();
 	}
 
 	/**
@@ -27,18 +28,28 @@ public class InstructionIfElse extends InstructionConditionelle {
 	 * @param cond la condition du if
 	 */
 	public InstructionIfElse(final Condition cond) {
-		super(null);
+		super();
 		membreIf = new InstructionIf(cond);
 	}
 
 	@Override
-	public Condition getCondition() {
+	public Expression getCondition() {
 		return getMembreIf().getCondition();
 	}
 
 	@Override
 	public void setCondition(final Condition cond) {
 		getMembreIf().setCondition(cond);
+	}
+	
+	@Override
+	public void setCondition(final NonLogique cond) {
+		membreIf.setCondition(cond);
+	}
+	
+	@Override
+	public void setCondition(final Variable cond) {
+		membreIf.setCondition(cond);
 	}
 
 	/**

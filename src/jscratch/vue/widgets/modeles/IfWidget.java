@@ -61,7 +61,7 @@ public class IfWidget extends ModeleWidget {
 			Condition cond = (Condition) contentWidget.getElementProgramme();
 			ifIns.setCondition(cond);
 		} else {
-			ifIns.setCondition(null);
+			ifIns.rmCondition();
 		}
 	}
 	

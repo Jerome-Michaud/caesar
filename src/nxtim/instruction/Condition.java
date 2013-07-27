@@ -1,7 +1,7 @@
 package nxtim.instruction;
 
 /**
- * Expression logique.
+ * Expression logique binaire.
  */
 public class Condition extends ExpressionComplexe {
 
@@ -42,5 +42,15 @@ public class Condition extends ExpressionComplexe {
 	public Categorie getCategorie() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public TypeElement getType() {
+		return TypeElement.BOOL;
+	}
+
+	@Override
+	public boolean isBooleenne() {
+		return true;
 	}
 }

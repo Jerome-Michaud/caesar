@@ -11,7 +11,7 @@ public class InstructionIf extends InstructionConditionelle {
 	 * <code>null</code>.
 	 */
 	public InstructionIf() {
-		super(null);
+		super();
 	}
 
 	/**

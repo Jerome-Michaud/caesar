@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import nxtim.instruction.TypeVariable;
+import nxtim.instruction.TypeElement;
 import nxtim.instruction.Variable;
 
 /**
@@ -116,7 +116,7 @@ public final class DicoVariables {
 	 * @param type le type de variable désiré
 	 * @return les variables du type désiré
 	 */
-	public List<Variable> getVariablesDeType(final TypeVariable type) {
+	public List<Variable> getVariablesDeType(final TypeElement type) {
 		ArrayList<Variable> res = new ArrayList<Variable>();
 		for (Variable v : dictionnaire.values()) {
 			if (v.getType() == type) {

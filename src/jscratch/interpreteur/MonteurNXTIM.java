@@ -20,7 +20,7 @@ import nxtim.instruction.InstructionTache;
 import nxtim.instruction.InstructionWhile;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
-import nxtim.instruction.TypeVariable;
+import nxtim.instruction.TypeElement;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;
@@ -46,14 +46,14 @@ public class MonteurNXTIM implements MonteurProgramme{
 		p = new Pile<IElementProgramme>();
 		dico = DicoVariables.getInstanceInterpreteur();
 		/* Ajout des constantes Moteur */
-		dico.ajouter(new VariableConstante(TypeVariable.INT, "OUT_A", null));
-		dico.ajouter(new VariableConstante(TypeVariable.INT, "OUT_B", null));
-		dico.ajouter(new VariableConstante(TypeVariable.INT, "OUT_C", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_A", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_B", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_C", null));
 	}
 	
 	@Override
 	public void declaration(String type, String var){
-		TypeVariable typeVar = typeConvert(type);
+		TypeElement typeVar = typeConvert(type);
 		VariableModifiable vm = null;
 		if(!isInteger(var,10)) {
 			vm = new VariableModifiable(typeVar,var,null);
@@ -69,7 +69,7 @@ public class MonteurNXTIM implements MonteurProgramme{
 		/* Récupération de l'expression d'initialisation */
 		Expression exp = (Expression) p.depile();
 		/* Création du modèle NXTIM */
-		TypeVariable typeVar = typeConvert(type);
+		TypeElement typeVar = typeConvert(type);
 		VariableModifiable vm = new VariableModifiable(typeVar,var,null);
 		DicoVariables.getInstanceInterpreteur().ajouter(vm);
 		InstructionDeclarationAffectation inst = new InstructionDeclarationAffectation();
@@ -235,7 +235,7 @@ public class MonteurNXTIM implements MonteurProgramme{
 
 	@Override
 	public void constante(String valeur, String type){
-		TypeVariable typeVar = typeConvert(type);
+		TypeElement typeVar = typeConvert(type);
 		/* Création du modèle NXTIM correspondant et stockage du résultat */
 		p.empile( new VariableConstante(typeVar, "", valeur));
 	}
@@ -329,26 +329,26 @@ public class MonteurNXTIM implements MonteurProgramme{
 		return Operateur.EGALITE;
 	}
 
-	private TypeVariable typeConvert(String type){
+	private TypeElement typeConvert(String type){
 		if(type.equals("int")) {
-			return TypeVariable.INT;
+			return TypeElement.INT;
 		}
 		else if(type.equals("float")) {
-			return TypeVariable.FLOAT;
+			return TypeElement.FLOAT;
 		}
 		else if(type.equals("boolean")) {
-			return TypeVariable.BOOL;
+			return TypeElement.BOOL;
 		}
 		else if(type.equals("short")) {
-			return TypeVariable.SHORT;
+			return TypeElement.SHORT;
 		}
 		else if(type.equals("long")) {
-			return TypeVariable.LONG;
+			return TypeElement.LONG;
 		}
 		else if(type.equals("list")) {
-			return TypeVariable.LIST;
+			return TypeElement.LIST;
 		}
-		return TypeVariable.STRING;
+		return TypeElement.STRING;
 	}
 
 	public static boolean isInteger(String s, int radix) {

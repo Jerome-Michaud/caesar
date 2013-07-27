@@ -44,4 +44,14 @@ public class ValeurCapteur implements Expression {
 	public void setSlot(CapteurSlot slot) {
 		this.slot = slot;
 	}
+
+	@Override
+	public TypeElement getType() {
+		return TypeElement.INT;
+	}
+
+	@Override
+	public boolean isBooleenne() {
+		return false;
+	}
 }

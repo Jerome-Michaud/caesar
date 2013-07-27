@@ -11,12 +11,24 @@ package nxtim.instruction;
 public interface Expression extends IElementProgramme {
 
 	/**
-	 * Donne la catégorie de l'instruction.
+	 * Donne la catégorie de l'expression.
 	 *
 	 * @return la catégorie
 	 */
-	Categorie getCategorie();
-
 	@Override
-	void accepte(VisiteurElementProg v);
+	public Categorie getCategorie();
+	
+	/**
+	 * Donne le type de l'expression.
+	 * 
+	 * @return le type de l'expresssion ou null s'il est inconnu.
+	 */
+	public TypeElement getType();
+	
+	/**
+	 * Permet de savoir si l'expression est booléenne.
+	 * 
+	 * @return <code>true</code> si c'est une expression booléenne, <code>false</code> dans le cas contraire.
+	 */
+	public boolean isBooleenne();
 }
