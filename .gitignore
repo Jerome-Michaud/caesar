@@ -1,4 +1,8 @@
 *~
+*.bak
+.project
+.classpath
+.settings/
 src/.classpath
 src/.project
 /nbproject/private/
