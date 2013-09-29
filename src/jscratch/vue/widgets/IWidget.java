@@ -10,7 +10,7 @@ ad.duroy@gmail.com
 Ce fichier est une partie du logiciel CAESAR.
 
 CAESAR est un programme informatique servant à construire un programme
-pour un robot NXT et à effectuer une simulation de l'exécution ce dernier. 
+pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier. 
 
 CAESAR est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
