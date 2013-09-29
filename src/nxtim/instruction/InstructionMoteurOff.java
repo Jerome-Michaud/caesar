@@ -3,7 +3,7 @@ Copyright (C) Université du Maine (2013)
 
 contributeurs : Adrien Duroy, Bastien Andru, Quentin Gosselin, Guillaume Delorme,
  Nicolas Detan, Zubair Parwany, Houda Chouket, Bastien Aubry,
- Vincent Besnard, Ivan Melnychenko, Gwendal Martin
+ Vincent Besnard, Ivan Melnychenko
 
 ad.duroy@gmail.com
 
