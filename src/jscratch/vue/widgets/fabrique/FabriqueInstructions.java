@@ -52,6 +52,7 @@ import jscratch.vue.widgets.modeles.CapteurWidget;
 import jscratch.vue.widgets.modeles.ConfigurationCapteursWidget;
 import jscratch.vue.widgets.modeles.DeclarationVariableWidget;
 import nxtim.instruction.Condition;
+import nxtim.instruction.NonLogique;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.Operation;
 import nxtim.instruction.VariableModifiable;
@@ -67,6 +68,7 @@ import jscratch.vue.widgets.modeles.MoteurMarcheWidget;
 import jscratch.vue.widgets.modeles.MoteurNombreRotationWidget;
 import jscratch.vue.widgets.modeles.MoteurOffWidget;
 import jscratch.vue.widgets.modeles.MoteurRAZWidget;
+import jscratch.vue.widgets.modeles.NonLogiqueWidget;
 import jscratch.vue.widgets.modeles.RepeatWidget;
 import jscratch.vue.widgets.modeles.TacheWidget;
 import jscratch.vue.widgets.modeles.TempsCourantWidget;
@@ -252,6 +254,15 @@ public class FabriqueInstructions {
 	}
 	
 	/**
+	 * Méthode permettant de créer un widget complexe de type "NonLogique".
+	 *
+	 * @return un widget complexe de type "non logique"
+	 */
+	public Widget creerWidgetNonLogique() {
+		return new Widget(new NonLogiqueWidget());
+	}
+
+	/**
 	 * Méthode permettant de créer un widget d'incrémentation (var++ ou var--).
 	 * 
 	 * @param op l'opérateur
@@ -358,6 +369,10 @@ public class FabriqueInstructions {
 			case EXPRESSION_LOGIQUE:
 				Condition con = (Condition) comp.getModele().getElementProgramme();
 				w = creerWidgetExpressionLogical(con.getOperateur());
+				break;
+			case NEGATION:
+				NonLogique nl = (NonLogique) comp.getModele().getElementProgramme();
+				w = creerWidgetNonLogique();
 				break;
 			case EXPRESSION_INC:
 				InstructionIncrementation ins = (InstructionIncrementation) comp.getModele().getElementProgramme();

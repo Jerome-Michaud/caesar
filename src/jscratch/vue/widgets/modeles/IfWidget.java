@@ -48,7 +48,10 @@ import jscratch.parametrages.properties.VariableProperties;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Condition;
+import nxtim.instruction.IElementProgramme;
 import nxtim.instruction.InstructionIf;
+import nxtim.instruction.NonLogique;
+import nxtim.instruction.Variable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la 
@@ -81,6 +84,7 @@ public class IfWidget extends ModeleWidget {
 		int widthChamp = 20;
 		f = new ChampTexte(widthChamp, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.NEGATION);
 		f.setBounds(55, 3, widthChamp, 20);
 		f.supprimerTexte();
 		this.getLesZonesSaisies().add(f);
@@ -99,8 +103,14 @@ public class IfWidget extends ModeleWidget {
 		
 		// On met à jour la condition dans l'elementProgramme si elle existe
 		if (contentWidget != null) {			
-			Condition cond = (Condition) contentWidget.getElementProgramme();
-			ifIns.setCondition(cond);
+				IElementProgramme expr = contentWidget.getElementProgramme();
+				if(expr instanceof Condition) {
+					ifIns.setCondition((Condition) expr);
+				} else if(expr instanceof NonLogique) {
+					ifIns.setCondition((NonLogique) expr);
+				} else {
+					ifIns.setCondition((Variable) expr);
+				}
 		} else {
 			ifIns.rmCondition();
 		}

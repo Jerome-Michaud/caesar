@@ -85,5 +85,6 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetNonLogique());
 	}
 }

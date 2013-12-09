@@ -49,7 +49,10 @@ import jscratch.parametrages.properties.VariableProperties;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.Condition;
+import nxtim.instruction.IElementProgramme;
 import nxtim.instruction.InstructionDoWhile;
+import nxtim.instruction.NonLogique;
+import nxtim.instruction.Variable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
@@ -78,6 +81,7 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		int widthChamp = 20;
 		f = new ChampTexte(widthChamp, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.NEGATION);
 		f.setBounds(95, 33, widthChamp, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
@@ -96,6 +100,14 @@ public class DoWhileWidget extends ModeleWidget implements Serializable {
 		if (doWhileIns != null) {
 			// On met à jour la condition dans l'elementProgramme si elle existe
 			if (contentWidget != null) {			
+				IElementProgramme expr = contentWidget.getElementProgramme();
+				if(expr instanceof Condition) {
+					doWhileIns.setCondition((Condition) expr);
+				} else if(expr instanceof NonLogique) {
+					doWhileIns.setCondition((NonLogique) expr);
+				} else {
+					doWhileIns.setCondition((Variable) expr);
+				}
 				Condition cond = (Condition) contentWidget.getElementProgramme();
 				doWhileIns.setCondition(cond);
 			} else {

@@ -54,8 +54,10 @@ import jscratch.dictionnaires.DicoVariables;
 import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
+import nxtim.instruction.IElementProgramme;
 import nxtim.instruction.InstructionFor;
 import nxtim.instruction.InstructionIncrementation;
+import nxtim.instruction.NonLogique;
 import nxtim.instruction.Operateur;
 import nxtim.instruction.TypeElement;
 import nxtim.instruction.Variable;
@@ -96,6 +98,7 @@ public class ForWidget extends ModeleWidget {
 		int widthChamp = 40;
         ff = new ChampTexte(widthChamp, this);
         ff.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
+        ff.ajouterTypeWidgetAccepte(TypeModeleWidget.NEGATION);
 		ff.supprimerTexte();
         ff.setBounds(60, 3, widthChamp, 20);
         this.getLesZonesSaisies().add(ff);
@@ -119,8 +122,17 @@ public class ForWidget extends ModeleWidget {
 		
 		// On met à jour l'elementProgramme si les éléments existent
 		if (contentCondition != null) {			
-			Condition cond  = (Condition) contentCondition.getElementProgramme();
-			forIns.setCondition(cond);
+				IElementProgramme expr = contentCondition.getElementProgramme();
+				if(expr instanceof Condition) {
+					forIns.setCondition((Condition) expr);
+				} else if(expr instanceof NonLogique) {
+					forIns.setCondition((NonLogique) expr);
+				} else {
+					forIns.setCondition((Variable) expr);
+				}
+		}
+		else {
+			forIns.setCondition((Condition) null);
 		}
 			
 		if (contentPas != null) {

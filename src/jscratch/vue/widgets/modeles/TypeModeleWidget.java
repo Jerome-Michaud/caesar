@@ -58,7 +58,7 @@ public enum TypeModeleWidget {
 		case INSTRUCTION:
 			return "Instruction";
 		case NEGATION:
-			return "Négation";
+			return "Negation";
 		case IF:
 			return "Si";
 		case WHILE:
