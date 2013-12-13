@@ -236,16 +236,16 @@ public class FabriqueInstructions {
 	}
 
 	/**
-	 * Méthode permettant de créer un widget complexe de type "Expression".
+	 * Méthode permettant de créer un widget complexe de type "Expression arithmétique".
 	 *
-	 * @return un widget complexe de type "expression arithmetique"
+	 * @return un widget complexe de type "expression arithmétique"
 	 */
 	public Widget creerWidgetExpressionArithmetic(Operateur op) {
 		return new Widget(new ExpressionArithmeticWidget(op));
 	}
 
 	/**
-	 * Méthode permettant de créer un widget complexe de type "Expression".
+	 * Méthode permettant de créer un widget complexe de type "Expression logique".
 	 *
 	 * @return un widget complexe de type "expression logique"
 	 */
