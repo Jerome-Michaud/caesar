@@ -45,22 +45,32 @@ import jscratch.modeles.sim.MotorPort;
 
 /**
  * classe Commande permet de donner des instructions au robot
- * @author Nicolas
  *
+ * @author Nicolas
  */
 public abstract class Command {
 	
+	/**
+	 * Le contrôleur de robot utilisé par la commande.
+	 */
 	protected RobotController robot;
+	/**
+	 * La nouvelle vitesse attribuée par la commande.
+	 */
 	protected int vitesse;
+	/**
+	 * Le moteur affecté par la commande.
+	 */
 	protected MotorPort port;
 	
 	/**
-	 * constructeur
+	 * Crée une commande pour le robot.
 	 * 
-	 * @param robot Robot representant le robot associé à la commande
-	 * @param vitesse int representant la vitesse du robot
+	 * @param r le contrôleur du robot associé à la commande
+	 * @param v la nouvelle vitesse
+	 * @param p le moteur du robot affectée par la commande
 	 */
-	public Command(RobotController r,int v,MotorPort p)
+	public Command(RobotController r, int v, MotorPort p)
 	{
 		this.robot = r;
 		this.vitesse = v;
@@ -69,8 +79,7 @@ public abstract class Command {
 	
 	
 	/**
-	 * permet d'exécuter la commande
+	 * Exécute la commande.
 	 */
-	
 	public abstract void execute();
 }

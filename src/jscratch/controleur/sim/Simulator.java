@@ -66,7 +66,7 @@ import jscratch.vue.sim.RobotRenderer;
  * @since 1.0
  * @version 1.0
  */
-public class Simulator implements Runnable, ObservableSimulator,ObserverInterpreteur {
+public class Simulator implements Runnable, ObservableSimulator, ObserverInterpreteur {
 	
 	private Robot robot;
 	private Map map;
@@ -99,23 +99,34 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 	}
 	
 	/**
+	 * Accède au robot du simuateur.
+	 * 
 	 * @return le robot
 	 */
 	public Robot getRobot() {
 		return robot;
 	}
 	
+	/**
+	 * Accède à la map sur laquelle évolue le robot.
+	 * 
+	 * @return la map
+	 */
 	public Map getMap() {
 		return map;
 	}
 
+	/**
+	 * Donne l'objet effectuant le rendu du robot.
+	 * 
+	 * @return l'objet de rendu
+	 */
 	public RobotRenderer getRobotRenderer() {
 		return robotRenderer;
 	}
 
 	/**
 	 * Mise à jour du simulateur
-	 * @param deltaTime
 	 */
 	public void update() {
 		robotController.update();
@@ -123,7 +134,8 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 
 	/**
 	 * Rendu du simulateur
-	 * @param g
+	 * 
+	 * @param g l'objet de dessin pour le rendu
 	 */
 	public void render(Graphics g) {
 		mapRenderer.render(g);
@@ -132,12 +144,18 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 	}
 
 	/**
-	 * @return le robotController
+	 * Donne le contrôleur du robot du simulateur.
+	 * 
+	 * @return le contrôleur du robot
 	 */
 	public RobotController getRobotController() {
 		return robotController;
 	}
 	
+	/**
+	 * Lance le simulateur.
+	 * Un nouveau thread est créé pour effectuer la simulation.
+	 */
 	public void start() {
 		new Thread(this).start();
 	}
@@ -244,6 +262,7 @@ public class Simulator implements Runnable, ObservableSimulator,ObserverInterpre
 			}
 		}
 	}
+
 	/**
 	 * met le simulator en pause
 	 */

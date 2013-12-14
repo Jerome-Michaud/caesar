@@ -50,6 +50,7 @@ import jscratch.modeles.sim.Robot;
 
 /**
  * Controller du robot
+ * 
  * @author Guillaume Delorme
  * @author Nicolas Detan
  */
@@ -64,8 +65,7 @@ public class RobotController {
 	/**
 	 * constructeur
 	 */
-
-	public RobotController(MapController m,Robot r){
+	public RobotController(MapController m, Robot r) {
 		this.listCommand = new LinkedList<Command>();
 		this.index = 0;
 		this.robot = r;
@@ -74,10 +74,8 @@ public class RobotController {
 
 	/**
 	 * met à jour le robot
-	 * @param deltaTime
 	 */
-
-	public synchronized void update()	{
+	public synchronized void update() {
 		/* Déplacement du robot */
 		int coef = 140000;
 		double vgauche = (double) robot.getMotor(MotorPort.OUT_C).getPower() / coef;
@@ -118,55 +116,50 @@ public class RobotController {
 	/**
 	 * fait avancer le robot
 	 * 
-	 * @param vitesse int
-	 * @param port MotorPort
+	 * @param port le port du moteur à affecter
+	 * @param vitesse la nouvelle vitesse du moteur
 	 */
-	public void onFwd(MotorPort port,int vitesse)
-	{
+	public void onFwd(MotorPort port, int vitesse) {
 		robot.getMotor(port).setPower(vitesse);		
 	}
 
 	/**
-	 * fait reculer le robot
+	 * Fait reculer le robot
 	 * 
-	 * @param vitesse int
-	 * @param port MotorPort
-	 * 
+	 * @param port le port du moteur à affecter
+	 * @param vitesse la nouvelle vitesse du moteur
 	 */
-	public void onRev(MotorPort port,int vitesse)
-	{
+	public void onRev(MotorPort port, int vitesse) {
 		robot.getMotor(port).setPower(-vitesse);		
 	}
 
 	/**
-	 * stop le robot
+	 * Stop un moteur du robot
 	 * 
-	 * @param port MotorPort
+	 * @param port le port du moteur à stopper
 	 */
-	public void off(MotorPort port)
-	{
+	public void off(MotorPort port) {
 		robot.getMotor(port).setPower(0);
 	}
 	
 	/**
-	 * permet de replacer le robot dans son etat initial
+	 * Replace le robot dans son état initial
 	 */
-	public void resetRobot()
-	{
+	public void resetRobot() {
 		robot.reset(200, 200);
 		addCommand(new StopCommand(this,0, MotorPort.OUT_B));
 		addCommand(new StopCommand(this,0, MotorPort.OUT_C));
 	}
 	
 	/**
-	 * Augmentation de l'angle du robot
+	 * Augmente l'angle d'orientation du robot
 	 */
 	public void changerAngleRobot(double pas) {
 		deplacementRobot(0, 0, pas);
 	}
 	
 	/**
-	 * Déplacer le robot à une position
+	 * Déplace le robot à une position
 	 * @param x les coordonnées en x
 	 * @param y les coordonnées en y
 	 */
@@ -181,7 +174,7 @@ public class RobotController {
 	}
 	
 	/**
-	 * Déplacement le robot
+	 * Déplace le robot
 	 * @param x le décalage en x
 	 * @param y le décalage en y
 	 * @param w l'angle
@@ -205,6 +198,7 @@ public class RobotController {
 			robot.updateSensor();
 		}
 	}
+
 	/**
 	 * vide la liste de commande du robot
 	 */
@@ -213,21 +207,16 @@ public class RobotController {
 		index = 0;
 	}
 
-	public void getSimulator() {
-		// TODO Stub de la méthode généré automatiquement
-		
-	}
 	/**
 	 * retourne le temps d'execution
-	 * @return currentTime
 	 */
 	public double getCurrentTime() {
 		return (double)(System.nanoTime() - startTime) / 1000000000.0;
 
 	}
+
 	/**
 	 * reset le temps de depart du simulator
-	 * @param currentTicks
 	 */
 	public void resetStartTime() {
 		startTime = System.nanoTime();    
