@@ -28,6 +28,21 @@ public class NonLogique implements Expression {
 	}
 	
 	/**
+	 * Crée une expression de négation d'une expression booléenne.
+	 * 
+	 * @param expr l'expression sur laquelle faire la négation
+	 * @throws NXTIMBadTypeElementException si l'expression n'est pas booléenne.
+	 */
+	public NonLogique(Expression expr) {
+		if(expr == null || expr.isBooleenne()) {
+			condition = expr;
+		}
+		else {
+			throw new NXTIMBadTypeElementException(expr.getType(), "Utilisation d'une expression non booléenne dans un non logique !");
+		}
+	}
+	
+	/**
 	 * Accède à l'expression de la condition sur laquelle porte la négation.
 	 * 
 	 * @return l'expression de la condition.
@@ -45,11 +60,32 @@ public class NonLogique implements Expression {
 		condition = c;
 	}
 	
+	/**
+	 * Modifie la condition de l'expression de négation.
+	 * 
+	 * @param v une variable booléenne.
+	 * @throws NXTIMBadTypeElementException si la variable n'est pas booléenne
+	 */
 	public void setCondition(Variable v) {
 		if(v == null || v.isBooleenne()) {
 			condition = v;
 		} else {
 			throw new NXTIMBadTypeElementException(v.getType(), "Utilisation d'une variable non booléenne dans un non logique !");
+		}
+	}
+
+	/**
+	 * Modifie la condition de l'expression de négation.
+	 * 
+	 * @param expr une expression booléenne.
+	 * @throws NXTIMBadTypeElementException si l'expression n'est pas booléenne
+	 */
+	public void setCondition(Expression expr) {
+		assert expr != this;
+		if(expr == null || expr.isBooleenne()) {
+			condition = expr;
+		} else {
+			throw new NXTIMBadTypeElementException(expr.getType(), "Utilisation d'une expression non booléenne dans un non logique !");
 		}
 	}
 	
@@ -59,6 +95,7 @@ public class NonLogique implements Expression {
 	 * sur un autre non logique bien que le résultat est le même que si les deux négations étaient absentes.
 	 * 
 	 * @param c une expression de négation sur laquelle faire la négation.
+	 * @deprecated Utiliser setCondition(Expression expr).
 	 */
 	public void setCondition(NonLogique c) {
 		assert c != this;
