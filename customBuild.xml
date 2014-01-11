@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="CAESAR" default="compile" >
+	<property name="src.dir" value="src" />
+	<property name="lib.dir" value="lib" />
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="jar.dir" value="${build.dir}/jar" />
+	<property name="doc.dir" value="doc/javadoc" />
+	<property name="dist.dir" value="dist" />
+
+	<property name="main-class" value="jscratch.Scratch" />
+	<property name="app.name" value="caesar" />
+
+	<path id="build.classpath" >
+		<fileset dir="${lib.dir}" >
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="init" >
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${jar.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+
+	<target name="compile_nxtim" depends="init" description="Compile NXTIM" >
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" >
+			<include name="nxtim/**/*.java" />
+		</javac>
+	</target>
+
+	<target name="compile" depends="init" description="Compile tout le projet" >
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="build.classpath" />
+	</target>
+
+	<target name="jar_nxtim" depends="compile_nxtim" description="Crée l'archive JAR de NXTIM" >
+		<jar destfile="${jar.dir}/nxtim.jar"
+			basedir="${classes.dir}"
+			includes="nxtim/*.class,nxtim/*/*.class" />
+	</target>
+
+	<target name="jar" depends="compile" description="Crée l'archive JAR du projet" >
+		<manifestclasspath property="jar.classpath" jarfile="${app.name}.jar" >
+			<classpath refid="build.classpath" />
+		</manifestclasspath>
+
+		<jar destfile="${jar.dir}/${app.name}.jar"
+			basedir="${classes.dir}" >
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+				<attribute name="Class-Path" value="${jar.classpath}" />
+			</manifest>
+			<include name="**/*.class" />
+		</jar>
+	</target>
+
+	<target name="dist" depends="clean_dist,jar" >
+		<copy file="${jar.dir}/${app.name}.jar" todir="${dist.dir}" />
+		<copy todir="${dist.dir}/${lib.dir}" >
+			<fileset dir="${lib.dir}" />
+		</copy>
+		<copy todir="${dist.dir}/ressources" >
+			<fileset dir="ressources" />
+		</copy>
+		<copy todir="${dist.dir}/lang" >
+			<fileset dir="lang" />
+		</copy>
+		<copy todir="${dist.dir}/licences" >
+			<fileset dir="licences" />
+		</copy>
+	</target>
+	
+	<target name="run" depends="dist" >
+		<java jar="${dist.dir}/${app.name}.jar" fork="true" />
+	</target>
+
+	<target name="clean" description="Supprimme les fichiers du répertoire de construction" >
+		<delete dir="${classes.dir}" />
+		<delete dir="${jar.dir}" />
+	</target>
+	
+	<target name="clean_dist" description="Supprimme le contenu du dossier de distribution" >
+		<delete dir="${dist.dir}" />
+	</target>
+	
+	<target name="doc">
+		<delete dir="${doc.dir}" />
+		<mkdir dir="${doc.dir}" />
+		<javadoc sourcepath="${src.dir}" destdir="${doc.dir}" />
+	</target>
+</project>

@@ -5,6 +5,7 @@
 .settings/
 src/.classpath
 src/.project
+bin/
 /nbproject/private/
 /build/
 /.sonar/
