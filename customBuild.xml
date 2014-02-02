@@ -39,7 +39,8 @@
 			includes="nxtim/*.class,nxtim/*/*.class" />
 	</target>
 
-	<target name="jar" depends="compile" description="Crée l'archive JAR du projet" >
+	<target name="jar" depends="compile,jar_nxtim" description="Crée l'archive JAR du projet" >
+		<copy file="${jar.dir}/nxtim.jar" todir="${lib.dir}" />
 		<manifestclasspath property="jar.classpath" jarfile="${app.name}.jar" >
 			<classpath refid="build.classpath" />
 		</manifestclasspath>
@@ -51,7 +52,9 @@
 				<attribute name="Class-Path" value="${jar.classpath}" />
 			</manifest>
 			<include name="**/*.class" />
+			<exclude name="nxtim/**/*.class" />
 		</jar>
+		<delete file="${lib.dir}/nxtim.jar" />
 	</target>
 
 	<target name="dist" depends="clean_dist,jar" >
@@ -59,6 +62,7 @@
 		<copy todir="${dist.dir}/${lib.dir}" >
 			<fileset dir="${lib.dir}" />
 		</copy>
+		<copy file="${jar.dir}/nxtim.jar" todir="${dist.dir}/${lib.dir}" />
 		<copy todir="${dist.dir}/ressources" >
 			<fileset dir="ressources" />
 		</copy>
