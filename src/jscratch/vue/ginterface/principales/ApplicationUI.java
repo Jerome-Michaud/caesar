@@ -69,6 +69,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
+import jscratch.dictionnaires.DicoVariables;
 import jscratch.helpers.ImagesHelper;
 import jscratch.helpers.LangueHelper;
 import jscratch.helpers.SessionHelper;
@@ -105,12 +106,17 @@ public final class ApplicationUI extends JFrame {
 	 * <code>DockingView</code>.
 	 */
 	private JYDockingView zoneCodeGraphique, zoneCodeNXC, zoneCodeConsole, zoneSimulateur,zoneCompilateur;
+	/**
+	 * Le dictionnaire de variables partagée dans toute l'application.
+	 */
+	private DicoVariables dicoVariables;
 
 	/**
 	 * Constructeur privé de
 	 * <code>ApplicationUI</code>.
 	 */
 	private ApplicationUI() {
+		this.dicoVariables = new DicoVariables();
 		this.setTitle("C.A.E.S.A.R");
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -159,6 +165,10 @@ public final class ApplicationUI extends JFrame {
 	
 	public JYDockingView getViewport() {
 		return zoneCodeGraphique;
+	}
+
+	public DicoVariables getDicoVariables() {
+		return dicoVariables;
 	}
 
 	/**
@@ -307,7 +317,7 @@ public final class ApplicationUI extends JFrame {
 	 *
 	 * @return L'instance unique de Fenetre.
 	 */
-	public static ApplicationUI getInstance() {
+	public static synchronized ApplicationUI getInstance() {
 		if (instance == null) {
 			instance = new ApplicationUI();
 		}

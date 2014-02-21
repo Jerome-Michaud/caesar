@@ -41,6 +41,7 @@ termes.
  */
 package jscratch.vue.widgets.modeles;
 
+import jscratch.vue.ginterface.principales.ApplicationUI;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.Zone;
@@ -50,7 +51,6 @@ import java.awt.Rectangle;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JComponent;
-import jscratch.dictionnaires.DicoVariables;
 import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Condition;
@@ -174,7 +174,7 @@ public class ForWidget extends ModeleWidget {
             ((JComponent) z).addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(final FocusEvent arg0) {
-                    VariableModifiable v = (VariableModifiable) DicoVariables.getInstance().getLesVariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
+                    VariableModifiable v = (VariableModifiable) ApplicationUI.getInstance().getDicoVariables().getLesVariables()[Integer.parseInt(((Zone) getLesZonesSaisies().get(0)).getValeur())];
                     String deb = ((Zone) getLesZonesSaisies().get(1)).getValeur();
                     Operateur o = Operateur.comparaisonA()[Integer.parseInt(((Zone) getLesZonesSaisies().get(2)).getValeur())];
                     String fin = ((Zone) getLesZonesSaisies().get(3)).getValeur();

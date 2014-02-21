@@ -85,7 +85,7 @@ public class MonteurNXTIM implements MonteurProgramme{
 	 */
 	public MonteurNXTIM(){
 		p = new Pile<IElementProgramme>();
-		dico = DicoVariables.getInstanceInterpreteur();
+		dico = new DicoVariables();
 		/* Ajout des constantes Moteur */
 		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_A", null));
 		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_B", null));
@@ -99,7 +99,7 @@ public class MonteurNXTIM implements MonteurProgramme{
 		if(!isInteger(var,10)) {
 			vm = new VariableModifiable(typeVar,var,null);
 		}
-		DicoVariables.getInstanceInterpreteur().ajouter(vm);
+		dico.ajouter(vm);
 		InstructionDeclaration inst = new InstructionDeclaration();
 		inst.setMembre(vm);
 		p.empile(inst);
@@ -112,7 +112,7 @@ public class MonteurNXTIM implements MonteurProgramme{
 		/* Création du modèle NXTIM */
 		TypeElement typeVar = typeConvert(type);
 		VariableModifiable vm = new VariableModifiable(typeVar,var,null);
-		DicoVariables.getInstanceInterpreteur().ajouter(vm);
+		dico.ajouter(vm);
 		InstructionDeclarationAffectation inst = new InstructionDeclarationAffectation();
 		inst.setMembre(vm);
 		inst.setMembreDroit(exp);
@@ -256,7 +256,7 @@ public class MonteurNXTIM implements MonteurProgramme{
 		VariableModifiable vm = null;
 		boolean trouve = false;
 		/* Recherche de la variable dans le dictionnaire de variable */
-		for(Variable variable : DicoVariables.getInstanceInterpreteur().getLesVariables()){
+		for(Variable variable : dico.getLesVariables()){
 			if(variable.getNom().equals(var)){
 				/* La variable est dans le dictionnaire de variables */
 				p.empile(variable);

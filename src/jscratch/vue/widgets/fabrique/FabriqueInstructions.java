@@ -43,9 +43,9 @@ package jscratch.vue.widgets.fabrique;
 
 import java.util.List;
 import jscratch.dictionnaires.DicoCouleursCategories;
-import jscratch.dictionnaires.DicoVariables;
 import jscratch.exceptions.NonChargeableException;
 import jscratch.exceptions.NonClonableException;
+import jscratch.vue.ginterface.principales.ApplicationUI;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.WidgetCompose;
 import jscratch.vue.widgets.modeles.CapteurWidget;
@@ -453,7 +453,7 @@ public class FabriqueInstructions {
 				}
 			}
 		} else if ("VariableWidget".equals(nomClasse)) {
-			Variable[] vars = DicoVariables.getInstance().getLesVariables();
+			Variable[] vars = ApplicationUI.getInstance().getDicoVariables().getLesVariables();
 			for (Variable v : vars) {
 				if (v.getNom().equals(supplement)) {
 					w = creerWidgetVariable((VariableModifiable)v);

@@ -49,7 +49,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import jscratch.dictionnaires.DicoVariables;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import nxtim.instruction.TypeElement;
 import nxtim.instruction.Variable;
@@ -110,7 +109,7 @@ public final class FenetreAjoutVariable extends JFrame {
 					Variable var = new VariableModifiable((TypeElement) typeVariable.getSelectedItem(), nomVariable.getText(), "0");
 					
 					// Ajout dans le dictionnaire
-					DicoVariables.getInstance().ajouter(var);
+					ApplicationUI.getInstance().getDicoVariables().ajouter(var);
 					
 					// Mise à jour des widgets liés au variables
 					DicoWidgetsCategories.getInstance().updateWidgetsVariables();

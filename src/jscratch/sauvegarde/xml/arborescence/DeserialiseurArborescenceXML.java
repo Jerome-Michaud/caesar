@@ -43,9 +43,9 @@ package jscratch.sauvegarde.xml.arborescence;
 
 import java.util.LinkedList;
 import java.util.List;
-import jscratch.dictionnaires.DicoVariables;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.exceptions.NonChargeableException;
+import jscratch.vue.ginterface.principales.ApplicationUI;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.widgets.IWidget;
 import jscratch.vue.widgets.Widget;
@@ -88,7 +88,7 @@ public final class DeserialiseurArborescenceXML {
 		Element dictionnaire = docXml.getRootElement().getChild("dictionnaire");
 		for (Element variable : dictionnaire.getChildren()) {
 			Variable var = new VariableModifiable(TypeElement.fromString(variable.getAttributeValue("type")), variable.getAttributeValue("nom"), "");
-			DicoVariables.getInstance().ajouter(var);
+			ApplicationUI.getInstance().getDicoVariables().ajouter(var);
 		}
 		DicoWidgetsCategories.getInstance().updateWidgetsVariables();
 		

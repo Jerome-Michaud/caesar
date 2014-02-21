@@ -42,8 +42,8 @@ termes.
 package jscratch.sauvegarde.xml.arborescence;
 
 import java.util.List;
-import jscratch.dictionnaires.DicoVariables;
 import jscratch.vue.arborescence.ArborescenceTools;
+import jscratch.vue.ginterface.principales.ApplicationUI;
 import nxtim.instruction.Variable;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -74,7 +74,7 @@ public final class SerialiseurArborescenceXML {
 
 		// Sauvegarde du dictionnaire
 		Element dictionnaire = new Element("dictionnaire");
-		for (Variable v : DicoVariables.getInstance().getLesVariables()) {
+		for (Variable v : ApplicationUI.getInstance().getDicoVariables().getLesVariables()) {
 			Element variable = new Element("variable");
 			variable.setAttribute("nom", v.getNom());	
 			variable.setAttribute("type", v.getType().toString());

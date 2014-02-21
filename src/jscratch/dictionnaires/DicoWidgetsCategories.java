@@ -50,6 +50,7 @@ import jscratch.helpers.PropertiesHelper;
 import nxtim.instruction.Categorie;
 import nxtim.instruction.Variable;
 import nxtim.instruction.VariableModifiable;
+import jscratch.vue.ginterface.principales.ApplicationUI;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
@@ -172,7 +173,7 @@ public final class DicoWidgetsCategories {
 	 * @param var la variable à ajouter
 	 */
 	public void updateWidgetsVariables() {
-		Variable[] vars = DicoVariables.getInstance().getLesVariables();
+		Variable[] vars = ApplicationUI.getInstance().getDicoVariables().getLesVariables();
 		this.dico.get(Categorie.VARIABLES).clear();
 		ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetVariableSetValue());
 		ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetDeclarerVariable());

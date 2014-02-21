@@ -50,7 +50,7 @@ import nxtim.instruction.TypeElement;
 import nxtim.instruction.Variable;
 
 /**
- * Définit le dictionnaire de variables.
+ * Cette classe représente un dictionnaire de variables.
  * 
  * @since 1.0
  * @version 1.0
@@ -75,54 +75,12 @@ public final class DicoVariables {
 	private Map<String, Variable> dictionnaire;
 
 	/**
-	 * Constructeur privé de <code>DicoVariables</code>.
+	 * Crée un nouveau dictionnaire de variables.
 	 * 
 	 * @since 1.0
 	 */
-	private DicoVariables() {
+	public DicoVariables() {
 		dictionnaire = new HashMap<String, Variable>();
-	}
-
-	/**
-	 * Récupère l'instance unique de <code>DicoVars</code>.
-	 *
-	 * @since 1.0
-	 * 
-	 * @return l'instance de <code>DicoVars</code>
-	 */
-	public static synchronized DicoVariables getInstance() {
-		if (instance == null) {
-			instance = new DicoVariables();
-		}
-		return instance;
-	}
-	
-	/**
-	 * Récupère l'instance unique de <code>DicoVars</code> pour l'interpréteur de NXC.
-	 *
-	 * @since 1.0
-	 * 
-	 * @return l'instance de <code>DicoVars</code>
-	 */
-	public static synchronized DicoVariables getInstanceInterpreteur() {
-		if (instanceInterp == null) {
-			instanceInterp = new DicoVariables();
-		}
-		return instanceInterp;
-	}
-	
-	/**
-	 * Récupère l'instance unique de <code>DicoVars</code> pour l'exécution.
-	 *
-	 * @since 1.0
-	 * 
-	 * @return l'instance de <code>DicoVars</code>
-	 */
-	public static synchronized DicoVariables getInstanceExecution() {
-		if (instanceExec == null) {
-			instanceExec = new DicoVariables();
-		}
-		return instanceExec;
 	}
 
 	/**

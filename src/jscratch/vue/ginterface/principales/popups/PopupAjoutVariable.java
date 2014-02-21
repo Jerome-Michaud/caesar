@@ -45,7 +45,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import jscratch.dictionnaires.DicoVariables;
+import jscratch.vue.ginterface.principales.ApplicationUI;
 import jscratch.vue.ginterface.principales.GUI;
 
 /**
@@ -76,7 +76,7 @@ public class PopupAjoutVariable extends JPopupMenu {
 		});
 		this.add(this.ajouter);
 		
-		if (!DicoVariables.getInstance().isEmpty()) {
+		if (!ApplicationUI.getInstance().getDicoVariables().isEmpty()) {
 			this.supprimer = new JMenuItem("Supprimer une variable");
 			this.supprimer.addActionListener(new ActionListener() {
 

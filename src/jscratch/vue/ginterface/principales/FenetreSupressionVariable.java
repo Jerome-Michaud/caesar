@@ -47,12 +47,14 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import jscratch.dictionnaires.DicoVariables;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.traduction.LanceurTraduction;
 import jscratch.vue.arborescence.ArborescenceTools;
 import nxtim.instruction.Variable;
 
+/**
+ * Cette classe représente la fenêtre permettant de supprimer des variables. 
+ */
 public final class FenetreSupressionVariable extends JFrame {
 
 	private JComboBox variables;
@@ -67,7 +69,7 @@ public final class FenetreSupressionVariable extends JFrame {
 		this.setAlwaysOnTop(true);
 		this.setResizable(false);
 		
-		variables = new JComboBox(DicoVariables.getInstance().getLesVariables());
+		variables = new JComboBox(ApplicationUI.getInstance().getDicoVariables().getLesVariables());
 		boutonValider = new JButton("Valider");
 
 		Box boxV = Box.createVerticalBox();
@@ -100,7 +102,7 @@ public final class FenetreSupressionVariable extends JFrame {
 				DicoWidgetsCategories.getInstance().supprimerWidgetVariable(variable);
 				
 				// Suppression de la vaiable dans le dictionnaire
-				DicoVariables.getInstance().supprimer(variable);
+				ApplicationUI.getInstance().getDicoVariables().supprimer(variable);
 				
 				// Suppression des widgets variable dans l'arborescence
 				ArborescenceTools.getInstance().supprimerVariable(variable);
