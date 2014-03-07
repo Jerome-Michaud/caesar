@@ -141,11 +141,15 @@ public abstract class ExpressionComplexe implements Expression {
 	protected void valideOperandes() throws NXTIMBadTypeElementException {
 		if(Operateur.isLogiqueBooleenne(getOperateur())) {
 			//opérandes doivent être booléens
-			if(getMembreDroit() != null && !getMembreDroit().isBooleenne()){
-				throw new NXTIMBadTypeElementException(getMembreDroit().getType(), "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
+			if(membreDroit != null && !membreDroit.isBooleenne()){
+				TypeElement type = membreDroit.getType();//Noter le type posant problème
+				membreDroit = null;//suppression de l'élément incorrect
+				throw new NXTIMBadTypeElementException(type, "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
 			}
-			else if(getMembreGauche() != null && !getMembreGauche().isBooleenne()) {
-				throw new NXTIMBadTypeElementException(getMembreGauche().getType(), "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
+			else if(membreGauche != null && !membreGauche.isBooleenne()) {
+				TypeElement type = membreGauche.getType();//Noter le type posant problème
+				membreGauche = null;//suppression de l'élément incorrect
+				throw new NXTIMBadTypeElementException(type, "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
 			}
 		}
 		else {//opérateur logique n'étant pas de logique booléenne et opérateur arithmétique
@@ -155,11 +159,15 @@ public abstract class ExpressionComplexe implements Expression {
 					break;
 				default:
 					//opérateur ne doivent pas être booléens
-					if(getMembreDroit() != null && getMembreDroit().isBooleenne()) {
-						throw new NXTIMBadTypeElementException(getMembreDroit().getType(), "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
+					if(membreDroit != null && membreDroit.isBooleenne()) {
+						TypeElement type = membreDroit.getType();//Noter le type posant problème
+						membreDroit = null;//suppression de l'élément incorrect
+						throw new NXTIMBadTypeElementException(type, "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
 					}
-					if(getMembreGauche() != null && getMembreGauche().isBooleenne()) {
-						throw new NXTIMBadTypeElementException(getMembreGauche().getType(), "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
+					if(membreGauche != null && membreGauche.isBooleenne()) {
+						TypeElement type = membreGauche.getType();//Noter le type posant problème
+						membreGauche = null;//suppression de l'élément incorrect
+						throw new NXTIMBadTypeElementException(type, "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
 					}
 					break;
 			}
