@@ -136,7 +136,13 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 			Expression varMemGauche = (Expression) widgetG.getElementProgramme();
 			expArith.setMembreGauche(varMemGauche);
 		} else {
-			expArith.setMembreGauche(new VariableConstante(TypeElement.INT, l.getValeur()));
+			String val = l.getValeur();
+			if(val.isEmpty()) {
+				expArith.setMembreGauche(null);
+			}
+			else {
+				expArith.setMembreGauche(new VariableConstante(TypeElement.INT, val));
+			}
 		}
 		
 		Widget widgetD = f.getContentWidget();
@@ -144,7 +150,13 @@ public class ExpressionArithmeticWidget extends ModeleWidget {
 			Expression varMemDroite = (Expression) widgetD.getElementProgramme();
 			expArith.setMembreDroit(varMemDroite);
 		} else {
-			expArith.setMembreDroit(new VariableConstante(TypeElement.INT, f.getValeur()));
+			String val = f.getValeur();
+			if(val.isEmpty()) {
+				expArith.setMembreDroit(null);
+			}
+			else {
+				expArith.setMembreDroit(new VariableConstante(TypeElement.INT, val));
+			}
 		}
 	}
 
