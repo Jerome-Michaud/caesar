@@ -1,5 +1,5 @@
 /*
-Copyright (C) Université du Maine (2013) 
+Copyright (C) Université du Maine (2013)
 
 contributeurs : Adrien Duroy, Bastien Andru, Quentin Gosselin, Guillaume Delorme,
  Nicolas Detan, Zubair Parwany, Houda Chouket, Bastien Aubry,
@@ -10,12 +10,12 @@ ad.duroy@gmail.com
 Ce fichier est une partie du logiciel CAESAR.
 
 CAESAR est un programme informatique servant à construire un programme
-pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier. 
+pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier.
 
 CAESAR est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
 utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA 
+de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
 sur le site "http://www.cecill.info".
 
 En contrepartie de l'accessibilité au code source et des droits de copie,
@@ -26,16 +26,16 @@ titulaire des droits patrimoniaux et les concédants successifs.
 
 A cet égard  l'attention de l'utilisateur est attirée sur les risques
 associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
+développement et à la reproduction du logiciel par l'utilisateur étant
+donné sa spécificité de logiciel libre, qui peut le rendre complexe à
 manipuler et qui le réserve donc à des développeurs et des professionnels
 avertis possédant  des  connaissances  informatiques approfondies.  Les
 utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
 logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
+sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
 
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
+Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
  */
@@ -77,13 +77,13 @@ import org.fife.ui.rtextarea.SearchEngine;
 public class EditorUI  extends JTabbedPane {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 652027320050530897L;
 	private static AutoCompletion ac; //permet d'avoir l'autocompletion sur l'editeur
 	private static final SyntaxScheme scheme = new SyntaxScheme(new Font(Font.MONOSPACED, Font.PLAIN, 14));
 	//styles pour les mots cles trouvés dans le code de l'utilisateur
-	static { 
+	static {
 		Font locBold = new Font(Font.MONOSPACED, Font.BOLD, 14);
 		Font locItalic = new Font(Font.MONOSPACED, Font.ITALIC, 14);
 		scheme.styles[Token.PREPROCESSOR].foreground = new Color(128, 64, 0);
@@ -109,7 +109,7 @@ public class EditorUI  extends JTabbedPane {
 	private static JPopupMenu popupMenu;
 
 	private static int nextNew = 1;
-	private final Map<File, RTextScrollPane> filesToTabs; // table regroupant fichier et onglet 
+	private final Map<File, RTextScrollPane> filesToTabs; // table regroupant fichier et onglet
 	private final Map<RTextScrollPane, File> tabsToFiles; // table regroupant onglet et fichier
 	public final  Map<RTextScrollPane, Boolean> tabToModify; // table regroupant onglet et boolean de modification
 
@@ -118,21 +118,21 @@ public class EditorUI  extends JTabbedPane {
 	private boolean matchCase;
 	private boolean wholeWord;
 	private boolean useRegex;
-	
+
 	private static EditorUI instance;
 	private static MyKeyAdapter myKeyAdapter; // permet d'avoir l'etoile sur tous fichier ayant subi une modification
 
 	/**
-	 * Constructeur, initialise les parametres 
+	 * Constructeur, initialise les parametres
 	 */
 	public EditorUI() {
 		//permet de reconnaitre les mots cles
 		AbstractTokenMakerFactory atmf = (AbstractTokenMakerFactory) TokenMakerFactory.getDefaultInstance();
-		atmf.putMapping("NXC", "coloration.utils.NXCTokenMaker");
-		
+		atmf.putMapping("NXC", "editeurNXC.utils.NXCTokenMaker");
+
 		this.setPreferredSize(new Dimension(400, 300));
 		this.filesToTabs = new HashMap<File, RTextScrollPane>();
-		this.tabsToFiles = new HashMap<RTextScrollPane, File>();	        
+		this.tabsToFiles = new HashMap<RTextScrollPane, File>();
 		tabToModify = new HashMap<RTextScrollPane, Boolean>();
 		//ajout d'un onglet
 		this.newTab();
@@ -152,7 +152,7 @@ public class EditorUI  extends JTabbedPane {
 	}
 
 	/**
-	 * Modifie la pop up  
+	 * Modifie la pop up
 	 * @param locJpm
 	 */
 	public static void setDefaultPopupMenu(JPopupMenu locJpm) {
@@ -196,7 +196,7 @@ public class EditorUI  extends JTabbedPane {
 			this.addTab("new " + nextNew++ +"   ", locTab);
 			tabToModify.put(locTab, false);
 			this.setSelectedComponent(locTab);
-			this.setTabComponentAt(this.getSelectedIndex(), new ButtonTabComponent(this));	            
+			this.setTabComponentAt(this.getSelectedIndex(), new ButtonTabComponent(this));
 			this.tabsToFiles.put(locTab, null);
 		} catch (IOException ex) {/* ne peut pas arriver, car on crée un onglet vide */}
 	}
@@ -223,7 +223,7 @@ public class EditorUI  extends JTabbedPane {
 				}
 
 				this.setSelectedComponent(locTab);
-				this.setTabComponentAt(this.getSelectedIndex(), new ButtonTabComponent(this));	            
+				this.setTabComponentAt(this.getSelectedIndex(), new ButtonTabComponent(this));
 
 				this.filesToTabs.put(parFile, locTab);
 				this.tabsToFiles.put(locTab, parFile);
@@ -259,7 +259,7 @@ public class EditorUI  extends JTabbedPane {
 	}
 
 	/**
-	 * sauvegarde sous, 
+	 * sauvegarde sous,
 	 * @param parFile
 	 */
 	public void saveAs(File parFile) {
@@ -353,7 +353,7 @@ public class EditorUI  extends JTabbedPane {
 		modification();
 	}
 
-	/** 
+	/**
 	 * action selectionner tout
 	 */
 	public void selectAll() {
@@ -361,7 +361,7 @@ public class EditorUI  extends JTabbedPane {
 	}
 
 	/**
-	 * action trouver 
+	 * action trouver
 	 * @param search, le mot a trouver
 	 * @param sens , sens de recherche, forward ou backward
 	 * @param matchCase, case sensitive
@@ -442,7 +442,7 @@ public class EditorUI  extends JTabbedPane {
 			myKeyAdapter.fichierModifier();
 		}
 	}
-	
+
 	/**
 	 * retourne le texte de l'onglet courant
 	 * @return
