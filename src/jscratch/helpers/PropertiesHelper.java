@@ -49,7 +49,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
@@ -286,7 +285,9 @@ public final class PropertiesHelper {
 		props.setProperty("linestroke.value", "5");
 		props.setProperty("taux.transfert", "0.6");
 		props.setProperty("ecart.defaut", "15");
-		props.setProperty("user.chemin.compilateur", "nbc.exe");
+		props.setProperty("user.chemin.compilateur.win", ".\\compilateur\\nbc.exe");
+		props.setProperty("user.chemin.compilateur.mac", "./compilateur/nbcMacOSX");
+		props.setProperty("user.chemin.compilateur.linux", "./compilateur/nbcLinux");
 		props.setProperty("user.categorie.afficher.nombrewidget", "true");
 		props.setProperty("user.couleur.Structures", "-692194");
 		props.setProperty("user.couleur.Moteurs", "-7814912");
