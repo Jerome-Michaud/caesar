@@ -125,7 +125,7 @@ public class EditorUI  extends JTabbedPane {
 	/**
 	 * Constructeur, initialise les parametres
 	 */
-	public EditorUI() {
+	private EditorUI() {
 		//permet de reconnaitre les mots cles
 		AbstractTokenMakerFactory atmf = (AbstractTokenMakerFactory) TokenMakerFactory.getDefaultInstance();
 		atmf.putMapping("NXC", "editeurNXC.utils.NXCTokenMaker");
