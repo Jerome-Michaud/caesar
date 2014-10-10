@@ -50,7 +50,7 @@ import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.widgets.IWidget;
 import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.WidgetCompose;
-import jscratch.vue.widgets.fabrique.FabriqueInstructions;
+import jscratch.vue.widgets.fabrique.FabriqueWidgets;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import jscratch.vue.widgets.modeles.zones.Zone;
 import nxtim.instruction.TypeElement;
@@ -130,7 +130,7 @@ public final class DeserialiseurArborescenceXML {
 		List<Element> accrochesXml = widget.getChildren("accroche");
 
 		// Récupération d'un objet Widget correspondant à la classe
-		FabriqueInstructions fabrique = new FabriqueInstructions();
+		FabriqueWidgets fabrique = new FabriqueWidgets();
 		
 		Widget w = fabrique.creerWidget(classe, categorie, supplement);
 		w.setDraggable(true);

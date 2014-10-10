@@ -58,7 +58,7 @@ import javax.swing.JTextPane;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.parametrages.properties.VariableProperties;
 import jscratch.vue.ginterface.principales.GUI;
-import jscratch.vue.widgets.fabrique.FabriqueInstructions;
+import jscratch.vue.widgets.fabrique.FabriqueWidgets;
 import jscratch.vue.widgets.Widget;
 import nxtim.instruction.Categorie;
 
@@ -71,7 +71,7 @@ import nxtim.instruction.Categorie;
 public final class PanelWidget extends JPanel implements Observer {
 
 	private static PanelWidget instance = new PanelWidget();
-	private FabriqueInstructions fabrique;
+	private FabriqueWidgets fabrique;
 	private List<Widget> lesWidgets;
 	private JTextPane texte;
 	private JPanel panelDeWidget;
@@ -88,7 +88,7 @@ public final class PanelWidget extends JPanel implements Observer {
 		this.lesWidgets = new LinkedList<Widget>();
 		this.setBorder(BorderFactory.createTitledBorder("Widgets"));
 
-		this.fabrique = new FabriqueInstructions();
+		this.fabrique = new FabriqueWidgets();
 		this.setLayout(new BorderLayout());
 
 		this.texte = new JTextPane();
@@ -148,7 +148,7 @@ public final class PanelWidget extends JPanel implements Observer {
 	 *
 	 * @return La fabrique de widgets
 	 */
-	public FabriqueInstructions getFabrique() {
+	public FabriqueWidgets getFabrique() {
 		return this.fabrique;
 	}
 

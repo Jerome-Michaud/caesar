@@ -1,5 +1,5 @@
 /*
-Copyright (C) Université du Maine (2013) 
+Copyright (C) Université du Maine (2013)
 
 contributeurs : Adrien Duroy, Bastien Andru, Quentin Gosselin, Guillaume Delorme,
  Nicolas Detan, Zubair Parwany, Houda Chouket, Bastien Aubry,
@@ -10,12 +10,12 @@ ad.duroy@gmail.com
 Ce fichier est une partie du logiciel CAESAR.
 
 CAESAR est un programme informatique servant à construire un programme
-pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier. 
+pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier.
 
 CAESAR est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
 utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA 
+de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
 sur le site "http://www.cecill.info".
 
 En contrepartie de l'accessibilité au code source et des droits de copie,
@@ -26,16 +26,16 @@ titulaire des droits patrimoniaux et les concédants successifs.
 
 A cet égard  l'attention de l'utilisateur est attirée sur les risques
 associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
+développement et à la reproduction du logiciel par l'utilisateur étant
+donné sa spécificité de logiciel libre, qui peut le rendre complexe à
 manipuler et qui le réserve donc à des développeurs et des professionnels
 avertis possédant  des  connaissances  informatiques approfondies.  Les
 utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
 logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
+sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
 
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
+Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
  */
@@ -48,27 +48,27 @@ import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
-import jscratch.dictionnaires.DicoTraces;
-import jscratch.traces.fabriques.FabriqueTrace;
 
 import jscratch.dictionnaires.DicoTraces;
 import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.traduction.LanceurTraduction;
 import jscratch.vue.widgets.modeles.ModeleWidget;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
+import jscratch.vue.widgets.Widget;
 
 import org.jdom2.Element;
-import jscratch.vue.widgets.Widget;
 
 /**
  * Cette classe représente un champ texte particulier intégrable dans un widget.
@@ -88,7 +88,7 @@ public class ChampTexte extends JPanel implements Zone {
 	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus
 	 */
 	int etat;
-	
+
 	private String valTempTexte;
 
 	/**
@@ -122,11 +122,11 @@ public class ChampTexte extends JPanel implements Zone {
 				// Le Widget parent du champtexte manque!
 				DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget)widgetContenu, (Zone)((JTextField)e.getSource()).getParent(), valTempTextField, textField.getText()));
 				valTempTextField = ((JTextField)e.getSource()).getText();
-	
+
 			}
 		});
 
-		
+
 		textField.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
@@ -162,7 +162,7 @@ public class ChampTexte extends JPanel implements Zone {
 	}
 
 	private void updateTextFieldWidth(DocumentEvent e) {
-		try {			
+		try {
 			int width = Math.max(this.minimumWidth,(int) new FontMetrics(textField.getFont()) {} .getStringBounds(e.getDocument().getText(0, e.getDocument().getLength()), null).getWidth()+10);
 
 			Rectangle bnds = this.getBounds();
@@ -220,7 +220,7 @@ public class ChampTexte extends JPanel implements Zone {
 	public boolean isContentWidget() {
 		return etat == 1;
 
-	}	
+	}
 
 	public ModeleWidget getWidgetParent() {
 		return widgetParent;
@@ -242,7 +242,7 @@ public class ChampTexte extends JPanel implements Zone {
 		this.removeAll();
 		int oldW = this.getWidth();
 		Widget wc = this.getWidgetContenu();
-		
+
 		if (w == null) {
 			this.etat = ETAT_SAISIE;
 			this.setComponent(textField);
@@ -283,7 +283,7 @@ public class ChampTexte extends JPanel implements Zone {
 			if (w.getParent().getParent() instanceof Widget) {
 				/*... alors on regarde si le parent du parent est un widget,
 				 * ceci afin de remonter au delà de la contenance du ChampTexte
-				 * et donc travailler sur le ChamTexte en lui même				  * 
+				 * et donc travailler sur le ChamTexte en lui même				  *
 				 */
 				parent = (Widget) (w.getParent().getParent());
 				positionX = w.getParent().getX();

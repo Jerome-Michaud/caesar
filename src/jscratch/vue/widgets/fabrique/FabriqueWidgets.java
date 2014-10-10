@@ -87,7 +87,7 @@ import nxtim.instruction.Variable;
  * @since 1.0
  * @version 1.0
  */
-public class FabriqueInstructions {
+public class FabriqueWidgets {
 
 	/**
 	 * Méthode permettant de créer un widget de type " Moteur Marche ".
