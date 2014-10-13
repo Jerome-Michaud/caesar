@@ -39,61 +39,44 @@ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL-C, et que vous en avez accepté les
 termes.
  */
-package nxtim.instruction;
+package nxtim.exception;
 
-import nxtim.exception.NXTIMBadOperateurException;
+import nxtim.instruction.Operateur;
 
 /**
- * Expression logique binaire.
+ * Exception concernant l'utilisation d'un mauvais opérateur dans une expression.
  */
-public class Condition extends ExpressionComplexe {
-
+public class NXTIMBadOperateurException extends RuntimeException {
+	private Operateur operateur;
+	
 	/**
-	 * Crée une condition.
-	 *
-	 * @param operateur l'opérateur logique à utiliser
-	 * @param membreDroit le membre gauche de la condition
-	 * @param membreGauche le membre droit de la condition
-	 * @throws NXTIMBadOperateurException Si l'opérateur fourni n'est pas un opérateur logique.
+	 * Crée une exception de mauvais opérateur.
+	 * @param op l'opérateur incorrect.
 	 */
-	public Condition(Operateur operateur, Expression membreGauche, Expression membreDroit) {
-		super(operateur, membreGauche, membreDroit);
-		if (!Operateur.isLogique(operateur)) {
-			throw new NXTIMBadOperateurException(operateur, "Opérateur non logique dans Condition.");
-		}
+	public NXTIMBadOperateurException(Operateur op) {
+		this(op, "");
 	}
-
+	
 	/**
-	 * Crée une condition.
-	 *
-	 * @param operateur l'opérateur logique à utiliser
-	 * @throws NXTIMBadOperateurException Si l'opérateur fourni n'est pas un opérateur logique.
+	 * Crée une exception de mauvais opérateur.
+	 * @param op l'opérateur incorrect.
+	 * @param message le message associé à l'erreur.
 	 */
-	public Condition(Operateur operateur) {
-		super(operateur);
-		if (!Operateur.isLogique(operateur)) {
-			throw new NXTIMBadOperateurException(operateur, "Opérateur non logique dans Condition.");
-		}
+	public NXTIMBadOperateurException(Operateur op, String message) {
+		super(message);
+		operateur = op;
 	}
-
-	@Override
-	public void accepte(VisiteurElementProg v) {
-		v.visiter(this);
+	
+	/**
+	 * Donne l'opérateur à l'origine de l'exception.
+	 * @return l'opérateur.
+	 */
+	public Operateur getOperateur() {
+		return operateur;
 	}
-
+	
 	@Override
-	public Categorie getCategorie() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public TypeElement getType() {
-		return TypeElement.BOOL;
-	}
-
-	@Override
-	public boolean isBooleenne() {
-		return true;
+	public String getMessage() {
+		return "(Opérateur " + operateur + ") " + super.getMessage();
 	}
 }

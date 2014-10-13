@@ -1,8 +1,9 @@
 package nxtim;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.*;
+import nxtim.exception.NXTIMBadOperateurException;
 import nxtim.exception.NXTIMBadTypeElementException;
 import nxtim.instruction.*;
 
@@ -21,7 +22,28 @@ public class TestNXTIM {
 	}
 
 	@Test
-	public void testCondition() {	
+	public void testConditionExceptionConstruction() {
+		boolean exception = false;
+		try {
+			Condition con = new Condition(Operateur.ADDITION, new VariableConstante(TypeElement.INT, "1"), new VariableConstante(TypeElement.INT, "0"));
+		} catch (NXTIMBadOperateurException e) {
+			assertEquals("Opérateur conditionnel incorrect.", Operateur.ADDITION, e.getOperateur());
+			exception = true;
+		}
+		assertTrue("Une NXTIMBadOperateurException devrait être levée. (Constructeur avec 3 paramètres)", exception);
+		
+		exception = false;
+		try {
+			Condition con = new Condition(Operateur.MULTIPLICATION);
+		} catch(NXTIMBadOperateurException e) {
+			assertEquals("Opérateur conditionnel incorrect.", Operateur.MULTIPLICATION, e.getOperateur());
+			exception = true;
+		}
+		assertTrue("Une NXTIMBadOperateurException devrait être levée. (Constructeur avec un paramètre)", exception);
+	}
+	
+	@Test
+	public void testConditionExceptionModification() {	
 		Condition con = new Condition(Operateur.OU, new VariableConstante(TypeElement.BOOL, "1"), new VariableConstante(TypeElement.BOOL, "0")) ;
 		boolean exception = false;
 		try {
