@@ -46,7 +46,7 @@ import nxtim.instruction.Operateur;
 /**
  * Exception concernant l'utilisation d'un mauvais opérateur dans une expression.
  */
-public class NXTIMBadOperateurException extends RuntimeException {
+public class NXTIMBadOperateurException extends NXTIMRuntimeException {
 	private Operateur operateur;
 	
 	/**

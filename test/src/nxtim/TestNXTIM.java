@@ -44,7 +44,8 @@ public class TestNXTIM {
 	
 	@Test
 	public void testConditionExceptionModification() {	
-		Condition con = new Condition(Operateur.OU, new VariableConstante(TypeElement.BOOL, "1"), new VariableConstante(TypeElement.BOOL, "0")) ;
+		final Variable membreDroit = new VariableConstante(TypeElement.BOOL, "0");
+		Condition con = new Condition(Operateur.OU, new VariableConstante(TypeElement.BOOL, "1"), membreDroit) ;
 		boolean exception = false;
 		try {
 			con.setMembreDroit(new VariableConstante(TypeElement.INT, "1"));
@@ -53,6 +54,7 @@ public class TestNXTIM {
 			assertEquals("Information de l'exception incorrecte.", TypeElement.INT, e.getTypeElement());
 		}
 		assertTrue("Une NXTIMBadTypeElementException devrait être levée.", exception);
+		assertTrue("L'ancien membre a été écrasé par à cause de l'élément incorrecte", membreDroit == con.getMembreDroit());
 	}
 
 }

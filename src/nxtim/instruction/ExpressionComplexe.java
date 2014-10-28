@@ -41,7 +41,9 @@ termes.
  */
 package nxtim.instruction;
 
-import nxtim.exception.NXTIMBadTypeElementException;
+import nxtim.exception.NXTIMRuntimeException;
+import nxtim.instruction.validation.ExpressionComplexeValidateur;
+import nxtim.instruction.validation.OperandesExpComplexeValidateur;
 
 /**
  * Expression composée de deux autres expressions avec lesquelles effectuer une opération.<br/>
@@ -52,55 +54,88 @@ public abstract class ExpressionComplexe implements Expression {
 	private Expression membreDroit;
 	private Expression membreGauche;
 	private Operateur operateur;
+	private ExpressionComplexeValidateur validateur;
 
 	/**
-	 * Crée une expression vide, le contenu devra être fourni plus tard.
+	 * Crée une expression vide sans validateur, le contenu devra être fourni plus tard.
 	 */
 	public ExpressionComplexe() {
 		super();
 	}
 
 	/**
-	 * Crée une expression complexe.
+	 * Crée une expression complexe. <br>
+	 * L'expression est associé à un validateur de type {@link OperandesExpComplexeValidateur}. La validation est effectuée à la fin de la construction lançant une {@link NXTIMRuntimeException} si elle échoue.
 	 *
 	 * @param operation l'opérateur de l'expression
 	 * @param membreGauche l'expression à gauche de l'opérateur
 	 * @param membreDroit l'expression à droite de l'opérateur
+	 * @throws NXTIMRuntimeException si l'expression n'est pas valide.
 	 */
 	public ExpressionComplexe(final Operateur operation, final Expression membreGauche, final Expression membreDroit) {
+		this(operation, membreGauche, membreDroit, new OperandesExpComplexeValidateur());
+	}
+	
+	/**
+	 * Crée une expression complexe. <br>
+	 * L'expression est associé à un validateur de type {@link OperandesExpComplexeValidateur}. La validation est effectuée à la fin de la construction lançant une {@link NXTIMRuntimeException} si elle échoue.
+	 * 
+	 * @param operation l'opérateur de l'expression
+	 * @param membreGauche l'expression à gauche de l'opérateur
+	 * @param membreDroit l'expression à droite de l'opérateur
+	 * @throws NXTIMRuntimeException si l'expression n'est pas valide.
+	 */
+	public ExpressionComplexe(final Operateur operation, final Expression membreGauche, final Expression membreDroit, final ExpressionComplexeValidateur validateur) {
 		this.operateur = operation;
 		this.membreGauche = membreGauche;
 		this.membreDroit = membreDroit;
-		valideOperandes();
+		this.validateur = validateur;
+		valider();
 	}
 
 	/**
 	 * Crée une expression complexe dont seul l'opérateur est défini, les membres devront être fournis plus tard.
+	 * L'expression est associé à un validateur de type {@link OperandesExpComplexeValidateur}. La validation est effectuée à la fin de la construction lançant une {@link NXTIMRuntimeException} si elle échoue.
 	 *
 	 * @param operation l'opérateur de l'expression
 	 */
 	public ExpressionComplexe(final Operateur operation) {
 		this.operateur = operation;
+		validateur = new OperandesExpComplexeValidateur();
 	}
 
 	/**
-	 * Modifie le membre droit.
+	 * Modifie le membre droit. La validation est effectuée, si elle échoue la modification est annulée et une {@link NXTIMRuntimeException} est lancée.
 	 *
 	 * @param expression l'expression à mettre en membre droit
+	 * @throws NXTIMRuntimeException si le nouveau membre n'est pas valide.
 	 */
 	public void setMembreDroit(final Expression expression) {
+		Expression old = membreDroit;
 		membreDroit = expression;
-		valideOperandes();
+		try {
+			valider();
+		} catch (NXTIMRuntimeException e) {
+			membreDroit = old;
+			throw e;
+		}
 	}
 
 	/**
-	 * Modifie le membre gauche.
+	 * Modifie le membre gauche. La validation est effectuée, si elle échoue la modification est annulée et une {@link NXTIMRuntimeException} est lancée.
 	 *
 	 * @param expression l'expression à mettre en membre gauche
+	 * @throws NXTIMRuntimeException si le nouveau membre n'est pas valide.
 	 */
 	public void setMembreGauche(final Expression expression) {
+		Expression old = membreGauche;
 		membreGauche = expression;
-		valideOperandes();
+		try {
+			valider();
+		} catch (NXTIMRuntimeException e) {
+			membreGauche = old;
+			throw e;
+		}
 	}
 
 	/**
@@ -129,6 +164,22 @@ public abstract class ExpressionComplexe implements Expression {
 	public Operateur getOperateur() {
 		return this.operateur;
 	}
+	
+	/**
+	 * Accède au validateur de l'expression.
+	 * @return le validateur.
+	 */
+	public ExpressionComplexeValidateur getValidateur() {
+		return validateur;
+	}
+
+	/**
+	 * Modifie le validateur de l'expression.
+	 * @param validateur le nouveau validateur.
+	 */
+	public void setValidateur(ExpressionComplexeValidateur validateur) {
+		this.validateur = validateur;
+	}
 
 	@Override
 	public String toString() {
@@ -136,41 +187,11 @@ public abstract class ExpressionComplexe implements Expression {
 	}
 	
 	/*
-	 * Valide les opérandes par rapport à l'opérateur.
+	 * Valide la cohérence des attributs.
 	 */
-	protected void valideOperandes() throws NXTIMBadTypeElementException {
-		if(Operateur.isLogiqueBooleenne(getOperateur())) {
-			//opérandes doivent être booléens
-			if(membreDroit != null && !membreDroit.isBooleenne()){
-				TypeElement type = membreDroit.getType();//Noter le type posant problème
-				membreDroit = null;//suppression de l'élément incorrect
-				throw new NXTIMBadTypeElementException(type, "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
-			}
-			else if(membreGauche != null && !membreGauche.isBooleenne()) {
-				TypeElement type = membreGauche.getType();//Noter le type posant problème
-				membreGauche = null;//suppression de l'élément incorrect
-				throw new NXTIMBadTypeElementException(type, "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
-			}
-		}
-		else {//opérateur logique n'étant pas de logique booléenne et opérateur arithmétique
-			Operateur o = getOperateur();
-			switch(o) {
-				case EGALITE:
-					break;
-				default:
-					//opérateur ne doivent pas être booléens
-					if(membreDroit != null && membreDroit.isBooleenne()) {
-						TypeElement type = membreDroit.getType();//Noter le type posant problème
-						membreDroit = null;//suppression de l'élément incorrect
-						throw new NXTIMBadTypeElementException(type, "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
-					}
-					if(membreGauche != null && membreGauche.isBooleenne()) {
-						TypeElement type = membreGauche.getType();//Noter le type posant problème
-						membreGauche = null;//suppression de l'élément incorrect
-						throw new NXTIMBadTypeElementException(type, "Opérateur de condition (" + getOperateur() + ") invalide avec ce type.");
-					}
-					break;
-			}
+	protected void valider() throws NXTIMRuntimeException {
+		if(validateur != null) {
+			validateur.valider(this);
 		}
 	}
 }
