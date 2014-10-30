@@ -1,5 +1,5 @@
 /*
-Copyright (C) Université du Maine (2013) 
+Copyright (C) Université du Maine (2013)
 
 contributeurs : Adrien Duroy, Bastien Andru, Quentin Gosselin, Guillaume Delorme,
  Nicolas Detan, Zubair Parwany, Houda Chouket, Bastien Aubry,
@@ -10,12 +10,12 @@ ad.duroy@gmail.com
 Ce fichier est une partie du logiciel CAESAR.
 
 CAESAR est un programme informatique servant à construire un programme
-pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier. 
+pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier.
 
 CAESAR est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
 utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA 
+de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
 sur le site "http://www.cecill.info".
 
 En contrepartie de l'accessibilité au code source et des droits de copie,
@@ -26,16 +26,16 @@ titulaire des droits patrimoniaux et les concédants successifs.
 
 A cet égard  l'attention de l'utilisateur est attirée sur les risques
 associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
+développement et à la reproduction du logiciel par l'utilisateur étant
+donné sa spécificité de logiciel libre, qui peut le rendre complexe à
 manipuler et qui le réserve donc à des développeurs et des professionnels
 avertis possédant  des  connaissances  informatiques approfondies.  Les
 utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
 logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
+sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
 
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
+Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
  */
@@ -62,12 +62,12 @@ import jscratch.vue.sim.RobotRenderer;
 
 /**
  * Classe qui gère le simulateur.
- * 
+ *
  * @since 1.0
  * @version 1.0
  */
 public class Simulator implements Runnable, ObservableSimulator, ObserverInterpreteur {
-	
+
 	private Robot robot;
 	private Map map;
 	private MapController mapController;
@@ -78,38 +78,38 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
 	private ArrayList<ObserverPanelController> listPanelController;// Tableau d'observateurs.
 	private boolean run;
 	private boolean wait;
-	
+
 	public Simulator() {
-		
+
 		this.listObserver = new ArrayList<ObserverSimulator>();
 		this.listPanelController = new ArrayList<ObserverPanelController>();
 
 		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/CAESAR.xml"));
-		
+
 		mapController = new MapController(map);
-		
+
 		robot = new Robot(mapController);
 		robotController = new RobotController(mapController, robot);
-		
+
 		mapRenderer = new MapRenderer(map);
 		robotRenderer = new RobotRenderer(robot);
-		
+
 		this.run = true;
 		this.wait = false;
 	}
-	
+
 	/**
 	 * Accède au robot du simuateur.
-	 * 
+	 *
 	 * @return le robot
 	 */
 	public Robot getRobot() {
 		return robot;
 	}
-	
+
 	/**
 	 * Accède à la map sur laquelle évolue le robot.
-	 * 
+	 *
 	 * @return la map
 	 */
 	public Map getMap() {
@@ -118,7 +118,7 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
 
 	/**
 	 * Donne l'objet effectuant le rendu du robot.
-	 * 
+	 *
 	 * @return l'objet de rendu
 	 */
 	public RobotRenderer getRobotRenderer() {
@@ -134,24 +134,24 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
 
 	/**
 	 * Rendu du simulateur
-	 * 
+	 *
 	 * @param g l'objet de dessin pour le rendu
 	 */
 	public void render(Graphics g) {
 		mapRenderer.render(g);
 		robotRenderer.render(g);
-		
+
 	}
 
 	/**
 	 * Donne le contrôleur du robot du simulateur.
-	 * 
+	 *
 	 * @return le contrôleur du robot
 	 */
 	public RobotController getRobotController() {
 		return robotController;
 	}
-	
+
 	/**
 	 * Lance le simulateur.
 	 * Un nouveau thread est créé pour effectuer la simulation.
@@ -159,29 +159,28 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
 	public void start() {
 		new Thread(this).start();
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Runnable#run()
 	 */
 	@Override
 	public void run() {
 		// Set up the graphics stuff, double-buffering.
-	/*	System.out.println("Demarrage du simulateur");
-		System.out.println("Simulateur = "+Thread.currentThread().getName());		*/
-				
+		//System.out.println("Demarrage du simulateur");
+
 		// Conversion du temps en secondes
         double nextTime = (double)System.nanoTime() / 1000000000.0;
         double maxTimeDiff = 0.5;
         int skippedFrames = 1;
         int maxSkippedFrames = 5;
         double currTime;
-        int sleepTime;        
+        int sleepTime;
         this.run = true;
 		this.robotController.resetStartTime();
-        
-        // Delta entre chaque mise à jour (1 / 30 -> 30 fps) 
+
+        // Delta entre chaque mise à jour (1 / 30 -> 30 fps)
         double delta = 1 / 30;
-        
+
         while(run)
         {
         	this.testWait();
@@ -194,10 +193,10 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
             {
                 // Temps pour la prochaine mise à jour
                 nextTime += delta;
-                
-                // Mise à jour du simulateur 
+
+                // Mise à jour du simulateur
                 this.update();
-                
+
                 if((currTime < nextTime) || (skippedFrames > maxSkippedFrames))
                 {
                 	// Affichage
@@ -213,7 +212,7 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
             {
                 // Calcul du temps à attendre
                 sleepTime = (int)(1000.0 * (nextTime - currTime));
-                
+
                 if(sleepTime > 0)
                 {
                     // Attente en attendant la prochaine mise à jour
@@ -227,30 +226,29 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
                 }
             }
         }
-        
+
         this.notifyObserverPanelController();
-		
-	/*	System.out.println("Arret du simulateur");
-		System.out.println("Simulateur = "+Thread.currentThread().getName());*/
+
+		//System.out.println("Arret du simulateur");
 	}
-	
+
 	@Override
 	public void addObserver(ObserverSimulator o) {
 		 listObserver.add(o);
 	}
-	
+
 	@Override
 	public void deleteObserver(ObserverSimulator o) {
-		listObserver.remove(o); 
+		listObserver.remove(o);
 	}
-	
+
 	@Override
 	public void notifyObserverSimulator() {
 		for(ObserverSimulator o : listObserver){
 			o.update(this);
 		}
 	}
-	
+
 	private synchronized void testWait() {
 		if(wait){
 			try {
@@ -276,7 +274,7 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
 		System.out.println("Simulateur = "+Thread.currentThread().getName());*/
 		this.wait = false;
 	}
-	
+
 	/**
 	 * arrete le simulator
 	 */

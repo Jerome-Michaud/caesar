@@ -1,5 +1,5 @@
 /*
-Copyright (C) Université du Maine (2013) 
+Copyright (C) Université du Maine (2013)
 
 contributeurs : Adrien Duroy, Bastien Andru, Quentin Gosselin, Guillaume Delorme,
  Nicolas Detan, Zubair Parwany, Houda Chouket, Bastien Aubry,
@@ -10,12 +10,12 @@ ad.duroy@gmail.com
 Ce fichier est une partie du logiciel CAESAR.
 
 CAESAR est un programme informatique servant à construire un programme
-pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier. 
+pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier.
 
 CAESAR est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
 utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA 
+de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
 sur le site "http://www.cecill.info".
 
 En contrepartie de l'accessibilité au code source et des droits de copie,
@@ -26,16 +26,16 @@ titulaire des droits patrimoniaux et les concédants successifs.
 
 A cet égard  l'attention de l'utilisateur est attirée sur les risques
 associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
+développement et à la reproduction du logiciel par l'utilisateur étant
+donné sa spécificité de logiciel libre, qui peut le rendre complexe à
 manipuler et qui le réserve donc à des développeurs et des professionnels
 avertis possédant  des  connaissances  informatiques approfondies.  Les
 utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
 logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
+sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
 
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
+Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
  */
@@ -83,13 +83,15 @@ public class PanelController extends JPanel {
 
 	/**
 	 * Constructeur par défaut de <code>PanelController</code>.
-	 * 
+	 *
 	 * @since 1.0
-	 * 
+	 *
 	 * @param simulator  le simulateur
 	 */
 	public PanelController(Simulator simulator) {
 		this.simulator = simulator;
+		this.simulation = new GestionSimulation(simulator);
+
 		setLayout(new FlowLayout(10, 1, 4));
 
 		ImageIcon iconPlay = (ImageIcon) ImagesHelper.getIcon("control.png");
@@ -125,7 +127,7 @@ public class PanelController extends JPanel {
 		this.add(buttonBar);
 
 		Listener listener = new Listener();
-		
+
 		bExec.addActionListener(listener);
 		bPause.addActionListener(listener);
 		bStop.addActionListener(listener);
@@ -171,32 +173,29 @@ public class PanelController extends JPanel {
 		b.setIcon(icon);
 		return b;
 	}
-	
+
 	/**
 	 * Classe pour la gestion des appuis sur les boutons.
-	 * 
+	 *
 	 * @since 1.0
 	 * @version 1.0
 	 */
 	private class Listener implements ActionListener,ObserverPanelController {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceBoutonsSimulateur(((JButton)e.getSource()).getText()));
-		
+
 			if ("ExécutionSimulator".equals(e.getActionCommand())) {
-				simulation = new GestionSimulation(simulator);
-				bExec.addActionListener(simulation.getListener());
-				bPause.addActionListener(simulation.getListener());
-				bStop.addActionListener(simulation.getListener());
 				this.start();
 				this.startThread();
-			} 
+			}
 			else if ("PauseSimulator".equals(e.getActionCommand())) {
 				this.pause();
 			}
 			else if ("StopSimulator".equals(e.getActionCommand())) {
 				this.stop();
+				simulation.stopThread();
 			}
 			else if (e.getActionCommand() == "PointsCapteurs") {
 				simulator.getRobotRenderer().setCapteurs(!simulator.getRobotRenderer().getCapteurs());
@@ -205,39 +204,42 @@ public class PanelController extends JPanel {
 				simulator.getRobotRenderer().setCollisions(!simulator.getRobotRenderer().getCollisions());
 			}
 		}
-		
+
 		/**
-		 * gerer le debut de la simulation
+		 * Gere le debut de la simulation
 		 */
 		private void startThread(){
 			simulator.addObserver(this);
-			simulation.startThread();
+			simulation.startThread(); // Lance la simulation
 		}
-		
+
 		/**
-		 * gere l'etat des boutons lors du debut de la simulation
+		 * Gere l'etat des boutons lors du debut de la simulation
 		 */
 		private void start(){
 			bPause.setEnabled(true);
 			bStop.setEnabled(true);
 			bExec.setEnabled(false);
 		}
-		
+
 		/**
-		 * gere l'etat des boutons lors du debut de la simulation
+		 * Gere l'etat des boutons lors du debut de la simulation
+		 * Gere l'état de la simulation
 		 */
 		private void pause(){
 			if (!pause) {
 				pause = true;
 				bPause.setText("Relance");
+				simulation.waitThread(); // Mise en attente de la simulation
 			} else {
 				pause = false;
 				bPause.setText("Pause");
+				simulation.notifyThread(); // Re-démarrage de la simulation
 			}
 		}
-		
+
 		/**
-		 * gere l'etat des boutons lors du debut de la simulation
+		 * Gere l'etat des boutons lors du debut de la simulation
 		 */
 		private void stop(){
 			bPause.setEnabled(false);
@@ -246,7 +248,7 @@ public class PanelController extends JPanel {
 			pause = false;
 			bPause.setText("Pause");
 		}
-	
+
 		@Override
 		public void update(ObservableSimulator o) {
 			this.stop();
