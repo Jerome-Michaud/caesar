@@ -53,11 +53,6 @@ import jscratch.exceptions.InstructionNonGereeException;
 import jscratch.helpers.ErreurHelper;
 import jscratch.modeles.sim.MotorPort;
 import jscratch.vue.arborescence.ArborescenceTools;
-import jscratch.vue.sim.ObservableInterpreteur;
-import jscratch.vue.sim.ObserverInterpreteur;
-import jscratch.vue.widgets.Widget;
-import jscratch.vue.widgets.modeles.ModeleWidget;
-import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Expression;
 import nxtim.instruction.ExpressionComplexe;
@@ -140,7 +135,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 		//System.out.println("Demarrage de l'interpreteur ; stop="+stop);
 
 		while(!stop){
-			for(Instruction l : trouveTaches()){
+			for(Instruction l : ArborescenceTools.getInstance().trouveTaches()){
 				l.accepte(this);
 			}
 			stop=true;
@@ -148,26 +143,6 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 		this.notifyObserver("End", 0, null);
 
 		//System.out.println("Arret de l'interpreteur ; stop =" + stop);
-	}
-
-	/**
-	 * Trouve les tâches parmi les widgets.<br/>
-	 * L'interpretation est effectuée à partir de celles-ci.
-	 *
-	 * @return les instructions à interpreter
-	 */
-	private List<Instruction> trouveTaches() {
-		List<Instruction> list = new LinkedList<Instruction>();
-		for (List<Widget> racine : ArborescenceTools.getInstance().getArborescence()) {
-			if (!racine.isEmpty()) {
-				Widget tache = racine.get(0);
-				ModeleWidget m = tache.getModele();
-				if (m.getType() == TypeModeleWidget.TACHE) {
-					list.add((Instruction) m.getElementProgramme());
-				}
-			}
-		}
-		return list;
 	}
 
 	public synchronized void waitThread() {
