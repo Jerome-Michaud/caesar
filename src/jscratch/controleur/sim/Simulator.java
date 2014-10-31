@@ -41,7 +41,6 @@ termes.
  */
 package jscratch.controleur.sim;
 
-import java.awt.Graphics;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +51,11 @@ import jscratch.modeles.sim.Map;
 import jscratch.modeles.sim.MapFactory;
 import jscratch.modeles.sim.MotorPort;
 import jscratch.modeles.sim.Robot;
-import jscratch.vue.sim.MapRenderer;
-import jscratch.vue.sim.ObservableInterpreteur;
+import jscratch.interpreteur.ObservableInterpreteur;
+import jscratch.interpreteur.ObserverInterpreteur;
 import jscratch.vue.sim.ObservableSimulator;
-import jscratch.vue.sim.ObserverInterpreteur;
 import jscratch.vue.sim.ObserverPanelController;
 import jscratch.vue.sim.ObserverSimulator;
-import jscratch.vue.sim.RobotRenderer;
 
 /**
  * Classe qui gère le simulateur.
@@ -72,8 +69,6 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
 	private Map map;
 	private MapController mapController;
 	private RobotController robotController;
-	private MapRenderer mapRenderer;
-	private RobotRenderer robotRenderer;
 	private ArrayList<ObserverSimulator> listObserver;// Tableau d'observateurs.
 	private ArrayList<ObserverPanelController> listPanelController;// Tableau d'observateurs.
 	private boolean run;
@@ -90,9 +85,6 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
 
 		robot = new Robot(mapController);
 		robotController = new RobotController(mapController, robot);
-
-		mapRenderer = new MapRenderer(map);
-		robotRenderer = new RobotRenderer(robot);
 
 		this.run = true;
 		this.wait = false;
@@ -114,33 +106,6 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
 	 */
 	public Map getMap() {
 		return map;
-	}
-
-	/**
-	 * Donne l'objet effectuant le rendu du robot.
-	 *
-	 * @return l'objet de rendu
-	 */
-	public RobotRenderer getRobotRenderer() {
-		return robotRenderer;
-	}
-
-	/**
-	 * Mise à jour du simulateur
-	 */
-	public void update() {
-		robotController.update();
-	}
-
-	/**
-	 * Rendu du simulateur
-	 *
-	 * @param g l'objet de dessin pour le rendu
-	 */
-	public void render(Graphics g) {
-		mapRenderer.render(g);
-		robotRenderer.render(g);
-
 	}
 
 	/**
@@ -195,7 +160,7 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
                 nextTime += delta;
 
                 // Mise à jour du simulateur
-                this.update();
+				robotController.update();
 
                 if((currTime < nextTime) || (skippedFrames > maxSkippedFrames))
                 {

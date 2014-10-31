@@ -80,17 +80,18 @@ public class PanelController extends JPanel {
 	private boolean pause = false;
 	private Simulator simulator;
 	private GestionSimulation simulation;
+	private PanelSimulator panelSimulator;
 
 	/**
 	 * Constructeur par défaut de <code>PanelController</code>.
 	 *
-	 * @since 1.0
-	 *
 	 * @param simulator  le simulateur
+	 * @param panelSimulator le panel du simulateur
 	 */
-	public PanelController(Simulator simulator) {
+	public PanelController(Simulator simulator, PanelSimulator panelSimulator) {
 		this.simulator = simulator;
 		this.simulation = new GestionSimulation(simulator);
+		this.panelSimulator = panelSimulator;
 
 		setLayout(new FlowLayout(10, 1, 4));
 
@@ -198,10 +199,10 @@ public class PanelController extends JPanel {
 				simulation.stopThread();
 			}
 			else if (e.getActionCommand() == "PointsCapteurs") {
-				simulator.getRobotRenderer().setCapteurs(!simulator.getRobotRenderer().getCapteurs());
+				panelSimulator.getRobotRenderer().setCapteurs(!panelSimulator.getRobotRenderer().getCapteurs());
 			}
 			else if (e.getActionCommand() == "PointsCollisions") {
-				simulator.getRobotRenderer().setCollisions(!simulator.getRobotRenderer().getCollisions());
+				panelSimulator.getRobotRenderer().setCollisions(!panelSimulator.getRobotRenderer().getCollisions());
 			}
 		}
 
