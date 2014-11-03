@@ -65,9 +65,7 @@ import jscratch.vue.sim.ObserverSimulator;
  */
 public class Simulator implements Runnable, ObservableSimulator, ObserverInterpreteur {
 
-	private Robot robot;
 	private Map map;
-	private MapController mapController;
 	private RobotController robotController;
 	private ArrayList<ObserverSimulator> listObserver;// Tableau d'observateurs.
 	private ArrayList<ObserverPanelController> listPanelController;// Tableau d'observateurs.
@@ -80,10 +78,8 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
 		this.listPanelController = new ArrayList<ObserverPanelController>();
 
 		map = MapFactory.createMapFromXML(new File("./ressources/simulateur/maps/CAESAR.xml"));
-
-		mapController = new MapController(map);
-
-		robot = new Robot(mapController);
+		MapController mapController = new MapController(map);
+		Robot robot = new Robot(mapController);
 		robotController = new RobotController(mapController, robot);
 
 		this.run = true;
@@ -96,7 +92,7 @@ public class Simulator implements Runnable, ObservableSimulator, ObserverInterpr
 	 * @return le robot
 	 */
 	public Robot getRobot() {
-		return robot;
+		return robotController.getRobot();
 	}
 
 	/**
