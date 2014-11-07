@@ -41,6 +41,8 @@ termes.
  */
 package nxtim.instruction;
 
+import nxtim.exception.NXTIMBadOperateurException;
+
 /**
  * Expression logique binaire.
  */
@@ -49,15 +51,15 @@ public class Condition extends ExpressionComplexe {
 	/**
 	 * Crée une condition.
 	 *
-	 * @param operation l'opérateur logique à utiliser
+	 * @param operateur l'opérateur logique à utiliser
 	 * @param membreDroit le membre gauche de la condition
 	 * @param membreGauche le membre droit de la condition
-	 * @throws RuntimeException Si l'opérateur fourni n'est pas un opérateur logique.
+	 * @throws NXTIMBadOperateurException Si l'opérateur fourni n'est pas un opérateur logique.
 	 */
-	public Condition(Operateur operation, Expression membreGauche, Expression membreDroit) {
-		super(operation, membreGauche, membreDroit);
-		if (!Operateur.isLogique(operation)) {
-			throw new RuntimeException("Opérateur non logique dans Condition.");
+	public Condition(Operateur operateur, Expression membreGauche, Expression membreDroit) {
+		super(operateur, membreGauche, membreDroit);
+		if (!Operateur.isLogique(operateur)) {
+			throw new NXTIMBadOperateurException(operateur, "Opérateur non logique dans Condition.");
 		}
 	}
 
@@ -65,12 +67,12 @@ public class Condition extends ExpressionComplexe {
 	 * Crée une condition.
 	 *
 	 * @param operateur l'opérateur logique à utiliser
-	 * @throws RuntimeException Si l'opérateur fourni n'est pas un opérateur logique.
+	 * @throws NXTIMBadOperateurException Si l'opérateur fourni n'est pas un opérateur logique.
 	 */
 	public Condition(Operateur operateur) {
 		super(operateur);
 		if (!Operateur.isLogique(operateur)) {
-			throw new RuntimeException("Opérateur non logique dans Condition.");
+			throw new NXTIMBadOperateurException(operateur, "Opérateur non logique dans Condition.");
 		}
 	}
 

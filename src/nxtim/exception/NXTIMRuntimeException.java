@@ -41,47 +41,40 @@ termes.
  */
 package nxtim.exception;
 
-import nxtim.instruction.TypeElement;
-
 /**
- * Exception indiquant qu'un type incorrect est utilisé dans un élément de programme.
- * 
- * @since 1.0
+ * Base des exception de type RuntimeTime utilisée dans NXTIM. 
  */
-public class NXTIMBadTypeElementException extends NXTIMRuntimeException {
-	private TypeElement typeElement;
+public class NXTIMRuntimeException extends RuntimeException {
 
 	/**
-	 * Crée une exception indiquant une erreur de type.
-	 * 
-	 * @param badType le type déclenchant l'erreur.
+	 * Crée une RnutimeException NXTIM.
 	 */
-	public NXTIMBadTypeElementException(TypeElement badType) {
-		this(badType, "");
+	public NXTIMRuntimeException() {
+		super();
 	}
 	
 	/**
-	 * Crée une exception indiquant une erreur de type.
-	 * 
-	 * @param badType le type déclenchant l'erreur.
-	 * @param message le message à associer à l'exception.
+	 * Crée une RnutimeException NXTIM.
+	 * @param message le message détaillé. Ce message sera plus tard retrouvé via la méthode {@link #getMessage()}. 
 	 */
-	public NXTIMBadTypeElementException(TypeElement badType, String message) {
+	public NXTIMRuntimeException(String message) {
 		super(message);
-		typeElement = badType;
 	}
 	
 	/**
-	 * Donne le type de l'élément ayant déclenché l'erreur.
-	 * 
-	 * @return le type à l'origine de l'erreur.
+	 * Crée une RnutimeException NXTIM.
+	 * @param cause la cause de l'exception. Elle pourra plus tard être récupérée via la méthode {@link #getCause()}.
 	 */
-	public TypeElement getTypeElement() {
-		return typeElement;
+	public NXTIMRuntimeException(Throwable cause) {
+		super(cause);
 	}
 	
-	@Override
-	public String getMessage() {
-		return "(Bad type : " + typeElement + ") " + super.getMessage();
+	/**
+	 * Crée une RnutimeException NXTIM.
+	 * @param message le message détaillé. Ce message sera plus tard retrouvé via la méthode {@link #getMessage()}. 
+	 * @param cause la cause de l'exception. Elle pourra plus tard être récupérée via la méthode {@link #getCause()}.
+	 */
+	public NXTIMRuntimeException(String message, Throwable cause) {
+		super(message, cause);
 	}
 }

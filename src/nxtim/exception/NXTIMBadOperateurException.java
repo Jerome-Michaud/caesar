@@ -41,47 +41,42 @@ termes.
  */
 package nxtim.exception;
 
-import nxtim.instruction.TypeElement;
+import nxtim.instruction.Operateur;
 
 /**
- * Exception indiquant qu'un type incorrect est utilisé dans un élément de programme.
- * 
- * @since 1.0
+ * Exception concernant l'utilisation d'un mauvais opérateur dans une expression.
  */
-public class NXTIMBadTypeElementException extends NXTIMRuntimeException {
-	private TypeElement typeElement;
-
+public class NXTIMBadOperateurException extends NXTIMRuntimeException {
+	private Operateur operateur;
+	
 	/**
-	 * Crée une exception indiquant une erreur de type.
-	 * 
-	 * @param badType le type déclenchant l'erreur.
+	 * Crée une exception de mauvais opérateur.
+	 * @param op l'opérateur incorrect.
 	 */
-	public NXTIMBadTypeElementException(TypeElement badType) {
-		this(badType, "");
+	public NXTIMBadOperateurException(Operateur op) {
+		this(op, "");
 	}
 	
 	/**
-	 * Crée une exception indiquant une erreur de type.
-	 * 
-	 * @param badType le type déclenchant l'erreur.
-	 * @param message le message à associer à l'exception.
+	 * Crée une exception de mauvais opérateur.
+	 * @param op l'opérateur incorrect.
+	 * @param message le message associé à l'erreur.
 	 */
-	public NXTIMBadTypeElementException(TypeElement badType, String message) {
+	public NXTIMBadOperateurException(Operateur op, String message) {
 		super(message);
-		typeElement = badType;
+		operateur = op;
 	}
 	
 	/**
-	 * Donne le type de l'élément ayant déclenché l'erreur.
-	 * 
-	 * @return le type à l'origine de l'erreur.
+	 * Donne l'opérateur à l'origine de l'exception.
+	 * @return l'opérateur.
 	 */
-	public TypeElement getTypeElement() {
-		return typeElement;
+	public Operateur getOperateur() {
+		return operateur;
 	}
 	
 	@Override
 	public String getMessage() {
-		return "(Bad type : " + typeElement + ") " + super.getMessage();
+		return "(Opérateur " + operateur + ") " + super.getMessage();
 	}
 }

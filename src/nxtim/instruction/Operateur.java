@@ -152,6 +152,21 @@ public enum Operateur {
 		}
 		return false;
 	}
+	
+	/**
+	 * Permet de savoir si un opérateur est un opérateur de logique booléenne (leurs opérandes doivent être des booléens).
+	 * @param o l'opérateur à tester
+	 * @return <code>true</code> si c'est un opérateur de logique booléenne, sinon <code>false</code>.
+	 */
+	public static boolean isLogiqueBooleenne(final Operateur o) {
+		switch(o) {
+			case ET:
+			case OU:
+				return true;
+			default:
+				return false;
+		}
+	}
 
 	/**
 	 * Donne la liste des opérateurs logiques sous forme d'une liste.
