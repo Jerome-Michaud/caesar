@@ -384,9 +384,8 @@ public final class ArborescenceTools {
 
 	/**
 	 * Trouve les tâches parmi les widgets.<br/>
-	 * L'interpretation est effectuée à partir de celles-ci.
 	 *
-	 * @return les instructions à interpreter
+	 * @return les instructions de type TACHE
 	 */
 	public List<Instruction> trouveTaches() {
 		List<Instruction> list = new LinkedList<Instruction>();

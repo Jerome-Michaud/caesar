@@ -97,7 +97,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 	private Deque<Double> pile;
 
 	private RobotController robot;
-	private Simulator simulator;
+
 	/**
 	 * Tableau d'observateurs
 	 */
@@ -114,7 +114,6 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 	public Interpreteur(Simulator simulator) {
 		this.pile = new ArrayDeque<Double>();
 		this.robot = simulator.getRobotController();
-		this.simulator = simulator;
 		this.listObserver = new ArrayList<ObserverInterpreteur>();
 		this.listObserver.add(simulator);
 		this.timeSleep = 0;

@@ -59,7 +59,6 @@ public class GestionSimulation{
     	this.simulator = simulator;
     	this.interpreteur = new Interpreteur(simulator);
     	this.runnables = new ArrayList<Runnable>();
-		//this.listener = new InterpreteurListener(this);
 
 		runnables.add(this.interpreteur);
 		runnables.add(this.simulator);

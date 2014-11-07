@@ -210,7 +210,7 @@ public class PanelController extends JPanel {
 		 * Gere le debut de la simulation
 		 */
 		private void startThread(){
-			simulator.addObserver(this);
+			simulator.addObserver(this); // Pour mettre les boutons en état stop
 			simulation.startThread(); // Lance la simulation
 		}
 
