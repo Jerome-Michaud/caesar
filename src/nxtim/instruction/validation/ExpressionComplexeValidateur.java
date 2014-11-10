@@ -39,49 +39,18 @@ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL-C, et que vous en avez accepté les
 termes.
  */
-package nxtim.exception;
+package nxtim.instruction.validation;
 
-import nxtim.instruction.TypeElement;
+import nxtim.instruction.ExpressionComplexe;
 
 /**
- * Exception indiquant qu'un type incorrect est utilisé dans un élément de programme.
- * 
- * @since 1.0
+ * Interface pour les validateurs d'expressions complexes. 
  */
-public class NXTIMBadTypeElementException extends NXTIMRuntimeException {
-	private TypeElement typeElement;
-
+public interface ExpressionComplexeValidateur {
 	/**
-	 * Crée une exception indiquant une erreur de type.
-	 * 
-	 * @param badType le type déclenchant l'erreur.
+	 * Valide une expression complexe.
+	 * @param exp l'expression à valider
+	 * @throws NXTIMRuntimeException en cas d'invalidité
 	 */
-	public NXTIMBadTypeElementException(TypeElement badType) {
-		this(badType, "");
-	}
-	
-	/**
-	 * Crée une exception indiquant une erreur de type.
-	 * 
-	 * @param badType le type déclenchant l'erreur.
-	 * @param message le message à associer à l'exception.
-	 */
-	public NXTIMBadTypeElementException(TypeElement badType, String message) {
-		super(message);
-		typeElement = badType;
-	}
-	
-	/**
-	 * Donne le type de l'élément ayant déclenché l'erreur.
-	 * 
-	 * @return le type à l'origine de l'erreur.
-	 */
-	public TypeElement getTypeElement() {
-		return typeElement;
-	}
-	
-	@Override
-	public String getMessage() {
-		return "(Bad type : " + typeElement + ") " + super.getMessage();
-	}
+	public void valider(ExpressionComplexe exp);
 }

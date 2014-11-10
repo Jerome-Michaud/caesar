@@ -136,14 +136,26 @@ public class ExpressionLogicalWidget extends ModeleWidget {
 			Expression varMemGauche = (Expression) widgetG.getElementProgramme();
 			expLog.setMembreGauche(varMemGauche);
 		} else {
-			expLog.setMembreGauche(new VariableConstante(TypeElement.INT, l.getValeur()));
+			String val = l.getValeur();
+			if(val.isEmpty()) {
+				expLog.setMembreGauche(null);
+			}
+			else {
+				expLog.setMembreGauche(new VariableConstante(TypeElement.INT, val));
+			}
 		}
 		Widget widgetD = f.getContentWidget();
 		if (widgetD != null) {
 			Expression varMemDroite = (Expression) widgetD.getElementProgramme();
 			expLog.setMembreDroit(varMemDroite);
 		} else {
-			expLog.setMembreDroit(new VariableConstante(TypeElement.INT, f.getValeur()));
+			String val = f.getValeur();
+			if(val.isEmpty()) {
+				expLog.setMembreDroit(null);
+			}
+			else {
+				expLog.setMembreDroit(new VariableConstante(TypeElement.INT, val));
+			}
 		}
 	}
 	

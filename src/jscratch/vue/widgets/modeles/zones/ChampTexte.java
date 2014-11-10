@@ -55,6 +55,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -64,17 +65,17 @@ import javax.swing.text.BadLocationException;
 import jscratch.dictionnaires.DicoTraces;
 import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.traduction.LanceurTraduction;
+import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.widgets.modeles.ModeleWidget;
 import jscratch.vue.widgets.modeles.TypeModeleWidget;
-import jscratch.vue.widgets.Widget;
-
+import nxtim.exception.NXTIMRuntimeException;
 import org.jdom2.Element;
-
+import jscratch.vue.widgets.Widget;
 /**
  * Cette classe représente un champ texte particulier intégrable dans un widget.
  */
 public class ChampTexte extends JPanel implements Zone {
-
+	private static final Logger LOG = Logger.getLogger(ChampTexte.class.getName());
 	public static final int ETAT_SAISIE = 0;
 	public static final int ETAT_CONTIENT_WIDGET = 1;
 	private Widget widgetContenu;
@@ -87,9 +88,7 @@ public class ChampTexte extends JPanel implements Zone {
 	 * Etat à ETAT_SAISIE (0) quand on affiche uniquement le champ texte
 	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus
 	 */
-	int etat;
-
-	private String valTempTexte;
+	protected int etat;
 
 	/**
 	 * Constructeur faisant appel au constructeur équivalent de la classe mère.
@@ -239,28 +238,33 @@ public class ChampTexte extends JPanel implements Zone {
 	}
 
 	public void setWidgetContenu(Widget w) {
+		Widget oldWidgetContenu = this.widgetContenu;
+		this.widgetContenu = w;
+		try {
+			widgetParent.applyChangeModele();
+		} catch (NXTIMRuntimeException e) {
+			this.widgetContenu = oldWidgetContenu;
+			LOG.info(e.getMessage());
+			javax.swing.JOptionPane.showMessageDialog(GUI.getFenetre(), e.getMessage(), "Construction incorrecte", JOptionPane.ERROR_MESSAGE);
+		}
 		this.removeAll();
 		int oldW = this.getWidth();
 		Widget wc = this.getWidgetContenu();
 
-		if (w == null) {
+		if (this.widgetContenu == null) {
 			this.etat = ETAT_SAISIE;
 			this.setComponent(textField);
 			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget) this.getParent(), this, wc, this.getValeur()));
-
 		} else {
 			this.etat = ETAT_CONTIENT_WIDGET;
 			this.textField.setSize(this.getSize());
-			this.setComponent(w);
-			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget) this.getParent(), this, this.getValeur(),wc));
-
-
+			this.setComponent(this.widgetContenu);
+			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget) this.getParent(), this, this.getValeur(), wc));
 		}
 		int decal = this.getWidth() - oldW;
 		//Appel à la méthode de redimensionnement en X, avec si nécessaire appel recursif pour le redimensionnement des parents
 		decaleWidgetParents(this, decal);
-		this.widgetContenu = w;
-		widgetParent.applyChangeModele();
+
 		LanceurTraduction.getInstance().lancerTraduction();
 	}
 

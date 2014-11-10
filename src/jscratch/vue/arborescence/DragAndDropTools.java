@@ -49,10 +49,10 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
+
 import javax.swing.SwingUtilities;
 
 import jscratch.dictionnaires.DicoTraces;
-
 import nxtim.instruction.Categorie;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.exceptions.ComposantIntrouvableException;
@@ -61,6 +61,7 @@ import jscratch.helpers.ErreurHelper;
 import jscratch.traces.fabriques.FabriqueTrace;
 import jscratch.traduction.LanceurTraduction;
 import jscratch.vue.arborescence.actions.Action;
+import jscratch.vue.arborescence.actions.TypeAction;
 import jscratch.vue.categories.boutons.BoutonCategorie;
 import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
@@ -337,7 +338,7 @@ public final class DragAndDropTools extends Observable {
 				}
 				compSurvole = a.getComp();
 
-				if (a.getVal() == 3) {
+				if (a.getVal() == TypeAction.INTERNE.toInt()) {
 					Zone z = compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
 					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification(comp, z, ((ChampTexte) z).getValeur(), composantsDrague.get(0)));
 					((ChampTexte) z).setWidgetContenu(composantsDrague.get(0));
