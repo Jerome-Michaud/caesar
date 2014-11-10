@@ -1,5 +1,5 @@
 /*
-Copyright (C) Université du Maine (2013) 
+Copyright (C) Université du Maine (2013)
 
 contributeurs : Adrien Duroy, Bastien Andru, Quentin Gosselin, Guillaume Delorme,
  Nicolas Detan, Zubair Parwany, Houda Chouket, Bastien Aubry,
@@ -10,12 +10,12 @@ ad.duroy@gmail.com
 Ce fichier est une partie du logiciel CAESAR.
 
 CAESAR est un programme informatique servant à construire un programme
-pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier. 
+pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier.
 
 CAESAR est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
 utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA 
+de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
 sur le site "http://www.cecill.info".
 
 En contrepartie de l'accessibilité au code source et des droits de copie,
@@ -26,16 +26,16 @@ titulaire des droits patrimoniaux et les concédants successifs.
 
 A cet égard  l'attention de l'utilisateur est attirée sur les risques
 associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
+développement et à la reproduction du logiciel par l'utilisateur étant
+donné sa spécificité de logiciel libre, qui peut le rendre complexe à
 manipuler et qui le réserve donc à des développeurs et des professionnels
 avertis possédant  des  connaissances  informatiques approfondies.  Les
 utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
 logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
+sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
 
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
+Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
  */
@@ -121,11 +121,11 @@ public final class ApplicationUI extends JFrame {
 		this.setIconImage(ImagesHelper.getImage("icone.png"));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
-		
+
 		if (this.getRootPane().getUI() instanceof SyntheticaRootPaneUI) {
 			((SyntheticaRootPaneUI) this.getRootPane().getUI()).setMaximizedBounds(this);
 		}
-		
+
 		this.setMinimumSize(new Dimension(800, 500));
 		if (!System.getProperty("os.name").toLowerCase().contains("windows")) {
 			this.setExtendedState(MAXIMIZED_BOTH);
@@ -133,14 +133,14 @@ public final class ApplicationUI extends JFrame {
 			Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
 			this.setSize((int) (tailleEcran.getWidth() * 0.7), (int) (tailleEcran.getHeight() * 0.7));
 		}
-		
+
 		this.setJMenuBar(Menu.getInstance());
 
 		add(creerDocking(),BorderLayout.CENTER);
 
 		DockingManager.setMinimized(zoneCompilateur, true, DockingManager.RIGHT);
 		DockingManager.setTabReorderByDraggingEnabled(false);
-		
+
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -157,12 +157,12 @@ public final class ApplicationUI extends JFrame {
 		this.glassPane = GlassPane.getInstance();
 		this.setGlassPane(this.glassPane);
 		this.glassPane.setVisible(true);
-		
+
 		this.setVisible(true);
-		
+
 		this.setLocationRelativeTo(null);
 	}
-	
+
 	public JYDockingView getViewport() {
 		return zoneCodeGraphique;
 	}
@@ -185,21 +185,21 @@ public final class ApplicationUI extends JFrame {
 		zoneCompilateur = creerZoneCompilateur();
 		viewport = new JYDockingPort();
 		viewport.dock(zoneCodeGraphique, IDockingConstants.CENTER_REGION);
-		
+
 		zoneCodeGraphique.dock(zoneCodeConsole, IDockingConstants.EAST_REGION, .8f);
-		
+
 		zoneCodeGraphique.dock(zoneCodeNXC, IDockingConstants.CENTER_REGION, 1f);
 		zoneCodeGraphique.dock(zoneSimulateur, IDockingConstants.CENTER_REGION, 1f);
-		
+
 		zoneCodeConsole.dock(zoneCompilateur, IDockingConstants.SOUTH_REGION, .7f);
-		
+
 		zoneCodeGraphique.getDockingPort().setTabPlacement(SwingConstants.BOTTOM);
 		zoneCodeGraphique.getDockingPort().setSelectedTabIndex(0);
-		
+
 		JPanel p = new JPanel(new BorderLayout(0, 0));
 		p.setBorder(new EmptyBorder(5, 5, 5, 5));
 		p.add(viewport, BorderLayout.CENTER);
-		
+
 		return p;
 	}
 
@@ -231,7 +231,7 @@ public final class ApplicationUI extends JFrame {
 		view.addAction(new DefaultMaximizeAction(view));
 		view.setIcon(ImagesHelper.getIcon("document-code.png"));
 		view.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));
-		view.setContentPane(new EditorUI());
+		view.setContentPane(EditorUI.getInstance());
 		view.setDraggingEnabled(false);
 		return view;
 	}
@@ -263,15 +263,15 @@ public final class ApplicationUI extends JFrame {
 						public void componentHidden(ComponentEvent e) {
 							zoneCodeGraphique.dock(zoneSimulateur, IDockingConstants.CENTER_REGION, .7f);
 						}
-					
+
 					});
 				}
 			}
-			
+
 			@Override
 			public void ancestorRemoved(AncestorEvent event) {
 			}
-			
+
 			@Override
 			public void ancestorMoved(AncestorEvent event) {
 			}

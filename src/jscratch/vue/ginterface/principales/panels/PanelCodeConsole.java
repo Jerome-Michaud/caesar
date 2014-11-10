@@ -1,5 +1,5 @@
 /*
-Copyright (C) Université du Maine (2013) 
+Copyright (C) Université du Maine (2013)
 
 contributeurs : Adrien Duroy, Bastien Andru, Quentin Gosselin, Guillaume Delorme,
  Nicolas Detan, Zubair Parwany, Houda Chouket, Bastien Aubry,
@@ -10,12 +10,12 @@ ad.duroy@gmail.com
 Ce fichier est une partie du logiciel CAESAR.
 
 CAESAR est un programme informatique servant à construire un programme
-pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier. 
+pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier.
 
 CAESAR est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
 utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA 
+de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
 sur le site "http://www.cecill.info".
 
 En contrepartie de l'accessibilité au code source et des droits de copie,
@@ -26,16 +26,16 @@ titulaire des droits patrimoniaux et les concédants successifs.
 
 A cet égard  l'attention de l'utilisateur est attirée sur les risques
 associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
+développement et à la reproduction du logiciel par l'utilisateur étant
+donné sa spécificité de logiciel libre, qui peut le rendre complexe à
 manipuler et qui le réserve donc à des développeurs et des professionnels
 avertis possédant  des  connaissances  informatiques approfondies.  Les
 utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
 logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
+sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
 
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
+Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
  */
@@ -43,13 +43,11 @@ package jscratch.vue.ginterface.principales.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -79,9 +77,9 @@ public final class PanelCodeConsole extends JPanel implements Observer {
 		this.textarea.setFont(FontHelper.getCodeFont());
 		this.setLayout(new BorderLayout());
 		this.setMinimumSize(new Dimension(100, 600));
-		
+
 		this.add(textarea, BorderLayout.CENTER);
-		
+
 		this.textarea.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -112,7 +110,7 @@ public final class PanelCodeConsole extends JPanel implements Observer {
 	public void setText(String texte) {
 		this.textarea.setText(texte);
 	}
-	
+
 	/**
 	 * @since 1.0
 	 *
@@ -121,7 +119,7 @@ public final class PanelCodeConsole extends JPanel implements Observer {
 	public String getText() {
 		return this.textarea.getText();
 	}
-	
+
 	@Override
 	public void update(Observable o, Object o1) {
 		// Mise à jour du texte dans la zone, envoyer le code au format String pas un objet

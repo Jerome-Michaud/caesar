@@ -1,5 +1,5 @@
 /*
-Copyright (C) Université du Maine (2013) 
+Copyright (C) Université du Maine (2013)
 
 contributeurs : Adrien Duroy, Bastien Andru, Quentin Gosselin, Guillaume Delorme,
  Nicolas Detan, Zubair Parwany, Houda Chouket, Bastien Aubry,
@@ -10,12 +10,12 @@ ad.duroy@gmail.com
 Ce fichier est une partie du logiciel CAESAR.
 
 CAESAR est un programme informatique servant à construire un programme
-pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier. 
+pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier.
 
 CAESAR est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
 utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA 
+de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
 sur le site "http://www.cecill.info".
 
 En contrepartie de l'accessibilité au code source et des droits de copie,
@@ -26,16 +26,16 @@ titulaire des droits patrimoniaux et les concédants successifs.
 
 A cet égard  l'attention de l'utilisateur est attirée sur les risques
 associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
+développement et à la reproduction du logiciel par l'utilisateur étant
+donné sa spécificité de logiciel libre, qui peut le rendre complexe à
 manipuler et qui le réserve donc à des développeurs et des professionnels
 avertis possédant  des  connaissances  informatiques approfondies.  Les
 utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
 logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
+sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
 
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
+Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
  */
@@ -93,7 +93,7 @@ public final class DragAndDropTools extends Observable {
 	 * Instance statique unique de la Classe.
 	 */
 	private static DragAndDropTools instance = new DragAndDropTools();
-	
+
 	private boolean deplacement = false;
 	private int empAvant;
 
@@ -130,10 +130,12 @@ public final class DragAndDropTools extends Observable {
 		Action act = FusionTools.checkSurvolWidgetV2(comp);
 		empAvant = act.getVal();
 		deplacement = comp.isDraggable();
-		if (!comp.isDraggable()) {
+
+		// Est-ce que l'on a cliqué sur un widget de la liste des widgets ?
+		if (!comp.isDraggable()) { // Oui donc on clone
 			comp.setDraggable(true);
 			Widget compNouv;
-			
+
 			// Si c'est la tache main, on supprime le widget du panel
 			if (comp.getType() == TypeModeleWidget.TACHE) {
 				PanelTypeWidget.getInstance().supprimerTachePrincipale();
@@ -142,8 +144,6 @@ public final class DragAndDropTools extends Observable {
 				try {
 					PanelWidget pw = GUI.getPanelWidget();
 					compNouv = pw.getFabrique().cloner(comp);
-					compNouv.setBounds(comp.getBounds());
-					pw.getPanelDeWidget().add(compNouv);
 					int ind = pw.getIndex(comp);
 					pw.supprimerWidget(comp);
 					pw.ajouterWidget(compNouv, ind);
@@ -154,21 +154,21 @@ public final class DragAndDropTools extends Observable {
 			}
 			composantsDrague = new LinkedList<Widget>();
 			composantsDrague.add(comp);
-			
-		} else {
+
+		} else { // Non, il s'agit d'un widget dans la zone d'édition
 			try {
 				//recuperation et detachement des widgets dragués
 				composantsDrague = new LinkedList<Widget>(arbo.getSuivants(comp, true));
-				
+
 				//supression des widgets dans l'arborescence
 				arbo.supprimerWidgets(composantsDrague);
 
-
 				if ((comp != null) && (comp.parent() != null) && (!comp.parent().isRacine())) {
 					((Widget) comp.parent()).applyChangeModele();
-
 				}
+
 				comp.defParent(null);
+
 			} catch (ComposantIntrouvableException ex) {
 				ErreurHelper.afficher(ex);
 			}
@@ -177,7 +177,7 @@ public final class DragAndDropTools extends Observable {
 		for (Widget w : composantsDrague) {
 			passerSurAutrePanel(w, GUI.getGlassPane());
 		}
-		
+
 		GUI.getGlassPane().setVisible(true);
 
 		Point p = GUI.getGlassPane().getMousePosition();
@@ -311,8 +311,8 @@ public final class DragAndDropTools extends Observable {
 	 * composants.
 	 */
 	public void dropWidget() {
-		
-		
+
+
 		Widget comp = composantsDrague.get(0);
 		Action a = FusionTools.checkSurvolWidgetV2(comp);
 		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
@@ -334,7 +334,7 @@ public final class DragAndDropTools extends Observable {
 				SwingUtilities.convertPointFromScreen(pt, p);
 				if (inter < comp.getWidth()) {
 					pt.x += (comp.getWidth() - inter) + (GUI.getZoneUtilisateur().getLocationOnScreen().getX() - GUI.getFenetre().getViewport().getLocationOnScreen().getX() + 5);
-			
+
 				}
 				compSurvole = a.getComp();
 
@@ -342,7 +342,7 @@ public final class DragAndDropTools extends Observable {
 					Zone z = compSurvole.getModele().getLesZonesSaisies().get(a.getZoneIndex());
 					DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification(comp, z, ((ChampTexte) z).getValeur(), composantsDrague.get(0)));
 					((ChampTexte) z).setWidgetContenu(composantsDrague.get(0));
-					
+
 
 				} else {
 					switch (a.getVal()) {
@@ -427,7 +427,7 @@ public final class DragAndDropTools extends Observable {
 
 					}
 				}
-			
+
 			} else {
 				arbo.supprimerWidgets(composantsDrague);
 				for (Widget w : composantsDrague) {
@@ -478,19 +478,19 @@ public final class DragAndDropTools extends Observable {
 		if (compSurvole != null) {
 			compSurvole.getModele().applyChangeModele();
 		}
-		
+
 		// Suppression de la tache principale de la liste des widgets
-		if (comp.getType() == TypeModeleWidget.TACHE && 
+		if (comp.getType() == TypeModeleWidget.TACHE &&
 				GUI.getPanelTypeWidget().getCurrentCategorie() == Categorie.STRUCTURES) {
 			for (BoutonCategorie bc : PanelTypeWidget.getInstance().getLesCategories()) {
 				if (bc.getCategorie() == Categorie.STRUCTURES) {
-					
+
 					GUI.getPanelWidget().setLesWidgets(bc.getNbColonnes());
 					break;
 				}
 			}
-		}		
-		
+		}
+
 		LanceurTraduction.getInstance().lancerTraduction();
 
 	}
@@ -502,7 +502,7 @@ public final class DragAndDropTools extends Observable {
 	 *
 	 * @param comp le widget à supprimer
 	 */
-	private void deleteWidgetsFromGlassPane(Widget comp) {		
+	private void deleteWidgetsFromGlassPane(Widget comp) {
 		if (comp.isComplexe()) {
 			for (List<Widget> lw : ((WidgetCompose) comp).getMapZone().values()) {
 				for (Widget w : lw) {
@@ -510,12 +510,12 @@ public final class DragAndDropTools extends Observable {
 				}
 			}
 		}
-		
+
 		if (comp.getType() == TypeModeleWidget.TACHE) {
 			((WidgetCompose) comp).clean();
-			PanelTypeWidget.getInstance().ajouterTachePrincipale();			
+			PanelTypeWidget.getInstance().ajouterTachePrincipale();
 		}
-		
+
 		GUI.getGlassPane().remove(comp);
 		DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetSuppression(comp));
 	}

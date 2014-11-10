@@ -1,5 +1,5 @@
 /*
-Copyright (C) Université du Maine (2013) 
+Copyright (C) Université du Maine (2013)
 
 contributeurs : Adrien Duroy, Bastien Andru, Quentin Gosselin, Guillaume Delorme,
  Nicolas Detan, Zubair Parwany, Houda Chouket, Bastien Aubry,
@@ -10,12 +10,12 @@ ad.duroy@gmail.com
 Ce fichier est une partie du logiciel CAESAR.
 
 CAESAR est un programme informatique servant à construire un programme
-pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier. 
+pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier.
 
 CAESAR est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
 utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA 
+de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
 sur le site "http://www.cecill.info".
 
 En contrepartie de l'accessibilité au code source et des droits de copie,
@@ -26,16 +26,16 @@ titulaire des droits patrimoniaux et les concédants successifs.
 
 A cet égard  l'attention de l'utilisateur est attirée sur les risques
 associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
+développement et à la reproduction du logiciel par l'utilisateur étant
+donné sa spécificité de logiciel libre, qui peut le rendre complexe à
 manipuler et qui le réserve donc à des développeurs et des professionnels
 avertis possédant  des  connaissances  informatiques approfondies.  Les
 utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
 logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
+sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
 
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
+Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
  */
@@ -53,11 +53,6 @@ import jscratch.exceptions.InstructionNonGereeException;
 import jscratch.helpers.ErreurHelper;
 import jscratch.modeles.sim.MotorPort;
 import jscratch.vue.arborescence.ArborescenceTools;
-import jscratch.vue.sim.ObservableInterpreteur;
-import jscratch.vue.sim.ObserverInterpreteur;
-import jscratch.vue.widgets.Widget;
-import jscratch.vue.widgets.modeles.ModeleWidget;
-import jscratch.vue.widgets.modeles.TypeModeleWidget;
 import nxtim.instruction.Affectation;
 import nxtim.instruction.Expression;
 import nxtim.instruction.ExpressionComplexe;
@@ -100,9 +95,9 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 	 * Pile de double sauvegardant les valeurs des Instructions
 	 */
 	private Deque<Double> pile;
-	
+
 	private RobotController robot;
-	private Simulator simulator;	
+
 	/**
 	 * Tableau d'observateurs
 	 */
@@ -119,7 +114,6 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 	public Interpreteur(Simulator simulator) {
 		this.pile = new ArrayDeque<Double>();
 		this.robot = simulator.getRobotController();
-		this.simulator = simulator;
 		this.listObserver = new ArrayList<ObserverInterpreteur>();
 		this.listObserver.add(simulator);
 		this.timeSleep = 0;
@@ -128,36 +122,103 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 		this.sleep = false;
 		this.sleepwait = false;
 	}
-	
+
 	@Override
 	public void run() {
+		this.run = true;
+		this.stop = false;
+		this.wait = false;
+		this.sleep = false;
+		this.sleepwait = false;
+
+		//System.out.println("Demarrage de l'interpreteur ; stop="+stop);
+
 		while(!stop){
-			for(Instruction l : trouveTaches()){
+			for(Instruction l : ArborescenceTools.getInstance().trouveTaches()){
 				l.accepte(this);
 			}
 			stop=true;
 		}
 		this.notifyObserver("End", 0, null);
+
+		//System.out.println("Arret de l'interpreteur ; stop =" + stop);
 	}
-	
-	/**
-	 * Trouve les tâches parmi les widgets.<br/>
-	 * L'interpretation est effectuée à partir de celles-ci.
-	 *
-	 * @return les instructions à interpreter
-	 */
-	private List<Instruction> trouveTaches() {
-		List<Instruction> list = new LinkedList<Instruction>();
-		for (List<Widget> racine : ArborescenceTools.getInstance().getArborescence()) {
-			if (!racine.isEmpty()) {
-				Widget tache = racine.get(0);
-				ModeleWidget m = tache.getModele();
-				if (m.getType() == TypeModeleWidget.TACHE) {
-					list.add((Instruction) m.getElementProgramme());
+
+	public synchronized void waitThread() {
+		this.notify();
+		this.wait = true;
+		timeInterrupt = System.nanoTime();
+		if(sleep){
+			sleepwait = true;
+			sleep = false;
+		}
+	}
+
+	public synchronized void notifyThread() {
+		this.notify();
+		this.wait = false;
+	}
+
+	public synchronized void sleepThread(){
+		if(sleepwait){
+			double time = timeWait - ((timeInterrupt/1000000000.0-timeSleep/1000000000.0)*1000);
+			try {
+				timeWait = time;
+				timeSleep = System.nanoTime();
+				sleepwait = false;
+				this.wait((long) time);
+			} catch (InterruptedException e) {
+				if(run){
+					ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 				}
 			}
 		}
-		return list;
+	}
+
+	public synchronized void stopThread() {
+		this.notify();
+		this.run = false;
+		this.stop = true;
+		this.wait = false;
+		this.sleep = false;
+		this.sleepwait = false;
+	}
+
+	private synchronized void testWait(){
+		try {
+			if(wait){
+				this.wait();
+			}
+		}
+		catch (InterruptedException e) {
+			if(run){
+				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
+			}
+		}
+	}
+
+	@Override
+	public void addObserver(ObserverInterpreteur o) {
+		 listObserver.add(o);
+	}
+
+	@Override
+	public void deleteObserver(ObserverInterpreteur o) {
+		listObserver.remove(o);
+	}
+
+	@Override
+	public void notifyObserver() {
+		for(ObserverInterpreteur o : listObserver){
+			o.update(this);
+		}
+	}
+
+	@Override
+	public void notifyObserver(String type, int vitesse, List<MotorPort> ports) {
+		for(ObserverInterpreteur o : listObserver){
+			o.update(type,vitesse,ports);
+		}
 	}
 
 	@Override
@@ -265,7 +326,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 				this.testWait();
 				this.sleepThread();
 				Expression cond = inst.getCondition();
-		
+
 				if (cond != null) {
 					cond.accepte(this);
 					while (pile.pop() == 1) {
@@ -328,7 +389,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 	}
 
 	@Override
-	public void visiter(TempsCourant inst) { 
+	public void visiter(TempsCourant inst) {
 		try{
 			if(run){
 				this.testWait();
@@ -353,14 +414,14 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 				if (ex != null) {
 					ex.accepte(this);
 				}
-		
+
 				double d = pile.pop();
 				timeWait = d;
 				try {
 					timeSleep = System.nanoTime();
 					synchronized (this) {
 						sleep = true;
-						this.wait((long) d);	
+						this.wait((long) d);
 					}
 				} catch (InterruptedException e) {
 					System.out.println("WARNING : interpreteur reveillé - sleep interrompu - Erreur temporelle possible");
@@ -423,8 +484,8 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 
 	/**
 	 * execute un For
-	 * 
-	 * @param inst 
+	 *
+	 * @param inst
 	 */
 	@Override
 	public void visiter(InstructionFor inst) {
@@ -474,7 +535,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 				if (exp != null) {
 					exp.accepte(this);
 					cpt = pile.pop();
-		
+
 					for (int i = 0; i < cpt; i++) {
 						for (Instruction is : inst.getEnfants()) {
 							is.accepte(this);
@@ -521,9 +582,9 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 				this.sleepThread();
 				Expression md = affec.getMembreDroit();
 				VariableModifiable mg = (VariableModifiable) affec.getMembreGauche();
-		
+
 				double d = 0;
-		
+
 				if (md != null) {
 					md.accepte(this);
 					d = pile.pop();
@@ -554,18 +615,18 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 				double g = 0;
 				Expression mda = expr.getMembreDroit();
 				Expression mdg = expr.getMembreGauche();
-				
+
 				if (mda != null) {
 					mda.accepte(this);
 					d = pile.pop();
-		
+
 				}
-		
+
 				if (mdg != null) {
 					mdg.accepte(this);
 					g = pile.pop();
 				}
-		
+
 				switch (opt) {
 					case ADDITION:
 						pile.push(g + d);
@@ -664,7 +725,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 	 */
 	private List<MotorPort> moteurToMotorPort(Moteur moteur) {
 		List<MotorPort> ports = new LinkedList<MotorPort>();
-		
+
 		switch (moteur) {
 			case A:
 				ports.add(MotorPort.OUT_A);
@@ -690,7 +751,7 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 			default:
 				break;
 		}
-		
+
 		return ports;
 	}
 
@@ -701,16 +762,16 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 				this.testWait();
 				this.sleepThread();
 				Variable var = inst.getVariable();
-				
+
 				double d = Double.parseDouble(var.getValeur());
-				
+
 				if(inst.isPositive()){
 					d++;
 				}
 				else{
 					d--;
 				}
-				
+
 				var.setValeur(String.valueOf(d));
 			}
 		}
@@ -718,33 +779,20 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 			if(run){
 				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
 			}
-		}		
+		}
 	}
 
 	@Override
 	public void visiter(NonLogique nonLog) {
 		Expression cond = nonLog.getCondition();
 		assert cond != null;// interpréteur supposer recevoir un code correct.
-		
+
 		cond.accepte(this);
 		double d = pile.pop();
 		if(d == (double) 0)
 			pile.push((double) 1);
 		else
 			pile.push((double) 0);
-	}
-	
-	private synchronized void testWait(){
-		try {
-			if(wait){
-				this.wait();
-			}
-		}
-		catch (InterruptedException e) {
-			if(run){
-				ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
-			}
-		}
 	}
 
 	@Override
@@ -759,72 +807,10 @@ public final class Interpreteur implements Runnable, ObservableInterpreteur, Vis
 	public void visiter(InstructionRAZRotationMoteur razMoteur) {
 		// TODO interprétation
 	}
-	
+
 	@Override
 	public void visiter(InstructionConfigCapteurs confCapt) {
 		// TODO interprétation
 	}
-	
-	@Override
-	public void addObserver(ObserverInterpreteur o) {
-		 listObserver.add(o); 
-	}
-	
-	@Override
-	public void deleteObserver(ObserverInterpreteur o) {
-		listObserver.remove(o); 
-	}
-	
-	@Override
-	public void notifyObserver() {
-		for(ObserverInterpreteur o : listObserver){
-			o.update(this);
-		}
-	}
 
-	@Override
-	public void notifyObserver(String type, int vitesse, List<MotorPort> ports) {
-		for(ObserverInterpreteur o : listObserver){
-			o.update(type,vitesse,ports);
-		}		
-	}
-
-	public synchronized void waitThread() {
-		this.notify();
-		this.wait = true;
-		timeInterrupt = System.nanoTime();
-		if(sleep){
-			sleepwait = true;
-			sleep = false;
-		}
-	}
-	
-	public synchronized void notifyThread() {
-		this.notify();
-		this.wait = false;
-	}
-	
-	public synchronized void sleepThread(){
-		if(sleepwait){
-			double time = timeWait - ((timeInterrupt/1000000000.0-timeSleep/1000000000.0)*1000);
-			try {
-				timeWait = time;
-				timeSleep = System.nanoTime();
-				sleepwait = false;
-				this.wait((long) time);
-			} catch (InterruptedException e) {
-				if(run){
-					ErreurHelper.afficherSansSortie(new InstructionNonGereeException("L'instruction n'est pas gérée par le simulateur"));
-				}
-			}
-		}
-	}
-
-	public synchronized void stopThread() {
-		this.notify();
-		this.run = false;
-		this.stop = true;
-		this.sleep = false;
-		this.sleepwait = false;
-	}
 }

@@ -1,5 +1,5 @@
 /*
-Copyright (C) Université du Maine (2013) 
+Copyright (C) Université du Maine (2013)
 
 contributeurs : Adrien Duroy, Bastien Andru, Quentin Gosselin, Guillaume Delorme,
  Nicolas Detan, Zubair Parwany, Houda Chouket, Bastien Aubry,
@@ -10,12 +10,12 @@ ad.duroy@gmail.com
 Ce fichier est une partie du logiciel CAESAR.
 
 CAESAR est un programme informatique servant à construire un programme
-pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier. 
+pour un robot NXT et à effectuer une simulation de l'exécution de ce dernier.
 
 CAESAR est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
 utiliser, modifier et/ou redistribuer ce programme sous les conditions
-de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA 
+de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
 sur le site "http://www.cecill.info".
 
 En contrepartie de l'accessibilité au code source et des droits de copie,
@@ -26,16 +26,16 @@ titulaire des droits patrimoniaux et les concédants successifs.
 
 A cet égard  l'attention de l'utilisateur est attirée sur les risques
 associés au chargement,  à l'utilisation,  à la modification et/ou au
-développement et à la reproduction du logiciel par l'utilisateur étant 
-donné sa spécificité de logiciel libre, qui peut le rendre complexe à 
+développement et à la reproduction du logiciel par l'utilisateur étant
+donné sa spécificité de logiciel libre, qui peut le rendre complexe à
 manipuler et qui le réserve donc à des développeurs et des professionnels
 avertis possédant  des  connaissances  informatiques approfondies.  Les
 utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
 logiciel à leurs besoins dans des conditions permettant d'assurer la
-sécurité de leurs systèmes et ou de leurs données et, plus généralement, 
-à l'utiliser et l'exploiter dans les mêmes conditions de sécurité. 
+sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
 
-Le fait que vous puissiez accéder à cet en-tête signifie que vous avez 
+Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
 pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
  */
@@ -58,7 +58,7 @@ import javax.swing.JTextPane;
 import jscratch.dictionnaires.DicoWidgetsCategories;
 import jscratch.parametrages.properties.VariableProperties;
 import jscratch.vue.ginterface.principales.GUI;
-import jscratch.vue.widgets.fabrique.FabriqueInstructions;
+import jscratch.vue.widgets.fabrique.FabriqueWidgets;
 import jscratch.vue.widgets.Widget;
 import nxtim.instruction.Categorie;
 
@@ -71,7 +71,7 @@ import nxtim.instruction.Categorie;
 public final class PanelWidget extends JPanel implements Observer {
 
 	private static PanelWidget instance = new PanelWidget();
-	private FabriqueInstructions fabrique;
+	private FabriqueWidgets fabrique;
 	private List<Widget> lesWidgets;
 	private JTextPane texte;
 	private JPanel panelDeWidget;
@@ -81,14 +81,14 @@ public final class PanelWidget extends JPanel implements Observer {
 
 	/**
 	 * Constructeur privé de <code>PanelWidget</code>.
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	private PanelWidget() {
 		this.lesWidgets = new LinkedList<Widget>();
 		this.setBorder(BorderFactory.createTitledBorder("Widgets"));
 
-		this.fabrique = new FabriqueInstructions();
+		this.fabrique = new FabriqueWidgets();
 		this.setLayout(new BorderLayout());
 
 		this.texte = new JTextPane();
@@ -126,7 +126,7 @@ public final class PanelWidget extends JPanel implements Observer {
 	 * Permet de modifier le texte de la catégorie.
 	 *
 	 * @since 1.0
-	 * 
+	 *
 	 * @param texte le nouveau texte
 	 */
 	public void setText(final String texte) {
@@ -148,7 +148,7 @@ public final class PanelWidget extends JPanel implements Observer {
 	 *
 	 * @return La fabrique de widgets
 	 */
-	public FabriqueInstructions getFabrique() {
+	public FabriqueWidgets getFabrique() {
 		return this.fabrique;
 	}
 
@@ -196,12 +196,13 @@ public final class PanelWidget extends JPanel implements Observer {
 	 */
 	public void ajouterWidget(Widget widget, int index) {
 		this.lesWidgets.add(index, widget);
+		panelDeWidget.add(widget); // Affichage dans le panle interne
 	}
 
 	/**
 	 * @since 1.0
 	 *
-	 * @param widget Le widget.
+	 * @param w Le widget.
 	 * @return L'index du widget passé en paramètre.
 	 */
 	public int getIndex(Widget w) {
@@ -252,9 +253,9 @@ public final class PanelWidget extends JPanel implements Observer {
 
 	/**
 	 * Permet de récupérer le panel où sont stockés les widgets.
-	 * 
+	 *
 	 * @since 1.0
-	 * 
+	 *
 	 * @return le panel
 	 */
 	public JPanel getPanelDeWidget() {
