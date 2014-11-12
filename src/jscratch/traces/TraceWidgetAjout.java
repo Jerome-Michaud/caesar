@@ -45,8 +45,7 @@ import jscratch.vue.widgets.Widget;
 import org.jdom2.Element;
 
 /**
- * @since 1.0
- * @version 1.0
+ * Trace pour l'ajout de widget.
  */
 public class TraceWidgetAjout extends Trace {
 
@@ -59,12 +58,9 @@ public class TraceWidgetAjout extends Trace {
 	/**
 	 * Constructeur par défaut de <code>TraceDeplacementWidget</code>.
 	 * 
-	 * @since 1.0
-	 * 
 	 * @param widget le widget deplacé
-	 * @param parentAvant le parent avant déplacement
 	 * @param parentApres le parent après déplacement
-	 * @param isAjout <code>true</code> si le widget est ajouté depuis le panel instruction, <code>false</code> sinon
+	 * @param positionParRapportParent la position du widget par rapport à son parent
 	 */
 	public TraceWidgetAjout(final Widget widget, final Widget parentApres, final int positionParRapportParent) {
 		super(TypeTrace.WIDGET_AJOUT);

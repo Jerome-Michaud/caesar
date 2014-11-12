@@ -67,9 +67,6 @@ import jscratch.vue.widgets.Widget;
 
 /**
  * Le menu de l'application.
- *
- * @since 1.0
- * @version 1.0
  */
 public final class Menu extends JMenuBar {
 
@@ -79,13 +76,8 @@ public final class Menu extends JMenuBar {
 	private JMenuItem tracesExporter;
 	private JMenuItem aideAPropos;
 	
-	/**
-	 * @since 1.0
-	 */
 	private static Menu instance = null;
-	/**
-	 * @see Vue.Interface.Menu.ListenerMenu
-	 */
+
 	private ListenerMenu listener = new ListenerMenu();
 
 	/**

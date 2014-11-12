@@ -66,9 +66,6 @@ import nxtim.instruction.VariableModifiable;
 
 /**
  * Classe héritant de ModeleWidget et implémentant <code>Serializable</code> modélisant la forme d'un widget de type For.
- * 
- * @since 1.0
- * @version 1.0
  */
 public class ForWidget extends ModeleWidget {
 
@@ -217,7 +214,6 @@ public class ForWidget extends ModeleWidget {
      * Méthode de définition de la valeur d'augmentation après une itération.
      *
      * @param v La variable concernée
-     * @param pas La valeur du pas pour une itération
      */
     public void setIteration(final VariableModifiable v) {
         InstructionIncrementation aff = (InstructionIncrementation)getElementProgramme();

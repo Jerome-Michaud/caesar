@@ -84,7 +84,7 @@ public final class DicoTraces {
 	/**
 	 * Ajout d'une trace.
 	 * 
-	 * @param type le type de la trace
+	 * @param trace la trace
 	 */
 	public void ajouterTrace(final Trace trace) {
 		boolean traces = Boolean.parseBoolean(PropertiesHelper.getInstance().get("user.trace.active"));

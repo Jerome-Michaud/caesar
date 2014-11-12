@@ -46,33 +46,35 @@ import java.util.List;
 import jscratch.modeles.sim.MotorPort;
 
 /**
- * Interface de la classe Interpreteur à observer
- * @author Nicolas
- *
+ * Interface des interpreteurs pouvant être observés.
  */
 public interface ObservableInterpreteur {
 
 	/**
-	 * ajoute un observateur sur l'interpreteur
+	 * Ajoute un observateur sur l'interpreteur.
 	 *
-	 * @param ObserverInterpreteur
+	 * @param o l'observateur à ajouter.
 	 */
 	public void addObserver(ObserverInterpreteur o);
 
 	/**
-	 * supprimer un observateur de l'interpreteur
+	 * Supprimer un observateur de l'interpreteur.
 	 *
-	 * @param ObserverInterpreteur
+	 * @param o l'observateur à supprimer.
 	 */
 	public void deleteObserver(ObserverInterpreteur o);
 
 	/**
-	 * met à jour les observateurs
+	 * Met à jour les observateurs.
 	 */
 	public void notifyObserver();
 
 	/**
-	 * met à jour les observateurs avec une commande
+	 * Met à jour les observateurs avec une commande.
+	 * 
+	 * @param type le type d'action à notifier aux observateurs
+	 * @param vitesse la vitesse mise à jour
+	 * @param port les ports du moteurs concernés par l'action
 	 */
 	public void notifyObserver(String type, int vitesse, List<MotorPort> port);
 }

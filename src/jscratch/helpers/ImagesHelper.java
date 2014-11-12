@@ -52,16 +52,11 @@ import javax.swing.ImageIcon;
 
 /**
  * Permet de gérer les images.
- * 
- * @since 1.0
- * @version 1.0
  */
 public final class ImagesHelper {
 
 	/**
 	 * Permet de récupérer une image.
-	 * 
-	 * @since 1.0
 	 * 
 	 * @param name nom du fichier
 	 * @return l'image
@@ -106,9 +101,9 @@ public final class ImagesHelper {
 	/**
 	 * Permet de redimensionner la taille d'une image
 	 * 
-	 * @param l'image à redimensionner
-	 * @param largeur
-	 * @param longueur
+	 * @param img l'image à redimensionner
+	 * @param width largeur
+	 * @param height longueur
 	 * 
 	 * @return l'image redimensionné
 	 */

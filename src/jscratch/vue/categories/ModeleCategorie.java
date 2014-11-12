@@ -62,9 +62,6 @@ import nxtim.instruction.Categorie;
  * <li>la couleur de la catégorie</li>
  * <li>le nom de la catégorie</li>
  * </ul>
- *
- * @since 1.0
- * @version 1.0
  */
 public class ModeleCategorie {
 
@@ -104,8 +101,7 @@ public class ModeleCategorie {
 	/**
 	 * Définit un nouveau modèle de catégorie.
 	 *
-	 * @param nom le nom de la catégorie
-	 * @param couleur la couleur de la catégorie
+	 * @param categorie la catégorie.
 	 */
 	public ModeleCategorie(final Categorie categorie) {
 		this.couleur = DicoCouleursCategories.getInstance().getCouleur(categorie);

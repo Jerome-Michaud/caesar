@@ -60,9 +60,6 @@ import nxtim.instruction.Categorie;
 /**
  * Classe abstraite permet de définir une structure commune pour chaque widget.
  * Cette classe implemente Serializable.
- *
- * @since 1.0
- * @version 1.0
  */
 public abstract class ModeleWidget implements Serializable {
     
@@ -421,8 +418,6 @@ public abstract class ModeleWidget implements Serializable {
 
     /**
      * Modifie la forme du widget.
-     *
-     * @return la nouvelle forme du widget.
      */
     public void setForme(Polygon forme) {
         this.forme = forme;

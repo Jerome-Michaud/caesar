@@ -1,3 +1,7 @@
+editeurNXC.langage
+editeurNXC.parser
+editeurNXC.ui
+editeurNXC.utils
 jscratch
 jscratch.comparateurs
 jscratch.controleur.sim
@@ -8,7 +12,8 @@ jscratch.interpreteur
 jscratch.interpreteur.parser
 jscratch.modeles.sim
 jscratch.modeles.sim.collision
-jscratch.parametrages
+jscratch.parametrages.langue
+jscratch.parametrages.properties
 jscratch.sauvegarde
 jscratch.sauvegarde.binaire
 jscratch.sauvegarde.filtres
@@ -35,4 +40,7 @@ jscratch.vue.widgets
 jscratch.vue.widgets.fabrique
 jscratch.vue.widgets.modeles
 jscratch.vue.widgets.modeles.zones
+nxtim
+nxtim.exception
 nxtim.instruction
+nxtim.instruction.validation

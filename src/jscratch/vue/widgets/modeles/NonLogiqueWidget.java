@@ -57,8 +57,6 @@ import nxtim.instruction.Variable;
 
 /**
  * Cette classe modélise la forme graphique du Widget représentant la négation logique.
- * @author ayden
- *
  */
 public class NonLogiqueWidget extends ModeleWidget {
 
@@ -67,8 +65,9 @@ public class NonLogiqueWidget extends ModeleWidget {
 	private final int LARG_EXTREMITE;
 
 	private ChampTexte f;
+
 	/**
-	 * @param args
+	 * Crée un widget de non logique.
 	 */
 	public NonLogiqueWidget() {
 		this.LARG_EXTREMITE = 10;

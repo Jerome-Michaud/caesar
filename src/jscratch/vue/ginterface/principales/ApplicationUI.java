@@ -77,28 +77,21 @@ import jscratch.parametrages.langue.VariableLangue;
 
 /**
  * Fenêtre principale de l'application.
- *
- * @since 1.0
- * @version 1.0
  */
 public final class ApplicationUI extends JFrame {
 
 	/**
 	 * SINGLETON.
-	 *
-	 * @since 1.0
 	 */
 	private static ApplicationUI instance = null;
 	/**
-	 * Le
-	 * <code>GlassPane</code>.
+	 * Le <code>GlassPane</code>.
 	 *
-	 * @see Vue.Interface.GlassPane
+	 * @see GlassPane
 	 */
 	private GlassPane glassPane;
 	/**
-	 * Le
-	 * <code>DockingPort</code>.
+	 * Le <code>DockingPort</code>.
 	 */
 	private JYDockingPort viewport;
 	/**

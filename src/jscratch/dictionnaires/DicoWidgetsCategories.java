@@ -166,11 +166,7 @@ public final class DicoWidgetsCategories {
 	}
 	
 	/**
-	 * Permet d'ajouter une variable.
-	 * 
-	 * @since 1.0
-	 * 
-	 * @param var la variable à ajouter
+	 * Met à jour les widgets des variables.
 	 */
 	public void updateWidgetsVariables() {
 		Variable[] vars = ApplicationUI.getInstance().getDicoVariables().getLesVariables();

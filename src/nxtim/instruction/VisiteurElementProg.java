@@ -43,8 +43,6 @@ package nxtim.instruction;
 
 /**
  * Interface permettant de visiter les instructions et les expressions.
- *
- * @author Adrien DUROY
  */
 public interface VisiteurElementProg {
 
@@ -100,7 +98,7 @@ public interface VisiteurElementProg {
 	/**
 	 * Visite une instruction obtenant le temps courant.
 	 *
-	 * @param inst l'instruction à visiter
+	 * @param exp l'instruction à visiter
 	 */
 	public void visiter(TempsCourant exp);
 

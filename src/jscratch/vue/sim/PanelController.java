@@ -64,9 +64,6 @@ import jscratch.traces.fabriques.FabriqueTrace;
 
 /**
  * Panel permettant de controller l'execution du simulateur
- *
- * @author Nicolas
- *
  */
 public class PanelController extends JPanel {
 
@@ -137,13 +134,13 @@ public class PanelController extends JPanel {
 	}
 
 	/**
-	 * methode permettant de créer un bouton pour la buttonBar
+	 * Créer un bouton pour la buttonBar.
 	 *
-	 * @param text
-	 * @param icon
-	 * @param enabled
-	 * @param toggleButton
-	 * @return
+	 * @param text le texte du bouton
+	 * @param icon l'icône du bouton
+	 * @param enabled <code>true</code> pour que le bouton soit activé.
+	 * @param toggleButton <code>true</code> pour créer un bouton de type toggle.
+	 * @return le bouton créé.
 	 */
 	private AbstractButton createButton(String text, ImageIcon icon, boolean enabled, boolean toggleButton) {
 		AbstractButton b = null;
@@ -177,9 +174,6 @@ public class PanelController extends JPanel {
 
 	/**
 	 * Classe pour la gestion des appuis sur les boutons.
-	 *
-	 * @since 1.0
-	 * @version 1.0
 	 */
 	private class Listener implements ActionListener,ObserverPanelController {
 

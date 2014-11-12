@@ -43,7 +43,6 @@ package nxtim.instruction;
 
 /**
  * Expression donnant la valeur courante d'un capteur à partir de son slot.
- * @author Adrien DUROY
  */
 public class ValeurCapteur implements Expression {
 	/**
@@ -71,7 +70,7 @@ public class ValeurCapteur implements Expression {
 	
 	/**
 	 * Donne le slot à lire.
-	 * @return 
+	 * @return le slot.
 	 */
 	public CapteurSlot getSlot() {
 		return slot;

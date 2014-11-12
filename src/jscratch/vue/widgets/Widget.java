@@ -242,7 +242,7 @@ public class Widget extends JComponent {
 	/**
 	 * Définie si un composant est en train dragué.
 	 *
-	 * @param draggable la valeur définissant si le composant est dragué ou non
+	 * @param dragging la valeur définissant si le composant est en cours de draggage.
 	 */
 	public void setDragging(boolean dragging) {
 		this.dragging = dragging;

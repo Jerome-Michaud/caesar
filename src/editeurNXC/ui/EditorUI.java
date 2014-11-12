@@ -69,16 +69,10 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.SearchEngine;
 
 /**
- * Classe de l'interface de l'editeur
- * @author Christophe Chartier
- *
+ * Classe de l'interface de l'editeur.
  */
-
 public class EditorUI  extends JTabbedPane {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 652027320050530897L;
 	private static AutoCompletion ac; //permet d'avoir l'autocompletion sur l'editeur
 	private static final SyntaxScheme scheme = new SyntaxScheme(new Font(Font.MONOSPACED, Font.PLAIN, 14));
@@ -141,8 +135,8 @@ public class EditorUI  extends JTabbedPane {
 	}
 
 	/**
-	 * Retourne l'instance de l'editeur, singleton
-	 * @return
+	 * Donne l'instance de l'éditeur (singleton).
+	 * @return l'instance de l'éditeur.
 	 */
 	public static EditorUI getInstance() {
 		if (instance == null) {
@@ -162,7 +156,7 @@ public class EditorUI  extends JTabbedPane {
 	/**
 	 * Met le contenu d'un fichier dans un conteneur de texte
 	 * @param parFile
-	 * @return
+	 * @return le conteneur texte créé.
 	 * @throws IOException
 	 */
 	private static RTextScrollPane createTab(File parFile) throws IOException {
@@ -232,9 +226,8 @@ public class EditorUI  extends JTabbedPane {
 	}
 
 	/**
-	 * retourne un boolean precisant si l'onglet correspond a un fichier
-	 * ou si il s'agit d'un "nouvel onglet" jamais enregistré
-	 * @return
+	 * Précise si l'onglet correspond à un fichier ou si il s'agit d'un "nouvel onglet" jamais enregistré
+	 * @return <code>true</code> s'il n'y a pas de fichier associé à l'onglet.
 	 */
 	public boolean needSaveAs() {
 		return this.tabsToFiles.get((RTextScrollPane) this.getSelectedComponent()) == null;
@@ -362,11 +355,11 @@ public class EditorUI  extends JTabbedPane {
 
 	/**
 	 * action trouver
-	 * @param search, le mot a trouver
-	 * @param sens , sens de recherche, forward ou backward
-	 * @param matchCase, case sensitive
-	 * @param wholeWord, mot entier
-	 * @param useRegex, expression reguliere
+	 * @param search le mot a trouver
+	 * @param sens sens de recherche, forward ou backward
+	 * @param matchCase case sensitive
+	 * @param wholeWord mot entier
+	 * @param useRegex expression reguliere
 	 */
 	public void find(String search,boolean sens, boolean matchCase, boolean wholeWord, boolean useRegex) {
 		this.search = search;
@@ -378,7 +371,7 @@ public class EditorUI  extends JTabbedPane {
 
 	/**
 	 * trouve une chaine de caracteres
-	 * @param sens, sens de recherche, forward ou backward
+	 * @param sens sens de recherche, forward ou backward
 	 */
 	public void findNext(boolean sens) {
 		SearchEngine.find(((RTextScrollPane) this.getSelectedComponent()).getTextArea(), search, sens, matchCase, wholeWord, useRegex);
@@ -386,12 +379,12 @@ public class EditorUI  extends JTabbedPane {
 
 	/**
 	 * remplace une chaine de caracteres recherche par une autre
-	 * @param search, le mot cherche
-	 * @param replace, le mot remplacant
-	 * @param sens, sens de recherche, forward ou backward
-	 * @param matchCase, case sensitive
-	 * @param wholeWord, mot entier
-	 * @param useRegex, expression reguliere
+	 * @param search le mot cherche
+	 * @param replace le mot remplacant
+	 * @param sens sens de recherche, forward ou backward
+	 * @param matchCase case sensitive
+	 * @param wholeWord mot entier
+	 * @param useRegex expression reguliere
 	 */
 	public void replace(String search, String replace,boolean sens, boolean matchCase, boolean wholeWord, boolean useRegex) {
 		this.search = search;
@@ -403,11 +396,11 @@ public class EditorUI  extends JTabbedPane {
 
 	/**
 	 * remplace toutes les occurences d'une chaine de caracteres
-	 * @param search, le mot cherche
-	 * @param replace, le mot remplacant
-	 * @param matchCase, case sensitive
-	 * @param wholeWord, mot entier
-	 * @param useRegex, expression reguliere
+	 * @param search le mot cherche
+	 * @param replace le mot remplacant
+	 * @param matchCase case sensitive
+	 * @param wholeWord mot entier
+	 * @param useRegex expression reguliere
 	 */
 	public void replaceAll(String search, String replace, boolean matchCase, boolean wholeWord, boolean useRegex) {
 		this.search = search;
@@ -419,7 +412,7 @@ public class EditorUI  extends JTabbedPane {
 
 	/**
 	 * retourne le conteneur courant
-	 * @return
+	 * @return le conteneur courant.
 	 */
 	public TextEditorPane getCurrentEditor() {
 		return (TextEditorPane) ((RTextScrollPane) this.getSelectedComponent()).getTextArea();
@@ -428,14 +421,14 @@ public class EditorUI  extends JTabbedPane {
 	/**
 	 * retourne un boolean precisant si le code à été modifier depuis la derniere sauvegarde
 	 * @param item
-	 * @return
+	 * @return <code>true</code> si le code a été modifié.
 	 */
 	public boolean isModify(RTextScrollPane item){
 		return tabToModify.get(item);
 	}
 
 	/**
-	 * affiche la modification, *
+	 * Affiche la modification.
 	 */
 	public void modification(){
 		if(!tabToModify.get(this.getSelectedComponent())) {
@@ -445,7 +438,7 @@ public class EditorUI  extends JTabbedPane {
 
 	/**
 	 * retourne le texte de l'onglet courant
-	 * @return
+	 * @return le texte de l'onglet courant.
 	 */
 	public String getProg() {
 		return ((TextEditorPane) ((RTextScrollPane) this.getSelectedComponent()).getTextArea()).getText();
@@ -453,7 +446,7 @@ public class EditorUI  extends JTabbedPane {
 
 	/**
 	 * retourne le titre de l'onglet courant
-	 * @return
+	 * @return le titre de l'onglet courant.
 	 */
 	public String getTitle() {
 		return this.getTitleAt(this.getSelectedIndex());

@@ -66,16 +66,14 @@ import jscratch.traces.fabriques.FabriqueTrace;
 
 /**
  * Classe permettant de définir les différents comportements des boutons catégories.
- *
- * @since 1.0
- * @version 1.0
  */
 public abstract class BoutonCategorie extends JComponent {
 
 	/**
-	 * @see Vue.Categories.ModeleCategorie
+	 * @see ModeleCategorie
 	 */
 	private ModeleCategorie modele;
+
 	/**
 	 * La police de caractère.
 	 */
