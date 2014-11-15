@@ -41,9 +41,6 @@ termes.
  */
 package nxtim.instruction;
 
-import jscratch.helpers.LangueHelper;
-import jscratch.parametrages.langue.VariableLangue;
-
 /**
  * Cette énumération regroupe les différentes catégories d'instructions et d'expressions possibles.
  */
@@ -95,26 +92,6 @@ public enum Categorie {
 				return "Temps";
 			case EXPRESSIONS:
 				return "Expressions";
-			default:
-				return null;
-		}
-	}
-	
-	@Override
-	public String toString() {
-		switch (this) {
-			case STRUCTURES:
-				return LangueHelper.getInstance().get(VariableLangue.CAT_STRUCTURES);
-			case MOTEURS:
-				return LangueHelper.getInstance().get(VariableLangue.CAT_MOTEURS);
-			case VARIABLES:
-				return LangueHelper.getInstance().get(VariableLangue.CAT_VARIABLES);
-			case CAPTEURS:
-				return LangueHelper.getInstance().get(VariableLangue.CAT_CAPTEURS);
-			case TEMPS:
-				return LangueHelper.getInstance().get(VariableLangue.CAT_TEMPS);
-			case EXPRESSIONS:
-				return LangueHelper.getInstance().get(VariableLangue.CAT_EXPRESSIONS);
 			default:
 				return null;
 		}
