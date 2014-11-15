@@ -5,6 +5,7 @@ import jscratch.traduction.VisiteurC;
 import nxtim.instruction.InstructionDeclaration;
 import nxtim.instruction.TypeElement;
 import nxtim.instruction.Variable;
+import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;
 
 import org.junit.Test;
@@ -32,5 +33,20 @@ public class VisiteurCTest {
 		declaration.setMembre(new VariableModifiable(TypeElement.FLOAT, "f"));
 		declaration.accepte(visiteur);
 		assertEquals("Traduction d'une déclaration incorrecte.", "float f;\n", visiteur.getTraduction());
+	}
+	
+	@Test
+	public void testTraduireVariableConstante() {
+		final VisiteurC visiteur = new VisiteurC();
+		final String valeur = "2.1";
+		final String nom = "var";
+		Variable var = new VariableConstante(TypeElement.DOUBLE, valeur);
+		var.accepte(visiteur);
+		assertEquals("Traduction d'une valeur incorrecte.", valeur, visiteur.getTraduction());
+		
+		visiteur.reset();
+		var = new VariableConstante(TypeElement.DOUBLE, nom, valeur);
+		var.accepte(visiteur);
+		assertEquals("Traduction d'une variable constante incorrecte.", nom, visiteur.getTraduction());
 	}
 }

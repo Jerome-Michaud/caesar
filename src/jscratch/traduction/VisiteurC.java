@@ -260,7 +260,7 @@ public class VisiteurC extends VisiteurTraduction {
 
 	@Override
 	public void visiter(Variable variable) {
-		if (variable.isConstante()) {
+		if (variable.isConstante() && variable.getNom().isEmpty()) {
 			traduction += variable.getValeur();
 		} else {
 			traduction += variable.getNom();
