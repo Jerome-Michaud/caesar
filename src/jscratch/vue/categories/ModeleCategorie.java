@@ -43,8 +43,10 @@ package jscratch.vue.categories;
 
 import java.awt.Color;
 import java.awt.Polygon;
+
 import jscratch.dictionnaires.DicoCouleursCategories;
 import jscratch.dictionnaires.DicoWidgetsCategories;
+import jscratch.lang.CategorieLangueTraducteur;
 import jscratch.parametrages.properties.VariableProperties;
 import nxtim.instruction.Categorie;
 
@@ -145,7 +147,7 @@ public class ModeleCategorie {
 	 */
 	public String getMessage(final boolean nombreWidget) {
 		if (nombreWidget) {
-			return this.categorie.toString() + " (" + DicoWidgetsCategories.getInstance().getWidgets(this.categorie, true).size() + ")" ;
+			return CategorieLangueTraducteur.traduire(this.categorie) + " (" + DicoWidgetsCategories.getInstance().getWidgets(this.categorie, true).size() + ")" ;
 		}
 		return this.categorie.toString();
 	}

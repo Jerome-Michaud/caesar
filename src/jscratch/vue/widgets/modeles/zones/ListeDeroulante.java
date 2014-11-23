@@ -57,7 +57,7 @@ import org.jdom2.Element;
  * @author Vincent Besnard - Quentin Gosselin
  * @param <T> Le type des valeurs de la liste.
  */
-public class ListeDeroulante<T> extends JComboBox implements Zone {
+public class ListeDeroulante<T> extends JComboBox<T> implements Zone {
 
 	/**
 	 * Constructeur du composant faisant appel au constructeur équivalent de la classe mère.
