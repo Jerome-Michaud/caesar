@@ -41,12 +41,16 @@ termes.
  */
 package editeurNXC.ui;
 
+import de.javasoft.swing.jydocking.DockingManager;
+import de.javasoft.swing.jydocking.IDockingConstants;
 import editeurNXC.utils.MyKeyAdapter;
 import editeurNXC.utils.ButtonTabComponent;
 import editeurNXC.parser.NXCDefs;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -55,6 +59,8 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
+import jscratch.vue.ginterface.principales.ApplicationUI;
+import jscratch.vue.ginterface.principales.GUI;
 import org.fife.ui.autocomplete.AutoCompletion;
 import org.fife.ui.autocomplete.BasicCompletion;
 import org.fife.ui.autocomplete.CompletionProvider;
@@ -124,6 +130,20 @@ public class EditorUI  extends JTabbedPane {
 		AbstractTokenMakerFactory atmf = (AbstractTokenMakerFactory) TokenMakerFactory.getDefaultInstance();
 		atmf.putMapping("NXC", "editeurNXC.utils.NXCTokenMaker");
 
+		this.setFocusable(true);
+		this.addFocusListener(new FocusListener() {
+			// Arrivée du focus  
+			@Override
+			public void focusGained(FocusEvent e) {
+				ApplicationUI.getInstance().minimizeZoneCodeConsole();
+			}
+			// Perte de focus
+			@Override
+			public void focusLost(FocusEvent e) {
+			}
+
+		});
+		
 		this.setPreferredSize(new Dimension(400, 300));
 		this.filesToTabs = new HashMap<File, RTextScrollPane>();
 		this.tabsToFiles = new HashMap<RTextScrollPane, File>();

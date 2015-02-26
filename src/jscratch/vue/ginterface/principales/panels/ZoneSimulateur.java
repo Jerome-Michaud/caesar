@@ -43,10 +43,13 @@ package jscratch.vue.ginterface.principales.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import jscratch.controleur.sim.Simulator;
+import jscratch.vue.ginterface.principales.ApplicationUI;
 import jscratch.vue.sim.PanelController;
 import jscratch.vue.sim.PanelInfosRobot;
 import jscratch.vue.sim.PanelSimulator;
@@ -86,6 +89,20 @@ public class ZoneSimulateur extends JPanel {
 		this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, infosRobot, panelSC);
 		panelSimulator.addObserver(infosRobot);
 
+		this.setFocusable(true);
+		this.addFocusListener(new FocusListener() {
+			// Arrivée du focus  
+			@Override
+			public void focusGained(FocusEvent e) {
+				ApplicationUI.getInstance().maximizeZoneCodeConsole();
+			}
+			// Perte de focus
+			@Override
+			public void focusLost(FocusEvent e) {
+			}
+
+		});
+		
 		this.add(split);
 	}
 }

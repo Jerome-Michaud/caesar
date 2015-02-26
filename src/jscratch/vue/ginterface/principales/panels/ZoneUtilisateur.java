@@ -41,10 +41,18 @@ termes.
  */
 package jscratch.vue.ginterface.principales.panels;
 
+import de.javasoft.swing.jydocking.IDockingConstants;
 import java.awt.BorderLayout;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import jscratch.helpers.PropertiesHelper;
+import jscratch.vue.ginterface.principales.ApplicationUI;
 import jscratch.vue.ginterface.principales.GUI;
 
 /**
@@ -72,6 +80,20 @@ public final class ZoneUtilisateur extends JPanel {
 	private ZoneUtilisateur() {
 		this.setLayout(new BorderLayout());
 		PanelCodeGraphique p = GUI.getPanelCodeGraphique();
+		
+		this.setFocusable(true);
+		this.addFocusListener(new FocusListener() {
+			// Arrivée du focus  
+			@Override
+			public void focusGained(FocusEvent e) {
+				ApplicationUI.getInstance().maximizeZoneCodeConsole();
+			}
+			// Perte de focus
+			@Override
+			public void focusLost(FocusEvent e) {
+			}
+
+		});
 		
 		scrollCodeGraphique = new JScrollPane(p);
 		scrollCodeGraphique.setBorder(null);
