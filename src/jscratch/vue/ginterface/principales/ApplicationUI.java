@@ -173,19 +173,15 @@ public final class ApplicationUI extends JFrame {
 	}
 	
 	public void minimizeZoneCodeConsole() {
-		if (zoneCodeConsole.isVisible()) {
-			zoneCodeConsole.setVisible(false);
-			//zoneCodeGraphique.dock(zoneCodeConsole, IDockingConstants.EAST_REGION, 1f);
-			System.out.println("1 - minimized\n");
-		}
+		zoneCodeConsole.setTitle(LangueHelper.getInstance().get(VariableLangue.DOCK_OUTPUT));
+		zoneCodeConsole.setIcon(ImagesHelper.getIcon("warning.png"));
+		zoneCodeConsole.setDockbarIcon(ImagesHelper.getIcon("warning.png"));
 	}
 	
 	public void maximizeZoneCodeConsole() {
-		if ( !(zoneCodeConsole.isVisible()) ) {
-			zoneCodeConsole.setVisible(true);
-			//zoneCodeGraphique.dock(zoneCodeConsole, IDockingConstants.EAST_REGION, .8f);
-			System.out.println("2 - maximized\n");
-		}
+		zoneCodeConsole.setTitle(LangueHelper.getInstance().get(VariableLangue.DOCK_CODE));
+		zoneCodeConsole.setIcon(ImagesHelper.getIcon("document-code.png"));
+		zoneCodeConsole.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));
 	}
 
 	public DicoVariables getDicoVariables() {

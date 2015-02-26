@@ -59,7 +59,7 @@ public enum VariableLangue {
 	MOR, MOR_HELP,
 	
 	// Docking
-	DOCK_ED_GRAPH, DOCK_ED_CODE, DOCK_SIM, DOCK_CODE, DOCK_COMP,
+	DOCK_ED_GRAPH, DOCK_ED_CODE, DOCK_SIM, DOCK_CODE, DOCK_COMP, DOCK_OUTPUT,
 	
 	// Simulateur (boutons)
 	SIM_BUT_EXEC, SIM_BUT_PAUSE, SIM_BUT_STOP, SIM_BUT_DEB, SIM_BUT_DEB_SEN, SIM_BUT_DEB_COL,
@@ -104,6 +104,7 @@ public enum VariableLangue {
 			case DOCK_ED_CODE: return "interface.dock.edition.code";
 			case DOCK_SIM: return "interface.dock.simulation";
 			case DOCK_CODE: return "interface.dock.code";
+			case DOCK_OUTPUT: return "interface.dock.output";
 			case DOCK_COMP: return "interface.dock.compiler";
 				
 			case SIM_BUT_EXEC: return "interface.simulator.buttons.execute";

@@ -24,6 +24,7 @@ interface.dock.edition.graphic=Edition graphique
 interface.dock.edition.code=Edition NXC
 interface.dock.simulation=Simulation
 interface.dock.code=Code
+interface.dock.output=Sortie
 interface.dock.compiler=Compilateur
 
 
