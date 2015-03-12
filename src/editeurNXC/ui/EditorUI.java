@@ -41,11 +41,9 @@ termes.
  */
 package editeurNXC.ui;
 
-import de.javasoft.swing.jydocking.DockingManager;
-import de.javasoft.swing.jydocking.IDockingConstants;
-import editeurNXC.utils.MyKeyAdapter;
-import editeurNXC.utils.ButtonTabComponent;
 import editeurNXC.parser.NXCDefs;
+import editeurNXC.utils.ButtonTabComponent;
+import editeurNXC.utils.MyKeyAdapter;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -61,6 +59,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import jscratch.vue.ginterface.principales.ApplicationUI;
 import jscratch.vue.ginterface.principales.GUI;
+import nxtim.NXTIMArbreTools;
 import org.fife.ui.autocomplete.AutoCompletion;
 import org.fife.ui.autocomplete.BasicCompletion;
 import org.fife.ui.autocomplete.CompletionProvider;
@@ -135,6 +134,11 @@ public class EditorUI  extends JTabbedPane {
 			// Arrivée du focus  
 			@Override
 			public void focusGained(FocusEvent e) {
+				if(NXTIMArbreTools.getInstance().isWidgetsModified()){
+					((TextEditorPane) ((RTextScrollPane) getSelectedComponent()).getTextArea())
+							.setText(GUI.getPanelCodeConsole().getText());
+					GUI.getPanelCodeConsole().update(null, "");
+				}
 				ApplicationUI.getInstance().minimizeZoneCodeConsole();
 			}
 			// Perte de focus

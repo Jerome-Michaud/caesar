@@ -68,6 +68,9 @@ import nxtim.instruction.VariableModifiable;
 import nxtim.instruction.Moteur;
 import jscratch.dictionnaires.DicoVariables;
 import nxtim.instruction.InstructionDeclarationAffectation;
+import nxtim.instruction.InstructionFor;
+import nxtim.instruction.InstructionIncrementation;
+import nxtim.instruction.InstructionRepeat;
 
 /**
  * Constructeur de modèle NXTIM d'un programme NXC.
@@ -194,6 +197,55 @@ public class MonteurNXTIM implements MonteurProgramme{
 		/* Construction du modèle NXTIM correspondant */
 		Collections.reverse(instrucs);
 		InstructionDoWhile inst = new InstructionDoWhile(cond);
+		for(IElementProgramme ie : instrucs) {
+			inst.insererFin((Instruction) ie);
+		}
+		/* Stocker le résultat */
+		p.empile(inst);
+	}
+	
+	@Override
+	public void brepeat(int nbArg){
+		ArrayList<IElementProgramme> lEL = new ArrayList<IElementProgramme>();
+		/* Récupération des éléments du corps */
+		for(int i = 1; i<= nbArg; i++) {
+			lEL.add(p.depile());
+		}
+		/* Récupération de la condition */
+		Expression expr = (Expression) p.depile();
+		/* Construction du modèle NXTIM correspondant */
+		Collections.reverse(lEL);
+		InstructionRepeat insRepeat = new InstructionRepeat(expr);
+		for(IElementProgramme ie : lEL) {
+			insRepeat.insererFin((Instruction)ie);
+		}
+		/* Stocker le résultat */
+		p.empile(insRepeat);
+	}
+	
+	@Override
+	public void bfor(int nbInst) {
+		ArrayList<IElementProgramme> instrucs = new ArrayList<IElementProgramme>();
+		/* Récupération des éléments du corps */
+		for(int i = 0; i < nbInst; i++) {
+			instrucs.add(p.depile());
+		}
+		/* Récupération de l'iteration */
+		Expression iter = (Expression) p.depile();
+		/* Récupération de la condition */
+		Condition cond = (Condition) p.depile();
+		/* Récupération de l'initialisation */
+		Affectation init = (Affectation) p.depile();
+		/* Construction du modèle NXTIM correspondant */
+		Collections.reverse(instrucs);
+		
+		InstructionFor inst;
+		if(iter instanceof Affectation){	
+			inst = new InstructionFor((Affectation)init, cond, (Affectation) iter);
+		} else {
+			inst = new InstructionFor((Affectation)init, cond, (InstructionIncrementation) iter);
+		}
+		
 		for(IElementProgramme ie : instrucs) {
 			inst.insererFin((Instruction) ie);
 		}

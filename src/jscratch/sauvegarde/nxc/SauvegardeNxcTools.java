@@ -41,6 +41,7 @@ termes.
  */
 package jscratch.sauvegarde.nxc;
 
+import editeurNXC.ui.EditorUI;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -48,7 +49,6 @@ import jscratch.dictionnaires.DicoTraces;
 import jscratch.helpers.ErreurHelper;
 import jscratch.sauvegarde.SauvegardeTools;
 import jscratch.traces.fabriques.FabriqueTrace;
-import jscratch.vue.ginterface.principales.GUI;
 
 /**
  * @since 1.0
@@ -81,25 +81,35 @@ public final class SauvegardeNxcTools implements SauvegardeTools {
 	}
 
 	@Override
-	public void load(String path) { }
+	public void load(String path) { 
+		try {
+			EditorUI.getInstance().newTab(new File(path));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	@Override
 	public File save(String path) {
-		try {
-			File fichier = new File(path);
-			if (!fichier.exists()) {
-				fichier.createNewFile();
+		if(EditorUI.getInstance().needSaveAs()){
+			try {
+				File fichier = new File(path);
+				if (!fichier.exists()) {
+					fichier.createNewFile();
+				}
+				FileWriter fw = new FileWriter(fichier);
+				fw.append(EditorUI.getInstance().getProg());
+				fw.close();
+
+				DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceSauvegarde(fichier));
+
+				return fichier;
+			} catch (IOException ex) {
+				ErreurHelper.afficher(ex);
 			}
-			FileWriter fw = new FileWriter(fichier);
-			fw.append(GUI.getPanelCodeConsole().getText());
-			fw.close();
-			
-			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceSauvegarde(fichier));
-			
-			return fichier;
-		} catch (IOException ex) {
-			ErreurHelper.afficher(ex);
-		}
+		} else {
+			EditorUI.getInstance().save();
+		}	
 		return null;
 	}
  }

@@ -68,6 +68,20 @@ public interface MonteurProgramme {
 	public void bdoWhile(int nbInst);
 	
 	/**
+	 * Ajoute une boucle repeat au programme.
+	 * 
+	 * @param nbInst le nombre d'instruction dans le corps de la boucle.
+	 */
+	public void brepeat(int nbInst);
+	
+	/**
+	 * Ajoute une boucle for au programme.
+	 * 
+	 * @param nbInst le nombre d'instruction dans le corps de la boucle.
+	 */
+	public void bfor(int nbInst);
+	
+	/**
 	 * Ajoute une condition au programme.
 	 * 
 	 * @param op l'opérateur conditionnel.

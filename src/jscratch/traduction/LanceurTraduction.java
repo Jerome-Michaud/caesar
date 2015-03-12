@@ -43,9 +43,10 @@ package jscratch.traduction;
 
 import java.util.List;
 import java.util.Observable;
-import nxtim.instruction.Instruction;
-import jscratch.vue.ginterface.principales.GUI;
 import jscratch.vue.arborescence.ArborescenceTools;
+import jscratch.vue.ginterface.principales.GUI;
+import nxtim.NXTIMArbreTools;
+import nxtim.instruction.Instruction;
 
 /**
  * Cette classe s'occupe de lancer la traduction du programme construit avec les widgets.<br/>
@@ -69,6 +70,7 @@ public final class LanceurTraduction extends Observable {
 	private LanceurTraduction() {
 		traducteur = VisiteurNXC.getInstance();
 		this.addObserver(GUI.getPanelCodeConsole());
+		this.addObserver(NXTIMArbreTools.getInstance().getObserver());
 	}
 
 	/**

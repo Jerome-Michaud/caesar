@@ -89,6 +89,9 @@ public class ExplorerASTNXC {
 			case NXCParser.DO:
 				traitementDoWhile(tree);
 				break;
+			case NXCParser.REPEAT:
+				traitementRepeat(tree);				
+				break;
 			case NXCParser.IF:
 				if(nbChild == 2) {//if seul
 					traitementIf(tree);
@@ -219,6 +222,7 @@ public class ExplorerASTNXC {
 			exploration(tree.getChild(3).getChild(i));
 		}
         System.out.println("for (" + nbStatements + ")");
+		monteur.bfor(nbStatements);
 	}
 	
 	/* Gère l'exploration d'un appel de fonction */
@@ -255,6 +259,17 @@ public class ExplorerASTNXC {
 		}
 		System.out.println("dowhile (" + nbInst + ")");
 		monteur.bdoWhile(nbInst);
+	}
+	
+	/* Gère l'exploration d'un repeat */
+	private void traitementRepeat(Tree tree) {
+		exploration(tree.getChild(0));//Expression
+		int nbInsts = tree.getChild(1).getChildCount();
+		for(int i = 0; i < nbInsts; i++) {//STATEMENTS
+			exploration(tree.getChild(1).getChild(i));
+		}
+		System.out.println("repeat (" + nbInsts + ")");
+		monteur.brepeat(nbInsts);
 	}
 	
 	/* Gère l'exploration d'un if seul */

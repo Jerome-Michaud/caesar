@@ -44,6 +44,7 @@ package editeurNXC.utils;
 import editeurNXC.ui.EditorUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import nxtim.NXTIMArbreTools;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 /**
@@ -63,6 +64,13 @@ public class MyKeyAdapter extends KeyAdapter {
 		}
 	}
 
+	@Override
+	public void keyReleased(KeyEvent e){
+		if (controlPress(e.getKeyCode())) {
+			NXTIMArbreTools.getInstance().compiler(EditorUI.getInstance().getProg());
+		}
+	}
+	
 	/**
 	 * Ajoute l'etoile de notification a l'onglet courant de l'editeur.
 	 */
