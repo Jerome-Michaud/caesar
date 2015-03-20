@@ -67,10 +67,17 @@ import nxtim.instruction.VariableConstante;
 import nxtim.instruction.VariableModifiable;
 import nxtim.instruction.Moteur;
 import jscratch.dictionnaires.DicoVariables;
+import nxtim.instruction.Capteur;
+import nxtim.instruction.CapteurSlot;
+import nxtim.instruction.InstructionConfigCapteurs;
 import nxtim.instruction.InstructionDeclarationAffectation;
 import nxtim.instruction.InstructionFor;
 import nxtim.instruction.InstructionIncrementation;
+import nxtim.instruction.InstructionRAZRotationMoteur;
 import nxtim.instruction.InstructionRepeat;
+import nxtim.instruction.RotationMoteur;
+import nxtim.instruction.TempsCourant;
+import nxtim.instruction.ValeurCapteur;
 
 /**
  * Constructeur de modèle NXTIM d'un programme NXC.
@@ -93,6 +100,22 @@ public class MonteurNXTIM implements MonteurProgramme{
 		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_A", null));
 		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_B", null));
 		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_C", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_AB", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_BC", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "OUT_AC", null));
+		
+		/* Ajout des constantes Slot de capteur */
+		dico.ajouter(new VariableConstante(TypeElement.INT, "IN_1", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "IN_2", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "IN_3", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "IN_4", null));
+		
+		/* Ajout des constantes Capteur */
+		dico.ajouter(new VariableConstante(TypeElement.INT, "COLOR", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "LIGHT", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "TOUCH", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "SONIC", null));
+		dico.ajouter(new VariableConstante(TypeElement.INT, "NONE", null));
 	}
 	
 	@Override
@@ -335,7 +358,7 @@ public class MonteurNXTIM implements MonteurProgramme{
 
 	@Override
 	public void fonctionAppel(String nom, int nbArg){
-		Instruction ins = null;
+		IElementProgramme ins = null;
 		Moteur moteur = null;
 		ArrayList<IElementProgramme> lEL = new ArrayList<IElementProgramme>();
 		/* Récupération des arguments */
@@ -357,6 +380,29 @@ public class MonteurNXTIM implements MonteurProgramme{
 		}else if(nom.equals("Wait")){
 			ins = new InstructionAttente();
 			((InstructionAttente)ins).setExpression((Expression)lEL.get(0));
+		}else if(nom.equals("CurrentTick")){
+			ins = new TempsCourant();
+		}else if(nom.equals("GetSensorValue")){
+			ins = new ValeurCapteur(chercheCapteurSlot(((Variable)lEL.get(0)).getNom()));
+		}else if(nom.equals("MotorRotationCount")){
+			ins = new RotationMoteur(chercheMoteur(((Variable)lEL.get(0)).getNom()));
+		}else if(nom.equals("ResetMotorRotationCount")){
+			ins = new InstructionRAZRotationMoteur(chercheMoteur(((Variable)lEL.get(0)).getNom()));
+		}else if(nom.equals("DefineSensors")){
+			ins = new InstructionConfigCapteurs();
+			InstructionConfigCapteurs config = (InstructionConfigCapteurs)ins;
+			
+			Capteur capteur = chercheCapteur(((Variable)lEL.get(0)).getNom());
+			config.setCapteurAuSlot(CapteurSlot.A, capteur);
+			
+			capteur = chercheCapteur(((Variable)lEL.get(1)).getNom());
+			config.setCapteurAuSlot(CapteurSlot.B, capteur);
+			
+			capteur = chercheCapteur(((Variable)lEL.get(2)).getNom());
+			config.setCapteurAuSlot(CapteurSlot.C, capteur);
+			
+			capteur = chercheCapteur(((Variable)lEL.get(3)).getNom());
+			config.setCapteurAuSlot(CapteurSlot.D, capteur);
 		}
 		/* Stockage du résulat */
 		p.empile(ins);
@@ -369,9 +415,44 @@ public class MonteurNXTIM implements MonteurProgramme{
 		else if(iElementProgramme.equals("OUT_B")) {
 			return Moteur.B;
 		}
-		else {
+		else if(iElementProgramme.equals("OUT_C")) {
 			return Moteur.C;
 		}
+		else if(iElementProgramme.equals("OUT_AB")) {
+			return Moteur.AB;
+		}
+		else if(iElementProgramme.equals("OUT_BC")) {
+			return Moteur.BC;
+		}
+		else return Moteur.AC;
+	}
+	
+	private CapteurSlot chercheCapteurSlot(String iElementProgramme){
+		if(iElementProgramme.equals("IN_1")) {
+			return CapteurSlot.A;
+		}
+		else if(iElementProgramme.equals("IN_2")) {
+			return CapteurSlot.B;
+		}
+		else if(iElementProgramme.equals("IN_3")) {
+			return CapteurSlot.C;
+		}
+		else return CapteurSlot.D;
+	}
+	
+	private Capteur chercheCapteur(String iElementProgramme){
+		if(iElementProgramme.equals("COLOR")) {
+			return Capteur.COLOR;
+		}
+		else if(iElementProgramme.equals("LIGHT")) {
+			return Capteur.LIGHT;
+		}
+		else if(iElementProgramme.equals("TOUCH")) {
+			return Capteur.TOUCH;
+		} if(iElementProgramme.equals("ULTRASONIC")) {
+			return Capteur.ULTRASONIC;
+		}
+		else return Capteur.NONE;
 	}
 	
 	@Override

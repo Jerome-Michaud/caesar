@@ -211,7 +211,7 @@ public class VisiteurWidgetGenerationNXC implements VisiteurWidgetGeneration{
 			clone.defParent(parent.parent());
 				
 			Zone z = parent.getModele().getLesZonesSaisies().get(zone);
-			((ChampTexte) z).setWidgetContenu(clone);			
+			((ChampTexte) z).setWidgetContenu(clone);
 		} catch (Exception ex) {
 			ErreurHelper.afficher(ex);
 		}
@@ -406,7 +406,7 @@ public class VisiteurWidgetGenerationNXC implements VisiteurWidgetGeneration{
 	
 	
 	@Override
-	public void visiter(InstructionTache inst) {		
+	public void visiter(InstructionTache inst) {
 		widget = getWidgetClone(inst.getCategorie(), TypeModeleWidget.TACHE, null);
 		widget.setLocation(20, 20);
 		
@@ -634,17 +634,35 @@ public class VisiteurWidgetGenerationNXC implements VisiteurWidgetGeneration{
 
 	@Override
 	public void visiter(ValeurCapteur valCapteur) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		Widget parent = widget;
+		try {
+			widget = GUI.getPanelWidget().getFabrique().cloner(getWidgetExistant(valCapteur.getCategorie(), TypeModeleWidget.CAPTEUR));
+			widget.setDraggable(true);
+			widget.getModele().getLesZonesSaisies().get(0).setValeur(""+valCapteur.getSlot().ordinal());
+			Zone z = parent.getModele().getLesZonesSaisies().get(prochVarZone);
+			((ChampTexte) z).setWidgetContenu(widget);
+		} catch (NonClonableException ex) {
+			ErreurHelper.afficher(ex);
+		}
+		
+		prochVarZone = 0;
+		widget = parent;
 	}
 
 	@Override
 	public void visiter(RotationMoteur rotMoteur) {
 		Widget parent = widget;
+		try {
+			widget = GUI.getPanelWidget().getFabrique().cloner(getWidgetExistant(rotMoteur.getCategorie(), TypeModeleWidget.MOTEURNOMBREROTATION));
+			widget.setDraggable(true);
+			widget.getModele().getLesZonesSaisies().get(0).setValeur(""+rotMoteur.getMoteur().ordinal());
+			Zone z = parent.getModele().getLesZonesSaisies().get(prochVarZone);
+			((ChampTexte) z).setWidgetContenu(widget);
+		} catch (NonClonableException ex) {
+			ErreurHelper.afficher(ex);
+		}
 		
-		widget = getWidgetClone(rotMoteur.getCategorie(), 
-						TypeModeleWidget.MOTEURNOMBREROTATION, parent);
-		widget.getModele().getLesZonesSaisies().get(0).setValeur(""+rotMoteur.getMoteur().ordinal());
-		
+		prochVarZone = 0;
 		widget = parent;
 	}
 
@@ -652,7 +670,7 @@ public class VisiteurWidgetGenerationNXC implements VisiteurWidgetGeneration{
 	public void visiter(InstructionRAZRotationMoteur razMoteur) {
 		Widget parent = widget;
 		
-		widget = getWidgetClone(razMoteur.getCategorie(), 
+		widget = getWidgetClone(razMoteur.getCategorie(),
 						TypeModeleWidget.MOTEURRAZ, parent);
 		widget.getModele().getLesZonesSaisies().get(0).setValeur(""+razMoteur.getMoteur().ordinal());
 		

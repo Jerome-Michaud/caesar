@@ -48,7 +48,6 @@ import jscratch.vue.ginterface.principales.panels.PanelTypeWidget;
 import jscratch.vue.widgets.Widget;
 import nxtim.NXTIMArbreTools;
 import nxtim.instruction.Instruction;
-import nxtim.instruction.VisiteurElementProg;
 
 /**
  *

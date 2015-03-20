@@ -104,7 +104,7 @@ public final class LanceurTraduction extends Observable {
 	 */
 	public void lancerTraduction() {
 		traducteur.reset();
-		List<Instruction> list = ArborescenceTools.getInstance().trouveTaches();
+		List<Instruction> list = NXTIMArbreTools.getInstance().trouveTaches();
 		for (Instruction inst : list) {
 			inst.accepte(traducteur);
 		}

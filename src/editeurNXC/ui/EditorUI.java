@@ -57,6 +57,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
+import jscratch.traduction.LanceurTraduction;
 import jscratch.vue.ginterface.principales.ApplicationUI;
 import jscratch.vue.ginterface.principales.GUI;
 import nxtim.NXTIMArbreTools;
@@ -144,6 +145,7 @@ public class EditorUI  extends JTabbedPane {
 			// Perte de focus
 			@Override
 			public void focusLost(FocusEvent e) {
+				LanceurTraduction.getInstance().lancerTraduction();
 			}
 
 		});
