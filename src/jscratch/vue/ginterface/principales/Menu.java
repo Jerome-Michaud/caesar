@@ -157,10 +157,18 @@ public final class Menu extends JMenuBar {
 				nouveau();
 			}
 			else if (e.getSource() == fichierOuvrir) {
-				new SelecteurFichier(TypeSelecteur.ARBORESCENCE).chargement();
+				if(ApplicationUI.getInstance().getViewport().isActive()){
+					new SelecteurFichier(TypeSelecteur.ARBORESCENCE).chargement();
+				} else {
+					new SelecteurFichier(TypeSelecteur.CODE).chargement();
+				}
 			}
 			else if (e.getSource() == fichierEnregistrer) {
-				new SelecteurFichier(TypeSelecteur.ARBORESCENCE).sauvegarde();
+				if(ApplicationUI.getInstance().getViewport().isActive()){
+					new SelecteurFichier(TypeSelecteur.ARBORESCENCE).sauvegarde();
+				} else {
+					new SelecteurFichier(TypeSelecteur.CODE).sauvegarde();
+				}				
 			}
 			else if (e.getSource() == fichierChargerProp) {
 				new SelecteurFichier(TypeSelecteur.PROPERTIES).chargement();
