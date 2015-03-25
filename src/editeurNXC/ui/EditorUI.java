@@ -135,16 +135,17 @@ public class EditorUI  extends JTabbedPane {
 			// Arrivée du focus  
 			@Override
 			public void focusGained(FocusEvent e) {
-<<<<<<< HEAD
+
 				ApplicationUI.getInstance().goToZoneOutput();
-=======
+
 				if(NXTIMArbreTools.getInstance().isWidgetsModified()){
 					((TextEditorPane) ((RTextScrollPane) getSelectedComponent()).getTextArea())
 							.setText(GUI.getPanelCodeConsole().getText());
 					GUI.getPanelCodeConsole().update(null, "");
 				}
-				ApplicationUI.getInstance().minimizeZoneCodeConsole();
->>>>>>> 3c36a9d9834059cde7a8eb973c8643783b649cd2
+				//ApplicationUI.getInstance().minimizeZoneCodeConsole();
+				ApplicationUI.getInstance().goToZoneCodeConsole();
+
 			}
 			// Perte de focus
 			@Override
