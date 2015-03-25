@@ -62,10 +62,13 @@ public enum VariableLangue {
 	DOCK_ED_GRAPH, DOCK_ED_CODE, DOCK_SIM, DOCK_CODE, DOCK_COMP, DOCK_OUTPUT,
 	
 	// Simulateur (boutons)
-	SIM_BUT_EXEC, SIM_BUT_PAUSE, SIM_BUT_STOP, SIM_BUT_DEB, SIM_BUT_DEB_SEN, SIM_BUT_DEB_COL,
+	SIM_BUT_EXEC, SIM_BUT_PAUSE, SIM_BUT_STOP, SIM_BUT_DEB, SIM_BUT_DEB_SEN, SIM_BUT_DEB_COL, SIM_BUT_CONF,
 	
 	// Simulateur (panel gauche robot)
 	SIM_PAN_ROB, SIM_PAN_ROB_VITESSE, SIM_PAN_ROB_ROTATION, SIM_PAN_ROB_ORIENTATION, SIM_PAN_ROB_POSITION, SIM_PAN_CAPT,
+	
+	// Simulateur (config robot)
+	SIM_CONF_TITTLE, SIM_CONF_CAPT_DISP, SIM_CONF_CAPT_UTIL, SIM_CONF_MOT_DISP, SIM_CONF_MOT_UTIL,
 
 	// Capteurs
 	CAPT_NONE, CAPT_TOUCH, CAPT_COLOR, CAPT_ULTRASONIC, CAPT_LIGHT,
@@ -110,6 +113,7 @@ public enum VariableLangue {
 			case SIM_BUT_EXEC: return "interface.simulator.buttons.execute";
 			case SIM_BUT_PAUSE: return "interface.simulator.buttons.pause";
 			case SIM_BUT_STOP: return "interface.simulator.buttons.stop";
+			case SIM_BUT_CONF: return "interface.simulator.buttons.config";
 			case SIM_BUT_DEB: return "interface.simulator.buttons.debug";
 			case SIM_BUT_DEB_SEN: return "interface.simulator.buttons.debug.sensors";
 			case SIM_BUT_DEB_COL: return "interface.simulator.buttons.debug.collisions";
@@ -120,6 +124,12 @@ public enum VariableLangue {
 			case SIM_PAN_ROB_ORIENTATION: return "interface.simulator.robot.orientation";
 			case SIM_PAN_ROB_POSITION: return "interface.simulator.robot.position";
 			case SIM_PAN_CAPT: return "interface.simulator.sensors";
+				
+			case SIM_CONF_TITTLE: return "interface.simulator.config.tittle";
+			case SIM_CONF_CAPT_DISP: return "interface.simulator.config.captDisp";	
+			case SIM_CONF_CAPT_UTIL: return "interface.simulator.config.captUtil";
+			case SIM_CONF_MOT_DISP: return "interface.simulator.config.motDisp";	
+			case SIM_CONF_MOT_UTIL: return "interface.simulator.config.motUtil";
 				
 			case COMPIL_EXEC: return "interface.compiler.execute";
 			case COMPIL_COMPIL: return "interface.compiler.compile";

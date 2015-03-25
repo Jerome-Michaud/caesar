@@ -172,13 +172,13 @@ public final class ApplicationUI extends JFrame {
 		return zoneCodeGraphique;
 	}
 	
-	public void minimizeZoneCodeConsole() {
+	public void goToZoneOutput() {
 		zoneCodeConsole.setTitle(LangueHelper.getInstance().get(VariableLangue.DOCK_OUTPUT));
 		zoneCodeConsole.setIcon(ImagesHelper.getIcon("warning.png"));
 		zoneCodeConsole.setDockbarIcon(ImagesHelper.getIcon("warning.png"));
 	}
 	
-	public void maximizeZoneCodeConsole() {
+	public void goToZoneCodeConsole() {
 		zoneCodeConsole.setTitle(LangueHelper.getInstance().get(VariableLangue.DOCK_CODE));
 		zoneCodeConsole.setIcon(ImagesHelper.getIcon("document-code.png"));
 		zoneCodeConsole.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));

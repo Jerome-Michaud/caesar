@@ -32,6 +32,7 @@ interface.dock.compiler=Compiler
 interface.simulator.buttons.execute=Execute
 interface.simulator.buttons.pause=Pause
 interface.simulator.buttons.stop=Stop
+interface.simulator.buttons.config=Robot settings
 interface.simulator.buttons.debug=Debug
 interface.simulator.buttons.debug.sensors=Show sensors
 interface.simulator.buttons.debug.collisions=Show collisions
@@ -42,6 +43,13 @@ interface.simulator.robot.rotations=Rotations
 interface.simulator.robot.orientation=Orientation
 interface.simulator.robot.position=Position
 interface.simulator.sensors=Sensors
+
+#Config Robot
+interface.simulator.config.tittle=Robot settings
+interface.simulator.config.captDisp=Available sensors
+interface.simulator.config.captUtil=Used sensors
+interface.simulator.config.motDisp=Available motors
+interface.simulator.config.motUtil=Used motors
 
 
 #Partie compilateur

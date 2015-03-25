@@ -86,7 +86,7 @@ public final class ZoneUtilisateur extends JPanel {
 			// Arrivée du focus  
 			@Override
 			public void focusGained(FocusEvent e) {
-				ApplicationUI.getInstance().maximizeZoneCodeConsole();
+				ApplicationUI.getInstance().goToZoneCodeConsole();
 			}
 			// Perte de focus
 			@Override

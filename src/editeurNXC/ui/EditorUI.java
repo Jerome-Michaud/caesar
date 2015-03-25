@@ -135,7 +135,7 @@ public class EditorUI  extends JTabbedPane {
 			// Arrivée du focus  
 			@Override
 			public void focusGained(FocusEvent e) {
-				ApplicationUI.getInstance().minimizeZoneCodeConsole();
+				ApplicationUI.getInstance().goToZoneOutput();
 			}
 			// Perte de focus
 			@Override
