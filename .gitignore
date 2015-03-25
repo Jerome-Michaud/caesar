@@ -13,3 +13,8 @@ bin/
 traces.xml
 save*.xml
 *.properties
+doc/conception/Thumbs.db
+doc/screenshots/Thumbs.db
+doc/uml/actual/Thumbs.db
+ressources/Thumbs.db
+Thumbs.db

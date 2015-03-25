@@ -47,20 +47,28 @@ import de.javasoft.swing.JYDockingPort;
 import de.javasoft.swing.JYDockingView;
 import de.javasoft.swing.jydocking.DockingManager;
 import de.javasoft.swing.jydocking.IDockingConstants;
+import de.javasoft.swing.plaf.jydocking.DefaultCloseAction;
 import de.javasoft.swing.plaf.jydocking.DefaultFloatAction;
 import de.javasoft.swing.plaf.jydocking.DefaultMaximizeAction;
 import de.javasoft.swing.plaf.jydocking.DefaultMinimizeAction;
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import jscratch.vue.ginterface.principales.panels.GlassPane;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.AbstractAction;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -68,12 +76,16 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import javax.swing.text.DefaultEditorKit;
+import jdk.internal.dynalink.DefaultBootstrapper;
 
 import jscratch.dictionnaires.DicoVariables;
 import jscratch.helpers.ImagesHelper;
 import jscratch.helpers.LangueHelper;
 import jscratch.helpers.SessionHelper;
 import jscratch.parametrages.langue.VariableLangue;
+import jscratch.vue.arborescence.actions.Action;
 
 /**
  * Fenêtre principale de l'application.
@@ -98,7 +110,7 @@ public final class ApplicationUI extends JFrame {
 	 * Les différents
 	 * <code>DockingView</code>.
 	 */
-	private JYDockingView zoneCodeGraphique, zoneCodeNXC, zoneCodeConsole, zoneSimulateur,zoneCompilateur;
+	private JYDockingView zoneCodeGraphique, zoneCodeNXC, zoneCodeConsole, zoneSimulateur, zoneCompilateur;
 	/**
 	 * Le dictionnaire de variables partagée dans toute l'application.
 	 */
@@ -130,10 +142,10 @@ public final class ApplicationUI extends JFrame {
 		this.setJMenuBar(Menu.getInstance());
 
 		add(creerDocking(),BorderLayout.CENTER);
-
+		
 		DockingManager.setMinimized(zoneCompilateur, true, DockingManager.RIGHT);
 		DockingManager.setTabReorderByDraggingEnabled(false);
-
+				
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -158,6 +170,18 @@ public final class ApplicationUI extends JFrame {
 
 	public JYDockingView getViewport() {
 		return zoneCodeGraphique;
+	}
+	
+	public void goToZoneOutput() {
+		zoneCodeConsole.setTitle(LangueHelper.getInstance().get(VariableLangue.DOCK_OUTPUT));
+		zoneCodeConsole.setIcon(ImagesHelper.getIcon("warning.png"));
+		zoneCodeConsole.setDockbarIcon(ImagesHelper.getIcon("warning.png"));
+	}
+	
+	public void goToZoneCodeConsole() {
+		zoneCodeConsole.setTitle(LangueHelper.getInstance().get(VariableLangue.DOCK_CODE));
+		zoneCodeConsole.setIcon(ImagesHelper.getIcon("document-code.png"));
+		zoneCodeConsole.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));
 	}
 
 	public DicoVariables getDicoVariables() {
@@ -185,7 +209,7 @@ public final class ApplicationUI extends JFrame {
 		zoneCodeGraphique.dock(zoneSimulateur, IDockingConstants.CENTER_REGION, 1f);
 
 		zoneCodeConsole.dock(zoneCompilateur, IDockingConstants.SOUTH_REGION, .7f);
-
+			
 		zoneCodeGraphique.getDockingPort().setTabPlacement(SwingConstants.BOTTOM);
 		zoneCodeGraphique.getDockingPort().setSelectedTabIndex(0);
 
@@ -284,7 +308,7 @@ public final class ApplicationUI extends JFrame {
 		view.setIcon(ImagesHelper.getIcon("document-code.png"));
 		view.setDockbarIcon(ImagesHelper.getIcon("document-code.png"));
 		view.setContentPane(new JScrollPane(GUI.getPanelCodeConsole()));
-		view.setDraggingEnabled(false);
+		view.setDraggingEnabled(true);
 		return view;
 	}
 

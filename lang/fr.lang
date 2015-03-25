@@ -24,6 +24,7 @@ interface.dock.edition.graphic=Edition graphique
 interface.dock.edition.code=Edition NXC
 interface.dock.simulation=Simulation
 interface.dock.code=Code
+interface.dock.output=Sortie
 interface.dock.compiler=Compilateur
 
 
@@ -31,6 +32,7 @@ interface.dock.compiler=Compilateur
 interface.simulator.buttons.execute=Exécuter
 interface.simulator.buttons.pause=Pause
 interface.simulator.buttons.stop=Stop
+interface.simulator.buttons.config=Configurer Robot
 interface.simulator.buttons.debug=Débogage
 interface.simulator.buttons.debug.sensors=Afficher les points des capteurs
 interface.simulator.buttons.debug.collisions=Afficher les points des collisions
@@ -41,6 +43,13 @@ interface.simulator.robot.rotations=Rotations de moteurs
 interface.simulator.robot.orientation=Orientation
 interface.simulator.robot.position=Position
 interface.simulator.sensors=Capteurs
+
+#Config Robot
+interface.simulator.config.tittle=Configuration du robot
+interface.simulator.config.captDisp=Capteurs disponibles
+interface.simulator.config.captUtil=Capteurs utilisés
+interface.simulator.config.motDisp=Moteurs disponibles
+interface.simulator.config.motUtil=Moteurs utilisés
 
 #Partie compilateur
 interface.compiler.execute=Executer
