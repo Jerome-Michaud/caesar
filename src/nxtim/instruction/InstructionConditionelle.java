@@ -52,6 +52,11 @@ public abstract class InstructionConditionelle extends InstructionStructure {
 	 * La condition.
 	 */
 	private Expression condition;
+	
+	/**
+	 * La valeur.
+	 */
+	private String valeur;
 
 	/**
 	 * Crée une instruction conditionnelle sans initialisé la condition.<br/>
@@ -90,14 +95,14 @@ public abstract class InstructionConditionelle extends InstructionStructure {
 	 */
 	public InstructionConditionelle(final Variable condition) {
 		super();
-		assert condition != null;// théoriquement ce constructeur n'est jamais appelé avec l'argument null
+//		assert condition != null;// théoriquement ce constructeur n'est jamais appelé avec l'argument null
 		
-		if(condition.isBooleenne()) {
+//		if(condition.isBooleenne()) {
 			this.condition = condition;
-		}
+/*		}
 		else {
 			throw new NXTIMBadTypeElementException(condition.getType(), "Variable non booléenne utilisée comme condition à une expression conditionelle.");
-		}
+		}*/
 	}
 
 	@Override
@@ -138,8 +143,8 @@ public abstract class InstructionConditionelle extends InstructionStructure {
 	 * @param cond une variable booléenne.
 	 */
 	public void setCondition(final Variable cond) {
-		if(cond == null || cond.isBooleenne()) {
-			condition = cond;
+		if(cond != null ) {
+			this.condition = cond;
 		}
 		else {
 			throw new NXTIMBadTypeElementException(cond.getType(), "Variable non booléenne utilisée comme condition à une expression conditionelle.");

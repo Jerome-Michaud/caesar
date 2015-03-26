@@ -48,6 +48,8 @@ import jscratch.vue.widgets.Widget;
 import jscratch.vue.widgets.modeles.zones.ChampTexte;
 import nxtim.instruction.InstructionDeclaration;
 import nxtim.instruction.Variable;
+import nxtim.instruction.VariableConstante;
+import nxtim.instruction.TypeElement;
 
 /**
  * @since 1.0
@@ -77,7 +79,7 @@ public class DeclarationVariableWidget extends ModeleWidget {
 		g = new ChampTexte(widthChamp, this);
 		g.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		g.setBounds(55, 3, widthChamp, 20);
-		g.supprimerTexte();
+		g.setValeur("");
 		this.getLesZonesSaisies().add(g);
 		
 		setElementProgramme(new InstructionDeclaration());
@@ -92,7 +94,8 @@ public class DeclarationVariableWidget extends ModeleWidget {
 				((InstructionDeclaration)getElementProgramme()).setMembre((Variable)contentWidget.getElementProgramme());
 			}
 			else {
-				((InstructionDeclaration)getElementProgramme()).setMembre(null);
+				VariableConstante var = new VariableConstante(TypeElement.INT, g.getValeur());
+				((InstructionDeclaration)getElementProgramme()).setMembre((Variable)var);
 			}
 		}
 	}

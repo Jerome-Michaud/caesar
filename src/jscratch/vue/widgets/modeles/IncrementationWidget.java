@@ -90,7 +90,7 @@ public class IncrementationWidget extends ModeleWidget {
 		this.LARG_EXTREMITE = 5;
 		final int widthChmp = 14;
 		chmpVar = new ChampTexte(widthChmp, this);
-		chmpVar.supprimerTexte();
+		chmpVar.setValeur("");
 		chmpVar.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		
 		Font font = FontHelper.getWidgetFont();
@@ -116,6 +116,7 @@ public class IncrementationWidget extends ModeleWidget {
 		this.setTailleY();
 
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
+		
 
 		initListeners();
 	}

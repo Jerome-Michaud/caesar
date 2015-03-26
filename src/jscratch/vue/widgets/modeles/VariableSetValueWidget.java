@@ -93,7 +93,7 @@ public class VariableSetValueWidget extends ModeleWidget {
 		d = new ChampTexte(widthChamp, this);
 		d.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		d.setBounds(128, 3, widthChamp, 20);
-		d.supprimerTexte();
+		d.setValeur("");
 		this.getLesZonesSaisies().add(d);
 		
 		this.setElementProgramme(new Affectation(true));

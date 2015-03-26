@@ -47,6 +47,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import de.javasoft.swing.ButtonBar;
 import de.javasoft.swing.SimpleDropDownButton;
+import java.awt.Dialog;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -61,6 +62,8 @@ import jscratch.helpers.LangueHelper;
 import jscratch.interpreteur.GestionSimulation;
 import jscratch.parametrages.langue.VariableLangue;
 import jscratch.traces.fabriques.FabriqueTrace;
+import jscratch.vue.ginterface.principales.GUI;
+import jscratch.vue.ginterface.principales.panels.PanelConfigRobot;
 
 /**
  * Panel permettant de controller l'execution du simulateur
@@ -71,6 +74,7 @@ public class PanelController extends JPanel {
 	private AbstractButton bExec;
 	private AbstractButton bPause;
 	private AbstractButton bStop;
+	private AbstractButton bRobotSettings;
 	private SimpleDropDownButton bDebug;
 	private JMenuItem m1;
 	private JMenuItem m2;
@@ -78,6 +82,7 @@ public class PanelController extends JPanel {
 	private Simulator simulator;
 	private GestionSimulation simulation;
 	private PanelSimulator panelSimulator;
+	private PanelConfigRobot panelConfigRobot;
 
 	/**
 	 * Constructeur par défaut de <code>PanelController</code>.
@@ -96,16 +101,19 @@ public class PanelController extends JPanel {
 		ImageIcon iconPause = (ImageIcon) ImagesHelper.getIcon("control-pause.png");
 		ImageIcon iconStop = (ImageIcon) ImagesHelper.getIcon("control-stop-square.png");
 		ImageIcon iconDebug = (ImageIcon) ImagesHelper.getIcon("bug.png");
+		ImageIcon iconSetting = (ImageIcon) ImagesHelper.getIcon("setting.png");
 
 		buttonBar = new ButtonBar();
 
 		bExec = createButton(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_EXEC), iconPlay, true, false);
 		bPause = createButton(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_PAUSE), iconPause, false, false);
 		bStop = createButton(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_STOP), iconStop, false, false);
+		bRobotSettings = createButton(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_CONF), iconSetting, true, false);
 		bExec.setActionCommand("ExécutionSimulator");
 		bPause.setActionCommand("PauseSimulator");
 		bStop.setActionCommand("StopSimulator");
-
+		bRobotSettings.setActionCommand("configRobot");
+		
 		bDebug = new SimpleDropDownButton(LangueHelper.getInstance().get(VariableLangue.SIM_BUT_DEB));
 		bDebug.setIcon(iconDebug);
 
@@ -122,13 +130,15 @@ public class PanelController extends JPanel {
 		buttonBar.add(bPause);
 		buttonBar.add(bStop);
 		buttonBar.add(bDebug);
+		buttonBar.add(bRobotSettings);
 		this.add(buttonBar);
-
+		
 		Listener listener = new Listener();
 
 		bExec.addActionListener(listener);
 		bPause.addActionListener(listener);
 		bStop.addActionListener(listener);
+		bRobotSettings.addActionListener(listener);
 		m1.addActionListener(listener);
 		m2.addActionListener(listener);
 	}
@@ -191,6 +201,9 @@ public class PanelController extends JPanel {
 			else if ("StopSimulator".equals(e.getActionCommand())) {
 				this.stop();
 				simulation.stopThread();
+			}
+			else if ("configRobot".equals(e.getActionCommand())) {
+				panelConfigRobot = new PanelConfigRobot(simulator);
 			}
 			else if (e.getActionCommand() == "PointsCapteurs") {
 				panelSimulator.getRobotRenderer().setCapteurs(!panelSimulator.getRobotRenderer().getCapteurs());

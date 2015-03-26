@@ -51,6 +51,7 @@ import jscratch.vue.widgets.WidgetCompose;
 import jscratch.vue.widgets.modeles.CapteurWidget;
 import jscratch.vue.widgets.modeles.ConfigurationCapteursWidget;
 import jscratch.vue.widgets.modeles.DeclarationVariableWidget;
+import jscratch.vue.widgets.modeles.DeclarationConstWidget;
 import nxtim.instruction.Condition;
 import nxtim.instruction.NonLogique;
 import nxtim.instruction.Operateur;
@@ -216,6 +217,17 @@ public class FabriqueWidgets {
 	public Widget creerWidgetDeclarerVariable() {
 		return new Widget(new DeclarationVariableWidget());
 	}
+	
+	/**
+	 * Permet de créer un widget de type déclaration de constante.
+	 *
+	 * @since 2.0
+	 *
+	 * @return le widget
+	 */
+	public Widget creerWidgetDeclarerConst() {
+		return new Widget(new DeclarationConstWidget());
+	}
 
 	/**
 	 * Méthode permettant de créer un widget de type "Temps Courant".
@@ -353,6 +365,9 @@ public class FabriqueWidgets {
 			case DECLARERVARIABLE:
 				w = creerWidgetDeclarerVariable();
 				break;
+			case DECLARERCONST:
+				w = creerWidgetDeclarerConst();
+				break;
 			case TEMPSCOURANT:
 				w = creerWidgetTempsCourant();
 				break;
@@ -471,6 +486,8 @@ public class FabriqueWidgets {
 			}
 		} else if("DeclarationVariableWidget".equals(nomClasse)) {
 			w = creerWidgetDeclarerVariable();
+		} else if("DeclarationConstWidget".equals(nomClasse)) {
+			w = creerWidgetDeclarerConst();
 		} else if("MoteurRAZWidget".equals(nomClasse)) {
 			w = creerWidgetMoteurRAZ();
 		} else if ("ConfigurationCapteursWidget".equals(nomClasse)) {

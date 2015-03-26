@@ -46,10 +46,20 @@ import java.awt.FontMetrics;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Rectangle2D;
+import jscratch.vue.widgets.modeles.zones.ChampTexte;
 
 import jscratch.helpers.FontHelper;
 
 import nxtim.instruction.VariableModifiable;
+import jscratch.vue.widgets.Widget;
+import nxtim.instruction.Affectation;
+import nxtim.instruction.Expression;
+import nxtim.instruction.VariableConstante;
+import nxtim.instruction.VariableModifiable;
+import nxtim.instruction.TypeElement;
+import nxtim.instruction.Variable;
+import nxtim.instruction.InstructionDeclaration;
+import nxtim.instruction.InstructionTache;
 
 /**
  *
@@ -58,6 +68,7 @@ import nxtim.instruction.VariableModifiable;
  */
 public class VariableWidget extends ModeleWidget {
 
+	private ChampTexte g;
 	/**
 	 * Constructeur du modèle définissant les différents paramètres du Variable.
 	 */
@@ -82,19 +93,46 @@ public class VariableWidget extends ModeleWidget {
 		this.setElementProgramme(variableModifiable);
 		this.setForme(new Polygon(this.getTabX(), this.getTabY(), this.getTabX().length));
 		
-        this.attachableBas = false;
+  /*      this.attachableBas = false;
         this.attachableHaut = false;
         this.imbricable = false;
-        this.attachableInterne = true;
+        this.attachableInterne = true;*/
         
 
 		Font font = FontHelper.getWidgetFont();
 		FontMetrics metrics = new FontMetrics(font){};  
 		Rectangle2D bounds = metrics.getStringBounds(variableModifiable.getNom(), null);  
 	
+/*		int widthChamp = 40;
+		g = new ChampTexte(widthChamp, this);
+		g.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		g.setBounds(128, 3, widthChamp, 20);
+		g.setValeur("1");
+		this.getLesZonesSaisies().add(g);*/
+		
+//		this.setElementProgramme(new Variable(TypeElement.INT, "1","1") {
 
 		this.decalageX((int) bounds.getWidth()+2);
 	}
+
+	/*@Override
+	public void applyChangeModele() {
+		if (g != null) {
+			Widget contentWidgetVar = g.getContentWidget();
+
+			Affectation setValueIns = ((Affectation) getElementProgramme());
+
+
+			if (contentWidgetVar != null) {
+				VariableModifiable var  = (VariableModifiable) contentWidgetVar.getElementProgramme();
+				setValueIns.setMembreGauche(var);
+				setValueIns.setIsInstruction(true);
+			}
+			else {
+				setValueIns.setMembreGauche(new VariableConstante(TypeElement.INT, g.getValeur()));
+			}
+		}
+	}*/
 /*
 	@Override
 	public void applyChangeModele(){
