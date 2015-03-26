@@ -144,7 +144,7 @@ public class EditorUI  extends JTabbedPane {
 					GUI.getPanelCodeConsole().update(null, "");
 				}
 				//ApplicationUI.getInstance().minimizeZoneCodeConsole();
-				ApplicationUI.getInstance().goToZoneCodeConsole();
+				ApplicationUI.getInstance().goToZoneOutput();
 
 			}
 			// Perte de focus

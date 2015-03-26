@@ -96,7 +96,7 @@ public class ForWidget extends ModeleWidget {
         ff = new ChampTexte(widthChamp, this);
         ff.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
         ff.ajouterTypeWidgetAccepte(TypeModeleWidget.NEGATION);
-		ff.supprimerTexte();
+		//ff.supprimerTexte();
         ff.setBounds(60, 3, widthChamp, 20);
         this.getLesZonesSaisies().add(ff);
 		
@@ -104,7 +104,7 @@ public class ForWidget extends ModeleWidget {
 		widthChamp = 20;
         fp = new ChampTexte(widthChamp, this);
 		fp.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_INC);
-		fp.supprimerTexte();
+	//	fp.supprimerTexte();
         fp.setBounds(138, 3, widthChamp, 20);
         this.getLesZonesSaisies().add(fp);
 

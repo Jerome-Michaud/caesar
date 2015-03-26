@@ -49,7 +49,7 @@ public enum TypeElement {
 	/**
 	 * Tous les types de variable.
 	 */
-	INT, SHORT, LONG, FLOAT, DOUBLE, BOOL, STRING, LIST;
+	INT, SHORT, LONG, FLOAT, DOUBLE, BOOL, STRING, LIST,CONST;
 
 	@Override
 	public String toString() {
@@ -64,6 +64,8 @@ public enum TypeElement {
 				return "float";
 			case DOUBLE:
 				return "double";
+			case CONST:
+				return "const";
 			case BOOL:
 				return "bool";
 			case STRING:

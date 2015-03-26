@@ -110,7 +110,7 @@ public final class ApplicationUI extends JFrame {
 	 * Les différents
 	 * <code>DockingView</code>.
 	 */
-	private JYDockingView zoneCodeGraphique, zoneCodeNXC, zoneCodeConsole, zoneSimulateur, zoneCompilateur;
+	private JYDockingView zoneCodeGraphique, zoneCodeNXC, zoneCodeConsole, zoneSimulateur,zoneCompilateur;
 	/**
 	 * Le dictionnaire de variables partagée dans toute l'application.
 	 */

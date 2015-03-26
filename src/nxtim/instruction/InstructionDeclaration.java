@@ -94,6 +94,11 @@ public class InstructionDeclaration implements Instruction {
 	public Variable getMembre() {
 		return this.membreGauche;
 	}
+	
+	public void setMembre(VariableConstante variable) {
+		this.membreGauche = variable;
+	}
+
 
 	/**
 	 * Accède à la variable de la déclaration.

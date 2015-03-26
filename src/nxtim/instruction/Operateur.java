@@ -60,11 +60,11 @@ public enum Operateur {
 	/**
 	 * Les opérateurs logiques.
 	 */
-	ET, OU, SUPERIEUR, INFERIEUR, EGALITE, SUPEGAL, INFEGAL,
+	ET, OU, SUPERIEUR, INFERIEUR, EGALITE, SUPEGAL, INFEGAL,NONEGALITE,EGAL,
 	/**
 	 * Les opérateurs d'affectation.
 	 */
-	AFFECTATION;
+	AFFECTATION,VALEUR;
 
 	@Override
 	public String toString() {
@@ -93,10 +93,16 @@ public enum Operateur {
 				return "<";
 			case EGALITE:
 				return "==";
+			case NONEGALITE:
+				return "!=";
 			case SUPEGAL:
 				return ">=";
+				case VALEUR:
+				return "1";
 			case INFEGAL:
 				return "<=";
+				case EGAL:
+				return "=";
 			default:
 				return null;
 		}
@@ -134,6 +140,8 @@ public enum Operateur {
 			case SOUSTRACTION:
 				return true;
 			case MULTIPLICATION:
+				return true;
+			case EGAL:
 				return true;
 			default:
 				return false;

@@ -173,6 +173,7 @@ public final class DicoWidgetsCategories {
 		this.dico.get(Categorie.VARIABLES).clear();
 		ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetVariableSetValue());
 		ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetDeclarerVariable());
+		ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetDeclarerConst());
 		
 		// Permet d'afficher ou non le widget de valeur
 		nettoyer(Categorie.VARIABLES);
