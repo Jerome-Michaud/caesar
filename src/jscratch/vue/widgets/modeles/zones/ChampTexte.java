@@ -77,6 +77,7 @@ import jscratch.vue.widgets.Widget;
 public class ChampTexte extends JPanel implements Zone {
 	private static final Logger LOG = Logger.getLogger(ChampTexte.class.getName());
 	public static final int ETAT_SAISIE = 0;
+	public static final String ETAT_VARIABLE = "";
 	public static final int ETAT_CONTIENT_WIDGET = 1;
 	private Widget widgetContenu;
 	private JTextField textField;
@@ -89,6 +90,7 @@ public class ChampTexte extends JPanel implements Zone {
 	 * Etat à ETAT_CONTIENT_WIDGET (1) quand on affiche les widgets contenus
 	 */
 	protected int etat;
+	protected String varetat;
 
 	/**
 	 * Constructeur faisant appel au constructeur équivalent de la classe mère.
@@ -101,6 +103,7 @@ public class ChampTexte extends JPanel implements Zone {
 		this.widgetContenu = null;
 		this.add(textField, BorderLayout.CENTER);
 		this.etat = ETAT_SAISIE;
+		this.varetat = ETAT_VARIABLE;
 		this.widgetParent = widgetParent;
 
 		this.addContainerListener(new ContainerAdapter() {
@@ -199,7 +202,7 @@ public class ChampTexte extends JPanel implements Zone {
 		} else if (etat == ETAT_CONTIENT_WIDGET) {
 			return textField.getText();
 		} else {
-			return "";
+			return ETAT_VARIABLE;
 		}
 
 	}
@@ -234,7 +237,11 @@ public class ChampTexte extends JPanel implements Zone {
 	public void setValeur(String v) {
 		if (etat == ETAT_SAISIE) {
 			this.textField.setText(v);
-		}
+		} 
+		else if (varetat == ETAT_VARIABLE) {
+			this.textField.setText(v);
+		} 
+		
 	}
 
 	public void setWidgetContenu(Widget w) {
@@ -253,6 +260,7 @@ public class ChampTexte extends JPanel implements Zone {
 
 		if (this.widgetContenu == null) {
 			this.etat = ETAT_SAISIE;
+			this.varetat = ETAT_VARIABLE;
 			this.setComponent(textField);
 			DicoTraces.getInstance().ajouterTrace(FabriqueTrace.creerTraceWidgetModification((Widget) this.getParent(), this, wc, this.getValeur()));
 		} else {
@@ -342,6 +350,9 @@ public class ChampTexte extends JPanel implements Zone {
 			zone.setAttribute("valeur", this.getValeur());
 		} else if (this.etat == ETAT_CONTIENT_WIDGET) {
 			zone.addContent(this.widgetContenu.toXml());
+		}
+		if (this.varetat == ETAT_VARIABLE) {
+			zone.setAttribute("valeur", this.getValeur());
 		}
 		return zone;
 	}

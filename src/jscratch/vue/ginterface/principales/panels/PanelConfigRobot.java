@@ -71,6 +71,9 @@ public final class PanelConfigRobot extends JDialog {
 	private JPanel capteursDisponibles;
 	private JLabel texteCapteursDispo;
 	private JLabel texteCapteursDispo2;
+	private JLabel texteCapteursDispo3;
+	private JLabel texteCapteursDispo4;
+	private JLabel texteCapteursDispo5;
 	private JPanel capteursInstalles;
 	private JLabel texteCapteursInstalles;
 	
@@ -103,12 +106,18 @@ public final class PanelConfigRobot extends JDialog {
 		capteursDisponibles.setBorder(BorderFactory.createTitledBorder(LangueHelper.getInstance().get(VariableLangue.SIM_CONF_CAPT_DISP)));
 		try {
 			texteCapteursDispo = new JLabel(new ImageIcon(ImageIO.read(new File("./ressources/simulateur/config/capteurContact_50x42.png"))));
-			texteCapteursDispo2 = new JLabel(new ImageIcon(ImageIO.read(new File("./ressources/simulateur/config/capteurContact_50x42.png")), "Capteur contact"));
+			texteCapteursDispo2 = new JLabel(new ImageIcon(ImageIO.read(new File("./ressources/simulateur/config/capteurSon_50x38.png"))));
+			texteCapteursDispo3 = new JLabel(new ImageIcon(ImageIO.read(new File("./ressources/simulateur/config/capteurCouleur_50x42.png"))));
+			texteCapteursDispo4 = new JLabel(new ImageIcon(ImageIO.read(new File("./ressources/simulateur/config/capteurProximite_50x35.png"))));
+			texteCapteursDispo5 = new JLabel(new ImageIcon(ImageIO.read(new File("./ressources/simulateur/config/paveNum_50x44.png"))));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 		capteursDisponibles.add(texteCapteursDispo);
 		capteursDisponibles.add(texteCapteursDispo2);
+		capteursDisponibles.add(texteCapteursDispo3);
+		capteursDisponibles.add(texteCapteursDispo4);
+		capteursDisponibles.add(texteCapteursDispo5);
 		
 		capteursInstalles = new JPanel();
 		capteursInstalles.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -125,7 +134,12 @@ public final class PanelConfigRobot extends JDialog {
 		moteursDisponibles = new JPanel();
 		moteursDisponibles.setLayout(new FlowLayout(FlowLayout.LEFT));
 		moteursDisponibles.setBorder(BorderFactory.createTitledBorder(LangueHelper.getInstance().get(VariableLangue.SIM_CONF_MOT_DISP)));
-		texteMoteursDispo = new JLabel("");
+		//texteMoteursDispo = new JLabel("");
+		try {
+			texteMoteursDispo = new JLabel(new ImageIcon(ImageIO.read(new File("./ressources/simulateur/config/moteur_110x85.png"))));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		moteursDisponibles.add(texteMoteursDispo);
 		
 		moteursInstalles = new JPanel();

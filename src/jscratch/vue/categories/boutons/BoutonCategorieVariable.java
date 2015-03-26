@@ -46,6 +46,8 @@ import jscratch.vue.categories.ModeleCategorie;
 import jscratch.vue.ginterface.principales.GUI;
 
 import nxtim.instruction.Categorie;
+import nxtim.instruction.TypeElement;
+import nxtim.instruction.VariableModifiable;
 
 /**
  *
@@ -68,7 +70,10 @@ public class BoutonCategorieVariable extends BoutonCategorie {
 
 	@Override
 	public void ajouterWidgets() {
+		VariableModifiable i = new VariableModifiable(TypeElement.INT, "1","1");
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetVariableSetValue());
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetDeclarerVariable());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetDeclarerConst());
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.VARIABLES, GUI.getPanelWidget().getFabrique().creerWidgetVariable(i));
 	}
 }

@@ -85,7 +85,7 @@ public class NonLogiqueWidget extends ModeleWidget {
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.NEGATION);
 		f.setBounds(this.LARG_EXTREMITE + ((int) bounds.getWidth()) + 5, 3, LARG_CHAMP, 14);
-		f.supprimerTexte();
+		f.setValeur("");
 		this.getLesZonesSaisies().add(f);
 
 		this.largeur = LARG_CHAMP + 5 + (int) bounds.getWidth();

@@ -86,7 +86,7 @@ public class IfWidget extends ModeleWidget {
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.NEGATION);
 		f.setBounds(55, 3, widthChamp, 20);
-		f.supprimerTexte();
+	//	f.supprimerTexte();
 		this.getLesZonesSaisies().add(f);
 
 		this.setElementProgramme(new InstructionIf());

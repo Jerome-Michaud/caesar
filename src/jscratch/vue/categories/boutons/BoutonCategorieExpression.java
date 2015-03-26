@@ -76,6 +76,7 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.DIVISION));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.MULTIPLICATION));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.SOUSTRACTION));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionArithmetic(Operateur.EGAL));
 		
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.OU));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
@@ -83,8 +84,10 @@ public class BoutonCategorieExpression extends BoutonCategorie {
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFERIEUR));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.ET));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGALITE));
+		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.NONEGALITE));
+		//DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.EGAL));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.INFEGAL));
-		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
+		//DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetExpressionLogical(Operateur.SUPEGAL));
 		DicoWidgetsCategories.getInstance().ajouterWidget(Categorie.EXPRESSIONS, GUI.getPanelWidget().getFabrique().creerWidgetNonLogique());
 	}
 }

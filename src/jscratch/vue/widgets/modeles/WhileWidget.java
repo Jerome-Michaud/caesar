@@ -54,6 +54,11 @@ import nxtim.instruction.IElementProgramme;
 import nxtim.instruction.InstructionWhile;
 import nxtim.instruction.NonLogique;
 import nxtim.instruction.Variable;
+import nxtim.instruction.Affectation;
+import nxtim.instruction.Expression;
+import nxtim.instruction.TypeElement;
+import nxtim.instruction.VariableConstante;
+import nxtim.instruction.ExpressionComplexe;
 
 /**
  * Classe héritant de ModeleWidget et implémentant Seriliazable modélisant la
@@ -83,6 +88,10 @@ public class WhileWidget extends ModeleWidget {
 		f = new ChampTexte(widthChamp, this);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.EXPRESSION_LOGIQUE);
 		f.ajouterTypeWidgetAccepte(TypeModeleWidget.NEGATION);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.DECLARERVARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.SETVALUEVARIABLE);
+		f.ajouterTypeWidgetAccepte(TypeModeleWidget.VARIABLE);
 		f.setBounds(60, 3, widthChamp, 20);
 		f.setValeur("0");
 		this.getLesZonesSaisies().add(f);
@@ -107,14 +116,14 @@ public class WhileWidget extends ModeleWidget {
 					whileIns.setCondition((Condition) expr);
 				} else if(expr instanceof NonLogique) {
 					whileIns.setCondition((NonLogique) expr);
-				} else {
+				} else if(expr instanceof VariableConstante) {
+					whileIns.setCondition((VariableConstante) expr);
+				} else if(expr instanceof Variable ){
 					whileIns.setCondition((Variable) expr);
+				} 
 				}
-			} else {
-				whileIns.rmCondition();
 			}
 		}
-	}
 
 	@Override
 	public void decalageX(final int a) {
